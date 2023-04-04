@@ -1,0 +1,43 @@
+version: 0.2
+
+env:
+    variables:
+        BUILD_ENV : "development"
+
+phases:
+    install:
+        
+        commands:
+        - n 14.20
+        - echo Installing source NPM dependencies...
+        - npm install -g @angular/cli
+        - npm install
+
+    pre_build:
+        commands:
+        # Test Angular 7 application. You can also build using custom environment here like mock or staging
+        # - echo Karma-Jasmine Unit testing started on `date`
+        # - ng test --watch=false
+
+
+    build:
+        commands:
+        # Builds Angular application. You can also build using custom environment here like mock or the staging
+        - echo Build started on `date`
+        - ng build
+
+
+    post_build:
+        commands:
+        # Clear S3 bucket
+        - aws s3 rm s3://enrollment-angular-dev --recursive
+        - echo S3 bucket is cleared.
+        # Copy dist folder to S3 bucket, As ofAngular 7, builds are stored inside an app folder in distribution and not at the root of the dist folder
+        - aws s3 cp dist s3://enrollment-angular-dev --recursive --cache-control max-age=60
+        - echo Build completed on `date`
+        - dir
+
+artifacts:
+    files:
+    - appspec.yml
+- '**/*'
