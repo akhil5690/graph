@@ -6,12 +6,12 @@ env:
         BUILD_FOLDER: "dist"
 phases:
   install:
-    runtime-versions:
-        nodejs: 14
     commands:
+        - n 14.20
         - echo Installing source NPM dependencies...
-        - npm install
         - npm install -g @angular/cli
+        - npm install
+
   build:
     commands:
         - echo Build started 
