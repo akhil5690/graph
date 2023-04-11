@@ -1,1 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
+@import "style/variable.scss";
+@import "style/primengStyle.scss";
+@import "style/gridStyle.scss";
+
+html, body {
+  margin: 0;
+  font-size: 14px; // 14px = 1rem
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+}
+
+.header {
+  margin-top: 0;
+}
+
+.header h1 {
+  font-size: 3rem
+}
+
+a {
+  text-decoration-line: none;
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+label {
+  font-weight: 500;
+}

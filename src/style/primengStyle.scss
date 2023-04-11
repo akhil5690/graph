@@ -1,0 +1,27 @@
+
+input.p-inputtext.p-component.p-element {
+  border: 1px solid #877f7f;
+  padding: 4px;
+}
+
+button.p-ripple.p-element.p-button.p-component {
+  background: var(--primary-color);
+  padding: 4px;
+  width: 100%;
+  border: none;
+}
+
+.p-inputtext:enabled:focus,button.p-ripple.p-element.p-button.p-component {
+  box-shadow: none;
+}
+
+
+button.p-ripple.p-element.p-button-outlined.p-button.p-component {
+  background: none;
+  border: 3px solid var(--primary-color);
+  color: var(--primary-color);
+}
+
+.p-divider.p-component.p-divider-horizontal.p-divider-solid.p-divider-center {
+  margin: 0;
+}

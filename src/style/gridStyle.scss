@@ -1,0 +1,17 @@
+
+.grid {
+  display: grid;
+}
+
+.gap {
+  grid-gap: var(--gap);
+}
+
+.align-center {
+  justify-items: center;
+  justify-content: center;
+}
+
+.align-end {
+  justify-content: end;
+}
