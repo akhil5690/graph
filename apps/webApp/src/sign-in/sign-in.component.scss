@@ -1,13 +1,13 @@
 
 app-sign-in {
   .signIn-container {
-    width: 60%;
+    width: calc(23 * var(--gap));
 
   }
 
   .name {
     color: var(--primary-color);
-    font-size: calc(2.8 * var(--gap)) //2 * 1rem
+    font-size: calc(3.5 * var(--gap))
   }
 }
 //common
