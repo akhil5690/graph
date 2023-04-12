@@ -11,7 +11,13 @@ app-sign-in {
   }
 }
 //common
-button.p-ripple.p-element.p-button.p-component {
-  width: 100%;
+.button {
+  button.p-ripple.p-element.p-button.p-component {
+    width: 100%;
+  }
 }
 
+.grid.nav {
+  justify-content: end;
+  margin: 0.5rem;
+}

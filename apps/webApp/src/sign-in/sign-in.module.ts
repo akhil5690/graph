@@ -5,6 +5,9 @@ import {WidgetFrameModule} from "../../../../common/component/ui-component/widge
 import {InputTextModule} from "primeng/inputtext";
 import {ButtonModule} from "primeng/button";
 import {DividerModule} from "primeng/divider";
+import {InputSwitchModule} from "primeng/inputswitch";
+import {FormsModule} from "@angular/forms";
+import {ToggleButtonModule} from "primeng/togglebutton";
 
 
 
@@ -20,7 +23,10 @@ import {DividerModule} from "primeng/divider";
     WidgetFrameModule,
     InputTextModule,
     ButtonModule,
-    DividerModule
+    DividerModule,
+    InputSwitchModule,
+    FormsModule,
+    ToggleButtonModule
   ]
 })
 export class SignInModule { }

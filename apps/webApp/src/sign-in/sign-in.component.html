@@ -1,6 +1,6 @@
 <app-widget-frame>
-  <div header>
-    <p-button label="Theme" (onClick)="toggleTheme()"></p-button>
+  <div class="grid nav" header>
+    <p-toggleButton [(ngModel)]="checked" onLabel="Dark" offLabel="Light" (click)="toggleTheme()"></p-toggleButton>
   </div>
   <div main class="grid align-center">
     <div class="grid signIn-container align-center">
@@ -19,7 +19,7 @@
           </div>
         </div>
         <div class="grid">
-          <p-button label="Sign In"></p-button>
+          <p-button class="button" label="Sign In"></p-button>
         </div>
         <small>By creating an account, you agree to <a href="/">condition of Use</a> and <a href="/">Privacy Policy</a>
         </small>
@@ -27,7 +27,7 @@
           <small>New to Cymonix IQ+ ?</small>
         </p-divider>
         <div class="grid">
-          <p-button label="Create an account" styleClass="p-button-outlined "></p-button>
+          <p-button class="button" label="Create an account" styleClass="p-button-outlined "></p-button>
         </div>
       </div>
     </div>

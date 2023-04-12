@@ -8,10 +8,11 @@ import {Component, ViewEncapsulation} from '@angular/core';
 })
 export class SignInComponent {
   theme: string = 'lightTheme';
+  checked!: boolean;
 
   toggleTheme() {
     this.theme = this.theme === 'lightTheme' ? 'darkTheme' : 'lightTheme';
-    console.log(this.theme);
+    this.checked = this.theme === 'darkTheme';
     document.body.className = this.theme;
   }
 }
