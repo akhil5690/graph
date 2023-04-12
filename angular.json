@@ -14,30 +14,29 @@
           "style": "scss"
         }
       },
-      "root": "",
-      "sourceRoot": "src",
+      "root": "apps/webApp",
+      "sourceRoot": "apps/webApp/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/cymonix",
-            "index": "src/index.html",
-            "main": "src/main.ts",
+            "outputPath": "dist",
+            "index": "apps/webApp/src/index.html",
+            "main": "apps/webApp/src/main.ts",
             "polyfills": [
               "zone.js"
             ],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "apps/webApp/src/favicon.ico",
+              "apps/webApp/src/assets"
             ],
             "styles": [
-              "./src/styles.scss",
               "node_modules/primeicons/primeicons.css",
-              "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
-              "node_modules/primeng/resources/primeng.min.css"
+              "node_modules/primeng/resources/primeng.min.css",
+              "./apps/webApp/src/styles.scss"
             ],
             "scripts": []
           },
@@ -96,11 +95,11 @@
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "apps/webApp/src/favicon.ico",
+              "apps/webApp/src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "apps/webApp/src/styles.scss"
             ],
             "scripts": []
           }
