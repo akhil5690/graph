@@ -1,4 +1,7 @@
 <app-widget-frame>
+  <div header>
+    <p-button label="Theme" (onClick)="toggleTheme()"></p-button>
+  </div>
   <div main class="grid align-center">
     <div class="grid signIn-container align-center">
       <h1 class="header name">Cymonix IQ+</h1>
@@ -18,12 +21,13 @@
         <div class="grid">
           <p-button label="Sign In"></p-button>
         </div>
-        <small>By creating an account, you agree to <a href="/">condition of Use</a> and <a href="/">Privacy Policy</a> </small>
+        <small>By creating an account, you agree to <a href="/">condition of Use</a> and <a href="/">Privacy Policy</a>
+        </small>
         <p-divider align="center">
           <small>New to Cymonix IQ+ ?</small>
         </p-divider>
         <div class="grid">
-          <p-button label="Danger" styleClass="p-button-outlined "></p-button>
+          <p-button label="Create an account" styleClass="p-button-outlined "></p-button>
         </div>
       </div>
     </div>

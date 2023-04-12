@@ -7,5 +7,11 @@ import {Component, ViewEncapsulation} from '@angular/core';
   encapsulation: ViewEncapsulation.None
 })
 export class SignInComponent {
+  theme: string = 'lightTheme';
 
+  toggleTheme() {
+    this.theme = this.theme === 'lightTheme' ? 'darkTheme' : 'lightTheme';
+    console.log(this.theme);
+    document.body.className = this.theme;
+  }
 }

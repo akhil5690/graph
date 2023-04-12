@@ -7,6 +7,11 @@ app-sign-in {
 
   .name {
     color: var(--primary-color);
-    font-size: calc(2 * var(--gap)) //2 * 1rem
+    font-size: calc(2.5 * var(--gap)) //2 * 1rem
   }
 }
+//common
+button.p-ripple.p-element.p-button.p-component {
+  width: 100%;
+}
+
