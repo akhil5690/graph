@@ -12,8 +12,14 @@ html, body {
   font-size: 14px; // 14px = 1rem
   font-family: Roboto,
   Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  background-image: url(/assets/image/light-mode.svg);
 
+}
+
+@media screen and (max-width: 1280px) {
+  html, body {
+    background-size: 1468px 892px;
+    font-size: 10px;
+  }
 }
 
 //theme switcher
@@ -23,6 +29,9 @@ body.darkTheme {
   background: var(--background-color);
   color: var(--text-color);
   background-image: url(/assets/image/dark-Mode.svg);
+}
+body.lightTheme{
+  background-image: url(/assets/image/light-mode.svg);
 }
 
 .header {

@@ -1,6 +1,12 @@
 <section class="frame-grid">
   <header>
+    <!--  theme changer  -->
+    <div class="grid nav">
+      <p-toggleButton [(ngModel)]="checked" onLabel="Dark" offLabel="Light" (click)="toggleTheme()"></p-toggleButton>
+    </div>
+
     <ng-content select="[header]"></ng-content>
+
   </header>
   <main>
     <ng-content select="[main]"></ng-content>

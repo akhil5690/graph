@@ -1,18 +1,20 @@
 
 app-sign-in {
   .signIn-container {
-    width: calc(27.2 * var(--gap));
+    width: 27.2rem
 
   }
 
   .name {
     color: var(--primary-color);
-    font-size: calc(3.5 * var(--gap));
+    font-size: 3.5rem;
   }
-  .title{
-    font-size: calc(1.55 * var(--gap));
+
+  .title {
+    font-size: 1.6rem;
   }
 }
+
 //common
 .button {
   button.p-ripple.p-element.p-button.p-component {

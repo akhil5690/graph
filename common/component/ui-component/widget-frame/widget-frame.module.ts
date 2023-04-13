@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WidgetFrameComponent } from './widget-frame.component';
+import {ToggleButtonModule} from "primeng/togglebutton";
+import {FormsModule} from "@angular/forms";
 
 
 
@@ -12,7 +14,9 @@ import { WidgetFrameComponent } from './widget-frame.component';
     WidgetFrameComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ToggleButtonModule,
+    FormsModule
   ]
 })
 export class WidgetFrameModule { }
