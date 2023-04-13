@@ -7,7 +7,10 @@ app-sign-in {
 
   .name {
     color: var(--primary-color);
-    font-size: calc(3.5 * var(--gap))
+    font-size: calc(3.5 * var(--gap));
+  }
+  .title{
+    font-size: calc(0.5 * var(--gap));
   }
 }
 //common

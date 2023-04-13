@@ -1,6 +1,6 @@
 //Input text
 .p-inputtext {
-  padding: calc(var(--gap) / 2); //0.25rem
+  padding: calc(var(--gap) / 1.4); //0.25rem
   border: 1px solid var(--text-color);
   background: transparent;
 }
@@ -18,8 +18,8 @@
 .p-button {
   color: var(--inverse-text-color);
   background: var(--primary-color);
-  border: none;
-  padding: calc(var(--gap) / 2); //0.5rem
+  border: var(--primary-color);
+  padding: calc(var(--gap) / 1.4); //0.5rem
   font-size: 1rem;
   transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
   border-radius: 6px;
