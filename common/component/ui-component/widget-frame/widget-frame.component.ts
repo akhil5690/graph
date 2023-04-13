@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewEncapsulation} from '@angular/core';
 
 @Component({
   selector: 'app-widget-frame',
@@ -7,15 +7,16 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
   encapsulation: ViewEncapsulation.None
 })
 export class WidgetFrameComponent implements OnInit{
+  @Output() isDarkTheme =  new EventEmitter<string>();
   theme: string = 'lightTheme';
   checked!: boolean;
 
   ngOnInit(){
-    document.body.className = this.theme;
+    this.isDarkTheme.emit('lightTheme');
   }
   toggleTheme() {
     this.theme = this.theme === 'lightTheme' ? 'darkTheme' : 'lightTheme';
     this.checked = this.theme === 'darkTheme';
-    document.body.className = this.theme;
+    this.isDarkTheme.emit(this.theme);
   }
 }
