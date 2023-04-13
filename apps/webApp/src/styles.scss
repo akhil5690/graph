@@ -12,6 +12,7 @@ html, body {
   font-size: 14px; // 14px = 1rem
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
   Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  background-image: url(/assets/image/light-mode.svg);
 
 }
 
@@ -21,6 +22,7 @@ body.darkTheme {
   --text-color: white;
   background: var(--background-color);
   color: var(--text-color);
+  background-image: url(/assets/image/dark-Mode.svg);
 }
 
 .header {
