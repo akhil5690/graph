@@ -10,7 +10,7 @@
 html, body {
   margin: 0;
   font-size: 14px; // 14px = 1rem
-  font-family: Roboto,
+  font-family: San fransisco, Roboto,
   Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 
 }
@@ -30,7 +30,8 @@ body.darkTheme {
   color: var(--text-color);
   background-image: url(/assets/image/dark-Mode.svg);
 }
-body.lightTheme{
+
+body.lightTheme {
   background-image: url(/assets/image/light-mode.svg);
 }
 

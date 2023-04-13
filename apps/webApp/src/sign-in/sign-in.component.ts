@@ -9,8 +9,6 @@ import {Component, ViewEncapsulation} from '@angular/core';
 export class SignInComponent {
 
   setBackground(isDarkTheme:string) {
-    if (isDarkTheme === 'lightTheme'){
-      document.body.className = isDarkTheme;
-    }
+    document.body.className = isDarkTheme;
   }
 }
