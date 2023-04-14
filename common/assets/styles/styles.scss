@@ -1,11 +1,10 @@
 /* You can add global styles to this file, and also import other styles files */
 @import "../../../node_modules/primeng/resources/primeng.css";
 @import "../../../node_modules/primeicons/primeicons.css";
-@import "assets/styles/grid-style";
-@import "assets/styles/primeng-style";
-@import "assets/styles/variable";
+@import "grid-style";
+@import "primeng-style";
+@import "variable";
 @import "../../../node_modules/primeng/resources/themes/lara-light-blue/theme.css";
-
 
 html, body {
   margin: 0;
@@ -28,11 +27,11 @@ body.darkTheme {
   --text-color: white;
   background: var(--background-color);
   color: var(--text-color);
-  background-image: url(/assets/image/dark-Mode.svg);
+  background-image: url(../../../common/assets/image/dark-Mode.svg);
 }
 
 body.lightTheme {
-  background-image: url(/assets/image/light-mode.svg);
+  background-image: url(../../../common/assets/image/light-Mode.svg);
 }
 
 .header {
