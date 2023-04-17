@@ -1,6 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-  <g id="Group_249" data-name="Group 249" transform="translate(-480 -680)">
-    <rect id="Rectangle_453" data-name="Rectangle 453" width="18" height="18" transform="translate(480 680)" fill="rgba(255,255,255,0)"/>
-    <text id="CY" transform="translate(481 693)" fill="#e2046e" font-size="11" font-family="SFUIText-BoldG1, SF UI  Text G1" font-weight="700"><tspan x="0" y="0">CY</tspan></text>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1000" height="1000" viewBox="0 0 1000 1000" xml:space="preserve">
+<desc>Created with Fabric.js 3.5.0</desc>
+<defs>
+</defs>
+<rect x="0" y="0" width="100%" height="100%" fill="rgba(255,255,255,0)"/>
+<g transform="matrix(1.0394 0 0 0.9933 498.2006 532.3573)" id="395235">
+<g style="">
+		<g transform="matrix(1.1558 0 0 -1.3828 0.0143 -193.5783)" id="510131">
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(247,30,136); fill-rule: nonzero; opacity: 1;" transform=" translate(-554.4095, -615.3331)" d="M 151 807 c -13 -13 -15 -151 -2 -175 c 5 -9 99 -61 208 -116 l 200 -98 l 204 103 l 204 104 l 3 89 c 2 49 -1 93 -6 98 c -6 6 -86 -29 -201 -86 c -105 -53 -198 -96 -207 -96 c -9 0 -46 15 -83 34 c -231 120 -309 154 -320 143 z m 149 -122 c 87 -44 90 -46 90 -80 l 0 -35 l -95 47 c -91 46 -95 49 -95 80 c 0 18 2 33 5 33 c 3 0 46 -20 95 -45 z m 195 -105 c 22 -24 13 -53 -16 -48 c -27 4 -44 30 -36 52 c 9 22 30 20 52 -4 z" stroke-linecap="round"/>
+</g>
+		<g transform="matrix(1.1558 0 0 -1.3828 0.0697 188.524)" id="84021">
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(247,30,136); fill-rule: nonzero; opacity: 1;" transform=" translate(-554.4575, -339)" d="M 152 528 c -14 -14 -16 -151 -3 -176 c 5 -9 99 -61 208 -116 l 200 -98 l 204 103 l 204 104 l 3 89 c 2 49 -1 93 -6 98 c -6 6 -88 -30 -206 -89 l -196 -98 l -195 98 c -107 53 -196 97 -198 97 c -2 0 -8 -5 -15 -12 z m 148 -123 c 87 -44 90 -46 90 -80 l 0 -35 l -95 47 c -91 46 -95 49 -95 80 c 0 18 2 33 5 33 c 3 0 46 -20 95 -45 z m 195 -105 c 22 -24 13 -53 -16 -48 c -27 4 -44 30 -36 52 c 9 22 30 20 52 -4 z" stroke-linecap="round"/>
+</g>
+</g>
+</g>
 </svg>
