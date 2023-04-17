@@ -25,7 +25,7 @@
 
 .p-button:enabled:hover, .p-button:enabled:active {
   @extend .solid-button;
-  background: rgb(216 12 121);
+  background: var(--primary-dark-color);
   border-color: var(--primary-color);
 }
 
@@ -36,7 +36,7 @@
 }
 
 .p-button.p-button-outlined:enabled:hover, .p-button.p-button-outlined:enabled:active {
-  background: rgb(246 59 159 / 12%);
+  background: var(--primary-light-color);
   color: var(--primary-color);
 }
 

@@ -2,7 +2,7 @@
 
 .base-input-text {
   @extend .ui-base-style;
-  border: 1px solid var(--primary-text-color);
+  border: var(--border-width) solid var(--primary-text-color);
   background: var(--background-color);
   width: 100%;
 }
@@ -12,8 +12,8 @@
 
 }
 
-  .p-inputtext ,.p-inputtext:enabled:hover{
-    @extend .ui-input-text;
-    border-color: var(--primary-text-color);
-  }
-
+.p-inputtext, .p-inputtext:enabled:hover,.p-inputtext:enabled:focus
+{
+  @extend .ui-input-text;
+  border-color: var(--primary-text-color);
+}

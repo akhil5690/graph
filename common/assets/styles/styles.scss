@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other styles files */
-@import "primeng-style";
+@import "ui-component-style";
 @import "ui-variable";
 @import "ui-input-text-style";
 @import "ui-button-style";
@@ -11,29 +11,29 @@
 
 html, body {
   margin: 0;
-  font-size: 14px; // 14px = 1rem
+  font-size: var(--large-screen-font); // 14px = 1rem
   font-family: var(--font-family);
 
 }
 
 @media screen and (max-width: 1280px) {
   html, body {
-    background-size: 1323px 804px;
-    font-size: 10px;
+    background-size: var(--bg-image-size);
+    font-size:  var(--medium-screen-font-size);
   }
 }
 
 //theme switcher
 body.darkTheme {
-  --background-color: #171717;
-  --primary-text-color: white;
+  --background-color: var(--dark-theme);
+  --primary-text-color: var(--secondary-text-color);
   background: var(--background-color);
   color: var(--primary-text-color);
-  background-image: url(../../../common/assets/image/dark-Mode.svg);
+  background-image:var(--dark-mode-img);
 }
 
 body.lightTheme {
-  background-image: url(../../../common/assets/image/light-Mode.svg);
+  background-image:var(--light-mode-img);
 }
 
 a {
@@ -42,6 +42,6 @@ a {
 }
 
 label {
-  font-weight: 500;
+  font-weight: var(--font-weight-normal);
 }
 
