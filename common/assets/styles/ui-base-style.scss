@@ -6,14 +6,14 @@
   border-radius: var(--border-radius);
 }
 
-.name {
+.title {
   @extend .ui-base-style;
   font-size: calc(var(--unit) * 3);
   color: var(--primary-color);
   font-weight: var(--font-weight-bold);
   border: none;
 }
-.title{
+.subtitle{
   @extend .ui-base-style;
   font-weight: var(--font-weight-bold);
   border: none;

@@ -3,11 +3,8 @@
 
 //Input text
 .input {
-  .p-inputtext {
+  .p-inputtext ,.p-inputtext:enabled:hover{
     @extend .ui-input-text;
-  }
-
-  .p-inputtext:enabled:hover {
     border-color: var(--primary-text-color);
   }
 }
@@ -31,13 +28,8 @@
     @extend .outlined-button;
   }
 
-  .p-button.p-button-outlined:enabled:hover {
+  .p-button.p-button-outlined:enabled:hover, .p-button.p-button-outlined:enabled:active  {
     background: rgb(246 59 159 / 12%);
-    color: var(--primary-color);
-  }
-
-  .p-button.p-button-outlined:enabled:active {
-    background: rgba(246, 59, 159, 0.04);
     color: var(--primary-color);
   }
 
