@@ -5,16 +5,3 @@
   border: 1px solid;
   border-radius: var(--border-radius);
 }
-
-.title {
-  @extend .ui-base-style;
-  font-size: calc(var(--unit) * 3);
-  color: var(--primary-color);
-  font-weight: var(--font-weight-bold);
-  border: none;
-}
-.subtitle{
-  @extend .ui-base-style;
-  font-weight: var(--font-weight-bold);
-  border: none;
-}
