@@ -31,3 +31,46 @@
 <!--    </div>-->
 <!--  </div>-->
 <!--</app-widget-frame>-->
+<app-widget-frame (isDarkTheme)="setBackground($event)">
+  <div main class="main-container">
+    <div class="signIn-container">
+      <div class="name">Cymonix IQ+</div>
+      <div class="title">Sign In</div>
+      <div class="form-container">
+        <div class="three-row-container">
+          <div class="label">
+            <label for="username">Email</label>
+          </div>
+          <div class="input">
+            <input pInputText id="username"/>
+          </div>
+        </div>
+        <div class="three-row-container">
+          <div class="label">
+            <label for="password">Password</label>
+          </div>
+          <div class="input">
+            <input pInputText type="password" id="password"/>
+          </div>
+          <div class="forgot">
+            <a href="/">Forgot Password?</a>
+          </div>
+        </div>
+        <div class="solid-btn">
+          <p-button label="Sign In"></p-button>
+        </div>
+        <small class="termsAndCondition">By creating an account, you agree to <a href="/">condition of Use</a> and <a
+          href="/">Privacy Policy</a>
+        </small>
+        <p-divider align="center">
+          <small>New to Cymonix IQ+ ?</small>
+        </p-divider>
+        <div class="outlined-btn">
+          <p-button label="Create an account" styleClass="p-button-outlined "></p-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-widget-frame>
+
+

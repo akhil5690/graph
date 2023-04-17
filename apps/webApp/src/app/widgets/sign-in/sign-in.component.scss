@@ -1,8 +1,23 @@
-
 app-sign-in {
   .signIn-container {
-    width: 27.2rem
+    display:grid;
+    justify-items: center;
+    justify-content: center;
+    width: 66%;
+  }
+  .main-container{
+    display:grid;
+    justify-items: center;
+    justify-content: center;
+  }
+  .form-container{
+    display: grid;
+    grid-gap: var(--unit);
+  }
 
+  .three-row-container{
+    display: grid;
+    grid-template-rows: auto auto auto;
   }
 
   .termsAndCondition {
@@ -11,18 +26,8 @@ app-sign-in {
 
   .forgot {
     padding-top: 4px;
+    text-align:end;
   }
 
 }
 
-//common
-.button {
-  button.p-ripple.p-element.p-button.p-component {
-    width: 100%;
-  }
-}
-
-.grid.nav {
-  justify-content: end;
-  margin: 0.5rem;
-}

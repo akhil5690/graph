@@ -1,5 +1,5 @@
-/* You can add global styles to this file, and also import other styles files */;
-@import "grid-style";
+/* You can add global styles to this file, and also import other styles files */
+//@import "grid-style";
 @import "primeng-style";
 @import "variable";
 @import "../../../apps/webApp/src/assets/font/font";
@@ -10,14 +10,10 @@
 html, body {
   margin: 0;
   font-size: 14px; // 14px = 1rem
-  font-family: 'san fransisco', Roboto,
-  Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: var(--font-family);
 
 }
-.p-component{
-  font-family: 'san fransisco', Roboto,
-  Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-}
+
 @media screen and (max-width: 1280px) {
   html, body {
     background-size: 1323px 804px;
@@ -28,9 +24,9 @@ html, body {
 //theme switcher
 body.darkTheme {
   --background-color: #171717;
-  --text-color: white;
+  --primary-text-color: white;
   background: var(--background-color);
-  color: var(--text-color);
+  color: var(--primary-text-color);
   background-image: url(../../../common/assets/image/dark-Mode.svg);
 }
 
@@ -38,10 +34,6 @@ body.lightTheme {
   background-image: url(../../../common/assets/image/light-Mode.svg);
 }
 
-.header {
-  margin-top: 0;
-  margin-bottom: 1rem;
-}
 a {
   text-decoration-line: none;
   color: var(--primary-color);

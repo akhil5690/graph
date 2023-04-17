@@ -1,6 +1,10 @@
-app-widget-frame{
-  .frame-grid{
+app-widget-frame {
+  .frame-grid {
     display: grid;
     grid-template-rows: 9vh 82vh 9vh;
+  }
+
+  .navbar {
+    padding: calc(var(--unit)/2);
   }
 }

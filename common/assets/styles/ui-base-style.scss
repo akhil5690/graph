@@ -1,0 +1,20 @@
+.ui-base-style {
+  color: var(--primary-text-color);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight-normal);
+  border: 1px solid;
+  border-radius: var(--border-radius);
+}
+
+.name {
+  @extend .ui-base-style;
+  font-size: calc(var(--unit) * 3);
+  color: var(--primary-color);
+  font-weight: var(--font-weight-bold);
+  border: none;
+}
+.title{
+  @extend .ui-base-style;
+  font-weight: var(--font-weight-bold);
+  border: none;
+}

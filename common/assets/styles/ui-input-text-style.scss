@@ -1,0 +1,12 @@
+@import "ui-base-style";
+
+.base-input-text {
+  @extend .ui-base-style;
+}
+
+.ui-input-text {
+  @extend .base-input-text;
+  border: 1px solid var(--primary-text-color);
+  background: var(--background-color);
+  width: 100%;
+}

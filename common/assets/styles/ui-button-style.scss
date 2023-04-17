@@ -1,0 +1,19 @@
+@import "ui-base-style";
+
+.base-button {
+  @extend .ui-base-style;
+}
+
+.solid-button {
+  @extend .base-button;
+  color: var(--secondary-text-color);
+  background-color: var(--primary-color);
+  border: none;
+}
+
+.outlined-button {
+  @extend .base-button;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+

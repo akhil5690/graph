@@ -1,7 +1,14 @@
 :root {
   --background-color: white;
+  --border-radius: calc(var(--unit)/2);
   --primary-color: #f71e88;
-  --gap: 1rem;
-  --text-color: black;
-  --inverse-text-color: white;
+  --unit: 1rem;
+  --font-weight-normal: 400;
+  --font-weight-bold: 600;
+  --primary-text-color: black;
+  --secondary-text-color: white;
+  --font-size: 1rem;
+  --font-family: 'san fransisco', Roboto,
+  Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
 }
