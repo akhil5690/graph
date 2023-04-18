@@ -27,13 +27,13 @@ html, body {
 body.darkTheme {
   --background-color: var(--dark-theme);
   --primary-text-color: var(--secondary-text-color);
-  background-image: url("../../assets/image/dark-mode.svg");
+  background-image: url("../image/dark-mode.svg");
   color: var(--primary-text-color);
   background:var(--dark-mode-img);
 }
 
 body.lightTheme {
-  background-image:url("../../assets/image/light-mode.svg");
+  background-image:url("../image/light-mode.svg");
 }
 
 a {
