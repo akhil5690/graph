@@ -29,11 +29,11 @@ body.darkTheme {
   --primary-text-color: var(--secondary-text-color);
   background: var(--background-color);
   color: var(--primary-text-color);
-  background-image:url('../../../apps/webApp/src/assets/image/dark-Mode.svg');
+  background:var(--dark-mode-img);
 }
 
 body.lightTheme {
-  background-image:url('../../../apps/webApp/src/assets/image/light-mode.svg');
+  background:var(--light-mode-img);
 }
 
 a {
