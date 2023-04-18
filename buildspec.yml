@@ -7,7 +7,7 @@ env:
 phases:
   install:
     commands:
-        - n 14.20
+        - n 16.16.0
         - echo Installing source NPM dependencies...
         - npm install -g @angular/cli
         - npm install
