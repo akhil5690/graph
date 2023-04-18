@@ -12,8 +12,14 @@
 
 }
 
-.p-inputtext, .p-inputtext:enabled:hover,.p-inputtext:enabled:focus
-{
+.three-row-container {
+  display: grid;
+  grid-template-rows: auto auto auto;
+  grid-gap: calc(var(--unit) / 3);
+  width: 100%;
+}
+
+.p-inputtext, .p-inputtext:enabled:hover, .p-inputtext:enabled:focus {
   @extend .ui-input-text;
   border-color: var(--primary-text-color);
 }

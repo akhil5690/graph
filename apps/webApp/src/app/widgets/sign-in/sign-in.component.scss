@@ -15,17 +15,11 @@ app-sign-in {
     grid-gap: var(--unit);
   }
 
-  .three-row-container{
-    display: grid;
-    grid-template-rows: auto auto auto;
-  }
-
   .termsAndCondition {
     text-align: center;
   }
 
   .forgot {
-    padding-top: 4px;
     text-align:end;
   }
 
