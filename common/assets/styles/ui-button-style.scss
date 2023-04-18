@@ -14,7 +14,7 @@
 .outlined-button {
   @extend .base-button;
   color: var(--primary-color);
-  border: 1px solid var(--primary-color);
+  border: var(--border-width) solid var(--primary-color);
 }
 
 
@@ -47,5 +47,5 @@
 }
 
 button.p-ripple.p-element.p-button.p-component {
-  width: 100%;
+  width: var(--base-width);
 }
