@@ -1,0 +1,51 @@
+@import "ui-base-style";
+
+.base-button {
+  @extend .ui-base-style;
+}
+
+.solid-button {
+  @extend .base-button;
+  color: var(--secondary-text-color);
+  background-color: var(--primary-color);
+  border: none;
+}
+
+.outlined-button {
+  @extend .base-button;
+  color: var(--primary-color);
+  border: var(--border-width) solid var(--primary-color);
+}
+
+
+// Solid Button
+.p-button {
+  @extend .solid-button;
+}
+
+.p-button:enabled:hover, .p-button:enabled:active {
+  @extend .solid-button;
+  background: var(--primary-dark-color);
+  border-color: var(--primary-color);
+}
+
+
+//outlined button
+.p-button.p-button-outlined {
+  @extend .outlined-button;
+}
+
+.p-button.p-button-outlined:enabled:hover, .p-button.p-button-outlined:enabled:active {
+  background: var(--primary-light-color);
+  color: var(--primary-color);
+}
+
+//theme switch
+.p-togglebutton.p-button, .p-togglebutton.p-button:not(.p-disabled):not(.p-highlight):hover,
+.p-togglebutton.p-button.p-highlight, .p-togglebutton.p-button.p-highlight:hover {
+  @extend .solid-button;
+}
+
+button.p-ripple.p-element.p-button.p-component {
+  width: var(--base-width);
+}

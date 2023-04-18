@@ -1,0 +1,17 @@
+//divider
+
+.p-divider.p-divider-horizontal {
+  margin: 0;
+}
+
+.p-divider .p-divider-content {
+  background: var(--background-color)
+}
+
+.p-component {
+  font-family: var(--font-family);
+}
+
+.p-button:focus, .p-inputtext:enabled:focus {
+  box-shadow: none;
+}
