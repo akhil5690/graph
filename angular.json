@@ -36,7 +36,7 @@
             "styles": [
               "node_modules/primeicons/primeicons.css",
               "node_modules/primeng/resources/primeng.min.css",
-              "common/assets/styles/styles.scss"
+              "assets/styles/styles.scss"
             ],
             "scripts": []
           },
@@ -99,7 +99,7 @@
               "apps/webApp/src/assets"
             ],
             "styles": [
-              "common/assets/styles/styles.scss"
+              "assets/styles/styles.scss"
             ],
             "scripts": []
           }
