@@ -2,7 +2,7 @@ app-widget-frame {
   .frame-with-sidebar {
     display: grid;
     grid-template-columns: var(--sidebar-width) auto;
-    grid-template-rows: var(--toolbar-height) var(--main-height) var(--toolbar-height);
+    grid-template-rows:  var(--top-toolbar-height) var(--main-height) var(--bottom-toolbar-height);
     grid-template-areas:
       "header header "
       "sidebar main "
@@ -12,7 +12,7 @@ app-widget-frame {
   .header-main-footer-frame {
     display: grid;
     grid-template-columns:var(--base-width);
-    grid-template-rows: var(--toolbar-height) var(--main-height) var(--toolbar-height);
+    grid-template-rows: var(--top-toolbar-height) var(--main-height) var(--bottom-toolbar-height);
     grid-template-areas:
       "header"
       "main"
@@ -22,7 +22,7 @@ app-widget-frame {
   .only-main {
     display: grid;
     grid-template-columns:var(--base-width);
-    grid-template-rows: var(--toolbar-height) var(--main-height) var(--toolbar-height);
+    grid-template-rows:  var(--top-toolbar-height) var(--main-height) var(--bottom-toolbar-height);
     grid-template-areas:
       "."
       "main"
@@ -32,7 +32,7 @@ app-widget-frame {
   .header-main-frame {
     display: grid;
     grid-template-columns:var(--base-width);
-    grid-template-rows: var(--toolbar-height) var(--main-height) var(--toolbar-height);
+    grid-template-rows: var(--top-toolbar-height) var(--main-height) var(--bottom-toolbar-height);
     grid-template-areas:
       "header"
       "main"

@@ -11,15 +11,18 @@
 
 html, body {
   margin: 0;
-  font-size: var(--large-screen-font); // 14px = 1rem
+  font-size: var(--large-screen-font-size); // 14px = 1rem
   font-family: var(--font-family);
 
 }
 
 @media screen and (max-width: 1280px) {
+  :root{
+    --main-height: 47.48rem;
+  }
   html, body {
     background-size: var(--bg-image-size);
-    font-size:  var(--medium-screen-font-size);
+    font-size: var(--medium-screen-font-size);
   }
 }
 
@@ -32,7 +35,7 @@ body.darkTheme {
 }
 
 body.lightTheme {
-  background-image:url("../image/light-mode.svg");
+  background-image: url("../image/light-mode.svg");
 }
 
 a {
