@@ -8,6 +8,7 @@ import {InputSwitchModule} from "primeng/inputswitch";
 import {FormsModule} from "@angular/forms";
 import {ToggleButtonModule} from "primeng/togglebutton";
 import {WidgetFrameModule} from "../../../../../../common/ui-component/frames/widget-frame/widget-frame.module";
+import {InputTextareaModule} from "primeng/inputtextarea";
 
 
 @NgModule({
@@ -17,15 +18,16 @@ import {WidgetFrameModule} from "../../../../../../common/ui-component/frames/wi
   exports: [
     SignInComponent,
   ],
-  imports: [
-    CommonModule,
-    InputTextModule,
-    ButtonModule,
-    DividerModule,
-    InputSwitchModule,
-    FormsModule,
-    ToggleButtonModule,
-    WidgetFrameModule,
-  ]
+    imports: [
+        CommonModule,
+        InputTextModule,
+        ButtonModule,
+        DividerModule,
+        InputSwitchModule,
+        FormsModule,
+        ToggleButtonModule,
+        WidgetFrameModule,
+        InputTextareaModule,
+    ]
 })
 export class SignInModule { }

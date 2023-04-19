@@ -5,6 +5,8 @@
   --primary-light-color: rgb(246 59 159 / 12%);
   --primary-text-color: black;
   --secondary-text-color: white;
+  --light-grey:rgba(0, 0, 0, 0.1);
+  --grey:#d7d7d7;
   --border-radius: calc(var(--unit) / 2);
   --font-weight-normal: 400;
   --font-weight-bold: 600;
@@ -18,5 +20,8 @@
   Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --dark-theme: #171717;
   --bg-image-size: 1323px 804px;
+  --toolbar-height:8vh;
+  --main-height:84vh;
+  --sidebar-width:20rem;
 
 }

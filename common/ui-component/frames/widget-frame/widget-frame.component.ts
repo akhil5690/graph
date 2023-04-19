@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 
 @Component({
   selector: 'app-widget-frame',
@@ -6,17 +6,26 @@ import {Component, EventEmitter, OnInit, Output, ViewEncapsulation} from '@angul
   styleUrls: ['./widget-frame.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class WidgetFrameComponent implements OnInit{
-  @Output() isDarkTheme =  new EventEmitter<string>();
+export class WidgetFrameComponent implements OnInit {
+  @Input() frame_type!: string;
+  @Output() isDarkTheme = new EventEmitter<string>();
   theme: string = 'lightTheme';
   checked!: boolean;
 
-  ngOnInit(){
+  ngOnInit() {
     this.isDarkTheme.emit('lightTheme');
   }
+
   toggleTheme() {
     this.theme = this.theme === 'lightTheme' ? 'darkTheme' : 'lightTheme';
     this.checked = this.theme === 'darkTheme';
     this.isDarkTheme.emit(this.theme);
+  }
+
+  getClass(frame_type:string) {
+    switch (frame_type){
+      case 'frame-with-sidebar': return 'frame-with-sidebar';
+      default: return 'only-main'
+    }
   }
 }

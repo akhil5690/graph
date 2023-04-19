@@ -1,17 +1,20 @@
-<section class="frame-grid">
-  <header class="navbar">
+<section [class]="getClass(frame_type)">
+  <header class="header">
     <!--  theme changer  -->
-    <div>
-      <p-toggleButton [(ngModel)]="checked" onLabel="Dark" offLabel="Light" (click)="toggleTheme()"></p-toggleButton>
-    </div>
+    <!--    <div>-->
+    <!--      <p-toggleButton [(ngModel)]="checked" onLabel="Dark" offLabel="Light" (click)="toggleTheme()"></p-toggleButton>-->
+    <!--    </div>-->
 
     <ng-content select="[header]"></ng-content>
-
   </header>
-  <main>
+  <div class="sidebar">
+    <ng-content select="[sidebar]"></ng-content>
+  </div>
+  <main class="main">
     <ng-content select="[main]"></ng-content>
   </main>
-  <footer>
+  <footer class="footer">
     <ng-content select="[footer]"></ng-content>
   </footer>
 </section>
+
