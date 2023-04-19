@@ -17,14 +17,12 @@ html, body {
 }
 
 @media screen and (max-width: 1280px) {
-  :root{
-    --main-height: 47.48rem;
-  }
   html, body {
     background-size: var(--bg-image-size);
     font-size: var(--medium-screen-font-size);
   }
 }
+
 
 //theme switcher
 body.darkTheme {
