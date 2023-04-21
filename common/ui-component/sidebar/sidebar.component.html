@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="menu" *ngFor="let items of sidebarItems">
+    <div class="categories">{{items.type}}</div>
+    <div class="items" *ngFor="let item of items.items">
+      <span class="icon">
+        <i class="pi pi-home"></i>
+      </span>
+      <span class="label">{{item.title}}</span>
+    </div>
+  </div>
+</div>
