@@ -3,13 +3,13 @@
     <div class="signIn-container">
       <div class="title">Cymonix IQ+</div>
       <div class="subtitle">Sign In</div>
-      <div class="form-container">
+      <div class="form-container" [formGroup]="signIn" >
         <div class="three-row-container">
           <div>
             <label for="username">Email</label>
           </div>
           <div>
-            <input pInputText id="username"/>
+            <input pInputText id="username" formControlName="email"/>
           </div>
         </div>
         <div class="three-row-container">
@@ -17,14 +17,14 @@
             <label for="password">Password</label>
           </div>
           <div>
-            <input pInputText type="password" id="password"/>
+            <input pInputText type="password" id="password" formControlName="password"/>
           </div>
           <div class="forgot">
             <a href="/">Forgot Password?</a>
           </div>
         </div>
         <div>
-          <p-button label="Sign In"></p-button>
+          <p-button label="Sign In" (click)="onSubmit()"></p-button>
         </div>
         <small class="termsAndCondition">By creating an account, you agree to <a href="/">condition of Use</a> and <a
           href="/">Privacy Policy</a>

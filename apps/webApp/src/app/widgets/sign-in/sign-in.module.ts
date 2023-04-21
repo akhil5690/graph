@@ -5,7 +5,7 @@ import {InputTextModule} from "primeng/inputtext";
 import {ButtonModule} from "primeng/button";
 import {DividerModule} from "primeng/divider";
 import {InputSwitchModule} from "primeng/inputswitch";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ToggleButtonModule} from "primeng/togglebutton";
 import {WidgetFrameModule} from "../../../../../../common/ui-component/frames/widget-frame/widget-frame.module";
 import {InputTextareaModule} from "primeng/inputtextarea";
@@ -28,6 +28,7 @@ import {InputTextareaModule} from "primeng/inputtextarea";
         ToggleButtonModule,
         WidgetFrameModule,
         InputTextareaModule,
+        ReactiveFormsModule,
     ]
 })
 export class SignInModule { }
