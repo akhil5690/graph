@@ -1,10 +1,26 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
+import {AuthGuard} from "../../../../common/ui-common/auth.guard";
 
 const routes: Routes = [
-  {path: '', loadChildren: () => import('../../../webApp/src/app/views/pages/auth/auth.module').then(m => m.AuthModule)},
+  {
+    path: '',
+    loadChildren: () => import('../../../webApp/src/app/views/pages/auth/auth.module')
+      .then(m => m.AuthModule)
+  }, {
+    path: '',
+    canActivate:[AuthGuard],
+    loadChildren: () => import('../../../webApp/src/app/views/pages/dashboard/dashboard.module')
+      .then(m => m.DashboardModule)
+  },
+  {
+    path: '**',
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
 ]
+
 @NgModule({
   declarations: [],
   imports: [
@@ -13,4 +29,5 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}
