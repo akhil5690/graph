@@ -24,19 +24,6 @@ html, body {
   }
 }
 
-
-//theme switcher
-body.darkTheme {
-  --background-color: var(--dark-theme);
-  --primary-text-color: var(--secondary-text-color);
-  background-image: url("../image/dark-mode.svg");
-  color: var(--primary-text-color);
-}
-
-body.lightTheme {
-  background-image: url("../image/light-mode.svg");
-}
-
 a {
   text-decoration-line: none;
   color: var(--primary-color);
