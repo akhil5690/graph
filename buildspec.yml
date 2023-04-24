@@ -2,8 +2,7 @@ version: 0.2
 
 env:
     variables:
-        CACHE_CONTROL: "86400"
-        BUILD_FOLDER: "dist"
+        BUILD_ENV : "development"
 phases:
   install:
     commands:
@@ -16,8 +15,20 @@ phases:
     commands:
         - echo Build started 
         - ng build # --aot --output-hashing=none
+        
+  post_build:
+    commands:
+        # Clear S3 bucket
+        - aws s3 rm s3://fusioncenterui --recursive
+        - echo S3 bucket is cleared.
+        # Copy dist folder to S3 bucket, As ofAngular 7, builds are stored inside an app folder in distribution and not at the root of the dist folder
+        - aws s3 cp dist s3://fusioncenterui --recursive --cache-control max-age=60
+        - echo Build completed on `date`
+        - dir
 artifacts:
     files:
         - '**/*'
-    base-directory: 'dist*'
     discard-paths: yes
+    base-directory: 'dist/*'
+    
+    
