@@ -25,7 +25,6 @@
   grid-template-areas:
       "."
       "main"
-    "."
 }
 
 .header-main-frame {
@@ -39,19 +38,25 @@
 
 .header {
   grid-area: header;
-  border-bottom: calc(var(--border-width) * 2) solid var(--light-grey);
+  border-bottom: calc(var(--border-width) * 2) solid var(--third-background-color);
+  background-color: var(--primary-background-color);
+  color:var(--primary-text-color);
 }
 
 .sidebar {
   grid-area: sidebar;
-  background-color: var(--light-grey);
+  color:var(--primary-text-color);
+  background-color: var(--third-background-color);
 }
 
 .main {
   grid-area: main;
+  color:var(--primary-text-color);
+  background-color: var(--primary-background-color);
 }
 
 .footer {
   grid-area: footer;
-  background-color: var(--grey);
+  color:var(--primary-text-color);
+  background-color: var(--secondary-background-color);
 }

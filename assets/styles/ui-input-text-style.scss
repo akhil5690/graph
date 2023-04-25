@@ -3,7 +3,7 @@
 .base-input-text {
   @extend .ui-base-style;
   border: var(--border-width) solid var(--primary-text-color);
-  background: var(--background-color);
+  background: var(--primary-background-color);
   width: var(--base-width);
 }
 
