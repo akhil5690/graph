@@ -1,10 +1,14 @@
 <app-widget-frame [frame_type]="'frame-with-sidebar'">
-  <div header>header</div>
+  <div header>
+    <app-top-toolbar></app-top-toolbar>
+  </div>
   <div sidebar>
     <app-sidebar></app-sidebar>
   </div>
   <div main>
     <app-iframe [url]="url"></app-iframe>
   </div>
-  <div footer>footer</div>
+  <div footer>
+    <app-bottom-toolbar></app-bottom-toolbar>
+  </div>
 </app-widget-frame>

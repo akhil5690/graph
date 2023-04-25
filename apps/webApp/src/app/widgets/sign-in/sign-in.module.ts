@@ -9,12 +9,14 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ToggleButtonModule} from "primeng/togglebutton";
 import {WidgetFrameModule} from "../../../../../../common/ui-component/frames/widget-frame/widget-frame.module";
 import {InputTextareaModule} from "primeng/inputtextarea";
+import {UiButtonComponent} from "../../../../../../common/ui-component/form/ui-button/ui-button.component";
 
 
 @NgModule({
-  declarations: [
-    SignInComponent
-  ],
+    declarations: [
+        SignInComponent,
+        UiButtonComponent
+    ],
   exports: [
     SignInComponent,
   ],
