@@ -9,14 +9,15 @@
   color: var(--secondary-text-color);
   background-color: var(--primary-color);
   border: none;
+  width: var(--base-width);
 }
 
 .outlined-button {
   @extend .base-button;
   color: var(--primary-color);
   border: var(--border-width) solid var(--primary-color);
+  width: var(--base-width);
 }
-
 
 // Solid Button
 .p-button {
@@ -46,6 +47,5 @@
   @extend .solid-button;
 }
 
-button.p-ripple.p-element.p-button.p-component {
-  width: var(--base-width);
-}
+
+

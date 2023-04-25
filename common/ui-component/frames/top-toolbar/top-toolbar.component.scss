@@ -1,5 +1,5 @@
 app-top-toolbar {
-  .toolbar {
+  .container {
     display: grid;
     grid-template-columns: var(--sidebar-width) 2fr 1fr 1fr;
     align-content: center;

@@ -1,0 +1,9 @@
+app-bottom-toolbar {
+  .container {
+    display: grid;
+    height: var(--bottom-toolbar-height);
+    grid-template-columns: calc(var(--unit) * 10) calc(var(--unit) * 10);
+    grid-gap: var(--unit);
+    justify-content: end;
+  }
+}
