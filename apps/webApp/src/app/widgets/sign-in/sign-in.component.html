@@ -3,28 +3,28 @@
     <div class="signIn-container">
       <div class="title">Cymonix IQ+</div>
       <div class="subtitle">Sign In</div>
-      <div class="form-container" [formGroup]="signIn" >
+      <div class="form-container" [formGroup]="signIn">
         <div class="three-row-container">
           <div>
-            <label for="username">Email</label>
+            <label>Email</label>
           </div>
           <div>
-            <input pInputText id="username" formControlName="email"/>
+            <input pInputText formControlName="email"/>
           </div>
         </div>
         <div class="three-row-container">
-          <div >
-            <label for="password">Password</label>
+          <div>
+            <label>Password</label>
           </div>
           <div>
-            <input pInputText type="password" id="password" formControlName="password"/>
+            <input pInputText type="password" formControlName="password"/>
           </div>
-          <div class="forgot">
-            <a href="/">Forgot Password?</a>
-          </div>
+        </div>
+        <div class="forgot">
+          <a href="/">Forgot Password?</a>
         </div>
         <div>
-          <ui-button (click)="onSubmit()"></ui-button>
+          <ui-button (click)="onSubmit()" [label]="'Sign In'"></ui-button>
         </div>
         <small class="termsAndCondition">By creating an account, you agree to <a href="/">condition of Use</a> and <a
           href="/">Privacy Policy</a>
@@ -33,7 +33,7 @@
           <small>New to Cymonix IQ+ ?</small>
         </p-divider>
         <div>
-          <p-button label="Create an account" styleClass="p-button-outlined "></p-button>
+          <ui-button [label]="'Create an account'" [styleClass]="'p-button-outlined '"></ui-button>
         </div>
       </div>
     </div>

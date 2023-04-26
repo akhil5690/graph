@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'ui-button',
@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./ui-button.component.scss']
 })
 export class UiButtonComponent {
+  @Input() label!: string;
+  @Input() styleClass!: string;
 
+  constructor() {
+  }
 }

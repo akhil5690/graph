@@ -10,6 +10,7 @@ import {
 } from "../../../../../../common/ui-component/frames/bottom-toolbar/bottom-toolbar.component";
 import {InputTextModule} from "primeng/inputtext";
 import {ButtonModule} from "primeng/button";
+import {SignInModule} from "../sign-in/sign-in.module";
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import {ButtonModule} from "primeng/button";
     CommonModule,
     WidgetFrameModule,
     InputTextModule,
-    ButtonModule
+    ButtonModule,
+    SignInModule
   ],
   exports:[SettingComponent]
 })

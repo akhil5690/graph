@@ -17,9 +17,10 @@ import {UiButtonComponent} from "../../../../../../common/ui-component/form/ui-b
         SignInComponent,
         UiButtonComponent
     ],
-  exports: [
-    SignInComponent,
-  ],
+    exports: [
+        SignInComponent,
+        UiButtonComponent,
+    ],
     imports: [
         CommonModule,
         InputTextModule,
