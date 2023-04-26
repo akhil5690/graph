@@ -2,6 +2,9 @@
 
 .base-button {
   @extend .ui-base-style;
+  width: var(--base-width);
+  padding: calc(var(--unit) / 1.5);
+  cursor: pointer;
 }
 
 .solid-button {
@@ -9,36 +12,34 @@
   color: var(--secondary-text-color);
   background-color: var(--primary-color);
   border: none;
-  width: var(--base-width);
+}
+
+.grey-button {
+  @extend .solid-button;
+  background-color: var(--grey-button-color);
 }
 
 .outlined-button {
   @extend .base-button;
   color: var(--primary-color);
   border: var(--border-width) solid var(--primary-color);
+  background: none;
   width: var(--base-width);
 }
 
-// Solid Button
-.p-button {
+.solid-button:hover {
   @extend .solid-button;
+  background-color: var(--primary-dark-color);
 }
 
-.p-button:enabled:hover, .p-button:enabled:active {
-  @extend .solid-button;
-  background: var(--primary-dark-color);
-  border-color: var(--primary-color);
-}
-
-
-//outlined button
-.p-button.p-button-outlined {
+.outlined-button:hover {
   @extend .outlined-button;
+  background-color: var(----primary-light-color)
 }
 
-.p-button.p-button-outlined:enabled:hover, .p-button.p-button-outlined:enabled:active {
-  background: var(--primary-light-color);
-  color: var(--primary-color);
+.grey-button:hover {
+  @extend .grey-button;
+  background-color: var(--grey-button-hover-color)
 }
 
 //theme switch

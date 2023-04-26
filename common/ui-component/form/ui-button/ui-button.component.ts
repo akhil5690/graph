@@ -7,7 +7,7 @@ import {Component, Input} from '@angular/core';
 })
 export class UiButtonComponent {
   @Input() label!: string;
-  @Input() styleClass!: string;
+  @Input() class!: string;
 
   constructor() {
   }
