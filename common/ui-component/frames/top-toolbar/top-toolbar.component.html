@@ -1,13 +1,16 @@
-  <div class="container">
-    <div class="brand-logo">
-      CYMONIX
-    </div>
-    <div class="menu">
-      <div>Dashboard</div>
-      <div>Workspace</div>
-    </div>
-    <ui-input></ui-input>
-    <div class="other-options">
-
+<div class="container">
+  <div class="brand-logo" *ngFor="let item of sector1">
+    {{item.name}}
+  </div>
+  <div class="menu">
+    <div *ngFor="let item of sector2">{{item.name}}</div>
+  </div>
+  <div>
+    <div *ngFor="let item of sector3">
+      <ui-input *ngIf="item.type === 'searchBox'"></ui-input>
     </div>
   </div>
+  <div class="other-options" *ngFor="let item of sector4">
+    <div></div>
+  </div>
+</div>

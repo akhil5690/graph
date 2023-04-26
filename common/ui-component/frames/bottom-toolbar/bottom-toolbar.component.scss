@@ -2,8 +2,13 @@ app-bottom-toolbar {
   .container {
     display: grid;
     height: var(--bottom-toolbar-height);
-    grid-template-columns: calc(var(--unit) * 10) calc(var(--unit) * 10);
+    grid-template-columns:2fr 1fr;
     grid-gap: var(--unit);
-    justify-content: end;
+  }
+  .right-toolbar{
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+    grid-gap: 1rem;
   }
 }

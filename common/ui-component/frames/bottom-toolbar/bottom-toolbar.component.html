@@ -1,4 +1,13 @@
 <div class="container">
-  <ui-button [label]="'Cancel'" [class]="'grey-button'"></ui-button>
-  <ui-button [label]="'Save'" [class]="'solid-button'"></ui-button>
+  <div class="left-toolbar">
+    <div *ngFor="let item of sector1">{{item}}</div>
+  </div>
+  <div class="right-toolbar">
+    <div *ngFor="let item of sector2">
+      <ui-button *ngIf="item.type==='button'"
+                 [label]="item.name"
+                 [class]="item.class">
+      </ui-button>
+    </div>
+  </div>
 </div>
