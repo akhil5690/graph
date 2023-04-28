@@ -10,20 +10,23 @@ import {WidgetFrameModule} from "../../../../common/ui-component/frames/widget-f
 import { DashboardComponent } from './views/pages/dashboard/dashboard.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    AuthComponent,
-    SignInComponent,
-    DashboardComponent,
-  ],
-  imports: [
-    BrowserModule,
-    SignInModule,
-    AppRoutingModule,
-    WidgetFrameModule,
-  ],
-  providers: [],
+    declarations: [
+        AppComponent,
+        AuthComponent,
+        SignInComponent,
+        DashboardComponent,
+    ],
+    imports: [
+        BrowserModule,
+        SignInModule,
+        AppRoutingModule,
+        WidgetFrameModule,
+    ],
+    providers: [],
+    exports: [
+        DashboardComponent
+    ],
 
-  bootstrap: [AppComponent]
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

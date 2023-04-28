@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {SettingComponent} from "./setting.component";
+import {DashboardWidgetComponent} from "./dashboard-widget.component";
 import {WidgetFrameModule} from "../../../../../../common/ui-component/frames/widget-frame/widget-frame.module";
 import {SidebarComponent} from "../../../../../../common/ui-component/sidebar/sidebar.component";
 import {IframeComponent} from "../../../../../../common/ui-component/iframe/iframe.component";
@@ -14,7 +14,7 @@ import {SignInModule} from "../sign-in/sign-in.module";
 
 
 @NgModule({
-  declarations: [SettingComponent, SidebarComponent, IframeComponent, TopToolbarComponent, BottomToolbarComponent],
+  declarations: [DashboardWidgetComponent, SidebarComponent, IframeComponent, TopToolbarComponent, BottomToolbarComponent],
   imports: [
     CommonModule,
     WidgetFrameModule,
@@ -22,6 +22,6 @@ import {SignInModule} from "../sign-in/sign-in.module";
     ButtonModule,
     SignInModule
   ],
-  exports:[SettingComponent]
+  exports:[DashboardWidgetComponent]
 })
-export class SettingModule { }
+export class DashboardWidgetModule { }
