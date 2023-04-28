@@ -41,49 +41,49 @@ export const toolbar = [{
     "type": "image",
     "sector": "4",
     "height": "15",
-    "width": "30"
+    "width": "20"
   }, {
     "url": "../../../../assets/image/chat.svg",
     "position": "top",
     "type": "image",
     "sector": "4",
     "height": "15",
-    "width": "30"
+    "width": "20"
   }, {
     "url": "../../../../assets/image/marketplace.svg",
     "position": "top",
     "type": "image",
     "sector": "4",
     "height": "15",
-    "width": "30"
+    "width": "20"
   }, {
     "url": "../../../../assets/image/notifications.svg",
     "position": "top",
     "type": "image",
     "sector": "4",
     "height": "15",
-    "width": "30"
+    "width": "20"
   }, {
     "url": "../../../../assets/image/settings.svg",
     "position": "top",
     "type": "image",
     "sector": "4",
     "height": "15",
-    "width": "30"
+    "width": "20"
   }, {
     "url": "../../../../assets/image/user.svg",
     "position": "top",
     "type": "image",
     "sector": "4",
     "height": "15",
-    "width": "30"
+    "width": "20"
   }, {
     "url": "../../../../assets/image/moreIcon2.svg",
     "position": "top",
     "type": "image",
     "sector": "4",
     "height": "15",
-    "width": "30"
+    "width": "20"
   },
 
 ]
