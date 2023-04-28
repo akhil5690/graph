@@ -14,7 +14,7 @@
           "style": "scss"
         }
       },
-      "root": "apps/webApp",
+      "root": "apps/webApp/",
       "sourceRoot": "apps/webApp/src",
       "prefix": "app",
       "architect": {
@@ -31,7 +31,12 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "apps/webApp/src/favicon.ico",
-              "apps/webApp/src/assets"
+              "apps/webApp/src/assets",
+              {
+                "glob": "**/*",
+                "input": "./assets/",
+                "output": "./assets"
+              }
             ],
             "styles": [
               "node_modules/primeicons/primeicons.css",

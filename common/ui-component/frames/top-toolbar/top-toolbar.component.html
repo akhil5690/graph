@@ -1,6 +1,6 @@
 <div class="container">
   <div class="brand-logo" *ngFor="let item of sector1">
-    {{item.name}}
+    <img [src]="item.url" alt="logo" [height]="item.height" [width]="item.width">
   </div>
   <div class="menu">
     <div *ngFor="let item of sector2">{{item.name}}</div>
@@ -10,7 +10,8 @@
       <ui-input *ngIf="item.type === 'searchBox'"></ui-input>
     </div>
   </div>
-  <div class="other-options" *ngFor="let item of sector4">
-    <div></div>
+  <div class="other-options">
+    <img *ngFor="let item of sector4" [src]="item.url"
+         [height]="item.height" [width]="item.width">
   </div>
 </div>

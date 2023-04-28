@@ -2,8 +2,9 @@ app-bottom-toolbar {
   .container {
     display: grid;
     height: var(--bottom-toolbar-height);
-    grid-template-columns:2fr 1fr;
+    grid-template-columns:4fr 1fr;
     grid-gap: var(--unit);
+    padding-right: var(--unit);
   }
   .right-toolbar{
     display: grid;

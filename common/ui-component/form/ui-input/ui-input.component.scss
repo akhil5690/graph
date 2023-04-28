@@ -1,12 +1,16 @@
 input.p-inputtext.p-component.p-element.search-bar {
   border-radius: 5rem;
   border: none;
-  background: #eceaea;
+  background: var(--third-background-color);
   color: black;
   text-align: center;
-  padding: 0.4rem;
+  padding: 0.7rem;
 }
 
 .p-input-icon-left > i {
   top: 45%;
+}
+
+.searchBox {
+  width: var(--base-width);
 }
