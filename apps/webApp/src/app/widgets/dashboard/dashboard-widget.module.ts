@@ -11,10 +11,11 @@ import {
 import {InputTextModule} from "primeng/inputtext";
 import {ButtonModule} from "primeng/button";
 import {SignInModule} from "../sign-in/sign-in.module";
+import {GraphComponents} from "../../../../../../common/ui-component/graph/graph.component";
 
 
 @NgModule({
-  declarations: [DashboardWidgetComponent, SidebarComponent, IframeComponent, TopToolbarComponent, BottomToolbarComponent],
+  declarations: [DashboardWidgetComponent, SidebarComponent, IframeComponent, TopToolbarComponent, BottomToolbarComponent, GraphComponents],
   imports: [
     CommonModule,
     WidgetFrameModule,
