@@ -1,16 +1,16 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {
   Arrow,
-  ArrowType, DefaultLabelStyle,
-  EdgePathLabelModel, ExteriorLabelModel,
+  ArrowType, BalloonLayout, DefaultLabelStyle,
   GraphBuilder,
-  GraphComponent, IconLabelStyle, IGraph, InteriorLabelModel,
+  GraphComponent, IconLabelStyle, InteriorLabelModel,
   License,
   PolylineEdgeStyle,
-  Rect, ShapeNodeShape,
-  ShapeNodeStyle, Size
+  Rect,
+  ShapeNodeStyle, Size,
 } from "yfiles";
 import licenseValue from 'license.json';
+import {data} from "./data";
 
 @Component({
   selector: 'app-graph',
@@ -19,36 +19,15 @@ import licenseValue from 'license.json';
   encapsulation: ViewEncapsulation.None
 })
 export class GraphComponents implements OnInit {
+  data = data;
   ngOnInit() {
     License.value = licenseValue;
     const graphComponent = new GraphComponent("#graphComponent");
-    let data = {
-      "nodes": [
-        {"id": "1", "label": "", "imageUrl": "../../../../assets/image/user.svg", "x": 100, "y": 100},
-        {"id": "2", "label": "AKTTest Role", "x": 300, "y": 100},
-        {"id": "3", "label": "AKTTest Role", "x": 300, "y": 300},
-        {"id": "4", "label": "Administrator", "x": 300, "y": 500},
-        {"id": "5", "label": "Image of Lambdas", "x": 600, "y": 100},
-        {"id": "6", "label": "Icon Sage Maker", "x": 600, "y": 300},
-        {"id": "7", "x": 800, "y": 100},
-        {"id": "8", "label": "Akshay", "x": 600, "y": 500},
-      ],
-      "edges": [
-        {"id": "e1", "source": "1", "target": "2"},
-        {"id": "e2", "source": "1", "target": "3"},
-        {"id": "e3", "source": "1", "target": "4"},
-        {"id": "e4", "label": "Used By", "source": "2", "target": "5"},
-        {"id": "e5", "label": "Used By", "source": "2", "target": "6"},
-        {"id": "e6", "source": "5", "target": "6"},
-        {"id": "e7", "source": "5", "target": "7"},
-        {"id": "e8", "label": "Assigned to", "source": "4", "target": "8"},
-      ]
-    };
     const builder = new GraphBuilder();
     const nodesSource = builder.createNodesSource({
       data: data.nodes,
       id: "id",
-      labels: ["label"],
+      // labels: ["label"],
     });
     const edgesSource = builder.createEdgesSource({
       data: data.edges,
@@ -57,19 +36,21 @@ export class GraphComponents implements OnInit {
       sourceId: "source",
       targetId: "target"
     });
-    nodesSource.nodeCreator.defaults.shareStyleInstance = false
 
     nodesSource.nodeCreator.defaults.style = new ShapeNodeStyle({
-      // stroke: null, fill: null //for no shape node
-      shape: 'ellipse'
+      stroke: null, fill: null //for no shape node
+      // shape: 'ellipse'
     });
-    const labelCreator = nodesSource.nodeCreator.createLabelBinding()
+    //
+    const labelCreator = nodesSource.nodeCreator.createLabelBinding(data => data.label);
+    labelCreator.defaults.layoutParameter = InteriorLabelModel.SOUTH
+    const iconCreator = nodesSource.nodeCreator.createLabelBinding()
 // to avoid empty labels to be created return null for missing image URL
-    labelCreator.textProvider = node => (node.imageUrl != null ? '' : null)
-    labelCreator.styleProvider = node =>
+    iconCreator.textProvider = node => (node.imageUrl != null ? '' : null)
+    iconCreator.styleProvider = node =>
       (new IconLabelStyle({
         icon: node.imageUrl,
-        iconSize: new Size(50, 50),
+        iconSize: new Size(20, 20),
         iconPlacement: InteriorLabelModel.CENTER
       }))
 
@@ -90,15 +71,17 @@ export class GraphComponents implements OnInit {
       const x = data.nodes.find(n => n.id === node.tag.id)?.x;
       const y = data.nodes.find(n => n.id === node.tag.id)?.y;
       if (x !== undefined && y !== undefined) {
-        graphComponent.graph.setNodeLayout(node, new Rect(x, y, 150, 90))
+        graphComponent.graph.setNodeLayout(node, new Rect(x, y, 50, 50))
         const layout = node.layout
       }
     });
 
     const nodes = graphComponent.graph.nodes.find(n => n.tag.label === 'Akshay');
     const nodeStyle = new ShapeNodeStyle({
-      fill: 'yellow',
-      shape: 'ellipse'
+      // fill: 'yellow',
+      // shape: 'ellipse'
+      stroke:null,
+      fill:null
     })
     if (nodes) {
       graphComponent.graph.setStyle(nodes, nodeStyle)
@@ -107,5 +90,6 @@ export class GraphComponents implements OnInit {
     graphComponent.fitGraphBounds()
 
   }
+
 
 }
