@@ -22,7 +22,7 @@
     "primeng": "^15.3.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
-    "yfiles": "file:../../../yFiles-for-HTML-Complete-2.5.0.4-Evaluation/lib-dev/yfiles-25.0.4+eval-dev.tgz",
+    "yfiles": "file:plugins/yfiles/yfiles-25.0.4+eval-dev.tgz",
     "zone.js": "~0.12.0"
   },
   "devDependencies": {
