@@ -23,9 +23,9 @@ import { DashboardComponent } from './views/pages/dashboard/dashboard.component'
         WidgetFrameModule,
     ],
     providers: [],
-    exports: [
-        DashboardComponent
-    ],
+  exports: [
+    DashboardComponent,
+  ],
 
     bootstrap: [AppComponent]
 })

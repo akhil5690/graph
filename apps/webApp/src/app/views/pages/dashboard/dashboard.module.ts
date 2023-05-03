@@ -4,12 +4,17 @@ import {RouterModule, Routes} from "@angular/router";
 import {DashboardWidgetModule} from "../../../widgets/dashboard/dashboard-widget.module";
 import {dashboardComponent} from "./dashboard/dashboard.component";
 import {DashboardComponent} from "./dashboard.component";
+import {LaunchpadComponent} from "./launchpad/launchpad.component";
+import {LaunchpadWidgetModule} from "../../../widgets/launchpad-widget/launchpad-widget.module";
 
 const routes: Routes = [
   { path: '',
     component: DashboardComponent,
     children: [{
       path: '',
+      component: LaunchpadComponent,
+    },{
+      path: 'dashboard',
       component: dashboardComponent,
     },]},
 
@@ -17,14 +22,15 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    dashboardComponent
+    dashboardComponent,LaunchpadComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     DashboardWidgetModule,
+    LaunchpadWidgetModule,
   ],
-  exports: [dashboardComponent]
+  exports: [dashboardComponent,LaunchpadComponent]
 })
 export class DashboardModule {
 }

@@ -87,7 +87,6 @@ export class GraphComponents implements OnInit {
       graphComponent.graph.setStyle(nodes, nodeStyle)
     }
 
-    graphComponent.fitGraphBounds()
 
   }
 

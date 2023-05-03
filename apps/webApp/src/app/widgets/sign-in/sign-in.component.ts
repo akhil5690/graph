@@ -25,7 +25,7 @@ export class SignInComponent {
   onSubmit() {
     if(this.authservice.login(this.signIn.valid)){
       document.body.className = '';
-      this.router.navigate(['/dashboard']).then()
+      this.router.navigate(['/launchpad']).then()
     }
   }
 }

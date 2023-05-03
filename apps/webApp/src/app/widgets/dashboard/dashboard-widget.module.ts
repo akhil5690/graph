@@ -1,28 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {DashboardWidgetComponent} from "./dashboard-widget.component";
-import {WidgetFrameModule} from "../../../../../../common/ui-component/frames/widget-frame/widget-frame.module";
-import {SidebarComponent} from "../../../../../../common/ui-component/sidebar/sidebar.component";
-import {IframeComponent} from "../../../../../../common/ui-component/iframe/iframe.component";
-import {TopToolbarComponent} from "../../../../../../common/ui-component/frames/top-toolbar/top-toolbar.component";
-import {
-  BottomToolbarComponent
-} from "../../../../../../common/ui-component/frames/bottom-toolbar/bottom-toolbar.component";
 import {InputTextModule} from "primeng/inputtext";
 import {ButtonModule} from "primeng/button";
 import {SignInModule} from "../sign-in/sign-in.module";
-import {GraphComponents} from "../../../../../../common/ui-component/graph/graph.component";
+import {GraphModule} from "../../../../../../common/ui-component/graph/graph.module";
 
 
 @NgModule({
-  declarations: [DashboardWidgetComponent, SidebarComponent, IframeComponent, TopToolbarComponent, BottomToolbarComponent, GraphComponents],
+  declarations: [DashboardWidgetComponent],
   imports: [
     CommonModule,
-    WidgetFrameModule,
     InputTextModule,
     ButtonModule,
-    SignInModule
+    SignInModule,
+    GraphModule,
   ],
-  exports:[DashboardWidgetComponent]
+  exports: [DashboardWidgetComponent]
 })
 export class DashboardWidgetModule { }
