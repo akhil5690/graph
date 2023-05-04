@@ -88,9 +88,9 @@ export class GraphComponents implements OnInit {
     graphComponent.graph = builder.buildGraph();
 
     // create layout
-    const layout = new BalloonLayout({minimumNodeDistance:50});
+    const layout = new BalloonLayout({minimumNodeDistance: 50});
     const layoutExecutor = new LayoutExecutor({
-      graphComponent:graphComponent,
+      graphComponent: graphComponent,
       layout: layout,
       duration: '0.5s',
 
@@ -124,11 +124,12 @@ export class GraphComponents implements OnInit {
   }
 
 
-  private initializeOverviewComponent(graphComponent: GraphComponent ) {
+  private initializeOverviewComponent(graphComponent: GraphComponent) {
 
     const overviewComponent = new GraphOverviewComponent('#overview', graphComponent);
     overviewComponent.autoDrag = true;
-    overviewComponent.contentRect = new Rect(0,0,1000,1000)
+    overviewComponent.contentRect = new Rect(0, 0, 1000, 1000)
     overviewComponent.fitContent(true).then();
   }
+
 }
