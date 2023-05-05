@@ -3,14 +3,14 @@ import {
   Arrow,
   ArrowType,
   BalloonLayout,
-  DefaultLabelStyle,
+  DefaultLabelStyle, EdgesSource,
   GraphBuilder,
   GraphComponent,
   GraphOverviewComponent,
-  IconLabelStyle,
-  InteriorLabelModel,
+  IconLabelStyle, IEdgeStyle, ILabelModelParameter, ILabelStyle, INodeStyle,
+  InteriorLabelModel, LabelCreator,
   LayoutExecutor,
-  License,
+  License, NodesSource,
   PolylineEdgeStyle,
   Rect,
   ShapeNodeStyle,
@@ -30,37 +30,49 @@ export class GraphComponents implements OnInit {
   visible = true;
 
   ngOnInit() {
+    this.createGraph();
+  }
+
+  private createGraph() {
     License.value = licenseValue;
     const graphComponent = new GraphComponent("#graphComponent");
     const builder = new GraphBuilder();
 
-    //create nodes
-    const nodesSource = builder.createNodesSource({
+    this.initializeNodeAndEdges(graphComponent, builder);
+
+    this.buildGraph(graphComponent, builder);
+
+    this.buildLayout(graphComponent);
+
+    this.initializeOverviewComponent(graphComponent);
+  }
+
+  private initializeNodeAndEdges(graphComponent: GraphComponent, builder: GraphBuilder) {
+    const nodesSource = this.getNodes(builder, {
       data: data.nodes,
       id: "id",
       // labels: ["label"],
     });
 
     //create edges
-    const edgesSource = builder.createEdgesSource({
+    const edgesSource = this.getEdges(builder, {
       data: data.edges,
       id: "id",
       labels: ["label"],
       sourceId: "source",
       targetId: "target"
-    });
+    })
 
     //style nodes
-    nodesSource.nodeCreator.defaults.style = new ShapeNodeStyle({
-      stroke: null, fill: null //for no shape node
-      // shape: 'ellipse'
-    });
+    nodesSource.nodeCreator.defaults.style = this.getNodeShape({
+      stroke: null, fill: null
+    })
     // set node size
-    nodesSource.nodeCreator.defaults.size = new Size(50, 50);
+    nodesSource.nodeCreator.defaults.size = this.getSize(50, 50)
 
     //create text label
-    const labelCreator = nodesSource.nodeCreator.createLabelBinding(data => data.label);
-    labelCreator.defaults.layoutParameter = InteriorLabelModel.SOUTH;
+    const labelCreator = this.createLabel(nodesSource);
+    labelCreator.defaults.layoutParameter = this.labelPlacement(InteriorLabelModel.SOUTH);
     // create icon label
     const iconCreator = nodesSource.nodeCreator.createLabelBinding();
     // null check
@@ -73,67 +85,91 @@ export class GraphComponents implements OnInit {
       }))
 
     // style edges
-    edgesSource.edgeCreator.defaults.style = new PolylineEdgeStyle({
+    edgesSource.edgeCreator.defaults.style = this.getEdgeStyle({
       stroke: "black",
-      targetArrow: new Arrow({
+      targetArrow: this.arrow({
         type: ArrowType.TRIANGLE,
         fill: "black"
       })
     });
 
     // style edge label
-    edgesSource.edgeCreator.defaults.labels.style = new DefaultLabelStyle({
+    edgesSource.edgeCreator.defaults.labels.style = this.getEdgeLabel({
       backgroundFill: 'white'
     })
-    //prepare the graph
-    graphComponent.graph = builder.buildGraph();
-
-    // create layout
-    const layout = new BalloonLayout({minimumNodeDistance: 50});
-    const layoutExecutor = new LayoutExecutor({
-      graphComponent: graphComponent,
-      layout: layout,
-      duration: '0.5s',
-
-    });
-    layoutExecutor.start().then();
-    //place the nodes
-    // graphComponent.graph.nodes.forEach(node => {
-    //   // console.log(graphComponent.graph.nodes.get(7))
-    //   const x = data.nodes.find(n => n.id === node.tag.id)?.x;
-    //   const y = data.nodes.find(n => n.id === node.tag.id)?.y;
-    //   if (x !== undefined && y !== undefined) {
-    //     graphComponent.graph.setNodeLayout(node, new Rect(x, y, 50, 50))
-    //     const layout = node.layout
-    //   }
-    // });
-
-    // customise one node style
-    const nodes = graphComponent.graph.nodes.find(n => n.tag.label === 'Akshay');
-    const nodeStyle = new ShapeNodeStyle({
-      // fill: 'yellow',
-      // shape: 'ellipse'
-      stroke: null,
-      fill: null
-    })
-    if (nodes) {
-      graphComponent.graph.setStyle(nodes, nodeStyle)
-    }
-
-    this.initializeOverviewComponent(graphComponent)
-
   }
 
-
   private initializeOverviewComponent(graphComponent: GraphComponent) {
-
     const overviewComponent = new GraphOverviewComponent('#overview', graphComponent);
     overviewComponent.autoDrag = true;
     overviewComponent.contentRect = new Rect(0, 0, 1000, 1000)
     overviewComponent.fitContent(true).then();
   }
 
+  private buildLayout(graphComponent: GraphComponent) {
+    const layout = this.prepareLayout({minimumNodeDistance: 50})
+    const layoutExecutor = this.getLayoutExecutor({
+      graphComponent: graphComponent,
+      layout: layout,
+      duration: '0.5s',
+    })
+    layoutExecutor.start().then();
+  }
+
   toggle() {
     this.visible = !this.visible;
   }
+
+  private getNodes(builder: GraphBuilder, options: any): NodesSource<any> {
+    return builder.createNodesSource(options);
+  }
+
+  private getEdges(builder: GraphBuilder, options: any): EdgesSource<any> {
+    return builder.createEdgesSource(options);
+  }
+
+  private getNodeShape(options: any): INodeStyle {
+    return new ShapeNodeStyle(options);
+  }
+
+  private getSize(width: number, height: number): Size {
+    return new Size(width, height);
+  }
+
+  private createLabel(nodesSource: NodesSource<any>): LabelCreator<any> {
+    return nodesSource.nodeCreator.createLabelBinding(data => data.label);
+  }
+
+  private labelPlacement(placement: ILabelModelParameter): ILabelModelParameter {
+    return placement;
+  }
+
+  private getEdgeStyle(options: any): IEdgeStyle {
+    return new PolylineEdgeStyle(options);
+  }
+
+  private arrow(options: any): Arrow {
+    return new Arrow(options);
+  }
+
+  private getEdgeLabel(options: any): ILabelStyle {
+    return new DefaultLabelStyle(options);
+  }
+
+  private buildGraph(graphComponent: GraphComponent, builder: GraphBuilder) {
+    graphComponent.graph = builder.buildGraph();
+  }
+
+  private prepareLayout(option: any): BalloonLayout {
+    return new BalloonLayout();
+  }
+
+  private getLayoutExecutor(options: any): LayoutExecutor {
+    return new LayoutExecutor(options);
+  }
+
+  private getNode(graphComponent: GraphComponent, label: string) {
+    return graphComponent.graph.nodes.find(n => n.tag.label === label);
+  }
+
 }
