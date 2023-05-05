@@ -27,6 +27,7 @@ import {data} from "./data";
 })
 export class GraphComponents implements OnInit {
   data = data;
+  visible = true;
 
   ngOnInit() {
     License.value = licenseValue;
@@ -132,4 +133,7 @@ export class GraphComponents implements OnInit {
     overviewComponent.fitContent(true).then();
   }
 
+  toggle() {
+    this.visible = !this.visible;
+  }
 }

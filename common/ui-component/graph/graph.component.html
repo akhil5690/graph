@@ -1,8 +1,10 @@
 <div id="graphComponent">
-  <div class="container">
-    <div class="header">Overview</div>
+</div>
+
+<div class="container">
+  <div class="header" (click)="toggle()">Overview</div>
+  <div [ngClass]="!visible?'hide':''">
     <div id="overview"></div>
   </div>
-
 </div>
 
