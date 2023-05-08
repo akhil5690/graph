@@ -5,6 +5,8 @@ import {InputTextModule} from "primeng/inputtext";
 import {ButtonModule} from "primeng/button";
 import {SignInModule} from "../sign-in/sign-in.module";
 import {GraphModule} from "../../../../../../common/ui-component/graph/graph.module";
+import {HttpClientModule} from "@angular/common/http";
+import {GraphService} from "../../../../../../common/ui-services/graph/graph.service";
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import {GraphModule} from "../../../../../../common/ui-component/graph/graph.mod
     ButtonModule,
     SignInModule,
     GraphModule,
+    HttpClientModule,
   ],
+  providers:[GraphService],
   exports: [DashboardWidgetComponent]
 })
 export class DashboardWidgetModule { }
