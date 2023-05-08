@@ -17,6 +17,7 @@ import {
   ShapeNodeStyle,
   Size,
 } from "yfiles";
+import {data} from './data'
 import licenseValue from 'license.json';
 import {HttpClient} from "@angular/common/http";
 import {GraphService} from "../../ui-services/graph/graph.service";
@@ -28,19 +29,20 @@ import {GraphService} from "../../ui-services/graph/graph.service";
   encapsulation: ViewEncapsulation.None
 })
 export class GraphComponents implements OnInit {
-  // data = data;
+  data = data;
   visible = true;
-  data: any;
+  // data: any;
 
   constructor(private http: HttpClient, private graphService: GraphService) {
   }
 
   ngOnInit() {
-    this.graphService.getGraphData().then((data) => {
-      console.log(data);
-      this.data = data;
-      this.createGraph();
-    }).catch(e => console.log(e))
+    // this.graphService.getGraphData().then((data) => {
+    //   console.log(data);
+    //   this.data = data;
+    //   this.createGraph();
+    // }).catch(e => console.log(e))
+    this.createGraph();
   }
 
   private createGraph() {
@@ -82,17 +84,17 @@ export class GraphComponents implements OnInit {
 
     //create text label
     const labelCreator = this.createLabel(nodesSource);
-    labelCreator.defaults.layoutParameter = this.labelPlacement(InteriorLabelModel.CENTER);
+    labelCreator.defaults.layoutParameter = this.labelPlacement(InteriorLabelModel.SOUTH);
     // create icon label
-    // const iconCreator = nodesSource.nodeCreator.createLabelBinding();
-    // // null check
-    // iconCreator.textProvider = node => (node.imageUrl != null ? '' : null)
-    // iconCreator.styleProvider = node =>
-    //   (new IconLabelStyle({
-    //     icon: node.imageUrl,
-    //     iconSize: new Size(20, 20),
-    //     iconPlacement: InteriorLabelModel.CENTER
-    //   }))
+    const iconCreator = nodesSource.nodeCreator.createLabelBinding();
+    // null check
+    iconCreator.textProvider = node => (node.imageUrl != null ? '' : null)
+    iconCreator.styleProvider = node =>
+      (new IconLabelStyle({
+        icon: node.imageUrl,
+        iconSize: new Size(20, 20),
+        iconPlacement: InteriorLabelModel.CENTER
+      }))
 
     // style edges
     edgesSource.edgeCreator.defaults.style = this.getEdgeStyle({
@@ -168,6 +170,7 @@ export class GraphComponents implements OnInit {
 
   private buildGraph(graphComponent: GraphComponent, builder: GraphBuilder) {
     graphComponent.graph = builder.buildGraph();
+
   }
 
   private prepareLayout(option: any): any {
