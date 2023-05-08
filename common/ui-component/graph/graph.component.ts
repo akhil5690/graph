@@ -3,6 +3,7 @@ import {
   Arrow,
   ArrowType,
   BalloonLayout,
+  CircularLayout,
   DefaultLabelStyle, EdgesSource,
   GraphBuilder,
   GraphComponent,
@@ -74,7 +75,7 @@ export class GraphComponents implements OnInit {
 
     //style nodes
     nodesSource.nodeCreator.defaults.style = this.getNodeShape({
-      stroke: null, fill: null
+      stroke: null, fill: 'orange', shape:'ellipse'
     })
     // set node size
     nodesSource.nodeCreator.defaults.size = this.getSize(50, 50)
@@ -169,8 +170,8 @@ export class GraphComponents implements OnInit {
     graphComponent.graph = builder.buildGraph();
   }
 
-  private prepareLayout(option: any): RadialLayout {
-    return new RadialLayout();
+  private prepareLayout(option: any): any {
+    return new CircularLayout();
   }
 
   private getLayoutExecutor(options: any): LayoutExecutor {
