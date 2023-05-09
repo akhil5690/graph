@@ -63,7 +63,8 @@ export class GraphComponents implements OnInit {
     const nodesSource = this.getNodes(builder, {
       data: this.data.nodes,
       id: "id",
-      // labels: ["label"],
+      // style: (data:any)=> this.getNodeShape({fill:data.color, shape:'ellipse'})
+      // labels: ["label"]
     });
 
     //create edges
