@@ -1,10 +1,12 @@
 <div id="graphComponent">
-</div>
-
-<div class="container">
-  <div class="header" (click)="toggle()">Overview</div>
-  <div [ngClass]="!visible?'hide':''">
-    <div id="overview"></div>
+  <div class="container">
+    <div class="header" (click)="toggle()">Overview</div>
+    <div [ngClass]="!visible?'hide':''">
+      <div id="overview"></div>
+    </div>
   </div>
+<!--  <p-dialog class="popup" [(visible)]="openPopUp" >-->
+<!--    <div id="fraud"></div>-->
+<!--  </p-dialog>-->
 </div>
 

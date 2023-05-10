@@ -8,6 +8,7 @@ import { SignInComponent } from './views/pages/auth/sign-in/sign-in.component';
 import { AppRoutingModule } from './app-routing.module';
 import {WidgetFrameModule} from "../../../../common/ui-component/frames/widget-frame/widget-frame.module";
 import { DashboardComponent } from './views/pages/dashboard/dashboard.component';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
     declarations: [
@@ -21,6 +22,7 @@ import { DashboardComponent } from './views/pages/dashboard/dashboard.component'
         SignInModule,
         AppRoutingModule,
         WidgetFrameModule,
+        BrowserAnimationsModule
     ],
     providers: [],
   exports: [

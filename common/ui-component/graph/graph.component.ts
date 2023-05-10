@@ -2,17 +2,16 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {
   Arrow,
   ArrowType,
-  BalloonLayout,
   CircularLayout,
   DefaultLabelStyle, EdgesSource,
   GraphBuilder,
-  GraphComponent,
+  GraphComponent, GraphEditorInputMode,
   GraphOverviewComponent,
-  IconLabelStyle, IEdgeStyle, ILabelModelParameter, ILabelStyle, INodeStyle,
+  IconLabelStyle, IEdgeStyle, ILabelModelParameter, ILabelStyle, INode, INodeStyle,
   InteriorLabelModel, LabelCreator,
   LayoutExecutor,
   License, NodesSource,
-  PolylineEdgeStyle, RadialLayout,
+  PolylineEdgeStyle,
   Rect,
   ShapeNodeStyle,
   Size,
@@ -31,7 +30,9 @@ import {GraphService} from "../../ui-services/graph/graph.service";
 export class GraphComponents implements OnInit {
   data = data;
   visible = true;
+
   // data: any;
+  openPopUp = false;
 
   constructor(private http: HttpClient, private graphService: GraphService) {
   }
@@ -78,7 +79,7 @@ export class GraphComponents implements OnInit {
 
     //style nodes
     nodesSource.nodeCreator.defaults.style = this.getNodeShape({
-      stroke: null, fill: 'orange', shape:'ellipse'
+      stroke: null, fill: 'orange', shape: 'ellipse'
     })
     // set node size
     nodesSource.nodeCreator.defaults.size = this.getSize(50, 50)
@@ -187,3 +188,28 @@ export class GraphComponents implements OnInit {
   }
 
 }
+
+
+// graphComponent.graph.nodes.forEach((node) => {
+//       if (node.tag.isFraud) {
+//         graphComponent.graph.setStyle(node, new ShapeNodeStyle({fill: 'red', shape: "ellipse", stroke: null}))
+//       }
+//     })
+//     const inputMode = graphComponent.inputMode = new GraphEditorInputMode({
+//       allowCreateNode: false,
+//       allowCreateEdge: false,
+//       allowCreateBend: false,
+//       allowDuplicate: false,
+//       allowGroupingOperations: false,
+//       allowClipboardOperations: false,
+//       allowUndoOperations: false,
+//       allowEditLabelOnDoubleClick: false,
+//     });
+//     inputMode.addItemRightClickedListener((sender, evt) => {
+//       const node = evt.item instanceof INode ? evt.item : null;
+//       if (node && node.tag.isFraud) {
+//         this.openPopUp = true;
+//       } else {
+//         this.openPopUp = false;
+//       }
+//     })
