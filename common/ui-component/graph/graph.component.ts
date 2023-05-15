@@ -172,7 +172,29 @@ export class GraphComponents implements OnInit {
 
   private buildGraph(graphComponent: GraphComponent, builder: GraphBuilder) {
     graphComponent.graph = builder.buildGraph();
-
+    graphComponent.graph.nodes.forEach((node) => {
+      if (node.tag.isFraud) {
+        graphComponent.graph.setStyle(node, new ShapeNodeStyle({fill: 'red', shape: "ellipse", stroke: null}))
+      }
+    })
+    const inputMode = graphComponent.inputMode = new GraphEditorInputMode({
+      allowCreateNode: false,
+      allowCreateEdge: false,
+      allowCreateBend: false,
+      allowDuplicate: false,
+      allowGroupingOperations: false,
+      allowClipboardOperations: false,
+      allowUndoOperations: false,
+      allowEditLabelOnDoubleClick: false,
+    });
+    inputMode.addItemLeftClickedListener((sender, evt) => {
+      const node = evt.item instanceof INode ? evt.item : null;
+      if (node && node.tag.isFraud) {
+        this.openPopUp = true;
+      } else {
+        this.openPopUp = false;
+      }
+    })
   }
 
   private prepareLayout(option: any): any {
@@ -190,26 +212,4 @@ export class GraphComponents implements OnInit {
 }
 
 
-// graphComponent.graph.nodes.forEach((node) => {
-//       if (node.tag.isFraud) {
-//         graphComponent.graph.setStyle(node, new ShapeNodeStyle({fill: 'red', shape: "ellipse", stroke: null}))
-//       }
-//     })
-//     const inputMode = graphComponent.inputMode = new GraphEditorInputMode({
-//       allowCreateNode: false,
-//       allowCreateEdge: false,
-//       allowCreateBend: false,
-//       allowDuplicate: false,
-//       allowGroupingOperations: false,
-//       allowClipboardOperations: false,
-//       allowUndoOperations: false,
-//       allowEditLabelOnDoubleClick: false,
-//     });
-//     inputMode.addItemRightClickedListener((sender, evt) => {
-//       const node = evt.item instanceof INode ? evt.item : null;
-//       if (node && node.tag.isFraud) {
-//         this.openPopUp = true;
-//       } else {
-//         this.openPopUp = false;
-//       }
-//     })
+
