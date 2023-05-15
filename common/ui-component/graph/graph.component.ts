@@ -20,7 +20,7 @@ import {
   LabelCreator,
   LayoutExecutor,
   License,
-  NodesSource,
+  NodesSource, Point,
   PolylineEdgeStyle,
   Rect,
   ShapeNodeStyle,
@@ -135,6 +135,7 @@ export class GraphComponents implements OnInit {
   private initializeOverviewComponent(graphComponent: GraphComponent) {
     const overviewComponent = new GraphOverviewComponent('#overview', graphComponent);
     overviewComponent.autoDrag = true;
+    graphComponent.viewPoint = new Point(-200,0)
     overviewComponent.contentRect = new Rect(0, 0, 1000, 1000)
     overviewComponent.fitContent(true).then();
   }
@@ -192,6 +193,7 @@ export class GraphComponents implements OnInit {
 
   private buildGraph(graphComponent: GraphComponent, builder: GraphBuilder) {
     graphComponent.graph = builder.buildGraph();
+    graphComponent.fitContent()
     // graphComponent.graph.nodes.forEach((node)=>{
     //   if (node.tag.isFraud){
     //     const res = graphComponent.graph.edges.filter((edge) => node.tag.id === edge.tag.sourceId);
