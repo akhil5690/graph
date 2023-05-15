@@ -23,7 +23,7 @@ export const data = {
     },
     {
       "id": "AIDAWPAQBN4NCQOIQXHRL",
-      "label": "usercredentialcreatenewstage"
+      "label": "user"
     },
     {
       "id": "AIDAWPAQBN4NADSDCWP5B",

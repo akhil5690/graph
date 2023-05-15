@@ -3,7 +3,7 @@ import {
   Arrow,
   ArrowType,
   CircularLayout,
-  DefaultLabelStyle, EdgesSource,
+  DefaultLabelStyle, EdgePathLabelModel, EdgesSource, ExteriorLabelModel,
   GraphBuilder,
   GraphComponent, GraphEditorInputMode,
   GraphOverviewComponent,
@@ -28,22 +28,22 @@ import {GraphService} from "../../ui-services/graph/graph.service";
   encapsulation: ViewEncapsulation.None
 })
 export class GraphComponents implements OnInit {
-  data = data;
+  // data = data;
   visible = true;
 
-  // data: any;
+  data: any;
   openPopUp = false;
 
   constructor(private http: HttpClient, private graphService: GraphService) {
   }
 
   ngOnInit() {
-    // this.graphService.getGraphData().then((data) => {
-    //   console.log(data);
-    //   this.data = data;
-    //   this.createGraph();
-    // }).catch(e => console.log(e))
-    this.createGraph();
+    this.graphService.getGraphData().then((data) => {
+      console.log(data);
+      this.data = data;
+      this.createGraph();
+    }).catch(e => console.log(e))
+    // this.createGraph();
   }
 
   private createGraph() {
@@ -79,14 +79,14 @@ export class GraphComponents implements OnInit {
 
     //style nodes
     nodesSource.nodeCreator.defaults.style = this.getNodeShape({
-      stroke: null, fill: 'orange', shape: 'ellipse'
+      stroke: 'green', fill: null, shape: 'ellipse'
     })
     // set node size
     nodesSource.nodeCreator.defaults.size = this.getSize(50, 50)
 
     //create text label
     const labelCreator = this.createLabel(nodesSource);
-    labelCreator.defaults.layoutParameter = this.labelPlacement(InteriorLabelModel.SOUTH);
+    labelCreator.defaults.layoutParameter = this.labelPlacement(ExteriorLabelModel.SOUTH);
     // create icon label
     const iconCreator = nodesSource.nodeCreator.createLabelBinding();
     // null check
@@ -109,7 +109,8 @@ export class GraphComponents implements OnInit {
 
     // style edge label
     edgesSource.edgeCreator.defaults.labels.style = this.getEdgeLabel({
-      backgroundFill: 'white'
+      backgroundFill: 'white',
+      textSize: 10
     })
   }
 
@@ -121,7 +122,8 @@ export class GraphComponents implements OnInit {
   }
 
   private buildLayout(graphComponent: GraphComponent) {
-    const layout = this.prepareLayout({minimumNodeDistance: 50})
+    const layout = this.prepareLayout();
+    // const layout = new CircularLayout({});
     const layoutExecutor = this.getLayoutExecutor({
       graphComponent: graphComponent,
       layout: layout,
@@ -172,9 +174,18 @@ export class GraphComponents implements OnInit {
 
   private buildGraph(graphComponent: GraphComponent, builder: GraphBuilder) {
     graphComponent.graph = builder.buildGraph();
+    // graphComponent.graph.nodes.forEach((node)=>{
+    //   if (node.tag.isFraud){
+    //     const res = graphComponent.graph.edges.filter((edge) => node.tag.id === edge.tag.sourceId);
+    //     console.log(res);
+    //     res.forEach((edge) => {
+    //       // edge.style = new PolylineEdgeStyle()
+    //     })}
+    //
+    // })
     graphComponent.graph.nodes.forEach((node) => {
       if (node.tag.isFraud) {
-        graphComponent.graph.setStyle(node, new ShapeNodeStyle({fill: 'red', shape: "ellipse", stroke: null}))
+        graphComponent.graph.setStyle(node, new ShapeNodeStyle({fill: null, shape: "ellipse", stroke: '#ff1a61'}))
       }
     })
     const inputMode = graphComponent.inputMode = new GraphEditorInputMode({
@@ -197,8 +208,8 @@ export class GraphComponents implements OnInit {
     })
   }
 
-  private prepareLayout(option: any): any {
-    return new CircularLayout();
+  private prepareLayout(): CircularLayout {
+    return new CircularLayout({nodeLabelingPolicy: "ray-like-leaves"});
   }
 
   private getLayoutExecutor(options: any): LayoutExecutor {
