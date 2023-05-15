@@ -3,18 +3,29 @@ import {
   Arrow,
   ArrowType,
   CircularLayout,
-  DefaultLabelStyle, EdgePathLabelModel, EdgesSource, ExteriorLabelModel,
+  DefaultLabelStyle,
+  EdgesSource,
+  ExteriorLabelModel,
   GraphBuilder,
-  GraphComponent, GraphEditorInputMode,
+  GraphComponent,
+  GraphEditorInputMode,
   GraphOverviewComponent,
-  IconLabelStyle, IEdgeStyle, ILabelModelParameter, ILabelStyle, INode, INodeStyle,
-  InteriorLabelModel, LabelCreator,
+  IconLabelStyle,
+  IEdgeStyle,
+  ILabelModelParameter,
+  ILabelStyle,
+  INode,
+  INodeStyle,
+  InteriorLabelModel,
+  LabelCreator,
   LayoutExecutor,
-  License, NodesSource,
+  License,
+  NodesSource,
   PolylineEdgeStyle,
   Rect,
   ShapeNodeStyle,
   Size,
+  TextWrapping,
 } from "yfiles";
 import {data} from './data'
 import licenseValue from 'license.json';
@@ -28,22 +39,22 @@ import {GraphService} from "../../ui-services/graph/graph.service";
   encapsulation: ViewEncapsulation.None
 })
 export class GraphComponents implements OnInit {
-  // data = data;
+  data = data;
   visible = true;
 
-  data: any;
+  // data: any;
   openPopUp = false;
 
-  constructor(private http: HttpClient, private graphService: GraphService) {
+  constructor(private graphService: GraphService) {
   }
 
   ngOnInit() {
-    this.graphService.getGraphData().then((data) => {
-      console.log(data);
-      this.data = data;
-      this.createGraph();
-    }).catch(e => console.log(e))
-    // this.createGraph();
+    // this.graphService.getGraphData().then((data) => {
+    //   console.log(data);
+    //   this.data = data;
+    //   this.createGraph();
+    // }).catch(e => console.log(e))
+    this.createGraph();
   }
 
   private createGraph() {
@@ -65,7 +76,7 @@ export class GraphComponents implements OnInit {
       data: this.data.nodes,
       id: "id",
       // style: (data:any)=> this.getNodeShape({fill:data.color, shape:'ellipse'})
-      // labels: ["label"]
+      labels: ["label"]
     });
 
     //create edges
@@ -84,9 +95,16 @@ export class GraphComponents implements OnInit {
     // set node size
     nodesSource.nodeCreator.defaults.size = this.getSize(50, 50)
 
-    //create text label
-    const labelCreator = this.createLabel(nodesSource);
-    labelCreator.defaults.layoutParameter = this.labelPlacement(ExteriorLabelModel.SOUTH);
+    // labelWrapping
+    nodesSource.nodeCreator.defaults.labels.style = new DefaultLabelStyle({
+      maximumSize: this.getSize(100, 15),
+      // textWrappingShape: TextWrappingShape.ELLIPSE,
+      wrapping: TextWrapping.CHARACTER_ELLIPSIS,
+      autoFlip: true,
+    })
+
+    nodesSource.nodeCreator.defaults.labels.layoutParameter = this.labelPlacement(ExteriorLabelModel.SOUTH);
+
     // create icon label
     const iconCreator = nodesSource.nodeCreator.createLabelBinding();
     // null check
