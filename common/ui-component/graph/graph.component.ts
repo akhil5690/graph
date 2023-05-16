@@ -39,9 +39,9 @@ import {GraphService} from "../../ui-services/graph/graph.service";
   encapsulation: ViewEncapsulation.None
 })
 export class GraphComponents implements OnInit {
-  data = data;
+  // data = data;
   visible = true;
-  // data: any;
+  data: any;
   openPopUp = false;
   selectedItem!: IEdge | INode | null;
   itemKeys: any;
@@ -51,12 +51,12 @@ export class GraphComponents implements OnInit {
   }
 
   ngOnInit() {
-    // this.graphService.getGraphData().then((data) => {
-    //   console.log(data);
-    //   this.data = data;
-    //   this.createGraph();
-    // }).catch(e => console.log(e))
-    this.createGraph();
+    this.graphService.getGraphData().then((data) => {
+      console.log(data);
+      this.data = data;
+      this.createGraph();
+    }).catch(e => console.log(e))
+    // this.createGraph();
   }
 
   private createGraph() {
@@ -141,15 +141,17 @@ export class GraphComponents implements OnInit {
   private initializeOverviewComponent(graphComponent: GraphComponent) {
     const overviewComponent = new GraphOverviewComponent('#overview', graphComponent);
     overviewComponent.autoDrag = true;
-    graphComponent.viewPoint = new Rect(1000, 0, 1000, 1000)
-    overviewComponent.contentRect = new Rect(1000, 0, 1000, 1000);
+    graphComponent.viewPoint = new Rect(1000, 1000, 0, 0);
+    overviewComponent.contentRect = new Rect(0, 0, 1000, 1000);
+    graphComponent.zoom = 0.2;
     overviewComponent.fitContent();
   }
 
   private buildLayout(graphComponent: GraphComponent) {
     // const layout = this.prepareLayout();
+    const layout = new OrganicLayout({minimumNodeDistance: 70, nodeEdgeOverlapAvoided: true});
     // const layout = new CircularLayout({});
-    const layout = new CircularLayout({})
+
     const layoutExecutor = this.getLayoutExecutor({
       graphComponent: graphComponent,
       layout: layout,
