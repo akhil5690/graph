@@ -10,7 +10,7 @@ import {
   GraphComponent,
   GraphEditorInputMode,
   GraphOverviewComponent,
-  IconLabelStyle,
+  IconLabelStyle, IEdge,
   IEdgeStyle,
   ILabelModelParameter,
   ILabelStyle,
@@ -20,7 +20,7 @@ import {
   LabelCreator,
   LayoutExecutor,
   License,
-  NodesSource, Point,
+  NodesSource, OrganicLayout, Point,
   PolylineEdgeStyle,
   Rect,
   ShapeNodeStyle,
@@ -39,22 +39,24 @@ import {GraphService} from "../../ui-services/graph/graph.service";
   encapsulation: ViewEncapsulation.None
 })
 export class GraphComponents implements OnInit {
-  // data = data;
+  data = data;
   visible = true;
-
-  data: any;
+  // data: any;
   openPopUp = false;
+  selectedItem!: IEdge | INode | null;
+  itemKeys: any;
+  itemValues: any;
 
   constructor(private graphService: GraphService) {
   }
 
   ngOnInit() {
-    this.graphService.getGraphData().then((data) => {
-      console.log(data);
-      this.data = data;
-      this.createGraph();
-    }).catch(e => console.log(e))
-    // this.createGraph();
+    // this.graphService.getGraphData().then((data) => {
+    //   console.log(data);
+    //   this.data = data;
+    //   this.createGraph();
+    // }).catch(e => console.log(e))
+    this.createGraph();
   }
 
   private createGraph() {
@@ -65,6 +67,10 @@ export class GraphComponents implements OnInit {
     this.initializeNodeAndEdges(graphComponent, builder);
 
     this.buildGraph(graphComponent, builder);
+
+    this.setInputMode(graphComponent);
+
+    this.styleForFraudData(graphComponent);
 
     this.buildLayout(graphComponent);
 
@@ -135,14 +141,15 @@ export class GraphComponents implements OnInit {
   private initializeOverviewComponent(graphComponent: GraphComponent) {
     const overviewComponent = new GraphOverviewComponent('#overview', graphComponent);
     overviewComponent.autoDrag = true;
-    graphComponent.viewPoint = new Point(-200,0)
-    overviewComponent.contentRect = new Rect(0, 0, 1000, 1000)
-    overviewComponent.fitContent(true).then();
+    graphComponent.viewPoint = new Rect(1000, 0, 1000, 1000)
+    overviewComponent.contentRect = new Rect(1000, 0, 1000, 1000);
+    overviewComponent.fitContent();
   }
 
   private buildLayout(graphComponent: GraphComponent) {
-    const layout = this.prepareLayout();
+    // const layout = this.prepareLayout();
     // const layout = new CircularLayout({});
+    const layout = new CircularLayout({})
     const layoutExecutor = this.getLayoutExecutor({
       graphComponent: graphComponent,
       layout: layout,
@@ -193,43 +200,10 @@ export class GraphComponents implements OnInit {
 
   private buildGraph(graphComponent: GraphComponent, builder: GraphBuilder) {
     graphComponent.graph = builder.buildGraph();
-    graphComponent.fitContent()
-    // graphComponent.graph.nodes.forEach((node)=>{
-    //   if (node.tag.isFraud){
-    //     const res = graphComponent.graph.edges.filter((edge) => node.tag.id === edge.tag.sourceId);
-    //     console.log(res);
-    //     res.forEach((edge) => {
-    //       // edge.style = new PolylineEdgeStyle()
-    //     })}
-    //
-    // })
-    graphComponent.graph.nodes.forEach((node) => {
-      if (node.tag.isFraud) {
-        graphComponent.graph.setStyle(node, new ShapeNodeStyle({fill: null, shape: "ellipse", stroke: '#ff1a61'}))
-      }
-    })
-    const inputMode = graphComponent.inputMode = new GraphEditorInputMode({
-      allowCreateNode: false,
-      allowCreateEdge: false,
-      allowCreateBend: false,
-      allowDuplicate: false,
-      allowGroupingOperations: false,
-      allowClipboardOperations: false,
-      allowUndoOperations: false,
-      allowEditLabelOnDoubleClick: false,
-    });
-    inputMode.addItemLeftClickedListener((sender, evt) => {
-      const node = evt.item instanceof INode ? evt.item : null;
-      if (node && node.tag.isFraud) {
-        this.openPopUp = true;
-      } else {
-        this.openPopUp = false;
-      }
-    })
   }
 
   private prepareLayout(): CircularLayout {
-    return new CircularLayout({nodeLabelingPolicy: "ray-like-leaves"});
+    return new CircularLayout();
   }
 
   private getLayoutExecutor(options: any): LayoutExecutor {
@@ -240,6 +214,42 @@ export class GraphComponents implements OnInit {
     return graphComponent.graph.nodes.find(n => n.tag.label === label);
   }
 
+  private styleForFraudData(graphComponent: GraphComponent) {
+    graphComponent.graph.nodes.forEach((node) => {
+      if (node.tag.isFraud) {
+        graphComponent.graph.setStyle(node, new ShapeNodeStyle({fill: null, shape: "ellipse", stroke: '#ff1a61'}))
+      }
+    })
+  }
+
+  private setInputMode(graphComponent: GraphComponent) {
+    const inputMode = graphComponent.inputMode = new GraphEditorInputMode({
+      allowCreateNode: false,
+      allowCreateEdge: false,
+      allowCreateBend: false,
+      allowDuplicate: false,
+      allowGroupingOperations: false,
+      allowClipboardOperations: false,
+      allowUndoOperations: false,
+      allowEditLabelOnDoubleClick: false,
+    });
+    this.leftClickListener(inputMode);
+
+  }
+
+  private leftClickListener(inputMode: GraphEditorInputMode) {
+    inputMode.addItemLeftClickedListener((sender, evt) => {
+      // const node = evt.item instanceof INode ? evt.item : null;
+      this.selectedItem = evt.item instanceof IEdge || evt.item instanceof INode ? evt.item : null;
+      if (this.selectedItem) {
+        this.itemKeys = Object.keys(this.selectedItem?.tag);
+        this.itemValues = Object.values(this.selectedItem?.tag);
+        this.openPopUp = true;
+      } else {
+        this.openPopUp = false;
+      }
+    })
+  }
 }
 
 

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {GraphComponents} from "./graph.component";
 import {DialogModule} from "primeng/dialog";
+import {TableModule} from "primeng/table";
 
 
 
@@ -9,7 +10,8 @@ import {DialogModule} from "primeng/dialog";
   declarations: [GraphComponents],
     imports: [
         CommonModule,
-        DialogModule
+        DialogModule,
+        TableModule
     ],
   exports:[GraphComponents]
 })

@@ -5,8 +5,22 @@
       <div id="overview"></div>
     </div>
   </div>
-  <p-dialog class="popup" [(visible)]="openPopUp" >
-    <div id="fraud"></div>
+  <!--  <p-dialog class="fraud-popup" [(visible)]="openPopUp" >-->
+  <!--    <div id="fraud"></div>-->
+  <!--  </p-dialog>-->
+  <p-dialog class="popup" [(visible)]="openPopUp">
+    <div class="edgeDetails">
+      <div class="keys">
+        <div *ngFor="let key of itemKeys">
+          <div>{{key}}</div>
+        </div>
+      </div>
+      <div class="values">
+        <div *ngFor="let val of itemValues">
+          <div>{{val}}</div>
+        </div>
+      </div>
+    </div>
   </p-dialog>
 </div>
 
