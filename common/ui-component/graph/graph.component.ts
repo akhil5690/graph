@@ -41,9 +41,9 @@ import {GraphService} from "../../ui-services/graph/graph.service";
   encapsulation: ViewEncapsulation.None
 })
 export class GraphComponents implements OnInit {
-  // data = data;
+  data = data;
   visible = true;
-  data: any;
+  // data: any;
   openPopUp = false;
   selectedItem!: IEdge | INode | null;
   items: any;
@@ -53,12 +53,12 @@ export class GraphComponents implements OnInit {
   }
 
   ngOnInit() {
-    this.graphService.getGraphData().then((data) => {
-      console.log(data);
-      this.data = data;
-      this.createGraph();
-    }).catch(e => console.log(e))
-    // this.createGraph();
+    // this.graphService.getGraphData().then((data) => {
+    //   console.log(data);
+    //   this.data = data;
+    //   this.createGraph();
+    // }).catch(e => console.log(e))
+    this.createGraph();
   }
 
   private createGraph() {
@@ -243,16 +243,6 @@ export class GraphComponents implements OnInit {
     })
     // set node size
     nodesSource.nodeCreator.defaults.size = this.getSize(50, 50)
-
-    // labelWrapping
-    // nodesSource.nodeCreator.defaults.labels.style = new DefaultLabelStyle({
-    //   maximumSize: this.getSize(100, 15),
-    //   // textWrappingShape: TextWrappingShape.ELLIPSE,
-    //   wrapping: TextWrapping.CHARACTER_ELLIPSIS,
-    //   autoFlip: true,
-    // })
-
-    // nodesSource.nodeCreator.defaults.labels.layoutParameter = this.labelPlacement(ExteriorLabelModel.SOUTH);
 
   }
 
