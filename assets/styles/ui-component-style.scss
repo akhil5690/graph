@@ -15,3 +15,11 @@
 .p-button:focus, .p-inputtext:enabled:focus {
   box-shadow: none;
 }
+
+.p-sidebar.p-sidebar-active.p-sidebar-right{
+  top: 0;
+  right: 0;
+  width: 25%;
+  height: 100%;
+  padding: 1rem;
+}
