@@ -39,23 +39,4 @@ app-graph {
     }
   }
 
-  .popup{
-    .p-element.ng-trigger.ng-trigger-animation.ng-tns-c68-0.p-dialog.p-component.p-dialog-draggable.p-dialog-resizable.ng-star-inserted {
-      width: 50%;
-    }
-  }
-
-  .edgeDetails{
-    display: grid;
-    grid-template-columns: auto auto;
-    gap: 1rem;
-    overflow-wrap: anywhere;
-  }
-
-  .keys,.values{
-    display:grid;
-    grid-gap:var(--unit);
-  }
-
-
 }
