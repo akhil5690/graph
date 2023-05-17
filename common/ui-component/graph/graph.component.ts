@@ -41,24 +41,24 @@ import {GraphService} from "../../ui-services/graph/graph.service";
   encapsulation: ViewEncapsulation.None
 })
 export class GraphComponents implements OnInit {
-  // data = data;
+  data = data;
   visible = true;
-  data: any;
+  // data: any;
   openPopUp = false;
   selectedItem!: IEdge | INode | null;
-  item: any;
-  itemValues: any;
+  items: any;
+  nodeData: any;
 
   constructor(private graphService: GraphService) {
   }
 
   ngOnInit() {
-    this.graphService.getGraphData().then((data) => {
-      console.log(data);
-      this.data = data;
-      this.createGraph();
-    }).catch(e => console.log(e))
-    // this.createGraph();
+    // this.graphService.getGraphData().then((data) => {
+    //   console.log(data);
+    //   this.data = data;
+    //   this.createGraph();
+    // }).catch(e => console.log(e))
+    this.createGraph();
   }
 
   private createGraph() {
@@ -86,7 +86,7 @@ export class GraphComponents implements OnInit {
       data: this.data.nodes,
       id: "id",
       // style: (data:any)=> this.getNodeShape({fill:data.color, shape:'ellipse'})
-      labels: ["label"]
+      // labels: ["label"]
     });
 
     //create edges
@@ -224,9 +224,11 @@ export class GraphComponents implements OnInit {
     inputMode.addItemLeftClickedListener((sender, evt) => {
       this.selectedItem = evt.item instanceof IEdge || evt.item instanceof INode ? evt.item : null;
       if (this.selectedItem) {
-        this.item = [];
-        this.item.push({key:Object.keys(this.selectedItem?.tag)});
-        this.item.push({value:Object.values(this.selectedItem?.tag)});
+        this.items = [this.selectedItem.tag];
+         this.nodeData = this.items.flatMap((item:any) =>
+          Object.entries(item).map(([label, value]) => ({ label, value }))
+        );
+        console.log(this.nodeData)
         this.openPopUp = true;
       } else {
         this.openPopUp = false;
@@ -250,11 +252,13 @@ export class GraphComponents implements OnInit {
       autoFlip: true,
     })
 
-    nodesSource.nodeCreator.defaults.labels.layoutParameter = this.labelPlacement(ExteriorLabelModel.SOUTH);
+    // nodesSource.nodeCreator.defaults.labels.layoutParameter = this.labelPlacement(ExteriorLabelModel.SOUTH);
 
   }
 
   private styleIconLabel(nodesSource: NodesSource<any>) {
+    const labelCreator = this.createLabel(nodesSource);
+    labelCreator.defaults.layoutParameter = this.labelPlacement(ExteriorLabelModel.SOUTH);
     const iconCreator = nodesSource.nodeCreator.createLabelBinding();
     // null check
     iconCreator.textProvider = node => (node.imageUrl != null ? '' : null)
