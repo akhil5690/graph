@@ -10,7 +10,8 @@ import {
   GraphComponent,
   GraphEditorInputMode,
   GraphOverviewComponent,
-  IconLabelStyle, IEdge,
+  IconLabelStyle,
+  IEdge,
   IEdgeStyle,
   ILabelModelParameter,
   ILabelStyle,
@@ -20,7 +21,9 @@ import {
   LabelCreator,
   LayoutExecutor,
   License,
-  NodesSource, OrganicLayout, Point,
+  NodesSource,
+  OrganicLayout,
+  Point,
   PolylineEdgeStyle,
   Rect,
   ShapeNodeStyle,
@@ -29,7 +32,6 @@ import {
 } from "yfiles";
 import {data} from './data'
 import licenseValue from 'license.json';
-import {HttpClient} from "@angular/common/http";
 import {GraphService} from "../../ui-services/graph/graph.service";
 
 @Component({
@@ -39,9 +41,9 @@ import {GraphService} from "../../ui-services/graph/graph.service";
   encapsulation: ViewEncapsulation.None
 })
 export class GraphComponents implements OnInit {
-  // data = data;
+  data = data;
   visible = true;
-  data: any;
+  // data: any;
   openPopUp = false;
   selectedItem!: IEdge | INode | null;
   itemKeys: any;
@@ -51,12 +53,12 @@ export class GraphComponents implements OnInit {
   }
 
   ngOnInit() {
-    this.graphService.getGraphData().then((data) => {
-      console.log(data);
-      this.data = data;
-      this.createGraph();
-    }).catch(e => console.log(e))
-    // this.createGraph();
+    // this.graphService.getGraphData().then((data) => {
+    //   console.log(data);
+    //   this.data = data;
+    //   this.createGraph();
+    // }).catch(e => console.log(e))
+    this.createGraph();
   }
 
   private createGraph() {
@@ -64,9 +66,11 @@ export class GraphComponents implements OnInit {
     const graphComponent = new GraphComponent("#graphComponent");
     const builder = new GraphBuilder();
 
-    this.initializeNodeAndEdges(graphComponent, builder);
+    this.initializeNodeAndEdges(builder);
 
     this.buildGraph(graphComponent, builder);
+
+    this.zoomOnCtrlClick(graphComponent);
 
     this.setInputMode(graphComponent);
 
@@ -77,7 +81,7 @@ export class GraphComponents implements OnInit {
     this.initializeOverviewComponent(graphComponent);
   }
 
-  private initializeNodeAndEdges(graphComponent: GraphComponent, builder: GraphBuilder) {
+  private initializeNodeAndEdges( builder: GraphBuilder) {
     const nodesSource = this.getNodes(builder, {
       data: this.data.nodes,
       id: "id",
@@ -142,7 +146,7 @@ export class GraphComponents implements OnInit {
     const overviewComponent = new GraphOverviewComponent('#overview', graphComponent);
     overviewComponent.autoDrag = true;
     graphComponent.viewPoint = new Rect(1000, 1000, 0, 0);
-    overviewComponent.contentRect = new Rect(0, 0, 1000, 1000);
+    overviewComponent.contentRect = new Rect(0, 0, 2000, 2000);
     graphComponent.zoom = 0.2;
     overviewComponent.fitContent();
   }
@@ -204,6 +208,21 @@ export class GraphComponents implements OnInit {
     graphComponent.graph = builder.buildGraph();
   }
 
+  zoomOnCtrlClick(graphComponent: GraphComponent) {
+    const containerElement = graphComponent.div;
+    containerElement.addEventListener('click', (event: MouseEvent) => {
+      // Check if the ctrl key (or cmd key on macOS) is pressed
+      const ctrlKey = event.ctrlKey || event.metaKey;
+
+      if (ctrlKey) {
+        // Zoom in on click when ctrl/cmd key is pressed
+        const zoomFactor = 4;
+        const zoomPoint = graphComponent.toWorldCoordinates(new Point(event.clientX, event.clientY));
+        graphComponent.zoomTo(zoomPoint, graphComponent.zoom * zoomFactor);
+      }
+    });
+  }
+
   private prepareLayout(): CircularLayout {
     return new CircularLayout();
   }
@@ -241,9 +260,9 @@ export class GraphComponents implements OnInit {
 
   private leftClickListener(inputMode: GraphEditorInputMode) {
     inputMode.addItemLeftClickedListener((sender, evt) => {
-      // const node = evt.item instanceof INode ? evt.item : null;
       this.selectedItem = evt.item instanceof IEdge || evt.item instanceof INode ? evt.item : null;
       if (this.selectedItem) {
+        console.log(typeof this.selectedItem)
         this.itemKeys = Object.keys(this.selectedItem?.tag);
         this.itemValues = Object.values(this.selectedItem?.tag);
         this.openPopUp = true;
