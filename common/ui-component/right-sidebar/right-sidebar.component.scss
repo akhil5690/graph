@@ -11,12 +11,13 @@ app-right-sidebar{
   }
   .menu-panel {
     display: flex;
-    padding: 1rem;
+    padding: 1.5rem;
     flex-direction: column;
     background-color: var(--primary-background-color);
     align-items: center;
     border: 2px solid var(--third-background-color);
     border-top: none;
+    cursor:pointer;
   }
 
   .details-panel {
@@ -24,4 +25,5 @@ app-right-sidebar{
     overflow-y: auto;
     overflow-x: hidden;
   }
+
 }
