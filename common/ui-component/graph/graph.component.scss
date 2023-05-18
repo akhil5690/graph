@@ -2,8 +2,6 @@ app-graph {
   #graphComponent {
     background-color: var(--primary-background-color);
     height: var(--main-no-footer);
-    //width: 100vw;
-    //height: 100vh;
   }
 
   #overview {
@@ -15,7 +13,6 @@ app-graph {
 
   .container {
     position: absolute;
-    top: 0;
     width: 200px;
     height: 200px;
   }
