@@ -1,34 +1,10 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {
-  Arrow,
-  ArrowType,
-  CircularLayout,
-  DefaultLabelStyle,
-  EdgesSource,
-  ExteriorLabelModel,
-  GraphBuilder,
-  GraphComponent,
-  GraphEditorInputMode,
-  GraphOverviewComponent,
-  IconLabelStyle,
-  IEdge,
-  IEdgeStyle,
-  ILabelModelParameter,
-  ILabelStyle,
-  INode,
-  INodeStyle,
-  InteriorLabelModel,
-  LabelCreator,
-  LayoutExecutor,
-  License,
-  NodesSource,
-  OrganicLayout,
-  Point,
-  PolylineEdgeStyle,
-  Rect,
-  ShapeNodeStyle,
-  Size,
-  TextWrapping,
+  Arrow, ArrowType, CircularLayout, DefaultLabelStyle, EdgesSource,
+  GraphBuilder, GraphComponent, GraphEditorInputMode, GraphOverviewComponent, IconLabelStyle,
+  IEdge, IEdgeStyle, ILabelModelParameter, ILabelStyle, INode, INodeStyle, InteriorLabelModel,
+  LabelCreator, LayoutExecutor, License, NodesSource, OrganicLayout, Point, PolylineEdgeStyle, Rect,
+  ShapeNodeStyle, Size
 } from "yfiles";
 import {data} from './data'
 import licenseValue from 'license.json';
@@ -187,7 +163,6 @@ export class GraphComponents implements OnInit {
         this.nodeData = this.items.flatMap((item: any) =>
           Object.entries(item).map(([label, value]) => ({label, value}))
         );
-        console.log(this.nodeData)
         this.openPopUp = true;
       } else {
         this.openPopUp = false;
