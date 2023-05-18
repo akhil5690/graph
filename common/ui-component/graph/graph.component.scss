@@ -55,8 +55,10 @@ app-graph {
     display: flex;
     padding: 1rem;
     flex-direction: column;
-    background-color: #ebd4de;
+    background-color: var(--primary-background-color);
     align-items: center;
+    border: 2px solid var(--third-background-color);
+    border-top: none;
   }
 
   .details-panel {
