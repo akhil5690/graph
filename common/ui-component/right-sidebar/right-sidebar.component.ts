@@ -15,7 +15,6 @@ export class RightSidebarComponent implements OnChanges{
   @Output() isRightSidebarOpen = new EventEmitter();
 
   ngOnChanges(): void {
-    console.log(this.details?.tag);
     if (this.details) {
       this.items = [this.details.tag];
       this.nodeData = this.items.flatMap((item: any) =>

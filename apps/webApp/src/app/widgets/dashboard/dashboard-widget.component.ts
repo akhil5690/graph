@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation} from '@angular/core';
+import {ChangeDetectorRef, Component, ViewEncapsulation} from '@angular/core';
 
 @Component({
   selector: 'app-dashboard-widget',
@@ -7,9 +7,10 @@ import {Component, ViewEncapsulation} from '@angular/core';
   encapsulation: ViewEncapsulation.None
 })
 export class DashboardWidgetComponent {
-  details:any;
+  details: any;
   frameType!: string;
-  constructor() {
+
+  constructor(private cdr: ChangeDetectorRef) {
   }
 
   sidebar(details: any) {
@@ -18,7 +19,7 @@ export class DashboardWidgetComponent {
   }
 
   getFrameType(isRightSidebarOpen: any) {
-    console.log(isRightSidebarOpen)
-    this.frameType = isRightSidebarOpen?'header-main-right-sidebar-frame':'header-main-menubar-frame';
+    this.frameType = !isRightSidebarOpen ? 'header-main-menubar-frame' : 'header-main-right-sidebar-frame';
+    this.cdr.detectChanges();
   }
 }
