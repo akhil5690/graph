@@ -8,6 +8,7 @@ import {GraphModule} from "../../../../../../common/ui-component/graph/graph.mod
 import {HttpClientModule} from "@angular/common/http";
 import {GraphService} from "../../../../../../common/ui-services/graph/graph.service";
 import {WidgetFrameModule} from "../../../../../../common/ui-component/frames/widget-frame/widget-frame.module";
+import {RightSidebarModule} from "../../../../../../common/ui-component/right-sidebar/right-sidebar.module";
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import {WidgetFrameModule} from "../../../../../../common/ui-component/frames/wi
         ButtonModule,
         SignInModule,
         GraphModule,
+        RightSidebarModule,
         HttpClientModule,
         WidgetFrameModule,
     ],
