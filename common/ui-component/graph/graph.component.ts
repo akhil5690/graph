@@ -1,10 +1,33 @@
 import {Component, EventEmitter, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {
-  Arrow, ArrowType, CircularLayout, DefaultLabelStyle, EdgesSource,
-  GraphBuilder, GraphComponent, GraphEditorInputMode, GraphOverviewComponent, IconLabelStyle,
-  IEdge, IEdgeStyle, ILabelModelParameter, ILabelStyle, INode, INodeStyle, InteriorLabelModel,
-  LabelCreator, LayoutExecutor, License, NodesSource, OrganicLayout, Point, PolylineEdgeStyle, Rect,
-  ShapeNodeStyle, Size
+  Arrow,
+  ArrowType,
+  CircularLayout,
+  DefaultLabelStyle,
+  EdgesSource,
+  GraphBuilder,
+  GraphComponent,
+  GraphEditorInputMode,
+  GraphItemTypes,
+  GraphOverviewComponent,
+  IconLabelStyle,
+  IEdge,
+  IEdgeStyle,
+  ILabelModelParameter,
+  ILabelStyle,
+  INode,
+  INodeStyle,
+  InteriorLabelModel,
+  LabelCreator,
+  LayoutExecutor,
+  License,
+  NodesSource,
+  OrganicLayout,
+  Point,
+  PolylineEdgeStyle,
+  Rect,
+  ShapeNodeStyle,
+  Size
 } from "yfiles";
 import {data} from './data'
 import licenseValue from 'license.json';
@@ -151,6 +174,7 @@ export class GraphComponents implements OnInit {
       allowClipboardOperations: false,
       allowUndoOperations: false,
       allowEditLabelOnDoubleClick: false,
+      showHandleItems: GraphItemTypes.NONE
     });
     this.leftClickListener(inputMode);
 
