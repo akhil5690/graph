@@ -1,8 +1,8 @@
-<app-widget-frame [frame_type]="'header-main-right-sidebar-frame'">
+<app-widget-frame [frame_type]="this.frameType">
   <div main>
     <app-graph (sidebarDetails)="sidebar($event)"></app-graph>
   </div>
   <div sidebar>
-    <app-right-sidebar [details]="details"></app-right-sidebar>
+    <app-right-sidebar [details]="details" (isRightSidebarOpen)="getFrameType($event)"></app-right-sidebar>
   </div>
 </app-widget-frame>

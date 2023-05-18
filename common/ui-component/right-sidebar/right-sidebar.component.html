@@ -1,7 +1,7 @@
   <div class="right-sidebar">
     <div class="menu-panel">
-      <i *ngIf="!openPopUp" (click)="details?openPopUp=true:false" class="pi pi-arrow-left"></i>
-      <i *ngIf="openPopUp" (click)="openPopUp=false" class="pi pi-arrow-right"></i>
+      <i *ngIf="!openPopUp" (click)="open(true)" class="pi pi-arrow-left"></i>
+      <i *ngIf="openPopUp" (click)="open(false)" class="pi pi-arrow-right"></i>
     </div>
     <div class="details-panel" *ngIf="openPopUp">
       <div class="subtitle">Details</div>

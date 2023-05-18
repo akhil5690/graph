@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, ViewEncapsulation} from '@angular/core';
 
 @Component({
   selector: 'app-right-sidebar',
@@ -12,6 +12,7 @@ export class RightSidebarComponent implements OnChanges{
   openPopUp = false;
 
   @Input() details: any;
+  @Output() isRightSidebarOpen = new EventEmitter();
 
   ngOnChanges(): void {
     console.log(this.details?.tag);
@@ -24,6 +25,11 @@ export class RightSidebarComponent implements OnChanges{
     } else {
       this.openPopUp = false;
     }
+    this.isRightSidebarOpen.emit(this.openPopUp);
+  }
 
+  open(isOpen:boolean) {
+    this.openPopUp = isOpen && this.details;
+    this.isRightSidebarOpen.emit(this.openPopUp);
   }
 }

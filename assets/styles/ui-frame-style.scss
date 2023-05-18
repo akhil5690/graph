@@ -46,6 +46,16 @@
 
 }
 
+.header-main-menubar-frame{
+  display: grid;
+  grid-template-columns: 96vw 4vw;
+  grid-template-rows: var(--top-toolbar-height) var(--main-no-footer);
+  grid-template-areas:
+      "header header"
+      "main sidebar"
+
+}
+
 .header {
   grid-area: header;
   border-bottom: calc(var(--border-width) * 2) solid var(--third-background-color);

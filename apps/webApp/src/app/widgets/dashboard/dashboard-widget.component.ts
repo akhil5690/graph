@@ -8,11 +8,17 @@ import {Component, ViewEncapsulation} from '@angular/core';
 })
 export class DashboardWidgetComponent {
   details:any;
+  frameType!: string;
   constructor() {
   }
 
   sidebar(details: any) {
     console.log(details);
     this.details = details;
+  }
+
+  getFrameType(isRightSidebarOpen: any) {
+    console.log(isRightSidebarOpen)
+    this.frameType = isRightSidebarOpen?'header-main-right-sidebar-frame':'header-main-menubar-frame';
   }
 }
