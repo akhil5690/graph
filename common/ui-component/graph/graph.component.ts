@@ -81,7 +81,7 @@ export class GraphComponents implements OnInit {
     this.initializeOverviewComponent(graphComponent);
   }
 
-  private initializeNodeAndEdges( builder: GraphBuilder) {
+  private initializeNodeAndEdges(builder: GraphBuilder) {
     const nodesSource = this.getNodes(builder, {
       data: this.data.nodes,
       id: "id",
@@ -100,19 +100,109 @@ export class GraphComponents implements OnInit {
 
     this.styleNode(nodesSource);
     // create icon label
-   this.styleIconLabel(nodesSource);
+    this.styleIconLabel(nodesSource);
     // style edges
-   this.styleEdge(edgesSource);
+    this.styleEdge(edgesSource);
   }
 
-  private initializeOverviewComponent(graphComponent: GraphComponent) {
-    const overviewComponent = new GraphOverviewComponent('#overview', graphComponent);
-    overviewComponent.autoDrag = true;
-    graphComponent.viewPoint = new Rect(1000, 1000, 0, 0);
-    overviewComponent.contentRect = new Rect(0, 0, 2000, 2000);
-    graphComponent.zoom = 0.2;
-    overviewComponent.fitContent();
+  private styleNode(nodesSource: NodesSource<any>) {
+    //style nodes
+    nodesSource.nodeCreator.defaults.style = this.getNodeShape({
+      stroke: null, fill: null, shape: 'ellipse'
+    })
+    // set node size
+    nodesSource.nodeCreator.defaults.size = this.getSize(50, 50)
+
   }
+  private styleIconLabel(nodesSource: NodesSource<any>) {
+    const labelCreator = this.createLabel(nodesSource);
+    labelCreator.defaults.layoutParameter = this.labelPlacement(InteriorLabelModel.SOUTH);
+    const iconCreator = nodesSource.nodeCreator.createLabelBinding();
+    // null check
+    iconCreator.textProvider = node => (node.imageUrl != null ? '' : null)
+    iconCreator.styleProvider = node =>
+      (new IconLabelStyle({
+        icon: node.imageUrl,
+        iconSize: new Size(20, 20),
+        iconPlacement: InteriorLabelModel.CENTER
+      }))
+
+  }
+  private styleEdge(edgesSource: EdgesSource<any>) {
+    edgesSource.edgeCreator.defaults.style = this.getEdgeStyle({
+      stroke: "black",
+      targetArrow: this.arrow({
+        type: ArrowType.TRIANGLE,
+        fill: "black"
+      })
+    });
+
+    // style edge label
+    edgesSource.edgeCreator.defaults.labels.style = this.getEdgeLabel({
+      backgroundFill: 'white',
+      textSize: 10
+    })
+
+  }
+
+  private buildGraph(graphComponent: GraphComponent, builder: GraphBuilder) {
+    graphComponent.graph = builder.buildGraph();
+  }
+
+  zoomOnCtrlClick(graphComponent: GraphComponent) {
+    const containerElement = graphComponent.div;
+    containerElement.addEventListener('click', (event: MouseEvent) => {
+      // Check if the ctrl key (or cmd key on macOS) is pressed
+      const ctrlKey = event.shiftKey;
+      if (ctrlKey) {
+        // Zoom in on click when ctrl/cmd key is pressed
+        const zoomFactor = 4;
+        const zoomPoint = graphComponent.toWorldCoordinates(new Point(event.clientX, event.clientY));
+        graphComponent.zoomTo(zoomPoint, graphComponent.zoom * zoomFactor);
+      }
+    });
+  }
+
+
+  private setInputMode(graphComponent: GraphComponent) {
+    const inputMode = graphComponent.inputMode = new GraphEditorInputMode({
+      allowCreateNode: false,
+      allowCreateEdge: false,
+      allowCreateBend: false,
+      allowDuplicate: false,
+      allowGroupingOperations: false,
+      allowClipboardOperations: false,
+      allowUndoOperations: false,
+      allowEditLabelOnDoubleClick: false,
+    });
+    this.leftClickListener(inputMode);
+
+  }
+
+  private leftClickListener(inputMode: GraphEditorInputMode) {
+    inputMode.addItemLeftClickedListener((sender, evt) => {
+      this.selectedItem = evt.item instanceof IEdge || evt.item instanceof INode ? evt.item : null;
+      if (this.selectedItem) {
+        this.items = [this.selectedItem.tag];
+        this.nodeData = this.items.flatMap((item: any) =>
+          Object.entries(item).map(([label, value]) => ({label, value}))
+        );
+        console.log(this.nodeData)
+        this.openPopUp = true;
+      } else {
+        this.openPopUp = false;
+      }
+    })
+  }
+
+  private styleForFraudData(graphComponent: GraphComponent) {
+    graphComponent.graph.nodes.forEach((node) => {
+      if (node.tag.isFraud) {
+        graphComponent.graph.setStyle(node, new ShapeNodeStyle({fill: null, shape: "ellipse", stroke: '#ff1a61'}))
+      }
+    })
+  }
+
 
   private buildLayout(graphComponent: GraphComponent) {
     // const layout = this.prepareLayout();
@@ -125,6 +215,15 @@ export class GraphComponents implements OnInit {
       duration: '0.5s',
     })
     layoutExecutor.start().then();
+  }
+
+  private initializeOverviewComponent(graphComponent: GraphComponent) {
+    const overviewComponent = new GraphOverviewComponent('#overview', graphComponent);
+    overviewComponent.autoDrag = true;
+    graphComponent.viewPoint = new Rect(1000, 1000, 0, 0);
+    overviewComponent.contentRect = new Rect(0, 0, 2000, 2000);
+    graphComponent.zoom = 0.2;
+    overviewComponent.fitContent();
   }
 
   toggle() {
@@ -167,24 +266,6 @@ export class GraphComponents implements OnInit {
     return new DefaultLabelStyle(options);
   }
 
-  private buildGraph(graphComponent: GraphComponent, builder: GraphBuilder) {
-    graphComponent.graph = builder.buildGraph();
-  }
-
-  zoomOnCtrlClick(graphComponent: GraphComponent) {
-    const containerElement = graphComponent.div;
-    containerElement.addEventListener('click', (event: MouseEvent) => {
-      // Check if the ctrl key (or cmd key on macOS) is pressed
-      const ctrlKey = event.shiftKey ;
-      if (ctrlKey) {
-        // Zoom in on click when ctrl/cmd key is pressed
-        const zoomFactor = 4;
-        const zoomPoint = graphComponent.toWorldCoordinates(new Point(event.clientX, event.clientY));
-        graphComponent.zoomTo(zoomPoint, graphComponent.zoom * zoomFactor);
-      }
-    });
-  }
-
   private prepareLayout(): CircularLayout {
     return new CircularLayout();
   }
@@ -197,86 +278,8 @@ export class GraphComponents implements OnInit {
     return graphComponent.graph.nodes.find(n => n.tag.label === label);
   }
 
-  private styleForFraudData(graphComponent: GraphComponent) {
-    graphComponent.graph.nodes.forEach((node) => {
-      if (node.tag.isFraud) {
-        graphComponent.graph.setStyle(node, new ShapeNodeStyle({fill: null, shape: "ellipse", stroke: '#ff1a61'}))
-      }
-    })
-  }
 
-  private setInputMode(graphComponent: GraphComponent) {
-    const inputMode = graphComponent.inputMode = new GraphEditorInputMode({
-      allowCreateNode: false,
-      allowCreateEdge: false,
-      allowCreateBend: false,
-      allowDuplicate: false,
-      allowGroupingOperations: false,
-      allowClipboardOperations: false,
-      allowUndoOperations: false,
-      allowEditLabelOnDoubleClick: false,
-    });
-    this.leftClickListener(inputMode);
 
-  }
-
-  private leftClickListener(inputMode: GraphEditorInputMode) {
-    inputMode.addItemLeftClickedListener((sender, evt) => {
-      this.selectedItem = evt.item instanceof IEdge || evt.item instanceof INode ? evt.item : null;
-      if (this.selectedItem) {
-        this.items = [this.selectedItem.tag];
-         this.nodeData = this.items.flatMap((item:any) =>
-          Object.entries(item).map(([label, value]) => ({ label, value }))
-        );
-        console.log(this.nodeData)
-        this.openPopUp = true;
-      } else {
-        this.openPopUp = false;
-      }
-    })
-  }
-
-  private styleNode(nodesSource: NodesSource<any>) {
-    //style nodes
-    nodesSource.nodeCreator.defaults.style = this.getNodeShape({
-      stroke: null, fill: null, shape: 'ellipse'
-    })
-    // set node size
-    nodesSource.nodeCreator.defaults.size = this.getSize(50, 50)
-
-  }
-
-  private styleIconLabel(nodesSource: NodesSource<any>) {
-    const labelCreator = this.createLabel(nodesSource);
-    labelCreator.defaults.layoutParameter = this.labelPlacement(InteriorLabelModel.SOUTH);
-    const iconCreator = nodesSource.nodeCreator.createLabelBinding();
-    // null check
-    iconCreator.textProvider = node => (node.imageUrl != null ? '' : null)
-    iconCreator.styleProvider = node =>
-      (new IconLabelStyle({
-        icon: node.imageUrl,
-        iconSize: new Size(20, 20),
-        iconPlacement: InteriorLabelModel.CENTER
-      }))
-
-  }
-
-  private styleEdge(edgesSource: EdgesSource<any>) {
-    edgesSource.edgeCreator.defaults.style = this.getEdgeStyle({
-      stroke: "black",
-      targetArrow: this.arrow({
-        type: ArrowType.TRIANGLE,
-        fill: "black"
-      })
-    });
-
-    // style edge label
-    edgesSource.edgeCreator.defaults.labels.style = this.getEdgeLabel({
-      backgroundFill: 'white',
-      textSize: 10
-    })
-
-  }
 }
 
 
