@@ -1,8 +1,8 @@
 <app-widget-frame [frame_type]="'header-main-right-sidebar-frame'">
   <div main>
-    <app-graph></app-graph>
+    <app-graph (sidebarDetails)="sidebar($event)"></app-graph>
   </div>
   <div sidebar>
-    <app-right-sidebar></app-right-sidebar>
+    <app-right-sidebar [details]="details"></app-right-sidebar>
   </div>
 </app-widget-frame>

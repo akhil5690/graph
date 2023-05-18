@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {RightSidebarComponent} from "./right-sidebar.component";
+import {TableModule} from "primeng/table";
 
 
 
@@ -11,8 +12,9 @@ import {RightSidebarComponent} from "./right-sidebar.component";
     exports: [
         RightSidebarComponent
     ],
-    imports: [
-        CommonModule
-    ]
+  imports: [
+    CommonModule,
+    TableModule
+  ]
 })
 export class RightSidebarModule { }

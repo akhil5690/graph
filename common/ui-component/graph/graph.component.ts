@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {
   Arrow, ArrowType, CircularLayout, DefaultLabelStyle, EdgesSource,
   GraphBuilder, GraphComponent, GraphEditorInputMode, GraphOverviewComponent, IconLabelStyle,
@@ -17,24 +17,23 @@ import {GraphService} from "../../ui-services/graph/graph.service";
   encapsulation: ViewEncapsulation.None
 })
 export class GraphComponents implements OnInit {
-  // data = data;
+  data = data;
   visible = true;
-  data: any;
-  openPopUp = false;
+  // data: any;
   selectedItem!: IEdge | INode | null;
-  items: any;
-  nodeData: any;
+
+  @Output() sidebarDetails = new EventEmitter();
 
   constructor(private graphService: GraphService) {
   }
 
   ngOnInit() {
-    this.graphService.getGraphData().then((data) => {
-      console.log(data);
-      this.data = data;
-      this.createGraph();
-    }).catch(e => console.log(e))
-    // this.createGraph();
+    // this.graphService.getGraphData().then((data) => {
+    //   console.log(data);
+    //   this.data = data;
+    //   this.createGraph();
+    // }).catch(e => console.log(e))
+    this.createGraph();
   }
 
   private createGraph() {
@@ -90,6 +89,7 @@ export class GraphComponents implements OnInit {
     nodesSource.nodeCreator.defaults.size = this.getSize(50, 50)
 
   }
+
   private styleIconLabel(nodesSource: NodesSource<any>) {
     const labelCreator = this.createLabel(nodesSource);
     labelCreator.defaults.layoutParameter = this.labelPlacement(InteriorLabelModel.SOUTH);
@@ -104,6 +104,7 @@ export class GraphComponents implements OnInit {
       }))
 
   }
+
   private styleEdge(edgesSource: EdgesSource<any>) {
     edgesSource.edgeCreator.defaults.style = this.getEdgeStyle({
       stroke: "black",
@@ -158,15 +159,7 @@ export class GraphComponents implements OnInit {
   private leftClickListener(inputMode: GraphEditorInputMode) {
     inputMode.addItemLeftClickedListener((sender, evt) => {
       this.selectedItem = evt.item instanceof IEdge || evt.item instanceof INode ? evt.item : null;
-      if (this.selectedItem) {
-        this.items = [this.selectedItem.tag];
-        this.nodeData = this.items.flatMap((item: any) =>
-          Object.entries(item).map(([label, value]) => ({label, value}))
-        );
-        this.openPopUp = true;
-      } else {
-        this.openPopUp = false;
-      }
+      this.sidebarDetails.emit(this.selectedItem);
     })
   }
 
@@ -252,7 +245,6 @@ export class GraphComponents implements OnInit {
   private getNode(graphComponent: GraphComponent, label: string) {
     return graphComponent.graph.nodes.find(n => n.tag.label === label);
   }
-
 
 
 }

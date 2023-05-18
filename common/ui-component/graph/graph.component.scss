@@ -40,29 +40,4 @@ app-graph {
     }
   }
 
-  .right-sidebar {
-    display: grid;
-    position: absolute;
-    height: 100vh;
-    max-width: 25%;
-    grid-template-rows: auto;
-    grid-template-columns: 5rem auto;
-    background: white;
-    top: 0;
-    right: 0;
-  }
-  .menu-panel {
-    display: flex;
-    padding: 1rem;
-    flex-direction: column;
-    background-color: var(--primary-background-color);
-    align-items: center;
-    border: 2px solid var(--third-background-color);
-    border-top: none;
-  }
-
-  .details-panel {
-    padding: 1rem;
-  }
-
 }
