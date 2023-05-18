@@ -37,6 +37,8 @@ export class WidgetFrameComponent implements OnInit {
   getClass(frame_type:string) {
     switch (frame_type){
       case 'frame-with-sidebar': return 'frame-with-sidebar';
+      case 'header-main-frame ': return 'header-main-frame ';
+      case 'header-main-right-sidebar-frame': return 'header-main-right-sidebar-frame';
       default: return 'only-main'
     }
   }

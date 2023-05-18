@@ -30,10 +30,20 @@
 .header-main-frame {
   display: grid;
   grid-template-columns:var(--base-width);
-  grid-template-rows: var(--top-toolbar-height) var(--main-height) var(--bottom-toolbar-height);
+  grid-template-rows: var(--top-toolbar-height) var(--main-no-footer);
   grid-template-areas:
       "header"
-      "main"
+      "main sidebar"
+}
+
+.header-main-right-sidebar-frame{
+  display: grid;
+  grid-template-columns: 70vw 30vw;
+  grid-template-rows: var(--top-toolbar-height) var(--main-no-footer);
+  grid-template-areas:
+      "header header"
+      "main sidebar"
+
 }
 
 .header {
