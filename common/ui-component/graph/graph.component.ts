@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {
   Arrow,
   ArrowType,
@@ -44,18 +44,16 @@ export class GraphComponents implements OnInit {
   visible = true;
   // data: any;
   selectedItem!: IEdge | INode | null;
-
+  // @Input() data:any;
   @Output() sidebarDetails = new EventEmitter();
 
   constructor(private graphService: GraphService) {
   }
 
   ngOnInit() {
-    // this.graphService.getGraphData().then((data) => {
-    //   console.log(data);
-    //   this.data = data;
+    // if (this.data){
     //   this.createGraph();
-    // }).catch(e => console.log(e))
+    // }
     this.createGraph();
   }
 
@@ -75,6 +73,10 @@ export class GraphComponents implements OnInit {
     this.styleForFraudData(graphComponent);
 
     this.buildLayout(graphComponent);
+
+    setTimeout(()=>{
+      graphComponent.zoomTo(graphComponent.contentRect);
+    },100)
 
     this.initializeOverviewComponent(graphComponent);
   }
@@ -147,16 +149,19 @@ export class GraphComponents implements OnInit {
 
   private buildGraph(graphComponent: GraphComponent, builder: GraphBuilder) {
     graphComponent.graph = builder.buildGraph();
+    graphComponent.fitContent();
+    graphComponent.fitGraphBounds();
+
   }
 
   zoomOnCtrlClick(graphComponent: GraphComponent) {
     const containerElement = graphComponent.div;
     containerElement.addEventListener('click', (event: MouseEvent) => {
       // Check if the ctrl key (or cmd key on macOS) is pressed
-      const ctrlKey = event.shiftKey;
+      const ctrlKey = event.ctrlKey;
       if (ctrlKey) {
         // Zoom in on click when ctrl/cmd key is pressed
-        const zoomFactor = 4;
+        const zoomFactor = 2;
         const zoomPoint = graphComponent.toWorldCoordinates(new Point(event.clientX, event.clientY));
         graphComponent.zoomTo(zoomPoint, graphComponent.zoom * zoomFactor);
       }
