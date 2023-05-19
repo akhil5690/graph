@@ -16,7 +16,7 @@
 
 .grey-button {
   @extend .solid-button;
-  background-color: var(--grey-button-color);
+  background-color: var(--grey-color);
 }
 
 .outlined-button {
@@ -39,7 +39,7 @@
 
 .grey-button:hover {
   @extend .grey-button;
-  background-color: var(--grey-button-hover-color)
+  background-color: var(--dark-grey-color)
 }
 
 //theme switch

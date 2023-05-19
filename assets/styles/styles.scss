@@ -30,7 +30,21 @@ a {
 }
 
 label {
-  color:var(--primary-text-color);
+  color: var(--primary-text-color);
   font-weight: var(--font-weight-normal);
+}
+
+*::-webkit-scrollbar {
+  width: var(--unit); /* width of the entire scrollbar */
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--primary-background-color); /* color of the tracking area */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--grey-color); /* color of the scroll thumb */
+  border-radius: 20px; /* roundness of the scroll thumb */
+  border: calc(var(--unit) / 4) solid var(--primary-background-color);
 }
 
