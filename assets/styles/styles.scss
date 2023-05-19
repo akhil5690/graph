@@ -43,7 +43,7 @@ label {
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: var(--grey-color); /* color of the scroll thumb */
+  background-color: var(--third-background-color); /* color of the scroll thumb */
   border-radius: 20px; /* roundness of the scroll thumb */
   border: calc(var(--unit) / 4) solid var(--primary-background-color);
 }

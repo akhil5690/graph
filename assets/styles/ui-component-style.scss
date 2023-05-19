@@ -16,10 +16,52 @@
   box-shadow: none;
 }
 
-.p-sidebar.p-sidebar-active.p-sidebar-right{
+.p-sidebar.p-sidebar-active.p-sidebar-right {
   top: 0;
   right: 0;
   width: 30%;
   height: 100%;
   padding: 1rem;
 }
+
+.yfiles-canvascomponent .yfiles-scrollbar.yfiles-scrollbar-vertical,
+.yfiles-canvascomponent .yfiles-scrollbar.yfiles-scrollbar-vertical div,
+.yfiles-canvascomponent
+.yfiles-scrollbar-range.yfiles-scrollbar-range-vertical
+.yfiles-scrollbar-slider,
+.yfiles-canvascomponent .yfiles-scrollbar .yfiles-scrollbar-range.yfiles-scrollbar-range-vertical {
+  width: 1rem;
+}
+
+yfiles-canvascomponent .yfiles-scrollbar.yfiles-scrollbar-horizontal,
+.yfiles-canvascomponent .yfiles-scrollbar.yfiles-scrollbar-horizontal div,
+.yfiles-canvascomponent
+.yfiles-scrollbar-range.yfiles-scrollbar-range-horizontal
+.yfiles-scrollbar-slider,
+.yfiles-canvascomponent .yfiles-scrollbar .yfiles-scrollbar-range.yfiles-scrollbar-range-horizontal {
+  height: 1rem;
+}
+
+.yfiles-canvascomponent .yfiles-scrollbar .yfiles-scrollbar-range.yfiles-scrollbar-range-vertical {
+  top: 0;
+  bottom: 0;
+}
+
+.yfiles-scrollbar-range.yfiles-scrollbar-range-horizontal {
+  left: 0;
+  right: 0;
+}
+
+.yfiles-canvascomponent .yfiles-scrollbar-vertical .yfiles-button, .yfiles-canvascomponent .yfiles-scrollbar-horizontal .yfiles-button {
+  display: none;
+}
+
+.yfiles-scrollbar {
+  background: var(--primary-background-color);
+}
+
+.yfiles-scrollbar-slider {
+   border: 0;
+   background: var(--third-background-color);
+   border-radius: 20px;
+ }
