@@ -1,16 +1,17 @@
 <div id="graphComponent">
   <div class="top-toolbar">
     <div (click)="toggle()">
-      Overview
+      <img src="assets/image/overview.svg"  height="20" width="20" alt="overview">
     </div>
     <div (click)="zooIn()">
-      Zoom In
+      <img src="assets/image/zoomIn.svg"  height="20" width="20" alt="overview">
     </div>
     <div (click)="zoomOut()">
-      Zoom Out
+      <img src="assets/image/zoomOut.svg"  height="20" width="20" alt="overview">
     </div>
     <div (click)="fitcontent()">
-      Fit
+      <img src="assets/image/fit.svg"  height="20" width="20" alt="overview">
+
     </div>
   </div>
   <div class="container" [ngClass]="!visible?'hide':''">
