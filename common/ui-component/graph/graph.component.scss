@@ -12,7 +12,7 @@ app-graph {
   }
 
   .container {
-    position: absolute;
+    position: relative;
     width: 200px;
     height: 200px;
   }
@@ -37,4 +37,16 @@ app-graph {
     }
   }
 
+  .top-toolbar {
+    position: relative;
+    top: 0;
+    bottom: 0;
+    height: calc(var(--unit) * 3);
+    width: 100%;
+    background-color: var(--third-background-color);
+    display: inline-flex;
+    align-items: center;
+    padding: var(--unit);
+    gap: var(--unit);
+  }
 }

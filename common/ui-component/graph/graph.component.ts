@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {
   Arrow,
   ArrowType,
@@ -39,46 +39,51 @@ import {GraphService} from "../../ui-services/graph/graph.service";
   styleUrls: ['./graph.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class GraphComponents implements OnInit {
+export class GraphComponents implements OnInit{
   data = data;
   visible = true;
   // data: any;
+  graphComponent: any;
   selectedItem!: IEdge | INode | null;
-  // @Input() data:any;
+  // @Input() data: any;
   @Output() sidebarDetails = new EventEmitter();
 
   constructor(private graphService: GraphService) {
   }
 
   ngOnInit() {
-    // if (this.data){
-    //   this.createGraph();
-    // }
+
     this.createGraph();
   }
 
+  // ngOnChanges() {
+  //   if (this.data) {
+  //     this.createGraph();
+  //   }
+  // }
+
   private createGraph() {
     License.value = licenseValue;
-    const graphComponent = new GraphComponent("#graphComponent");
     const builder = new GraphBuilder();
+    this.graphComponent = new GraphComponent("#graphComponent");
 
     this.initializeNodeAndEdges(builder);
 
-    this.buildGraph(graphComponent, builder);
+    this.buildGraph(this.graphComponent, builder);
 
-    this.zoomOnCtrlClick(graphComponent);
+    this.zoomOnCtrlClick(this.graphComponent);
 
-    this.setInputMode(graphComponent);
+    this.setInputMode(this.graphComponent);
 
-    this.styleForFraudData(graphComponent);
+    this.styleForFraudData(this.graphComponent);
 
-    this.buildLayout(graphComponent);
+    this.buildLayout(this.graphComponent);
 
-    setTimeout(()=>{
-      graphComponent.zoomTo(graphComponent.contentRect);
-    },100)
+    setTimeout(() => {
+      this.graphComponent.zoomTo(this.graphComponent.contentRect);
+    }, 50)
 
-    this.initializeOverviewComponent(graphComponent);
+    this.initializeOverviewComponent(this.graphComponent);
   }
 
   private initializeNodeAndEdges(builder: GraphBuilder) {
@@ -217,7 +222,6 @@ export class GraphComponents implements OnInit {
   private initializeOverviewComponent(graphComponent: GraphComponent) {
     const overviewComponent = new GraphOverviewComponent('#overview', graphComponent);
     overviewComponent.autoDrag = true;
-    graphComponent.viewPoint = new Rect(1000, 1000, 0, 0);
     overviewComponent.contentRect = new Rect(0, 0, 2000, 2000);
     graphComponent.zoom = 0.2;
     overviewComponent.fitContent();
@@ -276,6 +280,24 @@ export class GraphComponents implements OnInit {
   }
 
 
+  // zoomIn() {
+  //   zoomfactor = 2
+  //   graphComponent.zoomTo(graphComponent.center, graphComponent.zoom * zoomFactor)
+  //
+  // }
+  zooIn() {
+    const zoomFactor = 2;
+    this.graphComponent.zoomTo(this.graphComponent.center, this.graphComponent.zoom * zoomFactor);
+  }
+
+  zoomOut() {
+    const zoomFactor = 0.6;
+    this.graphComponent.zoomTo(this.graphComponent.center, this.graphComponent.zoom * zoomFactor);
+  }
+
+  fitcontent() {
+    this.graphComponent.zoomTo(this.graphComponent.contentRect);
+  }
 }
 
 
