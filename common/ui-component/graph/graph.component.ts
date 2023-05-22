@@ -39,7 +39,7 @@ import {GraphService} from "../../ui-services/graph/graph.service";
   styleUrls: ['./graph.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class GraphComponents implements OnInit,OnChanges{
+export class GraphComponents implements OnInit, OnChanges {
   // data = data;
   visible = true;
   // data: any;
@@ -47,6 +47,22 @@ export class GraphComponents implements OnInit,OnChanges{
   selectedItem!: IEdge | INode | null;
   @Input() data: any;
   @Output() sidebarDetails = new EventEmitter();
+
+  toolBarItems = [{
+    toolName: 'toggle',
+    icon: 'assets/image/overview.svg'
+  },
+    {
+    toolName: 'zoomIn',
+    icon: 'assets/image/zoomIn.svg'
+  },{
+    toolName: 'zoomOut',
+    icon: 'assets/image/zoomOut.svg'
+  },{
+    toolName: 'fitContent',
+    icon: 'assets/image/fit.svg'
+  },
+  ]
 
   constructor(private graphService: GraphService) {
   }
@@ -80,7 +96,7 @@ export class GraphComponents implements OnInit,OnChanges{
     this.buildLayout(this.graphComponent);
 
     setTimeout(() => {
-     this.fitContent();
+      this.fitContent();
     }, 50)
 
     this.initializeOverviewComponent(this.graphComponent);
@@ -278,12 +294,6 @@ export class GraphComponents implements OnInit,OnChanges{
     return graphComponent.graph.nodes.find(n => n.tag.label === label);
   }
 
-
-  // zoomIn() {
-  //   zoomfactor = 2
-  //   graphComponent.zoomTo(graphComponent.center, graphComponent.zoom * zoomFactor)
-  //
-  // }
   zooIn() {
     const zoomFactor = 2;
     this.graphComponent.zoomTo(this.graphComponent.center, this.graphComponent.zoom * zoomFactor);
@@ -296,6 +306,24 @@ export class GraphComponents implements OnInit,OnChanges{
 
   fitContent() {
     this.graphComponent.zoomTo(this.graphComponent.contentRect);
+  }
+
+  clickEvent(tool: { icon: string; toolName: string } ) {
+    if (this.graphComponent) {
+      switch (tool.toolName) {
+        case 'toggle':
+          this.toggle();
+          break;
+        case 'zoomIn':
+          this.zooIn();
+          break;
+        case 'zoomOut':
+          this.zoomOut();
+          break;
+        case 'fitContent':
+          this.fitContent();
+      }
+    }
   }
 }
 

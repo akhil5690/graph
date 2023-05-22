@@ -1,17 +1,9 @@
 <div id="graphComponent">
   <div class="top-toolbar">
-    <div (click)="toggle()">
-      <img src="assets/image/overview.svg"  height="20" width="20" alt="overview">
-    </div>
-    <div (click)="zooIn()">
-      <img src="assets/image/zoomIn.svg"  height="20" width="20" alt="overview">
-    </div>
-    <div (click)="zoomOut()">
-      <img src="assets/image/zoomOut.svg"  height="20" width="20" alt="overview">
-    </div>
-    <div (click)="fitContent()">
-      <img src="assets/image/fit.svg"  height="20" width="20" alt="overview">
-
+    <div *ngFor="let tool of toolBarItems">
+      <div (click)="clickEvent(tool)">
+        <img [src]="tool.icon" [alt]="tool.toolName" height="20" width="20">
+      </div>
     </div>
   </div>
   <div class="container" [ngClass]="!visible?'hide':''">
