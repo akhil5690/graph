@@ -39,13 +39,13 @@ import {GraphService} from "../../ui-services/graph/graph.service";
   styleUrls: ['./graph.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class GraphComponents implements OnInit{
-  data = data;
+export class GraphComponents implements OnInit,OnChanges{
+  // data = data;
   visible = true;
   // data: any;
   graphComponent: any;
   selectedItem!: IEdge | INode | null;
-  // @Input() data: any;
+  @Input() data: any;
   @Output() sidebarDetails = new EventEmitter();
 
   constructor(private graphService: GraphService) {
@@ -53,14 +53,14 @@ export class GraphComponents implements OnInit{
 
   ngOnInit() {
 
-    this.createGraph();
+    // this.createGraph();
   }
 
-  // ngOnChanges() {
-  //   if (this.data) {
-  //     this.createGraph();
-  //   }
-  // }
+  ngOnChanges() {
+    if (this.data) {
+      this.createGraph();
+    }
+  }
 
   private createGraph() {
     License.value = licenseValue;
@@ -80,7 +80,7 @@ export class GraphComponents implements OnInit{
     this.buildLayout(this.graphComponent);
 
     setTimeout(() => {
-      this.graphComponent.zoomTo(this.graphComponent.contentRect);
+     this.fitContent();
     }, 50)
 
     this.initializeOverviewComponent(this.graphComponent);
@@ -223,7 +223,6 @@ export class GraphComponents implements OnInit{
     const overviewComponent = new GraphOverviewComponent('#overview', graphComponent);
     overviewComponent.autoDrag = true;
     overviewComponent.contentRect = new Rect(0, 0, 2000, 2000);
-    graphComponent.zoom = 0.2;
     overviewComponent.fitContent();
   }
 
@@ -295,7 +294,7 @@ export class GraphComponents implements OnInit{
     this.graphComponent.zoomTo(this.graphComponent.center, this.graphComponent.zoom * zoomFactor);
   }
 
-  fitcontent() {
+  fitContent() {
     this.graphComponent.zoomTo(this.graphComponent.contentRect);
   }
 }
