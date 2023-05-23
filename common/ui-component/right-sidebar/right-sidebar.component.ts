@@ -31,9 +31,13 @@ export class RightSidebarComponent implements OnChanges {
     this.isRightSidebarOpen.emit(this.openPopUp);
   }
 
-  tabs(tab:string) {
+  tabs(tab: string) {
     this.openPopUp = true;
     this.tab = tab;
     this.isRightSidebarOpen.emit(this.openPopUp);
+    if (tab === 'details' && !this.nodeData) {
+      this.openPopUp = false;
+      this.isRightSidebarOpen.emit(this.openPopUp);
+    }
   }
 }
