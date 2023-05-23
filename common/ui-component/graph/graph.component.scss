@@ -8,7 +8,6 @@ app-graph {
     width: 200px;
     height: 200px;
     background-color: var(--third-background-color);
-
   }
 
   .container {
@@ -48,5 +47,9 @@ app-graph {
     align-items: center;
     padding: var(--unit);
     gap: var(--unit);
+  }
+
+  .tools {
+    cursor: pointer;
   }
 }
