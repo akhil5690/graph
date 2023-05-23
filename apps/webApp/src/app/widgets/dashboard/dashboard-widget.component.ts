@@ -16,7 +16,8 @@ export class DashboardWidgetComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.getGraphData()
+    this.getGraphData();
+    this.getOptions();
   }
   private getGraphData() {
     this.graphService.getGraphData().then((data) => {
@@ -33,4 +34,11 @@ export class DashboardWidgetComponent implements OnInit{
     this.cdr.detectChanges();
   }
 
+  private getOptions() {
+    this.graphService.getOption().then((data)=>{
+      console.log(data)
+    }).catch(e=>{
+      console.log(e)
+    })
+  }
 }

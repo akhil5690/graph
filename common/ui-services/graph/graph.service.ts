@@ -18,4 +18,12 @@ export class GraphService {
     })
   }
 
+  getOption():Promise<any>{
+    return  new Promise((resolve)=>{
+      this.http.get('https://u66v1wvvq9.execute-api.us-west-2.amazonaws.com/dev/').subscribe((data) => {
+        resolve(data);
+      })
+    })
+  }
+
 }
