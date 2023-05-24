@@ -7,23 +7,26 @@ import {GraphService} from "../../../../../../common/ui-services/graph/graph.ser
   styleUrls: ['./dashboard-widget.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class DashboardWidgetComponent implements OnInit{
+export class DashboardWidgetComponent implements OnInit {
   details: any;
   frameType!: string;
   data: any;
+  filterOptions: any;
 
-  constructor(private cdr: ChangeDetectorRef,private graphService: GraphService) {
+  constructor(private cdr: ChangeDetectorRef, private graphService: GraphService) {
   }
 
   ngOnInit() {
     this.getGraphData();
     this.getOptions();
   }
+
   private getGraphData() {
     this.graphService.getGraphData().then((data) => {
       this.data = data;
     }).catch(e => console.log(e))
   }
+
   sidebar(details: any) {
     console.log(details);
     this.details = details;
@@ -35,9 +38,9 @@ export class DashboardWidgetComponent implements OnInit{
   }
 
   private getOptions() {
-    this.graphService.getOption().then((data)=>{
-      console.log(data)
-    }).catch(e=>{
+    this.graphService.getOption().then((data) => {
+      this.filterOptions = data?.result;
+    }).catch(e => {
       console.log(e)
     })
   }

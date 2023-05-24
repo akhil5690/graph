@@ -12,10 +12,12 @@ export class RightSidebarComponent implements OnChanges {
   openPopUp = false;
 
   @Input() details: any;
+  @Input() filterOptions: any;
   @Output() isRightSidebarOpen = new EventEmitter();
   tab = 'details';
 
   ngOnChanges(): void {
+    console.log(this.filterOptions)
     if (this.details) {
       this.items = [this.details.tag];
       this.nodeData = this.items.flatMap((item: any) =>

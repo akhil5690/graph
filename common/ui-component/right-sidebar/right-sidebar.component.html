@@ -19,7 +19,8 @@
     </div>
 
     <div *ngIf="tab === 'filter'">
-      filter
+      <div class="subtitle">Filter</div>
+      <app-table [data]="filterOptions"></app-table>
     </div>
   </div>
 </div>
