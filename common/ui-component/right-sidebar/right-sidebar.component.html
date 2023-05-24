@@ -20,7 +20,10 @@
 
     <div *ngIf="tab === 'filter'">
       <div class="subtitle">Filter</div>
-      <app-table [data]="filterOptions"></app-table>
+<!--      <app-table [data]="filterOptions"></app-table>-->
+      <p-dropdown [options]="properties" [(ngModel)]="selectedProp" placeholder="select property" optionLabel="name" (onChange)="getProps(selectedProp)"></p-dropdown>
+<!--      <ui-button [label]="'Apply'" [class]="'solid-button'" (click)="getProps(selectedProp)"></ui-button>-->
+      <p-dropdown [options]="values" [(ngModel)]="selectedVal"  placeholder="select value" optionLabel="name"></p-dropdown>
     </div>
   </div>
 </div>

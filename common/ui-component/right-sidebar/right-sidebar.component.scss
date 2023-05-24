@@ -1,14 +1,15 @@
-app-right-sidebar{
+app-right-sidebar {
   .right-sidebar {
     display: grid;
     position: relative;
-    height:var(--main-no-footer);
+    height: var(--main-no-footer);
     grid-template-rows: auto;
     grid-template-columns: 5rem auto;
     background: white;
     right: 0;
-    overflow:hidden;
+    overflow: hidden;
   }
+
   .menu-panel {
     display: flex;
     padding: 1.5rem;
@@ -18,7 +19,7 @@ app-right-sidebar{
     align-items: center;
     border: 2px solid var(--third-background-color);
     border-top: none;
-    cursor:pointer;
+    cursor: pointer;
   }
 
   .details-panel {
@@ -27,4 +28,7 @@ app-right-sidebar{
     overflow-x: hidden;
   }
 
+  .p-overlay.p-component {
+    max-width: 20%;
+  }
 }

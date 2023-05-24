@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import {RightSidebarComponent} from "./right-sidebar.component";
 import {TableModule} from "primeng/table";
 import {TableComponent} from "../table/table.component";
+import {DropdownModule} from "primeng/dropdown";
+import {FormsModule} from "@angular/forms";
+import {SignInModule} from "../../../apps/webApp/src/app/widgets/sign-in/sign-in.module";
 
 @NgModule({
   declarations: [
@@ -14,7 +17,10 @@ import {TableComponent} from "../table/table.component";
     ],
   imports: [
     CommonModule,
-    TableModule
+    TableModule,
+    DropdownModule,
+    FormsModule,
+    SignInModule
   ]
 })
 export class RightSidebarModule { }
