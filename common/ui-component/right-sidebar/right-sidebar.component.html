@@ -20,10 +20,23 @@
 
     <div *ngIf="tab === 'filter'">
       <div class="subtitle">Filter</div>
-<!--      <app-table [data]="filterOptions"></app-table>-->
-      <p-dropdown [options]="properties" [(ngModel)]="selectedProp" placeholder="select property" optionLabel="name" (onChange)="getProps(selectedProp)"></p-dropdown>
-<!--      <ui-button [label]="'Apply'" [class]="'solid-button'" (click)="getProps(selectedProp)"></ui-button>-->
-      <p-dropdown [options]="values" [(ngModel)]="selectedVal"  placeholder="select value" optionLabel="name"></p-dropdown>
+      <p-autoComplete [(ngModel)]="selectedProp" [suggestions]="suggestedList" (ngModelChange)="getProps(selectedProp)"
+                      (completeMethod)="search($event,this.properties)" field="name" [dropdown]="true" >
+        <ng-template let-options pTemplate="item">
+          <div class="country-item">
+            <div>{{options.name}}</div>
+          </div>
+        </ng-template>
+      </p-autoComplete>
+
+      <p-autoComplete [(ngModel)]="selectedVal" [suggestions]="suggestedList"
+                      (completeMethod)="search($event,this.values)" field="name" [dropdown]="true">
+        <ng-template let-options pTemplate="item">
+          <div class="country-item">
+            <div>{{options.name}}</div>
+          </div>
+        </ng-template>
+      </p-autoComplete>
     </div>
   </div>
 </div>

@@ -6,6 +6,7 @@ import {TableComponent} from "../table/table.component";
 import {DropdownModule} from "primeng/dropdown";
 import {FormsModule} from "@angular/forms";
 import {SignInModule} from "../../../apps/webApp/src/app/widgets/sign-in/sign-in.module";
+import {AutoCompleteModule} from "primeng/autocomplete";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {SignInModule} from "../../../apps/webApp/src/app/widgets/sign-in/sign-in
     TableModule,
     DropdownModule,
     FormsModule,
-    SignInModule
+    SignInModule,
+    AutoCompleteModule
   ]
 })
 export class RightSidebarModule { }

@@ -22,6 +22,7 @@ export class RightSidebarComponent implements OnChanges, OnInit {
   values: any;
   selectedProp: any;
   selectedVal: any;
+  suggestedList: any;
 
   ngOnChanges(): void {
     this.selectedGraphItem()
@@ -33,13 +34,6 @@ export class RightSidebarComponent implements OnChanges, OnInit {
       {name: 'Label', code: 'label'},
       {name: 'Tag', code: 'tags'},
     ];
-    // this.values =[
-    //   { name: 'New York', code: 'NY' },
-    //   { name: 'Rome', code: 'RM' },
-    //   { name: 'London', code: 'LDN' },
-    //   { name: 'Istanbul', code: 'IST' },
-    //   { name: 'Paris', code: 'PRS' }
-    // ];
   }
 
   open(isOpen: boolean) {
@@ -58,7 +52,6 @@ export class RightSidebarComponent implements OnChanges, OnInit {
   }
 
   private selectedGraphItem() {
-    console.log(this.filterOptions)
     if (this.details) {
       this.items = [this.details.tag];
       this.nodeData = this.items.flatMap((item: any) =>
@@ -71,15 +64,23 @@ export class RightSidebarComponent implements OnChanges, OnInit {
 
   getProps(selectedProp: any) {
     this.values = [];
-    console.log(this.data)
     this.data?.nodes.forEach((data: any) => {
       // console.log(data[selectedProp['code']]);
       if (this.values.findIndex((value:any)=> value.name === data[selectedProp['code']]) === -1 && data[selectedProp['code']]) {
         this.values.push({name: data[selectedProp['code']]});
       }
-
-
     });
-    console.log( this.values)
+  }
+
+  search(event: { query: any; }, dataArray:any) {
+    let filtered: any[] = [];
+    let query = event.query;
+    for (let i = 0; i < dataArray.length; i++) {
+      let country = dataArray[i];
+      if (country.name.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+        filtered.push(country);
+      }
+    }
+    this.suggestedList = filtered;
   }
 }
