@@ -29,7 +29,7 @@ import {
   ShapeNodeStyle,
   Size
 } from "yfiles";
-import {data} from './data'
+// import {data} from './data'
 import licenseValue from 'license.json';
 import {GraphService} from "../../ui-services/graph/graph.service";
 
@@ -40,12 +40,12 @@ import {GraphService} from "../../ui-services/graph/graph.service";
   encapsulation: ViewEncapsulation.None
 })
 export class GraphComponents implements OnInit, OnChanges {
-  data = data;
+  // data = data;
   visible = true;
   // data: any;
   graphComponent: any;
   selectedItem!: IEdge | INode | null;
-  // @Input() data: any;
+  @Input() data: any;
   @Output() sidebarDetails = new EventEmitter();
 
   toolBarItems = [{
@@ -69,13 +69,13 @@ export class GraphComponents implements OnInit, OnChanges {
 
   ngOnInit() {
 
-    this.createGraph();
+    // this.createGraph();
   }
 
   ngOnChanges() {
-    // if (this.data) {
-    //   this.createGraph();
-    // }
+    if (this.data) {
+      this.createGraph();
+    }
   }
 
   private createGraph() {

@@ -13,8 +13,8 @@ export class RightSidebarComponent implements OnChanges, OnInit {
   openPopUp = false;
 
   @Input() details: any;
-  // @Input() data: any;
-  data = data;
+  @Input() data: any;
+  // data = data;
   @Input() filterOptions: any;
   @Output() isRightSidebarOpen = new EventEmitter();
   tab = 'details';
@@ -65,7 +65,6 @@ export class RightSidebarComponent implements OnChanges, OnInit {
   getProps(selectedProp: any) {
     this.values = [];
     this.data?.nodes.forEach((data: any) => {
-      // console.log(data[selectedProp['code']]);
       if (this.values.findIndex((value:any)=> value.name === data[selectedProp['code']]) === -1 && data[selectedProp['code']]) {
         this.values.push({name: data[selectedProp['code']]});
       }
