@@ -33,10 +33,12 @@ export class RightSidebarComponent implements OnChanges, OnInit {
   }
 
   ngOnChanges(): void {
+    // get the node or the edge that is clicked
     this.selectedGraphItem()
   }
 
   ngOnInit() {
+    // dropdown properties
     this.properties = [
       {name: 'Account Id', code: 'AccountId'},
       {name: 'Label', code: 'label'},
@@ -69,6 +71,7 @@ export class RightSidebarComponent implements OnChanges, OnInit {
   }
 
   private selectedGraphItem() {
+    // get the node or the edge that is clicked
     if (this.details) {
       this.items = [this.details.tag];
       this.nodeData = this.items.flatMap((item: any) =>
@@ -79,9 +82,11 @@ export class RightSidebarComponent implements OnChanges, OnInit {
     this.isRightSidebarOpen.emit(this.openPopUp);
   }
 
-  getProps(selectedProp: any) {
+  getValue(selectedProp: any) {
+    // on selecting property from autocomplete get the dropdown for value field
     this.values = [];
     this.data?.nodes.forEach((data: any) => {
+      // if the filter already exist dont push to dropdown list, this.value
       if (this.values.findIndex((value:any)=> value.name === data[selectedProp['code']]) === -1 && data[selectedProp['code']]) {
         this.values.push({name: data[selectedProp['code']]});
       }
@@ -89,6 +94,7 @@ export class RightSidebarComponent implements OnChanges, OnInit {
   }
 
   search(event: { query: any; }, dataArray:any) {
+    // get suggestion for autocomplete
     let filtered: any[] = [];
     let query = event.query;
     for (let i = 0; i < dataArray.length; i++) {
@@ -106,11 +112,12 @@ export class RightSidebarComponent implements OnChanges, OnInit {
       property:this.selectedProp.code,
       value:this.selectedVal.name
     }
-
+    // send params to dashboard and get new graph on filter
     this.filterGraph.emit(params)
   }
 
   layoutChange(selectedLayout: any) {
+    // send the layout which is selected from dropdown
     this.selectedLayout.emit(selectedLayout.name)
   }
 }

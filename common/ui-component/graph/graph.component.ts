@@ -4,7 +4,7 @@ import {
   ArrowType,
   CircularLayout,
   DefaultLabelStyle,
-  EdgesSource,
+  EdgesSource, ExteriorLabelModel,
   GraphBuilder,
   GraphComponent,
   GraphEditorInputMode,
@@ -50,6 +50,8 @@ export class GraphComponents implements OnInit, OnChanges {
   @Input() layout: any = 'Organic';
   @Output() sidebarDetails = new EventEmitter();
 
+
+  // graph toolbar tools
   toolBarItems = [{
     toolName: 'toggle',
     icon: 'assets/image/overview.svg'
@@ -71,49 +73,68 @@ export class GraphComponents implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-
-    // this.createGraph();
   }
 
   ngOnChanges() {
     if (this.data) {
+      // start creating graph
       this.createGraph();
     }
   }
 
   private createGraph() {
+    // add licence
     License.value = licenseValue;
+
+    // Graph Builder used to get json data and generate nodes and edges for graph
     const builder = new GraphBuilder();
-    if (this.graphComponent?.div?.id === 'graphComponent') {
-      this.graphComponent.cleanUp();
-      this.graphComponent = new GraphComponent("#graphComponent");
-      this.filter = true;
-    } else {
-      this.filter = false;
-      this.graphComponent = new GraphComponent("#graphComponent");
-    }
+
+    // creates a component to store graph
+    this.initializeGraphComponent()
+
+    // create nodes and edges for graph
     this.initializeNodeAndEdges(builder);
 
+    // run graph
     this.buildGraph(this.graphComponent, builder);
 
+    // zoom on click
     this.zoomOnCtrlClick(this.graphComponent);
 
+    // editable mode for graph like creating node, adding/updating label, resizing node etc,.
     this.setInputMode(this.graphComponent);
 
-    this.styleForFraudData(this.graphComponent);
+    // this.styleForFraudData(this.graphComponent);
 
+    // set the layout on filter
     this.layout = this.getLayout(this.filter, this.layout)
 
+    // start building layout, example: Organic layout
     this.buildLayout(this.graphComponent, this.layout);
 
+    // fit the whole graph into the canvas
     setTimeout(() => {
       this.fitContent();
     }, 50)
 
+    // create overview component to view and navigate the graph in graph component
     this.initializeOverviewComponent(this.graphComponent);
   }
 
+  private initializeGraphComponent() {
+    // inorder to update the graph component with another graph, check if the component already exist, if yes: cleanup
+    if (this.graphComponent?.div?.id === 'graphComponent') {
+      this.graphComponent.cleanUp();
+      this.graphComponent = new GraphComponent("#graphComponent");
+      this.filter = true; //if true change the layout from organic to some other layout
+    } else {
+      this.filter = false;
+      this.graphComponent = new GraphComponent("#graphComponent");
+    }
+  }
+
   private initializeNodeAndEdges(builder: GraphBuilder) {
+    // create nodes
     const nodesSource = this.getNodes(builder, {
       data: this.data.nodes,
       id: "id",
@@ -130,6 +151,7 @@ export class GraphComponents implements OnInit, OnChanges {
       targetId: "target"
     })
 
+    // add style to node
     this.styleNode(nodesSource);
     // create icon label
     this.styleIconLabel(nodesSource);
@@ -138,7 +160,7 @@ export class GraphComponents implements OnInit, OnChanges {
   }
 
   private styleNode(nodesSource: NodesSource<any>) {
-    //style nodes
+    // default will affect throughout the graph
     nodesSource.nodeCreator.defaults.style = this.getNodeShape({
       stroke: null, fill: null, shape: 'ellipse'
     })
@@ -147,9 +169,10 @@ export class GraphComponents implements OnInit, OnChanges {
 
   }
 
+  // add icon to the node. In yfiles it is considered as label
   private styleIconLabel(nodesSource: NodesSource<any>) {
     const labelCreator = this.createLabel(nodesSource);
-    labelCreator.defaults.layoutParameter = this.labelPlacement(InteriorLabelModel.SOUTH);
+    labelCreator.defaults.layoutParameter = this.labelPlacement(ExteriorLabelModel.SOUTH);
     const iconCreator = nodesSource.nodeCreator.createLabelBinding();
     // null check
     iconCreator.textProvider = node => (node.imageUrl != null ? '' : null)
@@ -180,10 +203,8 @@ export class GraphComponents implements OnInit, OnChanges {
   }
 
   private buildGraph(graphComponent: GraphComponent, builder: GraphBuilder) {
+    // assign graph builder nodes and edges to graph component  and run the graph
     graphComponent.graph = builder.buildGraph();
-    graphComponent.fitContent();
-    graphComponent.fitGraphBounds();
-
   }
 
   zoomOnCtrlClick(graphComponent: GraphComponent) {
@@ -234,19 +255,22 @@ export class GraphComponents implements OnInit, OnChanges {
 
 
   private buildLayout(graphComponent: GraphComponent, layoutType: string) {
+    // set layout
     const layout = this.prepareLayout(layoutType);
-    // const layout = new OrganicLayout({minimumNodeDistance: 70, nodeEdgeOverlapAvoided: true});
-    // const layout = new CircularLayout({});
 
+    // get an executor for executing layout
     const layoutExecutor = this.getLayoutExecutor({
       graphComponent: graphComponent,
       layout: layout,
       duration: '0.5s',
     })
+
+    // start executing the layout
     layoutExecutor.start().then();
   }
 
   private initializeOverviewComponent(graphComponent: GraphComponent) {
+    // reinitialize overview component to the update the view with new graph
     if (this.overviewComponent?.div?.id === 'overview') {
       this.overviewComponent.cleanUp();
       this.overviewComponent = new GraphOverviewComponent('#overview', graphComponent);
@@ -259,6 +283,7 @@ export class GraphComponents implements OnInit, OnChanges {
   }
 
   toggle() {
+    // toggle overview
     this.visible = !this.visible;
   }
 
@@ -330,6 +355,7 @@ export class GraphComponents implements OnInit, OnChanges {
     return graphComponent.graph.nodes.find(n => n.tag.label === label);
   }
 
+  // toolbar functionality
   zooIn() {
     const zoomFactor = 2;
     this.graphComponent.zoomTo(this.graphComponent.center, this.graphComponent.zoom * zoomFactor);
@@ -344,6 +370,7 @@ export class GraphComponents implements OnInit, OnChanges {
     this.graphComponent.zoomTo(this.graphComponent.contentRect);
   }
 
+  // toolbar event handling
   clickEvent(tool: { icon: string; toolName: string }) {
     if (this.graphComponent) {
       switch (tool.toolName) {

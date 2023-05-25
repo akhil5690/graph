@@ -26,12 +26,11 @@ export class DashboardWidgetComponent implements OnInit {
   private getGraphData() {
     this.graphService.getGraphData({filter: false}).then((data) => {
       this.data = data;
-      this.copyData = data;
+      this.copyData = data;// for creating the filter
     }).catch(e => console.log(e))
   }
 
-  sidebar(details: any) {
-    console.log(details);
+  sendGraphItem(details: any) {
     this.details = details;
   }
 
@@ -49,7 +48,7 @@ export class DashboardWidgetComponent implements OnInit {
   }
 
   refreshGraph(params: any) {
-    console.log(params);
+    // on filtering get new graph data
     this.data = null;
     this.graphService.getGraphData(params).then((data) => {
       this.data = data;
@@ -58,6 +57,7 @@ export class DashboardWidgetComponent implements OnInit {
   }
 
   sendLayout(layout:any) {
+    // on selecting dropdown send layout that you selected to graph component
     this.layout = layout
   }
 }

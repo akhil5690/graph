@@ -13,15 +13,16 @@
 
 <!-- sidebar panel -->
   <div class="details-panel" *ngIf="openPopUp">
+<!--   opens on click of nodes or edges for the details-->
     <div *ngIf="nodeData && tab === 'details'">
       <div class="subtitle">Details</div>
       <app-table [data]="nodeData"></app-table>
     </div>
-
+<!--   opens on click of filter  from tab -->
     <div *ngIf="tab === 'filter'">
       <div class="subtitle">Filter</div>
       <p>Property</p>
-      <p-autoComplete [(ngModel)]="selectedProp" [suggestions]="suggestedList" (ngModelChange)="getProps(selectedProp)"
+      <p-autoComplete [(ngModel)]="selectedProp" [suggestions]="suggestedList" (ngModelChange)="getValue(selectedProp)"
                       (completeMethod)="search($event,this.properties)" field="name" [dropdown]="true" >
         <ng-template let-options pTemplate="item">
           <div class="country-item">
