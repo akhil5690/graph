@@ -43,7 +43,7 @@ export class GraphComponents implements OnInit, OnChanges {
   // data = data;
   visible = true;
   // data: any;
-  graphComponent: any;
+  graphComponent!: GraphComponent;
   selectedItem!: IEdge | INode | null;
   @Input() data: any;
   @Output() sidebarDetails = new EventEmitter();

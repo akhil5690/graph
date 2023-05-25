@@ -29,7 +29,7 @@
         </ng-template>
       </p-autoComplete>
 
-      <p-autoComplete [(ngModel)]="selectedVal" [suggestions]="suggestedList"
+      <p-autoComplete [(ngModel)]="selectedVal" [suggestions]="suggestedList" (ngModelChange)="getGraph()"
                       (completeMethod)="search($event,this.values)" field="name" [dropdown]="true">
         <ng-template let-options pTemplate="item">
           <div class="country-item">

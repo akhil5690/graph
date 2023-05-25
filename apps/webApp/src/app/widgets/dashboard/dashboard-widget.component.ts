@@ -22,7 +22,7 @@ export class DashboardWidgetComponent implements OnInit {
   }
 
   private getGraphData() {
-    this.graphService.getGraphData().then((data) => {
+    this.graphService.getGraphData({filter:false}).then((data) => {
       this.data = data;
     }).catch(e => console.log(e))
   }
@@ -43,5 +43,14 @@ export class DashboardWidgetComponent implements OnInit {
     }).catch(e => {
       console.log(e)
     })
+  }
+
+  refreshGraph(params: any) {
+    console.log(params);
+    this.data = null;
+    this.graphService.getGraphData(params).then((data) => {
+      this.data = data;
+      console.log(this.data)
+    }).catch(e => console.log(e))
   }
 }

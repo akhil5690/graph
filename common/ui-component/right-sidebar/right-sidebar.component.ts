@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {data} from "../graph/data";
+import {GraphService} from "../../ui-services/graph/graph.service";
 
 @Component({
   selector: 'app-right-sidebar',
@@ -17,12 +18,16 @@ export class RightSidebarComponent implements OnChanges, OnInit {
   // data = data;
   @Input() filterOptions: any;
   @Output() isRightSidebarOpen = new EventEmitter();
+  @Output() filterGraph = new EventEmitter();
   tab = 'details';
   properties: any;
   values: any;
   selectedProp: any;
   selectedVal: any;
   suggestedList: any;
+
+  constructor(private graphservice:GraphService) {
+  }
 
   ngOnChanges(): void {
     this.selectedGraphItem()
@@ -32,6 +37,7 @@ export class RightSidebarComponent implements OnChanges, OnInit {
     this.properties = [
       {name: 'Account Id', code: 'AccountId'},
       {name: 'Label', code: 'label'},
+      {name: 'Resource Type', code: 'resourceType'},
       {name: 'Tag', code: 'tags'},
     ];
   }
@@ -81,5 +87,15 @@ export class RightSidebarComponent implements OnChanges, OnInit {
       }
     }
     this.suggestedList = filtered;
+  }
+
+  getGraph() {
+    const params = {
+      filter:true,
+      property:this.selectedProp.code,
+      value:this.selectedVal.name
+    }
+
+    this.filterGraph.emit(params)
   }
 }

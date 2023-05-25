@@ -4,6 +4,7 @@
     <app-graph [data]="data" (sidebarDetails)="sidebar($event)"></app-graph>
   </div>
   <div sidebar>
-    <app-right-sidebar [data]="data" [details]="details" [filterOptions]='filterOptions' (isRightSidebarOpen)="getFrameType($event)"></app-right-sidebar>
+    <app-right-sidebar [data]="data" [details]="details" [filterOptions]='filterOptions'
+                       (filterGraph)="refreshGraph($event)" (isRightSidebarOpen)="getFrameType($event)"></app-right-sidebar>
   </div>
 </app-widget-frame>
