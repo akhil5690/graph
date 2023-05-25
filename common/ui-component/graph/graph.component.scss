@@ -1,13 +1,13 @@
 app-graph {
-  .graph{
-    position:relative;
+  .graph {
+    position: relative;
 
   }
 
-  #graphComponent{
+  #graphComponent {
     position: relative;
     background-color: var(--primary-background-color);
-    height: var(--main-no-footer);
+    height: calc(var(--main-no-footer) - var(--graph-top-toolbar-height));
   }
 
   .overview {
@@ -28,6 +28,7 @@ app-graph {
     padding: 1rem;
     color: var(--primary-color-text);
   }
+
   .hide {
     display: none;
   }
@@ -40,7 +41,7 @@ app-graph {
     position: relative;
     top: 0;
     bottom: 0;
-    height: calc(var(--unit) * 3);
+    height: var(--graph-top-toolbar-height);
     width: 100%;
     background-color: var(--third-background-color);
     display: inline-flex;

@@ -9,7 +9,7 @@
   <div class="graph" id="graphComponent">
   </div>
   <div class="overview">
-      <div class="container" [ngClass]="!visible?'hide':''">
+      <div class="container" [ngClass]="!visible || !graphComponent?'hide':''">
         <div class="header">Overview</div>
         <div>
           <div id="overview"></div>

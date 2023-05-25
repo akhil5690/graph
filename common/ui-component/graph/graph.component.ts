@@ -63,6 +63,7 @@ export class GraphComponents implements OnInit, OnChanges {
     icon: 'assets/image/fit.svg'
   },
   ]
+  overviewComponent!: GraphOverviewComponent;
 
   constructor(private graphService: GraphService) {
   }
@@ -81,8 +82,13 @@ export class GraphComponents implements OnInit, OnChanges {
   private createGraph() {
     License.value = licenseValue;
     const builder = new GraphBuilder();
-    this.graphComponent = new GraphComponent("#graphComponent");
-
+    if (this.graphComponent?.div?.id === 'graphComponent') {
+      this.graphComponent.cleanUp();
+      this.graphComponent = new GraphComponent("#graphComponent");
+    }
+    else{
+      this.graphComponent = new GraphComponent("#graphComponent");
+    }
     this.initializeNodeAndEdges(builder);
 
     this.buildGraph(this.graphComponent, builder);
@@ -236,10 +242,17 @@ export class GraphComponents implements OnInit, OnChanges {
   }
 
   private initializeOverviewComponent(graphComponent: GraphComponent) {
-    const overviewComponent = new GraphOverviewComponent('#overview', graphComponent);
-    overviewComponent.autoDrag = true;
-    overviewComponent.contentRect = new Rect(0, 0, 2000, 2000);
-    overviewComponent.fitContent();
+    if (this.overviewComponent?.div?.id === 'overview')
+    {
+      this.overviewComponent.cleanUp();
+      this.overviewComponent = new GraphOverviewComponent('#overview', graphComponent);
+    }
+    else{
+      this.overviewComponent = new GraphOverviewComponent('#overview', graphComponent);
+    }
+    this.overviewComponent.autoDrag = true;
+    this.overviewComponent.contentRect = new Rect(0, 0, 2000, 2000);
+    this.overviewComponent.fitContent();
   }
 
   toggle() {
