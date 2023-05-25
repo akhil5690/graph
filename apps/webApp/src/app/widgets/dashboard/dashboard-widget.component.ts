@@ -12,6 +12,8 @@ export class DashboardWidgetComponent implements OnInit {
   frameType!: string;
   data: any;
   filterOptions: any;
+  copyData: any;
+  layout: any;
 
   constructor(private cdr: ChangeDetectorRef, private graphService: GraphService) {
   }
@@ -22,8 +24,9 @@ export class DashboardWidgetComponent implements OnInit {
   }
 
   private getGraphData() {
-    this.graphService.getGraphData({filter:false}).then((data) => {
+    this.graphService.getGraphData({filter: false}).then((data) => {
       this.data = data;
+      this.copyData = data;
     }).catch(e => console.log(e))
   }
 
@@ -52,5 +55,9 @@ export class DashboardWidgetComponent implements OnInit {
       this.data = data;
       console.log(this.data)
     }).catch(e => console.log(e))
+  }
+
+  sendLayout(layout:any) {
+    this.layout = layout
   }
 }

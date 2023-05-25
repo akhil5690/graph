@@ -9,7 +9,7 @@ import {
   GraphComponent,
   GraphEditorInputMode,
   GraphItemTypes,
-  GraphOverviewComponent,
+  GraphOverviewComponent, HierarchicLayout,
   IconLabelStyle,
   IEdge,
   IEdgeStyle,
@@ -22,9 +22,9 @@ import {
   LayoutExecutor,
   License,
   NodesSource,
-  OrganicLayout,
+  OrganicLayout, OrthogonalLayout,
   Point,
-  PolylineEdgeStyle,
+  PolylineEdgeStyle, RadialLayout,
   Rect,
   ShapeNodeStyle,
   Size
@@ -45,7 +45,9 @@ export class GraphComponents implements OnInit, OnChanges {
   // data: any;
   graphComponent!: GraphComponent;
   selectedItem!: IEdge | INode | null;
+  filter = false;
   @Input() data: any;
+  @Input() layout: any = 'Organic';
   @Output() sidebarDetails = new EventEmitter();
 
   toolBarItems = [{
@@ -53,15 +55,15 @@ export class GraphComponents implements OnInit, OnChanges {
     icon: 'assets/image/overview.svg'
   },
     {
-    toolName: 'zoomIn',
-    icon: 'assets/image/zoomIn.svg'
-  },{
-    toolName: 'zoomOut',
-    icon: 'assets/image/zoomOut.svg'
-  },{
-    toolName: 'fitContent',
-    icon: 'assets/image/fit.svg'
-  },
+      toolName: 'zoomIn',
+      icon: 'assets/image/zoomIn.svg'
+    }, {
+      toolName: 'zoomOut',
+      icon: 'assets/image/zoomOut.svg'
+    }, {
+      toolName: 'fitContent',
+      icon: 'assets/image/fit.svg'
+    },
   ]
   overviewComponent!: GraphOverviewComponent;
 
@@ -85,8 +87,9 @@ export class GraphComponents implements OnInit, OnChanges {
     if (this.graphComponent?.div?.id === 'graphComponent') {
       this.graphComponent.cleanUp();
       this.graphComponent = new GraphComponent("#graphComponent");
-    }
-    else{
+      this.filter = true;
+    } else {
+      this.filter = false;
       this.graphComponent = new GraphComponent("#graphComponent");
     }
     this.initializeNodeAndEdges(builder);
@@ -99,7 +102,9 @@ export class GraphComponents implements OnInit, OnChanges {
 
     this.styleForFraudData(this.graphComponent);
 
-    this.buildLayout(this.graphComponent);
+    this.layout = this.getLayout(this.filter, this.layout)
+
+    this.buildLayout(this.graphComponent, this.layout);
 
     setTimeout(() => {
       this.fitContent();
@@ -228,9 +233,9 @@ export class GraphComponents implements OnInit, OnChanges {
   }
 
 
-  private buildLayout(graphComponent: GraphComponent) {
-    // const layout = this.prepareLayout();
-    const layout = new OrganicLayout({minimumNodeDistance: 70, nodeEdgeOverlapAvoided: true});
+  private buildLayout(graphComponent: GraphComponent, layoutType: string) {
+    const layout = this.prepareLayout(layoutType);
+    // const layout = new OrganicLayout({minimumNodeDistance: 70, nodeEdgeOverlapAvoided: true});
     // const layout = new CircularLayout({});
 
     const layoutExecutor = this.getLayoutExecutor({
@@ -242,12 +247,10 @@ export class GraphComponents implements OnInit, OnChanges {
   }
 
   private initializeOverviewComponent(graphComponent: GraphComponent) {
-    if (this.overviewComponent?.div?.id === 'overview')
-    {
+    if (this.overviewComponent?.div?.id === 'overview') {
       this.overviewComponent.cleanUp();
       this.overviewComponent = new GraphOverviewComponent('#overview', graphComponent);
-    }
-    else{
+    } else {
       this.overviewComponent = new GraphOverviewComponent('#overview', graphComponent);
     }
     this.overviewComponent.autoDrag = true;
@@ -295,8 +298,28 @@ export class GraphComponents implements OnInit, OnChanges {
     return new DefaultLabelStyle(options);
   }
 
-  private prepareLayout(): CircularLayout {
-    return new CircularLayout();
+  private getLayout(filter: boolean, layout: any) {
+    if (filter) {
+      return layout.name;
+    } else {
+      return 'Organic'
+    }
+  }
+
+  private prepareLayout(layout: string): any {
+    switch (layout) {
+      case 'Organic':
+        return new OrganicLayout({minimumNodeDistance: 90, nodeEdgeOverlapAvoided: true});
+      case 'Hierarchy':
+        return new HierarchicLayout();
+      case 'Circular':
+        return new CircularLayout();
+      case 'Radial':
+        return new RadialLayout();
+      case 'Orthogonal':
+        return new OrthogonalLayout();
+    }
+
   }
 
   private getLayoutExecutor(options: any): LayoutExecutor {
@@ -321,7 +344,7 @@ export class GraphComponents implements OnInit, OnChanges {
     this.graphComponent.zoomTo(this.graphComponent.contentRect);
   }
 
-  clickEvent(tool: { icon: string; toolName: string } ) {
+  clickEvent(tool: { icon: string; toolName: string }) {
     if (this.graphComponent) {
       switch (tool.toolName) {
         case 'toggle':
@@ -338,6 +361,7 @@ export class GraphComponents implements OnInit, OnChanges {
       }
     }
   }
+
 }
 
 

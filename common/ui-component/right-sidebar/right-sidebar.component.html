@@ -20,6 +20,7 @@
 
     <div *ngIf="tab === 'filter'">
       <div class="subtitle">Filter</div>
+      <p>Property</p>
       <p-autoComplete [(ngModel)]="selectedProp" [suggestions]="suggestedList" (ngModelChange)="getProps(selectedProp)"
                       (completeMethod)="search($event,this.properties)" field="name" [dropdown]="true" >
         <ng-template let-options pTemplate="item">
@@ -28,7 +29,7 @@
           </div>
         </ng-template>
       </p-autoComplete>
-
+      <p>Value</p>
       <p-autoComplete [(ngModel)]="selectedVal" [suggestions]="suggestedList" (ngModelChange)="getGraph()"
                       (completeMethod)="search($event,this.values)" field="name" [dropdown]="true">
         <ng-template let-options pTemplate="item">
@@ -37,6 +38,7 @@
           </div>
         </ng-template>
       </p-autoComplete>
-    </div>
+      <p>Layout</p>
+      <p-dropdown [options]="layout" [(ngModel)]="selectedLayoutOpt" optionLabel="name" (ngModelChange)="layoutChange(selectedLayoutOpt)"></p-dropdown>    </div>
   </div>
 </div>

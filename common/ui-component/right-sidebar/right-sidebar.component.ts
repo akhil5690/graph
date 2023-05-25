@@ -19,12 +19,15 @@ export class RightSidebarComponent implements OnChanges, OnInit {
   @Input() filterOptions: any;
   @Output() isRightSidebarOpen = new EventEmitter();
   @Output() filterGraph = new EventEmitter();
+  @Output() selectedLayout = new EventEmitter();
   tab = 'details';
   properties: any;
   values: any;
   selectedProp: any;
   selectedVal: any;
   suggestedList: any;
+  layout: any;
+  selectedLayoutOpt: any;
 
   constructor(private graphservice:GraphService) {
   }
@@ -39,6 +42,14 @@ export class RightSidebarComponent implements OnChanges, OnInit {
       {name: 'Label', code: 'label'},
       {name: 'Resource Type', code: 'resourceType'},
       {name: 'Tag', code: 'tags'},
+    ];
+
+    this.layout = [
+      {name: 'Organic', code: 'Organic'},
+      {name: 'Hierarchy', code: 'Hierarchy'},
+      {name: 'Orthogonal', code: 'Orthogonal'},
+      {name: 'Circular', code: 'Circular'},
+      {name: 'Radial', code: 'Radial'},
     ];
   }
 
@@ -97,5 +108,9 @@ export class RightSidebarComponent implements OnChanges, OnInit {
     }
 
     this.filterGraph.emit(params)
+  }
+
+  layoutChange(selectedLayout: any) {
+    this.selectedLayout.emit(selectedLayout)
   }
 }
