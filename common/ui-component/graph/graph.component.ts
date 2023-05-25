@@ -117,7 +117,7 @@ export class GraphComponents implements OnInit, OnChanges {
     const nodesSource = this.getNodes(builder, {
       data: this.data.nodes,
       id: "id",
-      // style: (data:any)=> this.getNodeShape({fill:data.color, shape:'ellipse'})
+      style: (data: any) => this.getNodeShape({fill: data.vertex_color, shape: 'ellipse', stroke: null})
       // labels: ["label"]
     });
 
@@ -300,7 +300,7 @@ export class GraphComponents implements OnInit, OnChanges {
 
   private getLayout(filter: boolean, layout: any) {
     if (filter) {
-      return layout.name;
+      return layout;
     } else {
       return 'Organic'
     }

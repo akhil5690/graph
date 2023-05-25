@@ -111,6 +111,6 @@ export class RightSidebarComponent implements OnChanges, OnInit {
   }
 
   layoutChange(selectedLayout: any) {
-    this.selectedLayout.emit(selectedLayout)
+    this.selectedLayout.emit(selectedLayout.name)
   }
 }
