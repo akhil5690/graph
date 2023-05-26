@@ -9,6 +9,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {GraphService} from "../../../../../../common/ui-services/graph/graph.service";
 import {WidgetFrameModule} from "../../../../../../common/ui-component/frames/widget-frame/widget-frame.module";
 import {RightSidebarModule} from "../../../../../../common/ui-component/right-sidebar/right-sidebar.module";
+import {HttpHandler} from "../../../../../../common/utils/httpHandler";
 
 
 @NgModule({
@@ -23,7 +24,7 @@ import {RightSidebarModule} from "../../../../../../common/ui-component/right-si
         HttpClientModule,
         WidgetFrameModule,
     ],
-  providers:[GraphService],
+  providers:[GraphService,HttpHandler],
   exports: [DashboardWidgetComponent]
 })
 export class DashboardWidgetModule { }
