@@ -11,11 +11,18 @@ phases:
         - echo Installing source NPM dependencies...
         - npm install -g @angular/cli
         - npm install
+        
+  pre_build:
+    commands:
+      - echo Clearing Angular cache...
+      - rm -rf .angular/cache
+      - echo Cleaning build artifacts...
+      - rm -rf dist
 
   build:
     commands:
         - echo Build started 
-        - ng build --verbose # --aot --output-hashing=none
+        - ng build --prod --aot --output-hashing=none # --aot --output-hashing=none
         
   post_build:
     commands:
