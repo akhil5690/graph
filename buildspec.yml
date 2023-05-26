@@ -15,7 +15,7 @@ phases:
   build:
     commands:
         - echo Build started 
-        - ng build --aot # --aot --output-hashing=none
+        - ng build --verbose # --aot --output-hashing=none
         
   post_build:
     commands:
