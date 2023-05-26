@@ -20,6 +20,7 @@ export class RightSidebarComponent implements OnChanges, OnInit {
   @Output() isRightSidebarOpen = new EventEmitter();
   @Output() filterGraph = new EventEmitter();
   @Output() selectedLayout = new EventEmitter();
+  @Output() filterByFinding = new EventEmitter();
   tab = 'details';
   properties: any;
   values: any;
@@ -30,7 +31,7 @@ export class RightSidebarComponent implements OnChanges, OnInit {
   selectedLayoutOpt: any;
   isFindings: any;
 
-  constructor(private graphservice:GraphService) {
+  constructor(private graphservice: GraphService) {
   }
 
   ngOnChanges(): void {
@@ -88,13 +89,13 @@ export class RightSidebarComponent implements OnChanges, OnInit {
     this.values = [];
     this.data?.nodes.forEach((data: any) => {
       // if the filter already exist dont push to dropdown list, this.value
-      if (this.values.findIndex((value:any)=> value.name === data[selectedProp['code']]) === -1 && data[selectedProp['code']]) {
+      if (this.values.findIndex((value: any) => value.name === data[selectedProp['code']]) === -1 && data[selectedProp['code']]) {
         this.values.push({name: data[selectedProp['code']]});
       }
     });
   }
 
-  search(event: { query: any; }, dataArray:any) {
+  search(event: { query: any; }, dataArray: any) {
     // get suggestion for autocomplete
     let filtered: any[] = [];
     let query = event.query;
@@ -109,9 +110,9 @@ export class RightSidebarComponent implements OnChanges, OnInit {
 
   getGraph() {
     const params = {
-      filter:true,
-      property:this.selectedProp.code,
-      value:this.selectedVal.name
+      filter: true,
+      property: this.selectedProp.code,
+      value: this.selectedVal.name
     }
     // send params to dashboard and get new graph on filter
     this.filterGraph.emit(params)
@@ -120,5 +121,19 @@ export class RightSidebarComponent implements OnChanges, OnInit {
   layoutChange(selectedLayout: any) {
     // send the layout which is selected from dropdown
     this.selectedLayout.emit(selectedLayout.name)
+  }
+
+  finding(checked: any) {
+    let params: any;
+    if (checked) {
+      params = {
+        filter: true,
+        property: 'findings',
+        value: 'True'
+      }
+    } else {
+      params = {filter: false}
+    }
+    this.filterByFinding.emit(params);
   }
 }

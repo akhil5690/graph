@@ -60,4 +60,12 @@ export class DashboardWidgetComponent implements OnInit {
     // on selecting dropdown send layout that you selected to graph component
     this.layout = layout
   }
+
+  getFindings(params: any) {
+    this.data = null;
+    this.graphService.getGraphData(params).then((data) => {
+      this.data = data;
+      console.log(this.data)
+    }).catch(e => console.log(e))
+  }
 }
