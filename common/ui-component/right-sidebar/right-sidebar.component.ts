@@ -80,6 +80,7 @@ export class RightSidebarComponent implements OnChanges, OnInit {
         Object.entries(item).map(([label, value]) => ({label, value}))
       );
       this.openPopUp = true;
+      this.tab = 'details'
     }
     this.isRightSidebarOpen.emit(this.openPopUp);
   }
