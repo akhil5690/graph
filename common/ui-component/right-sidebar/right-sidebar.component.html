@@ -40,6 +40,12 @@
         </ng-template>
       </p-autoComplete>
       <p>Layout</p>
-      <p-dropdown [options]="layout" [(ngModel)]="selectedLayoutOpt" optionLabel="name" (ngModelChange)="layoutChange(selectedLayoutOpt)"></p-dropdown>    </div>
+      <p-dropdown [options]="layout" [(ngModel)]="selectedLayoutOpt" optionLabel="name" (ngModelChange)="layoutChange(selectedLayoutOpt)"></p-dropdown>
+      <div>
+        <p-checkbox [(ngModel)]="isFindings" [binary]="true" id="binary"></p-checkbox>
+        <label for="binary">Findings</label>
+      </div>
+    </div>
+
   </div>
 </div>

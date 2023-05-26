@@ -7,6 +7,7 @@ import {DropdownModule} from "primeng/dropdown";
 import {FormsModule} from "@angular/forms";
 import {SignInModule} from "../../../apps/webApp/src/app/widgets/sign-in/sign-in.module";
 import {AutoCompleteModule} from "primeng/autocomplete";
+import {CheckboxModule} from "primeng/checkbox";
 
 @NgModule({
   declarations: [
@@ -16,13 +17,14 @@ import {AutoCompleteModule} from "primeng/autocomplete";
     exports: [
         RightSidebarComponent
     ],
-  imports: [
-    CommonModule,
-    TableModule,
-    DropdownModule,
-    FormsModule,
-    SignInModule,
-    AutoCompleteModule
-  ]
+    imports: [
+        CommonModule,
+        TableModule,
+        DropdownModule,
+        FormsModule,
+        SignInModule,
+        AutoCompleteModule,
+        CheckboxModule
+    ]
 })
 export class RightSidebarModule { }

@@ -28,6 +28,7 @@ export class RightSidebarComponent implements OnChanges, OnInit {
   suggestedList: any;
   layout: any;
   selectedLayoutOpt: any;
+  isFindings: any;
 
   constructor(private graphservice:GraphService) {
   }
