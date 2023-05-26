@@ -173,6 +173,15 @@ export class GraphComponents implements OnInit, OnChanges {
   private styleIconLabel(nodesSource: NodesSource<any>) {
     const labelCreator = this.createLabel(nodesSource);
     labelCreator.defaults.layoutParameter = this.labelPlacement(ExteriorLabelModel.SOUTH);
+    const findingIcon = nodesSource.nodeCreator.createLabelBinding();
+    // null check
+    findingIcon.textProvider = node => (node.findings_icon != null ? '' : null)
+    findingIcon.styleProvider = node =>
+      (new IconLabelStyle({
+        icon: node.findings_icon,
+        iconSize: new Size(5, 5),
+        iconPlacement: ExteriorLabelModel.NORTH_EAST
+      }));
     const iconCreator = nodesSource.nodeCreator.createLabelBinding();
     // null check
     iconCreator.textProvider = node => (node.imageUrl != null ? '' : null)
@@ -181,7 +190,8 @@ export class GraphComponents implements OnInit, OnChanges {
         icon: node.imageUrl,
         iconSize: new Size(20, 20),
         iconPlacement: InteriorLabelModel.CENTER
-      }))
+      }));
+
 
   }
 
