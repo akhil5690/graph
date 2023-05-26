@@ -6,7 +6,7 @@ env:
 phases:
   install:
     commands:
-        - export NODE_OPTIONS=--max-old-space-size=8192
+        - export NODE_OPTIONS=--max-old-space-size=16384
         - n 16.16.0
         - echo Installing source NPM dependencies...
         - npm install -g @angular/cli
