@@ -22,7 +22,7 @@ phases:
   build:
     commands:
         - echo Build started 
-        - ng build --prod --aot --output-hashing=none # --aot --output-hashing=none
+        - ng build #--prod --aot --output-hashing=none # --aot --output-hashing=none
         
   post_build:
     commands:
