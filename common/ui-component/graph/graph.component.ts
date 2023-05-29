@@ -165,7 +165,7 @@ export class GraphComponents implements OnInit, OnChanges {
       stroke: null, fill: null, shape: 'ellipse'
     })
     // set node size
-    nodesSource.nodeCreator.defaults.size = this.getSize(50, 50)
+    nodesSource.nodeCreator.defaults.size = this.getSize(30, 30)
 
   }
 
@@ -173,15 +173,6 @@ export class GraphComponents implements OnInit, OnChanges {
   private styleIconLabel(nodesSource: NodesSource<any>) {
     const labelCreator = this.createLabel(nodesSource);
     labelCreator.defaults.layoutParameter = this.labelPlacement(ExteriorLabelModel.SOUTH);
-    const findingIcon = nodesSource.nodeCreator.createLabelBinding();
-    // null check
-    findingIcon.textProvider = node => (node.findings_icon != null ? '' : null)
-    findingIcon.styleProvider = node =>
-      (new IconLabelStyle({
-        icon: node.findings_icon,
-        iconSize: new Size(5, 5),
-        iconPlacement: ExteriorLabelModel.NORTH_EAST
-      }));
     const iconCreator = nodesSource.nodeCreator.createLabelBinding();
     // null check
     iconCreator.textProvider = node => (node.imageUrl != null ? '' : null)
@@ -191,7 +182,15 @@ export class GraphComponents implements OnInit, OnChanges {
         iconSize: new Size(20, 20),
         iconPlacement: InteriorLabelModel.CENTER
       }));
-
+    const findingIcon = nodesSource.nodeCreator.createLabelBinding();
+    // null check
+    findingIcon.textProvider = node => (node.findings_icon != null ? '' : null)
+    findingIcon.styleProvider = node =>
+      (new IconLabelStyle({
+        icon: node.findings_icon,
+        iconSize: new Size(10, 10),
+      }));
+    findingIcon.defaults.layoutParameter = InteriorLabelModel.NORTH_EAST
 
   }
 
