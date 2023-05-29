@@ -11,7 +11,7 @@ phases:
         - echo Installing source NPM dependencies...
         - npm install -g @angular/cli
         - npm install
-        
+
   pre_build:
     commands:
       - echo Clearing Angular cache...
@@ -21,9 +21,9 @@ phases:
 
   build:
     commands:
-        - echo Build started 
-        - ng build #--prod --aot --output-hashing=none # --aot --output-hashing=none
-        
+        - echo Build started
+        - ng build #--prod --aot --output-hashing=none
+
   post_build:
     commands:
         # Clear S3 bucket
@@ -38,5 +38,4 @@ artifacts:
         - '**/*'
     discard-paths: yes
     base-directory: 'dist/*'
-    
-    
+
