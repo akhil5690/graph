@@ -4,10 +4,10 @@
     <i *ngIf="!openPopUp" (click)="open(true)" class="pi pi-arrow-left"></i>
     <i *ngIf="openPopUp" (click)="open(false)" class="pi pi-arrow-right"></i>
     <div (click)="tabs('details')">
-      <img src="assets/image/information.svg" alt="" height="20" width="20">
+      <img src="assets/image/information.svg" alt="" height="15" width="15">
     </div>
     <div (click)="tabs('filter')">
-      <img src="assets/image/filter.svg" alt="" height="20" width="20">
+      <img src="assets/image/filter.svg" alt="" height="15" width="15">
     </div>
   </div>
 
@@ -15,12 +15,11 @@
   <div class="details-panel" *ngIf="openPopUp">
 <!--   opens on click of nodes or edges for the details-->
     <div *ngIf="nodeData && tab === 'details'">
-      <div class="subtitle">Details</div>
-      <app-table [data]="nodeData"></app-table>
+<!--      <app-table [data]="nodeData"></app-table>-->
+      <app-details [data]="nodeData"></app-details>
     </div>
 <!--   opens on click of filter  from tab -->
     <div *ngIf="tab === 'filter'">
-      <div class="subtitle">Filter</div>
       <p>Property</p>
       <p-autoComplete [(ngModel)]="selectedProp" [suggestions]="suggestedList" (ngModelChange)="getValue(selectedProp)"
                       (completeMethod)="search($event,this.properties)" field="name" [dropdown]="true" >

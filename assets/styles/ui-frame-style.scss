@@ -38,7 +38,7 @@
 
 .header-main-right-sidebar-frame{
   display: grid;
-  grid-template-columns: 70vw 30vw;
+  grid-template-columns: var(--column-graph-frame);
   grid-template-rows: var(--top-toolbar-height) var(--main-no-footer);
   grid-template-areas:
       "header header"
@@ -48,7 +48,7 @@
 
 .header-main-menubar-frame{
   display: grid;
-  grid-template-columns: 96vw 4vw;
+  grid-template-columns: var(--column-menu-frame);
   grid-template-rows: var(--top-toolbar-height) var(--main-no-footer);
   grid-template-areas:
       "header header"

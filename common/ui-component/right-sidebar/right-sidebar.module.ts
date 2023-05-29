@@ -8,12 +8,14 @@ import {FormsModule} from "@angular/forms";
 import {SignInModule} from "../../../apps/webApp/src/app/widgets/sign-in/sign-in.module";
 import {AutoCompleteModule} from "primeng/autocomplete";
 import {CheckboxModule} from "primeng/checkbox";
+import {DetailsComponent} from "../details/details.component";
 
 @NgModule({
-  declarations: [
-    RightSidebarComponent,
-    TableComponent
-  ],
+    declarations: [
+        RightSidebarComponent,
+        TableComponent,
+        DetailsComponent
+    ],
     exports: [
         RightSidebarComponent
     ],
