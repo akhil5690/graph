@@ -8,4 +8,5 @@ import {Component, Input, ViewEncapsulation} from '@angular/core';
 })
 export class DetailsComponent {
   @Input() data: any;
+  headers = ['label','value']
 }

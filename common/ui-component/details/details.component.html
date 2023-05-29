@@ -1,4 +1,5 @@
 <div class="details-container" *ngFor="let item of data">
-  <div class="subtitle label">{{item.label}}</div>
-  <div>{{item.value}}</div>
+  <div *ngFor="let header of headers">
+    <div [ngClass]="header==='label'?'subtitle label':''">{{item[header]}}</div>
+  </div>
 </div>
