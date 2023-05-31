@@ -1,7 +1,8 @@
 <div class="details-container" *ngFor="let item of data">
   <div *ngFor="let header of headers">
-    <div [ngClass]="header==='label'?'subtitle label':''">{{item[header]}}
-      <div *ngIf="severity(item,header)"
+    <div class="subtitle label">{{header}}</div>
+    <div>{{item[header]}}
+      <div *ngIf="isSeverity(header)"
            [ngStyle]="getStyleForSeverity(item,header)" class="indicator"></div>
     </div>
   </div>

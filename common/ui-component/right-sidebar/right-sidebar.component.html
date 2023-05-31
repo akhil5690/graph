@@ -14,8 +14,8 @@
 <!-- sidebar panel -->
   <div class="details-panel" *ngIf="openPopUp">
 <!--   opens on click of nodes or edges for the details-->
-    <div *ngIf="nodeData && tab === 'details'">
-      <app-details [data]="nodeData"></app-details>
+    <div *ngIf="items && tab === 'details'">
+      <app-details [data]="items"></app-details>
     </div>
 <!--   opens on click of filter  from tab -->
     <div *ngIf="tab === 'filter'">

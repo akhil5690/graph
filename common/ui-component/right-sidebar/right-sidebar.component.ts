@@ -76,9 +76,9 @@ export class RightSidebarComponent implements OnChanges, OnInit {
     // get the node or the edge that is clicked
     if (this.details) {
       this.items = [this.details.tag];
-      this.nodeData = this.items.flatMap((item: any) =>
-        Object.entries(item).map(([label, value]) => ({label, value}))
-      );
+      // this.nodeData = this.items.flatMap((item: any) =>
+      //   Object.entries(item).map(([label, value]) => ({label, value}))
+      // );
       this.openPopUp = true;
       this.tab = 'details'
     }

@@ -1,25 +1,29 @@
-import {Component, Input, ViewEncapsulation} from '@angular/core';
+import {Component, Input, OnChanges, ViewEncapsulation} from '@angular/core';
 
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss'],
-  encapsulation:ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None
 })
-export class DetailsComponent {
+export class DetailsComponent implements OnChanges {
   @Input() data: any;
-  headers = ['label','value']
+  headers: any
+  ngOnChanges(): void {
+    console.log(this.data[0])
+    this.headers = Object.keys(this.data[0]);
+  }
 
-  severity(item: any, header: string) {
-    return header === 'value' && item['label']==='severity';
+  isSeverity(header: string) {
+    return header === 'severity';
   }
 
   getStyleForSeverity(item: any, header: string) {
-    if(this.severity(item,header)){
-      switch (item['value']){
-        case 'CRITICAL': return {backgroundColor:'red'};
-      }
+    if (this.isSeverity(header)) {
+      return {backgroundColor: this.data[0].vertex_color};
     }
-    return ;
+    return;
   }
+
+
 }
