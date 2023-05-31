@@ -15,7 +15,6 @@
   <div class="details-panel" *ngIf="openPopUp">
 <!--   opens on click of nodes or edges for the details-->
     <div *ngIf="nodeData && tab === 'details'">
-<!--      <app-table [data]="nodeData"></app-table>-->
       <app-details [data]="nodeData"></app-details>
     </div>
 <!--   opens on click of filter  from tab -->
