@@ -8,10 +8,10 @@
     <div *ngIf="typeOf(item[header])==='object'">
       <div *ngFor="let i of item[header]">
         <div *ngFor="let groups of getHeader(i)">
-          <div class="subtitle label group">{{groups}}</div>
+          <div class="subtitle label group">{{readable(groups)}}</div>
           <div *ngFor="let group of i[groups]">
             <div *ngFor="let groupItem of getHeader(group)" class="table">
-              <div class="capitalize">{{groupItem}}</div>
+              <div class="capitalize">{{readable(groupItem)}}</div>
               <div>{{group[groupItem]}}
                 <div *ngIf="isSeverity(groupItem)"
                      [ngStyle]="getStyleForSeverity(item,groupItem)" class="indicator"></div>

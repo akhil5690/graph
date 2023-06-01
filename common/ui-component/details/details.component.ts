@@ -63,4 +63,8 @@ export class DetailsComponent implements OnChanges,OnInit {
   getHeader(i: any) {
     return Object.keys(i)
   }
+
+  readable(groupItem: string) {
+    return groupItem.replace('_',' ')
+  }
 }
