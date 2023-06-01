@@ -1,9 +1,26 @@
 <div class="details-container" *ngFor="let item of data">
-  <div *ngFor="let header of headers">
-    <div class="subtitle label">{{header}}</div>
-    <div>{{item[header]}}
-      <div *ngIf="isSeverity(header)"
-           [ngStyle]="getStyleForSeverity(item,header)" class="indicator"></div>
+  <div *ngFor="let header of getHeader(item)">
+    <div *ngIf="typeOf(item[header])==='string'" class="details">
+      <div class="subtitle label">{{header}}</div>
+      <div>{{item[header]}}
+      </div>
+    </div>
+    <div *ngIf="typeOf(item[header])==='object'">
+      <div *ngFor="let i of item[header]">
+        <div *ngFor="let groups of getHeader(i)">
+          <div class="subtitle label group">{{groups}}</div>
+          <div *ngFor="let group of i[groups]">
+            <div *ngFor="let groupItem of getHeader(group)" class="table">
+              <div class="capitalize">{{groupItem}}</div>
+              <div>{{group[groupItem]}}
+                <div *ngIf="isSeverity(groupItem)"
+                     [ngStyle]="getStyleForSeverity(item,groupItem)" class="indicator"></div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

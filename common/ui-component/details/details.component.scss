@@ -16,5 +16,26 @@ app-details {
     height: 14px;
     width: 14px;
     border-radius: 100%;
+    float: right;
+  }
+  .group{
+    background-color: var(--third-background-color);
+    padding:calc(var(--unit)/2) ;
+  }
+
+  .table{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow-wrap: anywhere;
+    gap: 1rem;
+    padding: 0.5rem;
+  }
+  .details{
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .capitalize{
+    text-transform: capitalize;
   }
 }
