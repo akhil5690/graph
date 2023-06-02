@@ -112,7 +112,7 @@ export class RightSidebarComponent implements OnChanges, OnInit {
 
   getGraph() {
     const params = {
-      filter: true,
+      filter: false,
       property: this.selectedProp.code,
       value: this.value
     }
