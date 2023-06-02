@@ -125,17 +125,17 @@ export class RightSidebarComponent implements OnChanges, OnInit {
     this.selectedLayout.emit(selectedLayout.name)
   }
 
-  finding(checked: any) {
-    let params: any;
-    if (checked) {
-      params = {
-        filter: true,
-        property: 'findings',
-        value: 'True'
-      }
-    } else {
-      params = {filter: false}
-    }
-    this.filterByFinding.emit(params);
-  }
+  // finding(checked: any) {
+  //   let params: any;
+  //   if (checked) {
+  //     params = {
+  //       filter: true,
+  //       property: 'findings',
+  //       value: 'True'
+  //     }
+  //   } else {
+  //     params = {filter: false}
+  //   }
+  //   this.filterByFinding.emit(params);
+  // }
 }
