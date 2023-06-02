@@ -29,4 +29,9 @@ app-right-sidebar {
   .tab{
     cursor: pointer;
   }
+
+  .grid {
+    display: grid;
+    gap: 1rem;
+  }
 }

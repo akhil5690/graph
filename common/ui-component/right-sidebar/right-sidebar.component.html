@@ -30,20 +30,22 @@
         </ng-template>
       </p-autoComplete>
       <p>Value</p>
-      <p-autoComplete [(ngModel)]="selectedVal" [suggestions]="suggestedList" (ngModelChange)="getGraph()"
-                      (completeMethod)="search($event,this.values)" field="name" [dropdown]="true">
-        <ng-template let-options pTemplate="item">
-          <div class="country-item">
-            <div>{{options.name}}</div>
-          </div>
-        </ng-template>
-      </p-autoComplete>
+
+      <div class="grid">
+        <input type="text" pInputText [(ngModel)]="value" />
+        <ui-button [label]="'Apply'" [class]="'outlined-button'" (click)="getGraph()"></ui-button>
+      </div>
+<!--      <p-autoComplete [(ngModel)]="selectedVal" [suggestions]="suggestedList" (ngModelChange)="getGraph()"-->
+<!--                      (completeMethod)="search($event,this.values)" field="name" [dropdown]="true">-->
+<!--        <ng-template let-options pTemplate="item">-->
+<!--          <div class="country-item">-->
+<!--            <div>{{options.name}}</div>-->
+<!--          </div>-->
+<!--        </ng-template>-->
+<!--      </p-autoComplete>-->
       <p>Layout</p>
       <p-dropdown [options]="layout" [(ngModel)]="selectedLayoutOpt" optionLabel="name" (ngModelChange)="layoutChange(selectedLayoutOpt)"></p-dropdown>
-      <div>
-        <p-checkbox [(ngModel)]="isFindings" [binary]="true" id="binary" (ngModelChange)="finding($event)"></p-checkbox>
-        <label for="binary">Findings</label>
-      </div>
+
     </div>
   </div>
 </div>

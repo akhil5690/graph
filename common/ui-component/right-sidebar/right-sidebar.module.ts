@@ -9,6 +9,7 @@ import {SignInModule} from "../../../apps/webApp/src/app/widgets/sign-in/sign-in
 import {AutoCompleteModule} from "primeng/autocomplete";
 import {CheckboxModule} from "primeng/checkbox";
 import {DetailsComponent} from "../details/details.component";
+import {InputTextModule} from "primeng/inputtext";
 
 @NgModule({
     declarations: [
@@ -26,7 +27,8 @@ import {DetailsComponent} from "../details/details.component";
         FormsModule,
         SignInModule,
         AutoCompleteModule,
-        CheckboxModule
+        CheckboxModule,
+        InputTextModule
     ]
 })
 export class RightSidebarModule { }

@@ -30,6 +30,7 @@ export class RightSidebarComponent implements OnChanges, OnInit {
   layout: any;
   selectedLayoutOpt: any;
   isFindings: any;
+  value: any;
 
   constructor(private graphservice: GraphService) {
   }
@@ -42,7 +43,7 @@ export class RightSidebarComponent implements OnChanges, OnInit {
   ngOnInit() {
     // dropdown properties
     this.properties = [
-      {name: 'Account Id', code: 'AccountId'},
+      {name: 'Account Id', code: '~id'},
       {name: 'Label', code: 'label'},
       {name: 'Resource Type', code: 'resourceType'},
       {name: 'Tag', code: 'tags'},
@@ -113,7 +114,7 @@ export class RightSidebarComponent implements OnChanges, OnInit {
     const params = {
       filter: true,
       property: this.selectedProp.code,
-      value: this.selectedVal.name
+      value: this.value
     }
     // send params to dashboard and get new graph on filter
     this.filterGraph.emit(params)
