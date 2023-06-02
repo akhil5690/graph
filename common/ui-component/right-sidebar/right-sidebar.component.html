@@ -3,10 +3,10 @@
   <div class="menu-panel">
     <i *ngIf="!openPopUp" (click)="open(true)" class="pi pi-arrow-left"></i>
     <i *ngIf="openPopUp" (click)="open(false)" class="pi pi-arrow-right"></i>
-    <div (click)="tabs('details')">
+    <div (click)="tabs('details')" class="tab">
       <img src="assets/image/information.svg" alt="" height="15" width="15">
     </div>
-    <div (click)="tabs('filter')">
+    <div (click)="tabs('filter')" class="tab">
       <img src="assets/image/filter.svg" alt="" height="15" width="15">
     </div>
   </div>

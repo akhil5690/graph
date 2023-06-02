@@ -19,7 +19,6 @@ app-right-sidebar {
     align-items: center;
     border: 2px solid var(--third-background-color);
     border-top: none;
-    cursor: pointer;
   }
 
   .details-panel {
@@ -27,8 +26,7 @@ app-right-sidebar {
     overflow-y: auto;
     overflow-x: hidden;
   }
-
-  //.p-overlay.p-component {
-  //  max-width: 20%;
-  //}
+  .tab{
+    cursor: pointer;
+  }
 }
