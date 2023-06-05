@@ -2,9 +2,9 @@
   <span class="ui-form-labels">{{ propertyMeta?.header }}</span>
   <div class=" p-input-icon-left searchBox" *ngIf="propertyMeta.searchIcon">
     <i class="pi pi-search"></i>
-    <input type="text" class="search-bar" pInputText placeholder="Search"/>
+    <input [type]="propertyMeta.type" class="search-bar" pInputText placeholder="Search"/>
   </div>
   <div *ngIf="!propertyMeta.searchIcon">
-    <input type="text" pInputText placeholder=""/>
+    <input type="text" pInputText [placeholder]="propertyMeta.placeholder"/>
   </div>
 </div>

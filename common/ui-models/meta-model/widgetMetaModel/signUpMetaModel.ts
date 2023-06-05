@@ -8,7 +8,8 @@ export class SignUpMetaModel {
   }
   public static getProperties() {
     return {
-      username:BaseMetaModel.global.username
+      email:BaseMetaModel.global.email,
+      accName:BaseMetaModel.global.accName
     }
   }
 }

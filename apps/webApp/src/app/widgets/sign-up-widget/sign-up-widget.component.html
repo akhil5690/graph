@@ -4,25 +4,8 @@
       <div class="title">Cymonix IQ+</div>
       <div class="subtitle">Sign Up</div>
       <div class="form-container">
-        <div class="three-row-container">
-          <div>
-            <label>Email</label>
-          </div>
-          <div>
-            <input pInputText/>
-          </div>
-        </div>
-        <div class="three-row-container">
-          <div>
-            <label>Account name</label>
-          </div>
-          <div>
-            <input pInputText />
-          </div>
-        </div>
-        <div class="forgot">
-          <a href="/">Forgot Password?</a>
-        </div>
+        <ui-input [propertyMeta]="propertyMeta.email"></ui-input>
+        <ui-input [propertyMeta]="propertyMeta.accName"></ui-input>
         <div>
           <ui-button [label]="'Verify Email Address'" [class]="'solid-button'"></ui-button>
         </div>
@@ -30,7 +13,7 @@
           <small>Already have an acoount?</small>
         </p-divider>
         <div>
-          <ui-button [label]="'Create an account'" [class]="'outlined-button'" ></ui-button>
+          <ui-button [label]="'Sign In'" [class]="'outlined-button'" ></ui-button>
         </div>
       </div>
     </div>
