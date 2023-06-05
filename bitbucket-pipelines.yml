@@ -1,0 +1,14 @@
+image: python:3.8.10
+pipelines:
+    branches:
+        cym-ui:
+            - step:
+                  deployment: IQ-D1
+                  script:
+                      - apt-get update
+                      - apt-get install -y zip
+                      - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+                      - unzip awscliv2.zip
+                      - ./aws/install
+                      - zip -r angular.zip .
+                      - aws s3 --region $AWS_DEFAULT_REGION cp angular.zip s3://$AWS_Bucket
