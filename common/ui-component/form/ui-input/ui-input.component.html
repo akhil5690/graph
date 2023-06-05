@@ -1,7 +1,12 @@
-<div class=" p-input-icon-left searchBox">
-  <i class="pi pi-search"></i>
-  <input type="text" class="search-bar" pInputText placeholder="Search"/>
-</div>
-<div>
-  <input type="text" pInputText placeholder=""/>
+
+<div class="three-row-container">
+  <div>{{ propertyMeta.header }}</div>
+  <span class="ui-form-labels">{{ propertyMeta?.header }}</span>
+  <div class=" p-input-icon-left searchBox" *ngIf="propertyMeta.searchIcon">
+    <i class="pi pi-search"></i>
+    <input type="text" class="search-bar" pInputText placeholder="Search"/>
+  </div>
+  <div *ngIf="!propertyMeta.searchIcon">
+    <input type="text" pInputText placeholder=""/>
+  </div>
 </div>

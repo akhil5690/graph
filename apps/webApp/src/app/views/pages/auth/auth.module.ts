@@ -5,6 +5,7 @@ import {AuthComponent} from "./auth.component";
 import {SignInComponent} from "./sign-in/sign-in.component";
 import { SignUpComponent } from './sign-up/sign-up.component';
 import {SignUpWidgetComponent} from "../../../widgets/sign-up-widget/sign-up-widget.component";
+import {UiInputModule} from "../../../../../../../common/ui-component/form/ui-input/ui-input.module";
 
 const routes: Routes = [
   {
@@ -35,10 +36,11 @@ const routes: Routes = [
     SignUpComponent,
     SignUpWidgetComponent
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-  ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        UiInputModule,
+    ],
   exports: []
 })
 export class AuthModule {

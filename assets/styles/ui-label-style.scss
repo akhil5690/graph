@@ -1,0 +1,8 @@
+.zui-base-label-style {
+  @extend .zui-base-style;
+}
+
+// labels for forms
+.zui-form-labels {
+  @extend .zui-base-label-style;
+}

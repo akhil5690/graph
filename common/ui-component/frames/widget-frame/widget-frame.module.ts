@@ -11,11 +11,9 @@ import {InputTextModule} from "primeng/inputtext";
 @NgModule({
     declarations: [
         WidgetFrameComponent,
-        UiInputComponent
     ],
     exports: [
         WidgetFrameComponent,
-        UiInputComponent
     ],
     imports: [
         CommonModule,
