@@ -6,6 +6,10 @@ import {SignInComponent} from "./sign-in/sign-in.component";
 import { SignUpComponent } from './sign-up/sign-up.component';
 import {SignUpWidgetComponent} from "../../../widgets/sign-up-widget/sign-up-widget.component";
 import {UiInputModule} from "../../../../../../../common/ui-component/form/ui-input/ui-input.module";
+import {SignInModule} from "../../../widgets/sign-in/sign-in.module";
+import {DividerModule} from "primeng/divider";
+import {InputTextModule} from "primeng/inputtext";
+import {WidgetFrameModule} from "../../../../../../../common/ui-component/frames/widget-frame/widget-frame.module";
 
 const routes: Routes = [
   {
@@ -36,11 +40,15 @@ const routes: Routes = [
     SignUpComponent,
     SignUpWidgetComponent
   ],
-    imports: [
-        CommonModule,
-        RouterModule.forChild(routes),
-        UiInputModule,
-    ],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    UiInputModule,
+    SignInModule,
+    DividerModule,
+    InputTextModule,
+    WidgetFrameModule,
+  ],
   exports: []
 })
 export class AuthModule {

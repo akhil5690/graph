@@ -1,0 +1,28 @@
+app-sign-up-widget {
+  .signIn-container {
+    display: grid;
+    width: 25rem;
+  }
+
+  .main-container {
+    display: grid;
+    justify-items: center;
+    justify-content: center;
+  }
+
+  .form-container {
+    display: grid;
+    grid-gap: var(--unit);
+  }
+
+  .termsAndCondition {
+    text-align: center;
+  }
+
+  .forgot {
+    text-align: end;
+  }
+  .subtitle,.title{
+    text-align: center;
+  }
+}

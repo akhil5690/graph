@@ -1,9 +1,7 @@
-app-sign-in {
+app-sign-in{
   .signIn-container {
-    display:grid;
-    justify-items: center;
-    justify-content: center;
-    width: 75%;
+    display: grid;
+    width: 25rem;
   }
   .main-container{
     display:grid;
@@ -15,12 +13,11 @@ app-sign-in {
     grid-gap: var(--unit);
   }
 
-  .termsAndCondition {
-    text-align: center;
-  }
-
   .forgot {
     text-align:end;
+  }
+  .subtitle,.title{
+    text-align: center;
   }
 
 }
