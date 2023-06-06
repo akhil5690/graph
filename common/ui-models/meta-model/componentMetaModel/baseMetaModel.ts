@@ -32,4 +32,19 @@ export class BaseMetaModel {
       false
     )
   }
+
+  get password() {
+    return new StringComponent(
+      new CommonMetaModel(
+        '',
+        'Password',
+        true,
+        'password',
+        true,
+        '',
+        false,
+      ),
+      false
+    )
+  }
 }
