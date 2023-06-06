@@ -1,5 +1,8 @@
 <div class="three-row-container">
-  <span class="ui-form-labels">{{ propertyMeta?.header }}</span>
+  <span class="ui-form-labels">
+    {{ propertyMeta?.header }}
+    <span *ngIf="propertyMeta.required" [ngClass]="propertyMeta.required?'showAstrix':''">*</span>
+  </span>
   <div class=" p-input-icon-left searchBox" *ngIf="propertyMeta.searchIcon">
     <i class="pi pi-search"></i>
     <input [type]="propertyMeta.type" class="search-bar" pInputText placeholder="Search"/>

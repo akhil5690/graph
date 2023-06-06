@@ -2,6 +2,7 @@ app-sign-up-widget {
   .signIn-container {
     display: grid;
     width: 25rem;
+    gap: 1rem;
   }
 
   .main-container {
@@ -22,7 +23,8 @@ app-sign-up-widget {
   .forgot {
     text-align: end;
   }
-  .subtitle,.title{
+
+  .subtitle, .title {
     text-align: center;
   }
 }
