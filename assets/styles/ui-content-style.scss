@@ -4,10 +4,12 @@
   color: var(--primary-color);
   font-weight: var(--font-weight-bold);
   border: none;
+  font-family:var(--font-family-bold);
 }
 .subtitle{
   @extend .ui-base-style;
   font-size: calc(var(--unit) * 1.5);
   font-weight: var(--font-weight-bold);
+  font-family:var(--font-family-bold);
   border: none;
 }
