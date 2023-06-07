@@ -13,6 +13,8 @@ import {WidgetFrameModule} from "../../../../../../../common/ui-component/frames
 import {UiTooltipModule} from "../../../../../../../common/ui-component/form/ui-tooltip/ui-tooltip.module";
 import {NgOtpInputModule} from "ng-otp-input";
 import {UiOtpModule} from "../../../../../../../common/ui-component/form/ui-otp/ui-otp.module";
+import {CheckboxModule} from "primeng/checkbox";
+import {UiCheckboxModule} from "../../../../../../../common/ui-component/form/ui-checkbox/ui-checkbox.module";
 
 const routes: Routes = [
   {
@@ -43,18 +45,20 @@ const routes: Routes = [
     SignUpComponent,
     SignUpWidgetComponent
   ],
-    imports: [
-        CommonModule,
-        RouterModule.forChild(routes),
-        UiInputModule,
-        SignInModule,
-        DividerModule,
-        InputTextModule,
-        WidgetFrameModule,
-        UiTooltipModule,
-        NgOtpInputModule,
-        UiOtpModule,
-    ],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    UiInputModule,
+    SignInModule,
+    DividerModule,
+    InputTextModule,
+    WidgetFrameModule,
+    UiTooltipModule,
+    NgOtpInputModule,
+    UiOtpModule,
+    CheckboxModule,
+    UiCheckboxModule,
+  ],
   exports: []
 })
 export class AuthModule {
