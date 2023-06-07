@@ -62,6 +62,7 @@ export class StringComponent extends CommonMetaModel{
       zuiCommonPropertyMeta.required,
       zuiCommonPropertyMeta.placeholder,
       zuiCommonPropertyMeta.readOnly,
+      zuiCommonPropertyMeta.toolTip,
       zuiCommonPropertyMeta.showBorders,
       zuiCommonPropertyMeta.minLength,
       zuiCommonPropertyMeta.maxLength,

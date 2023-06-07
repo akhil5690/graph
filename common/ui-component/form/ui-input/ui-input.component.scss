@@ -14,4 +14,7 @@ input.p-inputtext.p-component.p-element.search-bar {
 .searchBox {
   width: var(--base-width);
 }
-
+span.ui-form-labels {
+  display: flex;
+  gap: 0.5rem;
+}

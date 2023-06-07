@@ -42,6 +42,7 @@ export class CommonMetaModel {
     required: boolean = false,
     placeholder: string = 'place holder',
     readOnly: boolean = false,
+    toolTip = '',
     showBorders: boolean = true,
     minLength: number = 0,
     maxLength: number = 50,
@@ -62,12 +63,11 @@ export class CommonMetaModel {
     updateOn = 'change',
     addSplSymbol = '',
     showAstrixNoValidation = false,
-    addSuffix:string = '',
+    addSuffix: string = '',
     mobileReadOnlyLabel = '',
     overrideMinMaxDate = false,
     // nextelementId = null,
     // currentElementId = null,
-    toolTip = ''
   ) {
     this.field = field;
     this.header = header;

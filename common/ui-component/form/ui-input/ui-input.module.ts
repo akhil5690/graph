@@ -4,6 +4,7 @@ import {UiInputComponent} from "./ui-input.component";
 import {InputTextModule} from "primeng/inputtext";
 import {FormsModule} from "@angular/forms";
 import {RequiredComponent} from "../ui-required/required.component";
+import {UiTooltipModule} from "../ui-tooltip/ui-tooltip.module";
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import {RequiredComponent} from "../ui-required/required.component";
   imports: [
     CommonModule,
     InputTextModule,
-    FormsModule
+    FormsModule,
+    UiTooltipModule
   ],
   exports: [UiInputComponent]
 })

@@ -10,6 +10,7 @@ import {SignInModule} from "../../../widgets/sign-in/sign-in.module";
 import {DividerModule} from "primeng/divider";
 import {InputTextModule} from "primeng/inputtext";
 import {WidgetFrameModule} from "../../../../../../../common/ui-component/frames/widget-frame/widget-frame.module";
+import {UiTooltipModule} from "../../../../../../../common/ui-component/form/ui-tooltip/ui-tooltip.module";
 
 const routes: Routes = [
   {
@@ -48,6 +49,7 @@ const routes: Routes = [
     DividerModule,
     InputTextModule,
     WidgetFrameModule,
+    UiTooltipModule,
   ],
   exports: []
 })

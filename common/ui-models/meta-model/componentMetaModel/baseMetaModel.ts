@@ -14,6 +14,7 @@ export class BaseMetaModel {
         true,
         '',
         false,
+        ''
       ),
       false
     )
@@ -28,6 +29,7 @@ export class BaseMetaModel {
         true,
         '',
         false,
+        ''
       ),
       false
     )
