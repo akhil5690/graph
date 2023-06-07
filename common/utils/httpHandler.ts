@@ -9,7 +9,7 @@ export class HttpHandler {
   }
   getData(apiUrl:string,params?:HttpParams){
     return new Promise((resolve)=>{
-      this.http.get('https://2m2ujd9wg3.execute-api.us-west-2.amazonaws.com/dev/', {params: params}).subscribe((data) => {
+      this.http.get(apiUrl, {params: params}).subscribe((data) => {
         resolve(data);
       })
     })

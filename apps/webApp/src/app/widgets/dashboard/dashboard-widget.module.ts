@@ -10,6 +10,7 @@ import {GraphService} from "../../../../../../common/ui-services/graph/graph.ser
 import {WidgetFrameModule} from "../../../../../../common/ui-component/frames/widget-frame/widget-frame.module";
 import {RightSidebarModule} from "../../../../../../common/ui-component/right-sidebar/right-sidebar.module";
 import {HttpHandler} from "../../../../../../common/utils/httpHandler";
+import {TabViewModule} from "primeng/tabview";
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import {HttpHandler} from "../../../../../../common/utils/httpHandler";
         RightSidebarModule,
         HttpClientModule,
         WidgetFrameModule,
+        TabViewModule,
     ],
   providers:[GraphService,HttpHandler],
   exports: [DashboardWidgetComponent]

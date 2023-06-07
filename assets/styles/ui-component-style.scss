@@ -62,10 +62,10 @@ yfiles-canvascomponent .yfiles-scrollbar.yfiles-scrollbar-horizontal,
 }
 
 .yfiles-scrollbar-slider {
-   border: 0;
-   background: var(--third-background-color);
-   border-radius: 20px;
- }
+  border: 0;
+  background: var(--third-background-color);
+  border-radius: 20px;
+}
 
 .class_otp {
   height: 3.5rem !important;
@@ -74,3 +74,11 @@ yfiles-canvascomponent .yfiles-scrollbar.yfiles-scrollbar-horizontal,
 
 }
 
+.p-tabview .p-tabview-panels {
+  background: #ffffff;
+  border: 0 none;
+  padding: 0;
+  color: #495057;
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 6px;
+}

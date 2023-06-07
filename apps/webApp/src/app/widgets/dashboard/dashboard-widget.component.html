@@ -1,6 +1,21 @@
 <app-widget-frame [frame_type]="this.frameType">
   <div main>
-    <app-graph [layout]="layout" [data]="data" (sidebarDetails)="sendGraphItem($event)"></app-graph>
+    <div class="schema-toolbar">
+      <p-tabView styleClass="tabview-custom">
+        <p-tabPanel>
+          <ng-template pTemplate="header">
+            <span>SCHEMA</span>
+          </ng-template>
+          <app-graph [layout]="layout" [data]="data" (sidebarDetails)="sendGraphItem($event)"></app-graph>
+        </p-tabPanel>
+        <p-tabPanel header="Header II">
+          <ng-template pTemplate="header">
+            <span>EXPLORER</span>
+          </ng-template>
+          <app-graph [layout]="layout" [data]="data" (sidebarDetails)="sendGraphItem($event)"></app-graph>
+        </p-tabPanel>
+      </p-tabView>
+    </div>
   </div>
   <div sidebar>
     <app-right-sidebar [data]="copyData" [details]="details" [filterOptions]='filterOptions'
