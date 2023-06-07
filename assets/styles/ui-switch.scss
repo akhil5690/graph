@@ -1,0 +1,16 @@
+
+.p-inputswitch.p-inputswitch-checked .p-inputswitch-slider,
+.p-inputswitch.p-inputswitch-checked:not(.p-disabled):hover .p-inputswitch-slider {
+  background: var(--pink1);
+}
+
+.p-inputswitch.p-focus .p-inputswitch-slider {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: none;
+}
+.p-inputswitch .p-inputswitch-slider,.p-inputswitch:not(.p-disabled):hover .p-inputswitch-slider  {
+  background: var(--pink3);
+  border: 1px solid var(--pink2);
+
+}

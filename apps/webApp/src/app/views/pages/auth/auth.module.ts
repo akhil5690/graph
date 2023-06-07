@@ -15,6 +15,10 @@ import {NgOtpInputModule} from "ng-otp-input";
 import {UiOtpModule} from "../../../../../../../common/ui-component/form/ui-otp/ui-otp.module";
 import {CheckboxModule} from "primeng/checkbox";
 import {UiCheckboxModule} from "../../../../../../../common/ui-component/form/ui-checkbox/ui-checkbox.module";
+import {InputSwitchModule} from "primeng/inputswitch";
+import {
+  UiInputSwitchModule
+} from "../../../../../../../common/ui-component/form/ui-input-switch/ui-input-switch.module";
 
 const routes: Routes = [
   {
@@ -58,6 +62,8 @@ const routes: Routes = [
     UiOtpModule,
     CheckboxModule,
     UiCheckboxModule,
+    InputSwitchModule,
+    UiInputSwitchModule,
   ],
   exports: []
 })
