@@ -17,4 +17,5 @@ export class SignUpWidgetComponent implements OnInit{
   ngOnInit(): void {
     this.propertyMeta = SignUpMetaModel.getMetaModel().properties;
   }
+
 }

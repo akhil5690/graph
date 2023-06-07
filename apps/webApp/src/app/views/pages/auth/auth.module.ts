@@ -11,6 +11,8 @@ import {DividerModule} from "primeng/divider";
 import {InputTextModule} from "primeng/inputtext";
 import {WidgetFrameModule} from "../../../../../../../common/ui-component/frames/widget-frame/widget-frame.module";
 import {UiTooltipModule} from "../../../../../../../common/ui-component/form/ui-tooltip/ui-tooltip.module";
+import {NgOtpInputModule} from "ng-otp-input";
+import {UiOtpModule} from "../../../../../../../common/ui-component/form/ui-otp/ui-otp.module";
 
 const routes: Routes = [
   {
@@ -41,16 +43,18 @@ const routes: Routes = [
     SignUpComponent,
     SignUpWidgetComponent
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    UiInputModule,
-    SignInModule,
-    DividerModule,
-    InputTextModule,
-    WidgetFrameModule,
-    UiTooltipModule,
-  ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        UiInputModule,
+        SignInModule,
+        DividerModule,
+        InputTextModule,
+        WidgetFrameModule,
+        UiTooltipModule,
+        NgOtpInputModule,
+        UiOtpModule,
+    ],
   exports: []
 })
 export class AuthModule {

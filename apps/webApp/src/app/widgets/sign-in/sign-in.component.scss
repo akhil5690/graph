@@ -1,22 +1,26 @@
-app-sign-in{
+app-sign-in {
   .signIn-container {
     display: grid;
     width: 25rem;
+    gap: 1rem;
   }
-  .main-container{
-    display:grid;
+
+  .main-container {
+    display: grid;
     justify-items: center;
     justify-content: center;
   }
-  .form-container{
+
+  .form-container {
     display: grid;
     grid-gap: var(--unit);
   }
 
   .forgot {
-    text-align:end;
+    text-align: end;
   }
-  .subtitle,.title{
+
+  .subtitle, .title {
     text-align: center;
   }
 
