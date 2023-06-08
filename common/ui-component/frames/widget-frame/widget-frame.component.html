@@ -1,9 +1,9 @@
 <section [class]="getClass(frame_type)">
   <header class="header">
 <!--      theme changer  -->
-<!--        <div class="toggle">-->
-<!--          <p-toggleButton [(ngModel)]="checked" onLabel="Dark" offLabel="Light" (click)="toggleTheme()"></p-toggleButton>-->
-<!--        </div>-->
+        <div class="toggle">
+          <p-toggleButton [(ngModel)]="checked" onLabel="Dark" offLabel="Light" (click)="toggleTheme()"></p-toggleButton>
+        </div>
 
     <ng-content select="[header]"></ng-content>
   </header>

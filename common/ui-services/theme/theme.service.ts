@@ -9,6 +9,6 @@ export class ThemeService {
   }
 
   setTheme(variable: any, color: any) {
-    document.documentElement.style.setProperty(`--${variable}`,color)
+    document.documentElement.style.setProperty(`${variable}`,color)
   }
 }
