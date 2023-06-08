@@ -3,7 +3,7 @@ import {
   Arrow,
   ArrowType,
   CircularLayout,
-  DefaultLabelStyle,
+  DefaultLabelStyle, EdgePathLabelModel,
   EdgesSource, ExteriorLabelModel,
   GraphBuilder,
   GraphComponent,
@@ -162,7 +162,7 @@ export class GraphComponents implements OnInit, OnChanges {
   private styleNode(nodesSource: NodesSource<any>) {
     // default will affect throughout the graph
     nodesSource.nodeCreator.defaults.style = this.getNodeShape({
-      stroke: null, fill: null, shape: 'ellipse'
+      stroke: null, fill: 'grey', shape: 'ellipse'
     })
     // set node size
     nodesSource.nodeCreator.defaults.size = this.getSize(30, 30)
@@ -208,7 +208,9 @@ export class GraphComponents implements OnInit, OnChanges {
       backgroundFill: 'white',
       textSize: 10
     })
+    const labelModel = new EdgePathLabelModel({ distance: 10 });
 
+    edgesSource.edgeCreator.defaults.labels.layoutParameter = labelModel.createDefaultParameter();
   }
 
   private buildGraph(graphComponent: GraphComponent, builder: GraphBuilder) {

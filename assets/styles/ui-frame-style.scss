@@ -49,7 +49,7 @@
 .header-main-menubar-frame{
   display: grid;
   grid-template-columns: var(--column-menu-frame);
-  grid-template-rows: var(--top-toolbar-height) var(--main-no-footer);
+  grid-template-rows: var(--top-toolbar-height);
   grid-template-areas:
       "header header"
       "main sidebar"
