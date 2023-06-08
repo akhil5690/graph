@@ -14,13 +14,14 @@ export class DashboardWidgetComponent implements OnInit {
   filterOptions: any;
   copyData: any;
   layout: any;
+  schema: any;
 
   constructor(private cdr: ChangeDetectorRef, private graphService: GraphService) {
   }
 
   ngOnInit() {
     this.getGraphData();
-    this.getOptions();
+    this.getSchemaData();
   }
 
   private getGraphData() {
@@ -39,14 +40,6 @@ export class DashboardWidgetComponent implements OnInit {
     this.cdr.detectChanges();
   }
 
-  private getOptions() {
-    this.graphService.getOption().then((data) => {
-      this.filterOptions = data?.result;
-    }).catch(e => {
-      console.log(e)
-    })
-  }
-
   refreshGraph(params: any) {
     // on filtering get new graph data
     this.data = null;
@@ -63,9 +56,16 @@ export class DashboardWidgetComponent implements OnInit {
 
   getFindings(params: any) {
     this.data = null;
-    this.graphService.getGraphData(params).then((data) => {
+    this.graphService.getGraphData(params).then((data: any) => {
       this.data = data;
       console.log(this.data)
+    }).catch(e => console.log(e))
+  }
+
+  private getSchemaData() {
+    this.graphService.getSchemaData({filter: false}).then((data) => {
+      this.schema = data;
+      this.copyData = data;// for creating the filter
     }).catch(e => console.log(e))
   }
 }

@@ -8,20 +8,18 @@ export class GraphService {
   constructor(private http: HttpHandler) {
   }
 
-  getGraphData(params:any): Promise<any> {
+  getSchemaData(params:any): Promise<any> {
     return new Promise((resolve, reject) => {
       this.http.getData('https://wkgf09u9ba.execute-api.us-east-1.amazonaws.com/development/').then((data)=>{
         resolve(data)
       })
     })
   }
-
-  getOption():Promise<any>{
-    return  new Promise((resolve)=>{
-      this.http.getData('https://u66v1wvvq9.execute-api.us-west-2.amazonaws.com/dev/').then((data) => {
-        resolve(data);
+  getGraphData(params:any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.getData('https://2m2ujd9wg3.execute-api.us-west-2.amazonaws.com/dev/',params).then((data)=>{
+        resolve(data)
       })
     })
   }
-
 }
