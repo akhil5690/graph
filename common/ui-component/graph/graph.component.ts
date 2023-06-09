@@ -138,7 +138,7 @@ export class GraphComponents implements OnInit, OnChanges {
     const nodesSource = this.getNodes(builder, {
       data: this.data.nodes,
       id: "id",
-      style: (data: any) => this.getNodeShape({fill: data.vertex_color, shape: 'ellipse', stroke: null})
+      // style: (data: any) => this.getNodeShape({fill: data.vertex_color, shape: 'ellipse', stroke: null})
       // labels: ["label"]
     });
 
@@ -161,8 +161,14 @@ export class GraphComponents implements OnInit, OnChanges {
 
   private styleNode(nodesSource: NodesSource<any>) {
     // default will affect throughout the graph
+    // nodesSource.nodeCreator.defaults.style = this.getNodeShape({
+    //   stroke: null, fill: null, shape: 'ellipse'
+    // })
+    // // set node size
+    // nodesSource.nodeCreator.defaults.size = this.getSize(30, 30)
+
     nodesSource.nodeCreator.defaults.style = this.getNodeShape({
-      stroke: null, fill: 'grey', shape: 'ellipse'
+      stroke: 'black', fill: 'lightgrey', shape: 'ellipse'
     })
     // set node size
     nodesSource.nodeCreator.defaults.size = this.getSize(30, 30)
@@ -208,7 +214,9 @@ export class GraphComponents implements OnInit, OnChanges {
       backgroundFill: 'white',
       textSize: 10
     })
-    const labelModel = new EdgePathLabelModel({ distance: 10 });
+
+    // aligning the edge label
+    const labelModel = new EdgePathLabelModel({ distance: 50 });
 
     edgesSource.edgeCreator.defaults.labels.layoutParameter = labelModel.createDefaultParameter();
   }
@@ -222,7 +230,7 @@ export class GraphComponents implements OnInit, OnChanges {
     const containerElement = graphComponent.div;
     containerElement.addEventListener('click', (event: MouseEvent) => {
       // Check if the ctrl key (or cmd key on macOS) is pressed
-      const ctrlKey = event.ctrlKey;
+      const ctrlKey = event.shiftKey;
       if (ctrlKey) {
         // Zoom in on click when ctrl/cmd key is pressed
         const zoomFactor = 2;

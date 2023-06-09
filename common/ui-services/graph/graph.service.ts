@@ -17,7 +17,7 @@ export class GraphService {
   }
   getGraphData(params:any): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.http.getData('https://2m2ujd9wg3.execute-api.us-west-2.amazonaws.com/dev/',params).then((data)=>{
+      this.http.getData('https://0te5h1qtrg.execute-api.us-east-1.amazonaws.com/Stage/dev-query-neptune-data-lambda',params).then((data)=>{
         resolve(data)
       })
     })
