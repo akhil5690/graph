@@ -9,7 +9,7 @@ import {
   GraphComponent,
   GraphEditorInputMode,
   GraphItemTypes,
-  GraphOverviewComponent, HierarchicLayout,
+  GraphOverviewComponent, HierarchicLayout, ICommand,
   IconLabelStyle,
   IEdge,
   IEdgeStyle,
@@ -114,7 +114,7 @@ export class GraphComponents implements OnInit, OnChanges {
 
     // fit the whole graph into the canvas
     setTimeout(() => {
-      this.fitContent();
+      this.graphComponent.zoomTo(this.graphComponent.contentRect);
     }, 50)
 
     // create overview component to view and navigate the graph in graph component
@@ -386,7 +386,7 @@ export class GraphComponents implements OnInit, OnChanges {
   }
 
   fitContent() {
-    this.graphComponent.zoomTo(this.graphComponent.contentRect);
+    ICommand.FIT_GRAPH_BOUNDS.execute(null,this.graphComponent)
   }
 
   // toolbar event handling
