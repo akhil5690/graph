@@ -1,4 +1,14 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewEncapsulation} from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  ViewChild,
+  ViewEncapsulation
+} from '@angular/core';
 import {
   Arrow,
   ArrowType,
@@ -49,6 +59,7 @@ export class GraphComponents implements OnInit, OnChanges {
   @Input() data: any;
   @Input() layout: any = 'Organic';
   @Output() sidebarDetails = new EventEmitter();
+  @ViewChild('graphComponent') containerRef!: ElementRef<HTMLDivElement>;
 
 
   // graph toolbar tools
@@ -122,14 +133,15 @@ export class GraphComponents implements OnInit, OnChanges {
   }
 
   private initializeGraphComponent() {
+    const container = this.containerRef.nativeElement;
     // inorder to update the graph component with another graph, check if the component already exist, if yes: cleanup
-    if (this.graphComponent?.div?.id === 'graphComponent') {
+    if (this.graphComponent) {
       this.graphComponent.cleanUp();
-      this.graphComponent = new GraphComponent("#graphComponent");
+      this.graphComponent = new GraphComponent(container);
       this.filter = true; //if true change the layout from organic to some other layout
     } else {
       this.filter = false;
-      this.graphComponent = new GraphComponent("#graphComponent");
+      this.graphComponent = new GraphComponent(container);
     }
   }
 
