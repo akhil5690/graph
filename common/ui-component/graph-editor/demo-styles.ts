@@ -38,7 +38,7 @@ import {
   GroupNodeStyle,
   HorizontalTextAlignment,
   IGraph,
-  ILabelStyle,
+  ILabelStyle, ImageNodeStyle,
   INode,
   Insets,
   IRenderContext,
@@ -52,8 +52,8 @@ import {
   Theme,
   VerticalTextAlignment
 } from 'yfiles'
-import type { ColorSet as CS, ColorSetName as CSN } from './demo-colors'
-import { colorSets as cs } from './demo-colors'
+import type {ColorSet as CS, ColorSetName as CSN} from './demo-colors'
+import {colorSets as cs} from './demo-colors'
 
 export type ColorSetName = CSN
 export type ColorSet = CS
@@ -96,7 +96,7 @@ export function initDemoStyles(
   } = {}
 ): void {
   if (typeof theme === 'string') {
-    theme = { node: theme, edge: theme, group: theme }
+    theme = {node: theme, edge: theme, group: theme}
   }
 
   theme.node = theme.node || 'demo-orange'
@@ -107,7 +107,7 @@ export function initDemoStyles(
   theme.groupLabel = theme.groupLabel || theme.group
 
   graph.nodeDefaults.style = shape
-    ? createDemoShapeNodeStyle(shape, theme.node)
+    ? createShapeNodeStyle(shape, theme.node)
     : createDemoNodeStyle(theme.node)
   graph.nodeDefaults.labels.style = createDemoNodeLabelStyle(theme.nodeLabel)
 
@@ -119,9 +119,9 @@ export function initDemoStyles(
   graph.groupNodeDefaults.labels.layoutParameter =
     new GroupNodeLabelModel().createTabBackgroundParameter()
 
-  graph.edgeDefaults.style = createDemoEdgeStyle({ colorSetName: theme.edge })
+  graph.edgeDefaults.style = createDemoEdgeStyle({colorSetName: theme.edge})
   graph.decorator.portDecorator.edgePathCropperDecorator.setImplementation(
-    new DefaultEdgePathCropper({ cropAtPort: false, extraCropLength })
+    new DefaultEdgePathCropper({cropAtPort: false, extraCropLength})
   )
   graph.edgeDefaults.labels.style = createDemoEdgeLabelStyle(theme.edgeLabel)
 }
@@ -143,7 +143,25 @@ export function createDemoNodeStyle(
 /**
  * Creates a new node style with the given shape whose colors match the given well-known CSS style.
  */
-export function createDemoShapeNodeStyle(
+export function createShapeNodeStyle(
+  shape: ShapeNodeShape,
+  colorSetName: ColorSetName = 'demo-orange'
+): ShapeNodeStyle {
+  return new ShapeNodeStyle({
+    shape,
+    fill: colorSets[colorSetName].fill,
+    stroke: `1.5px ${colorSets[colorSetName].stroke}`
+  })
+}
+
+export function createIconNode(imageurl: string) {
+  return new ImageNodeStyle({
+    image: imageurl,
+    aspectRatio: 0.5,
+  })
+}
+
+export function createIconShapeNodeStyle(
   shape: ShapeNodeShape,
   colorSetName: ColorSetName = 'demo-orange'
 ): ShapeNodeStyle {
@@ -244,6 +262,7 @@ export function createDemoGroupStyle({
     hitTransparentContentArea: true
   })
 }
+
 /**
  * Applies the default demo theme to the {@link GraphComponent}.
  */

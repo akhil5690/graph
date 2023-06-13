@@ -9,7 +9,7 @@ import {
   GraphEditorInputMode,
   GroupNodeLabelModel,
   GroupNodeStyle,
-  IGraph,
+  IGraph, ImageNodeStyle,
   INode,
   INodeStyle,
   Insets,
@@ -27,8 +27,8 @@ import licenseValue from "../../../license.json";
 import {
   addClass,
   applyDemoTheme,
-  createDemoGroupStyle,
-  createDemoShapeNodeStyle,
+  createDemoGroupStyle, createIconNode,
+  createShapeNodeStyle,
   initDemoStyles,
   removeClass
 } from "./demo-styles";
@@ -67,7 +67,6 @@ export class GraphEditorComponent implements OnInit {
 
     // configure drag and drop
     this.configureDragAndDrop()
-
     // this.graphComponent.graph = builder.buildGraph()
     // bind the buttons to their commands
     // registerCommands()
@@ -87,7 +86,7 @@ export class GraphEditorComponent implements OnInit {
     // When dragging the node within the GraphComponent, we want to show a preview of that node.
     nodeDropInputMode.showPreview = true
 
-    this.initializeDragAndDropPanel()
+    this.initializeDragAndDropPanel();
   }
 
   /**
@@ -99,29 +98,30 @@ export class GraphEditorComponent implements OnInit {
 
     // prepare node styles for the palette
     const defaultNode = this.graphComponent.graph.nodeDefaults.style
-    const ellipse = createDemoShapeNodeStyle(ShapeNodeShape.ELLIPSE);
-    const rectangle = createDemoShapeNodeStyle(ShapeNodeShape.RECTANGLE);
-    const diamond = createDemoShapeNodeStyle(ShapeNodeShape.DIAMOND);
-    const fatArrow = createDemoShapeNodeStyle(ShapeNodeShape.FAT_ARROW);
-    const fatArrow2 = createDemoShapeNodeStyle(ShapeNodeShape.FAT_ARROW2);
-    const hexagon = createDemoShapeNodeStyle(ShapeNodeShape.HEXAGON);
-    const hexagon2 = createDemoShapeNodeStyle(ShapeNodeShape.HEXAGON2);
+    const ellipse = createShapeNodeStyle(ShapeNodeShape.ELLIPSE);
+    const rectangle = createShapeNodeStyle(ShapeNodeShape.RECTANGLE);
+    const diamond = createShapeNodeStyle(ShapeNodeShape.DIAMOND);
+    const fatArrow = createShapeNodeStyle(ShapeNodeShape.FAT_ARROW);
+    const fatArrow2 = createShapeNodeStyle(ShapeNodeShape.FAT_ARROW2);
+    const hexagon = createShapeNodeStyle(ShapeNodeShape.HEXAGON);
+    const hexagon2 = createShapeNodeStyle(ShapeNodeShape.HEXAGON2);
+
+    // const icon = createIconNode('assets/image/edit.svg')
 
     const defaultGroupNodeStyle = this.graphComponent.graph.groupNodeDefaults.style;
-    const newGroup = createDemoGroupStyle({colorSetName: 'demo-palette-23', foldingEnabled: false})
+    const newGroup = createDemoGroupStyle({colorSetName: 'demo-palette-23', foldingEnabled: true})
     const nodeStyles = [defaultNode, ellipse, rectangle, fatArrow, fatArrow2, hexagon, hexagon2, diamond, defaultGroupNodeStyle, newGroup]
 
     // add a visual for each node style to the palette
-    nodeStyles.forEach((style: INodeStyle): void => {
+    nodeStyles.forEach((style: any): void => {
       this.addNodeVisual(style, panel)
     })
   }
 
-  createNodeVisual(style: INodeStyle): string {
+  createNodeVisual(style: any): string {
     // another GraphComponent is utilized to export a visual of the given style
     const exportComponent = new GraphComponent()
     const exportGraph = exportComponent.graph
-
     // we create a node in this GraphComponent that should be exported as SVG
     exportGraph.createNode(new Rect(0, 0, 40, 40), style)
     exportComponent.updateContentRect(new Insets(5))
@@ -133,7 +133,7 @@ export class GraphEditorComponent implements OnInit {
     return SvgExport.encodeSvgDataUrl(svgString)
   }
 
-  addNodeVisual(style: INodeStyle, panel: Element): void {
+  addNodeVisual(style: any, panel: Element): void {
     // Create the HTML element for the visual.
     const div = document.createElement('div')
     div.setAttribute('style', 'width: 40px; height: 40px; margin: 10px auto; cursor: grab;')
