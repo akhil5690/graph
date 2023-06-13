@@ -11,6 +11,7 @@ import {WidgetFrameModule} from "../../../../../../common/ui-component/frames/wi
 import {RightSidebarModule} from "../../../../../../common/ui-component/right-sidebar/right-sidebar.module";
 import {HttpHandler} from "../../../../../../common/utils/httpHandler";
 import {TabViewModule} from "primeng/tabview";
+import {GraphEditorModule} from "../../../../../../common/ui-component/graph-editor/graph-editor.module";
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import {TabViewModule} from "primeng/tabview";
         HttpClientModule,
         WidgetFrameModule,
         TabViewModule,
+        GraphEditorModule,
     ],
   providers:[GraphService,HttpHandler],
   exports: [DashboardWidgetComponent]
