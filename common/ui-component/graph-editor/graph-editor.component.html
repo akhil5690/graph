@@ -1,4 +1,7 @@
 <div class="demo-content-dynamic" style="display: flex">
-  <div id="graphComponent" #graphContainer style="height:50vh;width: 50vw"></div>
-  <div id="drag-and-drop-panel" #panel></div>
+  <div id="graphComponent" #graphContainer [ngClass]="this.isFilterOpen?'graph-sidebar':'graph'"></div>
+  <app-right-sidebar (isRightSidebarOpen)="setFrame($event)">
+    <div id="drag-and-drop-panel" panel #panel></div>
+  </app-right-sidebar>
 </div>
+

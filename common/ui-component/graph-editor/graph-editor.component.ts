@@ -1,16 +1,27 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {
   DefaultLabelStyle,
   DragDropEffects,
-  EdgePathLabelModel, EdgeSides, ExteriorLabelModel,
-  GraphComponent, GraphEditorInputMode, GroupNodeLabelModel, GroupNodeStyle, IGraph,
-  INode, INodeStyle,
+  EdgePathLabelModel,
+  EdgeSides,
+  ExteriorLabelModel,
+  GraphComponent,
+  GraphEditorInputMode,
+  GroupNodeLabelModel,
+  GroupNodeStyle,
+  IGraph,
+  INode,
+  INodeStyle,
   Insets,
   License,
-  NodeDropInputMode, Point,
-  QueryContinueDragEventArgs, Rect, ShapeNodeShape,
+  NodeDropInputMode,
+  Point,
+  QueryContinueDragEventArgs,
+  Rect,
+  ShapeNodeShape,
   SimpleNode,
-  Size, SvgExport
+  Size,
+  SvgExport
 } from "yfiles";
 import licenseValue from "../../../license.json";
 import {
@@ -25,17 +36,20 @@ import {
 @Component({
   selector: 'app-graph-editor',
   templateUrl: './graph-editor.component.html',
-  styleUrls: ['./graph-editor.component.scss']
+  styleUrls: ['./graph-editor.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class GraphEditorComponent implements OnInit {
   private graphComponent!: GraphComponent;
-  @ViewChild('graphContainer', { static: true }) graphContainer!: ElementRef;
-  @ViewChild('panel', { static: true }) panelContainer!: ElementRef;
+  @ViewChild('graphContainer', {static: true}) graphContainer!: ElementRef;
+  @ViewChild('panel', {static: true}) panelContainer!: ElementRef;
+  isFilterOpen: boolean = false;
 
   ngOnInit() {
     this.run();
   }
-  run(){
+
+  run() {
     License.value = licenseValue;
     const divElement = this.graphContainer.nativeElement;
     this.graphComponent = new GraphComponent(divElement);
@@ -90,7 +104,7 @@ export class GraphEditorComponent implements OnInit {
     const diamond = createDemoShapeNodeStyle(ShapeNodeShape.DIAMOND);
 
     const defaultGroupNodeStyle = this.graphComponent.graph.groupNodeDefaults.style;
-    const newGroup = createDemoGroupStyle({colorSetName: 'demo-palette-23',foldingEnabled:false})
+    const newGroup = createDemoGroupStyle({colorSetName: 'demo-palette-23', foldingEnabled: false})
     const nodeStyles = [defaultNode, ellipse, rectangle, diamond, defaultGroupNodeStyle, newGroup]
 
     // add a visual for each node style to the palette
@@ -239,5 +253,9 @@ export class GraphEditorComponent implements OnInit {
 
     this.graphComponent.fitGraphBounds()
     graph.undoEngine!.clear()
+  }
+
+  setFrame(isFilterOpen: boolean) {
+    this.isFilterOpen = isFilterOpen;
   }
 }

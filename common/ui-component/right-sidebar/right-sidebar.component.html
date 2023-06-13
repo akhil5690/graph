@@ -9,6 +9,9 @@
     <div (click)="tabs('filter')" class="tab">
       <img src="assets/image/filter.svg" alt="" height="15" width="15">
     </div>
+    <div (click)="tabs('edit')" class="tab">
+      <img src="assets/image/edit.svg" alt="" height="15" width="15">
+    </div>
   </div>
 
 <!-- sidebar panel -->
@@ -16,7 +19,7 @@
 <!--   opens on click of nodes or edges for the details-->
     <div *ngIf="items && tab === 'details'">
 <!--      <app-details [data]="items"></app-details>-->
-      <app-details></app-details>
+<!--      <app-details></app-details>-->
     </div>
 <!--   opens on click of filter  from tab -->
     <div *ngIf="tab === 'filter'">
@@ -46,6 +49,10 @@
       <p>Layout</p>
       <p-dropdown [options]="layout" [(ngModel)]="selectedLayoutOpt" optionLabel="name" (ngModelChange)="layoutChange(selectedLayoutOpt)"></p-dropdown>
 
+    </div>
+
+    <div *ngIf="tab === 'edit'">
+      <ng-content select="[panel]"></ng-content>
     </div>
   </div>
 </div>
