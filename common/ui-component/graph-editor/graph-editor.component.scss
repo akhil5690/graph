@@ -1,10 +1,16 @@
 app-graph-editor{
 .graph-sidebar{
   height: 85vh;
-  width: 70vw;
+  width: 75vw;
 }
   .graph{
     height: 85vh;
     width: 100vw;
   }
+  div#drag-and-drop-panel {
+    width: 20vw;
+    display: grid;
+    grid-template-columns: repeat(5,auto);
+  }
+
 }

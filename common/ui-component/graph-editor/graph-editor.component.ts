@@ -102,10 +102,14 @@ export class GraphEditorComponent implements OnInit {
     const ellipse = createDemoShapeNodeStyle(ShapeNodeShape.ELLIPSE);
     const rectangle = createDemoShapeNodeStyle(ShapeNodeShape.RECTANGLE);
     const diamond = createDemoShapeNodeStyle(ShapeNodeShape.DIAMOND);
+    const fatArrow = createDemoShapeNodeStyle(ShapeNodeShape.FAT_ARROW);
+    const fatArrow2 = createDemoShapeNodeStyle(ShapeNodeShape.FAT_ARROW2);
+    const hexagon = createDemoShapeNodeStyle(ShapeNodeShape.HEXAGON);
+    const hexagon2 = createDemoShapeNodeStyle(ShapeNodeShape.HEXAGON2);
 
     const defaultGroupNodeStyle = this.graphComponent.graph.groupNodeDefaults.style;
     const newGroup = createDemoGroupStyle({colorSetName: 'demo-palette-23', foldingEnabled: false})
-    const nodeStyles = [defaultNode, ellipse, rectangle, diamond, defaultGroupNodeStyle, newGroup]
+    const nodeStyles = [defaultNode, ellipse, rectangle, fatArrow, fatArrow2, hexagon, hexagon2, diamond, defaultGroupNodeStyle, newGroup]
 
     // add a visual for each node style to the palette
     nodeStyles.forEach((style: INodeStyle): void => {
