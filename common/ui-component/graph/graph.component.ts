@@ -58,8 +58,8 @@ export class GraphComponents implements OnInit, OnChanges {
   filter = false;
   @Input() data: any;
   @Input() layout: any = 'Organic';
-  @ViewChild('container') containerRef!: ElementRef<HTMLDivElement>;
-
+  @ViewChild('graphComponent', {static: true}) graphContainer!: ElementRef;
+  @ViewChild('overViewComponent', {static: true}) overViewContainer!: ElementRef;
   @Output() refreshGraph = new EventEmitter()
 
 
@@ -135,16 +135,15 @@ export class GraphComponents implements OnInit, OnChanges {
   }
 
   private initializeGraphComponent() {
-    // const container = this.containerRef.nativeElement;
-    // this.graphComponent = new GraphComponent(container);
+    const container = this.graphContainer.nativeElement;
     // inorder to update the graph component with another graph, check if the component already exist, if yes: cleanup
-    if (this.graphComponent?.div?.id === 'graphComponent') {
+    if (this.graphComponent?.div) {
       this.graphComponent.cleanUp();
-      this.graphComponent = new GraphComponent("#graphComponent");
+      this.graphComponent = new GraphComponent(container);
       this.filter = true; //if true change the layout from organic to some other layout
     } else {
       this.filter = false;
-      this.graphComponent = new GraphComponent("#graphComponent");
+      this.graphComponent = new GraphComponent(container);
     }
   }
 
@@ -294,7 +293,7 @@ export class GraphComponents implements OnInit, OnChanges {
     // get an executor for executing layout
     const layoutExecutor = this.getLayoutExecutor({
       graphComponent: graphComponent,
-      layout: layout,
+      layout: layout ? layout : new OrganicLayout({minimumNodeDistance: 90, nodeEdgeOverlapAvoided: true}),
       duration: '0.5s',
     })
 
@@ -303,12 +302,13 @@ export class GraphComponents implements OnInit, OnChanges {
   }
 
   private initializeOverviewComponent(graphComponent: GraphComponent) {
+    const container = this.overViewContainer.nativeElement;
     // reinitialize overview component to the update the view with new graph
-    if (this.overviewComponent?.div?.id === 'overview') {
+    if (this.overviewComponent?.div) {
       this.overviewComponent.cleanUp();
-      this.overviewComponent = new GraphOverviewComponent('#overview', graphComponent);
+      this.overviewComponent = new GraphOverviewComponent(container, graphComponent);
     } else {
-      this.overviewComponent = new GraphOverviewComponent('#overview', graphComponent);
+      this.overviewComponent = new GraphOverviewComponent(container, graphComponent);
     }
     this.overviewComponent.autoDrag = true;
     this.overviewComponent.contentRect = new Rect(0, 0, 2000, 2000);

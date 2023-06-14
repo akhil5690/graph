@@ -7,7 +7,7 @@
     </div>
   </div>
   <div class="graph-container">
-    <div id="graphComponent" [ngClass]="this.isFilterOpen?'graph-sidebar':'graph'">
+    <div id="graphComponent" #graphComponent [ngClass]="this.isFilterOpen?'graph-sidebar':'graph'">
     </div>
     <app-right-sidebar [details]="selectedItem" [data]="data" (filterGraph)="refreshData($event)" (isRightSidebarOpen)="setFrame($event)">
     </app-right-sidebar>
@@ -17,7 +17,7 @@
       <div class="container" [ngClass]="!visible || !graphComponent?'hide':''">
         <div class="header">Overview</div>
         <div>
-          <div id="overview"></div>
+          <div id="overview" #overViewComponent></div>
         </div>
       </div>
   </div>
