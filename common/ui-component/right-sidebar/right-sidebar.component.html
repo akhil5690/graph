@@ -1,8 +1,12 @@
 <div class="right-sidebar">
-<!--  tabs-->
+  <!--  tabs-->
   <div class="menu-panel">
-    <i *ngIf="!openPopUp" (click)="open(true)" class="pi pi-arrow-left"></i>
-    <i *ngIf="openPopUp" (click)="open(false)" class="pi pi-arrow-right"></i>
+    <div *ngIf="!openPopUp" (click)="open(true)">
+      <i class="pi pi-arrow-left"></i>
+    </div>
+    <div *ngIf="openPopUp" (click)="open(false)">
+      <i class="pi pi-arrow-right"></i>
+    </div>
     <div (click)="tabs('details')" class="tab">
       <img src="assets/image/information.svg" alt="" height="15" width="15">
     </div>
@@ -14,18 +18,18 @@
     </div>
   </div>
 
-<!-- sidebar panel -->
+  <!-- sidebar panel -->
   <div class="details-panel" *ngIf="openPopUp">
-<!--   opens on click of nodes or edges for the details-->
+    <!--   opens on click of nodes or edges for the details-->
     <div *ngIf="items && tab === 'details'">
-<!--      <app-details [data]="items"></app-details>-->
-<!--      <app-details></app-details>-->
+      <!--      <app-details [data]="items"></app-details>-->
+      <app-details></app-details>
     </div>
-<!--   opens on click of filter  from tab -->
+    <!--   opens on click of filter  from tab -->
     <div *ngIf="tab === 'filter'">
       <p>Property</p>
       <p-autoComplete [(ngModel)]="selectedProp" [suggestions]="suggestedList" (ngModelChange)="getValue(selectedProp)"
-                      (completeMethod)="search($event,this.properties)" field="name" [dropdown]="true" >
+                      (completeMethod)="search($event,this.properties)" field="name" [dropdown]="true">
         <ng-template let-options pTemplate="item">
           <div class="country-item">
             <div>{{options.name}}</div>
@@ -35,19 +39,20 @@
       <p>Value</p>
 
       <div class="grid">
-        <input type="text" pInputText [(ngModel)]="value" />
+        <input type="text" pInputText [(ngModel)]="value"/>
         <ui-button [label]="'Apply'" [class]="'outlined-button'" (click)="getGraph()"></ui-button>
       </div>
-<!--      <p-autoComplete [(ngModel)]="selectedVal" [suggestions]="suggestedList" (ngModelChange)="getGraph()"-->
-<!--                      (completeMethod)="search($event,this.values)" field="name" [dropdown]="true">-->
-<!--        <ng-template let-options pTemplate="item">-->
-<!--          <div class="country-item">-->
-<!--            <div>{{options.name}}</div>-->
-<!--          </div>-->
-<!--        </ng-template>-->
-<!--      </p-autoComplete>-->
+      <!--      <p-autoComplete [(ngModel)]="selectedVal" [suggestions]="suggestedList" (ngModelChange)="getGraph()"-->
+      <!--                      (completeMethod)="search($event,this.values)" field="name" [dropdown]="true">-->
+      <!--        <ng-template let-options pTemplate="item">-->
+      <!--          <div class="country-item">-->
+      <!--            <div>{{options.name}}</div>-->
+      <!--          </div>-->
+      <!--        </ng-template>-->
+      <!--      </p-autoComplete>-->
       <p>Layout</p>
-      <p-dropdown [options]="layout" [(ngModel)]="selectedLayoutOpt" optionLabel="name" (ngModelChange)="layoutChange(selectedLayoutOpt)"></p-dropdown>
+      <p-dropdown [options]="layout" [(ngModel)]="selectedLayoutOpt" optionLabel="name"
+                  (ngModelChange)="layoutChange(selectedLayoutOpt)"></p-dropdown>
 
     </div>
 
