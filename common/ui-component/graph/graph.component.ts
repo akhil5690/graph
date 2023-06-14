@@ -79,6 +79,7 @@ export class GraphComponents implements OnInit, OnChanges {
     },
   ]
   overviewComponent!: GraphOverviewComponent;
+  isFilterOpen = false;
 
   constructor(private graphService: GraphService) {
   }
@@ -229,7 +230,7 @@ export class GraphComponents implements OnInit, OnChanges {
     })
 
     // aligning the edge label
-    const labelModel = new EdgePathLabelModel({ distance: 50 });
+    const labelModel = new EdgePathLabelModel({distance: 50});
 
     edgesSource.edgeCreator.defaults.labels.layoutParameter = labelModel.createDefaultParameter();
   }
@@ -399,7 +400,7 @@ export class GraphComponents implements OnInit, OnChanges {
   }
 
   fitContent() {
-    ICommand.FIT_GRAPH_BOUNDS.execute(null,this.graphComponent)
+    ICommand.FIT_GRAPH_BOUNDS.execute(null, this.graphComponent)
   }
 
   // toolbar event handling
@@ -421,6 +422,9 @@ export class GraphComponents implements OnInit, OnChanges {
     }
   }
 
+  setFrame(isFilterOpen: boolean) {
+    this.isFilterOpen = isFilterOpen;
+  }
 }
 
 

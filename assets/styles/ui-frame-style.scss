@@ -21,7 +21,7 @@
 .only-main {
   display: grid;
   grid-template-columns:var(--base-width);
-  grid-template-rows:  var(--top-toolbar-height) var(--main-height) var(--bottom-toolbar-height);
+  grid-template-rows:  var(--top-toolbar-height) calc(var(--main-height) + var(--bottom-toolbar-height));
   grid-template-areas:
       "."
       "main"
@@ -36,7 +36,7 @@
       "main sidebar"
 }
 
-.header-main-right-sidebar-frame{
+.header-main-right-sidebar-frame {
   display: grid;
   grid-template-columns: var(--column-graph-frame);
   grid-template-rows: var(--top-toolbar-height);
@@ -46,7 +46,7 @@
 
 }
 
-.header-main-menubar-frame{
+.header-main-menubar-frame {
   display: grid;
   grid-template-columns: var(--column-menu-frame);
   grid-template-rows: var(--top-toolbar-height);
@@ -60,27 +60,27 @@
   grid-area: header;
   border-bottom: calc(var(--border-width) * 2) solid var(--third-background-color);
   background-color: var(--primary-background-color);
-  color:var(--primary-text-color);
+  color: var(--primary-text-color);
 }
 
 .sidebar {
   grid-area: sidebar;
-  color:var(--primary-text-color);
+  color: var(--primary-text-color);
   background-color: var(--third-background-color);
 }
 
 .main {
   grid-area: main;
-  color:var(--primary-text-color);
+  color: var(--primary-text-color);
   background-color: var(--primary-background-color);
 }
 
 .footer {
   grid-area: footer;
-  color:var(--primary-text-color);
+  color: var(--primary-text-color);
   background-color: var(--secondary-background-color);
 }
 
-.toggle{
+.toggle {
   width: 10rem;
 }

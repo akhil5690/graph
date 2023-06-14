@@ -1,15 +1,4 @@
 app-graph {
-  .graph {
-    position: relative;
-
-  }
-
-  #graphComponent {
-    position: relative;
-    background-color: var(--primary-background-color);
-    height: 46rem;
-  }
-
   .overview {
     position: absolute;
     top: 30px;
@@ -52,5 +41,17 @@ app-graph {
 
   .tools {
     cursor: pointer;
+  }
+
+  .graph-container{
+    display: flex;
+  }
+  .graph-sidebar{
+    height: 85vh;
+    width: 75vw;
+  }
+  .graph{
+    height: 85vh;
+    width: 100vw;
   }
 }
