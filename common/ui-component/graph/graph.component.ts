@@ -58,7 +58,6 @@ export class GraphComponents implements OnInit, OnChanges {
   filter = false;
   @Input() data: any;
   @Input() layout: any = 'Organic';
-  @Output() sidebarDetails = new EventEmitter();
   @ViewChild('container') containerRef!: ElementRef<HTMLDivElement>;
 
 
@@ -274,7 +273,6 @@ export class GraphComponents implements OnInit, OnChanges {
   private leftClickListener(inputMode: GraphEditorInputMode) {
     inputMode.addItemLeftClickedListener((sender, evt) => {
       this.selectedItem = evt.item instanceof IEdge || evt.item instanceof INode ? evt.item : null;
-      this.sidebarDetails.emit(this.selectedItem);
     })
   }
 

@@ -9,7 +9,7 @@
   <div class="graph-container">
     <div id="graphComponent" [ngClass]="this.isFilterOpen?'graph-sidebar':'graph'">
     </div>
-    <app-right-sidebar [data]="data" (isRightSidebarOpen)="setFrame($event)">
+    <app-right-sidebar [details]="selectedItem" [data]="data" (isRightSidebarOpen)="setFrame($event)">
     </app-right-sidebar>
   </div>
 

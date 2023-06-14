@@ -31,10 +31,6 @@ export class DashboardWidgetComponent implements OnInit {
     }).catch(e => console.log(e))
   }
 
-  sendGraphItem(details: any) {
-    this.details = details;
-  }
-
   getFrameType(isRightSidebarOpen: any) {
     this.frameType = !isRightSidebarOpen ? 'header-main-menubar-frame' : 'header-main-right-sidebar-frame';
     this.cdr.detectChanges();
