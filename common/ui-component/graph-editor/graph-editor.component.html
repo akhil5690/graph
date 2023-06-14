@@ -1,5 +1,13 @@
 <div class="demo-content-dynamic" style="display: flex">
-  <div id="graphComponent" #graphContainer [ngClass]="this.isFilterOpen?'graph-sidebar':'graph'"></div>
+  <div id="graphComponent" #graphContainer [ngClass]="this.isFilterOpen?'graph-sidebar':'graph'">
+    <div class="top-toolbar">
+      <div *ngFor="let tool of toolBarItems">
+        <div (click)="clickEvent(tool)" class="tools">
+          <img [src]="tool.icon" [alt]="tool.toolName" height="20" width="20">
+        </div>
+      </div>
+    </div>
+  </div>
   <app-right-sidebar (isRightSidebarOpen)="setFrame($event)">
     <div id="drag-and-drop-panel" panel #panel></div>
   </app-right-sidebar>
