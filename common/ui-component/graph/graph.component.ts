@@ -60,6 +60,8 @@ export class GraphComponents implements OnInit, OnChanges {
   @Input() layout: any = 'Organic';
   @ViewChild('container') containerRef!: ElementRef<HTMLDivElement>;
 
+  @Output() refreshGraph = new EventEmitter()
+
 
   // graph toolbar tools
   toolBarItems = [{
@@ -422,6 +424,12 @@ export class GraphComponents implements OnInit, OnChanges {
 
   setFrame(isFilterOpen: boolean) {
     this.isFilterOpen = isFilterOpen;
+  }
+
+
+  refreshData(params: any) {
+    console.log(params)
+    this.refreshGraph.emit(params);
   }
 }
 

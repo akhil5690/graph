@@ -49,13 +49,15 @@ export class RightSidebarComponent implements OnChanges, OnInit {
       {name: 'Tag', code: 'tags'},
     ];
 
-    this.layout = [
-      {name: 'Organic', code: 'Organic'},
-      {name: 'Hierarchy', code: 'Hierarchy'},
-      {name: 'Orthogonal', code: 'Orthogonal'},
-      {name: 'Circular', code: 'Circular'},
-      {name: 'Radial', code: 'Radial'},
-    ];
+    // this.layout = [
+    //   {name: 'Organic', code: 'Organic'},
+    //   {name: 'Hierarchy', code: 'Hierarchy'},
+    //   {name: 'Orthogonal', code: 'Orthogonal'},
+    //   {name: 'Circular', code: 'Circular'},
+    //   {name: 'Radial', code: 'Radial'},
+    // ];
+
+    this.layout = [{}]
   }
 
   open(isOpen: boolean) {
@@ -88,13 +90,13 @@ export class RightSidebarComponent implements OnChanges, OnInit {
 
   getValue(selectedProp: any) {
     // on selecting property from autocomplete get the dropdown for value field
-    this.values = [];
-    this.data?.nodes.forEach((data: any) => {
-      // if the filter already exist dont push to dropdown list, this.value
-      if (this.values.findIndex((value: any) => value.name === data[selectedProp['code']]) === -1 && data[selectedProp['code']]) {
-        this.values.push({name: data[selectedProp['code']]});
-      }
-    });
+    // this.values = [];
+    // this.data?.nodes.forEach((data: any) => {
+    //   // if the filter already exist dont push to dropdown list, this.value
+    //   if (this.values.findIndex((value: any) => value.name === data[selectedProp['code']]) === -1 && data[selectedProp['code']]) {
+    //     this.values.push({name: data[selectedProp['code']]});
+    //   }
+    // });
   }
 
   search(event: { query: any; }, dataArray: any) {

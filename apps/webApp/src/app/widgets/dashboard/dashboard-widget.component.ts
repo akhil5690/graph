@@ -37,6 +37,7 @@ export class DashboardWidgetComponent implements OnInit {
   }
 
   refreshGraph(params: any) {
+    console.log(params)
     // on filtering get new graph data
     this.data = null;
     this.graphService.getGraphData(params).then((data) => {
