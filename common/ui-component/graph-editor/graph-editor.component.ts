@@ -8,7 +8,7 @@ import {
   GraphComponent,
   GraphEditorInputMode,
   GroupNodeLabelModel,
-  GroupNodeStyle,
+  GroupNodeStyle, IEdge,
   IGraph,
   INode,
   Insets,
@@ -68,6 +68,7 @@ export class GraphEditorComponent implements OnInit {
     nodeDropInputMode.showPreview = true
     this.nodeListener(inputMode);
     this.edgeListener(inputMode);
+    this.labelListener(inputMode);
     this.initializeDragAndDropPanel();
   }
 
@@ -78,14 +79,32 @@ export class GraphEditorComponent implements OnInit {
     })
   }
 
-  edgeListener(inputMode:GraphEditorInputMode){
+  labelListener(inputMode: GraphEditorInputMode) {
+    inputMode.addItemDoubleClickedListener((sender, evt) => {
+      inputMode.addLabelAddedListener((sender, evt) => {
+        if (evt.owner instanceof INode) {
+          evt.owner.tag = {id: evt.owner.tag.id, label: evt.item.text};
+        }
+        if (evt.owner instanceof IEdge) {
+          evt.owner.tag = {
+            id: evt.owner.tag.id,
+            source: evt.owner.tag.source,
+            target: evt.owner.tag.target,
+            label: evt.item.text
+          };
+
+        }
+      })
+    })
+  }
+
+  edgeListener(inputMode: GraphEditorInputMode) {
     inputMode.createEdgeInputMode.addEdgeCreatedListener((sender, evt) => {
       const edge = evt.item;
       const sourceNode = edge.sourceNode;
       const targetNode = edge.targetNode;
-      console.log(targetNode?.tag)
       edge.tag = {id: Math.random(), source: sourceNode?.tag?.id, target: targetNode?.tag?.id};
-      this.graphComponent.graph.edges.append(edge)
+      this.graphComponent.graph.edges.append(edge);
     })
   }
 
@@ -206,17 +225,17 @@ export class GraphEditorComponent implements OnInit {
     node5.tag = {id: 5, label: 'Node 5'};
     const groupnode1 = graph.groupNodes({children: [node1, node2, node3], labels: ['Group 1']});
     const edge1 = graph.createEdge(node1, node2);
-    edge1.tag = {source: 1, target: 2}
+    edge1.tag = {id: 1, source: 1, target: 2}
     const edge2 = graph.createEdge(node1, node3);
-    edge2.tag = {source: 1, target: 3}
+    edge2.tag = {id: 2, source: 1, target: 3}
     const edge3 = graph.createEdge(node3, node4)
-    edge3.tag = {source: 3, target: 4}
+    edge3.tag = {id: 3, source: 3, target: 4}
 
     const edge4 = graph.createEdge(node3, node5);
-    edge4.tag = {source: 3, target: 5}
+    edge4.tag = {id: 4, source: 3, target: 5}
 
     const edge5 = graph.createEdge(node1, node5);
-    edge5.tag = {source: 1, target: 5}
+    edge5.tag = {id: 5, source: 1, target: 5}
 
     graph.setPortLocation(edge1.sourcePort!, new Point(123.33, 40))
     graph.setPortLocation(edge1.targetPort!, new Point(145, 75))
@@ -267,6 +286,7 @@ export class GraphEditorComponent implements OnInit {
         id: edge?.tag?.id,
         source: edge?.tag?.source,
         target: edge?.tag?.target,
+        label: edge?.tag?.label
         // Include other edge properties as needed
       };
       jsonGraph.edges.push(jsonEdge);
