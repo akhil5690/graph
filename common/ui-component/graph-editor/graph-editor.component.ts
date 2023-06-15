@@ -80,22 +80,24 @@ export class GraphEditorComponent implements OnInit {
   }
 
   labelListener(inputMode: GraphEditorInputMode) {
-    inputMode.addItemDoubleClickedListener((sender, evt) => {
-      inputMode.addLabelAddedListener((sender, evt) => {
-        if (evt.owner instanceof INode) {
-          evt.owner.tag = {id: evt.owner.tag.id, label: evt.item.text};
-        }
-        if (evt.owner instanceof IEdge) {
-          evt.owner.tag = {
-            id: evt.owner.tag.id,
-            source: evt.owner.tag.source,
-            target: evt.owner.tag.target,
-            label: evt.item.text
-          };
+    inputMode.addLabelAddedListener(this.getLabelListner);
 
-        }
-      })
-    })
+    inputMode.addLabelTextChangedListener(this.getLabelListner);
+  }
+
+  getLabelListner = (sender: any, evt: { item: any; }) => {
+    const label = evt.item;
+    const owner = label.owner;
+    if (owner instanceof INode) {
+      owner.tag = {id: owner.tag.id, label: label.text};
+    } else if (owner instanceof IEdge) {
+      owner.tag = {
+        id: owner.tag.id,
+        source: owner.tag.source,
+        target: owner.tag.target,
+        label: label.text
+      };
+    }
   }
 
   edgeListener(inputMode: GraphEditorInputMode) {
