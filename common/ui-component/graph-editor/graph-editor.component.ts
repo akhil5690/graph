@@ -8,7 +8,7 @@ import {
   GraphComponent,
   GraphEditorInputMode,
   GroupNodeLabelModel,
-  GroupNodeStyle, IEdge,
+  GroupNodeStyle, ICommand, IEdge,
   IGraph,
   INode,
   Insets,
@@ -37,8 +37,14 @@ export class GraphEditorComponent implements OnInit {
   @ViewChild('panel', {static: true}) panelContainer!: ElementRef;
   isFilterOpen: boolean = false;
   toolBarItems = [{
-    toolName: 'Save',
-    icon: 'assets/image/overview.svg'
+    toolName: 'save',
+    icon: 'assets/image/save.svg'
+  }, {
+    toolName: 'undo',
+    icon: 'assets/image/undo.svg'
+  }, {
+    toolName: 'redo',
+    icon: 'assets/image/redo.svg'
   }
   ]
 
@@ -69,11 +75,26 @@ export class GraphEditorComponent implements OnInit {
     this.nodeListener(inputMode);
     this.edgeListener(inputMode);
     this.labelListener(inputMode);
+
+    this.onTagChange(inputMode)
     this.initializeDragAndDropPanel();
+  }
+
+  onTagChange(inputMode: GraphEditorInputMode) {
+    this.graphComponent.graph.addEdgeTagChangedListener(this.triggerSave);
+    this.graphComponent.graph.addNodeTagChangedListener(this.triggerSave);
+    inputMode.addDeletedItemListener(this.triggerSave)
+  }
+
+  triggerSave = (sender: any, evt: any) => {
+    this.save();
   }
 
   nodeListener(inputMode: GraphEditorInputMode) {
     inputMode.addNodeCreatedListener((sender, evt) => {
+      if (evt.item.style instanceof GroupNodeStyle) {
+        console.log('is group')
+      }
       evt.item.tag = {id: Math.random()};
       this.graphComponent.graph.nodes.append(evt.item);
     })
@@ -264,9 +285,16 @@ export class GraphEditorComponent implements OnInit {
   clickEvent(tool: { icon: string; toolName: string }) {
     if (this.graphComponent) {
       switch (tool.toolName) {
-        case 'Save':
+        case 'save':
           this.save();
           break;
+        case 'undo':
+          ICommand.UNDO.execute(null, this.graphComponent)
+          break;
+        case 'redo':
+          ICommand.REDO.execute(null, this.graphComponent)
+          break;
+
       }
     }
   }
