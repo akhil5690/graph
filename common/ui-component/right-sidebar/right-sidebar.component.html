@@ -23,7 +23,7 @@
     <!--   opens on click of nodes or edges for the details-->
     <div *ngIf="items && tab === 'details'">
       <!--      <app-details [data]="items"></app-details>-->
-      <app-details></app-details>
+      <app-details [type]="type" [info]="items"></app-details>
     </div>
     <!--   opens on click of filter  from tab -->
     <div *ngIf="tab === 'filter'">
@@ -50,9 +50,9 @@
       <!--          </div>-->
       <!--        </ng-template>-->
       <!--      </p-autoComplete>-->
-      <p>Layout</p>
-      <p-dropdown [options]="layout" [(ngModel)]="selectedLayoutOpt" optionLabel="name"
-                  (ngModelChange)="layoutChange(selectedLayoutOpt)"></p-dropdown>
+<!--      <p>Layout</p>-->
+<!--      <p-dropdown [options]="layout" [(ngModel)]="selectedLayoutOpt" optionLabel="name"-->
+<!--                  (ngModelChange)="layoutChange(selectedLayoutOpt)"></p-dropdown>-->
 
     </div>
 

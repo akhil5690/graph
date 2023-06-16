@@ -15,6 +15,8 @@ export class RightSidebarComponent implements OnChanges, OnInit {
 
   @Input() details: any;
   @Input() data: any;
+  @Input() isItemClicked: any;
+  @Input() type: any;
   // data = data;
   @Input() filterOptions: any;
   @Output() isRightSidebarOpen = new EventEmitter();
@@ -61,7 +63,7 @@ export class RightSidebarComponent implements OnChanges, OnInit {
   }
 
   open(isOpen: boolean) {
-    this.openPopUp = isOpen && this.details;
+    this.openPopUp = isOpen && this.isItemClicked;
     this.isRightSidebarOpen.emit(this.openPopUp);
   }
 
@@ -69,7 +71,7 @@ export class RightSidebarComponent implements OnChanges, OnInit {
     this.openPopUp = true;
     this.tab = tab;
     this.isRightSidebarOpen.emit(this.openPopUp);
-    if (tab === 'details' && !this.nodeData) {
+    if (tab === 'details' && !this.isItemClicked) {
       this.openPopUp = false;
       this.isRightSidebarOpen.emit(this.openPopUp);
     }
@@ -126,18 +128,4 @@ export class RightSidebarComponent implements OnChanges, OnInit {
     // send the layout which is selected from dropdown
     this.selectedLayout.emit(selectedLayout.name)
   }
-
-  // finding(checked: any) {
-  //   let params: any;
-  //   if (checked) {
-  //     params = {
-  //       filter: true,
-  //       property: 'findings',
-  //       value: 'True'
-  //     }
-  //   } else {
-  //     params = {filter: false}
-  //   }
-  //   this.filterByFinding.emit(params);
-  // }
 }

@@ -6,13 +6,24 @@ import {Component, Input, OnChanges, OnInit, ViewEncapsulation} from '@angular/c
   styleUrls: ['./details.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class DetailsComponent implements OnChanges,OnInit {
+export class DetailsComponent implements OnChanges, OnInit {
   data !: any
   headers!: string[]
 
+  @Input() type: string | undefined;// editor or graph
+  @Input() info: any;
+  form: { [key: string]: string } = {};
+
   ngOnChanges(): void {
     // this.headers = Object.keys(this.data[0]);
+    this.form = {
+      id: this.info[0].id,
+      label: this.info[0].label,
+      source: this.info[0].source,
+      target: this.info[0].target,
+    };
   }
+
   ngOnInit(): void {
     this.data = [
       {
@@ -42,6 +53,7 @@ export class DetailsComponent implements OnChanges,OnInit {
     ];
     this.headers = Object.keys(this.data[0]);
   }
+
   isSeverity(header: string) {
     return header === 'severity';
   }
@@ -65,6 +77,10 @@ export class DetailsComponent implements OnChanges,OnInit {
   }
 
   readable(groupItem: string) {
-    return groupItem.replace('_',' ')
+    return groupItem.replace('_', ' ')
+  }
+
+  setProperties() {
+    console.log(this.form)
   }
 }

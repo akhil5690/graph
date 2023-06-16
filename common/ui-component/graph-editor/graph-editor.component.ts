@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {
   DefaultLabelStyle,
   DragDropEffects,
@@ -47,6 +47,14 @@ export class GraphEditorComponent implements OnInit {
     icon: 'assets/image/redo.svg'
   }
   ]
+  selectedItem: any;
+
+  private max = 1000000;
+  private min = 0;
+  isItemClicked!: boolean;
+
+  constructor(private cdr: ChangeDetectorRef) {
+  }
 
   ngOnInit() {
     this.run();
@@ -61,7 +69,7 @@ export class GraphEditorComponent implements OnInit {
     })
     this.graphComponent.graph.undoEngineEnabled = true
     this.initTutorialDefaults(this.graphComponent.graph)
-    this.createGraph()
+    // this.createGraph()
     this.configureDragAndDrop()
   }
 
@@ -75,9 +83,17 @@ export class GraphEditorComponent implements OnInit {
     this.nodeListener(inputMode);
     this.edgeListener(inputMode);
     this.labelListener(inputMode);
+    this.leftClickListener(inputMode);
 
     this.onTagChange(inputMode)
     this.initializeDragAndDropPanel();
+  }
+
+  private leftClickListener(inputMode: GraphEditorInputMode) {
+    inputMode.addItemLeftClickedListener((sender, evt) => {
+      this.isItemClicked = true;
+      this.selectedItem = evt.item instanceof IEdge || evt.item instanceof INode ? evt.item : null;
+    })
   }
 
   onTagChange(inputMode: GraphEditorInputMode) {
@@ -95,7 +111,7 @@ export class GraphEditorComponent implements OnInit {
       if (evt.item.style instanceof GroupNodeStyle) {
         console.log('is group')
       }
-      evt.item.tag = {id: Math.random()};
+      evt.item.tag = {id: (Math.floor(Math.random() * (this.max - this.min + 1)) + this.min).toString()};
       this.graphComponent.graph.nodes.append(evt.item);
     })
   }
@@ -121,12 +137,17 @@ export class GraphEditorComponent implements OnInit {
     }
   }
 
+
   edgeListener(inputMode: GraphEditorInputMode) {
     inputMode.createEdgeInputMode.addEdgeCreatedListener((sender, evt) => {
       const edge = evt.item;
       const sourceNode = edge.sourceNode;
       const targetNode = edge.targetNode;
-      edge.tag = {id: Math.random(), source: sourceNode?.tag?.id, target: targetNode?.tag?.id};
+      edge.tag = {
+        id: (Math.floor(Math.random() * (this.max - this.min + 1)) + this.min).toString(),
+        source: sourceNode?.tag?.id,
+        target: targetNode?.tag?.id
+      };
       this.graphComponent.graph.edges.append(edge);
     })
   }
@@ -324,4 +345,5 @@ export class GraphEditorComponent implements OnInit {
 
     console.log(jsonGraph)
   }
+
 }

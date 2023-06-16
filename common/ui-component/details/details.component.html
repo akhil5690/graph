@@ -1,26 +1,45 @@
 <div class="details-container" *ngFor="let item of data">
-  <div *ngFor="let header of getHeader(item)">
-    <div *ngIf="typeOf(item[header])==='string'" class="details">
-      <div class="subtitle label">{{header}}</div>
-      <div>{{item[header]}}
+  <div *ngIf="type!=='editor'">
+    <div *ngFor="let header of getHeader(item)">
+      <div *ngIf="typeOf(item[header])==='string'" class="details">
+        <div class="subtitle label">{{header}}</div>
+        <div>{{item[header]}}
+        </div>
       </div>
-    </div>
-    <div *ngIf="typeOf(item[header])==='object'">
-      <div *ngFor="let i of item[header]">
-        <div *ngFor="let groups of getHeader(i)">
-          <div class="subtitle label group">{{readable(groups)}}</div>
-          <div *ngFor="let group of i[groups]">
-            <div *ngFor="let groupItem of getHeader(group)" class="table">
-              <div class="capitalize">{{readable(groupItem)}}</div>
-              <div>{{group[groupItem]}}
-                <div *ngIf="isSeverity(groupItem)"
-                     [ngStyle]="getStyleForSeverity(item,groupItem)" class="indicator"></div>
-              </div>
+      <div *ngIf="typeOf(item[header])==='object'">
+        <div *ngFor="let i of item[header]">
+          <div *ngFor="let groups of getHeader(i)">
+            <div class="subtitle label group">{{readable(groups)}}</div>
+            <div *ngFor="let group of i[groups]">
+              <div *ngFor="let groupItem of getHeader(group)" class="table">
+                <div class="capitalize">{{readable(groupItem)}}</div>
+                <div>{{group[groupItem]}}
+                  <div *ngIf="isSeverity(groupItem)"
+                       [ngStyle]="getStyleForSeverity(item,groupItem)" class="indicator"></div>
+                </div>
 
+              </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="type === 'editor'">
+  <div class="details-container">
+    <div *ngFor="let i of info">
+      <div *ngFor="let header of getHeader(i)">
+        <div class="subtitle label">
+          {{header}}
+        </div>
+        <div *ngIf="header === 'id'">{{i[header]}}</div>
+        <div *ngIf="header!=='id'">
+          <input pInputText type="text" [(ngModel)]="form[header]">
+        </div>
+      </div>
+      <ui-button [class]="'solid-button'" [label]="'Apply'" (click)="setProperties()"></ui-button>
     </div>
   </div>
 </div>
