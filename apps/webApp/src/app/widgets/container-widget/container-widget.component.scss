@@ -1,0 +1,30 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+}
+
+.header-container {
+  font-size: 20px;
+  font-family: system-ui;
+}
+
+.header-title {
+  color: #f71e88;
+  font-size: 20px;
+  text-align: center;
+}
+
+.margin {
+  margin: 20px;
+}
+
+.marin-bottom {
+  margin-bottom: 0px;
+}
+
+.tool-header {
+  color: rgb(214 27 119 / 51%);
+  font-size: 15px;
+  text-align: left;
+}

@@ -10,9 +10,20 @@ const routes: Routes = [
       .then(m => m.AuthModule)
   }, {
     path: 'launchpad',
-    canActivate:[AuthGuard],
+    canActivate: [AuthGuard],
     loadChildren: () => import('../../../webApp/src/app/views/pages/dashboard/dashboard.module')
       .then(m => m.DashboardModule)
+  },
+  {
+    path: 'launchpad',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('../../../webApp/src/app/views/pages/dashboard/dashboard.module')
+      .then(m => m.DashboardModule)
+  },
+  {
+    path: 'container',
+    loadChildren: () => import('../../../webApp/src/app/views/pages/containers/containers.module')
+      .then(m => m.ContainersModule)
   },
   {
     path: '**',

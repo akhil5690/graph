@@ -1,5 +1,6 @@
 import {ChangeDetectorRef, Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {GraphService} from "../../../../../../common/ui-services/graph/graph.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-dashboard-widget',
@@ -16,7 +17,7 @@ export class DashboardWidgetComponent implements OnInit {
   layout: any;
   schema: any;
 
-  constructor(private cdr: ChangeDetectorRef, private graphService: GraphService) {
+  constructor(private cdr: ChangeDetectorRef, private graphService: GraphService ,private router:Router) {
   }
 
   ngOnInit() {
@@ -64,5 +65,9 @@ export class DashboardWidgetComponent implements OnInit {
       this.schema = data;
       this.copyData = data;// for creating the filter
     }).catch(e => console.log(e))
+  }
+
+  viewContainer(){
+    this.router.navigate(['container']).then()
   }
 }

@@ -1,9 +1,9 @@
 <app-widget-frame [frame_type]="this.frameType">
   <div header>
-
   </div>
 
   <div main>
+    <ui-button (click)="viewContainer()" label="Containers"></ui-button>
     <div class="schema-toolbar">
       <p-tabView styleClass="tabview-custom">
         <p-tabPanel>
@@ -24,6 +24,12 @@
           </ng-template>
           <app-graph-editor></app-graph-editor>
         </p-tabPanel>
+<!--        <p-tabPanel header="Header II">-->
+<!--          <ng-template pTemplate="header">-->
+<!--            <span>Container</span>-->
+<!--          </ng-template>-->
+<!--        </p-tabPanel>-->
+
       </p-tabView>
     </div>
   </div>
