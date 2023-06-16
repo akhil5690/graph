@@ -154,13 +154,6 @@ export function createShapeNodeStyle(
   })
 }
 
-export function createIconNode(imageurl: string) {
-  return new ImageNodeStyle({
-    image: imageurl,
-    aspectRatio: 0.5,
-  })
-}
-
 export function createIconShapeNodeStyle(
   shape: ShapeNodeShape,
   colorSetName: ColorSetName = 'demo-orange'

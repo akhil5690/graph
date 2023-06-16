@@ -8,7 +8,7 @@
       </div>
     </div>
   </div>
-  <app-right-sidebar [type]="'editor'" [isItemClicked]="isItemClicked" [details]="selectedItem" (isRightSidebarOpen)="setFrame($event)">
+  <app-right-sidebar [type]="'editor'" [isItemClicked]="isItemClicked" [details]="selectedItem" (edgeNodeProperty)="changeEdgeNode($event)" (isRightSidebarOpen)="setFrame($event)">
     <div id="drag-and-drop-panel" panel #panel></div>
   </app-right-sidebar>
 </div>

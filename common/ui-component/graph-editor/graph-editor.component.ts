@@ -1,10 +1,19 @@
-import {ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnInit,
+  ViewChild,
+  ViewEncapsulation
+} from '@angular/core';
 import {
   DefaultLabelStyle,
   DragDropEffects,
   EdgePathLabelModel,
   EdgeSides,
-  ExteriorLabelModel,
+  ExteriorLabelModel, GraphBuilder,
   GraphComponent,
   GraphEditorInputMode,
   GroupNodeLabelModel,
@@ -24,7 +33,7 @@ import {
 } from "yfiles";
 import licenseValue from "../../../license.json";
 import {addClass, createDemoGroupStyle, createShapeNodeStyle, initDemoStyles, removeClass} from "./demo-styles";
-import { v4 as uuidv4 } from 'uuid';
+import {v4 as uuidv4} from 'uuid';
 
 @Component({
   selector: 'app-graph-editor',
@@ -32,8 +41,9 @@ import { v4 as uuidv4 } from 'uuid';
   styleUrls: ['./graph-editor.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class GraphEditorComponent implements OnInit {
+export class GraphEditorComponent implements OnInit, OnChanges {
   private graphComponent!: GraphComponent;
+  @Input() data: any;
   @ViewChild('graphContainer', {static: true}) graphContainer!: ElementRef;
   @ViewChild('panel', {static: true}) panelContainer!: ElementRef;
   isFilterOpen: boolean = false;
@@ -57,6 +67,9 @@ export class GraphEditorComponent implements OnInit {
   constructor(private cdr: ChangeDetectorRef) {
   }
 
+  ngOnChanges() {
+  }
+
   ngOnInit() {
     this.run();
   }
@@ -70,7 +83,7 @@ export class GraphEditorComponent implements OnInit {
     })
     this.graphComponent.graph.undoEngineEnabled = true
     this.initTutorialDefaults(this.graphComponent.graph)
-    // this.createGraph()
+    this.createGraph()
     this.configureDragAndDrop()
   }
 
@@ -257,46 +270,37 @@ export class GraphEditorComponent implements OnInit {
   }
 
   createGraph(): void {
-    const graph = this.graphComponent.graph
-    const node1 = graph.createNodeAt([110, 20])
-    node1.tag = {id: 1, label: 'Node 1'};
-    const node2 = graph.createNodeAt([145, 95])
-    node2.tag = {id: 2, label: 'Node 2'};
-    const node3 = graph.createNodeAt([75, 95])
-    node3.tag = {id: 3, label: 'Node 3'};
-    const node4 = graph.createNodeAt([30, 175])
-    node4.tag = {id: 4, label: 'Node 4'};
-    const node5 = graph.createNodeAt([100, 175])
-    node5.tag = {id: 5, label: 'Node 5'};
-    const groupnode1 = graph.groupNodes({children: [node1, node2, node3], labels: ['Group 1']});
-    const edge1 = graph.createEdge(node1, node2);
-    edge1.tag = {id: 1, source: 1, target: 2}
-    const edge2 = graph.createEdge(node1, node3);
-    edge2.tag = {id: 2, source: 1, target: 3}
-    const edge3 = graph.createEdge(node3, node4)
-    edge3.tag = {id: 3, source: 3, target: 4}
+    const builder = new GraphBuilder()
+    const initGraph = {
+      "nodes": [
+        {
+          "id": "e3034993-a309-4dcd-8360-e8b6672a2b8e",
+          "label": "movie"
+        },
+        {
+          "id": "824f0d0d-d720-47ed-8ba9-b81c71b7715f",
+          "label": "person"
+        }
+      ],
+      "edges": [
+        {
+          "id": "60a56245-b447-4ef3-8979-943bc2eb6823",
+          "source": "824f0d0d-d720-47ed-8ba9-b81c71b7715f",
+          "target": "e3034993-a309-4dcd-8360-e8b6672a2b8e"
+        }
+      ]
+    }
 
-    const edge4 = graph.createEdge(node3, node5);
-    edge4.tag = {id: 4, source: 3, target: 5}
+    const sourceNode = builder.createNodesSource({
+      data: initGraph.nodes, id: "id", labels: ['label']
+    });
 
-    const edge5 = graph.createEdge(node1, node5);
-    edge5.tag = {id: 5, source: 1, target: 5}
+    const edgeNode = builder.createEdgesSource({
+      data: initGraph.edges, id: "id", labels: ['label'], sourceId: "source", targetId: "target"
+    })
 
-    graph.setPortLocation(edge1.sourcePort!, new Point(123.33, 40))
-    graph.setPortLocation(edge1.targetPort!, new Point(145, 75))
-    graph.setPortLocation(edge2.sourcePort!, new Point(96.67, 40))
-    graph.setPortLocation(edge2.targetPort!, new Point(75, 75))
-    graph.setPortLocation(edge3.sourcePort!, new Point(65, 115))
-    graph.setPortLocation(edge3.targetPort!, new Point(30, 155))
-    graph.setPortLocation(edge4.sourcePort!, new Point(85, 115))
-    graph.setPortLocation(edge4.targetPort!, new Point(90, 155))
-    graph.setPortLocation(edge5.sourcePort!, new Point(110, 40))
-    graph.setPortLocation(edge5.targetPort!, new Point(110, 155))
-    graph.addBends(edge1, [new Point(123.33, 55), new Point(145, 55)])
-    graph.addBends(edge2, [new Point(96.67, 55), new Point(75, 55)])
-    graph.addBends(edge3, [new Point(65, 130), new Point(30, 130)])
-    graph.addBends(edge4, [new Point(85, 130), new Point(90, 130)])
-
+    this.graphComponent.graph = builder.buildGraph();
+    this.graphComponent.graph.undoEngineEnabled = true;
     this.graphComponent.fitGraphBounds()
   }
 
@@ -347,4 +351,7 @@ export class GraphEditorComponent implements OnInit {
     console.log(jsonGraph)
   }
 
+  changeEdgeNode(property: any) {
+    console.log(property)
+  }
 }
