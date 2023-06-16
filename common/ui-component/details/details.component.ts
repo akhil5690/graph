@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewEncapsulation} from '@angular/core';
 
 @Component({
   selector: 'app-details',
@@ -12,16 +12,31 @@ export class DetailsComponent implements OnChanges, OnInit {
 
   @Input() type: string | undefined;// editor or graph
   @Input() info: any;
-  form: { [key: string]: string } = {};
+  @Output() property = new EventEmitter()
+  edgeForm: { [key: string]: string } = {};
+  nodeForm: { [key: string]: string } = {};
 
   ngOnChanges(): void {
     // this.headers = Object.keys(this.data[0]);
-    this.form = {
-      id: this.info[0].id,
-      label: this.info[0].label,
-      source: this.info[0].source,
-      target: this.info[0].target,
-    };
+    this.getForm();
+  }
+
+  getForm() {
+    if (this.info[0].source && this.info[0].target) {
+      this.edgeForm = {
+        id: this.info[0].id,
+        label: this.info[0].label,
+        source: this.info[0].source,
+        target: this.info[0].target,
+      };
+    } else {
+      this.nodeForm = {
+        id: this.info[0].id,
+        label: this.info[0].label,
+        source: this.info[0].source,
+        target: this.info[0].target,
+      };
+    }
   }
 
   ngOnInit(): void {
@@ -80,7 +95,8 @@ export class DetailsComponent implements OnChanges, OnInit {
     return groupItem.replace('_', ' ')
   }
 
-  setProperties() {
-    console.log(this.form)
+  submit(form: any) {
+    console.log(form);
+    this.property.emit(form)
   }
 }

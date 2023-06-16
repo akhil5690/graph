@@ -390,13 +390,11 @@ export class GraphComponents implements OnInit, OnChanges {
 
   // toolbar functionality
   zooIn() {
-    const zoomFactor = 2;
-    this.graphComponent.zoomTo(this.graphComponent.center, this.graphComponent.zoom * zoomFactor);
+    ICommand.INCREASE_ZOOM.execute(null,this.graphComponent)
   }
 
   zoomOut() {
-    const zoomFactor = 0.6;
-    this.graphComponent.zoomTo(this.graphComponent.center, this.graphComponent.zoom * zoomFactor);
+    ICommand.DECREASE_ZOOM.execute(null,this.graphComponent)
   }
 
   fitContent() {

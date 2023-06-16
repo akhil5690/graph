@@ -12,6 +12,7 @@ export class RightSidebarComponent implements OnChanges, OnInit {
   items: any;
   nodeData: any;
   openPopUp = false;
+  @Output() edgeNodeProperty = new EventEmitter()
 
   @Input() details: any;
   @Input() data: any;
@@ -127,5 +128,9 @@ export class RightSidebarComponent implements OnChanges, OnInit {
   layoutChange(selectedLayout: any) {
     // send the layout which is selected from dropdown
     this.selectedLayout.emit(selectedLayout.name)
+  }
+
+  property($event: any) {
+    this.edgeNodeProperty.emit($event)
   }
 }
