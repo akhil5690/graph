@@ -24,6 +24,7 @@ import {
 } from "yfiles";
 import licenseValue from "../../../license.json";
 import {addClass, createDemoGroupStyle, createShapeNodeStyle, initDemoStyles, removeClass} from "./demo-styles";
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-graph-editor',
@@ -111,7 +112,7 @@ export class GraphEditorComponent implements OnInit {
       if (evt.item.style instanceof GroupNodeStyle) {
         console.log('is group')
       }
-      evt.item.tag = {id: (Math.floor(Math.random() * (this.max - this.min + 1)) + this.min).toString()};
+      evt.item.tag = {id: uuidv4().toString()};
       this.graphComponent.graph.nodes.append(evt.item);
     })
   }
@@ -144,7 +145,7 @@ export class GraphEditorComponent implements OnInit {
       const sourceNode = edge.sourceNode;
       const targetNode = edge.targetNode;
       edge.tag = {
-        id: (Math.floor(Math.random() * (this.max - this.min + 1)) + this.min).toString(),
+        id: uuidv4().toString(),
         source: sourceNode?.tag?.id,
         target: targetNode?.tag?.id
       };
