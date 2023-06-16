@@ -34,6 +34,7 @@ import {
 import licenseValue from "../../../license.json";
 import {addClass, createDemoGroupStyle, createShapeNodeStyle, initDemoStyles, removeClass} from "./demo-styles";
 import {v4 as uuidv4} from 'uuid';
+import {data} from "../graph/data";
 
 @Component({
   selector: 'app-graph-editor',
@@ -83,8 +84,8 @@ export class GraphEditorComponent implements OnInit, OnChanges {
     })
     this.graphComponent.graph.undoEngineEnabled = true
     this.initTutorialDefaults(this.graphComponent.graph)
-    this.createGraph()
     this.configureDragAndDrop()
+
   }
 
   configureDragAndDrop(): void {
@@ -125,9 +126,10 @@ export class GraphEditorComponent implements OnInit, OnChanges {
       if (evt.item.style instanceof GroupNodeStyle) {
         console.log('is group')
       }
-      evt.item.tag = {id: uuidv4().toString()};
+      evt.item.tag = {id: uuidv4().toString(), style: evt.item.style, layout: evt.item.layout};
       this.graphComponent.graph.nodes.append(evt.item);
-    })
+      this.save();
+    });
   }
 
   labelListener(inputMode: GraphEditorInputMode) {
@@ -140,15 +142,18 @@ export class GraphEditorComponent implements OnInit, OnChanges {
     const label = evt.item;
     const owner = label.owner;
     if (owner instanceof INode) {
-      owner.tag = {id: owner.tag.id, label: label.text};
+      owner.tag = {id: owner.tag.id, label: label.text, style: owner.tag.style, layout: owner.tag.layout};
     } else if (owner instanceof IEdge) {
       owner.tag = {
         id: owner.tag.id,
         source: owner.tag.source,
         target: owner.tag.target,
-        label: label.text
+        label: label.text,
+        style: owner.tag.style,
+        layout: owner.tag.layout
       };
     }
+    this.save()
   }
 
 
@@ -160,7 +165,8 @@ export class GraphEditorComponent implements OnInit, OnChanges {
       edge.tag = {
         id: uuidv4().toString(),
         source: sourceNode?.tag?.id,
-        target: targetNode?.tag?.id
+        target: targetNode?.tag?.id,
+        style: edge.style,
       };
       this.graphComponent.graph.edges.append(edge);
     })
@@ -269,39 +275,18 @@ export class GraphEditorComponent implements OnInit, OnChanges {
     }).createRatioParameter({sideOfEdge: EdgeSides.BELOW_EDGE})
   }
 
-  createGraph(): void {
+  createGraph(initGraph: any): void {
     const builder = new GraphBuilder()
-    const initGraph = {
-      "nodes": [
-        {
-          "id": "e3034993-a309-4dcd-8360-e8b6672a2b8e",
-          "label": "movie"
-        },
-        {
-          "id": "824f0d0d-d720-47ed-8ba9-b81c71b7715f",
-          "label": "person"
-        }
-      ],
-      "edges": [
-        {
-          "id": "60a56245-b447-4ef3-8979-943bc2eb6823",
-          "source": "824f0d0d-d720-47ed-8ba9-b81c71b7715f",
-          "target": "e3034993-a309-4dcd-8360-e8b6672a2b8e"
-        }
-      ]
-    }
-
     const sourceNode = builder.createNodesSource({
-      data: initGraph.nodes, id: "id", labels: ['label']
+      data: initGraph.nodes, id: "id", labels: ['label'], style: "style", layout: "layout"
     });
 
     const edgeNode = builder.createEdgesSource({
-      data: initGraph.edges, id: "id", labels: ['label'], sourceId: "source", targetId: "target"
+      data: initGraph.edges, id: "id", labels: ['label'], sourceId: "source", targetId: "target", style: "style"
     })
 
     this.graphComponent.graph = builder.buildGraph();
-    this.graphComponent.graph.undoEngineEnabled = true;
-    this.graphComponent.fitGraphBounds()
+    this.initTutorialDefaults(this.graphComponent.graph)
   }
 
   setFrame(isFilterOpen: boolean) {
@@ -333,7 +318,7 @@ export class GraphEditorComponent implements OnInit, OnChanges {
     this.graphComponent.graph.nodes.forEach((node) => {
       const jsonNode = {
         id: node?.tag?.id,
-        label: node?.tag?.label,
+        label: node?.tag?.label, style: node.tag.style, layout: node.tag.layout
       };
       jsonGraph.nodes.push(jsonNode);
     });
@@ -342,16 +327,43 @@ export class GraphEditorComponent implements OnInit, OnChanges {
         id: edge?.tag?.id,
         source: edge?.tag?.source,
         target: edge?.tag?.target,
-        label: edge?.tag?.label
+        label: edge?.tag?.label, style: edge.tag.style
         // Include other edge properties as needed
       };
       jsonGraph.edges.push(jsonEdge);
     });
 
-    console.log(jsonGraph)
+    console.log(jsonGraph);
+    this.createGraph(jsonGraph)
   }
 
   changeEdgeNode(property: any) {
-    console.log(property)
+    console.log(property.label);
+    if (property.source) {
+      this.graphComponent.graph.edges.forEach((data) => {
+        if (data.tag.id === property.id) {
+          data.tag = {
+            id: data.tag.id,
+            source: property.source,
+            target: property.target,
+            label: property.label ? property.label : data.tag.label,
+            style: data.tag.style,
+            layout: data.tag.layout
+          }
+        }
+      })
+    } else {
+      this.graphComponent.graph.nodes.forEach((data)=>{
+        if (data.tag.id === property.id) {
+          data.tag = {
+            id: data.tag.id,
+            label: property.label ? property.label : data.tag.label,
+            style: data.tag.style,
+            layout: data.tag.layout
+          }
+        }
+      })
+    }
+    this.save();
   }
 }
