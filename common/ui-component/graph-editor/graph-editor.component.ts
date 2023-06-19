@@ -114,7 +114,6 @@ export class GraphEditorComponent implements OnInit, OnChanges {
   onTagChange(inputMode: GraphEditorInputMode) {
     this.graphComponent.graph.addEdgeTagChangedListener(this.triggerSave);
     this.graphComponent.graph.addNodeTagChangedListener(this.triggerSave);
-    inputMode.addDeletedItemListener(this.triggerSave)
   }
 
   triggerSave = (sender: any, evt: any) => {
