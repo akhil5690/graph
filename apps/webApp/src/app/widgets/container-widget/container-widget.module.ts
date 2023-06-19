@@ -21,6 +21,7 @@ import {CymSplitterModule} from "../../../../../../common/cym-containers/cym-spl
 import {CymScrollPanelModule} from "../../../../../../common/cym-containers/cym-scroll-panel/cym-scroll-panel.module";
 import {CymTabViewModule} from "../../../../../../common/cym-containers/cym-tab-view/cym-tab-view.module";
 import {CymToolbarModule} from "../../../../../../common/cym-containers/cym-toolbar/cym-toolbar.module";
+import {CymDivModule} from "../../../../../../common/cym-containers/cym-div/cym-div.module";
 @NgModule({
   declarations: [
     ContainerWidgetComponent,
@@ -46,6 +47,7 @@ import {CymToolbarModule} from "../../../../../../common/cym-containers/cym-tool
     CymScrollPanelModule,
     CymTabViewModule,
     CymToolbarModule,
+    CymDivModule,
   ],
   providers:[GraphService,HttpHandler],
   exports: [ContainerWidgetComponent]
