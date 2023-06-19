@@ -99,8 +99,6 @@ export class GraphEditorComponent implements OnInit, OnChanges {
     this.edgeListener(inputMode);
     this.labelListener(inputMode);
     this.leftClickListener(inputMode);
-
-    this.onTagChange(inputMode)
     this.initializeDragAndDropPanel();
   }
 
@@ -110,17 +108,6 @@ export class GraphEditorComponent implements OnInit, OnChanges {
       this.selectedItem = evt.item instanceof IEdge || evt.item instanceof INode ? evt.item : null;
     })
   }
-
-  onTagChange(inputMode: GraphEditorInputMode) {
-    this.graphComponent.graph.addEdgeTagChangedListener(this.triggerSave);
-    this.graphComponent.graph.addNodeTagChangedListener(this.triggerSave);
-    inputMode.addDeletedItemListener(this.triggerSave)
-  }
-
-  triggerSave = (sender: any, evt: any) => {
-    this.save();
-  }
-
   nodeListener(inputMode: GraphEditorInputMode) {
     inputMode.addNodeCreatedListener((sender, evt) => {
       if (evt.item.style instanceof GroupNodeStyle) {
@@ -128,7 +115,6 @@ export class GraphEditorComponent implements OnInit, OnChanges {
       }
       evt.item.tag = {id: uuidv4().toString(), style: evt.item.style, layout: evt.item.layout};
       this.graphComponent.graph.nodes.append(evt.item);
-      this.save();
     });
   }
 
@@ -153,7 +139,6 @@ export class GraphEditorComponent implements OnInit, OnChanges {
         layout: owner.tag.layout
       };
     }
-    this.save()
   }
 
 
