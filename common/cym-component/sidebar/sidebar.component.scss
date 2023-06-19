@@ -1,0 +1,23 @@
+cym-sidebar {
+  .container {
+    display: grid;
+    padding: calc((var(--unit) / 2) + (var(--unit))) 0 0 calc((var(--unit) / 2) + (var(--unit)));
+    grid-gap: calc((var(--unit) / 2) + (var(--unit)));
+  }
+
+  .categories {
+    font-weight: var(--font-weight-bold);
+  }
+
+  .menu {
+    display: grid;
+    grid-gap: var(--unit);
+  }
+
+  .items {
+    padding-left: calc(var(--unit) / 2);
+    display: grid;
+    grid-template-columns: var(--unit) auto;
+    grid-gap: calc((var(--unit) / 2) + (var(--unit)));
+  }
+}

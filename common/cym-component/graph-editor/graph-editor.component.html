@@ -1,0 +1,15 @@
+<div class="demo-content-dynamic" style="display: flex">
+  <div #graphContainer [class]="this.isFilterOpen ? 'graph-sidebar' : 'graph'" id="graphComponent">
+    <div class="top-toolbar">
+      <div *ngFor="let tool of toolBarItems">
+        <div (click)="clickEvent(tool)" class="tools">
+          <img [src]="tool.icon" [alt]="tool.toolName" height="20" width="20">
+        </div>
+      </div>
+    </div>
+  </div>
+  <cym-right-sidebar [type]="'editor'" [isItemClicked]="isItemClicked" [details]="selectedItem" (edgeNodeProperty)="changeEdgeNode($event)" (isRightSidebarOpen)="setFrame($event)">
+    <div id="drag-and-drop-panel" panel #panel></div>
+  </cym-right-sidebar>
+</div>
+

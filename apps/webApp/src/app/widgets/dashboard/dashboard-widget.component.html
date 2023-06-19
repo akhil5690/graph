@@ -1,28 +1,28 @@
-<app-widget-frame [frame_type]="this.frameType">
+<cym-widget-frame [frame_type]="this.frameType">
   <div header>
   </div>
 
   <div main>
-    <ui-button (click)="viewContainer()" label="Containers"></ui-button>
+    <cym-button (click)="viewContainer()" label="Containers"></cym-button>
     <div class="schema-toolbar">
       <p-tabView styleClass="tabview-custom">
         <p-tabPanel>
           <ng-template pTemplate="header">
             <span>SCHEMA</span>
           </ng-template>
-          <app-graph [layout]="layout" [data]="schema"></app-graph>
+          <cym-graph [layout]="layout" [data]="schema"></cym-graph>
         </p-tabPanel>
         <p-tabPanel header="Header II">
           <ng-template pTemplate="header">
             <span>EXPLORER</span>
           </ng-template>
-          <app-graph [layout]="layout" [data]="data" (refreshGraph)="refreshGraph($event)"></app-graph>
+          <cym-graph [layout]="layout" [data]="data" (refreshGraph)="refreshGraph($event)"></cym-graph>
         </p-tabPanel>
         <p-tabPanel header="Header II">
           <ng-template pTemplate="header">
             <span>EDITOR</span>
           </ng-template>
-          <app-graph-editor></app-graph-editor>
+          <cym-graph-editor></cym-graph-editor>
         </p-tabPanel>
 <!--        <p-tabPanel header="Header II">-->
 <!--          <ng-template pTemplate="header">-->
@@ -38,4 +38,4 @@
 <!--                       (selectedLayout)="sendLayout($event)" (filterGraph)="refreshGraph($event)"-->
 <!--                       (filterByFinding)="getFindings($event)" (isRightSidebarOpen)="getFrameType($event)"></app-right-sidebar>-->
 <!--  </div>-->
-</app-widget-frame>
+</cym-widget-frame>

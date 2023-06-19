@@ -1,20 +1,20 @@
-<app-widget-frame [frame_type]="'only-main'">
+<cym-widget-frame [frame_type]="'only-main'">
   <div main class="main-container">
     <div class="signIn-container">
       <div class="title">Cymonix IQ+</div>
       <div class="subtitle">Sign Up</div>
       <div class="form-container">
-        <ui-input [propertyMeta]="propertyMeta.email"></ui-input>
-        <ui-input [propertyMeta]="propertyMeta.accName"></ui-input>
-        <ui-button [label]="'Verify Email Address'" [class]="'solid-button'"></ui-button>
-        <ui-otp></ui-otp>
-        <ui-checkbox></ui-checkbox>
-        <ui-input-switch></ui-input-switch>
+        <cym-input [propertyMeta]="propertyMeta.email"></cym-input>
+        <cym-input [propertyMeta]="propertyMeta.accName"></cym-input>
+        <cym-button [label]="'Verify Email Address'" [class]="'solid-button'"></cym-button>
+        <cym-otp></cym-otp>
+        <cym-checkbox></cym-checkbox>
+        <cym-input-switch></cym-input-switch>
         <p-divider align="center">
           <small>Already have an acoount?</small>
         </p-divider>
-        <ui-button [label]="'Sign In'" [class]="'outlined-button'"></ui-button>
+        <cym-button [label]="'Sign In'" [class]="'outlined-button'"></cym-button>
       </div>
     </div>
   </div>
-</app-widget-frame>
+</cym-widget-frame>

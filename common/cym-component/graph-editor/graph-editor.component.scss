@@ -1,0 +1,27 @@
+cym-graph-editor{
+.graph-sidebar{
+  height: 85vh;
+  width: 75vw;
+}
+  .graph{
+    height: 85vh;
+    width: 100vw;
+  }
+  div#drag-and-drop-panel {
+    width: 20vw;
+    display: grid;
+    grid-template-columns: repeat(5,auto);
+  }
+  .top-toolbar {
+    position: relative;
+    top: 0;
+    bottom: 0;
+    height: var(--graph-top-toolbar-height);
+    width: 100%;
+    background-color: var(--third-background-color);
+    display: inline-flex;
+    align-items: center;
+    padding: var(--unit);
+    gap: var(--unit);
+  }
+}

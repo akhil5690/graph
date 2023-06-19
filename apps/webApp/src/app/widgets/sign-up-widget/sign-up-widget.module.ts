@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {UiInputModule} from "../../../../../../common/ui-component/form/ui-input/ui-input.module";
+import {UiInputModule} from "../../../../../../common/ui-component/form/cym-input/cym-input.module";
 
 
 @NgModule({
