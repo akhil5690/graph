@@ -1,9 +1,9 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import { SignUpModel } from 'common/ui-models/model/signUpModel';
-import {SignUpMetaModel} from "../../../../../../common/ui-models/meta-model/widgetMetaModel/signUpMetaModel";
+import { SignUpModel } from 'common/cym-models/model/signUpModel';
+import {SignUpMetaModel} from "../../../../../../common/cym-models/meta-model/widgetMetaModel/signUpMetaModel";
 
 @Component({
-  selector: 'app-sign-up-widget',
+  selector: 'cym-sign-up-widget',
   templateUrl: './sign-up-widget.component.html',
   styleUrls: ['./sign-up-widget.component.scss'],
   encapsulation:ViewEncapsulation.None

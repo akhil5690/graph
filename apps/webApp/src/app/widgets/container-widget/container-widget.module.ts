@@ -3,24 +3,25 @@ import { CommonModule } from '@angular/common';
 import {InputTextModule} from "primeng/inputtext";
 import {ButtonModule} from "primeng/button";
 import {SignInModule} from "../sign-in/sign-in.module";
-import {GraphModule} from "../../../../../../common/ui-component/graph/graph.module";
+import {GraphModule} from "../../../../../../common/cym-component/graph/graph.module";
 import {HttpClientModule} from "@angular/common/http";
-import {GraphService} from "../../../../../../common/ui-services/graph/graph.service";
-import {WidgetFrameModule} from "../../../../../../common/ui-component/frames/widget-frame/widget-frame.module";
-import {RightSidebarModule} from "../../../../../../common/ui-component/right-sidebar/right-sidebar.module";
+import {GraphService} from "../../../../../../common/cym-services/graph/graph.service";
+import {WidgetFrameModule} from "../../../../../../common/cym-component/frames/widget-frame/widget-frame.module";
+import {RightSidebarModule} from "../../../../../../common/cym-component/right-sidebar/right-sidebar.module";
 import {HttpHandler} from "../../../../../../common/utils/httpHandler";
 import {TabViewModule} from "primeng/tabview";
-import {GraphEditorModule} from "../../../../../../common/ui-component/graph-editor/graph-editor.module";
+import {GraphEditorModule} from "../../../../../../common/cym-component/graph-editor/graph-editor.module";
 import {ContainerWidgetComponent} from "./container-widget.component";
-import {UiAccordionModule} from "../../../../../../common/ui-containers/ui-accordion/ui-accordion.module";
-import {UiCardModule} from "../../../../../../common/ui-containers/ui-card/ui-card.module";
-import {UiDividerModule} from "../../../../../../common/ui-containers/ui-divider/ui-divider.module";
-import {UiFieldsetModule} from "../../../../../../common/ui-containers/ui-fieldset/ui-fieldset.module";
-import {UiPanelModule} from "../../../../../../common/ui-containers/ui-panel/ui-panel.module";
-import {UiSplitterModule} from "../../../../../../common/ui-containers/ui-splitter/ui-splitter.module";
-import {UiScrollPanelModule} from "../../../../../../common/ui-containers/ui-scroll-panel/ui-scroll-panel.module";
-import {UiTabViewModule} from "../../../../../../common/ui-containers/ui-tab-view/ui-tab-view.module";
-import {UiToolbarModule} from "../../../../../../common/ui-containers/ui-toolbar/ui-toolbar.module";
+import {CymAccordionModule} from "../../../../../../common/cym-containers/cym-accordion/cym-accordion.module";
+import {CymCardModule} from "../../../../../../common/cym-containers/cym-card/cym-card.module";
+import {CymDividerModule} from "../../../../../../common/cym-containers/cym-divider/cym-divider.module";
+import {CymFieldsetModule} from "../../../../../../common/cym-containers/cym-fieldset/cym-fieldset.module";
+import {CymPanelModule} from "../../../../../../common/cym-containers/cym-panel/cym-panel.module";
+import {CymSplitterModule} from "../../../../../../common/cym-containers/cym-splitter/cym-splitter.module";
+import {CymScrollPanelModule} from "../../../../../../common/cym-containers/cym-scroll-panel/cym-scroll-panel.module";
+import {CymTabViewModule} from "../../../../../../common/cym-containers/cym-tab-view/cym-tab-view.module";
+import {CymToolbarModule} from "../../../../../../common/cym-containers/cym-toolbar/cym-toolbar.module";
+import {CymDivModule} from "../../../../../../common/cym-containers/cym-div/cym-div.module";
 @NgModule({
   declarations: [
     ContainerWidgetComponent,
@@ -37,15 +38,16 @@ import {UiToolbarModule} from "../../../../../../common/ui-containers/ui-toolbar
     WidgetFrameModule,
     TabViewModule,
     GraphEditorModule,
-    UiAccordionModule,
-    UiCardModule,
-    UiDividerModule,
-    UiFieldsetModule,
-    UiPanelModule,
-    UiSplitterModule,
-    UiScrollPanelModule,
-    UiTabViewModule,
-    UiToolbarModule,
+    CymAccordionModule,
+    CymCardModule,
+    CymDividerModule,
+    CymFieldsetModule,
+    CymPanelModule,
+    CymSplitterModule,
+    CymScrollPanelModule,
+    CymTabViewModule,
+    CymToolbarModule,
+    CymDivModule,
   ],
   providers:[GraphService,HttpHandler],
   exports: [ContainerWidgetComponent]

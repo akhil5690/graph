@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 
 @Component({
-  selector: 'app-container-widget',
+  selector: 'cym-container-widget',
   templateUrl: './container-widget.component.html',
   styleUrls: ['./container-widget.component.scss']
 })

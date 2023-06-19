@@ -1,0 +1,57 @@
+cym-graph {
+  .overview {
+    position: absolute;
+    top: 30px;
+  }
+
+  #overview {
+    width: 200px;
+    height: 200px;
+    background-color: var(--third-background-color);
+  }
+
+  .header {
+    font-weight: var(--font-weight-bold);
+    font-size: medium;
+    background: var(--pink1);
+    padding: 1rem;
+    color: var(--primary-color-text);
+  }
+
+  .hide {
+    display: none;
+  }
+
+  .main {
+    position: relative;
+  }
+
+  .top-toolbar {
+    position: relative;
+    top: 0;
+    bottom: 0;
+    height: var(--graph-top-toolbar-height);
+    width: 100%;
+    background-color: var(--third-background-color);
+    display: inline-flex;
+    align-items: center;
+    padding: var(--unit);
+    gap: var(--unit);
+  }
+
+  .tools {
+    cursor: pointer;
+  }
+
+  .graph-container{
+    display: flex;
+  }
+  .graph-sidebar{
+    height: 85vh;
+    width: 75vw;
+  }
+  .graph{
+    height: 85vh;
+    width: 100vw;
+  }
+}

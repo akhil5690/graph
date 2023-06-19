@@ -4,14 +4,14 @@ import {DashboardWidgetComponent} from "./dashboard-widget.component";
 import {InputTextModule} from "primeng/inputtext";
 import {ButtonModule} from "primeng/button";
 import {SignInModule} from "../sign-in/sign-in.module";
-import {GraphModule} from "../../../../../../common/ui-component/graph/graph.module";
+import {GraphModule} from "../../../../../../common/cym-component/graph/graph.module";
 import {HttpClientModule} from "@angular/common/http";
-import {GraphService} from "../../../../../../common/ui-services/graph/graph.service";
-import {WidgetFrameModule} from "../../../../../../common/ui-component/frames/widget-frame/widget-frame.module";
-import {RightSidebarModule} from "../../../../../../common/ui-component/right-sidebar/right-sidebar.module";
+import {GraphService} from "../../../../../../common/cym-services/graph/graph.service";
+import {WidgetFrameModule} from "../../../../../../common/cym-component/frames/widget-frame/widget-frame.module";
+import {RightSidebarModule} from "../../../../../../common/cym-component/right-sidebar/right-sidebar.module";
 import {HttpHandler} from "../../../../../../common/utils/httpHandler";
 import {TabViewModule} from "primeng/tabview";
-import {GraphEditorModule} from "../../../../../../common/ui-component/graph-editor/graph-editor.module";
+import {GraphEditorModule} from "../../../../../../common/cym-component/graph-editor/graph-editor.module";
 
 
 @NgModule({

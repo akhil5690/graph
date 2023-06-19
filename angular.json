@@ -16,7 +16,7 @@
       },
       "root": "apps/webApp/",
       "sourceRoot": "apps/webApp/src",
-      "prefix": "app",
+      "prefix": "cym",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",

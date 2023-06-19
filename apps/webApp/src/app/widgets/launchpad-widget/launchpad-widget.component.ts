@@ -2,7 +2,7 @@ import {Component, ViewEncapsulation} from '@angular/core';
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-launchpad-widget',
+  selector: 'cym-launchpad-widget',
   templateUrl: './launchpad-widget.component.html',
   styleUrls: ['./launchpad-widget.component.scss'],
   encapsulation: ViewEncapsulation.None

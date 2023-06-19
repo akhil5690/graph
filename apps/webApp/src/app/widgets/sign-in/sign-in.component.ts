@@ -1,10 +1,10 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "../../../../../../common/ui-services/auth/auth.service";
+import {AuthService} from "../../../../../../common/cym-services/auth/auth.service";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-sign-in',
+  selector: 'cym-sign-in',
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss'],
   encapsulation: ViewEncapsulation.None

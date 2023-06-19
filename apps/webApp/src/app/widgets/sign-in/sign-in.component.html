@@ -1,4 +1,4 @@
-<app-widget-frame (isDarkTheme)="setBackground($event)" [frame_type]="'only-main'">
+<cym-widget-frame (isDarkTheme)="setBackground($event)" [frame_type]="'only-main'">
   <div main class="main-container">
     <div class="signIn-container">
       <div class="title">Cymonix IQ+</div>
@@ -24,7 +24,7 @@
           <a href="/">Forgot Password?</a>
         </div>
         <div>
-          <ui-button (click)="onSubmit()" [label]="'Sign In'" [class]="'solid-button'"></ui-button>
+          <cym-button (click)="onSubmit()" [label]="'Sign In'" [class]="'solid-button'"></cym-button>
         </div>
         <small class="termsAndCondition">By creating an account, you agree to <a href="/">condition of Use</a> and <a
           href="/">Privacy Policy</a>
@@ -33,11 +33,11 @@
           <small>New to Cymonix IQ+ ?</small>
         </p-divider>
         <div>
-          <ui-button [label]="'Create an account'" [class]="'outlined-button'" (click)="goToSignUp()"></ui-button>
+          <cym-button [label]="'Create an account'" [class]="'outlined-button'" (click)="goToSignUp()"></cym-button>
         </div>
       </div>
     </div>
   </div>
-</app-widget-frame>
+</cym-widget-frame>
 
 

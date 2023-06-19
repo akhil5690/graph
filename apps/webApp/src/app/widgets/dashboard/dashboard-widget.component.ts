@@ -1,9 +1,9 @@
 import {ChangeDetectorRef, Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {GraphService} from "../../../../../../common/ui-services/graph/graph.service";
+import {GraphService} from "../../../../../../common/cym-services/graph/graph.service";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-dashboard-widget',
+  selector: 'cym-dashboard-widget',
   templateUrl: './dashboard-widget.component.html',
   styleUrls: ['./dashboard-widget.component.scss'],
   encapsulation: ViewEncapsulation.None
