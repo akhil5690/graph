@@ -22,12 +22,15 @@ export class DetailsComponent implements OnChanges, OnInit {
   }
 
   getForm() {
+    console.log(this.info)
     if (this.info[0].source && this.info[0].target) {
       this.edgeForm = {
         id: this.info[0].id,
         label: this.info[0].label,
         source: this.info[0].source,
         target: this.info[0].target,
+        sourceLabel:this.info[0].sourceLabel,
+        targetLabel:this.info[0].targetLabel,
       };
     } else {
       this.nodeForm = {

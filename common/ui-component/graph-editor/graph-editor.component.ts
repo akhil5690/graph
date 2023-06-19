@@ -108,6 +108,7 @@ export class GraphEditorComponent implements OnInit, OnChanges {
       this.selectedItem = evt.item instanceof IEdge || evt.item instanceof INode ? evt.item : null;
     })
   }
+
   nodeListener(inputMode: GraphEditorInputMode) {
     inputMode.addNodeCreatedListener((sender, evt) => {
       if (evt.item.style instanceof GroupNodeStyle) {
@@ -127,18 +128,35 @@ export class GraphEditorComponent implements OnInit, OnChanges {
   getLabelListner = (sender: any, evt: { item: any; }) => {
     const label = evt.item;
     const owner = label.owner;
+    console.log(owner)
     if (owner instanceof INode) {
       owner.tag = {id: owner.tag.id, label: label.text, style: owner.tag.style, layout: owner.tag.layout};
+      this.replaceEdgeTag(owner.tag.id, label.text)
     } else if (owner instanceof IEdge) {
       owner.tag = {
         id: owner.tag.id,
         source: owner.tag.source,
+        sourceLabel: owner.tag.sourceLabel,
         target: owner.tag.target,
+        targetLabel: owner.tag.targetLabel,
         label: label.text,
         style: owner.tag.style,
         layout: owner.tag.layout
       };
     }
+  }
+
+  private replaceEdgeTag(id: string, label: string) {
+    this.graphComponent.graph.edges.forEach((edge) => {
+      if (edge.tag.sourceLabel === id) {
+        edge.tag.sourceLabel = label
+      } else if (edge.tag.targetLabel === id) {
+        edge.tag.targetLabel = label
+      }
+
+      console.log(edge.tag)
+    });
+
   }
 
 
@@ -151,6 +169,8 @@ export class GraphEditorComponent implements OnInit, OnChanges {
         id: uuidv4().toString(),
         source: sourceNode?.tag?.id,
         target: targetNode?.tag?.id,
+        sourceLabel: sourceNode?.tag?.label ? sourceNode?.tag?.label : sourceNode?.tag?.id,
+        targetLabel: targetNode?.tag?.label ? targetNode?.tag?.label : targetNode?.tag?.id,
         style: edge.style,
       };
       this.graphComponent.graph.edges.append(edge);
@@ -312,7 +332,10 @@ export class GraphEditorComponent implements OnInit, OnChanges {
         id: edge?.tag?.id,
         source: edge?.tag?.source,
         target: edge?.tag?.target,
-        label: edge?.tag?.label, style: edge.tag.style
+        label: edge?.tag?.label,
+        sourceLabel: edge?.tag.sourceLabel,
+        targetLabel: edge?.tag.targetLabel,
+        style: edge.tag.style
         // Include other edge properties as needed
       };
       jsonGraph.edges.push(jsonEdge);
@@ -326,29 +349,37 @@ export class GraphEditorComponent implements OnInit, OnChanges {
     console.log(property.label);
     if (property.source) {
       this.graphComponent.graph.edges.forEach((data) => {
+        const source = this.graphComponent.graph.nodes.find((node) =>
+          (node.tag.label === property.sourceLabel || node.tag.id === property.sourceLabel))?.tag.id;
+        const target = this.graphComponent.graph.nodes.find((node) =>
+          (node.tag.label === property.targetLabel || node.tag.id === property.targetLabel))?.tag.id;
         if (data.tag.id === property.id) {
           data.tag = {
             id: data.tag.id,
-            source: property.source,
-            target: property.target,
-            label: property.label ? property.label : data.tag.label,
+            source: source,
+            target: target,
+            label: property.label,
+            sourceLabel: property.sourceLabel, targetLabel: property.targetLabel,
             style: data.tag.style,
             layout: data.tag.layout
           }
         }
       })
     } else {
-      this.graphComponent.graph.nodes.forEach((data)=>{
+      this.graphComponent.graph.nodes.forEach((data) => {
         if (data.tag.id === property.id) {
           data.tag = {
             id: data.tag.id,
-            label: property.label ? property.label : data.tag.label,
+            label: property.label,
             style: data.tag.style,
             layout: data.tag.layout
           }
         }
+        this.replaceEdgeTag(data.tag.id, data.tag.label)
       })
     }
     this.save();
   }
+
+
 }
