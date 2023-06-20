@@ -90,6 +90,8 @@ export class GraphEditorComponent implements OnInit, OnChanges {
 
   configureDragAndDrop(): void {
     const inputMode = this.graphComponent.inputMode = new GraphEditorInputMode()
+    inputMode.allowAddLabel = false;
+    inputMode.allowEditLabelOnDoubleClick = false;
     const nodeDropInputMode = inputMode.nodeDropInputMode
     nodeDropInputMode.enabled = true
     nodeDropInputMode.isGroupNodePredicate = (draggedNode: INode): boolean =>
@@ -354,7 +356,7 @@ export class GraphEditorComponent implements OnInit, OnChanges {
             id: data.tag.id,
             source: source,
             target: target,
-            label: property.label,
+            label: !this.validateLabel(property.label, 'edge') ? property.label : null,
             sourceLabel: property.sourceLabel, targetLabel: property.targetLabel,
             style: data.tag.style,
             layout: data.tag.layout
@@ -367,7 +369,7 @@ export class GraphEditorComponent implements OnInit, OnChanges {
           const oldLabel = data.tag.label
           data.tag = {
             id: data.tag.id,
-            label: property.label,
+            label: !this.validateLabel(property.label, 'node') ? property.label : null,
             style: data.tag.style,
             layout: data.tag.layout
           }
@@ -379,5 +381,11 @@ export class GraphEditorComponent implements OnInit, OnChanges {
     this.save();
   }
 
-
+  private validateLabel(label: string, type: string) {
+    if (type === 'edge') {
+      return this.graphComponent.graph.edges.find((edge) => edge.tag.label === label)
+    } else {
+      return this.graphComponent.graph.nodes.find((node) => node.tag.label === label)
+    }
+  }
 }
