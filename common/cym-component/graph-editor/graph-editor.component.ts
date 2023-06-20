@@ -61,6 +61,15 @@ export class GraphEditorComponent implements OnInit, OnChanges {
   }, {
     toolName: 'redo',
     icon: 'assets/image/redo.svg'
+  }, {
+    toolName: 'cut',
+    icon: 'assets/image/cut.svg'
+  }, {
+    toolName: 'copy',
+    icon: 'assets/image/copy.svg'
+  }, {
+    toolName: 'paste',
+    icon: 'assets/image/paste.svg'
   }
   ]
   selectedItem: any;
@@ -317,7 +326,21 @@ export class GraphEditorComponent implements OnInit, OnChanges {
         case 'redo':
           ICommand.REDO.execute(null, this.graphComponent)
           break;
+        case 'cut':
+          ICommand.CUT.execute(null, this.graphComponent)
+          break;
+        case 'copy':
+          ICommand.COPY.execute(null, this.graphComponent);
+          this.graphComponent.clipboard.fromClipboardCopier.addNodeCopiedListener((sender, evt) => {
+            evt.copy.tag = {id: uuidv4(), label: undefined, style: evt.original.style,layout:evt.original.layout};
+          })
 
+          break;
+        case 'paste':
+          ICommand.PASTE.execute(null, this.graphComponent);
+          this.save();
+          this.createGraph(this.iGraph);
+          break;
       }
     }
   }
