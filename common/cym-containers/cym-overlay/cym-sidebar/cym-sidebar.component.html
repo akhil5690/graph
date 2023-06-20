@@ -1,0 +1,36 @@
+<p-sidebar [(visible)]="sidebarVisible1" position="left">
+  <h3>Left Sidebar</h3>
+</p-sidebar>
+
+<p-sidebar [(visible)]="sidebarVisible2" position="right">
+  <h3>Right Sidebar</h3>
+</p-sidebar>
+
+<p-sidebar [(visible)]="sidebarVisible3" position="top">
+  <h3>Top Sidebar</h3>
+</p-sidebar>
+
+<p-sidebar [(visible)]="sidebarVisible4" position="bottom">
+  <h3>Bottom Sidebar</h3>
+</p-sidebar>
+
+<div class="grid-sidebar">
+  <div>
+    <div class="header-sidebar">Left Sidebar</div>
+    <p-button type="button" (click)="sidebarVisible1 = true" icon="pi pi-arrow-right"></p-button>
+  </div>
+  <div>
+    <div class="header-sidebar">Right Sidebar</div>
+    <p-button type="button" (click)="sidebarVisible2 = true" icon="pi pi-arrow-left"></p-button>
+  </div>
+  <div>
+    <div class="header-sidebar">Top Sidebar</div>
+    <p-button type="button" (click)="sidebarVisible3 = true" icon="pi pi-arrow-down"></p-button>
+  </div>
+  <div>
+    <div class="header-sidebar">Bottom Sidebar</div>
+    <p-button type="button" (click)="sidebarVisible4 = true" icon="pi pi-arrow-up"></p-button>
+  </div>
+
+</div>
+
