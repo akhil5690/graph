@@ -16,3 +16,8 @@ pipelines:
                       - aws configure --profile deployment set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY}
                       - zip -r angular.zip .
                       - aws s3 --region $AWS_DEFAULT_REGION cp angular.zip s3://$AWS_Bucket
+                      - aws ssm delete-parameter --region $AWS_DEFAULT_REGION --name /$Env/Cymonix/FusionCentre/version
+                      - aws ssm delete-parameter --region $AWS_DEFAULT_REGION --name /$Env/Cymonix/ssr/version
+                      - echo $BITBUCKET_BUILD_NUMBER
+                      - aws ssm put-parameter --region $AWS_DEFAULT_REGION --name /$Env/Cymonix/FusionCentre/version --value 1.0.$BITBUCKET_BUILD_NUMBER --type String --overwrite
+                      - aws ssm put-parameter --region $AWS_DEFAULT_REGION --name /$Env/Cymonix/ssr/version --value 1.0.$BITBUCKET_BUILD_NUMBER --type String --overwrite
