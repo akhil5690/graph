@@ -128,7 +128,6 @@ export class GraphEditorComponent implements OnInit, OnChanges {
   getLabelListner = (sender: any, evt: { item: any; }) => {
     const label = evt.item;
     const owner = label.owner;
-    console.log(owner)
     if (owner instanceof INode) {
       owner.tag = {id: owner.tag.id, label: label.text, style: owner.tag.style, layout: owner.tag.layout};
       this.replaceEdgeTag(owner.tag.id, label.text, owner.tag.label)
@@ -148,7 +147,6 @@ export class GraphEditorComponent implements OnInit, OnChanges {
 
   private replaceEdgeTag(id: string, label: string, oldLabel: string) {
     this.graphComponent.graph.edges.forEach((edge) => {
-      console.log(edge.tag.sourceLabel, oldLabel)
       if (edge.tag.sourceLabel === id || edge.tag.sourceLabel === oldLabel) {
         edge.tag.sourceLabel = label
       } else if (edge.tag.targetLabel === id || edge.tag.targetLabel === oldLabel) {
@@ -345,7 +343,6 @@ export class GraphEditorComponent implements OnInit, OnChanges {
   }
 
   changeEdgeNode(property: any) {
-    console.log(property.label);
     if (property.source) {
       this.graphComponent.graph.edges.forEach((data) => {
         const source = this.graphComponent.graph.nodes.find((node) =>
