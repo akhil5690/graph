@@ -13,17 +13,19 @@ import {
   DragDropEffects,
   EdgePathLabelModel,
   EdgeSides,
-  ExteriorLabelModel, GraphBuilder,
+  ExteriorLabelModel,
+  GraphBuilder,
   GraphComponent,
   GraphEditorInputMode,
   GroupNodeLabelModel,
-  GroupNodeStyle, ICommand, IEdge,
+  GroupNodeStyle,
+  ICommand,
+  IEdge,
   IGraph,
   INode,
   Insets,
   License,
   NodeDropInputMode,
-  Point,
   QueryContinueDragEventArgs,
   Rect,
   ShapeNodeShape,
@@ -34,7 +36,6 @@ import {
 import licenseValue from "../../../license.json";
 import {addClass, createDemoGroupStyle, createShapeNodeStyle, initDemoStyles, removeClass} from "./demo-styles";
 import {v4 as uuidv4} from 'uuid';
-import {data} from "../graph/data";
 
 @Component({
   selector: 'cym-graph-editor',
@@ -52,6 +53,9 @@ export class GraphEditorComponent implements OnInit, OnChanges {
     toolName: 'save',
     icon: 'assets/image/save.svg'
   }, {
+    toolName: 'refresh',
+    icon: 'assets/image/refresh.svg'
+  }, {
     toolName: 'undo',
     icon: 'assets/image/undo.svg'
   }, {
@@ -64,6 +68,7 @@ export class GraphEditorComponent implements OnInit, OnChanges {
   private max = 1000000;
   private min = 0;
   isItemClicked!: boolean;
+  iGraph: any = {};
 
   constructor(private cdr: ChangeDetectorRef) {
   }
@@ -90,6 +95,8 @@ export class GraphEditorComponent implements OnInit, OnChanges {
 
   configureDragAndDrop(): void {
     const inputMode = this.graphComponent.inputMode = new GraphEditorInputMode()
+    inputMode.allowAddLabel = false;
+    inputMode.allowEditLabelOnDoubleClick = false;
     const nodeDropInputMode = inputMode.nodeDropInputMode
     nodeDropInputMode.enabled = true
     nodeDropInputMode.isGroupNodePredicate = (draggedNode: INode): boolean =>
@@ -128,10 +135,9 @@ export class GraphEditorComponent implements OnInit, OnChanges {
   getLabelListner = (sender: any, evt: { item: any; }) => {
     const label = evt.item;
     const owner = label.owner;
-    console.log(owner)
     if (owner instanceof INode) {
       owner.tag = {id: owner.tag.id, label: label.text, style: owner.tag.style, layout: owner.tag.layout};
-      this.replaceEdgeTag(owner.tag.id, label.text)
+      this.replaceEdgeTag(owner.tag.id, label.text, owner.tag.label)
     } else if (owner instanceof IEdge) {
       owner.tag = {
         id: owner.tag.id,
@@ -146,15 +152,13 @@ export class GraphEditorComponent implements OnInit, OnChanges {
     }
   }
 
-  private replaceEdgeTag(id: string, label: string) {
+  private replaceEdgeTag(id: string, label: string, oldLabel: string) {
     this.graphComponent.graph.edges.forEach((edge) => {
-      if (edge.tag.sourceLabel === id) {
+      if (edge.tag.sourceLabel === id || edge.tag.sourceLabel === oldLabel) {
         edge.tag.sourceLabel = label
-      } else if (edge.tag.targetLabel === id) {
+      } else if (edge.tag.targetLabel === id || edge.tag.targetLabel === oldLabel) {
         edge.tag.targetLabel = label
       }
-
-      console.log(edge.tag)
     });
 
   }
@@ -304,6 +308,9 @@ export class GraphEditorComponent implements OnInit, OnChanges {
         case 'save':
           this.save();
           break;
+        case 'refresh':
+          this.createGraph(this.iGraph);
+          break;
         case 'undo':
           ICommand.UNDO.execute(null, this.graphComponent)
           break;
@@ -340,13 +347,10 @@ export class GraphEditorComponent implements OnInit, OnChanges {
       };
       jsonGraph.edges.push(jsonEdge);
     });
-
-    console.log(jsonGraph);
-    this.createGraph(jsonGraph)
+    this.iGraph = jsonGraph;
   }
 
   changeEdgeNode(property: any) {
-    console.log(property.label);
     if (property.source) {
       this.graphComponent.graph.edges.forEach((data) => {
         const source = this.graphComponent.graph.nodes.find((node) =>
@@ -358,7 +362,7 @@ export class GraphEditorComponent implements OnInit, OnChanges {
             id: data.tag.id,
             source: source,
             target: target,
-            label: property.label,
+            label: !this.validateLabel(property.label, 'edge') ? property.label : null,
             sourceLabel: property.sourceLabel, targetLabel: property.targetLabel,
             style: data.tag.style,
             layout: data.tag.layout
@@ -368,18 +372,28 @@ export class GraphEditorComponent implements OnInit, OnChanges {
     } else {
       this.graphComponent.graph.nodes.forEach((data) => {
         if (data.tag.id === property.id) {
+          const oldLabel = data.tag.label
           data.tag = {
             id: data.tag.id,
-            label: property.label,
+            label: !this.validateLabel(property.label, 'node') ? property.label : null,
             style: data.tag.style,
             layout: data.tag.layout
           }
+          this.replaceEdgeTag(data.tag.id, data.tag.label, oldLabel)
+
         }
-        this.replaceEdgeTag(data.tag.id, data.tag.label)
       })
     }
     this.save();
+    console.log(this.iGraph)
+    this.createGraph(this.iGraph)
   }
 
-
+  private validateLabel(label: string, type: string) {
+    if (type === 'edge') {
+      return this.graphComponent.graph.edges.find((edge) => edge.tag.label === label)
+    } else {
+      return this.graphComponent.graph.nodes.find((node) => node.tag.label === label)
+    }
+  }
 }
