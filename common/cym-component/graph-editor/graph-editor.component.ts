@@ -131,7 +131,7 @@ export class GraphEditorComponent implements OnInit, OnChanges {
     console.log(owner)
     if (owner instanceof INode) {
       owner.tag = {id: owner.tag.id, label: label.text, style: owner.tag.style, layout: owner.tag.layout};
-      this.replaceEdgeTag(owner.tag.id, label.text)
+      this.replaceEdgeTag(owner.tag.id, label.text, owner.tag.label)
     } else if (owner instanceof IEdge) {
       owner.tag = {
         id: owner.tag.id,
@@ -146,15 +146,14 @@ export class GraphEditorComponent implements OnInit, OnChanges {
     }
   }
 
-  private replaceEdgeTag(id: string, label: string) {
+  private replaceEdgeTag(id: string, label: string, oldLabel: string) {
     this.graphComponent.graph.edges.forEach((edge) => {
-      if (edge.tag.sourceLabel === id) {
+      console.log(edge.tag.sourceLabel, oldLabel)
+      if (edge.tag.sourceLabel === id || edge.tag.sourceLabel === oldLabel) {
         edge.tag.sourceLabel = label
-      } else if (edge.tag.targetLabel === id) {
+      } else if (edge.tag.targetLabel === id || edge.tag.targetLabel === oldLabel) {
         edge.tag.targetLabel = label
       }
-
-      console.log(edge.tag)
     });
 
   }
@@ -368,14 +367,16 @@ export class GraphEditorComponent implements OnInit, OnChanges {
     } else {
       this.graphComponent.graph.nodes.forEach((data) => {
         if (data.tag.id === property.id) {
+          const oldLabel = data.tag.label
           data.tag = {
             id: data.tag.id,
             label: property.label,
             style: data.tag.style,
             layout: data.tag.layout
           }
+          this.replaceEdgeTag(data.tag.id, data.tag.label, oldLabel)
+
         }
-        this.replaceEdgeTag(data.tag.id, data.tag.label)
       })
     }
     this.save();
