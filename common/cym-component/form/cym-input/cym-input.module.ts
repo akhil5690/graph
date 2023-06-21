@@ -4,7 +4,7 @@ import {CymInputComponent} from "./cym-input.component";
 import {InputTextModule} from "primeng/inputtext";
 import {FormsModule} from "@angular/forms";
 import {RequiredComponent} from "../cym-required/required.component";
-import {CymTooltipModule} from "../cym-tooltip/cym-tooltip.module";
+import {CymTooltipModule} from "../../../cym-containers/cym-overlay/cym-tooltip/cym-tooltip.module";
 
 
 @NgModule({
@@ -13,7 +13,8 @@ import {CymTooltipModule} from "../cym-tooltip/cym-tooltip.module";
     CommonModule,
     InputTextModule,
     FormsModule,
-    CymTooltipModule
+    CymTooltipModule,
+
   ],
   exports: [CymInputComponent]
 })
