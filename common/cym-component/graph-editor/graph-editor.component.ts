@@ -380,6 +380,9 @@ export class GraphEditorComponent implements OnInit, OnChanges {
             this.graphComponent.graph.setNodeLayout(evt.copy, new Rect(evt.copy.layout.x + 5, evt.copy.layout.y, evt.copy.layout.width, evt.copy.layout.height))
             evt.copy.tag = {id: uuidv4(), label: undefined, style: evt.original.style, layout: evt.copy.layout};
           })
+          this.graphComponent.clipboard.fromClipboardCopier.addEdgeCopiedListener((sender, evt) => {
+            evt.copy.tag = {id: uuidv4(), label: undefined,source:evt.copy.sourceNode?.tag?.id,target:evt.copy.targetNode?.tag?.id};
+          })
 
           break;
         case 'paste':
