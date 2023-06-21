@@ -10,7 +10,7 @@ import {SignInModule} from "../../../widgets/sign-in/sign-in.module";
 import {DividerModule} from "primeng/divider";
 import {InputTextModule} from "primeng/inputtext";
 import {WidgetFrameModule} from "../../../../../../../common/cym-component/frames/widget-frame/widget-frame.module";
-import {CymTooltipModule} from "../../../../../../../common/cym-component/form/cym-tooltip/cym-tooltip.module";
+import {CymTooltipModule} from "../../../../../../../common/cym-containers/cym-overlay/cym-tooltip/cym-tooltip.module";
 import {NgOtpInputModule} from "ng-otp-input";
 import {CymOtpModule} from "../../../../../../../common/cym-component/form/cym-otp/cym-otp.module";
 import {CheckboxModule} from "primeng/checkbox";

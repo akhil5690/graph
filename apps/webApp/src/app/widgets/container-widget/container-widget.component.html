@@ -1,53 +1,82 @@
-<cym-div class="margin">
-  <cym-div class="header-title">Container Widget</cym-div>
-  <cym-div>
-    <cym-div class="tool-header">Toolbar Component</cym-div>
+<cym-div [cymClass]="'container'">
+  <cym-div [cymClass]="'header-title'">Container Widget</cym-div>
+  <cym-div [cymClass]="'grid-margin'">
+    <cym-div [cymClass]="'component-header'">Toolbar Component</cym-div>
     <cym-toolbar></cym-toolbar>
   </cym-div>
-  <cym-div class="grid-container">
+  <cym-div [cymClass]="'grid-container'">
     <cym-div>
-      <cym-div class="tool-header">Accordion Component</cym-div>
+      <cym-div [cymClass]="'component-header'">Accordion Component</cym-div>
       <cym-accordion [data]="data"></cym-accordion>
     </cym-div>
     <cym-div>
-      <cym-div class="tool-header">Card Component</cym-div>
+      <cym-div [cymClass]="'component-header'">Card Component</cym-div>
       <cym-card [cardData]="cardData"></cym-card>
     </cym-div>
   </cym-div>
-  <cym-div class="grid-container">
+  <cym-div [cymClass]="'grid-container'">
     <cym-div>
-      <cym-div class="tool-header">Divider Component</cym-div>
+      <cym-div [cymClass]="'component-header'">Divider Component</cym-div>
       <cym-div>Paragraph Divider 1</cym-div>
       <cym-divider></cym-divider>
       <cym-div>Paragraph Divider 2</cym-div>
     </cym-div>
     <cym-div>
-      <cym-div class="tool-header">Fieldset Component</cym-div>
+      <cym-div [cymClass]="'component-header'">Fieldset Component</cym-div>
       <cym-fieldset [fieldsetData]="fieldsetData" [fieldsetDataText]="fieldsetDataText">
       </cym-fieldset>
     </cym-div>
   </cym-div>
-  <cym-div class="grid-container">
+  <cym-div [cymClass]="'grid-container'">
     <cym-div>
-      <cym-div class="tool-header">Panel Component</cym-div>
+      <cym-div [cymClass]="'component-header'">Panel Component</cym-div>
       <cym-panel [panelHeaderData]="panelHeaderData" [panelHeaderDataText]="panelHeaderDataText"></cym-panel>
     </cym-div>
     <cym-div>
-      <cym-div class="tool-header">Splitter Component</cym-div>
+      <cym-div [cymClass]="'component-header'">Splitter Component</cym-div>
       <cym-splitter></cym-splitter>
     </cym-div>
   </cym-div>
-  <cym-div class="grid-container">
+  <cym-div [cymClass]="'grid-container'">
     <cym-div>
-      <cym-div class="tool-header">Scroll Panel Component</cym-div>
+      <cym-div [cymClass]="'component-header'">Scroll Panel Component</cym-div>
       <cym-scroll-panel></cym-scroll-panel>
     </cym-div>
     <cym-div>
-      <cym-div class="tool-header">Tab View Component</cym-div>
+      <cym-div [cymClass]="'component-header'">Tab View Component</cym-div>
       <cym-tab-view></cym-tab-view>
     </cym-div>
   </cym-div>
+
+  <cym-div [cymClass]="'grid-margin'">
+    <cym-div [cymClass]="'component-header'">Sidebar Component</cym-div>
+    <cym-sidebars></cym-sidebars>
+  </cym-div>
+
+  <cym-div [cymClass]="'grid-container'">
+    <cym-div>
+      <cym-div [cymClass]="'component-header'">Confirm Dialog Component</cym-div>
+      <cym-confirm-dialog></cym-confirm-dialog>
+    </cym-div>
+    <cym-div>
+      <cym-div [cymClass]="'component-header'">Confirm Popup Component</cym-div>
+      <cym-confirm-popup></cym-confirm-popup>
+    </cym-div>
+  </cym-div>
+
+  <cym-div [cymClass]="'grid-container'">
+    <cym-div>
+      <cym-div [cymClass]="'component-header'">Dialog Component</cym-div>
+      <cym-dialog></cym-dialog>
+    </cym-div>
+    <cym-div>
+      <cym-div [cymClass]="'component-header'">Overlay Panel Component</cym-div>
+      <cym-overlay-panel></cym-overlay-panel>
+    </cym-div>
+  </cym-div>
+
 </cym-div>
+
 
 
 
