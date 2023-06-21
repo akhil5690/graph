@@ -33,4 +33,13 @@
   --main-no-footer: calc(100vh - (var(--top-toolbar-height)));
   --sidebar-width: 15rem;
 
+
+
+
+  --tool-header-margin: 0 0 1rem 0;
+  --tool-header-font-size: 1rem;
+  --tool-header-color:rgb(214 27 119 / 51%);
+
+  --header-title-font-size:2rem;
+  --header-title-font-color:var(--pink1);
 }

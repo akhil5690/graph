@@ -1,34 +1,27 @@
 .grid-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 10px;
+  grid-gap: 2rem;
   margin: 3rem;
 }
-
 .header-container {
-  font-size: 20px;
-  font-family: system-ui;
+  display: grid;
 }
 
 .header-title {
-  color: var(--pink1);
-  font-size: 25px;
+  display: grid;
   text-align: center;
   position: absolute;
   width: 100%;
-  font-family: system-ui;
-}
 
-.margin {
-  margin: 20px;
-}
 
-.marin-bottom {
-  margin-bottom: 0px;
 }
-
 .tool-header {
-  color: rgb(214 27 119 / 51%);
-  font-size: 15px;
+  display: grid;
   text-align: left;
+
+}
+.toolbar-container{
+  display: grid;
+  padding-top: 2rem;
 }
