@@ -3,7 +3,7 @@
     <div class="top-toolbar">
       <div *ngFor="let tool of toolBarItems">
         <div (click)="clickEvent(tool)" class="tools">
-          <img [src]="tool.icon" [alt]="tool.toolName" height="20" width="20">
+          <img [src]="tool.icon" [alt]="tool.toolName" [height]="tool.height" [width]="tool.width">
         </div>
       </div>
     </div>

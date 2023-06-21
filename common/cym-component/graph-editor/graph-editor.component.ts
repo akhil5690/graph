@@ -51,26 +51,49 @@ export class GraphEditorComponent implements OnInit, OnChanges {
   isFilterOpen: boolean = false;
   toolBarItems = [{
     toolName: 'save',
-    icon: 'assets/image/save.svg'
+    icon: 'assets/image/save.svg',
+    height: 20, width: 20
+
   }, {
     toolName: 'refresh',
-    icon: 'assets/image/refresh.svg'
+    icon: 'assets/image/refresh.svg',
+    height: 20, width: 20
+  }, {
+    toolName: 'zoomIn',
+    icon: 'assets/image/zoomIn.svg',
+    height: 20, width: 20
+  }, {
+    toolName: 'zoomOut',
+    icon: 'assets/image/zoomOut.svg',
+    height: 20, width: 20
   }, {
     toolName: 'undo',
-    icon: 'assets/image/undo.svg'
+    icon: 'assets/image/undo.svg',
+    height: 15, width: 15
   }, {
     toolName: 'redo',
-    icon: 'assets/image/redo.svg'
-  }, {
-    toolName: 'cut',
-    icon: 'assets/image/cut.svg'
-  }, {
-    toolName: 'copy',
-    icon: 'assets/image/copy.svg'
-  }, {
-    toolName: 'paste',
-    icon: 'assets/image/paste.svg'
-  }
+    icon: 'assets/image/redo.svg',
+    height: 15, width: 15
+  },
+    {
+      toolName: 'fit',
+      icon: 'assets/image/fullscreen.svg',
+      height: 15, width: 15
+    }, {
+      toolName: 'cut',
+      icon: 'assets/image/cut.svg',
+      height: 15, width: 15
+    }, {
+      toolName: 'copy',
+      icon: 'assets/image/copy.svg',
+      height: 15, width: 15
+    }, {
+      toolName: 'paste',
+      icon: 'assets/image/paste.svg',
+      height: 15, width: 15
+
+    }
+
   ]
   selectedItem: any;
 
@@ -323,6 +346,15 @@ export class GraphEditorComponent implements OnInit, OnChanges {
         case 'undo':
           ICommand.UNDO.execute(null, this.graphComponent)
           break;
+        case 'zoomIn':
+          ICommand.INCREASE_ZOOM.execute(null, this.graphComponent)
+          break;
+        case 'zoomOut':
+          ICommand.DECREASE_ZOOM.execute(null, this.graphComponent)
+          break;
+        case 'fit':
+          ICommand.FIT_CONTENT.execute(null, this.graphComponent)
+          break;
         case 'redo':
           ICommand.REDO.execute(null, this.graphComponent)
           break;
@@ -332,7 +364,7 @@ export class GraphEditorComponent implements OnInit, OnChanges {
         case 'copy':
           ICommand.COPY.execute(null, this.graphComponent);
           this.graphComponent.clipboard.fromClipboardCopier.addNodeCopiedListener((sender, evt) => {
-            evt.copy.tag = {id: uuidv4(), label: undefined, style: evt.original.style,layout:evt.original.layout};
+            evt.copy.tag = {id: uuidv4(), label: undefined, style: evt.original.style, layout: evt.original.layout};
           })
 
           break;
