@@ -364,7 +364,8 @@ export class GraphEditorComponent implements OnInit, OnChanges {
         case 'copy':
           ICommand.COPY.execute(null, this.graphComponent);
           this.graphComponent.clipboard.fromClipboardCopier.addNodeCopiedListener((sender, evt) => {
-            evt.copy.tag = {id: uuidv4(), label: undefined, style: evt.original.style, layout: evt.original.layout};
+            this.graphComponent.graph.setNodeLayout(evt.copy, new Rect(evt.copy.layout.x + 5, evt.copy.layout.y, evt.copy.layout.width, evt.copy.layout.height))
+            evt.copy.tag = {id: uuidv4(), label: undefined, style: evt.original.style, layout: evt.copy.layout};
           })
 
           break;
@@ -402,6 +403,7 @@ export class GraphEditorComponent implements OnInit, OnChanges {
       };
       jsonGraph.edges.push(jsonEdge);
     });
+    console.log(jsonGraph)
     this.iGraph = jsonGraph;
   }
 
