@@ -127,8 +127,6 @@ export class GraphEditorComponent implements OnInit, OnChanges {
 
   configureDragAndDrop(): void {
     const inputMode = this.graphComponent.inputMode = new GraphEditorInputMode()
-    inputMode.allowAddLabel = false;
-    inputMode.allowEditLabelOnDoubleClick = false;
     const nodeDropInputMode = inputMode.nodeDropInputMode
     nodeDropInputMode.enabled = true
     nodeDropInputMode.isGroupNodePredicate = (draggedNode: INode): boolean =>
@@ -138,8 +136,21 @@ export class GraphEditorComponent implements OnInit, OnChanges {
     this.edgeListener(inputMode);
     this.labelListener(inputMode);
     this.leftClickListener(inputMode);
+    this.onTagChange(inputMode)
     this.initializeDragAndDropPanel();
   }
+
+  onTagChange(inputMode: GraphEditorInputMode) {
+    this.graphComponent.graph.addEdgeTagChangedListener(this.triggerSave);
+    this.graphComponent.graph.addNodeTagChangedListener(this.triggerSave);
+    inputMode.addDeletedItemListener(this.triggerSave)
+  }
+
+  triggerSave = (sender: any, evt: any) => {
+    this.save();
+    this.createGraph(this.iGraph)
+  }
+
 
   private leftClickListener(inputMode: GraphEditorInputMode) {
     inputMode.addItemLeftClickedListener((sender, evt) => {
@@ -168,7 +179,13 @@ export class GraphEditorComponent implements OnInit, OnChanges {
     const label = evt.item;
     const owner = label.owner;
     if (owner instanceof INode) {
-      owner.tag = {id: owner.tag.id, label: label.text, style: owner.tag.style, layout: owner.tag.layout};
+      console.log(this.validateLabel(label.text, 'node'));
+      owner.tag = {
+        id: owner.tag.id,
+        label: !this.validateLabel(label.text, 'node') ? label.text : null,
+        style: owner.tag.style,
+        layout: owner.tag.layout
+      };
       this.replaceEdgeTag(owner.tag.id, label.text, owner.tag.label)
     } else if (owner instanceof IEdge) {
       owner.tag = {
@@ -182,6 +199,8 @@ export class GraphEditorComponent implements OnInit, OnChanges {
         layout: owner.tag.layout
       };
     }
+    this.save();
+    this.createGraph(this.iGraph)
   }
 
   private replaceEdgeTag(id: string, label: string, oldLabel: string) {
@@ -325,7 +344,14 @@ export class GraphEditorComponent implements OnInit, OnChanges {
     const edgeNode = builder.createEdgesSource({
       data: initGraph.edges, id: "id", labels: ['label'], sourceId: "source", targetId: "target", style: "style"
     })
+    edgeNode.edgeCreator.defaults.labels.style = new DefaultLabelStyle({
+      backgroundFill: 'white',
+      textSize: 10
+    })
+    // aligning the edge label
+    const labelModel = new EdgePathLabelModel({distance: 50});
 
+    edgeNode.edgeCreator.defaults.labels.layoutParameter = labelModel.createDefaultParameter();
     this.graphComponent.graph = builder.buildGraph();
     this.initTutorialDefaults(this.graphComponent.graph)
   }
@@ -338,7 +364,7 @@ export class GraphEditorComponent implements OnInit, OnChanges {
     if (this.graphComponent) {
       switch (tool.toolName) {
         case 'save':
-          this.save();
+          this.save()
           break;
         case 'refresh':
           this.createGraph(this.iGraph);
