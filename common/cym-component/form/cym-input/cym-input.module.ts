@@ -13,7 +13,8 @@ import {CymTooltipModule} from "../../../cym-containers/cym-overlay/cym-tooltip/
     CommonModule,
     InputTextModule,
     FormsModule,
-    CymTooltipModule
+    CymTooltipModule,
+
   ],
   exports: [CymInputComponent]
 })
