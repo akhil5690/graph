@@ -12,4 +12,5 @@ export class ContainerWidgetComponent {
   fieldsetDataText: any = "Paragraph for Fieldset";
   panelHeaderData: any = "Panel Header";
   panelHeaderDataText: any = "Panel Text";
+  dialogHeader: any = 'Dialog Header';
 }
