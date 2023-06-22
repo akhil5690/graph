@@ -23,7 +23,7 @@
     <!--   opens on click of nodes or edges for the details-->
     <div *ngIf="items && tab === 'details'">
       <!--      <app-details [data]="items"></app-details>-->
-      <cym-details [type]="type" [info]="items" (property)="property($event)"></cym-details>
+      <cym-details [type]="type" [data]="items" [info]="items" (property)="property($event)"></cym-details>
     </div>
     <!--   opens on click of filter  from tab -->
     <div *ngIf="tab === 'filter'">

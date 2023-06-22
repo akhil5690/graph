@@ -36,6 +36,17 @@ label {
   font-weight: var(--font-weight-normal);
 }
 
+.tool-header{
+  margin:var(--tool-header-margin);
+  color:var(--tool-header-color);
+}
+
+.header-title{
+  font-size:var( --header-title-font-size);
+  color: var( --header-title-font-color);
+}
+
+
 *::-webkit-scrollbar {
   width: var(--unit); /* width of the entire scrollbar */
 }

@@ -127,8 +127,6 @@ export class GraphEditorComponent implements OnInit, OnChanges {
 
   configureDragAndDrop(): void {
     const inputMode = this.graphComponent.inputMode = new GraphEditorInputMode()
-    inputMode.allowAddLabel = false;
-    inputMode.allowEditLabelOnDoubleClick = false;
     const nodeDropInputMode = inputMode.nodeDropInputMode
     nodeDropInputMode.enabled = true
     nodeDropInputMode.isGroupNodePredicate = (draggedNode: INode): boolean =>
@@ -168,7 +166,13 @@ export class GraphEditorComponent implements OnInit, OnChanges {
     const label = evt.item;
     const owner = label.owner;
     if (owner instanceof INode) {
-      owner.tag = {id: owner.tag.id, label: label.text, style: owner.tag.style, layout: owner.tag.layout};
+      console.log(this.validateLabel(label.text, 'node'));
+      owner.tag = {
+        id: owner.tag.id,
+        label: !this.validateLabel(label.text, 'node') ? label.text : null,
+        style: owner.tag.style,
+        layout: owner.tag.layout
+      };
       this.replaceEdgeTag(owner.tag.id, label.text, owner.tag.label)
     } else if (owner instanceof IEdge) {
       owner.tag = {
@@ -182,6 +186,8 @@ export class GraphEditorComponent implements OnInit, OnChanges {
         layout: owner.tag.layout
       };
     }
+    this.save();
+    this.createGraph(this.iGraph)
   }
 
   private replaceEdgeTag(id: string, label: string, oldLabel: string) {
@@ -325,7 +331,14 @@ export class GraphEditorComponent implements OnInit, OnChanges {
     const edgeNode = builder.createEdgesSource({
       data: initGraph.edges, id: "id", labels: ['label'], sourceId: "source", targetId: "target", style: "style"
     })
+    edgeNode.edgeCreator.defaults.labels.style = new DefaultLabelStyle({
+      backgroundFill: 'white',
+      textSize: 10
+    })
+    // aligning the edge label
+    const labelModel = new EdgePathLabelModel({distance: 50});
 
+    edgeNode.edgeCreator.defaults.labels.layoutParameter = labelModel.createDefaultParameter();
     this.graphComponent.graph = builder.buildGraph();
     this.initTutorialDefaults(this.graphComponent.graph)
   }
@@ -338,7 +351,7 @@ export class GraphEditorComponent implements OnInit, OnChanges {
     if (this.graphComponent) {
       switch (tool.toolName) {
         case 'save':
-          this.save();
+          this.save()
           break;
         case 'refresh':
           this.createGraph(this.iGraph);
@@ -364,7 +377,11 @@ export class GraphEditorComponent implements OnInit, OnChanges {
         case 'copy':
           ICommand.COPY.execute(null, this.graphComponent);
           this.graphComponent.clipboard.fromClipboardCopier.addNodeCopiedListener((sender, evt) => {
-            evt.copy.tag = {id: uuidv4(), label: undefined, style: evt.original.style, layout: evt.original.layout};
+            this.graphComponent.graph.setNodeLayout(evt.copy, new Rect(evt.copy.layout.x + 5, evt.copy.layout.y, evt.copy.layout.width, evt.copy.layout.height))
+            evt.copy.tag = {id: uuidv4(), label: undefined, style: evt.original.style, layout: evt.copy.layout};
+          })
+          this.graphComponent.clipboard.fromClipboardCopier.addEdgeCopiedListener((sender, evt) => {
+            evt.copy.tag = {id: uuidv4(), label: undefined,source:evt.copy.sourceNode?.tag?.id,target:evt.copy.targetNode?.tag?.id};
           })
 
           break;
@@ -402,6 +419,7 @@ export class GraphEditorComponent implements OnInit, OnChanges {
       };
       jsonGraph.edges.push(jsonEdge);
     });
+    console.log(jsonGraph)
     this.iGraph = jsonGraph;
   }
 
