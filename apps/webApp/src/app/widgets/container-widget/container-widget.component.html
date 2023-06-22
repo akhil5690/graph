@@ -1,57 +1,89 @@
-<cym-div class="margin">
-  <cym-div class="header-title">Container Widget</cym-div>
-  <cym-div>
-    <h3 class="tool-header">Toolbar Component</h3>
+<cym-div [cymClass]="'container'">
+  <cym-div [cymClass]="'header-title'">Cymonix-IQ UI Components</cym-div>
+  <cym-div [cymClass]="'grid-margin'">
+    <cym-div [cymClass]="'component-header'">Toolbar Component</cym-div>
     <cym-toolbar></cym-toolbar>
   </cym-div>
-  <br>
-  <cym-div class="grid-container">
-    <span>
-       <h3 class="tool-header">Accordion Component</h3>
-      <cym-accordion [data]="data"></cym-accordion>
-    </span>
-    <span>
-      <h3 class="tool-header">Card Component</h3>
-    <cym-card [cardData]="cardData"></cym-card>
-    </span>
-  </cym-div>
-  <br>
-  <cym-div class="grid-container">
-      <span>
-      <h3 class="tool-header">Divider Component</h3>
-   <h3>Paragraph Divider 1</h3>
-      <cym-divider></cym-divider>
-      <h3>Paragraph Divider 2</h3>
-    </span>
+  <cym-div [cymClass]="'grid-container'">
     <cym-div>
-      <h3 class="tool-header">Fieldset Component</h3>
+      <cym-div [cymClass]="'component-header'">Accordion Component</cym-div>
+      <cym-accordion [data]="data"></cym-accordion>
+    </cym-div>
+    <cym-div>
+      <cym-div [cymClass]="'component-header'">Card Component</cym-div>
+      <cym-card [cardData]="cardData"></cym-card>
+    </cym-div>
+  </cym-div>
+  <cym-div [cymClass]="'grid-container'">
+    <cym-div>
+      <cym-div [cymClass]="'component-header'">Divider Component</cym-div>
+      <cym-div>Paragraph Divider 1</cym-div>
+      <cym-divider></cym-divider>
+      <cym-div>Paragraph Divider 2</cym-div>
+    </cym-div>
+    <cym-div>
+      <cym-div [cymClass]="'component-header'">Fieldset Component</cym-div>
       <cym-fieldset [fieldsetData]="fieldsetData" [fieldsetDataText]="fieldsetDataText">
       </cym-fieldset>
     </cym-div>
   </cym-div>
-  <br>
-  <cym-div class="grid-container">
+  <cym-div [cymClass]="'grid-container'">
     <cym-div>
-      <h3 class="tool-header">Panel Component</h3>
+      <cym-div [cymClass]="'component-header'">Panel Component</cym-div>
       <cym-panel [panelHeaderData]="panelHeaderData" [panelHeaderDataText]="panelHeaderDataText"></cym-panel>
     </cym-div>
     <cym-div>
-      <h3 class="tool-header">Splitter Component</h3>
+      <cym-div [cymClass]="'component-header'">Splitter Component</cym-div>
       <cym-splitter></cym-splitter>
     </cym-div>
   </cym-div>
-  <br>
-  <cym-div class="grid-container">
+  <cym-div [cymClass]="'grid-container'">
     <cym-div>
-      <h3 class="tool-header">Scroll Panel Component</h3>
+      <cym-div [cymClass]="'component-header'">Scroll Panel Component</cym-div>
       <cym-scroll-panel></cym-scroll-panel>
     </cym-div>
     <cym-div>
-      <h3 class="tool-header">Tab View Component</h3>
-      <cym-tab-view></cym-tab-view>
+      <cym-div [cymClass]="'component-header'">Tab View Component</cym-div>
+      <cym-tab-view
+      ></cym-tab-view>
     </cym-div>
   </cym-div>
+
+  <cym-div [cymClass]="'grid-margin'">
+    <cym-div [cymClass]="'component-header'">Sidebar Component</cym-div>
+    <cym-sidebars></cym-sidebars>
+  </cym-div>
+
+  <cym-div [cymClass]="'grid-container'">
+    <cym-div>
+      <cym-div [cymClass]="'component-header'">Confirm Dialog Component</cym-div>
+      <cym-confirm-dialog></cym-confirm-dialog>
+    </cym-div>
+    <cym-div>
+      <cym-div [cymClass]="'component-header'">Confirm Popup Component</cym-div>
+      <cym-confirm-popup></cym-confirm-popup>
+    </cym-div>
+  </cym-div>
+
+  <cym-div [cymClass]="'grid-container'">
+    <cym-div>
+      <cym-div [cymClass]="'component-header'">Dialog Component</cym-div>
+      <cym-dialog [propertyMetaData]="dialogHeader">
+        <cym-div class="font-style">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </cym-div>
+<!--        <cym-div></cym-div>-->
+      </cym-dialog>
+    </cym-div>
+    <cym-div>
+      <cym-div [cymClass]="'component-header'">Overlay Panel Component</cym-div>
+      <cym-overlay-panel></cym-overlay-panel>
+    </cym-div>
+  </cym-div>
+
+  <cym-dropdown [cities]="cities"></cym-dropdown>
 </cym-div>
+
 
 
 

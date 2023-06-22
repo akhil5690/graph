@@ -1,0 +1,16 @@
+<p-button (click)="showDialog()" icon="pi pi-external-link" label="Show"></p-button>
+<p-dialog [(visible)]="visible"
+          [modal]="true"
+          [style]="{ width: '50vw' }"
+          [draggable]="false"
+          [resizable]="false">
+  <p-header>
+    <span>{{propertyMetaData}}</span>
+  </p-header>
+  <ng-content></ng-content>
+  <p-footer>
+    <span>
+       <p-button (click)="closeDialog()" label="Close"></p-button>
+    </span>
+  </p-footer>
+</p-dialog>

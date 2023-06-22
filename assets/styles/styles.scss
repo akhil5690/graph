@@ -36,6 +36,17 @@ label {
   font-weight: var(--font-weight-normal);
 }
 
+.tool-header{
+  margin:var(--tool-header-margin);
+  color:var(--tool-header-color);
+}
+
+.header-title{
+  font-size:var( --header-title-font-size);
+  color: var( --header-title-font-color);
+}
+
+
 *::-webkit-scrollbar {
   width: var(--unit); /* width of the entire scrollbar */
 }
@@ -49,4 +60,10 @@ label {
   border-radius: 20px; /* roundness of the scroll thumb */
   border: calc(var(--unit) / 4) solid var(--primary-background-color);
 }
-
+//overlay modal
+.p-dialog .p-dialog-content {
+  padding: 1rem;
+}
+.p-dialog .p-dialog-footer {
+  padding: 1rem;
+}

@@ -22,33 +22,55 @@ import {CymScrollPanelModule} from "../../../../../../common/cym-containers/cym-
 import {CymTabViewModule} from "../../../../../../common/cym-containers/cym-tab-view/cym-tab-view.module";
 import {CymToolbarModule} from "../../../../../../common/cym-containers/cym-toolbar/cym-toolbar.module";
 import {CymDivModule} from "../../../../../../common/cym-containers/cym-div/cym-div.module";
+import {
+    CymConfirmDialogModule
+} from "../../../../../../common/cym-containers/cym-overlay/cym-confirm-dialog/cym-confirm-dialog.module";
+import {
+  CymConfirmPopupModule
+} from "../../../../../../common/cym-containers/cym-overlay/cym-confirm-popup/cym-confirm-popup.module";
+import {CymDialogModule} from "../../../../../../common/cym-containers/cym-overlay/cym-dialog/cym-dialog.module";
+import {
+  CymOverlayPanelModule
+} from "../../../../../../common/cym-containers/cym-overlay/cym-overlay-panel/cym-overlay-panel.module";
+import {CymSidebarModule} from "../../../../../../common/cym-containers/cym-overlay/cym-sidebar/cym-sidebar.module";
+import {CymTooltipModule} from "../../../../../../common/cym-containers/cym-overlay/cym-tooltip/cym-tooltip.module";
+import {CymInputModule} from "../../../../../../common/cym-component/form/cym-input/cym-input.module";
+import {CymDropdownModule} from "../../../../../../common/cym-component/form/cym-dropdown/cym-dropdown.module";
 @NgModule({
   declarations: [
     ContainerWidgetComponent,
 
   ],
-  imports: [
-    CommonModule,
-    InputTextModule,
-    ButtonModule,
-    SignInModule,
-    GraphModule,
-    RightSidebarModule,
-    HttpClientModule,
-    WidgetFrameModule,
-    TabViewModule,
-    GraphEditorModule,
-    CymAccordionModule,
-    CymCardModule,
-    CymDividerModule,
-    CymFieldsetModule,
-    CymPanelModule,
-    CymSplitterModule,
-    CymScrollPanelModule,
-    CymTabViewModule,
-    CymToolbarModule,
-    CymDivModule,
-  ],
+    imports: [
+        CommonModule,
+        InputTextModule,
+        ButtonModule,
+        SignInModule,
+        GraphModule,
+        RightSidebarModule,
+        HttpClientModule,
+        WidgetFrameModule,
+        TabViewModule,
+        GraphEditorModule,
+        CymAccordionModule,
+        CymCardModule,
+        CymDividerModule,
+        CymFieldsetModule,
+        CymPanelModule,
+        CymSplitterModule,
+        CymScrollPanelModule,
+        CymTabViewModule,
+        CymToolbarModule,
+        CymDivModule,
+        CymConfirmDialogModule,
+        CymConfirmPopupModule,
+        CymDialogModule,
+        CymOverlayPanelModule,
+        CymSidebarModule,
+        CymTooltipModule,
+        CymInputModule,
+        CymDropdownModule,
+    ],
   providers:[GraphService,HttpHandler],
   exports: [ContainerWidgetComponent]
 })
