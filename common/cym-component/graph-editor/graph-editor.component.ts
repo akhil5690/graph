@@ -395,7 +395,9 @@ export class GraphEditorComponent implements OnInit, OnChanges {
     this.graphComponent.graph.nodes.forEach((node) => {
       const jsonNode = {
         id: node?.tag?.id,
-        label: node?.tag?.label, style: node.tag.style, layout: node.tag.layout
+        label: node?.tag?.label,
+        style: node.tag.style, layout: node.tag.layout,
+        properties:node.tag?.properties
       };
       jsonGraph.nodes.push(jsonNode);
     });
@@ -437,13 +439,15 @@ export class GraphEditorComponent implements OnInit, OnChanges {
       })
     } else {
       this.graphComponent.graph.nodes.forEach((data) => {
+        console.log(property)
         if (data.tag.id === property.id) {
           const oldLabel = data.tag.label
           data.tag = {
             id: data.tag.id,
             label: !this.validateLabel(property.label, 'node') ? property.label : null,
             style: data.tag.style,
-            layout: data.tag.layout
+            layout: data.tag.layout,
+            properties:property.properties
           }
           this.replaceEdgeTag(data.tag.id, data.tag.label, oldLabel)
 
