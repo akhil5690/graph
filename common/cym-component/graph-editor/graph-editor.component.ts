@@ -377,36 +377,11 @@ export class GraphEditorComponent implements OnInit, OnChanges {
           ICommand.CUT.execute(null, this.graphComponent)
           break;
         case 'copy':
-          this.nodeSelection = this.graphComponent.selection.selectedNodes.toList().map((node) => node.tag.id);
-          this.edgeSelection = this.graphComponent.selection.selectedEdges.toList().map((edge) => edge.tag.id);
-          ICommand.COPY.execute(null, this.graphComponent);
-          this.graphComponent.clipboard.fromClipboardCopier.addNodeCopiedListener((sender, evt) => {
-            this.graphComponent.graph.setNodeLayout(evt.copy, new Rect(evt.copy.layout.x + 5, evt.copy.layout.y, evt.copy.layout.width, evt.copy.layout.height))
-            evt.copy.tag = {id: uuidv4(), label: undefined, style: evt.original.style, layout: evt.copy.layout};
-
-          })
-
-          this.graphComponent.clipboard.fromClipboardCopier.addEdgeCopiedListener((sender, evt) => {
-            evt.copy.tag = {
-              id: uuidv4(),
-              label: undefined,
-              source: evt.copy.sourceNode?.tag?.id,
-              target: evt.copy.targetNode?.tag?.id,
-              style: evt.copy.tag.style
-            };
-          })
-
+          this.copy();
+          this.save();
           break;
         case 'paste':
-          ICommand.PASTE.execute(null, this.graphComponent);
-          this.save();
-          this.createGraph(this.iGraph);
-          this.graphComponent.graph.nodes.forEach((node)=>{
-            // this.graphComponent.selection.setSelected(node, true);
-            if (this.nodeSelection.includes(node.tag.id)) {
-              this.graphComponent.selection.setSelected(node, true);
-            }
-          })
+          this.paste()
           break;
       }
     }
@@ -486,5 +461,39 @@ export class GraphEditorComponent implements OnInit, OnChanges {
     } else {
       return this.graphComponent.graph.nodes.find((node) => node.tag.label === label)
     }
+  }
+
+  private copy() {
+    this.nodeSelection = this.graphComponent.selection.selectedNodes.toList().map((node) => node.tag.id);
+    this.edgeSelection = this.graphComponent.selection.selectedEdges.toList().map((edge) => edge.tag.id);
+    ICommand.COPY.execute(null, this.graphComponent);
+    this.graphComponent.clipboard.fromClipboardCopier.addNodeCopiedListener((sender, evt) => {
+      this.graphComponent.graph.setNodeLayout(evt.copy, new Rect(evt.copy.layout.x + 5, evt.copy.layout.y, evt.copy.layout.width, evt.copy.layout.height))
+      evt.copy.tag = {id: uuidv4(), label: undefined, style: evt.original.style, layout: evt.copy.layout};
+
+    })
+
+    this.graphComponent.clipboard.fromClipboardCopier.addEdgeCopiedListener((sender, evt) => {
+      evt.copy.tag = {
+        id: uuidv4(),
+        label: undefined,
+        source: evt.copy.sourceNode?.tag?.id,
+        target: evt.copy.targetNode?.tag?.id,
+        style: evt.copy.tag.style
+      };
+    })
+
+  }
+
+  private paste() {
+    ICommand.PASTE.execute(null, this.graphComponent);
+    this.save();
+    this.createGraph(this.iGraph);
+    this.graphComponent.graph.nodes.forEach((node) => {
+      // this.graphComponent.selection.setSelected(node, true);
+      if (this.nodeSelection.includes(node.tag.id)) {
+        this.graphComponent.selection.setSelected(node, true);
+      }
+    })
   }
 }
