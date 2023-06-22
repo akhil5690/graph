@@ -18,14 +18,10 @@ pipelines:
                       - ssm_explorer_uri=$(aws ssm get-parameter --name "/${Env}/api/Url/Explorer" --query "Parameter.Value" --output text)
                       - ssm_convert_to_schema_uri=$(aws ssm get-parameter --name "/${Env}/api/Url/ConvertToSchema" --query "Parameter.Value" --output text)
                       - ssm_convert_to_schema_uri=$(aws ssm get-parameter --name "/${Env}/api/Url/ConvertToSchema" --query "Parameter.Value" --output text)
-                      - which sed
-                      - echo "ssm_schema_uri: $ssm_schema_uri"
-                      - echo "ssm_explorer_uri: $ssm_explorer_uri"
-                      - echo "ssm_convert_to_schema_uri: $ssm_convert_to_schema_uri"
-                      #- sed -i "s|\"schema_uri\": \"ssm\"|\"schema_uri\": \"$ssm_schema_uri\"|" config.json
-                      #- sed -i "s|\"explorer_uri\": \"ssm\"|\"explorer_uri\": \"$ssm_explorer_uri\"|" config.json
-                      #- sed -i "s|\"convert_to_schema_uri\": \"ssm\"|\"convert_to_schema_uri\": \"$ssm_convert_to_schema_uri\"|" config.json
-                      #- cat config.json
+                      - sed -i "s|\"schema_uri\": \"ssm\"|\"schema_uri\": \"$ssm_schema_uri\"|" config.json
+                      - sed -i "s|\"explorer_uri\": \"ssm\"|\"explorer_uri\": \"$ssm_explorer_uri\"|" config.json
+                      - sed -i "s|\"convert_to_schema_uri\": \"ssm\"|\"convert_to_schema_uri\": \"$ssm_convert_to_schema_uri\"|" config.json
+                      - cat config.json
                       - zip -r angular.zip .
                       - aws s3 --region $AWS_DEFAULT_REGION cp angular.zip s3://$AWS_Bucket
                       - aws ssm delete-parameter --region $AWS_DEFAULT_REGION --name /$Env/Cymonix/FusionCentre/version
