@@ -76,9 +76,9 @@
         </div>
         <div>
           <div class="subtitle label">
-            <div>Property *</div>
+            <div>Type *</div>
           </div>
-          <input pInputText type="text" [(ngModel)]=" nodeForm['properties'][i]['type']">
+          <p-dropdown [options]="typeOptions" [(ngModel)]="nodeForm['properties'][i]['type']" [placeholder]="'select type'" optionLabel="option" optionValue="value"></p-dropdown>
         </div>
         <div>
           <div class="subtitle label">

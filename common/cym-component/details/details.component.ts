@@ -16,6 +16,7 @@ export class DetailsComponent implements OnChanges, OnInit {
   @Output() property = new EventEmitter()
   edgeForm: { [key: string]: any } = {};
   nodeForm: { [key: string]: any } = {};
+  typeOptions: any;
 
   ngOnChanges(): void {
     this.headers = Object.keys(this.data[0]);
@@ -24,7 +25,19 @@ export class DetailsComponent implements OnChanges, OnInit {
   }
 
   getForm() {
-    console.log(this.info)
+    this.typeOptions = [{
+      option:"String",
+      value:"string"
+    },{
+      option:"Number",
+      value:"number"
+    },{
+      option:"Boolean",
+      value:"boolean"
+    },{
+      option:"Enum",
+      value:"enum"
+    },]
     if (this.info[0].source && this.info[0].target) {
       this.edgeForm = {
         id: this.info[0].id,
@@ -38,7 +51,7 @@ export class DetailsComponent implements OnChanges, OnInit {
       this.nodeForm = {
         id: this.info[0].id,
         label: this.info[0].label,
-        properties: []
+        properties: this.info[0].properties ? this.info[0].properties : []
       };
     }
   }
