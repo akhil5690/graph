@@ -76,4 +76,10 @@ label {
   border-radius: 20px; /* roundness of the scroll thumb */
   border: calc(var(--unit) / 4) solid var(--primary-background-color);
 }
-
+//overlay modal
+.p-dialog .p-dialog-content {
+  padding: 1rem;
+}
+.p-dialog .p-dialog-footer {
+  padding: 1rem;
+}

@@ -1,5 +1,5 @@
 <cym-div [cymClass]="'container'">
-  <cym-div [cymClass]="'header-title'">Container Widget</cym-div>
+  <cym-div [cymClass]="'header-title'">Cymonix-IQ UI Components</cym-div>
   <cym-div [cymClass]="'grid-margin'">
     <cym-div [cymClass]="'component-header'">Toolbar Component</cym-div>
     <cym-toolbar></cym-toolbar>
@@ -44,7 +44,8 @@
     </cym-div>
     <cym-div>
       <cym-div [cymClass]="'component-header'">Tab View Component</cym-div>
-      <cym-tab-view></cym-tab-view>
+      <cym-tab-view
+      ></cym-tab-view>
     </cym-div>
   </cym-div>
 
@@ -67,7 +68,12 @@
   <cym-div [cymClass]="'grid-container'">
     <cym-div>
       <cym-div [cymClass]="'component-header'">Dialog Component</cym-div>
-      <cym-dialog></cym-dialog>
+      <cym-dialog [propertyMetaData]="dialogHeader">
+        <cym-div class="font-style">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </cym-div>
+<!--        <cym-div></cym-div>-->
+      </cym-dialog>
     </cym-div>
     <cym-div>
       <cym-div [cymClass]="'component-header'">Overlay Panel Component</cym-div>
