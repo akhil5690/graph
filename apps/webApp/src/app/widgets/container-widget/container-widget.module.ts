@@ -35,6 +35,7 @@ import {
 import {CymSidebarModule} from "../../../../../../common/cym-containers/cym-overlay/cym-sidebar/cym-sidebar.module";
 import {CymTooltipModule} from "../../../../../../common/cym-containers/cym-overlay/cym-tooltip/cym-tooltip.module";
 import {CymInputModule} from "../../../../../../common/cym-component/form/cym-input/cym-input.module";
+import {CymDropdownModule} from "../../../../../../common/cym-component/form/cym-dropdown/cym-dropdown.module";
 @NgModule({
   declarations: [
     ContainerWidgetComponent,
@@ -68,6 +69,7 @@ import {CymInputModule} from "../../../../../../common/cym-component/form/cym-in
         CymSidebarModule,
         CymTooltipModule,
         CymInputModule,
+        CymDropdownModule,
     ],
   providers:[GraphService,HttpHandler],
   exports: [ContainerWidgetComponent]
