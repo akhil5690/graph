@@ -1,11 +1,11 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'cym-container-widget',
   templateUrl: './container-widget.component.html',
   styleUrls: ['./container-widget.component.scss']
 })
-export class ContainerWidgetComponent {
+export class ContainerWidgetComponent implements OnInit{
   data: any = "Accordion Data";
   cardData: any = "Card Data"
   fieldsetData: any = "Fieldset Data";
@@ -13,4 +13,15 @@ export class ContainerWidgetComponent {
   panelHeaderData: any = "Panel Header";
   panelHeaderDataText: any = "Panel Text";
   dialogHeader: any = 'Dialog Header';
+  cities:any;
+
+  ngOnInit() {
+    this.cities = [
+      {name: 'New York', code: 'NY'},
+      {name: 'Rome', code: 'RM'},
+      {name: 'London', code: 'LDN'},
+      {name: 'Istanbul', code: 'IST'},
+      {name: 'Paris', code: 'PRS'}
+    ];
+  }
 }
