@@ -181,7 +181,7 @@ export class GraphEditorComponent implements OnInit {
     // node click listener which sends node or edge details to the sidebar
     inputMode.addItemLeftClickedListener((sender, evt) => {
 
-      this.getNeighbourGraph()
+      this.getNeighbourGraph(evt.item as INode)
 
       this.isItemClicked = true;
 
@@ -651,18 +651,25 @@ export class GraphEditorComponent implements OnInit {
   }
 
 
-  private getNeighbourGraph() {
+  private getNeighbourGraph(node: INode) {
+    const jsonGraph: { nodes: any[], edges: any[] } = {
+      nodes: [],
+      edges: []
+    };
     const algorithm = new Neighborhood({
       maximumDistance: 2,
-      traversalDirection: TraversalDirection.SUCCESSOR,startNodes:[this.graphComponent.graph.nodes.get(0)]
+      traversalDirection: TraversalDirection.SUCCESSOR, startNodes: [node]
     });
     const result = algorithm.run(this.graphComponent.graph);
-    const nodes = result.neighbors;
     for (const neighbor of result.neighbors) {
-      console.log(neighbor.tag)
-      const edges = this.graphComponent.graph.edges.filter(edge=>edge.tag.target === neighbor.tag.id)
-      edges.forEach(edge=>console.log(edge.tag))
+      jsonGraph.nodes.push(node.tag)
+      jsonGraph.nodes.push(neighbor.tag)
+      this.graphComponent.graph.edges.filter(edge => edge.tag.target === neighbor.tag.id).forEach((edge) => {
+        console.log(edge.tag)
+        jsonGraph.edges.push(edge.tag)
+      })
     }
-
+    console.log(jsonGraph)
+    this.createGraph(jsonGraph)
   }
 }
