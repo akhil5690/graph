@@ -1,18 +1,35 @@
 cym-graph-editor {
-  .graph-sidebar {
-    height: 85vh;
-    width: 75vw;
+
+  .overview {
+    position: absolute;
+    top: 30px;
   }
 
-  .graph {
-    height: 85vh;
-    width: 100vw;
+  #overview, #neighbour {
+    width: 150px;
+    height: 150px;
+    background-color: var(--third-background-color);
   }
 
-  div#drag-and-drop-panel {
-    width: 20vw;
-    display: grid;
-    grid-template-columns: repeat(5, auto);
+  .neighbour {
+    position: absolute;
+    top: 250px;
+  }
+
+  .header {
+    font-weight: var(--font-weight-bold);
+    font-size: medium;
+    background: var(--pink1);
+    padding: 1rem;
+    color: var(--primary-color-text);
+  }
+
+  .hide {
+    display: none;
+  }
+
+  .main {
+    position: relative;
   }
 
   .top-toolbar {
@@ -28,33 +45,27 @@ cym-graph-editor {
     gap: var(--unit);
   }
 
-  .overview {
-    position: absolute;
-    top: 128px;
+  .tools {
+    cursor: pointer;
   }
 
-  .neighbour {
-    position: absolute;
-    top: 330px;
+  .graph-container {
+    display: flex;
   }
 
-  #overview {
-    width: 150px;
-    height: 150px;
-    background-color: var(--third-background-color);
+  .graph-sidebar {
+    height: 85vh;
+    width: 75vw;
   }
 
-  #neighbour {
-    width: 150px;
-    height: 150px;
-    background-color: var(--third-background-color);
+  .graph {
+    height: 85vh;
+    width: 100vw;
   }
 
-  .header {
-    font-weight: var(--font-weight-bold);
-    font-size: medium;
-    background: var(--pink1);
-    padding: 1rem;
-    color: var(--primary-color-text);
+  div#drag-and-drop-panel {
+    width: 20vw;
+    display: grid;
+    grid-template-columns: repeat(5, auto);
   }
 }
