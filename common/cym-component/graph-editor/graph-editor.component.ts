@@ -24,14 +24,14 @@ import {
   IGraph,
   INode,
   Insets,
-  License,
+  License, Neighborhood,
   NodeDropInputMode,
   QueryContinueDragEventArgs,
   Rect,
   ShapeNodeShape,
   SimpleNode,
   Size,
-  SvgExport
+  SvgExport, TraversalDirection
 } from "yfiles";
 import licenseValue from "../../../license.json";
 import {addClass, createDemoGroupStyle, createShapeNodeStyle, initDemoStyles, removeClass} from "./demo-styles";
@@ -136,6 +136,7 @@ export class GraphEditorComponent implements OnInit {
     this.configureDragAndDrop();
 
     this.initializeOverviewComponent(this.graphComponent)
+
     this.initialiseNeighbourhood(this.graphComponent)
 
   }
@@ -179,6 +180,8 @@ export class GraphEditorComponent implements OnInit {
   private leftClickListener(inputMode: GraphEditorInputMode) {
     // node click listener which sends node or edge details to the sidebar
     inputMode.addItemLeftClickedListener((sender, evt) => {
+
+      this.getNeighbourGraph()
 
       this.isItemClicked = true;
 
@@ -648,4 +651,18 @@ export class GraphEditorComponent implements OnInit {
   }
 
 
+  private getNeighbourGraph() {
+    const algorithm = new Neighborhood({
+      maximumDistance: 2,
+      traversalDirection: TraversalDirection.SUCCESSOR,startNodes:[this.graphComponent.graph.nodes.get(0)]
+    });
+    const result = algorithm.run(this.graphComponent.graph);
+    const nodes = result.neighbors;
+    for (const neighbor of result.neighbors) {
+      console.log(neighbor.tag)
+      const edges = this.graphComponent.graph.edges.filter(edge=>edge.tag.target === neighbor.tag.id)
+      edges.forEach(edge=>console.log(edge.tag))
+    }
+
+  }
 }
