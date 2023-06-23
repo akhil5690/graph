@@ -242,7 +242,7 @@ export class GraphEditorComponent implements OnInit {
     }
 
     this.save();
-    this.createGraph(this.iGraph)
+    this.createGraph(this.iGraph, this.graphComponent)
   }
 
   private replaceEdgeTag(id: string, label: string, oldLabel: string) {
@@ -435,7 +435,7 @@ export class GraphEditorComponent implements OnInit {
     }).createRatioParameter({sideOfEdge: EdgeSides.BELOW_EDGE})
   }
 
-  createGraph(initGraph: any): void {
+  createGraph(initGraph: any, graphComponent: GraphComponent): void {
 
     // get the graph builder to create graph from json ie; initGraph
     const builder = new GraphBuilder()
@@ -475,7 +475,7 @@ export class GraphEditorComponent implements OnInit {
           this.save()
           break;
         case 'refresh':
-          this.createGraph(this.iGraph);
+          this.createGraph(this.iGraph,this.graphComponent);
           break;
         case 'undo':
           ICommand.UNDO.execute(null, this.graphComponent)
@@ -593,7 +593,7 @@ export class GraphEditorComponent implements OnInit {
     }
     this.save();
     console.log(this.iGraph)
-    this.createGraph(this.iGraph)
+    this.createGraph(this.iGraph, this.graphComponent)
   }
 
   private validateLabel(label: string, type: string) {
@@ -639,7 +639,7 @@ export class GraphEditorComponent implements OnInit {
     ICommand.PASTE.execute(null, this.graphComponent);
 
     this.save();
-    this.createGraph(this.iGraph);
+    this.createGraph(this.iGraph, this.graphComponent);
 
     // regain the selection back
     this.graphComponent.graph.nodes.forEach((node) => {
@@ -670,6 +670,6 @@ export class GraphEditorComponent implements OnInit {
       })
     }
     console.log(jsonGraph)
-    this.createGraph(jsonGraph)
+    this.createGraph(jsonGraph, this.graphComponent)
   }
 }
