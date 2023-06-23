@@ -47,9 +47,11 @@ export class GraphEditorComponent implements OnInit {
   @Input() data: any;
   @ViewChild('graphContainer', {static: true}) graphContainer!: ElementRef;
   @ViewChild('overViewComponent', {static: true}) overViewContainer!: ElementRef;
+  @ViewChild('neighbour', {static: true}) neighbour!: ElementRef;
 
   @ViewChild('panel', {static: true}) panelContainer!: ElementRef;
   private overviewComponent!: GraphOverviewComponent;
+  private neighbourComponent!: GraphOverviewComponent;
 
   private graphComponent!: GraphComponent;
   isFilterOpen: boolean = false;
@@ -134,6 +136,7 @@ export class GraphEditorComponent implements OnInit {
     this.configureDragAndDrop();
 
     this.initializeOverviewComponent(this.graphComponent)
+    this.initialiseNeighbourhood(this.graphComponent)
 
   }
 
@@ -266,6 +269,20 @@ export class GraphEditorComponent implements OnInit {
     this.overviewComponent.autoDrag = true;
     this.overviewComponent.contentRect = new Rect(0, 0, 2000, 2000);
     this.overviewComponent.fitContent();
+  }
+
+  private initialiseNeighbourhood(graphComponent: GraphComponent) {
+    const container = this.neighbour.nativeElement;
+    // reinitialize overview component to the update the view with new graph
+    if (this.neighbourComponent?.div) {
+      this.neighbourComponent.cleanUp();
+      this.neighbourComponent = new GraphOverviewComponent(container, graphComponent);
+    } else {
+      this.neighbourComponent = new GraphOverviewComponent(container, graphComponent);
+    }
+    this.neighbourComponent.autoDrag = true;
+    this.neighbourComponent.contentRect = new Rect(0, 0, 2000, 2000);
+    this.neighbourComponent.fitContent();
   }
 
 
