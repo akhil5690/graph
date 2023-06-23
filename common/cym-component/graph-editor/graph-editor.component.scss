@@ -24,4 +24,23 @@ cym-graph-editor{
     padding: var(--unit);
     gap: var(--unit);
   }
+
+  .overview {
+    position: absolute;
+    top: 128px;
+  }
+
+  #overview {
+    width: 200px;
+    height: 200px;
+    background-color: var(--third-background-color);
+  }
+
+  .header {
+    font-weight: var(--font-weight-bold);
+    font-size: medium;
+    background: var(--pink1);
+    padding: 1rem;
+    color: var(--primary-color-text);
+  }
 }

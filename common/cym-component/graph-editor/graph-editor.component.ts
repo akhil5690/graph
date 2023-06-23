@@ -16,7 +16,7 @@ import {
   ExteriorLabelModel,
   GraphBuilder,
   GraphComponent,
-  GraphEditorInputMode,
+  GraphEditorInputMode, GraphOverviewComponent,
   GroupNodeLabelModel,
   GroupNodeStyle,
   ICommand,
@@ -46,7 +46,11 @@ import {v4 as uuidv4} from 'uuid';
 export class GraphEditorComponent implements OnInit {
   @Input() data: any;
   @ViewChild('graphContainer', {static: true}) graphContainer!: ElementRef;
+  @ViewChild('overViewComponent', {static: true}) overViewContainer!: ElementRef;
+
   @ViewChild('panel', {static: true}) panelContainer!: ElementRef;
+  private overviewComponent!: GraphOverviewComponent;
+
   private graphComponent!: GraphComponent;
   isFilterOpen: boolean = false;
   toolBarItems = [{
@@ -128,6 +132,8 @@ export class GraphEditorComponent implements OnInit {
 
     // prepare drag and drop
     this.configureDragAndDrop();
+
+    this.initializeOverviewComponent(this.graphComponent)
 
   }
 
@@ -246,6 +252,20 @@ export class GraphEditorComponent implements OnInit {
 
     });
 
+  }
+
+  private initializeOverviewComponent(graphComponent: GraphComponent) {
+    const container = this.overViewContainer.nativeElement;
+    // reinitialize overview component to the update the view with new graph
+    if (this.overviewComponent?.div) {
+      this.overviewComponent.cleanUp();
+      this.overviewComponent = new GraphOverviewComponent(container, graphComponent);
+    } else {
+      this.overviewComponent = new GraphOverviewComponent(container, graphComponent);
+    }
+    this.overviewComponent.autoDrag = true;
+    this.overviewComponent.contentRect = new Rect(0, 0, 2000, 2000);
+    this.overviewComponent.fitContent();
   }
 
 
@@ -590,7 +610,7 @@ export class GraphEditorComponent implements OnInit {
       };
     })
 
-  // Note: selection is lost here
+    // Note: selection is lost here
 
   }
 
