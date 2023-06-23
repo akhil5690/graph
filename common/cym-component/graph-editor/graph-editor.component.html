@@ -16,6 +16,14 @@
       </div>
     </div>
   </div>
+  <div class="neighbour">
+    <div class="container" >
+      <div class="header">Neighbourhood</div>
+      <div>
+        <div id="neighbour" #neighbour></div>
+      </div>
+    </div>
+  </div>
   <cym-right-sidebar [type]="'editor'" [isItemClicked]="isItemClicked" [details]="selectedItem" (edgeNodeProperty)="changeEdgeNode($event)" (isRightSidebarOpen)="setFrame($event)">
     <div id="drag-and-drop-panel" panel #panel></div>
   </cym-right-sidebar>

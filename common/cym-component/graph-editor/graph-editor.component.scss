@@ -1,17 +1,20 @@
-cym-graph-editor{
-.graph-sidebar{
-  height: 85vh;
-  width: 75vw;
-}
-  .graph{
+cym-graph-editor {
+  .graph-sidebar {
+    height: 85vh;
+    width: 75vw;
+  }
+
+  .graph {
     height: 85vh;
     width: 100vw;
   }
+
   div#drag-and-drop-panel {
     width: 20vw;
     display: grid;
-    grid-template-columns: repeat(5,auto);
+    grid-template-columns: repeat(5, auto);
   }
+
   .top-toolbar {
     position: relative;
     top: 0;
@@ -30,9 +33,20 @@ cym-graph-editor{
     top: 128px;
   }
 
+  .neighbour {
+    position: absolute;
+    top: 330px;
+  }
+
   #overview {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
+    background-color: var(--third-background-color);
+  }
+
+  #neighbour {
+    width: 150px;
+    height: 150px;
     background-color: var(--third-background-color);
   }
 
