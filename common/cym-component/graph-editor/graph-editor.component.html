@@ -8,6 +8,14 @@
       </div>
     </div>
   </div>
+  <div class="overview">
+    <div class="container" >
+      <div class="header">Overview</div>
+      <div>
+        <div id="overview" #overViewComponent></div>
+      </div>
+    </div>
+  </div>
   <cym-right-sidebar [type]="'editor'" [isItemClicked]="isItemClicked" [details]="selectedItem" (edgeNodeProperty)="changeEdgeNode($event)" (isRightSidebarOpen)="setFrame($event)">
     <div id="drag-and-drop-panel" panel #panel></div>
   </cym-right-sidebar>
