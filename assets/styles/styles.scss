@@ -28,40 +28,18 @@ html, body {
 
 a {
   text-decoration-line: none;
+  color: var(--pink1);
+}
+
+span{
   color: var(--red);
 }
 
 label {
   color: var(--primary-text-color);
   font-weight: var(--font-weight-normal);
+  font-size: var(--large-screen-font-size);
 }
-
-.component-header{
-  margin:var(--header-margin-bottom);
-  color:var(--component-header-color);
-}
-.header-title{
-  font-size:var( --unit2);
-  color: var( --pink1);
-}
-.grid-container{
-  grid-gap: var(--unit);
-  margin: var(--unit2);
-}
-.header-sidebar{
-  margin: var( --header-margin-bottom);
-  font-weight: var(--font-weight-bold);
-}
-.grid-sidebar{
-  grid-gap: var( --unit);
-  margin:var( --unit2);
-}
-.grid-toolbar{
-  grid-gap: var( --unit);
-}
-
-
-
 
 *::-webkit-scrollbar {
   width: var(--unit); /* width of the entire scrollbar */

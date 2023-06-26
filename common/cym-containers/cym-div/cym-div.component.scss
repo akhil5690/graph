@@ -2,27 +2,26 @@ cym-div {
   .grid-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-gap: var(--unit);
+    margin: var(--unit2);
   }
-
-
   .header-title {
     text-align: center;
     width: 100%;
+    font-size:var( --unit2);
+    color: var( --pink1);
   }
-
   .container {
     margin: 2rem;
   }
-
-
-
   .component-header {
     text-align: left;
     font-weight: bold;
+    margin:var(--header-margin-bottom);
+    color:var(--component-header-color);
   }
-
   .grid-margin {
-    margin: 2rem;
+    margin: Var(--unit2);
   }
   //
   //.card-container {

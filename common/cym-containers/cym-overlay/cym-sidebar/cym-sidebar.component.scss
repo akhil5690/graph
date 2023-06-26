@@ -1,10 +1,14 @@
 .grid-sidebar {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-
+  grid-gap: var( --unit);
+  margin:var( --unit2);
 }
 .header-sidebar {
   color: rgba(214, 27, 119, 0.51);
   text-align: left;
+  margin: var( --header-margin-bottom);
+  font-weight: var(--font-weight-bold);
+
 
 }
