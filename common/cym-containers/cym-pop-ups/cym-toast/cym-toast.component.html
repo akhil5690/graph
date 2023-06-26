@@ -1,0 +1,10 @@
+<!--<p-toast></p-toast>-->
+<!--<button type="button" pButton pRipple (click)="show()" label="Show"></button>-->
+<p-toast [position]="position"></p-toast>
+<div class="grid-toast">
+  <p-button type="button" (click)="showSuccess()" label="Success" class="p-button-success"></p-button>
+  <p-button type="button" (click)="showInfo()" label="Info" class="p-button-info"></p-button>
+  <p-button type="button" (click)="showWarn()" label="Warn" class="p-button-warning"></p-button>
+  <p-button type="button" (click)="showError()" label="Error" class="p-button-danger"></p-button>
+</div>
+
