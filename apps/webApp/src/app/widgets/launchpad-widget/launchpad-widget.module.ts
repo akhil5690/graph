@@ -7,6 +7,9 @@ import {CymCardModule} from "../../../../../../common/cym-containers/cym-card/cy
 import {CymDivModule} from "../../../../../../common/cym-containers/cym-div/cym-div.module";
 import {WidgetFrameModule} from "../../../../../../common/cym-component/frames/widget-frame/widget-frame.module";
 import {CymToolbarModule} from "../../../../../../common/cym-containers/cym-toolbar/cym-toolbar.module";
+import {
+    CymCardDivisionModule
+} from "../../../../../../common/cym-containers/cym-card-division/cym-card-division.module";
 
 
 @NgModule({
@@ -17,7 +20,8 @@ import {CymToolbarModule} from "../../../../../../common/cym-containers/cym-tool
         CymCardModule,
         CymDivModule,
         WidgetFrameModule,
-        CymToolbarModule
+        CymToolbarModule,
+        CymCardDivisionModule
     ],
   exports: [LaunchpadWidgetComponent]
 })
