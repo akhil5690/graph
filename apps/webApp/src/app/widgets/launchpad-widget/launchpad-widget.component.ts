@@ -11,7 +11,6 @@ export class LaunchpadWidgetComponent implements OnInit {
   frameType: string = "header-main-footer-frame";
   cardMain: any;
   cardFooter = "";
-
   constructor(private router: Router) {
   }
 
@@ -52,7 +51,7 @@ export class LaunchpadWidgetComponent implements OnInit {
       subGroup: [{
         bgColor: "gray",
         cardLabel: "Modeling",
-        image: "./../apps/webApp/src/assets/image/data-modelling.svg",
+        image: "cymonix/fusioncenterui/apps/webApp/src/assets/image/data-modelling.svg",
       },
         {
           bgColor: "pink",

@@ -16,7 +16,7 @@ import {CymTooltipModule} from "../../../cym-containers/cym-overlay/cym-tooltip/
     CymTooltipModule,
 
   ],
-  exports: [CymInputComponent]
+  exports: [CymInputComponent, RequiredComponent]
 })
 export class CymInputModule {
 }

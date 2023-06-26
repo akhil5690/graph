@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 @Component({
   selector: 'cym-toolbar',
   templateUrl: './cym-toolbar.component.html',
   styleUrls: ['./cym-toolbar.component.scss']
 })
 export class CymToolbarComponent implements OnInit {
-  items:any;
+  @Input() items:any;
 
   ngOnInit() {
     this.items = [
