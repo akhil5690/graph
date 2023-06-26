@@ -11,7 +11,9 @@
     </cym-div>
     <cym-div>
       <cym-div [cymClass]="'component-header'">Card Component</cym-div>
-      <cym-card [cardData]="cardData"></cym-card>
+      <cym-card [propertyHeader]="cardData" [propertyFooter]="cardData">
+        <cym-div>{{cardData}}</cym-div>
+      </cym-card>
     </cym-div>
   </cym-div>
   <cym-div [cymClass]="'grid-container'">
@@ -69,10 +71,14 @@
     <cym-div>
       <cym-div [cymClass]="'component-header'">Dialog Component</cym-div>
       <cym-dialog [propertyMetaData]="dialogHeader">
-        <cym-div class="font-style">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        <cym-div class="font-style">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+          laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+          est laborum.
         </cym-div>
-<!--        <cym-div></cym-div>-->
+        <!--        <cym-div></cym-div>-->
       </cym-dialog>
     </cym-div>
     <cym-div>
@@ -80,8 +86,19 @@
       <cym-overlay-panel></cym-overlay-panel>
     </cym-div>
   </cym-div>
+  <cym-div [cymClass]="'grid-container'">
+    <cym-div>
+      <cym-div [cymClass]="'component-header'">Dropdown Component</cym-div>
+      <cym-dropdown [cities]="cities"></cym-dropdown>
+    </cym-div>
+    <cym-div>
+      <cym-div [cymClass]="'component-header'">Toast Component</cym-div>
+      <cym-toast [position]="toastPosition">
+<!--        <p-button type="button" (click)="showSuccess()" label="Success" class="p-button-success"></p-button>-->
+      </cym-toast>
+    </cym-div>
+  </cym-div>
 
-  <cym-dropdown [cities]="cities"></cym-dropdown>
 </cym-div>
 
 

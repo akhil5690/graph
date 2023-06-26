@@ -13,6 +13,8 @@ export class ContainerWidgetComponent implements OnInit{
   panelHeaderData: any = "Panel Header";
   panelHeaderDataText: any = "Panel Text";
   dialogHeader: any = 'Dialog Header';
+  toastPosition:any='top-center';
+  sideBarPosition:any='Left'
   cities:any;
 
   ngOnInit() {
@@ -24,4 +26,7 @@ export class ContainerWidgetComponent implements OnInit{
       {name: 'Paris', code: 'PRS'}
     ];
   }
+  // showSuccess() {
+  //   console.log('add');
+  // }
 }
