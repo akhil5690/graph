@@ -101,6 +101,11 @@ export class GraphEditorComponent implements OnInit {
   private nodeSelection: any;
   private edgeSelection: any;
 
+  selectedNeighbour: any;
+  neighboursOptions: any;
+  selectedNode!: INode;
+
+
   constructor(private cdr: ChangeDetectorRef) {
   }
 
@@ -131,7 +136,9 @@ export class GraphEditorComponent implements OnInit {
 
     this.initializeOverviewComponent(this.graphComponent)
 
-    this.initialiseNeighbourhood()
+    this.initialiseNeighbourhood();
+
+    this.getNeighbourOption();
 
   }
 
@@ -178,9 +185,9 @@ export class GraphEditorComponent implements OnInit {
 
       this.selectedItem = evt.item instanceof IEdge || evt.item instanceof INode ? evt.item : null;
 
-      if (evt.item instanceof INode)
-      {
-        this.getNeighbourGraph(evt.item )
+      if (evt.item instanceof INode) {
+        this.selectedNode = evt.item;
+        this.getNeighbourGraph(evt.item)
 
       }
     })
@@ -641,15 +648,17 @@ export class GraphEditorComponent implements OnInit {
   }
 
 
-  private getNeighbourGraph(node: INode) {
+  getNeighbourGraph(node: INode) {
     const jsonGraph: { nodes: any[], edges: any[] } = {
       nodes: [],
       edges: []
     };
+
+    console.log(this.selectedNeighbour)
     const algorithm = new Neighborhood({
-      traversalDirection: TraversalDirection.BOTH, startNodes: [node]
+      traversalDirection: this.selectedNeighbour, startNodes: [node]
     });
-    algorithm.maximumDistance = algorithm.traversalDirection === TraversalDirection.BOTH? 1:2;
+    algorithm.maximumDistance = algorithm.traversalDirection === TraversalDirection.BOTH ? 1 : 2;
     const result = algorithm.run(this.graphComponent.graph);
     jsonGraph.nodes.push(node.tag)
     for (const neighbor of result.neighbors) {
@@ -674,5 +683,15 @@ export class GraphEditorComponent implements OnInit {
     this.createGraph(jsonGraph, this.neighbourComponent)
     this.neighbourComponent.contentRect = new Rect(0, 0, 100, 100);
     this.neighbourComponent.fitGraphBounds()
+  }
+
+  private getNeighbourOption() {
+    this.neighboursOptions = [{
+      name: 'Neighbourhood', value: TraversalDirection.BOTH
+    }, {
+      name: 'Successor', value: TraversalDirection.SUCCESSOR
+    }, {
+      name: 'Predecessor', value: TraversalDirection.PREDECESSOR
+    },]
   }
 }

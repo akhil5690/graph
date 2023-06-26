@@ -26,7 +26,9 @@
 
   <div class="neighbour">
     <div class="container">
-      <div class="header">Neighbourhood</div>
+      <div class="header">
+        <p-dropdown [options]="neighboursOptions" [(ngModel)]="selectedNeighbour" (ngModelChange)="getNeighbourGraph(selectedNode)" optionLabel="name" optionValue="value"></p-dropdown>
+      </div>
       <div>
         <div id="neighbour" #neighbour></div>
       </div>
