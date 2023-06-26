@@ -1,6 +1,17 @@
-<div class="grid">
-  <div class="container" (click)="showGraph()">
-    Dashboard
-  </div>
-</div>
-
+<cym-widget-frame [frame_type]="this.frameType">
+  <cym-toolbar header>
+    <cym-div class="container" (click)="showGraph()">
+      Dashboard
+    </cym-div>
+  </cym-toolbar>
+  <cym-div main>
+    <cym-card *ngFor="let tool of launchpad" [propertyHeader]="tool.name">
+      <cym-card-division *ngFor="let sub of tool.subGroup;index as i">
+        <cym-div>{{tool.subGroup[i]['bgColor']}}</cym-div>
+        <cym-div>{{tool.subGroup[i]['image']}}</cym-div>
+        <cym-div>{{tool.subGroup[i]['cardLabel']}}</cym-div>
+      </cym-card-division>
+    </cym-card>
+  </cym-div>
+  <cym-div footer>Copyright</cym-div>
+</cym-widget-frame>

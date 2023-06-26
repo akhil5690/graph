@@ -10,6 +10,7 @@
           </div>
           <div>
             <input pInputText formControlName="email"/>
+            <span> Please enter the valid email </span>
           </div>
         </div>
         <div class="three-row-container">
@@ -18,6 +19,7 @@
           </div>
           <div>
             <input pInputText type="password" formControlName="password"/>
+            <span> Password incorrect </span>
           </div>
         </div>
         <div class="forgot">
@@ -26,15 +28,24 @@
         <div>
           <cym-button (click)="onSubmit()" [label]="'Sign In'" [class]="'solid-button'"></cym-button>
         </div>
-        <small class="termsAndCondition">By creating an account, you agree to <a href="/">condition of Use</a> and <a
-          href="/">Privacy Policy</a>
-        </small>
-        <p-divider align="center">
-          <small>New to Cymonix IQ+ ?</small>
-        </p-divider>
-        <div>
-          <cym-button [label]="'Create an account'" [class]="'outlined-button'" (click)="goToSignUp()"></cym-button>
-        </div>
+        <cym-div class="new">
+          <small class="termsAndCondition">By continuing, you agree to the <a href="/">Cymonix Customer Agreement</a> or other agreement for Cymonix services, and the  <a
+            href="/">Privacy Notice.</a> This site uses essential cookies. See our <a href="/">Cookie Notice</a> for more information.
+          </small>
+        </cym-div>
+        <cym-div>
+
+
+        </cym-div>
+        <cym-div class="new">
+          <small class="newtocym">New to Cymonix ?</small>
+        </cym-div>
+        <cym-div class="create">
+          <a href="/">Create an Account</a>
+        </cym-div>
+<!--        <div>-->
+<!--          <cym-button [label]="'Create an account'" [class]="'outlined-button'" (click)="goToSignUp()"></cym-button>-->
+<!--        </div>-->
       </div>
     </div>
   </div>

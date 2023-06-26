@@ -24,14 +24,14 @@ import {
   IGraph,
   INode,
   Insets,
-  License,
+  License, Neighborhood,
   NodeDropInputMode,
   QueryContinueDragEventArgs,
   Rect,
   ShapeNodeShape,
   SimpleNode,
   Size,
-  SvgExport
+  SvgExport, TraversalDirection
 } from "yfiles";
 import licenseValue from "../../../license.json";
 import {addClass, createDemoGroupStyle, createShapeNodeStyle, initDemoStyles, removeClass} from "./demo-styles";
@@ -47,9 +47,11 @@ export class GraphEditorComponent implements OnInit {
   @Input() data: any;
   @ViewChild('graphContainer', {static: true}) graphContainer!: ElementRef;
   @ViewChild('overViewComponent', {static: true}) overViewContainer!: ElementRef;
+  @ViewChild('neighbour', {static: true}) neighbour!: ElementRef;
 
   @ViewChild('panel', {static: true}) panelContainer!: ElementRef;
   private overviewComponent!: GraphOverviewComponent;
+  private neighbourComponent!: GraphOverviewComponent;
 
   private graphComponent!: GraphComponent;
   isFilterOpen: boolean = false;
@@ -135,6 +137,8 @@ export class GraphEditorComponent implements OnInit {
 
     this.initializeOverviewComponent(this.graphComponent)
 
+    this.initialiseNeighbourhood(this.graphComponent)
+
   }
 
   configureDragAndDrop(): void {
@@ -176,6 +180,8 @@ export class GraphEditorComponent implements OnInit {
   private leftClickListener(inputMode: GraphEditorInputMode) {
     // node click listener which sends node or edge details to the sidebar
     inputMode.addItemLeftClickedListener((sender, evt) => {
+
+      this.getNeighbourGraph(evt.item as INode)
 
       this.isItemClicked = true;
 
@@ -236,7 +242,7 @@ export class GraphEditorComponent implements OnInit {
     }
 
     this.save();
-    this.createGraph(this.iGraph)
+    this.createGraph(this.iGraph, this.graphComponent)
   }
 
   private replaceEdgeTag(id: string, label: string, oldLabel: string) {
@@ -266,6 +272,20 @@ export class GraphEditorComponent implements OnInit {
     this.overviewComponent.autoDrag = true;
     this.overviewComponent.contentRect = new Rect(0, 0, 2000, 2000);
     this.overviewComponent.fitContent();
+  }
+
+  private initialiseNeighbourhood(graphComponent: GraphComponent) {
+    const container = this.neighbour.nativeElement;
+    // reinitialize overview component to the update the view with new graph
+    if (this.neighbourComponent?.div) {
+      this.neighbourComponent.cleanUp();
+      this.neighbourComponent = new GraphOverviewComponent(container, graphComponent);
+    } else {
+      this.neighbourComponent = new GraphOverviewComponent(container, graphComponent);
+    }
+    this.neighbourComponent.autoDrag = true;
+    this.neighbourComponent.contentRect = new Rect(0, 0, 2000, 2000);
+    this.neighbourComponent.fitContent();
   }
 
 
@@ -415,7 +435,7 @@ export class GraphEditorComponent implements OnInit {
     }).createRatioParameter({sideOfEdge: EdgeSides.BELOW_EDGE})
   }
 
-  createGraph(initGraph: any): void {
+  createGraph(initGraph: any, graphComponent: GraphComponent): void {
 
     // get the graph builder to create graph from json ie; initGraph
     const builder = new GraphBuilder()
@@ -455,7 +475,7 @@ export class GraphEditorComponent implements OnInit {
           this.save()
           break;
         case 'refresh':
-          this.createGraph(this.iGraph);
+          this.createGraph(this.iGraph,this.graphComponent);
           break;
         case 'undo':
           ICommand.UNDO.execute(null, this.graphComponent)
@@ -573,7 +593,7 @@ export class GraphEditorComponent implements OnInit {
     }
     this.save();
     console.log(this.iGraph)
-    this.createGraph(this.iGraph)
+    this.createGraph(this.iGraph, this.graphComponent)
   }
 
   private validateLabel(label: string, type: string) {
@@ -619,7 +639,7 @@ export class GraphEditorComponent implements OnInit {
     ICommand.PASTE.execute(null, this.graphComponent);
 
     this.save();
-    this.createGraph(this.iGraph);
+    this.createGraph(this.iGraph, this.graphComponent);
 
     // regain the selection back
     this.graphComponent.graph.nodes.forEach((node) => {
@@ -631,4 +651,25 @@ export class GraphEditorComponent implements OnInit {
   }
 
 
+  private getNeighbourGraph(node: INode) {
+    const jsonGraph: { nodes: any[], edges: any[] } = {
+      nodes: [],
+      edges: []
+    };
+    const algorithm = new Neighborhood({
+      maximumDistance: 2,
+      traversalDirection: TraversalDirection.SUCCESSOR, startNodes: [node]
+    });
+    const result = algorithm.run(this.graphComponent.graph);
+    for (const neighbor of result.neighbors) {
+      jsonGraph.nodes.push(node.tag)
+      jsonGraph.nodes.push(neighbor.tag)
+      this.graphComponent.graph.edges.filter(edge => edge.tag.target === neighbor.tag.id).forEach((edge) => {
+        console.log(edge.tag)
+        jsonGraph.edges.push(edge.tag)
+      })
+    }
+    console.log(jsonGraph)
+    this.createGraph(jsonGraph, this.graphComponent)
+  }
 }

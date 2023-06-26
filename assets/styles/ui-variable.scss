@@ -1,11 +1,12 @@
 :root {
   --primary-background-color: white;
-  --pink1: #f71e88;
-  --primary-dark-color: rgb(216 12 121);
+  --pink1: #2FB2C3;
+  --primary-dark-color: #2896a4;
+  --red:#FF0000;
   --pink2: #f1a7b4;
   --pink3: #f7d8e3;
   --primary-light-color: rgb(246 59 159 / 12%);
-  --primary-text-color: black;
+  --primary-text-color: #292E3A;
   --secondary-text-color: white;
   --third-background-color: rgb(232, 232, 232);
   --secondary-background-color: #e7e7e7;
@@ -15,6 +16,7 @@
   --font-weight-normal: 400;
   --font-weight-bold: 600;
   --unit: 1rem;
+  --unit2: 2rem;
   --base-width: 100%;
   --font-size: 1rem;
   --large-screen-font-size: 14px;
@@ -33,13 +35,17 @@
   --main-no-footer: calc(100vh - (var(--top-toolbar-height)));
   --sidebar-width: 15rem;
 
+  --component-header-color:rgb(214 27 119 / 51%);
+  --header-margin-bottom: 0 0 1rem 0;
+
+  --theme-color-one: #292E3A;
+  --theme-color-two: #2FB2C3;
 
 
 
-  --tool-header-margin: 0 0 1rem 0;
-  --tool-header-font-size: 1rem;
-  --tool-header-color:rgb(214 27 119 / 51%);
 
-  --header-title-font-size:2rem;
-  --header-title-font-color:var(--pink1);
+
+
+
+
 }

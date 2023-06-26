@@ -2,41 +2,30 @@ cym-div {
   .grid-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 10px;
-    margin: 2rem;
+    grid-gap: var(--unit);
+    margin: var(--unit2);
   }
-
-  .header-container {
-    font-size: 20px;
-    font-family: system-ui;
-  }
-
   .header-title {
-    color: var(--pink1);
-    font-size: 25px;
     text-align: center;
     width: 100%;
-    font-family: system-ui;
+    font-size:var( --unit2);
+    color: var( --pink1);
   }
-
   .container {
-    margin: 20px;
-  }
-
-  .marin-bottom {
-    margin-bottom: 0px;
-  }
-
-  .component-header {
-    color: rgba(214, 27, 119, 0.51);
-    font-size: 15px;
-    text-align: left;
-    margin-bottom: 10px;
-    font-weight: bold;
-  }
-
-  .grid-margin {
     margin: 2rem;
   }
-
+  .component-header {
+    text-align: left;
+    font-weight: bold;
+    margin:var(--header-margin-bottom);
+    color:var(--component-header-color);
+  }
+  .grid-margin {
+    margin: Var(--unit2);
+  }
+  //
+  //.card-container {
+  //  display: grid;
+  //  grid-template-columns: auto auto auto auto;
+  //}
 }

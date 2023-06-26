@@ -1,6 +1,6 @@
 <div class="card flex justify-content-center">
   <p-overlayPanel #op>
-    <p>Overlay Panel Text</p>
+    <ng-content></ng-content>
   </p-overlayPanel>
   <p-button (click)="op.toggle($event)" icon="pi pi-image" label="Show"></p-button>
 </div>

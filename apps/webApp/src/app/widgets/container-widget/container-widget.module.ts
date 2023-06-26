@@ -36,6 +36,9 @@ import {CymSidebarModule} from "../../../../../../common/cym-containers/cym-over
 import {CymTooltipModule} from "../../../../../../common/cym-containers/cym-overlay/cym-tooltip/cym-tooltip.module";
 import {CymInputModule} from "../../../../../../common/cym-component/form/cym-input/cym-input.module";
 import {CymDropdownModule} from "../../../../../../common/cym-component/form/cym-dropdown/cym-dropdown.module";
+import {CymToastModule} from "../../../../../../common/cym-containers/cym-pop-ups/cym-toast/cym-toast.module";
+import {CymPasswordModule} from "../../../../../../common/cym-containers/cym-password/cym-password.module";
+import {CymProfileModule} from "../../../../../../common/cym-containers/cym-profile/cym-profile.module";
 @NgModule({
   declarations: [
     ContainerWidgetComponent,
@@ -70,6 +73,9 @@ import {CymDropdownModule} from "../../../../../../common/cym-component/form/cym
         CymTooltipModule,
         CymInputModule,
         CymDropdownModule,
+        CymToastModule,
+        CymPasswordModule,
+        CymProfileModule,
     ],
   providers:[GraphService,HttpHandler],
   exports: [ContainerWidgetComponent]

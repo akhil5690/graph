@@ -31,21 +31,15 @@ a {
   color: var(--pink1);
 }
 
+span{
+  color: var(--red);
+}
+
 label {
   color: var(--primary-text-color);
   font-weight: var(--font-weight-normal);
+  font-size: var(--large-screen-font-size);
 }
-
-.tool-header{
-  margin:var(--tool-header-margin);
-  color:var(--tool-header-color);
-}
-
-.header-title{
-  font-size:var( --header-title-font-size);
-  color: var( --header-title-font-color);
-}
-
 
 *::-webkit-scrollbar {
   width: var(--unit); /* width of the entire scrollbar */
@@ -62,8 +56,10 @@ label {
 }
 //overlay modal
 .p-dialog .p-dialog-content {
-  padding: 1rem;
+  padding: var(--unit);
 }
 .p-dialog .p-dialog-footer {
-  padding: 1rem;
+  padding:  var(--unit);
 }
+
+

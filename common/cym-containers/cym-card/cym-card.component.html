@@ -1,1 +1,11 @@
-<p-card>{{cardData}}</p-card>
+<p-card [class]="cymClass">
+  <!--  {{cardData}}-->
+  <p-header>
+    <div>{{propertyHeader}}</div>
+  </p-header>
+  <ng-content></ng-content>
+  <p-footer>
+<!--    <ng-content></ng-content>-->
+  </p-footer>
+</p-card>
+<!--{{propertyFooter}}-->
