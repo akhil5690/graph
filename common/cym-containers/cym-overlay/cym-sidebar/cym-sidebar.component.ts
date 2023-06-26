@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'cym-sidebars',
@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./cym-sidebar.component.scss']
 })
 export class CymSidebarComponent {
+  @Input() sideBarPosition:any ='';
   sidebarVisible1: boolean = false;
 
   sidebarVisible2: boolean = false;

@@ -6,8 +6,10 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./cym-card.component.scss']
 })
 export class CymCardComponent implements OnInit {
-  @Input() cardData: any;
-
+  @Input() cymClass!: string;
+  @Input() cardData: any="";
+  @Input() propertyHeader:any="";
+  @Input() propertyFooter:any="";
   ngOnInit() {
   }
 }
