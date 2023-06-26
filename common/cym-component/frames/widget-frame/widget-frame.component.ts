@@ -8,7 +8,7 @@ import {ThemeService} from "../../../cym-services/theme/theme.service";
   encapsulation: ViewEncapsulation.None
 })
 export class WidgetFrameComponent implements OnInit {
-  @Input() frame_type!: string;
+@Input() frame_type!: string;
   @Output() isDarkTheme = new EventEmitter<string>();
   theme: string = 'lightTheme';
 

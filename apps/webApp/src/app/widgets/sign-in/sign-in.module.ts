@@ -10,6 +10,7 @@ import {ToggleButtonModule} from "primeng/togglebutton";
 import {WidgetFrameModule} from "../../../../../../common/cym-component/frames/widget-frame/widget-frame.module";
 import {InputTextareaModule} from "primeng/inputtextarea";
 import {CymButtonComponent} from "../../../../../../common/cym-component/form/cym-button/cym-button.component";
+import {CymDivModule} from "../../../../../../common/cym-containers/cym-div/cym-div.module";
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import {CymButtonComponent} from "../../../../../../common/cym-component/form/cy
     WidgetFrameModule,
     InputTextareaModule,
     ReactiveFormsModule,
+    CymDivModule,
   ]
 })
 export class SignInModule {
