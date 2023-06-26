@@ -13,7 +13,7 @@ import {OverviewComponent} from "../overview/overview.component";
     RightSidebarModule,
     DropdownModule,
     FormsModule
-  ], exports: [GraphEditorComponent]
+  ], exports: [GraphEditorComponent, OverviewComponent]
 })
 export class GraphEditorModule {
 }
