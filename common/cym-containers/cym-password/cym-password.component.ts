@@ -1,10 +1,14 @@
-import { Component } from '@angular/core';
+import {Component, Input, OnChanges} from '@angular/core';
 
 @Component({
   selector: 'cym-password',
   templateUrl: './cym-password.component.html',
   styleUrls: ['./cym-password.component.scss']
 })
-export class CymPasswordComponent {
+export class CymPasswordComponent implements OnChanges{
+  @Input() propertyMeta!:any;
   value!: string;
+  ngOnChanges(): void {
+    console.log(this.propertyMeta.header)
+  }
 }
