@@ -14,37 +14,50 @@ export class DetailsComponent implements OnChanges, OnInit {
   @Input() type: string | undefined;// editor or graph
   @Input() info: any;
   @Output() property = new EventEmitter()
-  edgeForm: { [key: string]: string } = {};
-  nodeForm: { [key: string]: string } = {};
+  edgeForm: { [key: string]: any } = {};
+  nodeForm: { [key: string]: any } = {};
+  typeOptions: any;
 
   ngOnChanges(): void {
     this.headers = Object.keys(this.data[0]);
-    console.log(this.data,this.headers)
+    console.log(this.data, this.headers)
     this.getForm();
   }
 
   getForm() {
-    console.log(this.info)
+    this.typeOptions = [{
+      option:"String",
+      value:"string"
+    },{
+      option:"Number",
+      value:"number"
+    },{
+      option:"Boolean",
+      value:"boolean"
+    },{
+      option:"Enum",
+      value:"enum"
+    },]
     if (this.info[0].source && this.info[0].target) {
       this.edgeForm = {
         id: this.info[0].id,
         label: this.info[0].label,
         source: this.info[0].source,
         target: this.info[0].target,
-        sourceLabel:this.info[0].sourceLabel,
-        targetLabel:this.info[0].targetLabel,
+        sourceLabel: this.info[0].sourceLabel,
+        targetLabel: this.info[0].targetLabel,
       };
     } else {
       this.nodeForm = {
         id: this.info[0].id,
         label: this.info[0].label,
-        source: this.info[0].source,
-        target: this.info[0].target,
+        properties: this.info[0].properties ? this.info[0].properties : []
       };
     }
   }
 
   ngOnInit(): void {
+
     // this.data = [
     //   {
     //     "description": "In Django 3.2 before 3.2.19, 4.x before 4.1.9, and 4.2 before 4.2.1, it was possible to bypass " +
@@ -103,5 +116,9 @@ export class DetailsComponent implements OnChanges, OnInit {
   submit(form: any) {
     console.log(form);
     this.property.emit(form)
+  }
+
+  addForm() {
+    this.nodeForm['properties'].push({key: null, type: null, default: null});
   }
 }

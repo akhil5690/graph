@@ -152,7 +152,11 @@ export class GraphComponents implements OnInit, OnChanges {
     const nodesSource = this.getNodes(builder, {
       data: this.data.nodes,
       id: "id",
-      // style: (data: any) => this.getNodeShape({fill: data.vertex_color, shape: 'ellipse', stroke: null})
+      style: (data: any) => this.getNodeShape({
+        fill: data.vertex_color ? data.vertex_color : "#FF9900",
+        shape: 'ellipse',
+        stroke: null
+      })
       // labels: ["label"]
     });
 
@@ -390,11 +394,11 @@ export class GraphComponents implements OnInit, OnChanges {
 
   // toolbar functionality
   zooIn() {
-    ICommand.INCREASE_ZOOM.execute(null,this.graphComponent)
+    ICommand.INCREASE_ZOOM.execute(null, this.graphComponent)
   }
 
   zoomOut() {
-    ICommand.DECREASE_ZOOM.execute(null,this.graphComponent)
+    ICommand.DECREASE_ZOOM.execute(null, this.graphComponent)
   }
 
   fitContent() {

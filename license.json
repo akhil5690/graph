@@ -1,11 +1,11 @@
 {
-  "comment": "a3a128d9-b0e4-444d-9f33-18715010b070",
-  "date": "04/26/2023",
+  "comment": "906e0b3a-13a6-4158-9f66-8076889855ef",
+  "date": "06/26/2023",
   "distribution": false,
   "domains": [
     "*"
   ],
-  "expires": "06/26/2023",
+  "expires": "08/26/2023",
   "fileSystemAllowed": true,
   "licensefileversion": "1.1",
   "localhost": true,
@@ -15,5 +15,5 @@
   "type": "eval",
   "version": "2.5",
   "watermark": "yFiles HTML Evaluation License (expires in ${license-days-remaining} days)",
-  "key": "c7c173b9cf4bde7411de17d3ee785e691e3a3dfb"
+  "key": "3a0da9ed722e2023a5bcb1692a234d5823370274"
 }

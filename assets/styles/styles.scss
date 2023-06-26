@@ -28,7 +28,7 @@ html, body {
 
 a {
   text-decoration-line: none;
-  color: var(--pink1);
+  color: var(--red);
 }
 
 label {
@@ -36,15 +36,31 @@ label {
   font-weight: var(--font-weight-normal);
 }
 
-.tool-header{
-  margin:var(--tool-header-margin);
-  color:var(--tool-header-color);
+.component-header{
+  margin:var(--header-margin-bottom);
+  color:var(--component-header-color);
+}
+.header-title{
+  font-size:var( --unit2);
+  color: var( --pink1);
+}
+.grid-container{
+  grid-gap: var(--unit);
+  margin: var(--unit2);
+}
+.header-sidebar{
+  margin: var( --header-margin-bottom);
+  font-weight: var(--font-weight-bold);
+}
+.grid-sidebar{
+  grid-gap: var( --unit);
+  margin:var( --unit2);
+}
+.grid-toolbar{
+  grid-gap: var( --unit);
 }
 
-.header-title{
-  font-size:var( --header-title-font-size);
-  color: var( --header-title-font-color);
-}
+
 
 
 *::-webkit-scrollbar {
@@ -62,8 +78,10 @@ label {
 }
 //overlay modal
 .p-dialog .p-dialog-content {
-  padding: 1rem;
+  padding: var(--unit);
 }
 .p-dialog .p-dialog-footer {
-  padding: 1rem;
+  padding:  var(--unit);
 }
+
+
