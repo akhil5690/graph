@@ -1,13 +1,4 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  ElementRef,
-  Input,
-  OnChanges,
-  OnInit,
-  ViewChild,
-  ViewEncapsulation
-} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {
   DefaultLabelStyle,
   DragDropEffects,
@@ -16,7 +7,8 @@ import {
   ExteriorLabelModel,
   GraphBuilder,
   GraphComponent,
-  GraphEditorInputMode, GraphOverviewComponent,
+  GraphEditorInputMode,
+  GraphOverviewComponent,
   GroupNodeLabelModel,
   GroupNodeStyle,
   ICommand,
@@ -24,14 +16,16 @@ import {
   IGraph,
   INode,
   Insets,
-  License, Neighborhood,
+  License,
+  Neighborhood,
   NodeDropInputMode,
   QueryContinueDragEventArgs,
   Rect,
   ShapeNodeShape,
   SimpleNode,
   Size,
-  SvgExport, TraversalDirection
+  SvgExport,
+  TraversalDirection
 } from "yfiles";
 import licenseValue from "../../../license.json";
 import {addClass, createDemoGroupStyle, createShapeNodeStyle, initDemoStyles, removeClass} from "./demo-styles";
@@ -51,7 +45,7 @@ export class GraphEditorComponent implements OnInit {
 
   @ViewChild('panel', {static: true}) panelContainer!: ElementRef;
   private overviewComponent!: GraphOverviewComponent;
-  private neighbourComponent!: GraphOverviewComponent;
+  private neighbourComponent!: GraphComponent;
 
   private graphComponent!: GraphComponent;
   isFilterOpen: boolean = false;
@@ -137,7 +131,7 @@ export class GraphEditorComponent implements OnInit {
 
     this.initializeOverviewComponent(this.graphComponent)
 
-    this.initialiseNeighbourhood(this.graphComponent)
+    this.initialiseNeighbourhood()
 
   }
 
@@ -180,12 +174,15 @@ export class GraphEditorComponent implements OnInit {
   private leftClickListener(inputMode: GraphEditorInputMode) {
     // node click listener which sends node or edge details to the sidebar
     inputMode.addItemLeftClickedListener((sender, evt) => {
-
-      this.getNeighbourGraph(evt.item as INode)
-
       this.isItemClicked = true;
 
       this.selectedItem = evt.item instanceof IEdge || evt.item instanceof INode ? evt.item : null;
+
+      if (evt.item instanceof INode)
+      {
+        this.getNeighbourGraph(evt.item )
+
+      }
     })
   }
 
@@ -270,22 +267,14 @@ export class GraphEditorComponent implements OnInit {
       this.overviewComponent = new GraphOverviewComponent(container, graphComponent);
     }
     this.overviewComponent.autoDrag = true;
-    this.overviewComponent.contentRect = new Rect(0, 0, 2000, 2000);
     this.overviewComponent.fitContent();
   }
 
-  private initialiseNeighbourhood(graphComponent: GraphComponent) {
+  private initialiseNeighbourhood() {
     const container = this.neighbour.nativeElement;
-    // reinitialize overview component to the update the view with new graph
-    if (this.neighbourComponent?.div) {
-      this.neighbourComponent.cleanUp();
-      this.neighbourComponent = new GraphOverviewComponent(container, graphComponent);
-    } else {
-      this.neighbourComponent = new GraphOverviewComponent(container, graphComponent);
-    }
-    this.neighbourComponent.autoDrag = true;
-    this.neighbourComponent.contentRect = new Rect(0, 0, 2000, 2000);
-    this.neighbourComponent.fitContent();
+    this.neighbourComponent = new GraphComponent(container);
+    this.neighbourComponent.contentRect = new Rect(0, 0, 100, 100);
+    this.neighbourComponent.fitGraphBounds()
   }
 
 
@@ -457,14 +446,15 @@ export class GraphEditorComponent implements OnInit {
 
     edgeNode.edgeCreator.defaults.labels.layoutParameter = labelModel.createDefaultParameter();
 
-    this.graphComponent.graph = builder.buildGraph();
+    graphComponent.graph = builder.buildGraph();
 
-    this.initTutorialDefaults(this.graphComponent.graph)
+    this.initTutorialDefaults(graphComponent.graph)
   }
 
   setFrame(isFilterOpen: boolean) {
     // frame for sidebar and the graph
     this.isFilterOpen = isFilterOpen;
+    this.cdr.detectChanges();
   }
 
   clickEvent(tool: { icon: string; toolName: string }) {
@@ -475,7 +465,7 @@ export class GraphEditorComponent implements OnInit {
           this.save()
           break;
         case 'refresh':
-          this.createGraph(this.iGraph,this.graphComponent);
+          this.createGraph(this.iGraph, this.graphComponent);
           break;
         case 'undo':
           ICommand.UNDO.execute(null, this.graphComponent)
@@ -657,19 +647,32 @@ export class GraphEditorComponent implements OnInit {
       edges: []
     };
     const algorithm = new Neighborhood({
-      maximumDistance: 2,
-      traversalDirection: TraversalDirection.SUCCESSOR, startNodes: [node]
+      traversalDirection: TraversalDirection.BOTH, startNodes: [node]
     });
+    algorithm.maximumDistance = algorithm.traversalDirection === TraversalDirection.BOTH? 1:2;
     const result = algorithm.run(this.graphComponent.graph);
+    jsonGraph.nodes.push(node.tag)
     for (const neighbor of result.neighbors) {
-      jsonGraph.nodes.push(node.tag)
       jsonGraph.nodes.push(neighbor.tag)
-      this.graphComponent.graph.edges.filter(edge => edge.tag.target === neighbor.tag.id).forEach((edge) => {
-        console.log(edge.tag)
-        jsonGraph.edges.push(edge.tag)
-      })
+      if (algorithm.traversalDirection === TraversalDirection.SUCCESSOR) {
+        this.graphComponent.graph.edges.filter(edge => edge.tag.target === neighbor.tag.id).forEach((edge) => {
+          console.log(edge.tag)
+          jsonGraph.edges.push(edge.tag)
+        })
+      } else if (algorithm.traversalDirection === TraversalDirection.PREDECESSOR) {
+        this.graphComponent.graph.edges.filter(edge => edge.tag.source === neighbor.tag.id).forEach((edge) => {
+          console.log(edge.tag)
+          jsonGraph.edges.push(edge.tag)
+        })
+      } else {
+        this.graphComponent.graph.edges.filter(edge => edge.tag.source === neighbor.tag.id || edge.tag.target === neighbor.tag.id).forEach((edge) => {
+          console.log(edge.tag)
+          jsonGraph.edges.push(edge.tag)
+        })
+      }
     }
-    console.log(jsonGraph)
-    this.createGraph(jsonGraph, this.graphComponent)
+    this.createGraph(jsonGraph, this.neighbourComponent)
+    this.neighbourComponent.contentRect = new Rect(0, 0, 100, 100);
+    this.neighbourComponent.fitGraphBounds()
   }
 }
