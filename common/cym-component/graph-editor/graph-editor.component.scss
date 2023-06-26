@@ -1,17 +1,37 @@
-cym-graph-editor{
-.graph-sidebar{
-  height: 85vh;
-  width: 75vw;
-}
-  .graph{
-    height: 85vh;
-    width: 100vw;
+cym-graph-editor {
+
+  .overview {
+    position: absolute;
+    top: 30px;
   }
-  div#drag-and-drop-panel {
-    width: 20vw;
-    display: grid;
-    grid-template-columns: repeat(5,auto);
+
+  #overview, #neighbour {
+    width: 150px;
+    height: 150px;
+    background-color: var(--third-background-color);
   }
+
+  .neighbour {
+    position: absolute;
+    top: 250px;
+  }
+
+  .header {
+    font-weight: var(--font-weight-bold);
+    font-size: medium;
+    background: var(--pink1);
+    padding: 1rem;
+    color: var(--primary-color-text);
+  }
+
+  .hide {
+    display: none;
+  }
+
+  .main {
+    position: relative;
+  }
+
   .top-toolbar {
     position: relative;
     top: 0;
@@ -23,5 +43,29 @@ cym-graph-editor{
     align-items: center;
     padding: var(--unit);
     gap: var(--unit);
+  }
+
+  .tools {
+    cursor: pointer;
+  }
+
+  .graph-container {
+    display: flex;
+  }
+
+  .graph-sidebar {
+    height: 85vh;
+    width: 75vw;
+  }
+
+  .graph {
+    height: 85vh;
+    width: 100vw;
+  }
+
+  div#drag-and-drop-panel {
+    width: 20vw;
+    display: grid;
+    grid-template-columns: repeat(5, auto);
   }
 }

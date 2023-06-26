@@ -13,13 +13,13 @@
 <div *ngIf="type === 'editor'">
   <div class="details-container" *ngIf="info[0].source">
     <div class="title label">EDGE</div>
-    <div class="details">
+    <div class="grid">
       <div class="subtitle label">
         <div>Id</div>
       </div>
       <div>{{info[0].id}}</div>
     </div>
-    <div class="details">
+    <div class="grid">
       <div class="subtitle label">
         <div>Label</div>
       </div>
@@ -27,7 +27,7 @@
         <input pInputText type="text" [(ngModel)]="edgeForm['label']">
       </div>
     </div>
-    <div class="details">
+    <div class="grid">
       <div class="subtitle label">
         <div>Source</div>
       </div>
@@ -35,7 +35,7 @@
         <input pInputText type="text" [(ngModel)]="edgeForm['sourceLabel']">
       </div>
     </div>
-    <div class="details">
+    <div class="grid">
       <div class="subtitle label">
         <div>Target</div>
       </div>
@@ -49,13 +49,13 @@
   </div>
   <div class="details-container" *ngIf="!info[0].source">
     <div class="title label">NODE</div>
-    <div class="details">
+    <div class="grid">
       <div class="subtitle label">
         <div>Id</div>
       </div>
       <div>{{info[0].id}}</div>
     </div>
-    <div class="details">
+    <div class="grid">
       <div class="subtitle label">
         <div>Label</div>
       </div>
@@ -63,6 +63,33 @@
         <input pInputText type="text" [(ngModel)]="nodeForm['label']">
       </div>
     </div>
+    <div class="grid">
+      <div>
+        <cym-button [class]="'solid-button'" [label]="'Add property'" (click)="addForm()"></cym-button>
+      </div>
+      <div class="grid" *ngFor="let value of nodeForm['properties'];let i=index">
+        <div>
+          <div class="subtitle label">
+            <div>Name *</div>
+          </div>
+          <input pInputText type="text" [(ngModel)]=" nodeForm['properties'][i]['key']">
+        </div>
+        <div>
+          <div class="subtitle label">
+            <div>Type *</div>
+          </div>
+          <p-dropdown [options]="typeOptions" [(ngModel)]="nodeForm['properties'][i]['type']" [placeholder]="'select type'" optionLabel="option" optionValue="value"></p-dropdown>
+        </div>
+        <div>
+          <div class="subtitle label">
+            <div>Default</div>
+          </div>
+          <input pInputText type="text" [(ngModel)]=" nodeForm['properties'][i]['default']">
+        </div>
+
+      </div>
+    </div>
+
     <div>
       <cym-button [class]="'solid-button'" [label]="'Apply'" (click)="submit(nodeForm)"></cym-button>
     </div>
