@@ -50,12 +50,12 @@ export class LaunchpadWidgetComponent implements OnInit {
       subGroup: [{
         bgColor: "gray",
         cardLabel: "Modeling",
-        image: "cymonix/fusioncenterui/apps/webApp/src/assets/image/data-modelling.svg",
+        image: "assets/image/data-modelling.svg",
       },
         {
           bgColor: "pink",
           cardLabel: "Load Data",
-          image:"../../apps/webApp/src/assets/image/data-transformation.svg",
+          image:"assets/image/data-transformation.svg",
         }],
     },
     {
@@ -63,29 +63,29 @@ export class LaunchpadWidgetComponent implements OnInit {
       subGroup: [{
         bgColor: "red",
         cardLabel: "AWS Cymonix Infrastructure",
-        image: "./../apps/webApp/src/assets/image/data-modelling.svg",
+        image: "assets/image/data-modelling.svg",
       },
         {
           bgColor: "pink",
           cardLabel: "ARMS",
-          image: "./../apps/webApp/src/assets/image/data-modelling.svg",
+          image: "assets/image/data-modelling.svg",
         },
         {
           bgColor: "blue",
           cardLabel: "Name",
-          image: "./../apps/webApp/src/assets/image/data-modelling.svg",
+          image: "assets/image/data-modelling.svg",
         },
         {
           bgColor: "green",
           cardLabel: "Name",
-          image: "./../apps/webApp/src/assets/image/data-modelling.svg",
+          image: "assets/image/data-modelling.svg",
         }],
     }, {
       name: "Settings",
       subGroup: [{
         bgColor: "red",
         cardLabel: "Add User",
-        image: "../../apps/webApp/src/assets/image/add-user.svg",
+        image: "assets/image/add-user.svg",
       },
       ],
     }]

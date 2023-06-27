@@ -16,16 +16,28 @@
 <!--  <div>{{cardDivision}}</div>-->
 <!--</p-card>-->
 
-<cym-card [class]="cymClass">
-<!--  {{subGroup}}-->
-  <div card-content>
-    <p-header>
-      <cym-div>{{cardHeader}}</cym-div>
-    </p-header>
-    <cym-div>{{cardContent}}</cym-div>
-    <p-footer>
-      <cym-div>{{cardFooter}}</cym-div>
-    </p-footer>
-  </div>
+<!--<cym-card >-->
+<!--&lt;!&ndash;  {{subGroup}}&ndash;&gt;-->
+<!--  <div card-content [class]="cymClass">-->
+<!--&lt;!&ndash;    <p-header>&ndash;&gt;-->
+<!--&lt;!&ndash;      <cym-div>{{cardHeader}}</cym-div>&ndash;&gt;-->
+<!--&lt;!&ndash;    </p-header>&ndash;&gt;-->
+<!--&lt;!&ndash;    <cym-div>{{cardContent}}</cym-div>&ndash;&gt;-->
+<!--&lt;!&ndash;    <p-footer>&ndash;&gt;-->
+<!--&lt;!&ndash;      <cym-div>{{cardFooter}}</cym-div>&ndash;&gt;-->
+<!--&lt;!&ndash;    </p-footer>&ndash;&gt;-->
+<!--  </div>-->
 
-</cym-card>
+<!--</cym-card>-->
+<div [class]="cymClass">
+  <div>
+
+  </div>
+  <div class="box-color" [ngStyle]="{background: cardHeader}" *ngIf="cardContent===''">
+    <span>{{getAbbrevation(cardFooter)}}</span>
+  </div>
+  <img [src]="cardContent">
+  <div>
+    {{cardFooter}}
+  </div>
+</div>

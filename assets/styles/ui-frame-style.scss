@@ -63,9 +63,7 @@
 
 .header {
   grid-area: header;
-  border-bottom: calc(var(--border-width) * 2) solid var(--third-background-color);
-  background-color: var(--primary-background-color);
-  color: var(--primary-text-color);
+  background-color: var(--main-bg-color);
 }
 
 .sidebar {
@@ -80,6 +78,7 @@
   background-color: var(--main-bg-color);
   max-height: 100vh calc(2 * var(--top-toolbar-height));
   overflow-y: auto;
+  padding: 1rem;
 }
 
 .footer {

@@ -19,12 +19,12 @@ html, body {
 
 }
 
-@media screen and (max-width: 1280px) {
-  html, body {
-    background-size: var(--bg-image-size);
-    font-size: var(--medium-screen-font-size);
-  }
-}
+//@media screen and (max-width: 1280px) {
+//  html, body {
+//    background-size: var(--bg-image-size);
+//    font-size: var(--medium-screen-font-size);
+//  }
+//}
 
 a {
   text-decoration-line: none;
@@ -54,12 +54,49 @@ label {
   border-radius: 20px; /* roundness of the scroll thumb */
   border: calc(var(--unit) / 4) solid var(--primary-background-color);
 }
+
 //overlay modal
 .p-dialog .p-dialog-content {
   padding: var(--unit);
 }
+
 .p-dialog .p-dialog-footer {
-  padding:  var(--unit);
+  padding: var(--unit);
 }
 
+.card-main {
+  display: grid;
+  grid-auto-rows: var(--vertical-cards-loop);
+  row-gap: 0.4rem;
+}
 
+.header-content-divs {
+  display: grid;
+  grid-template-rows: 2rem auto;
+}
+
+.card-divisions {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 10rem);
+  column-gap: 0.8rem;
+  padding-left: 0.75rem;
+}
+
+.launcpad-cards {
+  display: grid;
+  height: var(--card-height);
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 6px #00000029;
+  grid-template-rows: 1fr 8fr 1fr;
+  padding: 0.5rem;
+  align-items: center;
+  justify-items: center;
+}
+
+.box-color {
+  height: 5rem;
+  width: 5rem;
+  display:grid;
+  align-items:center;
+  justify-items: center;
+}

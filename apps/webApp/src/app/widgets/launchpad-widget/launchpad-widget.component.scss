@@ -1,5 +1,5 @@
-cym-launchpad-widget{
-  .grid{
+cym-launchpad-widget {
+  .grid {
     display: grid;
     height: 100vh;
     width: 100vw;
@@ -7,7 +7,7 @@ cym-launchpad-widget{
     align-items: center;
   }
 
-  .container{
+  .container {
     display: grid;
     height: 20%;
     width: 20%;
@@ -16,9 +16,12 @@ cym-launchpad-widget{
     justify-items: center;
     align-items: center;
   }
-  .graph-container{
+
+  .graph-container {
     display: grid;
     justify-items: center;
     align-items: center;
   }
+
+
 }
