@@ -1,11 +1,11 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'cym-card-division',
   templateUrl: './cym-card-division.component.html',
   styleUrls: ['./cym-card-division.component.scss']
 })
-export class CymCardDivisionComponent {
+export class CymCardDivisionComponent implements OnInit {
   @Input() cardDivision: any;
   @Input() cymClass: any;
   @Input() propertyHeader: any;
@@ -13,6 +13,11 @@ export class CymCardDivisionComponent {
   @Input() cardHeader: any;
   @Input() cardContent: any;
   @Input() cardFooter: any;
+  @Input() routClick = false;
+  @Output() cardClickEvent = new EventEmitter<any>;
+
+  ngOnInit() {
+  }
 
   getAbbrevation(value: string) {
     if (value) {
@@ -24,5 +29,12 @@ export class CymCardDivisionComponent {
     }
 
     return '';
+  }
+
+  cardClick() {
+    if (this.routClick) {
+      this.cardClickEvent.emit()
+    }
+
   }
 }

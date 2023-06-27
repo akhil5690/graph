@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {Router} from "@angular/router";
 
 @Component({
@@ -10,15 +10,17 @@ import {Router} from "@angular/router";
 export class LaunchpadWidgetComponent implements OnInit {
   cardMain: any;
   cardFooter = "";
+
   constructor(private router: Router) {
   }
 
   ngOnInit() {
     console.log(this.launchpad);
+
   }
 
   // launchpad container
-  launchpad = [{
+  launchpad: any = [{
     name: "Workspace",
     subGroup: [{
       bgColor: "red",
@@ -55,7 +57,7 @@ export class LaunchpadWidgetComponent implements OnInit {
         {
           bgColor: "pink",
           cardLabel: "Load Data",
-          image:"assets/image/data-transformation.svg",
+          image: "assets/image/data-transformation.svg",
         }],
     },
     {
@@ -64,6 +66,8 @@ export class LaunchpadWidgetComponent implements OnInit {
         bgColor: "red",
         cardLabel: "AWS Cymonix Infrastructure",
         image: "assets/image/data-modelling.svg",
+        routPath: "/launchpad/dashboard",
+        click: true,
       },
         {
           bgColor: "pink",

@@ -10,9 +10,13 @@
       <cym-card *ngFor="let tool of launchpad" [cymClass]="'header-content-divs'">
         <div header>{{tool.name}}</div>
         <cym-div card-content [cymClass]="'card-divisions'">
-          <cym-card-division  *ngFor="let sub of tool.subGroup;index as i" [cymClass]="'launcpad-cards'"
+          <cym-card-division *ngFor="let sub of tool.subGroup;index as i" [cymClass]="'launcpad-cards'"
                              [cardHeader]="tool.subGroup[i]['bgColor']"
-                             [cardContent]="tool.subGroup[i]['image']" [cardFooter]="tool.subGroup[i]['cardLabel']">
+                             [cardContent]="tool.subGroup[i]['image']"
+                             [cardFooter]="tool.subGroup[i]['cardLabel']"
+                             [routClick]="tool.subGroup[i]['click']"
+                             (cardClickEvent)="showGraph()"
+          >
           </cym-card-division>
         </cym-div>
 
