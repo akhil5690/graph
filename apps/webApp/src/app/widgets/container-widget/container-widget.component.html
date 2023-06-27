@@ -96,13 +96,34 @@
     <cym-div>
       <cym-div [cymClass]="'component-header'">Toast Component</cym-div>
       <cym-toast [position]="toastPosition">
-<!--        <p-button type="button" (click)="showSuccess()" label="Success" class="p-button-success"></p-button>-->
+        <!--        <p-button type="button" (click)="showSuccess()" label="Success" class="p-button-success"></p-button>-->
       </cym-toast>
     </cym-div>
   </cym-div>
-<cym-password [propertyMeta]="'Name'">
-</cym-password>
-  <cym-profile></cym-profile>
+  <cym-div [cymClass]="'grid-container'">
+    <cym-div>
+      <cym-div [cymClass]="'component-header'">Password Component</cym-div>
+      <cym-password [propertyMeta]="'Name'"></cym-password>
+    </cym-div>
+    <cym-div>
+      <cym-div [cymClass]="'component-header'">User Profile Component</cym-div>
+      <cym-profile></cym-profile>
+    </cym-div>
+  </cym-div>
+
+  <cym-div [cymClass]="'grid-container'">
+    <cym-div>
+      <cym-div [cymClass]="'component-header'">Card Division Component</cym-div>
+      <cym-card-division [propertyHeader]="'Hello'">
+        <cym-div>hello</cym-div>
+        <cym-div>{{cardData}}</cym-div>
+      </cym-card-division>
+    </cym-div>
+    <cym-div>
+      <cym-div [cymClass]="'component-header'">Menu Component</cym-div>
+      <cym-menu></cym-menu>
+    </cym-div>
+  </cym-div>
 </cym-div>
 
 

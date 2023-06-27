@@ -4,6 +4,7 @@ import {CymProfileComponent} from "./cym-profile.component";
 import {CymOverlayPanelModule} from "../cym-overlay/cym-overlay-panel/cym-overlay-panel.module";
 import {ButtonModule} from "primeng/button";
 import {OverlayPanelModule} from "primeng/overlaypanel";
+import {CymMenuModule} from "../cym-menu/cym-menu.module";
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import {OverlayPanelModule} from "primeng/overlaypanel";
     CymOverlayPanelModule,
     ButtonModule,
     OverlayPanelModule,
+    CymMenuModule,
   ],
   exports: [CymProfileComponent]
 })

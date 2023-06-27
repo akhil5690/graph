@@ -1,3 +1,17 @@
-<cym-card>
+<!--<cym-card>-->
+<!--{{cardDivision}}-->
+<!--</cym-card>-->
+
+<p-card [class]="cymClass">
+  <p-header>
+    {{propertyHeader}}
+  </p-header>
   <ng-content></ng-content>
-</cym-card>
+  <p-footer>
+    <ng-content></ng-content>
+  </p-footer>
+</p-card>
+
+<!--<p-card [class]="cymClass">-->
+<!--  <div>{{cardDivision}}</div>-->
+<!--</p-card>-->
