@@ -104,6 +104,7 @@ export class GraphEditorComponent implements OnInit {
   selectedNeighbour: any;
   neighboursOptions: any;
   selectedNode!: INode;
+  private original: any;
 
 
   constructor(private cdr: ChangeDetectorRef) {
@@ -650,6 +651,7 @@ export class GraphEditorComponent implements OnInit {
 
 
   getNeighbourGraph(node: INode) {
+    this.original = {...this.iGraph}
     const jsonGraph: { nodes: any[], edges: any[] } = {
       nodes: [],
       edges: []
@@ -676,6 +678,7 @@ export class GraphEditorComponent implements OnInit {
         })
       }
     }
+    this.save();
     this.createGraph(jsonGraph, this.neighbourComponent)
     this.neighbourComponent.contentRect = new Rect(0, 0, 100, 100);
     this.neighbourComponent.fitGraphBounds()
@@ -697,8 +700,7 @@ export class GraphEditorComponent implements OnInit {
       this.graphComponent.graph = this.neighbourComponent.graph;
       this.graphComponent.inputMode = new GraphViewerInputMode();
     } else {
-
-      this.createGraph(this.iGraph, this.neighbourComponent);
+      this.createGraph(this.iGraph, this.graphComponent);
       this.setInputMode()
     }
   }
