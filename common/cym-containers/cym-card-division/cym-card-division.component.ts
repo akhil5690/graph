@@ -10,4 +10,7 @@ export class CymCardDivisionComponent {
   @Input() cymClass: any;
   @Input() propertyHeader: any;
   @Input() cardData:any;
+  @Input() cardHeader:any;
+  @Input() cardContent:any;
+  @Input() cardFooter:any;
 }

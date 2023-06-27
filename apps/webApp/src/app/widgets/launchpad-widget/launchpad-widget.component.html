@@ -5,13 +5,14 @@
     </cym-div>
   </cym-toolbar>
   <cym-div main>
-    <cym-card *ngFor="let tool of launchpad" [propertyHeader]="tool.name">
-      <cym-card-division *ngFor="let sub of tool.subGroup;index as i">
-        <cym-div>{{tool.subGroup[i]['bgColor']}}</cym-div>
-        <cym-div>{{tool.subGroup[i]['image']}}</cym-div>
-        <cym-div>{{tool.subGroup[i]['cardLabel']}}</cym-div>
+    <cym-card *ngFor="let tool of launchpad">
+      <div header>{{tool.name}}</div>
+
+      <cym-card-division card-content *ngFor="let sub of tool.subGroup;index as i" [cardHeader]="tool.subGroup[i]['bgColor']"
+                         [cardContent]="tool.subGroup[i]['image']" [cardFooter]="tool.subGroup[i]['cardLabel']">
       </cym-card-division>
     </cym-card>
   </cym-div>
   <cym-div footer>Copyright</cym-div>
 </cym-widget-frame>
+<!--[subGroup]="tool.subGroup[i]['bgColor']"-->
