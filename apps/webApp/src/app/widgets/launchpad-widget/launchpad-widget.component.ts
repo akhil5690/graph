@@ -8,7 +8,6 @@ import {Router} from "@angular/router";
   encapsulation: ViewEncapsulation.None
 })
 export class LaunchpadWidgetComponent implements OnInit {
-  frameType: string = "header-main-footer-frame";
   cardMain: any;
   cardFooter = "";
   constructor(private router: Router) {

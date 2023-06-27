@@ -1,11 +1,12 @@
 <p-card [class]="cymClass">
   <!--  {{cardData}}-->
-  <p-header>
-    <div>{{propertyHeader}}</div>
-  </p-header>
-  <ng-content></ng-content>
-  <p-footer>
-<!--    <ng-content></ng-content>-->
-  </p-footer>
+<!--  <p-header>-->
+<!--    <div>{{propertyHeader}}</div>-->
+<!--  </p-header>-->
+  <ng-content select="[header]"></ng-content>
+  <ng-content select="[card-content]"></ng-content>
+<!--  <p-footer>-->
+<!--&lt;!&ndash;    <ng-content></ng-content>&ndash;&gt;-->
+<!--  </p-footer>-->
 </p-card>
 <!--{{propertyFooter}}-->

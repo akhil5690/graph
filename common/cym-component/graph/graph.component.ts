@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -30,14 +31,14 @@ import {
   InteriorLabelModel,
   LabelCreator,
   LayoutExecutor,
-  License,
+  License, Neighborhood,
   NodesSource,
   OrganicLayout, OrthogonalLayout,
   Point,
   PolylineEdgeStyle, RadialLayout,
   Rect,
   ShapeNodeStyle,
-  Size
+  Size, TraversalDirection
 } from "yfiles";
 // import {data} from './data'
 import licenseValue from 'license.json';
@@ -53,13 +54,17 @@ export class GraphComponents implements OnInit, OnChanges {
   // data = data;
   visible = true;
   // data: any;
-  graphComponent!: GraphComponent;
+  private graphComponent!: GraphComponent;
+  private neighbourComponent!: GraphComponent;
+
   selectedItem!: IEdge | INode | null;
   filter = false;
   @Input() data: any;
   @Input() layout: any = 'Organic';
   @ViewChild('graphComponent', {static: true}) graphContainer!: ElementRef;
   @ViewChild('overViewComponent', {static: true}) overViewContainer!: ElementRef;
+  @ViewChild('neighbour', {static: true}) neighbour!: ElementRef;
+
   @Output() refreshGraph = new EventEmitter()
 
 
@@ -81,50 +86,35 @@ export class GraphComponents implements OnInit, OnChanges {
   ]
   overviewComponent!: GraphOverviewComponent;
   isFilterOpen = false;
+  neighboursOptions: any;
+  selectedNode!: INode;
+  selectedNeighbour: any;
 
-  constructor(private graphService: GraphService) {
+  constructor(private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit() {
+    this.getNeighbourOption();
   }
 
   ngOnChanges() {
     if (this.data) {
       // start creating graph
-      this.createGraph();
+      this.run();
     }
   }
 
-  private createGraph() {
+  private run() {
     // add licence
     License.value = licenseValue;
-
-    // Graph Builder used to get json data and generate nodes and edges for graph
-    const builder = new GraphBuilder();
 
     // creates a component to store graph
     this.initializeGraphComponent()
 
-    // create nodes and edges for graph
-    this.initializeNodeAndEdges(builder);
-
-    // run graph
-    this.buildGraph(this.graphComponent, builder);
-
-    // zoom on click
-    this.zoomOnCtrlClick(this.graphComponent);
-
     // editable mode for graph like creating node, adding/updating label, resizing node etc,.
     this.setInputMode(this.graphComponent);
 
-    // this.styleForFraudData(this.graphComponent);
-
-    // set the layout on filter
-    this.layout = this.getLayout(this.filter, this.layout)
-
-    // start building layout, example: Organic layout
-    this.buildLayout(this.graphComponent, this.layout);
-
+    this.createGraph(this.data, this.graphComponent);
     // fit the whole graph into the canvas
     setTimeout(() => {
       this.graphComponent.zoomTo(this.graphComponent.contentRect);
@@ -132,25 +122,33 @@ export class GraphComponents implements OnInit, OnChanges {
 
     // create overview component to view and navigate the graph in graph component
     this.initializeOverviewComponent(this.graphComponent);
+
+    this.initialiseNeighbourhood();
+
   }
 
-  private initializeGraphComponent() {
-    const container = this.graphContainer.nativeElement;
-    // inorder to update the graph component with another graph, check if the component already exist, if yes: cleanup
-    if (this.graphComponent?.div) {
-      this.graphComponent.cleanUp();
-      this.graphComponent = new GraphComponent(container);
-      this.filter = true; //if true change the layout from organic to some other layout
-    } else {
-      this.filter = false;
-      this.graphComponent = new GraphComponent(container);
-    }
+  createGraph(data: any, graphComponent: GraphComponent) {
+    // Graph Builder used to get json data and generate nodes and edges for graph
+    const builder = new GraphBuilder();
+
+    // create nodes and edges for graph
+    this.initializeNodeAndEdges(builder, data);
+
+    // run graph
+    this.buildGraph(graphComponent, builder);
+
+    // set the layout on filter
+    this.layout = this.getLayout(this.filter, this.layout)
+
+    // start building layout, example: Organic layout
+    this.buildLayout(graphComponent, this.layout);
+
   }
 
-  private initializeNodeAndEdges(builder: GraphBuilder) {
+  private initializeNodeAndEdges(builder: GraphBuilder, data: any) {
     // create nodes
     const nodesSource = this.getNodes(builder, {
-      data: this.data.nodes,
+      data: data.nodes,
       id: "id",
       style: (data: any) => this.getNodeShape({
         fill: data.vertex_color ? data.vertex_color : "#FF9900",
@@ -162,7 +160,7 @@ export class GraphComponents implements OnInit, OnChanges {
 
     //create edges
     const edgesSource = this.getEdges(builder, {
-      data: this.data.edges,
+      data: data.edges,
       id: "id",
       labels: ["label"],
       sourceId: "source",
@@ -178,16 +176,6 @@ export class GraphComponents implements OnInit, OnChanges {
   }
 
   private styleNode(nodesSource: NodesSource<any>) {
-    // default will affect throughout the graph
-    // nodesSource.nodeCreator.defaults.style = this.getNodeShape({
-    //   stroke: null, fill: null, shape: 'ellipse'
-    // })
-    // // set node size
-    // nodesSource.nodeCreator.defaults.size = this.getSize(30, 30)
-
-    nodesSource.nodeCreator.defaults.style = this.getNodeShape({
-      stroke: 'black', fill: 'lightgrey', shape: 'ellipse'
-    })
     // set node size
     nodesSource.nodeCreator.defaults.size = this.getSize(30, 30)
 
@@ -244,20 +232,6 @@ export class GraphComponents implements OnInit, OnChanges {
     graphComponent.graph = builder.buildGraph();
   }
 
-  zoomOnCtrlClick(graphComponent: GraphComponent) {
-    const containerElement = graphComponent.div;
-    containerElement.addEventListener('click', (event: MouseEvent) => {
-      // Check if the ctrl key (or cmd key on macOS) is pressed
-      const ctrlKey = event.shiftKey;
-      if (ctrlKey) {
-        // Zoom in on click when ctrl/cmd key is pressed
-        const zoomFactor = 2;
-        const zoomPoint = graphComponent.toWorldCoordinates(new Point(event.clientX, event.clientY));
-        graphComponent.zoomTo(zoomPoint, graphComponent.zoom * zoomFactor);
-      }
-    });
-  }
-
 
   private setInputMode(graphComponent: GraphComponent) {
     const inputMode = graphComponent.inputMode = new GraphEditorInputMode({
@@ -278,17 +252,13 @@ export class GraphComponents implements OnInit, OnChanges {
   private leftClickListener(inputMode: GraphEditorInputMode) {
     inputMode.addItemLeftClickedListener((sender, evt) => {
       this.selectedItem = evt.item instanceof IEdge || evt.item instanceof INode ? evt.item : null;
-    })
-  }
+      if (evt.item instanceof INode) {
+        this.selectedNode = evt.item;
+        this.getNeighbourGraph(evt.item)
 
-  private styleForFraudData(graphComponent: GraphComponent) {
-    graphComponent.graph.nodes.forEach((node) => {
-      if (node.tag.isFraud) {
-        graphComponent.graph.setStyle(node, new ShapeNodeStyle({fill: null, shape: "ellipse", stroke: '#ff1a61'}))
       }
     })
   }
-
 
   private buildLayout(graphComponent: GraphComponent, layoutType: string) {
     // set layout
@@ -304,7 +274,18 @@ export class GraphComponents implements OnInit, OnChanges {
     // start executing the layout
     layoutExecutor.start().then();
   }
-
+  private initializeGraphComponent() {
+    const container = this.graphContainer.nativeElement;
+    // inorder to update the graph component with another graph, check if the component already exist, if yes: cleanup
+    if (this.graphComponent?.div) {
+      this.graphComponent.cleanUp();
+      this.graphComponent = new GraphComponent(container);
+      this.filter = true; //if true change the layout from organic to some other layout
+    } else {
+      this.filter = false;
+      this.graphComponent = new GraphComponent(container);
+    }
+  }
   private initializeOverviewComponent(graphComponent: GraphComponent) {
     const container = this.overViewContainer.nativeElement;
     // reinitialize overview component to the update the view with new graph
@@ -315,9 +296,16 @@ export class GraphComponents implements OnInit, OnChanges {
       this.overviewComponent = new GraphOverviewComponent(container, graphComponent);
     }
     this.overviewComponent.autoDrag = true;
-    this.overviewComponent.contentRect = new Rect(0, 0, 2000, 2000);
     this.overviewComponent.fitContent();
   }
+
+  private initialiseNeighbourhood() {
+    const container = this.neighbour.nativeElement;
+    this.neighbourComponent = new GraphComponent(container);
+    this.neighbourComponent.contentRect = new Rect(0, 0, 100, 100);
+    this.neighbourComponent.fitGraphBounds()
+  }
+
 
   toggle() {
     // toggle overview
@@ -433,6 +421,53 @@ export class GraphComponents implements OnInit, OnChanges {
     console.log(params)
     this.refreshGraph.emit(params);
   }
+
+  private getNeighbourOption() {
+    this.neighboursOptions = [{
+      name: 'Neighbourhood', value: TraversalDirection.BOTH
+    }, {
+      name: 'Successor', value: TraversalDirection.SUCCESSOR
+    }, {
+      name: 'Predecessor', value: TraversalDirection.PREDECESSOR
+    },]
+  }
+
+  getNeighbourGraph(node: INode) {
+    if (this.graphComponent) {
+      const jsonGraph: { nodes: any[], edges: any[] } = {
+        nodes: [],
+        edges: []
+      };
+      const algorithm = new Neighborhood({
+        traversalDirection: this.selectedNeighbour, startNodes: [node]
+      });
+      algorithm.maximumDistance = algorithm.traversalDirection === TraversalDirection.BOTH ? 1 : 2;
+      const result = algorithm.run(this.graphComponent.graph);
+      jsonGraph.nodes.push(node?.tag)
+      for (const neighbor of result.neighbors) {
+        jsonGraph.nodes.push(neighbor?.tag)
+        if (algorithm.traversalDirection === TraversalDirection.SUCCESSOR) {
+          this.graphComponent.graph.edges.filter(edge => edge.tag.target === neighbor.tag.id).forEach((edge) => {
+            jsonGraph.edges.push(edge?.tag)
+          })
+        } else if (algorithm.traversalDirection === TraversalDirection.PREDECESSOR) {
+          this.graphComponent.graph.edges.filter(edge => edge.tag.source === neighbor.tag.id).forEach((edge) => {
+            jsonGraph.edges.push(edge.tag)
+          })
+        } else {
+          this.graphComponent.graph.edges.filter(edge => edge.tag.source === neighbor.tag.id || edge.tag.target === neighbor.tag.id).forEach((edge) => {
+            jsonGraph.edges.push(edge.tag)
+          })
+        }
+      }
+      this.createGraph(jsonGraph, this.neighbourComponent)
+      this.neighbourComponent.contentRect = new Rect(0, 0, 100, 100);
+      this.neighbourComponent.fitGraphBounds()
+      this.cdr.detectChanges();
+    }
+
+  }
+
 }
 
 
