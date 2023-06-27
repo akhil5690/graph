@@ -5,7 +5,7 @@ cym-top-toolbar {
     align-content: center;
     align-items: center;
     padding: 1rem;
-    height: calc(var(--unit) * 5);
+    height: var(--base-height);
     color: var(--primary-text-color);
     gap: var(--unit);
     width: var(--base-width);

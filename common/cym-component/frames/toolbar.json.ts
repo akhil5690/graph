@@ -4,7 +4,7 @@ export const toolbar = [{
   "position": "top",
   "type": "image",
   "sector": "1",
-  "height": "33",
+  "height": "20",
   "width": "70",
   "top": "8",
   "left": "16",

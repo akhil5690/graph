@@ -1,9 +1,10 @@
 <cym-widget-frame [frame_type]="'header-main-footer-frame'">
-  <cym-toolbar header>
-    <cym-div class="container" (click)="showGraph()">
-      Dashboard
-    </cym-div>
-  </cym-toolbar>
+<!--  <cym-toolbar header>-->
+<!--    <cym-div class="container" (click)="showGraph()">-->
+<!--      Dashboard-->
+<!--    </cym-div>-->
+<!--  </cym-toolbar>-->
+  <cym-top-toolbar header></cym-top-toolbar>
   <cym-div main>
     <cym-div [cymClass]="'card-main'">
       <cym-card *ngFor="let tool of launchpad" [cymClass]="'header-content-divs'">
