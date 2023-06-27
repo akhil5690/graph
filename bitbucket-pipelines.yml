@@ -14,20 +14,20 @@ pipelines:
                       - python3 -m pip install --upgrade pip
                       - aws configure --profile deployment set aws_access_key_id ${AWS_ACCESS_KEY_ID}
                       - aws configure --profile deployment set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY}
-                      - ssm_schema_uri=$(aws ssm get-parameter --name "/${Env}/api/Url/GetSchema" --query "Parameter.Value" --output text)
-                      - ssm_explorer_uri=$(aws ssm get-parameter --name "/${Env}/api/Url/Explorer" --query "Parameter.Value" --output text)
-                      - ssm_convert_to_schema_uri=$(aws ssm get-parameter --name "/${Env}/api/Url/ConvertToSchema" --query "Parameter.Value" --output text)
-                      - cat <<EOF > config.json
-                        {
-                          "schema_uri": "$ssm_schema_uri",
-                          "explorer_uri": "$ssm_explorer_uri",
-                          "convert_to_schema_uri": "$ssm_convert_to_schema_uri"
-                        }
-                        EOF
+                      # - ssm_schema_uri=$(aws ssm get-parameter --name "/${Env}/api/Url/GetSchema" --query "Parameter.Value" --output text)
+                      # - ssm_explorer_uri=$(aws ssm get-parameter --name "/${Env}/api/Url/Explorer" --query "Parameter.Value" --output text)
+                      # - ssm_convert_to_schema_uri=$(aws ssm get-parameter --name "/${Env}/api/Url/ConvertToSchema" --query "Parameter.Value" --output text)
+                      # - cat <<EOF > config.json
+                      #   {
+                      #     "schema_uri": "$ssm_schema_uri",
+                      #     "explorer_uri": "$ssm_explorer_uri",
+                      #     "convert_to_schema_uri": "$ssm_convert_to_schema_uri"
+                      #   }
+                      #   EOF
                       - zip -r angular.zip .
                       - aws s3 --region $AWS_DEFAULT_REGION cp angular.zip s3://$AWS_Bucket
-                      - aws ssm delete-parameter --region $AWS_DEFAULT_REGION --name /$Env/Cymonix/FusionCentre/version
-                      - aws ssm delete-parameter --region $AWS_DEFAULT_REGION --name /$Env/Cymonix/ssr/version
-                      - echo $BITBUCKET_BUILD_NUMBER
-                      - aws ssm put-parameter --region $AWS_DEFAULT_REGION --name /$Env/cymonix/fusioncentre/version --value 1.0.$BITBUCKET_BUILD_NUMBER --type String --overwrite
-                      - aws ssm put-parameter --region $AWS_DEFAULT_REGION --name /$Env/cymonix/ssr/version --value 1.0.$BITBUCKET_BUILD_NUMBER --type String --overwrite
+                      # - aws ssm delete-parameter --region $AWS_DEFAULT_REGION --name /$Env/Cymonix/FusionCentre/version
+                      # - aws ssm delete-parameter --region $AWS_DEFAULT_REGION --name /$Env/Cymonix/ssr/version
+                      # - echo $BITBUCKET_BUILD_NUMBER
+                      # - aws ssm put-parameter --region $AWS_DEFAULT_REGION --name /$Env/cymonix/fusioncentre/version --value 1.0.$BITBUCKET_BUILD_NUMBER --type String --overwrite
+                      # - aws ssm put-parameter --region $AWS_DEFAULT_REGION --name /$Env/cymonix/ssr/version --value 1.0.$BITBUCKET_BUILD_NUMBER --type String --overwrite

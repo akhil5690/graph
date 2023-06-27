@@ -91,66 +91,53 @@ export class GraphComponents implements OnInit, OnChanges {
   ngOnChanges() {
     if (this.data) {
       // start creating graph
-      this.createGraph();
+      this.run();
     }
   }
 
-  private createGraph() {
+  private run() {
     // add licence
     License.value = licenseValue;
 
-    // Graph Builder used to get json data and generate nodes and edges for graph
-    const builder = new GraphBuilder();
-
-    // creates a component to store graph
-    this.initializeGraphComponent()
-
-    // create nodes and edges for graph
-    this.initializeNodeAndEdges(builder);
-
-    // run graph
-    this.buildGraph(this.graphComponent, builder);
-
-    // zoom on click
-    this.zoomOnCtrlClick(this.graphComponent);
+    const container = this.graphContainer.nativeElement;
+    this.graphComponent = new GraphComponent(container);
 
     // editable mode for graph like creating node, adding/updating label, resizing node etc,.
     this.setInputMode(this.graphComponent);
 
-    // this.styleForFraudData(this.graphComponent);
-
-    // set the layout on filter
-    this.layout = this.getLayout(this.filter, this.layout)
-
-    // start building layout, example: Organic layout
-    this.buildLayout(this.graphComponent, this.layout);
-
-    // fit the whole graph into the canvas
-    setTimeout(() => {
-      this.graphComponent.zoomTo(this.graphComponent.contentRect);
-    }, 50)
+    this.createGraph(this.data,this.graphComponent);
 
     // create overview component to view and navigate the graph in graph component
     this.initializeOverviewComponent(this.graphComponent);
   }
 
-  private initializeGraphComponent() {
-    const container = this.graphContainer.nativeElement;
-    // inorder to update the graph component with another graph, check if the component already exist, if yes: cleanup
-    if (this.graphComponent?.div) {
-      this.graphComponent.cleanUp();
-      this.graphComponent = new GraphComponent(container);
-      this.filter = true; //if true change the layout from organic to some other layout
-    } else {
-      this.filter = false;
-      this.graphComponent = new GraphComponent(container);
-    }
+  createGraph(data: any, graphComponent: GraphComponent){
+    // Graph Builder used to get json data and generate nodes and edges for graph
+    const builder = new GraphBuilder();
+
+    // create nodes and edges for graph
+    this.initializeNodeAndEdges(builder,data);
+
+    // run graph
+    this.buildGraph(graphComponent, builder);
+
+    // set the layout on filter
+    this.layout = this.getLayout(this.filter, this.layout)
+
+    // start building layout, example: Organic layout
+    this.buildLayout(graphComponent, this.layout);
+
+    // fit the whole graph into the canvas
+    setTimeout(() => {
+      this.graphComponent.zoomTo(graphComponent.contentRect);
+    }, 50)
+
   }
 
-  private initializeNodeAndEdges(builder: GraphBuilder) {
+  private initializeNodeAndEdges(builder: GraphBuilder, data: any) {
     // create nodes
     const nodesSource = this.getNodes(builder, {
-      data: this.data.nodes,
+      data: data.nodes,
       id: "id",
       style: (data: any) => this.getNodeShape({
         fill: data.vertex_color ? data.vertex_color : "#FF9900",
@@ -162,7 +149,7 @@ export class GraphComponents implements OnInit, OnChanges {
 
     //create edges
     const edgesSource = this.getEdges(builder, {
-      data: this.data.edges,
+      data: data.edges,
       id: "id",
       labels: ["label"],
       sourceId: "source",
@@ -244,19 +231,6 @@ export class GraphComponents implements OnInit, OnChanges {
     graphComponent.graph = builder.buildGraph();
   }
 
-  zoomOnCtrlClick(graphComponent: GraphComponent) {
-    const containerElement = graphComponent.div;
-    containerElement.addEventListener('click', (event: MouseEvent) => {
-      // Check if the ctrl key (or cmd key on macOS) is pressed
-      const ctrlKey = event.shiftKey;
-      if (ctrlKey) {
-        // Zoom in on click when ctrl/cmd key is pressed
-        const zoomFactor = 2;
-        const zoomPoint = graphComponent.toWorldCoordinates(new Point(event.clientX, event.clientY));
-        graphComponent.zoomTo(zoomPoint, graphComponent.zoom * zoomFactor);
-      }
-    });
-  }
 
 
   private setInputMode(graphComponent: GraphComponent) {
@@ -280,15 +254,6 @@ export class GraphComponents implements OnInit, OnChanges {
       this.selectedItem = evt.item instanceof IEdge || evt.item instanceof INode ? evt.item : null;
     })
   }
-
-  private styleForFraudData(graphComponent: GraphComponent) {
-    graphComponent.graph.nodes.forEach((node) => {
-      if (node.tag.isFraud) {
-        graphComponent.graph.setStyle(node, new ShapeNodeStyle({fill: null, shape: "ellipse", stroke: '#ff1a61'}))
-      }
-    })
-  }
-
 
   private buildLayout(graphComponent: GraphComponent, layoutType: string) {
     // set layout
