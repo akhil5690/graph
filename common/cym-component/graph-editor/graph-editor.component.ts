@@ -248,6 +248,7 @@ export class GraphEditorComponent implements OnInit {
     this.save();
     this.createGraph(this.iGraph, this.graphComponent)
   }
+  isFullscreen: boolean = false;
 
   private replaceEdgeTag(id: string, label: string, oldLabel: string) {
     //when the node label is change, change the source and target of the respective edge

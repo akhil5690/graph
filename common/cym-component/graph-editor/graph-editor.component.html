@@ -26,6 +26,7 @@
         <p-dropdown [options]="neighboursOptions" [(ngModel)]="selectedNeighbour"
                     (ngModelChange)="getNeighbourGraph(selectedNode)" optionLabel="name"
                     optionValue="value"></p-dropdown>
+        <img src="assets/image/fullscreen.svg" alt="" (click)="isFullscreen = true">
       </div>
       <div>
         <div id="neighbour" #neighbour></div>
