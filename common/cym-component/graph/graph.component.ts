@@ -108,8 +108,8 @@ export class GraphComponents implements OnInit, OnChanges {
     // add licence
     License.value = licenseValue;
 
-    const container = this.graphContainer.nativeElement;
-    this.graphComponent = new GraphComponent(container);
+    // creates a component to store graph
+    this.initializeGraphComponent()
 
     // editable mode for graph like creating node, adding/updating label, resizing node etc,.
     this.setInputMode(this.graphComponent);
@@ -274,7 +274,18 @@ export class GraphComponents implements OnInit, OnChanges {
     // start executing the layout
     layoutExecutor.start().then();
   }
-
+  private initializeGraphComponent() {
+    const container = this.graphContainer.nativeElement;
+    // inorder to update the graph component with another graph, check if the component already exist, if yes: cleanup
+    if (this.graphComponent?.div) {
+      this.graphComponent.cleanUp();
+      this.graphComponent = new GraphComponent(container);
+      this.filter = true; //if true change the layout from organic to some other layout
+    } else {
+      this.filter = false;
+      this.graphComponent = new GraphComponent(container);
+    }
+  }
   private initializeOverviewComponent(graphComponent: GraphComponent) {
     const container = this.overViewContainer.nativeElement;
     // reinitialize overview component to the update the view with new graph
