@@ -132,7 +132,7 @@ export class GraphEditorComponent implements OnInit {
     this.initTutorialDefaults(this.graphComponent.graph);
 
     // prepare drag and drop
-    this.configureDragAndDrop();
+    this.setInputMode();
 
     this.initializeOverviewComponent(this.graphComponent)
 
@@ -142,7 +142,7 @@ export class GraphEditorComponent implements OnInit {
 
   }
 
-  configureDragAndDrop(): void {
+  setInputMode(): void {
 
     // get the input handler
     const inputMode = this.graphComponent.inputMode = new GraphEditorInputMode();
@@ -653,29 +653,24 @@ export class GraphEditorComponent implements OnInit {
       nodes: [],
       edges: []
     };
-
-    console.log(this.selectedNeighbour)
     const algorithm = new Neighborhood({
       traversalDirection: this.selectedNeighbour, startNodes: [node]
     });
     algorithm.maximumDistance = algorithm.traversalDirection === TraversalDirection.BOTH ? 1 : 2;
     const result = algorithm.run(this.graphComponent.graph);
-    jsonGraph.nodes.push(node.tag)
+    jsonGraph.nodes.push(node?.tag)
     for (const neighbor of result.neighbors) {
-      jsonGraph.nodes.push(neighbor.tag)
+      jsonGraph.nodes.push(neighbor?.tag)
       if (algorithm.traversalDirection === TraversalDirection.SUCCESSOR) {
         this.graphComponent.graph.edges.filter(edge => edge.tag.target === neighbor.tag.id).forEach((edge) => {
-          console.log(edge.tag)
-          jsonGraph.edges.push(edge.tag)
+          jsonGraph.edges.push(edge?.tag)
         })
       } else if (algorithm.traversalDirection === TraversalDirection.PREDECESSOR) {
         this.graphComponent.graph.edges.filter(edge => edge.tag.source === neighbor.tag.id).forEach((edge) => {
-          console.log(edge.tag)
           jsonGraph.edges.push(edge.tag)
         })
       } else {
         this.graphComponent.graph.edges.filter(edge => edge.tag.source === neighbor.tag.id || edge.tag.target === neighbor.tag.id).forEach((edge) => {
-          console.log(edge.tag)
           jsonGraph.edges.push(edge.tag)
         })
       }
