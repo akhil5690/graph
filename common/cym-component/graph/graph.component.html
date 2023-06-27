@@ -17,5 +17,17 @@
   <cym-overview>
     <div id="overview" overview #overViewComponent></div>
   </cym-overview>
+  <div class="neighbour">
+    <div class="container">
+      <div class="header">
+        <p-dropdown [options]="neighboursOptions" [(ngModel)]="selectedNeighbour"
+                    (ngModelChange)="getNeighbourGraph(selectedNode)" optionLabel="name"
+                    optionValue="value"></p-dropdown>
+      </div>
+      <div>
+        <div id="neighbour" #neighbour></div>
+      </div>
+    </div>
+  </div>
 
 </div>

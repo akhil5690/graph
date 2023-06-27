@@ -3,26 +3,31 @@ cym-div {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: var(--unit);
-    margin: var(--unit2);
+    margin: calc(2 * var(--unit));
   }
+
   .header-title {
     text-align: center;
     width: 100%;
-    font-size:var( --unit2);
-    color: var( --pink1);
+    font-size: calc(2 * var(--unit));
+    color: var(--primary-color);
   }
+
   .container {
     margin: 2rem;
   }
+
   .component-header {
     text-align: left;
     font-weight: bold;
-    margin:var(--header-margin-bottom);
-    color:var(--component-header-color);
+    margin: var(--header-margin-bottom);
+    color: var(--component-header-color);
   }
+
   .grid-margin {
-    margin: Var(--unit2);
+    margin: calc(2 * var(--unit));
   }
+
   //
   //.card-container {
   //  display: grid;

@@ -11,7 +11,7 @@
 .solid-button {
   @extend .base-button;
   color: var(--secondary-text-color);
-  background-color: var(--pink1);
+  background-color: var(--primary-color);
   border: none;
 }
 
@@ -22,8 +22,8 @@
 
 .outlined-button {
   @extend .base-button;
-  color: var(--pink1);
-  border: var(--border-width) solid var(--pink1);
+  color: var(--primary-color);
+  border: var(--border-width) solid var(--primary-color);
   background: none;
   width: var(--base-width);
 }

@@ -1,8 +1,8 @@
 :root {
   --primary-background-color: white;
-  --pink1: #2FB2C3;
+  --primary-color: #2FB2C3;
   --primary-dark-color: #2896a4;
-  --red:#FF0000;
+  --red: #FF0000;
   --pink2: #f1a7b4;
   --pink3: #f7d8e3;
   --primary-light-color: rgb(246 59 159 / 12%);
@@ -16,7 +16,6 @@
   --font-weight-normal: 400;
   --font-weight-bold: 600;
   --unit: 1rem;
-  --unit2: 2rem;
   --base-width: 100%;
   --font-size: 1rem;
   --large-screen-font-size: 14px;
@@ -35,17 +34,11 @@
   --main-no-footer: calc(100vh - (var(--top-toolbar-height)));
   --sidebar-width: 15rem;
 
-  --component-header-color:rgb(214 27 119 / 51%);
+  --component-header-color: rgb(214 27 119 / 51%);
   --header-margin-bottom: 0 0 1rem 0;
 
   --theme-color-one: #292E3A;
   --theme-color-two: #2FB2C3;
-
-
-
-
-
-
 
 
 }
