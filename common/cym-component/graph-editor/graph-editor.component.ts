@@ -8,7 +8,7 @@ import {
   GraphBuilder,
   GraphComponent,
   GraphEditorInputMode,
-  GraphOverviewComponent,
+  GraphOverviewComponent, GraphViewerInputMode,
   GroupNodeLabelModel,
   GroupNodeStyle,
   ICommand,
@@ -689,5 +689,17 @@ export class GraphEditorComponent implements OnInit {
     }, {
       name: 'Predecessor', value: TraversalDirection.PREDECESSOR
     },]
+  }
+
+  switch(isFullscreen: boolean) {
+    this.isFullscreen = isFullscreen;
+    if (isFullscreen) {
+      this.graphComponent.graph = this.neighbourComponent.graph;
+      this.graphComponent.inputMode = new GraphViewerInputMode();
+    } else {
+
+      this.createGraph(this.iGraph, this.neighbourComponent);
+      this.setInputMode()
+    }
   }
 }
