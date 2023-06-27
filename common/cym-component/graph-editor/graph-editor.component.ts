@@ -8,7 +8,7 @@ import {
   GraphBuilder,
   GraphComponent,
   GraphEditorInputMode,
-  GraphOverviewComponent,
+  GraphOverviewComponent, GraphViewerInputMode,
   GroupNodeLabelModel,
   GroupNodeStyle,
   ICommand,
@@ -248,6 +248,7 @@ export class GraphEditorComponent implements OnInit {
     this.save();
     this.createGraph(this.iGraph, this.graphComponent)
   }
+  isFullscreen: boolean = false;
 
   private replaceEdgeTag(id: string, label: string, oldLabel: string) {
     //when the node label is change, change the source and target of the respective edge
@@ -688,5 +689,17 @@ export class GraphEditorComponent implements OnInit {
     }, {
       name: 'Predecessor', value: TraversalDirection.PREDECESSOR
     },]
+  }
+
+  switch(isFullscreen: boolean) {
+    this.isFullscreen = isFullscreen;
+    if (isFullscreen) {
+      this.graphComponent.graph = this.neighbourComponent.graph;
+      this.graphComponent.inputMode = new GraphViewerInputMode();
+    } else {
+
+      this.createGraph(this.iGraph, this.neighbourComponent);
+      this.setInputMode()
+    }
   }
 }

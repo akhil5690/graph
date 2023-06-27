@@ -10,24 +10,11 @@ import {Router} from "@angular/router";
 export class LaunchpadWidgetComponent implements OnInit {
   cardMain: any;
   cardFooter = "";
-  toolbar:any;
   constructor(private router: Router) {
   }
 
   ngOnInit() {
-    console.log(this.launchpad)
-    this.toolbar = [
-      {
-        label: 'Angular',
-        icon: 'pi pi-external-link',
-        url: 'http://angular.io'
-      },
-      {
-        label: 'Router',
-        icon: 'pi pi-upload',
-        routerLink: '/fileupload'
-      }
-    ];
+    console.log(this.launchpad);
   }
 
   // launchpad container
@@ -76,29 +63,29 @@ export class LaunchpadWidgetComponent implements OnInit {
       subGroup: [{
         bgColor: "red",
         cardLabel: "AWS Cymonix Infrastructure",
-        image: "../../apps/webApp/src/assets/image/data-modelling.svg",
+        image: "assets/image/data-modelling.svg",
       },
         {
           bgColor: "pink",
           cardLabel: "ARMS",
-          image: "./../apps/webApp/src/assets/image/data-modelling.svg",
+          image: "assets/image/data-modelling.svg",
         },
         {
           bgColor: "blue",
           cardLabel: "Name",
-          image: "./../apps/webApp/src/assets/image/data-modelling.svg",
+          image: "assets/image/data-modelling.svg",
         },
         {
           bgColor: "green",
           cardLabel: "Name",
-          image: "./../apps/webApp/src/assets/image/data-modelling.svg",
+          image: "assets/image/data-modelling.svg",
         }],
     }, {
       name: "Settings",
       subGroup: [{
         bgColor: "red",
         cardLabel: "Add User",
-        image: "../../apps/webApp/src/assets/image/add-user.svg",
+        image: "assets/image/add-user.svg",
       },
       ],
     }]

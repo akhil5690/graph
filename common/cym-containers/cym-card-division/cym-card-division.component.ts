@@ -9,8 +9,20 @@ export class CymCardDivisionComponent {
   @Input() cardDivision: any;
   @Input() cymClass: any;
   @Input() propertyHeader: any;
-  @Input() cardData:any;
-  @Input() cardHeader:any;
-  @Input() cardContent:any;
-  @Input() cardFooter:any;
+  @Input() cardData: any;
+  @Input() cardHeader: any;
+  @Input() cardContent: any;
+  @Input() cardFooter: any;
+
+  getAbbrevation(value: string) {
+    if (value) {
+      let result = value.replace(/(\w)\w*\W*/g, function (_, i) {
+          return i.toUpperCase();
+        }
+      )
+      return result;
+    }
+
+    return '';
+  }
 }
