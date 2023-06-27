@@ -73,6 +73,9 @@ label {
 .header-content-divs {
   display: grid;
   grid-template-rows: 2rem auto;
+  background: white;
+  padding: 1rem;
+  height: var(--vertical-cards-loop);
 }
 
 .card-divisions {
@@ -91,6 +94,8 @@ label {
   padding: 0.5rem;
   align-items: center;
   justify-items: center;
+  cursor:pointer;
+  text-align:center;
 }
 
 .box-color {
@@ -100,3 +105,4 @@ label {
   align-items:center;
   justify-items: center;
 }
+
