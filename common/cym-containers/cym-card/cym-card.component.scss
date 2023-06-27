@@ -3,4 +3,17 @@ cym-card{
     display: grid;
     grid-template-columns: auto auto auto auto;
   }
+
+  .p-card.p-component {
+    display: grid;
+    margin: 1rem;
+  }
+
+  .p-card-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 1rem;
+  }
+
+
 }

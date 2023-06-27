@@ -1,9 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 
 @Component({
   selector: 'cym-card',
   templateUrl: './cym-card.component.html',
-  styleUrls: ['./cym-card.component.scss']
+  styleUrls: ['./cym-card.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class CymCardComponent implements OnInit {
   @Input() cymClass!: string;

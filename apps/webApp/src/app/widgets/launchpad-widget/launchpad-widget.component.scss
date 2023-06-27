@@ -9,8 +9,6 @@ cym-launchpad-widget{
 
   .container{
     display: grid;
-    height: 20%;
-    width: 20%;
     background: var(--pink1);
     color: white;
     justify-items: center;
@@ -21,4 +19,29 @@ cym-launchpad-widget{
     justify-items: center;
     align-items: center;
   }
+
+  .p-toolbar {
+    background-color: black;
+    padding: 1rem;
+  }
+
+  footer{
+    position: fixed;
+    bottom:0;
+    width:100%;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
