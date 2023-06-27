@@ -21,10 +21,15 @@
 .only-main {
   display: grid;
   grid-template-columns:var(--base-width);
-  grid-template-rows:  var(--top-toolbar-height) calc(var(--main-height) + var(--bottom-toolbar-height));
+  grid-template-rows:  100vh;
   grid-template-areas:
-      "."
-      "main"
+    "main";
+
+  .main {
+    max-height: 100vh;
+    align-items: center;
+    justify-content:center;
+  }
 }
 
 .header-main-frame {
@@ -72,13 +77,18 @@
 .main {
   grid-area: main;
   color: var(--primary-text-color);
-  background-color: var(--primary-background-color);
+  background-color: var(--main-bg-color);
+  max-height: 100vh calc(2 * var(--top-toolbar-height));
+  overflow-y: auto;
 }
 
 .footer {
   grid-area: footer;
   color: var(--primary-text-color);
   background-color: var(--secondary-background-color);
+  align-items: center;
+  justify-items: center;
+  display: grid;
 }
 
 .toggle {
