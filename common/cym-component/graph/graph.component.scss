@@ -4,16 +4,21 @@ cym-graph {
     top: 30px;
   }
 
-  #overview {
+  #overview, #neighbour  {
     width: 150px;
     height: 150px;
     background-color: var(--third-background-color);
   }
 
+  .neighbour {
+    position: absolute;
+    top: 250px;
+  }
+
   .header {
     font-weight: var(--font-weight-bold);
     font-size: medium;
-    background: var(--pink1);
+    background: var(--primary-color);
     padding: 1rem;
     color: var(--primary-color-text);
   }

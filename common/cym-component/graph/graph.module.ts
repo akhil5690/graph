@@ -6,6 +6,8 @@ import {TableModule} from "primeng/table";
 import {SidebarModule} from "primeng/sidebar";
 import {RightSidebarModule} from "../right-sidebar/right-sidebar.module";
 import {GraphEditorModule} from "../graph-editor/graph-editor.module";
+import {DropdownModule} from "primeng/dropdown";
+import {FormsModule} from "@angular/forms";
 
 
 
@@ -17,7 +19,9 @@ import {GraphEditorModule} from "../graph-editor/graph-editor.module";
     TableModule,
     SidebarModule,
     RightSidebarModule,
-    GraphEditorModule
+    GraphEditorModule,
+    DropdownModule,
+    FormsModule
   ],
   exports:[GraphComponents]
 })
