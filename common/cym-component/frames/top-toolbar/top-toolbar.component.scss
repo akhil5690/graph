@@ -5,9 +5,10 @@ cym-top-toolbar {
     align-content: center;
     align-items: center;
     padding: 1rem;
-    height: var(--top-toolbar-height);
+    height: var(--base-height);
     color: var(--primary-text-color);
     gap: var(--unit);
+    width: var(--base-width);
   }
 
   .menu {
@@ -16,7 +17,7 @@ cym-top-toolbar {
     gap: 0.5rem;
   }
 
-  .other-options{
+  .other-options {
     display: flex;
     gap: 0.5rem;
   }

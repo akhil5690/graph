@@ -19,12 +19,12 @@ html, body {
 
 }
 
-//@media screen and (max-width: 1280px) {
-//  html, body {
-//    background-size: var(--bg-image-size);
-//    font-size: var(--medium-screen-font-size);
-//  }
-//}
+@media screen and (max-width: 1280px) {
+  html, body {
+    background-size: var(--bg-image-size);
+    font-size: var(--medium-screen-font-size);
+  }
+}
 
 a {
   text-decoration-line: none;
