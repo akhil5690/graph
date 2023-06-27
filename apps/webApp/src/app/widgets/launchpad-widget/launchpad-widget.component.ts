@@ -10,11 +10,24 @@ import {Router} from "@angular/router";
 export class LaunchpadWidgetComponent implements OnInit {
   cardMain: any;
   cardFooter = "";
+  toolbar:any;
   constructor(private router: Router) {
   }
 
   ngOnInit() {
-    console.log(this.launchpad);
+    console.log(this.launchpad)
+    this.toolbar = [
+      {
+        label: 'Angular',
+        icon: 'pi pi-external-link',
+        url: 'http://angular.io'
+      },
+      {
+        label: 'Router',
+        icon: 'pi pi-upload',
+        routerLink: '/fileupload'
+      }
+    ];
   }
 
   // launchpad container
@@ -50,12 +63,12 @@ export class LaunchpadWidgetComponent implements OnInit {
       subGroup: [{
         bgColor: "gray",
         cardLabel: "Modeling",
-        image: "cymonix/fusioncenterui/apps/webApp/src/assets/image/data-modelling.svg",
+        image: "assets/image/data-modelling.svg",
       },
         {
           bgColor: "pink",
           cardLabel: "Load Data",
-          image:"../../apps/webApp/src/assets/image/data-transformation.svg",
+          image:"assets/image/data-transformation.svg",
         }],
     },
     {
@@ -63,7 +76,7 @@ export class LaunchpadWidgetComponent implements OnInit {
       subGroup: [{
         bgColor: "red",
         cardLabel: "AWS Cymonix Infrastructure",
-        image: "./../apps/webApp/src/assets/image/data-modelling.svg",
+        image: "../../apps/webApp/src/assets/image/data-modelling.svg",
       },
         {
           bgColor: "pink",
