@@ -91,6 +91,7 @@ label {
   padding: 0.5rem;
   align-items: center;
   justify-items: center;
+  cursor:pointer;
 }
 
 .box-color {
@@ -99,4 +100,8 @@ label {
   display:grid;
   align-items:center;
   justify-items: center;
+}
+
+.text-center{
+  text-align: center;
 }

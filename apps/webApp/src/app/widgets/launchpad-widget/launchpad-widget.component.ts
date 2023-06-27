@@ -10,6 +10,7 @@ import {Router} from "@angular/router";
 export class LaunchpadWidgetComponent implements OnInit {
   cardMain: any;
   cardFooter = "";
+
   constructor(private router: Router) {
   }
 
@@ -21,29 +22,23 @@ export class LaunchpadWidgetComponent implements OnInit {
   launchpad = [{
     name: "Workspace",
     subGroup: [{
-      bgColor: "red",
+      bgColor: "#FFED07",
       cardLabel: "Abhay Naveen",
       shortText: "AN",
       image: "",
     },
       {
-        bgColor: "pink",
+        bgColor: "#07FF6A",
         cardLabel: "Manoj Desai",
         shortText: "MD",
         image: "",
       },
       {
-        bgColor: "blue",
+        bgColor: "#FF8B07",
         cardLabel: "Shwetha Karanth",
         shortText: "KB",
         image: "",
-      },
-      {
-        bgColor: "green",
-        cardLabel: "Name",
-        shortText: "BH",
-        image: "",
-      }],
+      }]
   },
     {
       name: "Data management",
@@ -55,7 +50,7 @@ export class LaunchpadWidgetComponent implements OnInit {
         {
           bgColor: "pink",
           cardLabel: "Load Data",
-          image:"assets/image/data-transformation.svg",
+          image: "assets/image/data-transformation.svg",
         }],
     },
     {
@@ -70,16 +65,7 @@ export class LaunchpadWidgetComponent implements OnInit {
           cardLabel: "ARMS",
           image: "assets/image/data-modelling.svg",
         },
-        {
-          bgColor: "blue",
-          cardLabel: "Name",
-          image: "assets/image/data-modelling.svg",
-        },
-        {
-          bgColor: "green",
-          cardLabel: "Name",
-          image: "assets/image/data-modelling.svg",
-        }],
+      ],
     }, {
       name: "Settings",
       subGroup: [{
