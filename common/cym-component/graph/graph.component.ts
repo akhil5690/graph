@@ -105,39 +105,39 @@ export class GraphComponents implements OnInit, OnChanges {
     // editable mode for graph like creating node, adding/updating label, resizing node etc,.
     this.setInputMode(this.graphComponent);
 
-    this.createGraph();
+    this.createGraph(this.data,this.graphComponent);
 
     // create overview component to view and navigate the graph in graph component
     this.initializeOverviewComponent(this.graphComponent);
   }
 
-  createGraph(){
+  createGraph(data: any, graphComponent: GraphComponent){
     // Graph Builder used to get json data and generate nodes and edges for graph
     const builder = new GraphBuilder();
 
     // create nodes and edges for graph
-    this.initializeNodeAndEdges(builder);
+    this.initializeNodeAndEdges(builder,data);
 
     // run graph
-    this.buildGraph(this.graphComponent, builder);
+    this.buildGraph(graphComponent, builder);
 
     // set the layout on filter
     this.layout = this.getLayout(this.filter, this.layout)
 
     // start building layout, example: Organic layout
-    this.buildLayout(this.graphComponent, this.layout);
+    this.buildLayout(graphComponent, this.layout);
 
     // fit the whole graph into the canvas
     setTimeout(() => {
-      this.graphComponent.zoomTo(this.graphComponent.contentRect);
+      this.graphComponent.zoomTo(graphComponent.contentRect);
     }, 50)
 
   }
 
-  private initializeNodeAndEdges(builder: GraphBuilder) {
+  private initializeNodeAndEdges(builder: GraphBuilder, data: any) {
     // create nodes
     const nodesSource = this.getNodes(builder, {
-      data: this.data.nodes,
+      data: data.nodes,
       id: "id",
       style: (data: any) => this.getNodeShape({
         fill: data.vertex_color ? data.vertex_color : "#FF9900",
@@ -149,7 +149,7 @@ export class GraphComponents implements OnInit, OnChanges {
 
     //create edges
     const edgesSource = this.getEdges(builder, {
-      data: this.data.edges,
+      data: data.edges,
       id: "id",
       labels: ["label"],
       sourceId: "source",

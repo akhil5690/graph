@@ -431,17 +431,17 @@ export class GraphEditorComponent implements OnInit {
     }).createRatioParameter({sideOfEdge: EdgeSides.BELOW_EDGE})
   }
 
-  createGraph(initGraph: any, graphComponent: GraphComponent): void {
+  createGraph(data: any, graphComponent: GraphComponent): void {
 
     // get the graph builder to create graph from json ie; initGraph
     const builder = new GraphBuilder()
 
     const sourceNode = builder.createNodesSource({
-      data: initGraph.nodes, id: "id", labels: ['label'], style: "style", layout: "layout"
+      data: data.nodes, id: "id", labels: ['label'], style: "style", layout: "layout"
     });
 
     const edgeNode = builder.createEdgesSource({
-      data: initGraph.edges, id: "id", labels: ['label'], sourceId: "source", targetId: "target", style: "style"
+      data: data.edges, id: "id", labels: ['label'], sourceId: "source", targetId: "target", style: "style"
     })
 
     edgeNode.edgeCreator.defaults.labels.style = new DefaultLabelStyle({
