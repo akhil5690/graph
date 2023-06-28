@@ -90,6 +90,7 @@ export class GraphComponents implements OnInit, OnChanges {
   selectedNode!: INode;
   selectedNeighbour: any;
   isFullscreen: boolean = false;
+  private originalNeighbourhood: any;
 
   constructor(private cdr: ChangeDetectorRef) {
   }
@@ -305,7 +306,7 @@ export class GraphComponents implements OnInit, OnChanges {
   private initialiseNeighbourhood() {
     const container = this.neighbour.nativeElement;
     this.neighbourComponent = new GraphComponent(container);
-    this.neighbourComponent.contentRect = new Rect(0, 0, 500, 500);
+    this.neighbourComponent.contentRect = new Rect(0, 0, 100, 100);
     this.neighbourComponent.zoomTo(this.neighbourComponent.contentRect);
   }
 
@@ -464,6 +465,8 @@ export class GraphComponents implements OnInit, OnChanges {
           })
         }
       }
+
+      this.originalNeighbourhood = jsonGraph;
       this.createGraph(jsonGraph, this.neighbourComponent)
       this.neighbourComponent.zoomTo(this.neighbourComponent.contentRect);
       this.cdr.detectChanges();
@@ -476,10 +479,12 @@ export class GraphComponents implements OnInit, OnChanges {
       this.isFullscreen = isFullscreen;
       if (isFullscreen) {
         this.graphComponent.graph = this.neighbourComponent.graph;
+        this.createGraph(this.data, this.neighbourComponent);
         this.graphComponent.inputMode = new GraphViewerInputMode();
         this.graphComponent.zoomTo(this.graphComponent.contentRect);
       } else {
         this.createGraph(this.data, this.graphComponent);
+        this.createGraph(this.originalNeighbourhood, this.graphComponent);
         this.setInputMode(this.graphComponent)
       }
     }
