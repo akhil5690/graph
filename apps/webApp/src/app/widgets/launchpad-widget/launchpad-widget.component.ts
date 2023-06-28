@@ -1,6 +1,7 @@
 import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {Router} from "@angular/router";
 import {exitCodeFromResult} from "@angular/compiler-cli";
+import {CymService} from "../../../../../../common/cym-services/systemService/cymSystemService";
 
 @Component({
   selector: 'cym-launchpad-widget',
@@ -9,11 +10,14 @@ import {exitCodeFromResult} from "@angular/compiler-cli";
   encapsulation: ViewEncapsulation.None
 })
 export class LaunchpadWidgetComponent implements OnInit {
-  constructor(private router: Router) {
+  constructor(private router: Router, private cym: CymService) {
   }
 
   ngOnInit() {
-    console.log(this.launchpad);
+    this.cym.setLoader(true);
+    setTimeout(() => {
+      this.cym.setLoader(false)
+    }, 1000);
   }
 
   // launchpad container
