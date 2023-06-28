@@ -417,6 +417,7 @@ export class GraphComponents implements OnInit, OnChanges {
 
   setFrame(isFilterOpen: boolean) {
     this.isFilterOpen = isFilterOpen;
+    this.cdr.detectChanges();
   }
 
 
@@ -472,13 +473,16 @@ export class GraphComponents implements OnInit, OnChanges {
   }
 
   switch(isFullscreen: boolean) {
-    this.isFullscreen = isFullscreen;
-    if (isFullscreen) {
-      this.graphComponent.graph = this.neighbourComponent.graph;
-      this.graphComponent.inputMode = new GraphViewerInputMode();
-    } else {
-      this.createGraph(this.data, this.graphComponent);
-      this.setInputMode(this.graphComponent)
+    if (this.neighbourComponent.graph.nodes.size > 0) {
+      this.isFullscreen = isFullscreen;
+      if (isFullscreen) {
+        this.graphComponent.graph = this.neighbourComponent.graph;
+        this.graphComponent.inputMode = new GraphViewerInputMode();
+        this.graphComponent.zoomTo(this.graphComponent.contentRect);
+      } else {
+        this.createGraph(this.data, this.graphComponent);
+        this.setInputMode(this.graphComponent)
+      }
     }
   }
 

@@ -206,6 +206,7 @@ export class GraphEditorComponent implements OnInit {
 
       // add the new node to the graph
       this.graphComponent.graph.nodes.append(node);
+      this.save();
     });
   }
 
@@ -695,13 +696,15 @@ export class GraphEditorComponent implements OnInit {
   }
 
   switch(isFullscreen: boolean) {
-    this.isFullscreen = isFullscreen;
-    if (isFullscreen) {
-      this.graphComponent.graph = this.neighbourComponent.graph;
-      this.graphComponent.inputMode = new GraphViewerInputMode();
-    } else {
-      this.createGraph(this.iGraph, this.graphComponent);
-      this.setInputMode()
+    if (this.neighbourComponent.graph.nodes.size > 0) {
+      this.isFullscreen = isFullscreen;
+      if (isFullscreen) {
+        this.graphComponent.graph = this.neighbourComponent.graph;
+        this.graphComponent.inputMode = new GraphViewerInputMode();
+      } else {
+        this.createGraph(this.iGraph, this.graphComponent);
+        this.setInputMode()
+      }
     }
   }
 }
