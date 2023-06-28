@@ -20,7 +20,7 @@ import {
   GraphComponent,
   GraphEditorInputMode,
   GraphItemTypes,
-  GraphOverviewComponent, HierarchicLayout, ICommand,
+  GraphOverviewComponent, GraphViewerInputMode, HierarchicLayout, ICommand,
   IconLabelStyle,
   IEdge,
   IEdgeStyle,
@@ -89,6 +89,7 @@ export class GraphComponents implements OnInit, OnChanges {
   neighboursOptions: any;
   selectedNode!: INode;
   selectedNeighbour: any;
+  isFullscreen: boolean = false;
 
   constructor(private cdr: ChangeDetectorRef) {
   }
@@ -274,6 +275,7 @@ export class GraphComponents implements OnInit, OnChanges {
     // start executing the layout
     layoutExecutor.start().then();
   }
+
   private initializeGraphComponent() {
     const container = this.graphContainer.nativeElement;
     // inorder to update the graph component with another graph, check if the component already exist, if yes: cleanup
@@ -286,6 +288,7 @@ export class GraphComponents implements OnInit, OnChanges {
       this.graphComponent = new GraphComponent(container);
     }
   }
+
   private initializeOverviewComponent(graphComponent: GraphComponent) {
     const container = this.overViewContainer.nativeElement;
     // reinitialize overview component to the update the view with new graph
@@ -466,6 +469,17 @@ export class GraphComponents implements OnInit, OnChanges {
       this.cdr.detectChanges();
     }
 
+  }
+
+  switch(isFullscreen: boolean) {
+    this.isFullscreen = isFullscreen;
+    if (isFullscreen) {
+      this.graphComponent.graph = this.neighbourComponent.graph;
+      this.graphComponent.inputMode = new GraphViewerInputMode();
+    } else {
+      this.createGraph(this.data, this.graphComponent);
+      this.setInputMode(this.graphComponent)
+    }
   }
 
 }
