@@ -4,8 +4,8 @@ cym-graph {
     top: 30px;
   }
 
-  #overview, #neighbour  {
-    width: 150px;
+  #overview, #neighbour {
+    width: 175px;
     height: 150px;
     background-color: var(--third-background-color);
   }
@@ -19,8 +19,10 @@ cym-graph {
     font-weight: var(--font-weight-bold);
     font-size: medium;
     background: var(--primary-color);
-    padding: 1rem;
+    padding: var(--unit);
     color: var(--primary-color-text);
+    display: flex;
+    gap: var(--unit)
   }
 
   .hide {
@@ -48,14 +50,16 @@ cym-graph {
     cursor: pointer;
   }
 
-  .graph-container{
+  .graph-container {
     display: flex;
   }
-  .graph-sidebar{
+
+  .graph-sidebar {
     height: 85vh;
     width: 80vw;
   }
-  .graph{
+
+  .graph {
     height: 85vh;
     width: 100vw;
   }

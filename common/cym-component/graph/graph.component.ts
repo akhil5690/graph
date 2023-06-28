@@ -20,7 +20,7 @@ import {
   GraphComponent,
   GraphEditorInputMode,
   GraphItemTypes,
-  GraphOverviewComponent, HierarchicLayout, ICommand,
+  GraphOverviewComponent, GraphViewerInputMode, HierarchicLayout, ICommand,
   IconLabelStyle,
   IEdge,
   IEdgeStyle,
@@ -89,6 +89,8 @@ export class GraphComponents implements OnInit, OnChanges {
   neighboursOptions: any;
   selectedNode!: INode;
   selectedNeighbour: any;
+  isFullscreen: boolean = false;
+  private originalNeighbourhood: any;
 
   constructor(private cdr: ChangeDetectorRef) {
   }
@@ -274,6 +276,7 @@ export class GraphComponents implements OnInit, OnChanges {
     // start executing the layout
     layoutExecutor.start().then();
   }
+
   private initializeGraphComponent() {
     const container = this.graphContainer.nativeElement;
     // inorder to update the graph component with another graph, check if the component already exist, if yes: cleanup
@@ -286,6 +289,7 @@ export class GraphComponents implements OnInit, OnChanges {
       this.graphComponent = new GraphComponent(container);
     }
   }
+
   private initializeOverviewComponent(graphComponent: GraphComponent) {
     const container = this.overViewContainer.nativeElement;
     // reinitialize overview component to the update the view with new graph
@@ -296,14 +300,14 @@ export class GraphComponents implements OnInit, OnChanges {
       this.overviewComponent = new GraphOverviewComponent(container, graphComponent);
     }
     this.overviewComponent.autoDrag = true;
-    this.overviewComponent.fitContent();
+    this.graphComponent.zoomTo(this.graphComponent.contentRect);
   }
 
   private initialiseNeighbourhood() {
     const container = this.neighbour.nativeElement;
     this.neighbourComponent = new GraphComponent(container);
-    this.neighbourComponent.contentRect = new Rect(0, 0, 100, 100);
-    this.neighbourComponent.fitGraphBounds()
+    this.neighbourComponent.contentRect = new Rect(0, 0, 500, 500);
+    this.neighbourComponent.zoomTo(this.neighbourComponent.contentRect);
   }
 
 
@@ -414,6 +418,7 @@ export class GraphComponents implements OnInit, OnChanges {
 
   setFrame(isFilterOpen: boolean) {
     this.isFilterOpen = isFilterOpen;
+    this.cdr.detectChanges();
   }
 
 
@@ -460,12 +465,33 @@ export class GraphComponents implements OnInit, OnChanges {
           })
         }
       }
+
+      this.originalNeighbourhood = jsonGraph;
       this.createGraph(jsonGraph, this.neighbourComponent)
-      this.neighbourComponent.contentRect = new Rect(0, 0, 100, 100);
-      this.neighbourComponent.fitGraphBounds()
+      this.neighbourComponent.zoomTo(this.neighbourComponent.contentRect);
       this.cdr.detectChanges();
     }
 
+  }
+
+  switch(isFullscreen: boolean) {
+    if (this.neighbourComponent.graph.nodes.size > 0) {
+      this.isFullscreen = isFullscreen;
+      if (isFullscreen) {
+        this.graphComponent.graph = this.neighbourComponent.graph;
+        this.createGraph(this.data, this.neighbourComponent);
+        this.graphComponent.inputMode = new GraphViewerInputMode();
+        this.neighbourComponent.zoomTo(this.neighbourComponent.contentRect);
+        ICommand.FIT_GRAPH_BOUNDS.execute(null, this.graphComponent)
+      } else {
+        this.createGraph(this.data, this.graphComponent);
+        this.createGraph(this.originalNeighbourhood, this.neighbourComponent);
+        this.setInputMode(this.graphComponent);
+        this.neighbourComponent.zoomTo(this.neighbourComponent.contentRect);
+        this.graphComponent.zoomTo(this.graphComponent.contentRect);
+
+      }
+    }
   }
 
 }

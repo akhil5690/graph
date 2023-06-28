@@ -104,6 +104,8 @@ export class GraphEditorComponent implements OnInit {
   selectedNeighbour: any;
   neighboursOptions: any;
   selectedNode!: INode;
+  private original: any;
+  private originalNeighbourHood: any;
 
 
   constructor(private cdr: ChangeDetectorRef) {
@@ -205,6 +207,7 @@ export class GraphEditorComponent implements OnInit {
 
       // add the new node to the graph
       this.graphComponent.graph.nodes.append(node);
+      this.save();
     });
   }
 
@@ -303,6 +306,7 @@ export class GraphEditorComponent implements OnInit {
       };
 
       this.graphComponent.graph.edges.append(edge);
+      this.save()
     })
   }
 
@@ -650,6 +654,8 @@ export class GraphEditorComponent implements OnInit {
 
 
   getNeighbourGraph(node: INode) {
+    console.log('o',this.iGraph)
+    this.original = {...this.iGraph}
     const jsonGraph: { nodes: any[], edges: any[] } = {
       nodes: [],
       edges: []
@@ -676,6 +682,8 @@ export class GraphEditorComponent implements OnInit {
         })
       }
     }
+    this.originalNeighbourHood = jsonGraph;
+    this.save();
     this.createGraph(jsonGraph, this.neighbourComponent)
     this.neighbourComponent.contentRect = new Rect(0, 0, 100, 100);
     this.neighbourComponent.fitGraphBounds()
@@ -692,14 +700,18 @@ export class GraphEditorComponent implements OnInit {
   }
 
   switch(isFullscreen: boolean) {
-    this.isFullscreen = isFullscreen;
-    if (isFullscreen) {
-      this.graphComponent.graph = this.neighbourComponent.graph;
-      this.graphComponent.inputMode = new GraphViewerInputMode();
-    } else {
-
-      this.createGraph(this.iGraph, this.neighbourComponent);
-      this.setInputMode()
+    if (this.neighbourComponent.graph.nodes.size > 0) {
+      this.isFullscreen = isFullscreen;
+      console.log(this.original)
+      if (isFullscreen) {
+        this.graphComponent.graph = this.neighbourComponent.graph;
+        this.createGraph(this.original, this.neighbourComponent);
+        this.graphComponent.inputMode = new GraphViewerInputMode();
+      } else {
+        this.createGraph(this.iGraph, this.graphComponent);
+        this.createGraph(this.originalNeighbourHood, this.neighbourComponent);
+        this.setInputMode()
+      }
     }
   }
 }
