@@ -299,14 +299,14 @@ export class GraphComponents implements OnInit, OnChanges {
       this.overviewComponent = new GraphOverviewComponent(container, graphComponent);
     }
     this.overviewComponent.autoDrag = true;
-    this.overviewComponent.fitContent();
+    this.graphComponent.zoomTo(this.graphComponent.contentRect);
   }
 
   private initialiseNeighbourhood() {
     const container = this.neighbour.nativeElement;
     this.neighbourComponent = new GraphComponent(container);
-    this.neighbourComponent.contentRect = new Rect(0, 0, 100, 100);
-    this.neighbourComponent.fitGraphBounds()
+    this.neighbourComponent.contentRect = new Rect(0, 0, 500, 500);
+    this.neighbourComponent.zoomTo(this.neighbourComponent.contentRect);
   }
 
 
@@ -465,8 +465,7 @@ export class GraphComponents implements OnInit, OnChanges {
         }
       }
       this.createGraph(jsonGraph, this.neighbourComponent)
-      this.neighbourComponent.contentRect = new Rect(0, 0, 100, 100);
-      this.neighbourComponent.fitGraphBounds()
+      this.neighbourComponent.zoomTo(this.neighbourComponent.contentRect);
       this.cdr.detectChanges();
     }
 
