@@ -1,5 +1,6 @@
 import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {Router} from "@angular/router";
+import {exitCodeFromResult} from "@angular/compiler-cli";
 
 @Component({
   selector: 'cym-launchpad-widget',
@@ -8,15 +9,11 @@ import {Router} from "@angular/router";
   encapsulation: ViewEncapsulation.None
 })
 export class LaunchpadWidgetComponent implements OnInit {
-  cardMain: any;
-  cardFooter = "";
-
   constructor(private router: Router) {
   }
 
   ngOnInit() {
     console.log(this.launchpad);
-
   }
 
   // launchpad container
@@ -27,18 +24,21 @@ export class LaunchpadWidgetComponent implements OnInit {
       cardLabel: "Abhay Naveen",
       shortText: "AN",
       image: "",
+      routPath: "",
     },
       {
         bgColor: "#07FF6A",
         cardLabel: "Manoj Desai",
         shortText: "MD",
         image: "",
+        routPath: "",
       },
       {
         bgColor: "#FF8B07",
         cardLabel: "Shwetha Karanth",
         shortText: "KB",
         image: "",
+        routPath: "",
       }]
   },
     {
@@ -47,11 +47,13 @@ export class LaunchpadWidgetComponent implements OnInit {
         bgColor: "gray",
         cardLabel: "Modeling",
         image: "assets/image/data-modelling.svg",
+        routPath: "",
       },
         {
           bgColor: "pink",
           cardLabel: "Load Data",
           image: "assets/image/data-transformation.svg",
+          routPath: "",
         }],
     },
     {
@@ -61,12 +63,12 @@ export class LaunchpadWidgetComponent implements OnInit {
         cardLabel: "AWS Cymonix Infrastructure",
         image: "assets/image/data-modelling.svg",
         routPath: "/launchpad/dashboard",
-        click: true,
       },
         {
           bgColor: "pink",
           cardLabel: "ARMS",
           image: "assets/image/data-modelling.svg",
+          routPath: "",
         },
       ],
     }, {
@@ -75,11 +77,21 @@ export class LaunchpadWidgetComponent implements OnInit {
         bgColor: "red",
         cardLabel: "Add User",
         image: "assets/image/add-user.svg",
+        routPath: "/container",
       },
       ],
     }]
 
-  showGraph() {
-    this.router.navigate(['/launchpad/dashboard']).then()
+  showGraph(event: any) {
+    for (let i = 0; i < this.launchpad.length; i++) {
+      var arrayMain = this.launchpad[i];
+      for (let j = 0; j < arrayMain.subGroup.length; j++) {
+        var arraySub = arrayMain.subGroup[j];
+        if (event === arraySub.cardLabel) {
+          this.router.navigate([arraySub.routPath]).then()
+          break;
+        }
+      }
+    }
   }
 }

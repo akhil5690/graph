@@ -33,7 +33,8 @@ export class CymCardDivisionComponent implements OnInit {
 
   cardClick() {
     if (this.routClick) {
-      this.cardClickEvent.emit()
+      this.cardClickEvent.emit(this.routClick)
+
     }
 
   }

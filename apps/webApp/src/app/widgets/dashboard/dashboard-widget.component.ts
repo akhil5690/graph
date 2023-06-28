@@ -17,7 +17,7 @@ export class DashboardWidgetComponent implements OnInit {
   layout: any;
   schema: any;
 
-  constructor(private cdr: ChangeDetectorRef, private graphService: GraphService ,private router:Router) {
+  constructor(private cdr: ChangeDetectorRef, private graphService: GraphService, private router: Router) {
   }
 
   ngOnInit() {
@@ -47,7 +47,7 @@ export class DashboardWidgetComponent implements OnInit {
     }).catch(e => console.log(e))
   }
 
-  sendLayout(layout:any) {
+  sendLayout(layout: any) {
     // on selecting dropdown send layout that you selected to graph component
     this.layout = layout
   }
@@ -65,9 +65,5 @@ export class DashboardWidgetComponent implements OnInit {
       this.schema = data;
       this.copyData = data;// for creating the filter
     }).catch(e => console.log(e))
-  }
-
-  viewContainer(){
-    this.router.navigate(['container']).then()
   }
 }
