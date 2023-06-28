@@ -306,7 +306,7 @@ export class GraphComponents implements OnInit, OnChanges {
   private initialiseNeighbourhood() {
     const container = this.neighbour.nativeElement;
     this.neighbourComponent = new GraphComponent(container);
-    this.neighbourComponent.contentRect = new Rect(0, 0, 100, 100);
+    this.neighbourComponent.contentRect = new Rect(0, 0, 500, 500);
     this.neighbourComponent.zoomTo(this.neighbourComponent.contentRect);
   }
 
@@ -481,11 +481,15 @@ export class GraphComponents implements OnInit, OnChanges {
         this.graphComponent.graph = this.neighbourComponent.graph;
         this.createGraph(this.data, this.neighbourComponent);
         this.graphComponent.inputMode = new GraphViewerInputMode();
-        this.graphComponent.zoomTo(this.graphComponent.contentRect);
+        this.neighbourComponent.zoomTo(this.neighbourComponent.contentRect);
+        ICommand.FIT_GRAPH_BOUNDS.execute(null, this.graphComponent)
       } else {
         this.createGraph(this.data, this.graphComponent);
-        this.createGraph(this.originalNeighbourhood, this.graphComponent);
-        this.setInputMode(this.graphComponent)
+        this.createGraph(this.originalNeighbourhood, this.neighbourComponent);
+        this.setInputMode(this.graphComponent);
+        this.neighbourComponent.zoomTo(this.neighbourComponent.contentRect);
+        this.graphComponent.zoomTo(this.graphComponent.contentRect);
+
       }
     }
   }
