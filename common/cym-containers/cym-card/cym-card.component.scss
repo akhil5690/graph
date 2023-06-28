@@ -1,19 +1,14 @@
-cym-card{
+cym-card {
   .card-container {
     display: grid;
     grid-template-columns: auto auto auto auto;
   }
 
   .p-card.p-component {
-    display: grid;
-    margin: 1rem;
+    height: var(--vertical-cards-loop)
   }
 
-  .p-card-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-gap: 1rem;
+  .p-card .p-card-body {
+    padding: 0.5rem;
   }
-
-
 }

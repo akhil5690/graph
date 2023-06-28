@@ -1,6 +1,7 @@
 :root {
   --primary-background-color: white;
-  --pink1: #2FB2C3;
+  --main-bg-color: #EBEDEF;
+  --primary-color: #2FB2C3;
   --primary-dark-color: #2896a4;
   --red: #FF0000;
   --pink2: #f1a7b4;
@@ -16,6 +17,7 @@
   --font-weight-normal: 400;
   --font-weight-bold: 600;
   --unit: 1rem;
+  --base-height:100%;
   --base-width: 100%;
   --font-size: 1rem;
   --large-screen-font-size: 14px;
@@ -40,5 +42,6 @@
   --theme-color-one: #292E3A;
   --theme-color-two: #2FB2C3;
 
-
+  --vertical-cards-loop: 15rem;
+  --card-height: 10rem;
 }

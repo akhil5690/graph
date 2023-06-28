@@ -10,19 +10,24 @@ import {CymToolbarModule} from "../../../../../../common/cym-containers/cym-tool
 import {
     CymCardDivisionModule
 } from "../../../../../../common/cym-containers/cym-card-division/cym-card-division.module";
+import {CymProfileModule} from "../../../../../../common/cym-containers/cym-profile/cym-profile.module";
+import {TopToolbarComponent} from "../../../../../../common/cym-component/frames/top-toolbar/top-toolbar.component";
+import {CymInputModule} from "../../../../../../common/cym-component/form/cym-input/cym-input.module";
 
 
 @NgModule({
-  declarations: [LaunchpadWidgetComponent],
-    imports: [
-        CommonModule,
-        DashboardWidgetModule,
-        CymCardModule,
-        CymDivModule,
-        WidgetFrameModule,
-        CymToolbarModule,
-        CymCardDivisionModule
-    ],
+  declarations: [LaunchpadWidgetComponent, TopToolbarComponent],
+  imports: [
+    CommonModule,
+    DashboardWidgetModule,
+    CymCardModule,
+    CymDivModule,
+    WidgetFrameModule,
+    CymToolbarModule,
+    CymCardDivisionModule,
+    CymProfileModule,
+    CymInputModule
+  ],
   exports: [LaunchpadWidgetComponent]
 })
 export class LaunchpadWidgetModule { }

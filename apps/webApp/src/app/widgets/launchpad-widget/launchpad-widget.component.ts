@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {Router} from "@angular/router";
 
 @Component({
@@ -10,52 +10,48 @@ import {Router} from "@angular/router";
 export class LaunchpadWidgetComponent implements OnInit {
   cardMain: any;
   cardFooter = "";
+
   constructor(private router: Router) {
   }
 
   ngOnInit() {
     console.log(this.launchpad);
+
   }
 
   // launchpad container
-  launchpad = [{
+  launchpad: any = [{
     name: "Workspace",
     subGroup: [{
-      bgColor: "red",
+      bgColor: "#FFED07",
       cardLabel: "Abhay Naveen",
       shortText: "AN",
       image: "",
     },
       {
-        bgColor: "pink",
+        bgColor: "#07FF6A",
         cardLabel: "Manoj Desai",
         shortText: "MD",
         image: "",
       },
       {
-        bgColor: "blue",
+        bgColor: "#FF8B07",
         cardLabel: "Shwetha Karanth",
         shortText: "KB",
         image: "",
-      },
-      {
-        bgColor: "green",
-        cardLabel: "Name",
-        shortText: "BH",
-        image: "",
-      }],
+      }]
   },
     {
       name: "Data management",
       subGroup: [{
         bgColor: "gray",
         cardLabel: "Modeling",
-        image: "cymonix/fusioncenterui/apps/webApp/src/assets/image/data-modelling.svg",
+        image: "assets/image/data-modelling.svg",
       },
         {
           bgColor: "pink",
           cardLabel: "Load Data",
-          image:"../../apps/webApp/src/assets/image/data-transformation.svg",
+          image: "assets/image/data-transformation.svg",
         }],
     },
     {
@@ -63,29 +59,22 @@ export class LaunchpadWidgetComponent implements OnInit {
       subGroup: [{
         bgColor: "red",
         cardLabel: "AWS Cymonix Infrastructure",
-        image: "./../apps/webApp/src/assets/image/data-modelling.svg",
+        image: "assets/image/data-modelling.svg",
+        routPath: "/launchpad/dashboard",
+        click: true,
       },
         {
           bgColor: "pink",
           cardLabel: "ARMS",
-          image: "./../apps/webApp/src/assets/image/data-modelling.svg",
+          image: "assets/image/data-modelling.svg",
         },
-        {
-          bgColor: "blue",
-          cardLabel: "Name",
-          image: "./../apps/webApp/src/assets/image/data-modelling.svg",
-        },
-        {
-          bgColor: "green",
-          cardLabel: "Name",
-          image: "./../apps/webApp/src/assets/image/data-modelling.svg",
-        }],
+      ],
     }, {
       name: "Settings",
       subGroup: [{
         bgColor: "red",
         cardLabel: "Add User",
-        image: "../../apps/webApp/src/assets/image/add-user.svg",
+        image: "assets/image/add-user.svg",
       },
       ],
     }]

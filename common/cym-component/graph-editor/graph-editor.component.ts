@@ -8,7 +8,7 @@ import {
   GraphBuilder,
   GraphComponent,
   GraphEditorInputMode,
-  GraphOverviewComponent,
+  GraphOverviewComponent, GraphViewerInputMode,
   GroupNodeLabelModel,
   GroupNodeStyle,
   ICommand,
@@ -104,6 +104,7 @@ export class GraphEditorComponent implements OnInit {
   selectedNeighbour: any;
   neighboursOptions: any;
   selectedNode!: INode;
+  private original: any;
 
 
   constructor(private cdr: ChangeDetectorRef) {
@@ -248,6 +249,7 @@ export class GraphEditorComponent implements OnInit {
     this.save();
     this.createGraph(this.iGraph, this.graphComponent)
   }
+  isFullscreen: boolean = false;
 
   private replaceEdgeTag(id: string, label: string, oldLabel: string) {
     //when the node label is change, change the source and target of the respective edge
@@ -649,6 +651,7 @@ export class GraphEditorComponent implements OnInit {
 
 
   getNeighbourGraph(node: INode) {
+    this.original = {...this.iGraph}
     const jsonGraph: { nodes: any[], edges: any[] } = {
       nodes: [],
       edges: []
@@ -675,6 +678,7 @@ export class GraphEditorComponent implements OnInit {
         })
       }
     }
+    this.save();
     this.createGraph(jsonGraph, this.neighbourComponent)
     this.neighbourComponent.contentRect = new Rect(0, 0, 100, 100);
     this.neighbourComponent.fitGraphBounds()
@@ -688,5 +692,16 @@ export class GraphEditorComponent implements OnInit {
     }, {
       name: 'Predecessor', value: TraversalDirection.PREDECESSOR
     },]
+  }
+
+  switch(isFullscreen: boolean) {
+    this.isFullscreen = isFullscreen;
+    if (isFullscreen) {
+      this.graphComponent.graph = this.neighbourComponent.graph;
+      this.graphComponent.inputMode = new GraphViewerInputMode();
+    } else {
+      this.createGraph(this.iGraph, this.graphComponent);
+      this.setInputMode()
+    }
   }
 }
