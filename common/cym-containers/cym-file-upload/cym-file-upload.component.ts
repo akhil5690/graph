@@ -14,5 +14,6 @@ export class CymFileUploadComponent {
   constructor(private messageService: MessageService) { }
   onBasicUploadAuto(event: UploadEvent) {
     this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Auto Mode' });
+    console.log(event,"event");
   }
 }

@@ -27,22 +27,19 @@ export class LaunchpadWidgetComponent implements OnInit {
       bgColor: "#FFED07",
       cardLabel: "Abhay Naveen",
       shortText: "AN",
-      image: "",
-      routPath: "",
+      image: null
     },
       {
         bgColor: "#07FF6A",
         cardLabel: "Manoj Desai",
         shortText: "MD",
-        image: "",
-        routPath: "",
+        image: null
       },
       {
         bgColor: "#FF8B07",
         cardLabel: "Shwetha Karanth",
         shortText: "KB",
-        image: "",
-        routPath: "",
+        image: null
       }]
   },
     {
@@ -50,14 +47,12 @@ export class LaunchpadWidgetComponent implements OnInit {
       subGroup: [{
         bgColor: "gray",
         cardLabel: "Modeling",
-        image: "assets/image/data-modelling.svg",
-        routPath: "",
+        image: "assets/image/data-modelling.svg"
       },
         {
           bgColor: "pink",
           cardLabel: "Load Data",
-          image: "assets/image/data-transformation.svg",
-          routPath: "",
+          image: "assets/image/data-transformation.svg"
         }],
     },
     {
@@ -66,13 +61,12 @@ export class LaunchpadWidgetComponent implements OnInit {
         bgColor: "red",
         cardLabel: "AWS Cymonix Infrastructure",
         image: "assets/image/data-modelling.svg",
-        routPath: "/launchpad/dashboard",
+        routPath: "/launchpad/dashboard"
       },
         {
           bgColor: "pink",
           cardLabel: "ARMS",
-          image: "assets/image/data-modelling.svg",
-          routPath: "",
+          image: "assets/image/data-modelling.svg"
         },
       ],
     }, {
@@ -81,21 +75,12 @@ export class LaunchpadWidgetComponent implements OnInit {
         bgColor: "red",
         cardLabel: "Add User",
         image: "assets/image/add-user.svg",
-        routPath: "/container",
+        routPath: "/container"
       },
       ],
     }]
 
   showGraph(event: any) {
-    for (let i = 0; i < this.launchpad.length; i++) {
-      var arrayMain = this.launchpad[i];
-      for (let j = 0; j < arrayMain.subGroup.length; j++) {
-        var arraySub = arrayMain.subGroup[j];
-        if (event === arraySub.cardLabel) {
-          this.router.navigate([arraySub.routPath]).then()
-          break;
-        }
-      }
-    }
+    this.router.navigate([event]).then()
   }
 }
