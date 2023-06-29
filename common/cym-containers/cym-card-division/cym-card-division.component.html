@@ -6,10 +6,10 @@
 
   </div>
   <!--  {{cardDetails.image | json}}-->
-  <div class="box-color" [ngStyle]="{background: cardDetails.bgColor}" *ngIf="cardDetails.image === null">
+  <div class="box-color" [ngStyle]="{background: cardDetails.bgColor}" *ngIf="cardDetails?.image === null">
     <span>{{getAbbrevation(cardDetails.cardLabel)}}</span>
   </div>
-  <img [src]="cardDetails.image" alt="">
+  <img [src]="cardDetails?.image" alt="">
   <div>
     {{cardDetails.cardLabel}}
   </div>
