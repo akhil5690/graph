@@ -7,7 +7,7 @@ import {
   ExteriorLabelModel,
   GraphBuilder,
   GraphComponent,
-  GraphEditorInputMode,
+  GraphEditorInputMode, GraphItemTypes,
   GraphOverviewComponent, GraphViewerInputMode,
   GroupNodeLabelModel,
   GroupNodeStyle,
@@ -134,7 +134,7 @@ export class GraphEditorComponent implements OnInit {
     this.initTutorialDefaults(this.graphComponent.graph);
 
     // prepare drag and drop
-    this.setInputMode();
+    this.setNodeInputMode();
 
     this.initializeOverviewComponent(this.graphComponent)
 
@@ -144,11 +144,15 @@ export class GraphEditorComponent implements OnInit {
 
   }
 
-  setInputMode(): void {
+  setEditorMode(): GraphEditorInputMode {
 
     // get the input handler
-    const inputMode = this.graphComponent.inputMode = new GraphEditorInputMode();
+    return new GraphEditorInputMode();
+  }
 
+  setNodeInputMode(): void {
+
+    const inputMode = this.graphComponent.inputMode = this.setEditorMode()
     // get node drag and drop input handler
     const nodeDropInputMode = inputMode.nodeDropInputMode;
 
@@ -678,8 +682,8 @@ export class GraphEditorComponent implements OnInit {
         })
       } else {
         this.graphComponent.graph.edgesAt(neighbor).forEach((edge) => {
-          const dup = jsonGraph.edges.find(dupEdge=>dupEdge?.id === edge.tag.id)
-          if (!dup){
+          const dup = jsonGraph.edges.find(dupEdge => dupEdge?.id === edge.tag.id)
+          if (!dup) {
             jsonGraph.edges.push(edge.tag)
           }
         })
@@ -708,17 +712,24 @@ export class GraphEditorComponent implements OnInit {
       if (isFullscreen) {
         this.graphComponent.graph = this.neighbourComponent.graph;
         this.createGraph(this.original, this.neighbourComponent);
-        this.graphComponent.inputMode = new GraphViewerInputMode();
         const h = document.createElement('h1');
         h.innerHTML = `<span style="display: grid;justify-content: center">Neighbourhood</span>`
-        this.graphComponent.div.append(h)
+        this.graphComponent.div.append(h);
+        const mode = this.setEditorMode();
+        mode.allowEditLabelOnDoubleClick = false;
+        mode.allowCreateEdge = false;
+        mode.allowAddLabel = false;
+        mode.allowCreateNode = false;
+        mode.allowCreateBend = false;
+        mode.allowGroupingOperations = false;
       } else {
         const h = this.graphComponent.div.querySelector("h1");
-        if (h){h.remove()}
-
+        if (h) {
+          h.remove()
+        }
         this.createGraph(this.iGraph, this.graphComponent);
         this.createGraph(this.originalNeighbourHood, this.neighbourComponent);
-        this.setInputMode()
+        this.setNodeInputMode()
       }
     }
   }
