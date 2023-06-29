@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'cym-block-ui',
@@ -6,12 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./cym-block-ui.component.scss']
 })
 export class CymBlockUiComponent {
-  blockedDocument: boolean = false;
-
-  blockDocument() {
-    this.blockedDocument = true;
-    setTimeout(() => {
-      this.blockedDocument = false;
-    }, 3000);
-  }
+  @Input() blockedDocument: boolean = false;
 }

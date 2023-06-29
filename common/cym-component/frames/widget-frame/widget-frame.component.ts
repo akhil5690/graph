@@ -12,7 +12,7 @@ export class WidgetFrameComponent implements OnInit {
   @Input() frame_type!: string;
   @Output() isDarkTheme = new EventEmitter<string>();
   theme: string = 'lightTheme';
-
+  isBlocked = false;
   lightColors = {'text': 'black', 'bg1': 'white', 'bg2': '#e7e7e7', 'bg3': '#F3F3F3FF', 'color_scheme': 'light'};
   darkColors = {'text': 'white', 'bg1': 'black', 'bg2': '#3d3d3d', 'bg3': '#595959', 'color_scheme': 'dark'};
   checked!: boolean;
@@ -23,7 +23,7 @@ export class WidgetFrameComponent implements OnInit {
   ngOnInit() {
     this.isDarkTheme.emit('lightTheme');
     this.cymService.isLoading.subscribe(res => {
-      console.log('===>', res);
+      this.isBlocked = res;
     })
   }
 

@@ -8,7 +8,7 @@ import {BehaviorSubject} from "rxjs";
 export class CymService implements OnDestroy {
 
   // network status
-  private isLoadingSubject = new BehaviorSubject<boolean>(true);
+  private isLoadingSubject = new BehaviorSubject<boolean>(false);
   isLoading = this.isLoadingSubject.asObservable();
 
   constructor() {
@@ -20,6 +20,5 @@ export class CymService implements OnDestroy {
   setLoader(value: boolean) {
     this.isLoadingSubject.next(value);
   }
-
 }
 
