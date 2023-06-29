@@ -460,9 +460,8 @@ export class GraphComponents implements OnInit, OnChanges {
             jsonGraph.edges.push(edge.tag)
           })
         } else {
-          this.graphComponent.graph.edgesAt(neighbor).forEach((edge) => {
-            const dup = jsonGraph.edges.find(dupEdge=>dupEdge?.id === edge.tag.id)
-            if (!dup){
+          this.graphComponent.graph.edgesAt(node).forEach((edge) => {
+            if (jsonGraph.edges.findIndex(ele=> JSON.stringify(ele)=== JSON.stringify(edge.tag)) === -1) {
               jsonGraph.edges.push(edge.tag)
             }
           })
