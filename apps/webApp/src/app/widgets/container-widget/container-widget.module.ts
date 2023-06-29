@@ -49,6 +49,7 @@ import {CymBlockUiModule} from "../../../../../../common/cym-containers/cym-bloc
 import {
   CymInputTextareaModule
 } from "../../../../../../common/cym-containers/cym-input-textarea/cym-input-textarea.module";
+import {CymProgressBarModule} from "../../../../../../common/cym-containers/cym-progress-bar/cym-progress-bar.module";
 @NgModule({
   declarations: [
     ContainerWidgetComponent,
@@ -92,6 +93,7 @@ import {
     CymFileUploadModule,
     CymBlockUiModule,
     CymInputTextareaModule,
+    CymProgressBarModule,
   ],
   providers:[GraphService,HttpHandler],
   exports: [ContainerWidgetComponent]
