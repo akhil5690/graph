@@ -654,7 +654,7 @@ export class GraphEditorComponent implements OnInit {
 
 
   getNeighbourGraph(node: INode) {
-    console.log('o',this.iGraph)
+    console.log('o', this.iGraph)
     this.original = {...this.iGraph}
     const jsonGraph: { nodes: any[], edges: any[] } = {
       nodes: [],
@@ -702,12 +702,17 @@ export class GraphEditorComponent implements OnInit {
   switch(isFullscreen: boolean) {
     if (this.neighbourComponent.graph.nodes.size > 0) {
       this.isFullscreen = isFullscreen;
-      console.log(this.original)
       if (isFullscreen) {
         this.graphComponent.graph = this.neighbourComponent.graph;
         this.createGraph(this.original, this.neighbourComponent);
         this.graphComponent.inputMode = new GraphViewerInputMode();
+        const h = document.createElement('h1');
+        h.innerHTML = `<span style="display: grid;justify-content: center">Neighbourhood</span>`
+        this.graphComponent.div.append(h)
       } else {
+        const h = this.graphComponent.div.querySelector("h1");
+        if (h){h.remove()}
+
         this.createGraph(this.iGraph, this.graphComponent);
         this.createGraph(this.originalNeighbourHood, this.neighbourComponent);
         this.setInputMode()
