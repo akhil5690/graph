@@ -3,7 +3,6 @@ import {CommonModule} from '@angular/common';
 import {CymFileUploadComponent} from "./cym-file-upload.component";
 import {FileUploadModule} from "primeng/fileupload";
 
-
 @NgModule({
   declarations: [CymFileUploadComponent],
   imports: [
