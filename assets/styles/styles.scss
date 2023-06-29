@@ -68,7 +68,7 @@ label {
   display: grid;
   grid-auto-rows: var(--vertical-cards-loop);
   row-gap: 0.5rem;
-  padding:1rem
+  padding: 1rem
 }
 
 .header-content-divs {
@@ -95,15 +95,23 @@ label {
   padding: 0.5rem;
   align-items: center;
   justify-items: center;
-  cursor:pointer;
-  text-align:center;
+  cursor: pointer;
+  text-align: center;
 }
 
 .box-color {
   height: 5rem;
   width: 5rem;
-  display:grid;
-  align-items:center;
+  display: grid;
+  align-items: center;
   justify-items: center;
 }
 
+.progress-bar-class {
+  position: absolute;
+  width: 100%;
+}
+
+.p-progressbar-indeterminate .p-progressbar-value:before{
+  background: var(--theme-color-two)
+}
