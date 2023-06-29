@@ -8,23 +8,20 @@
   <cym-div main>
     <cym-div [cymClass]="'card-main'">
       <cym-card *ngFor="let tool of launchpad" [cymClass]="'header-content-divs'">
-        <div header>{{tool.name}}</div>
+        <cym-div header>{{tool.name}}</cym-div>
         <cym-div card-content [cymClass]="'card-divisions'">
           <cym-card-division *ngFor="let sub of tool.subGroup;index as i" [cymClass]="'launcpad-cards'"
                              [cardHeader]="tool.subGroup[i]['bgColor']"
                              [cardContent]="tool.subGroup[i]['image']"
                              [cardFooter]="tool.subGroup[i]['cardLabel']"
-                             [routClick]="tool.subGroup[i]['click']"
-                             (cardClickEvent)="showGraph()"
+                             [routClick]="tool.subGroup[i]['cardLabel']"
+                             (cardClickEvent)="showGraph($event)"
           >
           </cym-card-division>
         </cym-div>
-
-
       </cym-card>
     </cym-div>
-
   </cym-div>
   <cym-div footer>Copyright</cym-div>
 </cym-widget-frame>
-<!--[subGroup]="tool.subGroup[i]['bgColor']"-->
+

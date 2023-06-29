@@ -44,6 +44,7 @@ import {
 } from "../../../../../../common/cym-containers/cym-card-division/cym-card-division.module";
 import {CymMenuModule} from "../../../../../../common/cym-containers/cym-menu/cym-menu.module";
 import {CymColorPickerModule} from "../../../../../../common/cym-containers/cym-color-picker/cym-color-picker.module";
+import {CymFileUploadModule} from "../../../../../../common/cym-containers/cym-file-upload/cym-file-upload.module";
 @NgModule({
   declarations: [
     ContainerWidgetComponent,
@@ -84,6 +85,7 @@ import {CymColorPickerModule} from "../../../../../../common/cym-containers/cym-
         CymCardDivisionModule,
         CymMenuModule,
         CymColorPickerModule,
+        CymFileUploadModule,
     ],
   providers:[GraphService,HttpHandler],
   exports: [ContainerWidgetComponent]
