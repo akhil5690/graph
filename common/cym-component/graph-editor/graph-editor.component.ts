@@ -715,13 +715,6 @@ export class GraphEditorComponent implements OnInit {
         const h = document.createElement('h1');
         h.innerHTML = `<span style="display: grid;justify-content: center">Neighbourhood</span>`
         this.graphComponent.div.append(h);
-        const mode = this.setEditorMode();
-        mode.allowEditLabelOnDoubleClick = false;
-        mode.allowCreateEdge = false;
-        mode.allowAddLabel = false;
-        mode.allowCreateNode = false;
-        mode.allowCreateBend = false;
-        mode.allowGroupingOperations = false;
       } else {
         const h = this.graphComponent.div.querySelector("h1");
         if (h) {
