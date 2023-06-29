@@ -1,6 +1,7 @@
 import {ChangeDetectorRef, Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {GraphService} from "../../../../../../common/cym-services/graph/graph.service";
 import {Router} from "@angular/router";
+import {CymService} from "../../../../../../common/cym-services/systemService/cymSystemService";
 
 @Component({
   selector: 'cym-dashboard-widget',
@@ -17,19 +18,21 @@ export class DashboardWidgetComponent implements OnInit {
   layout: any;
   schema: any;
 
-  constructor(private cdr: ChangeDetectorRef, private graphService: GraphService, private router: Router) {
+  constructor(private cdr: ChangeDetectorRef, private graphService: GraphService, private router: Router, private cym: CymService) {
   }
 
   ngOnInit() {
-    this.getGraphData();
-    this.getSchemaData();
+    this.getSchemaData()
   }
 
-  private getGraphData() {
+  getGraphData() {
+    this.cym.setLoader(true);
     this.graphService.getGraphData({filter: false}).then((data) => {
       this.data = data;
       this.copyData = data;// for creating the filter
-    }).catch(e => console.log(e))
+    }).catch(e => console.log(e)).finally(() => {
+      this.cym.setLoader(false);
+    })
   }
 
   getFrameType(isRightSidebarOpen: any) {
@@ -60,10 +63,14 @@ export class DashboardWidgetComponent implements OnInit {
     }).catch(e => console.log(e))
   }
 
-  private getSchemaData() {
+  getSchemaData() {
+    this.cym.setLoader(true);
     this.graphService.getSchemaData({filter: false}).then((data) => {
       this.schema = data;
       this.copyData = data;// for creating the filter
-    }).catch(e => console.log(e))
+    }).catch(e => console.log(e)).finally(() => {
+      this.cym.setLoader(false);
+
+    })
   }
 }

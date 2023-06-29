@@ -13,28 +13,17 @@
         </p-tabPanel>
         <p-tabPanel header="Header II">
           <ng-template pTemplate="header">
-            <span>EXPLORER</span>
+            <span (click)="getGraphData()">EXPLORER</span>
           </ng-template>
           <cym-graph [layout]="layout" [data]="data" (refreshGraph)="refreshGraph($event)"></cym-graph>
         </p-tabPanel>
         <p-tabPanel header="Header II">
           <ng-template pTemplate="header">
-            <span>EDITOR</span>
+            <span (click)="getSchemaData()">EDITOR</span>
           </ng-template>
           <cym-graph-editor></cym-graph-editor>
         </p-tabPanel>
-<!--        <p-tabPanel header="Header II">-->
-<!--          <ng-template pTemplate="header">-->
-<!--            <span>Container</span>-->
-<!--          </ng-template>-->
-<!--        </p-tabPanel>-->
-
       </p-tabView>
     </div>
   </div>
-<!--  <div sidebar>-->
-<!--    <app-right-sidebar [data]="copyData" [details]="details" [filterOptions]='filterOptions'-->
-<!--                       (selectedLayout)="sendLayout($event)" (filterGraph)="refreshGraph($event)"-->
-<!--                       (filterByFinding)="getFindings($event)" (isRightSidebarOpen)="getFrameType($event)"></app-right-sidebar>-->
-<!--  </div>-->
 </cym-widget-frame>
