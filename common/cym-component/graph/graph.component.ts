@@ -452,16 +452,19 @@ export class GraphComponents implements OnInit, OnChanges {
       for (const neighbor of result.neighbors) {
         jsonGraph.nodes.push(neighbor?.tag)
         if (algorithm.traversalDirection === TraversalDirection.SUCCESSOR) {
-          this.graphComponent.graph.edges.filter(edge => edge.tag.target === neighbor.tag.id).forEach((edge) => {
+          this.graphComponent.graph.inEdgesAt(neighbor).forEach((edge) => {
             jsonGraph.edges.push(edge?.tag)
           })
         } else if (algorithm.traversalDirection === TraversalDirection.PREDECESSOR) {
-          this.graphComponent.graph.edges.filter(edge => edge.tag.source === neighbor.tag.id).forEach((edge) => {
+          this.graphComponent.graph.outEdgesAt(neighbor).forEach((edge) => {
             jsonGraph.edges.push(edge.tag)
           })
         } else {
-          this.graphComponent.graph.edges.filter(edge => edge.tag.source === neighbor.tag.id || edge.tag.target === neighbor.tag.id).forEach((edge) => {
-            jsonGraph.edges.push(edge.tag)
+          this.graphComponent.graph.edgesAt(neighbor).forEach((edge) => {
+            const dup = jsonGraph.edges.find(dupEdge=>dupEdge?.id === edge.tag.id)
+            if (!dup){
+              jsonGraph.edges.push(edge.tag)
+            }
           })
         }
       }
