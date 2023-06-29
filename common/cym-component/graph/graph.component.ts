@@ -155,7 +155,7 @@ export class GraphComponents implements OnInit, OnChanges {
       style: (data: any) => this.getNodeShape({
         fill: data.vertex_color ? data.vertex_color : "#FF9900",
         shape: 'ellipse',
-        stroke: null
+        stroke: data.Border_color
       })
       // labels: ["label"]
     });
