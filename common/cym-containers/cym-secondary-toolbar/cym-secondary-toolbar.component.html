@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="brand-logo" *ngFor="let item of sector1">
+    <div>
+      <cym-breadcrumb [items]="breadcrumbItems"></cym-breadcrumb>
+      <img [src]="item.url" alt="" [height]="item.height" [width]="item.width">
+    </div>
+  </div>
+  <div class="menu">
+    <div *ngFor="let item of sector2">{{item.name}}</div>
+  </div>
+  <div>
+    <div *ngFor="let item of sector3">
+      <img [src]="item.url" alt="" [height]="item.height" [width]="item.width">
+    </div>
+  </div>
+  <div class="other-options">
+    <img *ngFor="let item of sector4" [src]="item.url"
+         [height]="item.height" [width]="item.width" alt="">
+  </div>
+</div>

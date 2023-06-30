@@ -1,6 +1,6 @@
 <div class="container">
   <div class="brand-logo" *ngFor="let item of sector1">
-    <img [src]="item.url" alt="logo2" [height]="item.height" [width]="item.width">
+    <img [src]="item.url" alt="logo" [height]="item.height" [width]="item.width">
   </div>
   <div class="menu">
     <div *ngFor="let item of sector2">{{item.name}}</div>
@@ -16,3 +16,4 @@
          [height]="item.height" [width]="item.width"> Org name
   </div>
 </div>
+

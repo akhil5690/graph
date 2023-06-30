@@ -1,0 +1,23 @@
+cym-secondary-toolbar {
+  .container {
+    display: grid;
+    grid-template-columns: var(--sidebar-width) 3fr 1fr auto;
+    align-content: center;
+    align-items: center;
+    padding: 1rem;
+    height: var(--base-height);
+    color: var(--primary-text-color);
+    gap: var(--unit);
+    width: var(--base-width);
+  }
+  .menu {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 0.5rem;
+  }
+
+  .other-options {
+    display: flex;
+    gap: 0.5rem;
+  }
+}

@@ -6,6 +6,7 @@
   <!--  </cym-toolbar>-->
   <cym-top-toolbar header></cym-top-toolbar>
   <cym-div main>
+    <cym-secondary-toolbar></cym-secondary-toolbar>
     <cym-div [cymClass]="'card-main'">
       <cym-card *ngFor="let tool of launchpad" [cymClass]="'header-content-divs'">
         <cym-div header>{{tool.name}}</cym-div>
@@ -21,7 +22,3 @@
   </cym-div>
   <cym-div footer>Copyright</cym-div>
 </cym-widget-frame>
-<!--                             [cardHeader]="tool.subGroup[i]['bgColor']"-->
-<!--                             [cardContent]="tool.subGroup[i]['image']"-->
-<!--                             [cardFooter]="tool.subGroup[i]['cardLabel']"-->
-<!--                             [routClick]="tool.subGroup[i]['cardLabel']"-->

@@ -3,3 +3,12 @@
   width: 100%;
 
 }
+.p-dialog {
+  display: flex;
+  flex-direction: column;
+  pointer-events: auto;
+  max-height: 90%;
+  width: 100rem;
+  transform: scale(1);
+  position: relative;
+}

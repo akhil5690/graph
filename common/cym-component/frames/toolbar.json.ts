@@ -41,5 +41,4 @@ export const toolbar = [{
     "height": "22",
     "width": "19.8"
   },
-
 ]

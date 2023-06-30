@@ -25,10 +25,10 @@ import {
   IEdge,
   IEdgeStyle,
   ILabelModelParameter,
-  ILabelStyle,
+  ILabelStyle, IModelItem,
   INode,
   INodeStyle,
-  InteriorLabelModel,
+  InteriorLabelModel, ItemClickedEventArgs,
   LabelCreator,
   LayoutExecutor,
   License, Neighborhood,
@@ -66,6 +66,7 @@ export class GraphComponents implements OnInit, OnChanges {
   @ViewChild('neighbour', {static: true}) neighbour!: ElementRef;
 
   @Output() refreshGraph = new EventEmitter()
+  @Output() findingsClicked = new EventEmitter()
 
 
   // graph toolbar tools
@@ -119,8 +120,8 @@ export class GraphComponents implements OnInit, OnChanges {
     this.createGraph(this.data, this.graphComponent);
     // fit the whole graph into the canvas
     setTimeout(() => {
-      this.graphComponent.zoomTo(this.graphComponent.contentRect);
-    }, 50)
+      this.fitContent();
+    }, 100)
 
     // create overview component to view and navigate the graph in graph component
     this.initializeOverviewComponent(this.graphComponent);
@@ -254,13 +255,24 @@ export class GraphComponents implements OnInit, OnChanges {
   private leftClickListener(inputMode: GraphViewerInputMode | GraphEditorInputMode) {
     inputMode.addItemLeftClickedListener((sender, evt) => {
       this.selectedItem = evt.item instanceof IEdge || evt.item instanceof INode ? evt.item : null;
-      if (evt.item instanceof INode && !this.isFullscreen) {
-        this.selectedNode = evt.item;
-        this.getNeighbourGraph(evt.item)
-      }
+      this.checkNeighbour(evt);
+      this.checkFindings(evt);
     })
   }
 
+  checkNeighbour(evt: ItemClickedEventArgs<IModelItem>) {
+    if (evt.item instanceof INode && !this.isFullscreen) {
+      this.selectedNode = evt.item;
+      this.getNeighbourGraph(evt.item)
+    }
+  }
+
+  checkFindings(evt: ItemClickedEventArgs<IModelItem>){
+    if (evt.item instanceof INode && evt.item.tag.findings === 'True')
+    {
+      this.findingsClicked.emit(evt.item.tag)
+    }
+  }
   private buildLayout(graphComponent: GraphComponent, layoutType: string) {
     // set layout
     const layout = this.prepareLayout(layoutType);
@@ -299,14 +311,14 @@ export class GraphComponents implements OnInit, OnChanges {
       this.overviewComponent = new GraphOverviewComponent(container, graphComponent);
     }
     this.overviewComponent.autoDrag = true;
-    this.graphComponent.zoomTo(this.graphComponent.contentRect);
+    this.fitContent()
   }
 
   private initialiseNeighbourhood() {
     const container = this.neighbour.nativeElement;
     this.neighbourComponent = new GraphComponent(container);
-    this.neighbourComponent.contentRect = new Rect(0, 0, 500, 500);
-    this.neighbourComponent.zoomTo(this.neighbourComponent.contentRect);
+    this.neighbourComponent.contentRect = new Rect(0, 0, 100, 100);
+    this.fitContent();
   }
 
 
@@ -393,7 +405,7 @@ export class GraphComponents implements OnInit, OnChanges {
   }
 
   fitContent() {
-    ICommand.FIT_GRAPH_BOUNDS.execute(null, this.graphComponent)
+    this.graphComponent.zoomTo(this.graphComponent.contentRect);
   }
 
   // toolbar event handling
@@ -483,7 +495,7 @@ export class GraphComponents implements OnInit, OnChanges {
         this.createGraph(this.data, this.neighbourComponent);
         this.setInputMode(this.graphComponent);
         this.neighbourComponent.zoomTo(this.neighbourComponent.contentRect);
-        ICommand.FIT_GRAPH_BOUNDS.execute(null, this.graphComponent);
+        this.graphComponent.zoomTo(this.graphComponent.contentRect);
         const h = document.createElement('h1');
         h.innerHTML = `<span style="display: grid;justify-content: center">Neighbourhood</span>`
         this.graphComponent.div.append(h)
