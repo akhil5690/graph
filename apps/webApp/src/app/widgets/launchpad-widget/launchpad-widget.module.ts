@@ -28,6 +28,6 @@ import {CymInputModule} from "../../../../../../common/cym-component/form/cym-in
     CymProfileModule,
     CymInputModule
   ],
-  exports: [LaunchpadWidgetComponent]
+    exports: [LaunchpadWidgetComponent, TopToolbarComponent]
 })
 export class LaunchpadWidgetModule { }
