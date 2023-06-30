@@ -5,14 +5,14 @@
   <div class="menu">
     <div *ngFor="let item of sector2">{{item.name}}</div>
   </div>
-  <div>
-    <div *ngFor="let item of sector3">
-      <img [src]="item.url" alt="" [height]="item.height" [width]="item.width">
-<!--      <cym-input *ngIf="item.type === 'searchBox'"></cym-input>-->
+  <div  class="three" >
+      <div *ngFor="let item of sector3" >
+        <img [src]="item.url" alt="" [height]="item.height" [width]="item.width">
+        <!--      <cym-input *ngIf="item.type === 'searchBox'"></cym-input>-->
     </div>
   </div>
   <div class="other-options">
     <img *ngFor="let item of sector4" [src]="item.url"
-         [height]="item.height" [width]="item.width">
+         [height]="item.height" [width]="item.width"> Org name
   </div>
 </div>

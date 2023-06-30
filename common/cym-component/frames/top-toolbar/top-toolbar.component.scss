@@ -21,7 +21,16 @@ cym-top-toolbar {
   .other-options {
     display: flex;
     gap: var(--border-radius);
+    color: var(--primary-color-text)
+
   }
+
+  .three{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    text-align:right;
+  }
+
 
 
 

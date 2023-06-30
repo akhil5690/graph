@@ -3,13 +3,19 @@
   <cym-div main [cymClass]="'workstation'">
 
     <cym-div [cymClass]="'section1'">
+      <cym-workspace-card *ngFor="let tool of workspace1" [cymClass]="'section11'">
+        <cym-div card-content>
+          <cym-workspace-card-division *ngFor="let sub of tool.cardDivision" [workspaceCardDetails]="sub" [cymClass]="'section1111'">
+          </cym-workspace-card-division>
+        </cym-div>
+      </cym-workspace-card>
 
     </cym-div>
     <cym-div [cymClass]="'section2'">
       <cym-workspace-card *ngFor="let tool of workspace" [cymClass]="'section22'" >
-        <cym-div header>{{tool.name}}</cym-div>
-        <cym-div card-content [cymClass]="'section22'">
-          <cym-workspace-card-division *ngFor="let sub of tool.cardDivision" [workspaceCardDetails]="sub" [cymClass]="'section222'">
+        <cym-div header [cymClass]="'section-head'">{{tool.name}}</cym-div>
+        <cym-div card-content [cymClass]="'section222'">
+          <cym-workspace-card-division *ngFor="let sub of tool.cardDivision" [workspaceCardDetails]="sub" [cymClass]="'section2222'">
           </cym-workspace-card-division>
         </cym-div>
       </cym-workspace-card>
