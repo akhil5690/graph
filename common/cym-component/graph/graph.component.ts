@@ -317,7 +317,7 @@ export class GraphComponents implements OnInit, OnChanges {
   private initialiseNeighbourhood() {
     const container = this.neighbour.nativeElement;
     this.neighbourComponent = new GraphComponent(container);
-    this.neighbourComponent.contentRect = new Rect(0, 0, 500, 500);
+    this.neighbourComponent.contentRect = new Rect(0, 0, 100, 100);
     this.fitContent();
   }
 

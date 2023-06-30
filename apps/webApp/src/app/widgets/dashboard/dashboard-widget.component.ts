@@ -12,12 +12,12 @@ import {CymService} from "../../../../../../common/cym-services/systemService/cy
 export class DashboardWidgetComponent implements OnInit {
   details: any;
   frameType!: string;
-  data: any;
+  explorer: any;
   filterOptions: any;
   copyData: any;
   layout: any;
   schema: any;
-  popup: boolean = false;
+  openFindingsPopup: boolean = false;
 
   constructor(private cdr: ChangeDetectorRef, private graphService: GraphService, private router: Router, private cym: CymService) {
   }
@@ -29,42 +29,21 @@ export class DashboardWidgetComponent implements OnInit {
   getGraphData() {
     this.cym.setLoader(true);
     this.graphService.getGraphData({filter: false}).then((data) => {
-      this.data = data;
+      this.explorer = data;
       this.copyData = data;// for creating the filter
     }).catch(e => console.log(e)).finally(() => {
       this.cym.setLoader(false);
     })
   }
-
-  getFrameType(isRightSidebarOpen: any) {
-    this.frameType = !isRightSidebarOpen ? 'header-main-menubar-frame' : 'header-main-right-sidebar-frame';
-    this.cdr.detectChanges();
-  }
-
   refreshGraph(params: any) {
-    console.log(params);
     // on filtering get new graph data
-    this.data = null;
+    this.explorer = null;
     this.cym.setLoader(true);
     this.graphService.getGraphData(params).then((data) => {
-      this.data = data;
-      console.log(this.data)
+      this.explorer = data;
     }).catch(e => console.log(e)).finally(() => {
       this.cym.setLoader(false);
     })
-  }
-
-  sendLayout(layout: any) {
-    // on selecting dropdown send layout that you selected to graph component
-    this.layout = layout
-  }
-
-  getFindings(params: any) {
-    this.data = null;
-    this.graphService.getGraphData(params).then((data: any) => {
-      this.data = data;
-      console.log(this.data)
-    }).catch(e => console.log(e))
   }
 
   getSchemaData() {
@@ -79,8 +58,9 @@ export class DashboardWidgetComponent implements OnInit {
   }
 
   loadFindings(findings: any) {
+    // for opening findings pop up and show graph
     if (findings){
-      this.popup = true;
+      this.openFindingsPopup = true;
     }
   }
 }
