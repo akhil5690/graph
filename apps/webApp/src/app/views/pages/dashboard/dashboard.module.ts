@@ -6,14 +6,17 @@ import {dashboardComponent} from "./dashboard/dashboard.component";
 import {DashboardComponent} from "./dashboard.component";
 import {LaunchpadComponent} from "./launchpad/launchpad.component";
 import {LaunchpadWidgetModule} from "../../../widgets/launchpad-widget/launchpad-widget.module";
+import {WorkspaceComponent} from "../workspace/workspace.component";
 
 const routes: Routes = [
   { path: '',
     component: DashboardComponent,
-    children: [{
+    children: [
+      {
       path: '',
       component: LaunchpadComponent,
-    },{
+    },
+      {
       path: 'dashboard',
       component: dashboardComponent,
     },]},
