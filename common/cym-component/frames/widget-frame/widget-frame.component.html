@@ -1,14 +1,6 @@
-<section [class]="getClass(frame_type)">
-  <cym-block-ui [blockedDocument]="this.isBlocked"></cym-block-ui>
-  <div class="progress-bar-class" *ngIf="this.isBlocked">
-    <cym-progress-bar></cym-progress-bar>
-  </div>
-  <header class="header" *ngIf="getClass(frame_type)!== 'only-main'">
-    <!--      theme changer  -->
-    <!--        <div class="toggle">-->
-    <!--          <p-toggleButton [(ngModel)]="checked" onLabel="Dark" offLabel="Light" (click)="toggleTheme()"></p-toggleButton>-->
-    <!--        </div>-->
 
+<section [class]="getClass(frame_type)">
+  <header class="header" *ngIf="getClass(frame_type)!== 'only-main'">
     <ng-content select="[header]"></ng-content>
   </header>
   <div class="sidebar">
@@ -20,6 +12,10 @@
   <footer class="footer">
     <ng-content select="[footer]"></ng-content>
   </footer>
+  <cym-block-ui [blockedDocument]="this.isBlocked"></cym-block-ui>
+  <div class="progress-bar-class" *ngIf="this.isBlocked">
+    <cym-progress-bar></cym-progress-bar>
+  </div>
 </section>
 
 <!---->
