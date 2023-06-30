@@ -9,6 +9,6 @@ cym-card {
   }
 
   .p-card .p-card-body {
-    padding: 0.5rem;
+    padding: var(--border-radius);
   }
 }

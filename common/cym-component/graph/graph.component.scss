@@ -1,4 +1,6 @@
 cym-graph {
+
+
   .overview {
     position: absolute;
     top: 30px;
@@ -18,9 +20,10 @@ cym-graph {
   .header {
     font-weight: var(--font-weight-bold);
     font-size: medium;
-    background: var(--primary-color);
+    background: (var(--theme-color-one));
     padding: 1rem;
     color: var(--primary-color-text);
+    text-align: center;
   }
 
   .hide {
@@ -37,7 +40,20 @@ cym-graph {
     bottom: 0;
     height: var(--graph-top-toolbar-height);
     width: 100%;
-    background-color: var(--third-background-color);
+    background-color: var(--theme-color-one);
+    display: inline-flex;
+    align-items: center;
+    padding: var(--unit);
+    gap: var(--unit);
+  }
+
+  .top-toolbar {
+    position: relative;
+    top: 0;
+    bottom: 0;
+    height: var(--graph-top-toolbar-height);
+    width: 100%;
+    background-color: var(--theme-color-one);
     display: inline-flex;
     align-items: center;
     padding: var(--unit);

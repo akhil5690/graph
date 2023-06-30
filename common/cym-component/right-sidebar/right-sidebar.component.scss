@@ -15,9 +15,9 @@ cym-right-sidebar {
     padding: 1.5rem;
     flex-direction: column;
     gap: var(--unit);
-    background-color: var(--primary-background-color);
+    background-color: var(--theme-color-one);
     align-items: center;
-    border: 2px solid var(--third-background-color);
+    //border: 2px solid var(--third-background-color);
     border-top: none;
   }
 

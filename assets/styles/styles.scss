@@ -28,7 +28,7 @@ html, body {
 
 a {
   text-decoration-line: none;
-  color: var(--pink1);
+  color: var(--primary-color);
 }
 
 
@@ -66,23 +66,22 @@ label {
 .card-main {
   display: grid;
   grid-auto-rows: var(--vertical-cards-loop);
-  row-gap: 0.5rem;
-  padding:1rem
+  row-gap: var(--border-radius);
+  padding:var(--unit);
 }
 
-.header-content-divs {
+.header-content-divs{
   display: grid;
   grid-template-rows: 2rem auto;
   background: white;
-  padding: 1rem;
+  padding: var(--unit);
   height: var(--vertical-cards-loop);
 }
 
-.card-divisions {
+.card-divisions{
   display: grid;
   grid-template-columns: repeat(auto-fill, 10rem);
-  column-gap: 0.8rem;
-  padding-left: 0.75rem;
+  column-gap:var(--unit);
 }
 
 .launcpad-cards {
@@ -91,18 +90,63 @@ label {
   background: #FFFFFF 0% 0% no-repeat padding-box;
   box-shadow: 0px 3px 6px #00000029;
   grid-template-rows: 1fr 8fr 1fr;
-  padding: 0.5rem;
+  padding: var(--border-radius);
   align-items: center;
   justify-items: center;
   cursor:pointer;
   text-align:center;
 }
 
+.launcpad-cards:hover, .box-color:hover {
+  background-color: var(--theme-color-one );
+  color: var(--primary-color);
+  border : 2px solid var(--primary-color);
+}
 .box-color {
-  height: 5rem;
-  width: 5rem;
+  height: calc(var(--unit)*5);
+  width: calc(var(--unit)*5);
   display:grid;
   align-items:center;
   justify-items: center;
+}
+
+
+
+
+.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+  background: var(--primary-color);
+  color: var(--primary-color-text);
+}
+
+.p-tabview .p-tabview-nav {
+  background: var(--theme-color-one);
+  border-width: 0 0 0 0;
+}
+
+.p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  background-color: var(--theme-color-one);
+}
+
+
+.p-tabview .p-tabview-nav .p-tabview-nav-link {
+  background: var(--theme-color-one);
+  color: var(--primary-color-text);
+}
+
+.p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  border:none;
+  border-width: 0 0 2px 0;
+  /* border-color: transparent transparent #dee2e6 transparent; */
+  padding: 1.25rem;
+  font-weight: 700;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  transition: box-shadow 0.2s;
+}
+
+.p-tabview .p-tabview-nav li:not(.p-highlight):not(.p-disabled):hover .p-tabview-nav-link {
+  background: #2fb2c3;
+  border-color: #2fb2c3;
+  color: #6c757d;
 }
 

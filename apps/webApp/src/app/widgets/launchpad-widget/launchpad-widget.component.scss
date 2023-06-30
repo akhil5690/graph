@@ -1,8 +1,8 @@
 cym-launchpad-widget {
   .grid {
     display: grid;
-    height: 100vh;
-    width: 100vw;
+    height: var(--main-height);
+    width: var(--column-graph-frame);
     justify-items: center;
     align-items: center;
   }
@@ -13,7 +13,7 @@ cym-launchpad-widget {
     width: var(--base-width);
     align-content: center;
     align-items: center;
-    padding: 1rem;
+    padding: var(--unit);
     height: var(--top-toolbar-height);
     color: var(--primary-text-color);
     gap: var(--unit);

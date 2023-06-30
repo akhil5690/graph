@@ -6,8 +6,8 @@ cym-graph-editor {
   }
 
   #overview, #neighbour {
-    width: 175px;
-    height: 175px;
+    width: 150px;
+    height: 150px;
     background-color: var(--third-background-color);
   }
 
@@ -19,11 +19,12 @@ cym-graph-editor {
   .header {
     font-weight: var(--font-weight-bold);
     font-size: medium;
-    background: var(--primary-color);
+    background: var(--theme-color-one);
     padding: 1rem;
     color: var(--primary-color-text);
     display: flex;
-    gap: var(--unit)
+    gap: var(--unit);
+    text-align:center;
   }
 
   .hide {
@@ -40,11 +41,12 @@ cym-graph-editor {
     bottom: 0;
     height: var(--graph-top-toolbar-height);
     width: 100%;
-    background-color: var(--third-background-color);
+    background-color: var(--theme-color-one);
     display: inline-flex;
     align-items: center;
     padding: var(--unit);
     gap: var(--unit);
+    color: var(--primary-color-text);
   }
 
   .tools {

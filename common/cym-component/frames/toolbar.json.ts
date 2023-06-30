@@ -1,11 +1,11 @@
 export const toolbar = [{
   "name": "Cymonix",
-  "url": "../../../../assets/image/Logo.svg",
+  "url": "../../../../assets/image/Logo2.png",
   "position": "top",
   "type": "image",
   "sector": "1",
-  "height": "20",
-  "width": "70",
+  "height": "30",
+  "width": "100",
   "top": "8",
   "left": "16",
 },  {
