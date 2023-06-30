@@ -10,7 +10,6 @@ export class WorkspaceWidgetComponent {
     name: "Observables",
     cardDivision: [{
       image: "assets/image/find_workspace.svg",
-      subHeader1:"Observables",
       subHeader2:"No new Observables"
     },]
   },
@@ -18,7 +17,7 @@ export class WorkspaceWidgetComponent {
       name: "Tasks",
       cardDivision: [{
         image: "assets/image/clipboard_workspace.svg",
-        subHeader1:"",
+
         subHeader2:"You don't have any new tasks"
       },]
     },
@@ -26,8 +25,15 @@ export class WorkspaceWidgetComponent {
       name: "Shared with Me",
       cardDivision: [{
         image:  "assets/image/folder_workspace.svg",
-        subHeader1: "",
         subHeader2: "No files shared with you yet"
-      },],
+      }],
+    },
+    {
+      name: null,
+      cardDivision: [{
+        image:  "assets/image/Layer-6.svg",
+        subHeader1: "No Workspace created or shared yet",
+        subHeader2: "Create your first workspace here!"
+      }],
     }]
 }
