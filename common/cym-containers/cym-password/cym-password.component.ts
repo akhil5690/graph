@@ -9,6 +9,5 @@ export class CymPasswordComponent implements OnChanges{
   @Input() propertyMeta!:any;
   value!: string;
   ngOnChanges(): void {
-    console.log(this.propertyMeta.header)
   }
 }

@@ -9,11 +9,8 @@ export class CymCardDivisionComponent implements OnInit {
   @Input() cardDivision: any;
   @Input() cymClass: any;
   @Input() propertyHeader: any;
-  @Input() cardData: any;
-  @Input() cardHeader: any;
-  @Input() cardContent: any;
-  @Input() cardFooter: any;
   @Input() routClick = false;
+  @Input() cardDetails: any;
   @Output() cardClickEvent = new EventEmitter<any>;
 
   ngOnInit() {
@@ -31,10 +28,7 @@ export class CymCardDivisionComponent implements OnInit {
     return '';
   }
 
-  cardClick() {
-    if (this.routClick) {
-      this.cardClickEvent.emit()
-    }
-
+  cardClick(event: any) {
+    this.cardClickEvent.emit(event)
   }
 }

@@ -1,43 +1,16 @@
 <!--<cym-card>-->
 <!--{{cardDivision}}-->
 <!--</cym-card>-->
-
-<!--<p-card [class]="cymClass">-->
-<!--  <p-header>-->
-<!--    {{propertyHeader}}-->
-<!--  </p-header>-->
-<!--  <ng-content></ng-content>-->
-<!--  <p-footer>-->
-<!--    <ng-content></ng-content>-->
-<!--  </p-footer>-->
-<!--</p-card>-->
-
-<!--<p-card [class]="cymClass">-->
-<!--  <div>{{cardDivision}}</div>-->
-<!--</p-card>-->
-
-<!--<cym-card >-->
-<!--&lt;!&ndash;  {{subGroup}}&ndash;&gt;-->
-<!--  <div card-content [class]="cymClass">-->
-<!--&lt;!&ndash;    <p-header>&ndash;&gt;-->
-<!--&lt;!&ndash;      <cym-div>{{cardHeader}}</cym-div>&ndash;&gt;-->
-<!--&lt;!&ndash;    </p-header>&ndash;&gt;-->
-<!--&lt;!&ndash;    <cym-div>{{cardContent}}</cym-div>&ndash;&gt;-->
-<!--&lt;!&ndash;    <p-footer>&ndash;&gt;-->
-<!--&lt;!&ndash;      <cym-div>{{cardFooter}}</cym-div>&ndash;&gt;-->
-<!--&lt;!&ndash;    </p-footer>&ndash;&gt;-->
-<!--  </div>-->
-
-<!--</cym-card>-->
-<div [class]="cymClass" (click)="cardClick()">
+<div [class]="cymClass" (click)="cardClick(cardDetails.routPath)">
   <div>
 
   </div>
-  <div class="box-color" [ngStyle]="{background: cardHeader}" *ngIf="cardContent===''">
-    <span>{{getAbbrevation(cardFooter)}}</span>
+  <!--  {{cardDetails.image | json}}-->
+  <div class="box-color" [ngStyle]="{background: cardDetails.bgColor}" *ngIf="cardDetails?.image === null">
+    <span>{{getAbbrevation(cardDetails.cardLabel)}}</span>
   </div>
-  <img [src]="cardContent">
+  <img [src]="cardDetails?.image" alt="">
   <div>
-    {{cardFooter}}
+    {{cardDetails.cardLabel}}
   </div>
 </div>

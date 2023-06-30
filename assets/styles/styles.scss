@@ -70,7 +70,7 @@ label {
   padding:var(--unit);
 }
 
-.header-content-divs{
+.header-content-divs {
   display: grid;
   grid-template-rows: 2rem auto;
   background: white;
@@ -78,7 +78,7 @@ label {
   height: var(--vertical-cards-loop);
 }
 
-.card-divisions{
+.card-divisions {
   display: grid;
   grid-template-columns: repeat(auto-fill, 10rem);
   column-gap:var(--unit);
@@ -110,6 +110,14 @@ label {
   justify-items: center;
 }
 
+.progress-bar-class {
+  position: absolute;
+  width: 100%;
+}
+
+.p-progressbar-indeterminate .p-progressbar-value:before{
+  background: var(--theme-color-two)
+}
 
 
 

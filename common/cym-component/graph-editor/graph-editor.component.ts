@@ -7,7 +7,7 @@ import {
   ExteriorLabelModel,
   GraphBuilder,
   GraphComponent,
-  GraphEditorInputMode,
+  GraphEditorInputMode, GraphItemTypes,
   GraphOverviewComponent, GraphViewerInputMode,
   GroupNodeLabelModel,
   GroupNodeStyle,
@@ -105,6 +105,7 @@ export class GraphEditorComponent implements OnInit {
   neighboursOptions: any;
   selectedNode!: INode;
   private original: any;
+  private originalNeighbourHood: any;
 
 
   constructor(private cdr: ChangeDetectorRef) {
@@ -133,7 +134,7 @@ export class GraphEditorComponent implements OnInit {
     this.initTutorialDefaults(this.graphComponent.graph);
 
     // prepare drag and drop
-    this.setInputMode();
+    this.setNodeInputMode();
 
     this.initializeOverviewComponent(this.graphComponent)
 
@@ -143,11 +144,15 @@ export class GraphEditorComponent implements OnInit {
 
   }
 
-  setInputMode(): void {
+  setEditorMode(): GraphEditorInputMode {
 
     // get the input handler
-    const inputMode = this.graphComponent.inputMode = new GraphEditorInputMode();
+    return new GraphEditorInputMode();
+  }
 
+  setNodeInputMode(): void {
+
+    const inputMode = this.graphComponent.inputMode = this.setEditorMode()
     // get node drag and drop input handler
     const nodeDropInputMode = inputMode.nodeDropInputMode;
 
@@ -206,6 +211,7 @@ export class GraphEditorComponent implements OnInit {
 
       // add the new node to the graph
       this.graphComponent.graph.nodes.append(node);
+      this.save();
     });
   }
 
@@ -304,6 +310,7 @@ export class GraphEditorComponent implements OnInit {
       };
 
       this.graphComponent.graph.edges.append(edge);
+      this.save()
     })
   }
 
@@ -651,6 +658,7 @@ export class GraphEditorComponent implements OnInit {
 
 
   getNeighbourGraph(node: INode) {
+    console.log('o', this.iGraph)
     this.original = {...this.iGraph}
     const jsonGraph: { nodes: any[], edges: any[] } = {
       nodes: [],
@@ -665,19 +673,23 @@ export class GraphEditorComponent implements OnInit {
     for (const neighbor of result.neighbors) {
       jsonGraph.nodes.push(neighbor?.tag)
       if (algorithm.traversalDirection === TraversalDirection.SUCCESSOR) {
-        this.graphComponent.graph.edges.filter(edge => edge.tag.target === neighbor.tag.id).forEach((edge) => {
+        this.graphComponent.graph.inEdgesAt(neighbor).forEach((edge) => {
           jsonGraph.edges.push(edge?.tag)
         })
       } else if (algorithm.traversalDirection === TraversalDirection.PREDECESSOR) {
-        this.graphComponent.graph.edges.filter(edge => edge.tag.source === neighbor.tag.id).forEach((edge) => {
+        this.graphComponent.graph.outEdgesAt(neighbor).forEach((edge) => {
           jsonGraph.edges.push(edge.tag)
         })
       } else {
-        this.graphComponent.graph.edges.filter(edge => edge.tag.source === neighbor.tag.id || edge.tag.target === neighbor.tag.id).forEach((edge) => {
-          jsonGraph.edges.push(edge.tag)
+        this.graphComponent.graph.edgesAt(neighbor).forEach((edge) => {
+          const dup = jsonGraph.edges.find(dupEdge => dupEdge?.id === edge.tag.id)
+          if (!dup) {
+            jsonGraph.edges.push(edge.tag)
+          }
         })
       }
     }
+    this.originalNeighbourHood = jsonGraph;
     this.save();
     this.createGraph(jsonGraph, this.neighbourComponent)
     this.neighbourComponent.contentRect = new Rect(0, 0, 100, 100);
@@ -695,13 +707,23 @@ export class GraphEditorComponent implements OnInit {
   }
 
   switch(isFullscreen: boolean) {
-    this.isFullscreen = isFullscreen;
-    if (isFullscreen) {
-      this.graphComponent.graph = this.neighbourComponent.graph;
-      this.graphComponent.inputMode = new GraphViewerInputMode();
-    } else {
-      this.createGraph(this.iGraph, this.graphComponent);
-      this.setInputMode()
+    if (this.neighbourComponent.graph.nodes.size > 0) {
+      this.isFullscreen = isFullscreen;
+      if (isFullscreen) {
+        this.graphComponent.graph = this.neighbourComponent.graph;
+        this.createGraph(this.original, this.neighbourComponent);
+        const h = document.createElement('h1');
+        h.innerHTML = `<span style="display: grid;justify-content: center">Neighbourhood</span>`
+        this.graphComponent.div.append(h);
+      } else {
+        const h = this.graphComponent.div.querySelector("h1");
+        if (h) {
+          h.remove()
+        }
+        this.createGraph(this.iGraph, this.graphComponent);
+        this.createGraph(this.originalNeighbourHood, this.neighbourComponent);
+        this.setNodeInputMode()
+      }
     }
   }
 }

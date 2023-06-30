@@ -4,18 +4,20 @@
     <cym-div [cymClass]="'component-header'">Toolbar Component</cym-div>
     <cym-toolbar></cym-toolbar>
   </cym-div>
-  <cym-div [cymClass]="'grid-container'">
-    <cym-div>
-      <cym-div [cymClass]="'component-header'">Accordion Component</cym-div>
-      <cym-accordion [data]="data"></cym-accordion>
-    </cym-div>
-    <cym-div>
-      <cym-div [cymClass]="'component-header'">Card Component</cym-div>
-      <cym-card [propertyHeader]="cardData" [propertyFooter]="cardData">
-        <cym-div>{{cardData}}</cym-div>
-      </cym-card>
-    </cym-div>
-  </cym-div>
+
+<!--  <cym-div [cymClass]="'grid-container'">-->
+<!--    <cym-div>-->
+<!--      <cym-div [cymClass]="'component-header'">Accordion Component</cym-div>-->
+<!--      <cym-accordion [data]="data"></cym-accordion>-->
+<!--    </cym-div>-->
+<!--    &lt;!&ndash;    <cym-div>&ndash;&gt;-->
+<!--    &lt;!&ndash;      <cym-div [cymClass]="'component-header'">Card Component</cym-div>&ndash;&gt;-->
+<!--    &lt;!&ndash;      <cym-card [propertyHeader]="cardData" [propertyFooter]="cardData">&ndash;&gt;-->
+<!--    &lt;!&ndash;        <cym-div>{{cardData}}</cym-div>&ndash;&gt;-->
+<!--    &lt;!&ndash;      </cym-card>&ndash;&gt;-->
+<!--    &lt;!&ndash;    </cym-div>&ndash;&gt;-->
+<!--  </cym-div>-->
+
   <cym-div [cymClass]="'grid-container'">
     <cym-div>
       <cym-div [cymClass]="'component-header'">Divider Component</cym-div>
@@ -29,6 +31,7 @@
       </cym-fieldset>
     </cym-div>
   </cym-div>
+
   <cym-div [cymClass]="'grid-container'">
     <cym-div>
       <cym-div [cymClass]="'component-header'">Panel Component</cym-div>
@@ -39,6 +42,7 @@
       <cym-splitter></cym-splitter>
     </cym-div>
   </cym-div>
+
   <cym-div [cymClass]="'grid-container'">
     <cym-div>
       <cym-div [cymClass]="'component-header'">Scroll Panel Component</cym-div>
@@ -78,7 +82,6 @@
           pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
           est laborum.
         </cym-div>
-        <!--        <cym-div></cym-div>-->
       </cym-dialog>
     </cym-div>
     <cym-div>
@@ -88,6 +91,7 @@
       </cym-overlay-panel>
     </cym-div>
   </cym-div>
+
   <cym-div [cymClass]="'grid-container'">
     <cym-div>
       <cym-div [cymClass]="'component-header'">Dropdown Component</cym-div>
@@ -100,6 +104,7 @@
       </cym-toast>
     </cym-div>
   </cym-div>
+
   <cym-div [cymClass]="'grid-container'">
     <cym-div>
       <cym-div [cymClass]="'component-header'">Password Component</cym-div>
@@ -112,12 +117,16 @@
   </cym-div>
 
   <cym-div [cymClass]="'grid-container'">
+    <!--    <cym-div>-->
+    <!--      <cym-div [cymClass]="'component-header'">Card Division Component</cym-div>-->
+    <!--      <cym-card-division [propertyHeader]="'Hello'">-->
+    <!--        <cym-div>hello</cym-div>-->
+    <!--        <cym-div>{{cardData}}</cym-div>-->
+    <!--      </cym-card-division>-->
+    <!--    </cym-div>-->
     <cym-div>
-      <cym-div [cymClass]="'component-header'">Card Division Component</cym-div>
-      <cym-card-division [propertyHeader]="'Hello'">
-        <cym-div>hello</cym-div>
-        <cym-div>{{cardData}}</cym-div>
-      </cym-card-division>
+      <cym-div [cymClass]="'component-header'">Accordion Component</cym-div>
+      <cym-accordion [data]="data"></cym-accordion>
     </cym-div>
     <cym-div>
       <cym-div [cymClass]="'component-header'">Menu Component</cym-div>
@@ -130,7 +139,30 @@
       <cym-div [cymClass]="'component-header'">Color Picker Component</cym-div>
       <cym-color-picker [cymClass]="'color-size'"></cym-color-picker>
     </cym-div>
+    <cym-div>
+      <cym-div [cymClass]="'component-header'">File Upload Component</cym-div>
+      <cym-file-upload></cym-file-upload>
+    </cym-div>
   </cym-div>
+
+  <cym-div [cymClass]="'grid-container'">
+    <cym-div>
+      <cym-div [cymClass]="'component-header'">Block UI Component</cym-div>
+      <cym-block-ui></cym-block-ui>
+    </cym-div>
+    <cym-div>
+      <cym-div [cymClass]="'component-header'">Input Textarea Component</cym-div>
+      <cym-input-textarea></cym-input-textarea>
+    </cym-div>
+  </cym-div>
+
+  <cym-div [cymClass]="'grid-container'">
+    <cym-div>
+      <cym-div [cymClass]="'component-header'">Progress Bar Component</cym-div>
+      <cym-progress-bar></cym-progress-bar>
+    </cym-div>
+  </cym-div>
+
 </cym-div>
 
 
