@@ -1,14 +1,18 @@
 <cym-widget-frame [frame_type]="'header-main-footer-frame'">
   <cym-top-toolbar header></cym-top-toolbar>
-  <cym-div main>
-    <cym-workspace-card *ngFor="let tool of workspace">
-      <cym-div header>{{tool.name}}</cym-div>
-      <cym-div card-content>
-        <cym-workspace-card-division *ngFor="let sub of tool.cardDivision"
-                                     [workspaceCardDetails]="sub">
-        </cym-workspace-card-division>
-      </cym-div>
-    </cym-workspace-card>
+  <cym-div main [cymClass]="'workstation'">
+
+    <cym-div [cymClass]="'section1'">
+
+    </cym-div>
+    <cym-div [cymClass]="'section2'">
+      <cym-workspace-card *ngFor="let tool of workspace" [cymClass]="'section22'" >
+        <cym-div header>{{tool.name}}</cym-div>
+        <cym-div card-content [cymClass]="'section22'">
+          <cym-workspace-card-division *ngFor="let sub of tool.cardDivision" [workspaceCardDetails]="sub" [cymClass]="'section222'">
+          </cym-workspace-card-division>
+        </cym-div>
+      </cym-workspace-card>
+    </cym-div>
   </cym-div>
-  <
 </cym-widget-frame>

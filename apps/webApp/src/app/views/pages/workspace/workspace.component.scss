@@ -8,4 +8,22 @@ cym-workspace-widget{
     border:1px solid black;
   }
 
+  .section2{
+    display: grid;
+    grid-template-rows: 25% 50% 25% ;
+    text-align: center;
+    justify-content: center;
+    grid-gap: 1rem;
+    height:100%;
+    width: 100%;
+    align-items: center;
+
+  }
+
+
+
+
+
+
+
 }
