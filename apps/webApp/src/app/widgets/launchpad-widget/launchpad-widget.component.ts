@@ -61,7 +61,7 @@ export class LaunchpadWidgetComponent implements OnInit {
         bgColor: "red",
         cardLabel: "AWS Cymonix Infrastructure",
         image: "assets/image/data-modelling.svg",
-        routPath: "/launchpad/dashboard"
+          routPath: "/launchpad/dashboard"
       },
         {
           bgColor: "pink",

@@ -13,21 +13,25 @@ import {
 import {CymProfileModule} from "../../../../../../common/cym-containers/cym-profile/cym-profile.module";
 import {TopToolbarComponent} from "../../../../../../common/cym-component/frames/top-toolbar/top-toolbar.component";
 import {CymInputModule} from "../../../../../../common/cym-component/form/cym-input/cym-input.module";
+import {
+    CymSecondaryToolbarModule
+} from "../../../../../../common/cym-containers/cym-secondary-toolbar/cym-secondary-toolbar.module";
 
 
 @NgModule({
   declarations: [LaunchpadWidgetComponent, TopToolbarComponent],
-  imports: [
-    CommonModule,
-    DashboardWidgetModule,
-    CymCardModule,
-    CymDivModule,
-    WidgetFrameModule,
-    CymToolbarModule,
-    CymCardDivisionModule,
-    CymProfileModule,
-    CymInputModule
-  ],
+    imports: [
+        CommonModule,
+        DashboardWidgetModule,
+        CymCardModule,
+        CymDivModule,
+        WidgetFrameModule,
+        CymToolbarModule,
+        CymCardDivisionModule,
+        CymProfileModule,
+        CymInputModule,
+        CymSecondaryToolbarModule
+    ],
     exports: [LaunchpadWidgetComponent, TopToolbarComponent]
 })
 export class LaunchpadWidgetModule { }
