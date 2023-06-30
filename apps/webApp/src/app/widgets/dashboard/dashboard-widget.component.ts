@@ -41,13 +41,16 @@ export class DashboardWidgetComponent implements OnInit {
   }
 
   refreshGraph(params: any) {
-    console.log(params)
+    console.log(params);
     // on filtering get new graph data
     this.data = null;
+    this.cym.setLoader(true);
     this.graphService.getGraphData(params).then((data) => {
       this.data = data;
       console.log(this.data)
-    }).catch(e => console.log(e))
+    }).catch(e => console.log(e)).finally(() => {
+      this.cym.setLoader(false);
+    })
   }
 
   sendLayout(layout: any) {
