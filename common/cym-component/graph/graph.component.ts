@@ -120,8 +120,8 @@ export class GraphComponents implements OnInit, OnChanges {
     this.createGraph(this.data, this.graphComponent);
     // fit the whole graph into the canvas
     setTimeout(() => {
-      this.graphComponent.zoomTo(this.graphComponent.contentRect);
-    }, 50)
+      this.fitContent();
+    }, 100)
 
     // create overview component to view and navigate the graph in graph component
     this.initializeOverviewComponent(this.graphComponent);
@@ -311,14 +311,14 @@ export class GraphComponents implements OnInit, OnChanges {
       this.overviewComponent = new GraphOverviewComponent(container, graphComponent);
     }
     this.overviewComponent.autoDrag = true;
-    this.graphComponent.zoomTo(this.graphComponent.contentRect);
+    this.fitContent()
   }
 
   private initialiseNeighbourhood() {
     const container = this.neighbour.nativeElement;
     this.neighbourComponent = new GraphComponent(container);
     this.neighbourComponent.contentRect = new Rect(0, 0, 500, 500);
-    this.neighbourComponent.zoomTo(this.neighbourComponent.contentRect);
+    this.fitContent();
   }
 
 
@@ -405,7 +405,7 @@ export class GraphComponents implements OnInit, OnChanges {
   }
 
   fitContent() {
-    ICommand.FIT_GRAPH_BOUNDS.execute(null, this.graphComponent)
+    this.graphComponent.zoomTo(this.graphComponent.contentRect);
   }
 
   // toolbar event handling
@@ -495,7 +495,7 @@ export class GraphComponents implements OnInit, OnChanges {
         this.createGraph(this.data, this.neighbourComponent);
         this.setInputMode(this.graphComponent);
         this.neighbourComponent.zoomTo(this.neighbourComponent.contentRect);
-        ICommand.FIT_GRAPH_BOUNDS.execute(null, this.graphComponent);
+        this.graphComponent.zoomTo(this.graphComponent.contentRect);
         const h = document.createElement('h1');
         h.innerHTML = `<span style="display: grid;justify-content: center">Neighbourhood</span>`
         this.graphComponent.div.append(h)
