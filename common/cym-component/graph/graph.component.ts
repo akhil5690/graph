@@ -155,7 +155,7 @@ export class GraphComponents implements OnInit, OnChanges {
       style: (data: any) => this.getNodeShape({
         fill: data.vertex_color ? data.vertex_color : "#FF9900",
         shape: 'ellipse',
-        stroke: null
+        stroke: data.Border_color
       })
       // labels: ["label"]
     });
@@ -452,16 +452,18 @@ export class GraphComponents implements OnInit, OnChanges {
       for (const neighbor of result.neighbors) {
         jsonGraph.nodes.push(neighbor?.tag)
         if (algorithm.traversalDirection === TraversalDirection.SUCCESSOR) {
-          this.graphComponent.graph.edges.filter(edge => edge.tag.target === neighbor.tag.id).forEach((edge) => {
+          this.graphComponent.graph.inEdgesAt(neighbor).forEach((edge) => {
             jsonGraph.edges.push(edge?.tag)
           })
         } else if (algorithm.traversalDirection === TraversalDirection.PREDECESSOR) {
-          this.graphComponent.graph.edges.filter(edge => edge.tag.source === neighbor.tag.id).forEach((edge) => {
+          this.graphComponent.graph.outEdgesAt(neighbor).forEach((edge) => {
             jsonGraph.edges.push(edge.tag)
           })
         } else {
-          this.graphComponent.graph.edges.filter(edge => edge.tag.source === neighbor.tag.id || edge.tag.target === neighbor.tag.id).forEach((edge) => {
-            jsonGraph.edges.push(edge.tag)
+          this.graphComponent.graph.edgesAt(node).forEach((edge) => {
+            if (jsonGraph.edges.findIndex(ele=> JSON.stringify(ele)=== JSON.stringify(edge.tag)) === -1) {
+              jsonGraph.edges.push(edge.tag)
+            }
           })
         }
       }
@@ -482,8 +484,13 @@ export class GraphComponents implements OnInit, OnChanges {
         this.createGraph(this.data, this.neighbourComponent);
         this.graphComponent.inputMode = new GraphViewerInputMode();
         this.neighbourComponent.zoomTo(this.neighbourComponent.contentRect);
-        ICommand.FIT_GRAPH_BOUNDS.execute(null, this.graphComponent)
+        ICommand.FIT_GRAPH_BOUNDS.execute(null, this.graphComponent);
+        const h = document.createElement('h1');
+        h.innerHTML = `<span style="display: grid;justify-content: center">Neighbourhood</span>`
+        this.graphComponent.div.append(h)
       } else {
+        const h = this.graphComponent.div.querySelector("h1");
+        if (h){h.remove()}
         this.createGraph(this.data, this.graphComponent);
         this.createGraph(this.originalNeighbourhood, this.neighbourComponent);
         this.setInputMode(this.graphComponent);
