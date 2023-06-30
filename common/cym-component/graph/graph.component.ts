@@ -236,12 +236,22 @@ export class GraphComponents implements OnInit, OnChanges {
 
 
   private setInputMode(graphComponent: GraphComponent) {
-    const inputMode = graphComponent.inputMode = new GraphViewerInputMode()
+    const inputMode = graphComponent.inputMode = new GraphEditorInputMode({
+      allowCreateNode: false,
+      allowCreateEdge: false,
+      allowCreateBend: false,
+      allowDuplicate: false,
+      allowGroupingOperations: false,
+      allowClipboardOperations: false,
+      allowUndoOperations: false,
+      allowEditLabelOnDoubleClick: false,
+      showHandleItems: GraphItemTypes.NONE
+    });
     this.leftClickListener(inputMode);
 
   }
 
-  private leftClickListener(inputMode: GraphViewerInputMode) {
+  private leftClickListener(inputMode: GraphViewerInputMode | GraphEditorInputMode) {
     inputMode.addItemLeftClickedListener((sender, evt) => {
       this.selectedItem = evt.item instanceof IEdge || evt.item instanceof INode ? evt.item : null;
       if (evt.item instanceof INode && !this.isFullscreen) {

@@ -714,6 +714,8 @@ export class GraphEditorComponent implements OnInit {
         this.createGraph(this.original, this.neighbourComponent);
         const inputMode = this.graphComponent.inputMode = new GraphViewerInputMode();
         this.leftClickListener(inputMode)
+        this.neighbourComponent.zoomTo(this.neighbourComponent.contentRect);
+        ICommand.FIT_GRAPH_BOUNDS.execute(null, this.graphComponent);
         const h = document.createElement('h1');
         h.innerHTML = `<span style="display: grid;justify-content: center">Neighbourhood</span>`
         this.graphComponent.div.append(h);
@@ -725,6 +727,8 @@ export class GraphEditorComponent implements OnInit {
         this.createGraph(this.iGraph, this.graphComponent);
         this.createGraph(this.originalNeighbourHood, this.neighbourComponent);
         this.setNodeInputMode()
+        this.neighbourComponent.zoomTo(this.neighbourComponent.contentRect);
+        ICommand.FIT_GRAPH_BOUNDS.execute(null, this.graphComponent);
       }
     }
   }
