@@ -26,6 +26,11 @@ const routes: Routes = [
       .then(m => m.ContainersModule)
   },
   {
+    path: 'workspace',
+    loadChildren: () => import('../../../webApp/src/app/views/pages/workspace/workspace.module')
+      .then(m => m.WorkspaceModule)
+  },
+  {
     path: '**',
     redirectTo: 'login',
     pathMatch: 'full'

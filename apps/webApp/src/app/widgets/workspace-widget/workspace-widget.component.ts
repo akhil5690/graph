@@ -1,33 +1,17 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
-import {Router} from "@angular/router";
-import {exitCodeFromResult} from "@angular/compiler-cli";
-import {CymService} from "../../../../../../common/cym-services/systemService/cymSystemService";
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'cym-launchpad-widget',
-  templateUrl: './launchpad-widget.component.html',
-  styleUrls: ['./launchpad-widget.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  selector: 'cym-workspace-widget',
+  templateUrl: './workspace-widget.component.html',
+  styleUrls: ['./workspace-widget.component.scss']
 })
-export class LaunchpadWidgetComponent implements OnInit {
-  constructor(private router: Router, private cym: CymService) {
-  }
-
-  ngOnInit() {
-    this.cym.setLoader(true);
-    setTimeout(() => {
-      this.cym.setLoader(false)
-    }, 1000);
-  }
-
-  // launchpad container
-  launchpad: any = [{
+export class WorkspaceWidgetComponent {
+  workspace: any = [{
     name: "Workspace",
-    subGroup: [{
-      bgColor: "#FFED07",
-      cardLabel: "Abhay Naveen",
-      shortText: "AN", image: null,
-      routPath: "/workspace"
+    cardDivision: [{
+      image: null,
+      subHeader1:"",
+      subHeader2:""
     },
       {
         bgColor: "#07FF6A",
@@ -79,8 +63,4 @@ export class LaunchpadWidgetComponent implements OnInit {
       },
       ],
     }]
-
-  showGraph(event: any) {
-    this.router.navigate([event]).then()
-  }
 }
