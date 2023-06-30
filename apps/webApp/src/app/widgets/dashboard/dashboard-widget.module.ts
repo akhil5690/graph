@@ -12,6 +12,7 @@ import {RightSidebarModule} from "../../../../../../common/cym-component/right-s
 import {HttpHandler} from "../../../../../../common/utils/httpHandler";
 import {TabViewModule} from "primeng/tabview";
 import {GraphEditorModule} from "../../../../../../common/cym-component/graph-editor/graph-editor.module";
+import {DialogModule} from "primeng/dialog";
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import {GraphEditorModule} from "../../../../../../common/cym-component/graph-ed
         WidgetFrameModule,
         TabViewModule,
         GraphEditorModule,
+        DialogModule,
     ],
   providers:[GraphService,HttpHandler],
   exports: [DashboardWidgetComponent]

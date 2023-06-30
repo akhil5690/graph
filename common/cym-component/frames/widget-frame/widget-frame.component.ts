@@ -54,8 +54,8 @@ export class WidgetFrameComponent implements OnInit {
         return 'frame-with-sidebar';
       case 'header-main-footer-frame':
         return 'header-main-footer-frame';
-      case 'header-main-frame ':
-        return 'header-main-frame ';
+      case 'header-main-frame':
+        return 'header-main-frame';
       case 'header-main-right-sidebar-frame':
         return 'header-main-right-sidebar-frame';
       case 'header-main-menubar-frame':

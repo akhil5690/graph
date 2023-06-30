@@ -38,7 +38,7 @@
   grid-template-rows: var(--top-toolbar-height) var(--main-no-footer);
   grid-template-areas:
       "header"
-      "main sidebar"
+      "main"
 }
 
 .header-main-right-sidebar-frame {
