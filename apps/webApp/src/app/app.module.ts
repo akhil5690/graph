@@ -6,7 +6,6 @@ import {SignInModule} from "./widgets/sign-in/sign-in.module";
 import { AuthComponent } from './views/pages/auth/auth.component';
 import { SignInComponent } from './views/pages/auth/sign-in/sign-in.component';
 import { AppRoutingModule } from './app-routing.module';
-import {WidgetFrameModule} from "../../../../common/cym-component/frames/widget-frame/widget-frame.module";
 import { DashboardComponent } from './views/pages/dashboard/dashboard.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
@@ -21,7 +20,6 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
         BrowserModule,
         SignInModule,
         AppRoutingModule,
-        WidgetFrameModule,
         BrowserAnimationsModule
     ],
     providers: [],
