@@ -184,14 +184,14 @@ export class GraphEditorComponent implements OnInit {
     this.initializeDragAndDropPanel();
   }
 
-  private leftClickListener(inputMode: GraphEditorInputMode) {
+  private leftClickListener(inputMode: GraphEditorInputMode | GraphViewerInputMode) {
     // node click listener which sends node or edge details to the sidebar
     inputMode.addItemLeftClickedListener((sender, evt) => {
       this.isItemClicked = true;
 
       this.selectedItem = evt.item instanceof IEdge || evt.item instanceof INode ? evt.item : null;
 
-      if (evt.item instanceof INode) {
+      if (evt.item instanceof INode && !this.isFullscreen) {
         this.selectedNode = evt.item;
         this.getNeighbourGraph(evt.item)
 
@@ -712,6 +712,8 @@ export class GraphEditorComponent implements OnInit {
       if (isFullscreen) {
         this.graphComponent.graph = this.neighbourComponent.graph;
         this.createGraph(this.original, this.neighbourComponent);
+        const inputMode = this.graphComponent.inputMode = new GraphViewerInputMode();
+        this.leftClickListener(inputMode)
         const h = document.createElement('h1');
         h.innerHTML = `<span style="display: grid;justify-content: center">Neighbourhood</span>`
         this.graphComponent.div.append(h);

@@ -236,28 +236,17 @@ export class GraphComponents implements OnInit, OnChanges {
 
 
   private setInputMode(graphComponent: GraphComponent) {
-    const inputMode = graphComponent.inputMode = new GraphEditorInputMode({
-      allowCreateNode: false,
-      allowCreateEdge: false,
-      allowCreateBend: false,
-      allowDuplicate: false,
-      allowGroupingOperations: false,
-      allowClipboardOperations: false,
-      allowUndoOperations: false,
-      allowEditLabelOnDoubleClick: false,
-      showHandleItems: GraphItemTypes.NONE
-    });
+    const inputMode = graphComponent.inputMode = new GraphViewerInputMode()
     this.leftClickListener(inputMode);
 
   }
 
-  private leftClickListener(inputMode: GraphEditorInputMode) {
+  private leftClickListener(inputMode: GraphViewerInputMode) {
     inputMode.addItemLeftClickedListener((sender, evt) => {
       this.selectedItem = evt.item instanceof IEdge || evt.item instanceof INode ? evt.item : null;
-      if (evt.item instanceof INode) {
+      if (evt.item instanceof INode && !this.isFullscreen) {
         this.selectedNode = evt.item;
         this.getNeighbourGraph(evt.item)
-
       }
     })
   }
@@ -461,7 +450,7 @@ export class GraphComponents implements OnInit, OnChanges {
           })
         } else {
           this.graphComponent.graph.edgesAt(node).forEach((edge) => {
-            if (jsonGraph.edges.findIndex(ele=> JSON.stringify(ele)=== JSON.stringify(edge.tag)) === -1) {
+            if (jsonGraph.edges.findIndex(ele => JSON.stringify(ele) === JSON.stringify(edge.tag)) === -1) {
               jsonGraph.edges.push(edge.tag)
             }
           })
@@ -482,7 +471,7 @@ export class GraphComponents implements OnInit, OnChanges {
       if (isFullscreen) {
         this.graphComponent.graph = this.neighbourComponent.graph;
         this.createGraph(this.data, this.neighbourComponent);
-        this.graphComponent.inputMode = new GraphViewerInputMode();
+        this.setInputMode(this.graphComponent);
         this.neighbourComponent.zoomTo(this.neighbourComponent.contentRect);
         ICommand.FIT_GRAPH_BOUNDS.execute(null, this.graphComponent);
         const h = document.createElement('h1');
@@ -490,7 +479,9 @@ export class GraphComponents implements OnInit, OnChanges {
         this.graphComponent.div.append(h)
       } else {
         const h = this.graphComponent.div.querySelector("h1");
-        if (h){h.remove()}
+        if (h) {
+          h.remove()
+        }
         this.createGraph(this.data, this.graphComponent);
         this.createGraph(this.originalNeighbourhood, this.neighbourComponent);
         this.setInputMode(this.graphComponent);
