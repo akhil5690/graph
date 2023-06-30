@@ -1,6 +1,15 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
+import {
+  ChangeDetectionStrategy, ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewEncapsulation
+} from '@angular/core';
 import {ThemeService} from "../../../cym-services/theme/theme.service";
 import {CymService} from "../../../cym-services/systemService/cymSystemService";
+import {ChangeDetection} from "@angular/cli/lib/config/workspace-schema";
 
 @Component({
   selector: 'cym-widget-frame',
@@ -17,13 +26,14 @@ export class WidgetFrameComponent implements OnInit {
   darkColors = {'text': 'white', 'bg1': 'black', 'bg2': '#3d3d3d', 'bg3': '#595959', 'color_scheme': 'dark'};
   checked!: boolean;
 
-  constructor(private themeService: ThemeService, private cymService: CymService) {
+  constructor(private themeService: ThemeService, private cymService: CymService, private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit() {
     this.isDarkTheme.emit('lightTheme');
     this.cymService.isLoading.subscribe(res => {
       this.isBlocked = res;
+      this.cdr.detectChanges();
     })
   }
 
