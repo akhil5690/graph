@@ -25,10 +25,10 @@ import {
   IEdge,
   IEdgeStyle,
   ILabelModelParameter,
-  ILabelStyle,
+  ILabelStyle, IModelItem,
   INode,
   INodeStyle,
-  InteriorLabelModel,
+  InteriorLabelModel, ItemClickedEventArgs,
   LabelCreator,
   LayoutExecutor,
   License, Neighborhood,
@@ -66,6 +66,7 @@ export class GraphComponents implements OnInit, OnChanges {
   @ViewChild('neighbour', {static: true}) neighbour!: ElementRef;
 
   @Output() refreshGraph = new EventEmitter()
+  @Output() findingsClicked = new EventEmitter()
 
 
   // graph toolbar tools
@@ -254,13 +255,24 @@ export class GraphComponents implements OnInit, OnChanges {
   private leftClickListener(inputMode: GraphViewerInputMode | GraphEditorInputMode) {
     inputMode.addItemLeftClickedListener((sender, evt) => {
       this.selectedItem = evt.item instanceof IEdge || evt.item instanceof INode ? evt.item : null;
-      if (evt.item instanceof INode && !this.isFullscreen) {
-        this.selectedNode = evt.item;
-        this.getNeighbourGraph(evt.item)
-      }
+      this.checkNeighbour(evt);
+      this.checkFindings(evt);
     })
   }
 
+  checkNeighbour(evt: ItemClickedEventArgs<IModelItem>) {
+    if (evt.item instanceof INode && !this.isFullscreen) {
+      this.selectedNode = evt.item;
+      this.getNeighbourGraph(evt.item)
+    }
+  }
+
+  checkFindings(evt: ItemClickedEventArgs<IModelItem>){
+    if (evt.item instanceof INode && evt.item.tag.findings === 'True')
+    {
+      this.findingsClicked.emit(evt.item.tag)
+    }
+  }
   private buildLayout(graphComponent: GraphComponent, layoutType: string) {
     // set layout
     const layout = this.prepareLayout(layoutType);

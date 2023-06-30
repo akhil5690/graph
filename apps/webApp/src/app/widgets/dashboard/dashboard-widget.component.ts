@@ -17,6 +17,7 @@ export class DashboardWidgetComponent implements OnInit {
   copyData: any;
   layout: any;
   schema: any;
+  popup: boolean = false;
 
   constructor(private cdr: ChangeDetectorRef, private graphService: GraphService, private router: Router, private cym: CymService) {
   }
@@ -75,5 +76,11 @@ export class DashboardWidgetComponent implements OnInit {
       this.cym.setLoader(false);
 
     })
+  }
+
+  loadFindings(findings: any) {
+    if (findings){
+      this.popup = true;
+    }
   }
 }

@@ -15,15 +15,21 @@
           <ng-template pTemplate="header">
             <span (click)="getGraphData()">EXPLORER</span>
           </ng-template>
-          <cym-graph [layout]="layout" [data]="data" (refreshGraph)="refreshGraph($event)"></cym-graph>
+          <cym-graph [layout]="layout" [data]="data" (findingsClicked)="loadFindings($event)"
+                     (refreshGraph)="refreshGraph($event)"></cym-graph>
         </p-tabPanel>
         <p-tabPanel header="Header II">
           <ng-template pTemplate="header">
-            <span >EDITOR</span>
+            <span>EDITOR</span>
           </ng-template>
           <cym-graph-editor></cym-graph-editor>
         </p-tabPanel>
       </p-tabView>
     </div>
+
+    <p-dialog [modal]="true" [(visible)]="popup" (onHide)="popup =false" class="popup">
+      <cym-graph [data]="schema"></cym-graph>
+    </p-dialog>
+
   </div>
 </cym-widget-frame>
