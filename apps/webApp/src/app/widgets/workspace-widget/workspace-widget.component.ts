@@ -7,60 +7,27 @@ import { Component } from '@angular/core';
 })
 export class WorkspaceWidgetComponent {
   workspace: any = [{
-    name: "Workspace",
+    name: "Observables",
     cardDivision: [{
-      image: null,
-      subHeader1:"",
-      subHeader2:""
-    },
-      {
-        bgColor: "#07FF6A",
-        cardLabel: "Manoj Desai",
-        shortText: "MD",
-        image: null
-      },
-      {
-        bgColor: "#FF8B07",
-        cardLabel: "Shwetha Karanth",
-        shortText: "KB",
-        image: null
-      }]
+      image: "assets/image/find_workspace.svg",
+      subHeader1:"Observables",
+      subHeader2:"No new Observables"
+    },]
   },
     {
-      name: "Data management",
-      subGroup: [{
-        bgColor: "gray",
-        cardLabel: "Modeling",
-        image: "assets/image/data-modelling.svg"
-      },
-        {
-          bgColor: "pink",
-          cardLabel: "Load Data",
-          image: "assets/image/data-transformation.svg"
-        }],
+      name: "Tasks",
+      cardDivision: [{
+        image: "assets/image/clipboard_workspace.svg",
+        subHeader1:"",
+        subHeader2:"You don't have any new tasks"
+      },]
     },
     {
-      name: "Report",
-      subGroup: [{
-        bgColor: "red",
-        cardLabel: "AWS Cymonix Infrastructure",
-        image: "assets/image/data-modelling.svg",
-        routPath: "/launchpad/dashboard"
-      },
-        {
-          bgColor: "pink",
-          cardLabel: "ARMS",
-          image: "assets/image/data-modelling.svg"
-        },
-      ],
-    }, {
-      name: "Settings",
-      subGroup: [{
-        bgColor: "red",
-        cardLabel: "Add User",
-        image: "assets/image/add-user.svg",
-        routPath: "/container"
-      },
-      ],
+      name: "Shared with Me",
+      cardDivision: [{
+        image:  "assets/image/folder_workspace.svg",
+        subHeader1: "",
+        subHeader2: "No files shared with you yet"
+      },],
     }]
 }

@@ -6,9 +6,9 @@ cym-graph-editor {
   }
 
   #overview, #neighbour {
-    width: 150px;
-    height: 150px;
-    background-color: var(--third-background-color);
+    width: 175px;
+    height: 175px;
+    background-color: var(--primary-background-color);
   }
 
   .neighbour {
@@ -19,7 +19,7 @@ cym-graph-editor {
   .header {
     font-weight: var(--font-weight-bold);
     font-size: medium;
-    background: var(--theme-color-one);
+    background: var(--primary-color);
     padding: 1rem;
     color: var(--primary-color-text);
     display: flex;

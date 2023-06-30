@@ -10,7 +10,7 @@ export class GraphService {
 
   getSchemaData(params:any): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.http.getData('https://4exhzxr9jd.execute-api.us-east-1.amazonaws.com/Stage/GetSchemaAPI').then((data)=>{
+      this.http.getData('https://4exhzxr9jd.execute-api.us-east-1.amazonaws.com/Stage/GetSchemaAP').then((data)=>{
         resolve(data)
       }).catch((e)=>reject(e))
     })

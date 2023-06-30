@@ -1,16 +1,14 @@
 <cym-widget-frame [frame_type]="'header-main-footer-frame'">
-
   <cym-top-toolbar header></cym-top-toolbar>
-  <cym-div main [cymClass]="'workstation'">
-
-    <cym-div>
-
-    </cym-div>
-    <cym-div >
-
-    </cym-div>
-
+  <cym-div main>
+    <cym-workspace-card *ngFor="let tool of workspace">
+      <cym-div header>{{tool.name}}</cym-div>
+      <cym-div card-content>
+        <cym-workspace-card-division *ngFor="let sub of tool.cardDivision"
+                                     [workspaceCardDetails]="sub">
+        </cym-workspace-card-division>
+      </cym-div>
+    </cym-workspace-card>
   </cym-div>
-  <cym-div footer>Copyright</cym-div>
+  <
 </cym-widget-frame>
-

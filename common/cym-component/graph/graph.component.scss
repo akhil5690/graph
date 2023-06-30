@@ -1,6 +1,4 @@
 cym-graph {
-
-
   .overview {
     position: absolute;
     top: 30px;
@@ -23,7 +21,8 @@ cym-graph {
     background: (var(--theme-color-one));
     padding: 1rem;
     color: var(--primary-color-text);
-    text-align: center;
+    display: flex;
+    gap: var(--unit)
   }
 
   .hide {
@@ -64,14 +63,16 @@ cym-graph {
     cursor: pointer;
   }
 
-  .graph-container{
+  .graph-container {
     display: flex;
   }
-  .graph-sidebar{
+
+  .graph-sidebar {
     height: 85vh;
     width: 80vw;
   }
-  .graph{
+
+  .graph {
     height: 85vh;
     width: 100vw;
   }

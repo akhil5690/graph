@@ -5,11 +5,13 @@ import {HttpHandler} from "../../../../../../common/utils/httpHandler";
 import {WorkspaceWidgetComponent} from "./workspace-widget.component";
 import {WidgetFrameModule} from "../../../../../../common/cym-component/frames/widget-frame/widget-frame.module";
 import {LaunchpadWidgetModule} from "../launchpad-widget/launchpad-widget.module";
-import {CymCardModule} from "../../../../../../common/cym-containers/cym-card/cym-card.module";
 import {CymDivModule} from "../../../../../../common/cym-containers/cym-div/cym-div.module";
 import {
-  CymCardDivisionModule
-} from "../../../../../../common/cym-containers/cym-card-division/cym-card-division.module";
+  CymWorkspaceCardModule
+} from "../../../../../../common/cym-containers/cym-workspace-card/cym-workspace-card.module";
+import {
+  CymWorkspaceCardDivisionModule
+} from "../../../../../../common/cym-containers/cym-workspace-card-division/cym-workspace-card-division.module";
 
 
 @NgModule({
@@ -18,9 +20,9 @@ import {
     CommonModule,
     WidgetFrameModule,
     LaunchpadWidgetModule,
-    CymCardModule,
     CymDivModule,
-    CymCardDivisionModule,
+    CymWorkspaceCardModule,
+    CymWorkspaceCardDivisionModule,
   ],
   providers:[GraphService,HttpHandler],
   exports: [WorkspaceWidgetComponent]
