@@ -10,6 +10,7 @@ cym-top-toolbar {
     gap: var(--unit);
     width: var(--base-width);
     background-color: var(--theme-color-one);
+
   }
 
   .menu {
@@ -29,6 +30,10 @@ cym-top-toolbar {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     text-align:right;
+  }
+
+  .three>cym-div{
+    padding:1rem;
   }
 
 
