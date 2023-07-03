@@ -28,7 +28,7 @@
     </div>
 
     <p-dialog [modal]="true" *ngIf="openFindingsPopup" [(visible)]="openFindingsPopup" (onHide)="openFindingsPopup =false" class="popup">
-      <cym-graph [data]="explorer"></cym-graph>
+      <cym-graph [data]="findingsGraph"></cym-graph>
     </p-dialog>
 
   </div>
