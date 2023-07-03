@@ -13,23 +13,25 @@ import {HttpHandler} from "../../../../../../common/utils/httpHandler";
 import {TabViewModule} from "primeng/tabview";
 import {GraphEditorModule} from "../../../../../../common/cym-component/graph-editor/graph-editor.module";
 import {DialogModule} from "primeng/dialog";
+import {ToastModule} from "primeng/toast";
 
 
 @NgModule({
   declarations: [DashboardWidgetComponent],
-    imports: [
-        CommonModule,
-        InputTextModule,
-        ButtonModule,
-        SignInModule,
-        GraphModule,
-        RightSidebarModule,
-        HttpClientModule,
-        WidgetFrameModule,
-        TabViewModule,
-        GraphEditorModule,
-        DialogModule,
-    ],
+  imports: [
+    CommonModule,
+    InputTextModule,
+    ButtonModule,
+    SignInModule,
+    GraphModule,
+    RightSidebarModule,
+    HttpClientModule,
+    WidgetFrameModule,
+    TabViewModule,
+    GraphEditorModule,
+    DialogModule,
+    ToastModule,
+  ],
   providers:[GraphService,HttpHandler],
   exports: [DashboardWidgetComponent]
 })
