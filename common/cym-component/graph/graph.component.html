@@ -1,5 +1,5 @@
-<div class="main">
-  <div class="top-toolbar">
+<div class="graph-main">
+  <div class="graph-toolbar">
     <div *ngFor="let tool of toolBarItems">
       <div (click)="clickEvent(tool)" class="tools">
         <img [src]="tool.icon" [alt]="tool.toolName" height="20" width="20">
@@ -19,7 +19,7 @@
   </cym-overview>
   <div class="neighbour">
     <div class="container">
-      <div class="header">
+      <div class="panel-header">
         <p-dropdown [options]="neighboursOptions" [(ngModel)]="selectedNeighbour"
                     (ngModelChange)="getNeighbourGraph(selectedNode)" optionLabel="name"
                     optionValue="value"></p-dropdown>

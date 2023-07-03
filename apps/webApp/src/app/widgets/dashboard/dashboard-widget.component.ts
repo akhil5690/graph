@@ -18,6 +18,7 @@ export class DashboardWidgetComponent implements OnInit {
   layout: any;
   schema: any;
   openFindingsPopup: boolean = false;
+  findingsGraph: any;
 
   constructor(private cdr: ChangeDetectorRef, private graphService: GraphService, private router: Router, private cym: CymService) {
   }
@@ -61,6 +62,12 @@ export class DashboardWidgetComponent implements OnInit {
     // for opening findings pop up and show graph
     if (findings){
       this.openFindingsPopup = true;
+      this.cym.setLoader(true);
+      this.graphService.getGraphData({filter: false,property:'~id',value:findings.id,getFinding:true}).then((data) => {
+        this.findingsGraph = data;
+      }).catch(e => console.log(e)).finally(() => {
+        this.cym.setLoader(false);
+      })
     }
   }
 }
