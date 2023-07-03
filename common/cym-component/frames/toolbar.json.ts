@@ -32,6 +32,14 @@ export const toolbar = [{
     "height": "7.32",
     "width": "12.9"
   },
+  {
+    "url": "../../../../assets/image/Component_sk.svg",
+    "position": "top",
+    "type": "image",
+    "sector": "3",
+    "height": "24",
+    "width": "24"
+  },
 
   {
     "url": "../../../../assets/image/building.svg",
