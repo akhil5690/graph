@@ -1,7 +1,7 @@
 cym-top-toolbar {
   .container {
     display: grid;
-    grid-template-columns: var(--sidebar-width) 3fr auto auto;
+    grid-template-columns: var(--sidebar-width) 3fr auto  auto;
     align-content: center;
     align-items: center;
     padding: var(--unit);
@@ -10,6 +10,7 @@ cym-top-toolbar {
     gap: var(--unit);
     width: var(--base-width);
     background-color: var(--theme-color-one);
+
   }
 
   .menu {
@@ -21,15 +22,20 @@ cym-top-toolbar {
   .other-options {
     display: flex;
     gap: var(--border-radius);
-    color: var(--primary-color-text)
+    color: var(--primary-color-text);
+    align-items:center;
 
   }
 
   .three{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    text-align:right;
+    grid-template-columns: repeat(4, 1fr);
+    text-align:center;
+    align-items:center;
+
   }
+
+
 
 
 
