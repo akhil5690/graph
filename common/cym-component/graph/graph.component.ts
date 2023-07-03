@@ -495,7 +495,7 @@ export class GraphComponents implements OnInit, OnChanges {
         this.createGraph(this.data, this.neighbourComponent);
         this.setInputMode(this.graphComponent);
         this.neighbourComponent.zoomTo(this.neighbourComponent.contentRect);
-        this.graphComponent.zoomTo(this.graphComponent.contentRect);
+        ICommand.FIT_GRAPH_BOUNDS.execute(null, this.graphComponent);
         const h = document.createElement('h1');
         h.innerHTML = `<span style="display: grid;justify-content: center">Neighbourhood</span>`
         this.graphComponent.div.append(h)
