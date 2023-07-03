@@ -36,6 +36,10 @@
   width: 100vw;
 }
 
+#graphComponent{
+  background-color:var(--main-bg-color)
+}
+
 .panel-header {
   font-weight: var(--font-weight-bold);
   font-size: medium;
