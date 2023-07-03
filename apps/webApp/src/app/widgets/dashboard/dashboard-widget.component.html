@@ -27,7 +27,7 @@
       </p-tabView>
     </div>
 
-    <p-dialog [modal]="true" [(visible)]="openFindingsPopup" (onHide)="openFindingsPopup =false" class="popup">
+    <p-dialog [modal]="true" *ngIf="openFindingsPopup" [(visible)]="openFindingsPopup" (onHide)="openFindingsPopup =false" class="popup">
       <cym-graph [data]="explorer"></cym-graph>
     </p-dialog>
 
