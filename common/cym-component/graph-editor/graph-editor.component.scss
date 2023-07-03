@@ -1,32 +1,4 @@
 cym-graph-editor {
-    .header {
-    font-weight: var(--font-weight-bold);
-    font-size: medium;
-    background: var(--primary-color);
-    padding: 1rem;
-    color: var(--primary-color-text);
-    display: flex;
-    gap: var(--unit);
-    text-align:center;
-  }
-
-  .main {
-    position: relative;
-  }
-
-  .top-toolbar {
-    position: relative;
-    top: 0;
-    bottom: 0;
-    height: var(--graph-top-toolbar-height);
-    width: 100%;
-    background-color: var(--theme-color-one);
-    display: inline-flex;
-    align-items: center;
-    padding: var(--unit);
-    gap: var(--unit);
-    color: var(--primary-color-text);
-  }
 
   div#drag-and-drop-panel {
     width: 20vw;
