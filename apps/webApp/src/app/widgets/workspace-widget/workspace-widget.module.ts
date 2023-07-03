@@ -12,18 +12,20 @@ import {
 import {
   CymWorkspaceCardDivisionModule
 } from "../../../../../../common/cym-containers/cym-workspace-card-division/cym-workspace-card-division.module";
+import {SignInModule} from "../sign-in/sign-in.module";
 
 
 @NgModule({
   declarations: [WorkspaceWidgetComponent],
-  imports: [
-    CommonModule,
-    WidgetFrameModule,
-    LaunchpadWidgetModule,
-    CymDivModule,
-    CymWorkspaceCardModule,
-    CymWorkspaceCardDivisionModule,
-  ],
+    imports: [
+        CommonModule,
+        WidgetFrameModule,
+        LaunchpadWidgetModule,
+        CymDivModule,
+        CymWorkspaceCardModule,
+        CymWorkspaceCardDivisionModule,
+        SignInModule,
+    ],
   providers:[GraphService,HttpHandler],
   exports: [WorkspaceWidgetComponent]
 })
