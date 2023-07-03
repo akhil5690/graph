@@ -16,15 +16,14 @@ cym-workspace-widget{
     text-align: center;
   }
 
-.subheader1{
-  font-size: var(--font24);
-  padding: var(--unit);
-  color: var(--icon-grey) ;
-}
+  .create-workspace {
+    display: grid;
+   padding: 1rem 2rem 1rem 2rem ;
 
- .create-workspace{
-   margin-top:  var(--unit) ;
- }
+
+  }
+
+
 
 
   .section2{
