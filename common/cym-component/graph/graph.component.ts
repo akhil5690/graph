@@ -199,10 +199,10 @@ export class GraphComponents implements OnInit, OnChanges {
       }));
     const findingIcon = nodesSource.nodeCreator.createLabelBinding();
     // null check
-    findingIcon.textProvider = node => (node.findings_icon != null ? '' : null)
+    findingIcon.textProvider = node => (node.findingsUrl != null ? '' : null)
     findingIcon.styleProvider = node =>
       (new IconLabelStyle({
-        icon: node.findings_icon,
+        icon: node.findingsUrl,
         iconSize: new Size(10, 10),
       }));
     findingIcon.defaults.layoutParameter = InteriorLabelModel.NORTH_EAST
@@ -495,10 +495,7 @@ export class GraphComponents implements OnInit, OnChanges {
         this.createGraph(this.data, this.neighbourComponent);
         this.setInputMode(this.graphComponent);
         this.neighbourComponent.zoomTo(this.neighbourComponent.contentRect);
-        this.graphComponent.zoomTo(this.graphComponent.contentRect);
-        const h = document.createElement('h1');
-        h.innerHTML = `<span style="display: grid;justify-content: center">Neighbourhood</span>`
-        this.graphComponent.div.append(h)
+        ICommand.FIT_GRAPH_BOUNDS.execute(null, this.graphComponent);
       } else {
         const h = this.graphComponent.div.querySelector("h1");
         if (h) {

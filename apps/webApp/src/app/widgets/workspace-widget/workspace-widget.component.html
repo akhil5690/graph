@@ -7,6 +7,9 @@
         <cym-div card-content >
           <cym-workspace-card-division *ngFor="let sub of tool.cardDivision" [workspaceCardDetails]="sub">
           </cym-workspace-card-division>
+          <div>
+            <cym-button [label]="'Create Wokspace'" [class]="'solid-button'"></cym-button>
+          </div>
         </cym-div>
       </cym-workspace-card>
 

@@ -5,12 +5,11 @@
   <div>
 
   </div>
-  <!--  {{cardDetails.image | json}}-->
   <div class="box-color" [ngStyle]="{background: cardDetails.bgColor}" *ngIf="cardDetails?.image === null">
     <span>{{getAbbrevation(cardDetails.cardLabel)}}</span>
   </div>
   <img [src]="cardDetails?.image" alt="">
-  <div>
+  <div *ngIf="cardDetails.cardcardLabel!==null">
     {{cardDetails.cardLabel}}
   </div>
 </div>
