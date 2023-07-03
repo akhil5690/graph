@@ -199,10 +199,10 @@ export class GraphComponents implements OnInit, OnChanges {
       }));
     const findingIcon = nodesSource.nodeCreator.createLabelBinding();
     // null check
-    findingIcon.textProvider = node => (node.findings_icon != null ? '' : null)
+    findingIcon.textProvider = node => (node.findingsUrl != null ? '' : null)
     findingIcon.styleProvider = node =>
       (new IconLabelStyle({
-        icon: node.findings_icon,
+        icon: node.findingsUrl,
         iconSize: new Size(10, 10),
       }));
     findingIcon.defaults.layoutParameter = InteriorLabelModel.NORTH_EAST
