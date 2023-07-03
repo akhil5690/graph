@@ -11,18 +11,11 @@ cym-workspace-widget{
   .section1{
     display:grid;
     grid-template-columns: 1fr;
-    align-items: center;
     text-align: center;
-    background-color:var(--primary-background-color)
+    height: calc(var(--unit) *45);
+    align-items: center;
   }
 
-  .section11{
-    align-items:center;
-  }
-
-  .section1111{
-    height: 44.5rem;
-  }
 
 
   .section2{
@@ -30,34 +23,34 @@ cym-workspace-widget{
     grid-template-rows: repeat(auto-fill, auto) ;
     text-align: center;
     justify-content: center;
-    grid-gap: 1rem;
+    grid-gap: var(--unit);
     height:100%;
     width: 100%;
 
   }
 
-  .section22{
+  .section2-card{
     display: grid;
     grid-template-rows: auto auto ;
     text-align: center;
     justify-content: center;
 
     height:100%;
-    width: 50rem;
+    width: calc(var(--unit) *50);
     align-items: center;
     background-color:var(--primary-background-color)
 
   }
 
-  .section-head{
+  .section2-head{
     text-align:left;
     padding-left:var(--unit);
 
   }
 
-  .section2222{
-    width: 50rem;
-    height:10rem;
+  .section2-division{
+    width: calc(var(--unit) *50);
+    height:calc(var(--unit) *10);
   }
 
 

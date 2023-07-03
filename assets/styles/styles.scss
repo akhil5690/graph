@@ -85,7 +85,7 @@ label {
   column-gap:var(--unit);
 }
 
-.launcpad-cards {
+.launchpad-cards {
   display: grid;
   height: var(--card-height);
   background: #FFFFFF 0% 0% no-repeat padding-box;
@@ -147,7 +147,7 @@ label {
   border-width: 0 0 2px 0;
   /* border-color: transparent transparent #dee2e6 transparent; */
   padding: 1.25rem;
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   border-top-right-radius: 0;
   border-top-left-radius: 0;
   transition: box-shadow 0.2s;

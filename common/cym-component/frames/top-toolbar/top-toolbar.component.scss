@@ -1,7 +1,7 @@
 cym-top-toolbar {
   .container {
     display: grid;
-    grid-template-columns: var(--sidebar-width) 3fr 1fr auto;
+    grid-template-columns: var(--sidebar-width) 3fr auto auto;
     align-content: center;
     align-items: center;
     padding: var(--unit);
