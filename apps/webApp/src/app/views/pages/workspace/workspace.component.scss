@@ -16,12 +16,20 @@ cym-workspace-widget{
     text-align: center;
   }
 
+.subheader1{
+  font-size: calc(var(--unit)*2);
+  padding-bottom: var(--unit);
+}
+
+ .create-workspace{
+   margin-top:  var(--unit) ;
+ }
 
 
   .section2{
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 2fr 3fr 2fr ;
+    grid-template-rows: 3fr 4fr 3fr ;
     text-align: center;
     justify-content: center;
     grid-gap: var(--unit);
