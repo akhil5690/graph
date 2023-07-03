@@ -1,22 +1,5 @@
 cym-graph-editor {
-
-  .overview {
-    position: absolute;
-    top: 30px;
-  }
-
-  #overview, #neighbour {
-    width: 175px;
-    height: 175px;
-    background-color: var(--primary-background-color);
-  }
-
-  .neighbour {
-    position: absolute;
-    top: 250px;
-  }
-
-  .header {
+    .header {
     font-weight: var(--font-weight-bold);
     font-size: medium;
     background: var(--primary-color);
@@ -25,10 +8,6 @@ cym-graph-editor {
     display: flex;
     gap: var(--unit);
     text-align:center;
-  }
-
-  .hide {
-    display: none;
   }
 
   .main {
@@ -47,24 +26,6 @@ cym-graph-editor {
     padding: var(--unit);
     gap: var(--unit);
     color: var(--primary-color-text);
-  }
-
-  .tools {
-    cursor: pointer;
-  }
-
-  .graph-container {
-    display: flex;
-  }
-
-  .graph-sidebar {
-    height: 85vh;
-    width: 75vw;
-  }
-
-  .graph {
-    height: 85vh;
-    width: 100vw;
   }
 
   div#drag-and-drop-panel {

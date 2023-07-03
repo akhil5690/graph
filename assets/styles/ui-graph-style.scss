@@ -1,0 +1,37 @@
+.overview {
+  position: absolute;
+  top: 30px;
+}
+
+#overview, #neighbour {
+  width: 175px;
+  height: 175px;
+  background-color: var(--primary-background-color);
+}
+
+.neighbour {
+  position: absolute;
+  top: 250px;
+}
+
+.hide {
+  display: none;
+}
+
+.tools {
+  cursor: pointer;
+}
+
+.graph-container {
+  display: flex;
+}
+
+.graph-sidebar {
+  height: 85vh;
+  width: 75vw;
+}
+
+.graph {
+  height: 85vh;
+  width: 100vw;
+}
