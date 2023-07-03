@@ -19,6 +19,7 @@ export class DashboardWidgetComponent implements OnInit {
   schema: any;
   openFindingsPopup: boolean = false;
   findingsGraph: any;
+  selectedFindings: any;
 
   constructor(private cdr: ChangeDetectorRef, private graphService: GraphService, private router: Router, private cym: CymService) {
   }
@@ -59,6 +60,7 @@ export class DashboardWidgetComponent implements OnInit {
   }
 
   loadFindings(findings: any) {
+    this.selectedFindings = findings;
     // for opening findings pop up and show graph
     if (findings){
       this.openFindingsPopup = true;

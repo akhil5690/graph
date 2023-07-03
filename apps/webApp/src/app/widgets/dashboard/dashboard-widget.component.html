@@ -28,6 +28,9 @@
     </div>
 
     <p-dialog [modal]="true" *ngIf="openFindingsPopup" [(visible)]="openFindingsPopup" (onHide)="openFindingsPopup =false" class="popup">
+      <ng-template pTemplate="header">
+        <span class="subtitle">Findings for: {{selectedFindings.label}}</span>
+      </ng-template>
       <cym-graph [data]="findingsGraph"></cym-graph>
     </p-dialog>
 
