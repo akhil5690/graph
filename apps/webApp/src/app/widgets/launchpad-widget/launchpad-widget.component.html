@@ -8,8 +8,10 @@
   <cym-div main>
     <cym-secondary-toolbar></cym-secondary-toolbar>
     <cym-div [cymClass]="'card-main'">
-      <cym-card *ngFor="let tool of launchpad" [cymClass]="'header-content-divs'">
-        <cym-div header>{{tool.name}}</cym-div>
+      <cym-card *ngFor="let tool of launchpad" >
+        <cym-div header>{{tool.name}}
+        <cym-div>{{tool.description}}</cym-div>
+        </cym-div>
         <cym-div card-content [cymClass]="'card-divisions'">
           <cym-card-division *ngFor="let sub of tool.subGroup;index as i" [cymClass]="'launchpad-cards'"
                              [cardDetails]="sub"

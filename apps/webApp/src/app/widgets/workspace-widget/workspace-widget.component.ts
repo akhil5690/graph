@@ -17,7 +17,6 @@ export class WorkspaceWidgetComponent {
       name: "Tasks",
       cardDivision: [{
         image: "assets/image/clipboard_workspace.svg",
-
         subHeader2: "You don't have any new tasks"
       },]
     },
@@ -37,6 +36,36 @@ export class WorkspaceWidgetComponent {
       subHeader1: "No Workspace created or shared yet",
       subHeader2: "Create your first workspace here!"
     }],
+  }]
+  myWorkspace: any = [{
+    name: "My Workspace",
+    cardDivision: [{
+      image: null,
+      subHeader1: "Operations Management",
+      subHeader2: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no"
+    }, {
+      image: null,
+      subHeader1: "Human Resources",
+      subHeader2: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no"
+    },
+      {
+        image: null,
+        subHeader1: "Supply Chain Management",
+        subHeader2: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no"
+      }]
+  }]
+
+  sharedWorkspace: any = [{
+    name: "My Workspace",
+    cardDivision: [{
+      image: null,
+      subHeader1: "Sales Department",
+      subHeader2: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no"
+    }, {
+      image: null,
+      subHeader1: "Cloud Computing",
+      subHeader2: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no"
+    }]
   }]
 }
 

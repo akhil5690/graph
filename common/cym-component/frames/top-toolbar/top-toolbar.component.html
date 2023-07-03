@@ -2,6 +2,7 @@
   <div class="brand-logo" *ngFor="let item of sector1">
     <img [src]="item.url" alt="logo" [height]="item.height" [width]="item.width">
   </div>
+  <img src="assets/image/Line_top_toolbar.svg" alt="">
   <div class="menu">
     <div *ngFor="let item of sector2">{{item.name}}</div>
   </div>
@@ -11,9 +12,10 @@
         <!--      <cym-input *ngIf="item.type === 'searchBox'"></cym-input>-->
     </div>
   </div>
+  <img src="assets/image/Line_top_toolbar.svg" alt="">
   <div class="other-options">
     <img *ngFor="let item of sector4" [src]="item.url"
-         [height]="item.height" [width]="item.width"> Org name
+         [height]="item.height" [width]="item.width" alt=""> Org name
   </div>
 </div>
 

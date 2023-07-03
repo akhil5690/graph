@@ -22,61 +22,60 @@ export class LaunchpadWidgetComponent implements OnInit {
 
   // launchpad container
   launchpad: any = [{
-    name: "Workspace",
+    name: "Data management",
     subGroup: [{
-      bgColor: "#FFED07",
-      cardLabel: "Abhay Naveen",
-      shortText: "AN", image: null,
-      routPath: "/workspace"
+      cardLabel: "Modeling",
+      image: "assets/image/data-modelling.svg"
     },
       {
-        bgColor: "#07FF6A",
-        cardLabel: "Manoj Desai",
-        shortText: "MD",
-        image: null
+        cardLabel: "Load Data",
+        image: "assets/image/data-transformation.svg"
       },
       {
-        bgColor: "#FF8B07",
-        cardLabel: "Shwetha Karanth",
-        shortText: "KB",
-        image: null
-      }]
+        cardLabel: "Data Catalog",
+        image: "assets/image/Data Catalog.svg"
+      }, {
+        cardLabel: "Data Sources",
+        image: "assets/image/Data Sources.svg"
+      }, {
+        cardLabel: "Data Pipelines",
+        image: "assets/image/Data Pipelines.svg"
+      }, {
+        cardLabel: "Queries",
+        image: "assets/image/Queries.svg"
+      }],
   },
-    {
-      name: "Data management",
-      subGroup: [{
-        bgColor: "gray",
-        cardLabel: "Modeling",
-        image: "assets/image/data-modelling.svg"
-      },
-        {
-          bgColor: "pink",
-          cardLabel: "Load Data",
-          image: "assets/image/data-transformation.svg"
-        }],
-    },
     {
       name: "Report",
       subGroup: [{
-        bgColor: "red",
-        cardLabel: "AWS Cymonix Infrastructure",
+        cardLabel: "Cymonix IQ Infrastructure",
         image: "assets/image/data-modelling.svg",
-          routPath: "/launchpad/dashboard"
+        routPath: "/launchpad/dashboard"
       },
         {
-          bgColor: "pink",
-          cardLabel: "ARMS",
+          cardLabel: "UAG Armis",
           image: "assets/image/data-modelling.svg"
         },
       ],
+    },
+    {
+      name: "BOTs",
+      description: "There are no BOTs configured or running"
     }, {
       name: "Settings",
       subGroup: [{
-        bgColor: "red",
         cardLabel: "Add User",
         image: "assets/image/add-user.svg",
         routPath: "/container"
       },
+        {
+          cardLabel: "Organisation Settings",
+          image: "assets/image/Organisation Settings.svg",
+        },
+        {
+          cardLabel: "Account Management",
+          image: "assets/image/Account Management.svg",
+        }
       ],
     }]
 
