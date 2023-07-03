@@ -13,11 +13,13 @@
   --secondary-background-color: #e7e7e7;
   --border-radius: calc(var(--unit) / 2);
   --grey-color:  #e6e6e6;
+  --icon-grey:#585858;
   --dark-grey-color: #727272;
   --font-weight-normal: 400;
   --font-weight-bold: 600;
   --font-weight-bolder: 1000;
   --unit: 1rem;
+
   --base-height:100%;
   --base-width: 100%;
   --font-size: var(--unit);
@@ -45,4 +47,6 @@
 
   --vertical-cards-loop: calc(var(--unit)*16);
   --card-height: calc(var(--unit)*12);
+
+  --font24 : 1.7rem;
 }

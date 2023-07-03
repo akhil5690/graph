@@ -17,8 +17,9 @@ cym-workspace-widget{
   }
 
 .subheader1{
-  font-size: calc(var(--unit)*2);
-  padding-bottom: var(--unit);
+  font-size: var(--font24);
+  padding: var(--unit);
+  color: var(--icon-grey) ;
 }
 
  .create-workspace{
