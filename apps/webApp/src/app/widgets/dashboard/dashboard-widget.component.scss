@@ -1,14 +1,21 @@
-.schema-toolbar {
-  height: 3rem;
-  width: 100%;
 
-}
-.p-dialog {
-  display: flex;
-  flex-direction: column;
-  pointer-events: auto;
-  max-height: 90%;
-  width: 100rem;
-  transform: scale(1);
-  position: relative;
+cym-dashboard-widget {
+  .schema-toolbar {
+    height: 3rem;
+    width: 100%;
+
+  }
+
+  .popup {
+    .p-dialog {
+      display: flex;
+      flex-direction: column;
+      pointer-events: auto;
+      max-height: 100%;
+      width: 100vw;
+      transform: scale(1);
+      position: relative;
+    }
+  }
+
 }
