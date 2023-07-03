@@ -65,7 +65,7 @@ export class DashboardWidgetComponent implements OnInit {
     if (findings){
       this.openFindingsPopup = true;
       this.cym.setLoader(true);
-      this.graphService.getGraphData({filter: false,property:'~id',value:findings.id,getFinding:true}).then((data) => {
+      this.graphService.getGraphData({filter: false,property:'~id',value:findings.id,getFindings:true}).then((data) => {
         this.findingsGraph = data;
       }).catch(e => console.log(e)).finally(() => {
         this.cym.setLoader(false);
