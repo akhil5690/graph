@@ -32,7 +32,11 @@ export class DashboardWidgetComponent implements OnInit {
 
   getGraphData() {
     this.cym.setLoader(true);
-    this.graphService.getGraphData({filter: false}).then((data) => {
+    this.graphService.getGraphData({
+      "filter": false,
+      "property": "~id",
+      "value": "806000659309"
+    }).then((data) => {
       this.explorer = data;
       this.copyData = data;// for creating the filter
     }).catch(e => {
