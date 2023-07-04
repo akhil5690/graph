@@ -72,12 +72,6 @@ label {
   //align-items: center;
 }
 
-.header-content{
-  display: grid;
-  grid-gap: var(--grid-gap);
-}
-
-
 
 .card-header{
   display:grid;
@@ -87,7 +81,10 @@ label {
   align-items:center
 }
 
-
+.header-content{
+  display: grid;
+  grid-gap: var(--grid-gap);
+}
 
 
 //.header-content-divs {
@@ -104,6 +101,8 @@ label {
   column-gap:var(--unit);
 
 }
+
+
 
 .launchpad-cards {
   display: grid;

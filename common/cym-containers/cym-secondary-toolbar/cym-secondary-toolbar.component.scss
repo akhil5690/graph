@@ -21,17 +21,12 @@ cym-secondary-toolbar {
     gap: calc(var(--grip-gap)/2);
   }
 
-  .breadstar{
-    display: grid;
-    grid-template-columns: 3fr 1fr auto;
-  }
 
   .horizontal{
     display: grid;
     grid-template-columns: auto auto;
     gap:calc(var(--unit)/3);
   }
-
 
   .other-options {
     display: grid;
@@ -45,5 +40,7 @@ cym-secondary-toolbar {
     border: none;
   }
 }
+
+
 
 
