@@ -96,7 +96,7 @@ export class GraphEditorComponent implements OnInit {
 
   ]
   selectedItem: any;
-  isItemClicked!: boolean;
+  showDetails!: boolean;
   iGraph: any = {};
   private nodeSelection: any;
   private edgeSelection: any;
@@ -187,7 +187,7 @@ export class GraphEditorComponent implements OnInit {
   private leftClickListener(inputMode: GraphEditorInputMode | GraphViewerInputMode) {
     // node click listener which sends node or edge details to the sidebar
     inputMode.addItemLeftClickedListener((sender, evt) => {
-      this.isItemClicked = true;
+      this.showDetails = true;
 
       this.selectedItem = evt.item instanceof IEdge || evt.item instanceof INode ? evt.item : null;
 
@@ -710,6 +710,7 @@ export class GraphEditorComponent implements OnInit {
     if (this.neighbourComponent.graph.nodes.size > 0) {
       this.isFullscreen = isFullscreen;
       if (isFullscreen) {
+        this.showDetails = false
         this.graphComponent.graph = this.neighbourComponent.graph;
         this.createGraph(this.original, this.neighbourComponent);
         const inputMode = this.graphComponent.inputMode = new GraphViewerInputMode();

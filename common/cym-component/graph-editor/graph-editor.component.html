@@ -9,7 +9,7 @@
   <div class="graph-container">
     <div id="graphComponent" #graphContainer [ngClass]="this.isFilterOpen?'graph-sidebar':'graph'">
     </div>
-    <cym-right-sidebar [type]="'editor'" [isItemClicked]="isItemClicked" [details]="selectedItem"
+    <cym-right-sidebar [type]="'editor'" [showDetails]="showDetails" [details]="selectedItem"
                        (edgeNodeProperty)="changeEdgeNode($event)" (isRightSidebarOpen)="setFrame($event)">
       <div id="drag-and-drop-panel" panel #panel></div>
     </cym-right-sidebar>

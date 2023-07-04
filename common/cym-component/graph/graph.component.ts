@@ -91,7 +91,8 @@ export class GraphComponents implements OnInit, OnChanges {
   selectedNode!: INode;
   selectedNeighbour: any;
   isFullscreen: boolean = false;
-  private originalNeighbourhood: any;
+  originalNeighbourhood: any;
+  showDetails!: boolean;
 
   constructor(private cdr: ChangeDetectorRef) {
   }
@@ -255,6 +256,7 @@ export class GraphComponents implements OnInit, OnChanges {
   private leftClickListener(inputMode: GraphViewerInputMode | GraphEditorInputMode) {
     inputMode.addItemLeftClickedListener((sender, evt) => {
       this.selectedItem = evt.item instanceof IEdge || evt.item instanceof INode ? evt.item : null;
+      this.showDetails = true;
       this.checkNeighbour(evt);
       this.checkFindings(evt);
     })
@@ -496,11 +498,8 @@ export class GraphComponents implements OnInit, OnChanges {
         this.setInputMode(this.graphComponent);
         this.neighbourComponent.zoomTo(this.neighbourComponent.contentRect);
         ICommand.FIT_GRAPH_BOUNDS.execute(null, this.graphComponent);
+        this.showDetails = false;
       } else {
-        const h = this.graphComponent.div.querySelector("h1");
-        if (h) {
-          h.remove()
-        }
         this.createGraph(this.data, this.graphComponent);
         this.createGraph(this.originalNeighbourhood, this.neighbourComponent);
         this.setInputMode(this.graphComponent);

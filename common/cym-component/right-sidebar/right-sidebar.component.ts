@@ -16,7 +16,7 @@ export class RightSidebarComponent implements OnChanges, OnInit {
 
   @Input() details: any;
   @Input() data: any;
-  @Input() isItemClicked: any;
+  @Input() showDetails: any;
   @Input() type: any;
   // data = data;
   @Input() filterOptions: any;
@@ -64,7 +64,7 @@ export class RightSidebarComponent implements OnChanges, OnInit {
   }
 
   open(isOpen: boolean) {
-    this.openPopUp = isOpen && this.isItemClicked;
+    this.openPopUp = isOpen && this.showDetails;
     this.isRightSidebarOpen.emit(this.openPopUp);
   }
 
@@ -72,7 +72,7 @@ export class RightSidebarComponent implements OnChanges, OnInit {
     this.openPopUp = true;
     this.tab = tab;
     this.isRightSidebarOpen.emit(this.openPopUp);
-    if (tab === 'details' && !this.isItemClicked) {
+    if (tab === 'details' && !this.showDetails) {
       this.openPopUp = false;
       this.isRightSidebarOpen.emit(this.openPopUp);
     }
@@ -80,13 +80,16 @@ export class RightSidebarComponent implements OnChanges, OnInit {
 
   private selectedGraphItem() {
     // get the node or the edge that is clicked
-    if (this.details) {
+    if (this.details && this.showDetails) {
       this.items = [this.details.tag];
       // this.nodeData = this.items.flatMap((item: any) =>
       //   Object.entries(item).map(([label, value]) => ({label, value}))
       // );
       this.openPopUp = true;
       this.tab = 'details'
+    }
+    else{
+      this.openPopUp = false
     }
     this.isRightSidebarOpen.emit(this.openPopUp);
   }
