@@ -1,5 +1,6 @@
 import {ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {
+  Color,
   DefaultLabelStyle,
   DragDropEffects,
   EdgePathLabelModel,
@@ -14,16 +15,17 @@ import {
   ICommand,
   IEdge,
   IGraph,
-  INode,
+  INode, INodeStyle,
   Insets, IRectangle,
   License,
   Neighborhood,
   NodeDropInputMode,
   QueryContinueDragEventArgs,
   Rect,
-  ShapeNodeShape,
+  ShapeNodeShape, ShapeNodeStyle,
   SimpleNode,
   Size,
+  SolidColorFill,
   SvgExport,
   TraversalDirection
 } from "yfiles";
@@ -203,7 +205,9 @@ export class GraphEditorComponent implements OnInit {
     inputMode.addNodeCreatedListener((sender, evt) => {
       const node = evt.item
       const layout = this.getNodeLayout(node.layout);
-      console.log(layout)
+      console.log(layout);
+      const fillColor = this.getFillColor(node.style)
+
       if (node.style instanceof GroupNodeStyle) {
         console.log('is group')
       }
@@ -217,6 +221,20 @@ export class GraphEditorComponent implements OnInit {
     });
   }
 
+  getFillColor(nodeStyle: INodeStyle){
+    const style = nodeStyle as ShapeNodeStyle
+    const fill = style.fill as SolidColorFill
+    const color = fill.color as Color;
+    return this.rgbToHex(color)
+
+  }
+
+  rgbToHex(rgb: Color){
+    const r = rgb.r.toString(16).padStart(2, '0');
+    const g = rgb.g.toString(16).padStart(2, '0');
+    const b = rgb.b.toString(16).padStart(2, '0');
+    return `#${r}${g}${b}`;
+  }
   getNodeLayout(layout:IRectangle){
     const x = layout.x;
     const y = layout.y;
