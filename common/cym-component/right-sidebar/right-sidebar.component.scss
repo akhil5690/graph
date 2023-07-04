@@ -1,7 +1,7 @@
 cym-right-sidebar {
   .right-sidebar {
     display: grid;
-    position: absolute;
+    position: relative;
     grid-template-rows: auto;
     grid-template-columns: 3vw auto;
     background: white;
@@ -25,6 +25,7 @@ cym-right-sidebar {
     padding: 1rem;
     overflow-y: auto;
     overflow-x: hidden;
+    width: 20vw
   }
 
   .tab {

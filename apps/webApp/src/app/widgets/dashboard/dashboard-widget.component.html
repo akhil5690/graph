@@ -29,10 +29,11 @@
 
     <p-dialog [modal]="true" *ngIf="openFindingsPopup" [(visible)]="openFindingsPopup" (onHide)="openFindingsPopup =false" class="popup">
       <ng-template pTemplate="header">
-        <span class="subtitle">Findings for: {{selectedFindings.label}}</span>
+        <span class="subtitle">Findings for {{selectedFindings.label}}</span>
       </ng-template>
       <cym-graph [data]="findingsGraph"></cym-graph>
     </p-dialog>
 
+    <p-toast></p-toast>
   </div>
 </cym-widget-frame>
