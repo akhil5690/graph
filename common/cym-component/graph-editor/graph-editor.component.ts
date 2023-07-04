@@ -15,7 +15,7 @@ import {
   IEdge,
   IGraph,
   INode,
-  Insets,
+  Insets, IRectangle,
   License,
   Neighborhood,
   NodeDropInputMode,
@@ -202,6 +202,8 @@ export class GraphEditorComponent implements OnInit {
   private nodeListener(inputMode: GraphEditorInputMode) {
     inputMode.addNodeCreatedListener((sender, evt) => {
       const node = evt.item
+      const layout = this.getNodeLayout(node.layout);
+      console.log(layout)
       if (node.style instanceof GroupNodeStyle) {
         console.log('is group')
       }
@@ -213,6 +215,15 @@ export class GraphEditorComponent implements OnInit {
       this.graphComponent.graph.nodes.append(node);
       this.save();
     });
+  }
+
+  getNodeLayout(layout:IRectangle){
+    const x = layout.x;
+    const y = layout.y;
+    const width= layout.width;
+    const height = layout.height
+    return {x,y,width,height};
+
   }
 
   labelListener(inputMode: GraphEditorInputMode) {
