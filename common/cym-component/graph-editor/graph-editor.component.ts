@@ -209,7 +209,7 @@ export class GraphEditorComponent implements OnInit {
       }
 
       // set node tag for creating json
-      node.tag = {id: uuidv4().toString(), style: node.style, layout: node.layout};
+      node.tag = {id: uuidv4().toString(), style: node.style, layout: layout};
 
       // add the new node to the graph
       this.graphComponent.graph.nodes.append(node);
@@ -457,7 +457,7 @@ export class GraphEditorComponent implements OnInit {
     const builder = new GraphBuilder()
 
     const sourceNode = builder.createNodesSource({
-      data: data.nodes, id: "id", labels: ['label'], style: "style", layout: "layout"
+      data: data.nodes, id: "id", labels: ['label'], style: "style", layout: (data:INode)=> new Rect(data.layout.x,data.layout.y,data.layout.width,data.layout.height)
     });
 
     const edgeNode = builder.createEdgesSource({
