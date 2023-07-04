@@ -33,20 +33,16 @@ import {
   EdgeSelectionIndicatorInstaller,
   Fill,
   GraphComponent,
-  GraphOverviewCanvasVisualCreator,
   GroupNodeLabelModel,
   GroupNodeStyle,
   HorizontalTextAlignment,
   IGraph,
-  ILabelStyle, ImageNodeStyle,
-  INode,
+  ILabelStyle,
   Insets,
-  IRenderContext,
   LabelShape,
   OrientedRectangleIndicatorInstaller,
   PolylineEdgeStyle,
   RectangleIndicatorInstaller,
-  RectangleNodeStyle,
   ShapeNodeShape,
   ShapeNodeStyle,
   Theme,
@@ -131,12 +127,11 @@ export function initDemoStyles(
  */
 export function createDemoNodeStyle(
   colorSetName: ColorSetName = 'demo-orange'
-): RectangleNodeStyle {
-  return new RectangleNodeStyle({
+): ShapeNodeStyle {
+  return new ShapeNodeStyle({
+    shape:ShapeNodeShape.ROUND_RECTANGLE,
     fill: colorSets[colorSetName].fill,
-    stroke: `1.5px ${colorSets[colorSetName].stroke}`,
-    cornerStyle: 'round',
-    cornerSize: 3.5
+    stroke: `1.5px ${colorSets[colorSetName].stroke}`
   })
 }
 

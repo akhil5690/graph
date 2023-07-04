@@ -22,10 +22,10 @@ import {
   NodeDropInputMode,
   QueryContinueDragEventArgs,
   Rect,
-  ShapeNodeShape, ShapeNodeStyle,
+  ShapeNodeShape, ShapeNodeShapeStringValues, ShapeNodeStyle,
   SimpleNode,
   Size,
-  SolidColorFill,
+  SolidColorFill, Stroke,
   SvgExport,
   TraversalDirection
 } from "yfiles";
@@ -204,16 +204,18 @@ export class GraphEditorComponent implements OnInit {
   private nodeListener(inputMode: GraphEditorInputMode) {
     inputMode.addNodeCreatedListener((sender, evt) => {
       const node = evt.item
-      const layout = this.getNodeLayout(node.layout);
-      console.log(layout);
+      const shape = this.getShape(node.style);
       const fillColor = this.getFillColor(node.style)
+      const strokeColor = this.getStrokeColor(node.style);
+      const style = this.getStyleForSaving(shape, fillColor, strokeColor);
+      const layout = this.getNodeLayout(node.layout);
 
       if (node.style instanceof GroupNodeStyle) {
         console.log('is group')
       }
 
       // set node tag for creating json
-      node.tag = {id: uuidv4().toString(), style: node.style, layout: layout};
+      node.tag = {id: uuidv4().toString(), style: style, layout: layout};
 
       // add the new node to the graph
       this.graphComponent.graph.nodes.append(node);
@@ -221,7 +223,25 @@ export class GraphEditorComponent implements OnInit {
     });
   }
 
-  getFillColor(nodeStyle: INodeStyle){
+  getStyleForSaving(shape: ShapeNodeShape, fillColor: string, strokeColor: string) {
+    return {shape: shape, fill: fillColor, stroke: strokeColor}
+  }
+
+  getShape(nodeStyle: INodeStyle) {
+    const style = nodeStyle as ShapeNodeStyle;
+    return style.shape;
+  }
+
+  getStrokeColor(nodeStyle: INodeStyle) {
+    const style = nodeStyle as ShapeNodeStyle
+    const stroke = style.stroke as Stroke
+    const strokeFill = stroke.fill as SolidColorFill
+    const strokeColor = strokeFill.color as Color
+    return this.rgbToHex(strokeColor)
+
+  }
+
+  getFillColor(nodeStyle: INodeStyle) {
     const style = nodeStyle as ShapeNodeStyle
     const fill = style.fill as SolidColorFill
     const color = fill.color as Color;
@@ -229,18 +249,19 @@ export class GraphEditorComponent implements OnInit {
 
   }
 
-  rgbToHex(rgb: Color){
+  rgbToHex(rgb: Color) {
     const r = rgb.r.toString(16).padStart(2, '0');
     const g = rgb.g.toString(16).padStart(2, '0');
     const b = rgb.b.toString(16).padStart(2, '0');
     return `#${r}${g}${b}`;
   }
-  getNodeLayout(layout:IRectangle){
+
+  getNodeLayout(layout: IRectangle) {
     const x = layout.x;
     const y = layout.y;
-    const width= layout.width;
+    const width = layout.width;
     const height = layout.height
-    return {x,y,width,height};
+    return {x, y, width, height};
 
   }
 
@@ -475,7 +496,15 @@ export class GraphEditorComponent implements OnInit {
     const builder = new GraphBuilder()
 
     const sourceNode = builder.createNodesSource({
-      data: data.nodes, id: "id", labels: ['label'], style: "style", layout: (data:INode)=> new Rect(data.layout.x,data.layout.y,data.layout.width,data.layout.height)
+      data: data.nodes,
+      id: "id",
+      labels: ['label'],
+      style: (nodeStyle: any) => new ShapeNodeStyle({
+        shape: nodeStyle.style.shape,
+        fill: nodeStyle.style.fill,
+        stroke: nodeStyle.style.stroke
+      }),
+      layout: (nodeLayout: INode) => new Rect(nodeLayout.layout.x, nodeLayout.layout.y, nodeLayout.layout.width, nodeLayout.layout.height)
     });
 
     const edgeNode = builder.createEdgesSource({
