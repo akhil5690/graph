@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {toolbar} from "../../cym-component/frames/toolbar.json";
 import {secondaryToolbar} from "./secondary-toolbar.json";
 import {Router} from "@angular/router";
 

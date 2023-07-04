@@ -10,6 +10,7 @@ cym-secondary-toolbar {
     gap: var(--unit);
     width: var(--base-width);
   }
+
   .menu {
     display: grid;
     grid-template-columns: repeat(10, 1fr);

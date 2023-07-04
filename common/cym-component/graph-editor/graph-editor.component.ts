@@ -402,12 +402,27 @@ export class GraphEditorComponent implements OnInit {
     const fatArrow2 = createShapeNodeStyle(ShapeNodeShape.FAT_ARROW2);
     const hexagon = createShapeNodeStyle(ShapeNodeShape.HEXAGON);
     const hexagon2 = createShapeNodeStyle(ShapeNodeShape.HEXAGON2);
+    const triangle = createShapeNodeStyle(ShapeNodeShape.TRIANGLE);
+    const triangle2 = createShapeNodeStyle(ShapeNodeShape.TRIANGLE2);
+    const shearedRectangle = createShapeNodeStyle(ShapeNodeShape.SHEARED_RECTANGLE);
+    const shearedRectangle2 = createShapeNodeStyle(ShapeNodeShape.SHEARED_RECTANGLE2);
+    const trapez = createShapeNodeStyle(ShapeNodeShape.TRAPEZ);
+    const trapez2 = createShapeNodeStyle(ShapeNodeShape.TRAPEZ2);
+    const octagon = createShapeNodeStyle(ShapeNodeShape.OCTAGON);
+    const star5 = createShapeNodeStyle(ShapeNodeShape.STAR5);
+    const star6 = createShapeNodeStyle(ShapeNodeShape.STAR6);
+    const star8 = createShapeNodeStyle(ShapeNodeShape.STAR8);
+    const star_up = createShapeNodeStyle(ShapeNodeShape.STAR5_UP);
+    const pill = createShapeNodeStyle(ShapeNodeShape.PILL);
+
+
     // const icon = createIconNode('assets/image/edit.svg')
     const defaultGroupNodeStyle = this.graphComponent.graph.groupNodeDefaults.style;
     const newGroup = createDemoGroupStyle({colorSetName: 'demo-palette-23', foldingEnabled: true})
 
     // create an array of all node styles
-    const nodeStyles = [defaultNode, ellipse, rectangle, fatArrow, fatArrow2, hexagon, hexagon2, diamond, defaultGroupNodeStyle, newGroup]
+    const nodeStyles = [defaultNode, ellipse, rectangle, fatArrow, fatArrow2, hexagon, hexagon2, triangle, triangle2,
+      shearedRectangle, shearedRectangle2, trapez, trapez2, octagon, star5, star6, star8, star_up, pill, diamond, defaultGroupNodeStyle, newGroup]
 
     // create visual images for the nodes for panel
     nodeStyles.forEach((style: any): void => {
