@@ -1,5 +1,6 @@
 import {ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {
+  Color,
   DefaultLabelStyle,
   DragDropEffects,
   EdgePathLabelModel,
@@ -14,16 +15,17 @@ import {
   ICommand,
   IEdge,
   IGraph,
-  INode,
-  Insets,
+  INode, INodeStyle,
+  Insets, IRectangle,
   License,
   Neighborhood,
   NodeDropInputMode,
   QueryContinueDragEventArgs,
   Rect,
-  ShapeNodeShape,
+  ShapeNodeShape, ShapeNodeShapeStringValues, ShapeNodeStyle,
   SimpleNode,
   Size,
+  SolidColorFill, Stroke,
   SvgExport,
   TraversalDirection
 } from "yfiles";
@@ -96,7 +98,7 @@ export class GraphEditorComponent implements OnInit {
 
   ]
   selectedItem: any;
-  isItemClicked!: boolean;
+  showDetails!: boolean;
   iGraph: any = {};
   private nodeSelection: any;
   private edgeSelection: any;
@@ -187,7 +189,7 @@ export class GraphEditorComponent implements OnInit {
   private leftClickListener(inputMode: GraphEditorInputMode | GraphViewerInputMode) {
     // node click listener which sends node or edge details to the sidebar
     inputMode.addItemLeftClickedListener((sender, evt) => {
-      this.isItemClicked = true;
+      this.showDetails = true;
 
       this.selectedItem = evt.item instanceof IEdge || evt.item instanceof INode ? evt.item : null;
 
@@ -202,17 +204,90 @@ export class GraphEditorComponent implements OnInit {
   private nodeListener(inputMode: GraphEditorInputMode) {
     inputMode.addNodeCreatedListener((sender, evt) => {
       const node = evt.item
+      const shape = this.getShape(node.style);
+      const fillColor = this.getFillColor(node.style)
+      const strokeColor = this.getStrokeColor(node.style);
+      const style = this.getStyleForSaving(shape, fillColor, strokeColor);
+      const layout = this.getNodeLayout(node.layout);
+
       if (node.style instanceof GroupNodeStyle) {
         console.log('is group')
       }
 
       // set node tag for creating json
-      node.tag = {id: uuidv4().toString(), style: node.style, layout: node.layout};
+      node.tag = {id: uuidv4().toString(), style: style, layout: layout};
 
       // add the new node to the graph
       this.graphComponent.graph.nodes.append(node);
       this.save();
     });
+    this.hoverEvent(inputMode);
+  }
+
+  hoverEvent(inputMode: GraphEditorInputMode) {
+    inputMode.itemHoverInputMode.enabled = true
+    inputMode.itemHoverInputMode.hoverItems = GraphItemTypes.EDGE | GraphItemTypes.NODE
+// ignore items of other types which might be in front of them
+    inputMode.itemHoverInputMode.discardInvalidItems = false
+// handle changes on the hovered items
+    inputMode.itemHoverInputMode.addHoveredItemChangedListener((sender, args) => {
+      const hoverOut = args.oldItem
+      // e.g. remove the highlight from oldItem here
+      const hoverIn = args.item
+      // e.g. add a highlight to newItem here
+
+      if (hoverIn instanceof INode) {
+        const stroke = this.getStrokeColor(hoverIn.style);
+        console.log('hover in')
+
+      }
+      if (hoverOut instanceof INode) {
+        const stroke = this.getStrokeColor(hoverOut.style);
+        console.log('hover out')
+      }
+    })
+  }
+
+  getStyleForSaving(shape: ShapeNodeShape, fillColor: string, strokeColor: string) {
+    return {shape: shape, fill: fillColor, stroke: strokeColor}
+  }
+
+  getShape(nodeStyle: INodeStyle) {
+    const style = nodeStyle as ShapeNodeStyle;
+    return style.shape;
+  }
+
+  getStrokeColor(nodeStyle: INodeStyle) {
+    const style = nodeStyle as ShapeNodeStyle
+    const stroke = style.stroke as Stroke
+    const strokeFill = stroke.fill as SolidColorFill
+    const strokeColor = strokeFill.color as Color
+    return this.rgbToHex(strokeColor)
+
+  }
+
+  getFillColor(nodeStyle: INodeStyle) {
+    const style = nodeStyle as ShapeNodeStyle
+    const fill = style.fill as SolidColorFill
+    const color = fill.color as Color;
+    return this.rgbToHex(color)
+
+  }
+
+  rgbToHex(rgb: Color) {
+    const r = rgb.r.toString(16).padStart(2, '0');
+    const g = rgb.g.toString(16).padStart(2, '0');
+    const b = rgb.b.toString(16).padStart(2, '0');
+    return `#${r}${g}${b}`;
+  }
+
+  getNodeLayout(layout: IRectangle) {
+    const x = layout.x;
+    const y = layout.y;
+    const width = layout.width;
+    const height = layout.height
+    return {x, y, width, height};
+
   }
 
   labelListener(inputMode: GraphEditorInputMode) {
@@ -327,12 +402,27 @@ export class GraphEditorComponent implements OnInit {
     const fatArrow2 = createShapeNodeStyle(ShapeNodeShape.FAT_ARROW2);
     const hexagon = createShapeNodeStyle(ShapeNodeShape.HEXAGON);
     const hexagon2 = createShapeNodeStyle(ShapeNodeShape.HEXAGON2);
+    const triangle = createShapeNodeStyle(ShapeNodeShape.TRIANGLE);
+    const triangle2 = createShapeNodeStyle(ShapeNodeShape.TRIANGLE2);
+    const shearedRectangle = createShapeNodeStyle(ShapeNodeShape.SHEARED_RECTANGLE);
+    const shearedRectangle2 = createShapeNodeStyle(ShapeNodeShape.SHEARED_RECTANGLE2);
+    const trapez = createShapeNodeStyle(ShapeNodeShape.TRAPEZ);
+    const trapez2 = createShapeNodeStyle(ShapeNodeShape.TRAPEZ2);
+    const octagon = createShapeNodeStyle(ShapeNodeShape.OCTAGON);
+    const star5 = createShapeNodeStyle(ShapeNodeShape.STAR5);
+    const star6 = createShapeNodeStyle(ShapeNodeShape.STAR6);
+    const star8 = createShapeNodeStyle(ShapeNodeShape.STAR8);
+    const star_up = createShapeNodeStyle(ShapeNodeShape.STAR5_UP);
+    const pill = createShapeNodeStyle(ShapeNodeShape.PILL);
+
+
     // const icon = createIconNode('assets/image/edit.svg')
     const defaultGroupNodeStyle = this.graphComponent.graph.groupNodeDefaults.style;
     const newGroup = createDemoGroupStyle({colorSetName: 'demo-palette-23', foldingEnabled: true})
 
     // create an array of all node styles
-    const nodeStyles = [defaultNode, ellipse, rectangle, fatArrow, fatArrow2, hexagon, hexagon2, diamond, defaultGroupNodeStyle, newGroup]
+    const nodeStyles = [defaultNode, ellipse, rectangle, fatArrow, fatArrow2, hexagon, hexagon2, triangle, triangle2,
+      shearedRectangle, shearedRectangle2, trapez, trapez2, octagon, star5, star6, star8, star_up, pill, diamond, defaultGroupNodeStyle, newGroup]
 
     // create visual images for the nodes for panel
     nodeStyles.forEach((style: any): void => {
@@ -446,7 +536,15 @@ export class GraphEditorComponent implements OnInit {
     const builder = new GraphBuilder()
 
     const sourceNode = builder.createNodesSource({
-      data: data.nodes, id: "id", labels: ['label'], style: "style", layout: "layout"
+      data: data.nodes,
+      id: "id",
+      labels: ['label'],
+      style: (nodeStyle: any) => new ShapeNodeStyle({
+        shape: nodeStyle.style.shape,
+        fill: nodeStyle.style.fill,
+        stroke: nodeStyle.style.stroke
+      }),
+      layout: (nodeLayout: INode) => new Rect(nodeLayout.layout.x, nodeLayout.layout.y, nodeLayout.layout.width, nodeLayout.layout.height)
     });
 
     const edgeNode = builder.createEdgesSource({
@@ -710,20 +808,15 @@ export class GraphEditorComponent implements OnInit {
     if (this.neighbourComponent.graph.nodes.size > 0) {
       this.isFullscreen = isFullscreen;
       if (isFullscreen) {
+        this.showDetails = false
         this.graphComponent.graph = this.neighbourComponent.graph;
         this.createGraph(this.original, this.neighbourComponent);
         const inputMode = this.graphComponent.inputMode = new GraphViewerInputMode();
         this.leftClickListener(inputMode)
         this.neighbourComponent.zoomTo(this.neighbourComponent.contentRect);
         ICommand.FIT_GRAPH_BOUNDS.execute(null, this.graphComponent);
-        const h = document.createElement('h1');
-        h.innerHTML = `<span style="display: grid;justify-content: center">Neighbourhood</span>`
-        this.graphComponent.div.append(h);
       } else {
-        const h = this.graphComponent.div.querySelector("h1");
-        if (h) {
-          h.remove()
-        }
+        this.showDetails = false;
         this.createGraph(this.iGraph, this.graphComponent);
         this.createGraph(this.originalNeighbourHood, this.neighbourComponent);
         this.setNodeInputMode()
