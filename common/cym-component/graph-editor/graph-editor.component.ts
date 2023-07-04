@@ -718,6 +718,7 @@ export class GraphEditorComponent implements OnInit {
         this.neighbourComponent.zoomTo(this.neighbourComponent.contentRect);
         ICommand.FIT_GRAPH_BOUNDS.execute(null, this.graphComponent);
       } else {
+        this.showDetails = false;
         this.createGraph(this.iGraph, this.graphComponent);
         this.createGraph(this.originalNeighbourHood, this.neighbourComponent);
         this.setNodeInputMode()

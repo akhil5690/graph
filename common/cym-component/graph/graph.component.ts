@@ -500,6 +500,7 @@ export class GraphComponents implements OnInit, OnChanges {
         ICommand.FIT_GRAPH_BOUNDS.execute(null, this.graphComponent);
         this.showDetails = false;
       } else {
+        this.showDetails = false;
         this.createGraph(this.data, this.graphComponent);
         this.createGraph(this.originalNeighbourhood, this.neighbourComponent);
         this.setInputMode(this.graphComponent);
