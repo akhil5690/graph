@@ -2,7 +2,7 @@ cym-sign-up-widget {
   .signIn-container {
     display: grid;
     width: 25rem;
-    gap: 1rem;
+    gap: var(--grid-gap);
   }
 
   .main-container {
@@ -13,7 +13,7 @@ cym-sign-up-widget {
 
   .form-container {
     display: grid;
-    grid-gap: var(--unit);
+    grid-gap: var(--grid-gap);
   }
 
   .termsAndCondition {

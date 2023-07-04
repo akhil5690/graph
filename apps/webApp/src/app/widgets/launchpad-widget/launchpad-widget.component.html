@@ -11,8 +11,8 @@
     </cym-div>
 
     <cym-div [cymClass]="'card-main'">
-      <cym-card *ngFor="let tool of launchpad" >
-        <cym-div header [cymClass]="'header-cont'">{{tool.name}}
+      <cym-card *ngFor="let tool of launchpad" [cymClass]="'header-content'" >
+        <cym-div header [cymClass]="'card-header'">{{tool.name}}
         <cym-div>{{tool.description}}</cym-div>
         </cym-div>
         <cym-div card-content [cymClass]="'card-divisions'">

@@ -1,35 +1,43 @@
 cym-secondary-toolbar {
-  .secondary-container {
+  .container {
     display: grid;
-    grid-template-columns: var(--sidebar-width) 3fr 1fr auto;
-    align-content: center;
+    grid-template-columns:8.5fr 0.5fr 0.5fr 0.5fr ;
     align-items: center;
-    padding: 1rem;
     height: var(--base-height);
     color: var(--primary-text-color);
-    gap: var(--unit);
+    gap: calc(var(--unit)*2);
     width: var(--base-width);
-  }
-  .menu {
-    display: grid;
-    grid-template-columns: repeat(10, 1fr);
-    gap: 0.5rem;
   }
 
   .breadstar{
     display: grid;
-    grid-template-columns: 3fr 1fr auto;
+    grid-template-columns: 13rem auto;
+    align-items: center;
   }
+
+  .menu {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: calc(var(--grip-gap)/2);
+  }
+
 
   .horizontal{
     display: grid;
     grid-template-columns: auto auto;
+    gap:calc(var(--unit)/3);
   }
 
-
   .other-options {
-    display: flex;
-    gap: 0.5rem;
+    display: grid;
+    grid-template-columns: auto  auto auto;
+    grid-gap: calc(var(--grip-gap)/2) ;
+  }
+
+  .p-breadcrumb.p-component {
+    padding: var(--padding);
+    background: none;
+    border: none;
   }
 }
 
