@@ -221,6 +221,31 @@ export class GraphEditorComponent implements OnInit {
       this.graphComponent.graph.nodes.append(node);
       this.save();
     });
+    this.hoverEvent(inputMode);
+  }
+
+  hoverEvent(inputMode: GraphEditorInputMode) {
+    inputMode.itemHoverInputMode.enabled = true
+    inputMode.itemHoverInputMode.hoverItems = GraphItemTypes.EDGE | GraphItemTypes.NODE
+// ignore items of other types which might be in front of them
+    inputMode.itemHoverInputMode.discardInvalidItems = false
+// handle changes on the hovered items
+    inputMode.itemHoverInputMode.addHoveredItemChangedListener((sender, args) => {
+      const hoverOut = args.oldItem
+      // e.g. remove the highlight from oldItem here
+      const hoverIn = args.item
+      // e.g. add a highlight to newItem here
+
+      if (hoverIn instanceof INode) {
+        const stroke = this.getStrokeColor(hoverIn.style);
+        console.log('hover in')
+
+      }
+      if (hoverOut instanceof INode) {
+        const stroke = this.getStrokeColor(hoverOut.style);
+        console.log('hover out')
+      }
+    })
   }
 
   getStyleForSaving(shape: ShapeNodeShape, fillColor: string, strokeColor: string) {
