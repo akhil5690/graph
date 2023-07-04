@@ -1,5 +1,5 @@
 cym-secondary-toolbar {
-  .container {
+  .secondary-container {
     display: grid;
     grid-template-columns: var(--sidebar-width) 3fr 1fr auto;
     align-content: center;
@@ -16,8 +16,21 @@ cym-secondary-toolbar {
     gap: 0.5rem;
   }
 
+  .breadstar{
+    display: grid;
+    grid-template-columns: 3fr 1fr auto;
+  }
+
+  .horizontal{
+    display: grid;
+    grid-template-columns: auto auto;
+  }
+
+
   .other-options {
     display: flex;
     gap: 0.5rem;
   }
 }
+
+

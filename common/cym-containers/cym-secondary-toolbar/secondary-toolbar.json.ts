@@ -9,6 +9,7 @@ export const secondaryToolbar = [
   },
   {
     "url": "../../../../assets/image/home.svg",
+    "text":"Home",
     "position": "top",
     "type": "image",
     "sector": "4",
@@ -17,6 +18,7 @@ export const secondaryToolbar = [
   },
   {
     "url": "../../../../assets/image/star.svg",
+    "text":"Shortcut",
     "position": "top",
     "type": "image",
     "sector": "4",
@@ -25,6 +27,7 @@ export const secondaryToolbar = [
   },
   {
     "url": "../../../../assets/image/testing.svg",
+    "text":"Activity",
     "position": "top",
     "type": "image",
     "sector": "4",
