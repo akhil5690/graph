@@ -4,19 +4,21 @@
   <!--      Dashboard-->
   <!--    </cym-div>-->
   <!--  </cym-toolbar>-->
-  <cym-top-toolbar header></cym-top-toolbar>
-  <cym-div main>
-    <cym-secondary-toolbar></cym-secondary-toolbar>
+  <cym-top-toolbar header ></cym-top-toolbar>
+  <cym-div main >
+    <cym-div >
+      <cym-secondary-toolbar></cym-secondary-toolbar>
+    </cym-div>
+
     <cym-div [cymClass]="'card-main'">
       <cym-card *ngFor="let tool of launchpad" >
-        <cym-div header>{{tool.name}}
+        <cym-div header [cymClass]="'header-cont'">{{tool.name}}
         <cym-div>{{tool.description}}</cym-div>
         </cym-div>
         <cym-div card-content [cymClass]="'card-divisions'">
           <cym-card-division *ngFor="let sub of tool.subGroup;index as i" [cymClass]="'launchpad-cards'"
                              [cardDetails]="sub"
-                             (cardClickEvent)="showGraph($event)"
-          >
+                             (cardClickEvent)="showGraph($event)" >
           </cym-card-division>
         </cym-div>
       </cym-card>
