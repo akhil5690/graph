@@ -7,7 +7,7 @@ cym-top-toolbar {
     padding: var(--unit);
     height: var(--base-height);
     color: var(--primary-text-color);
-    gap: calc(var(--unit)/5);
+    gap: var(--unit);
     width: var(--base-width);
     background-color: var(--theme-color-one);
 
@@ -29,7 +29,7 @@ cym-top-toolbar {
 
   .three{
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     text-align:center;
     align-items:center;
     gap: calc(var(--unit)/2);

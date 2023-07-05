@@ -67,8 +67,8 @@ label {
 .card-main {
   display: grid;
   grid-auto-rows: var(--vertical-cards-loop);
-  row-gap: var(--border-radius);
-  padding:0 2rem 0 2rem;
+  row-gap: var(--grid-gap);
+  padding: 0 1rem 0 1rem;
   //align-items: center;
 }
 
@@ -83,7 +83,8 @@ label {
 
 .header-content{
   display: grid;
-  grid-gap: var(--grid-gap);
+  grid-template-rows: 1fr 9fr;
+  grid-gap: calc(var(--grid-gap)/2);
 }
 
 
@@ -98,8 +99,7 @@ label {
 .card-divisions {
   display: grid;
   grid-template-columns: repeat(auto-fill, 10rem);
-  column-gap:var(--unit);
-
+  column-gap: var(--unit);
 }
 
 
@@ -109,12 +109,13 @@ label {
   height: var(--card-height);
   background: #FFFFFF 0% 0% no-repeat padding-box;
   //box-shadow: 0px 3px 6px #00000029;
-  grid-template-rows: 1fr 8fr 1fr;
+  grid-template-rows: 1fr 6fr 3fr;
   padding: var(--border-radius);
   align-items: center;
   justify-items: center;
   cursor:pointer;
   text-align:center;
+  color:var(--primary-color)
 }
 
 .launchpad-cards:hover, .box-color:hover {

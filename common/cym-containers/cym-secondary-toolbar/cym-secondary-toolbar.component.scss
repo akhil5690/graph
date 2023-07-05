@@ -1,17 +1,17 @@
 cym-secondary-toolbar {
   .container {
     display: grid;
-    grid-template-columns:8.5fr 0.5fr 0.5fr 0.5fr ;
+    grid-template-columns:8fr auto auto auto ;
     align-items: center;
     height: var(--base-height);
     color: var(--primary-text-color);
-    gap: calc(var(--unit)*2);
+    gap: var(--unit);
     width: var(--base-width);
   }
 
   .breadstar{
     display: grid;
-    grid-template-columns: 13rem auto;
+    grid-template-columns: auto;
     align-items: center;
   }
 
@@ -25,20 +25,25 @@ cym-secondary-toolbar {
   .horizontal{
     display: grid;
     grid-template-columns: auto auto;
-    gap:calc(var(--unit)/3);
+    gap: 1rem;
   }
 
   .other-options {
     display: grid;
-    grid-template-columns: auto  auto auto;
-    grid-gap: calc(var(--grip-gap)/2) ;
+    grid-template-columns: auto auto auto;
+    grid-gap: var(--grip-gap) ;
   }
 
   .p-breadcrumb.p-component {
-    padding: var(--padding);
     background: none;
     border: none;
+    padding:0;
   }
+
+  .icons{
+    text-align:right;
+  }
+
 }
 
 

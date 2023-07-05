@@ -13,16 +13,16 @@ export const toolbar = [{
   "position": "top",
   "type": "image",
   "sector": "3",
-  "height": "19.66",
-  "width": "22"
+  "height": "24",
+  "width": "24",
 },
   {
     "url": "../../../../assets/image/notifications.svg",
     "position": "top",
     "type": "image",
     "sector": "3",
-    "height": "22",
-    "width": "14.81"
+    "height": "24",
+    "width": "24",
   },
   {
     "url": "../../../../assets/image/Component_sk.svg",
@@ -30,16 +30,16 @@ export const toolbar = [{
     "type": "image",
     "sector": "3",
     "height": "24",
-    "width": "24"
+    "width": "24",
   },
-  {
-    "url": "../../../../assets/image/Icon awesome-caret-up.svg",
-    "position": "top",
-    "type": "image",
-    "sector": "3",
-    "height": "7.32",
-    "width": "12.9"
-  },
+  // {
+  //   "url": "../../../../assets/image/Icon awesome-caret-up.svg",
+  //   "position": "top",
+  //   "type": "image",
+  //   "sector": "3",
+  //   "height": "7.32",
+  //   "width": "12.9"
+  // },
 
 
   {
@@ -47,7 +47,7 @@ export const toolbar = [{
     "position": "top",
     "type": "image",
     "sector": "4",
-    "height": "22",
-    "width": "19.8"
+    "height": "24",
+    "width": "24",
   },
 ]

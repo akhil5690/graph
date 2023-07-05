@@ -3,9 +3,9 @@
     <div>
       <cym-breadcrumb [items]="breadcrumbItems"></cym-breadcrumb>
     </div>
-    <div>
-      <img [src]="item.url" alt="" [height]="item.height" [width]="item.width">
-    </div>
+<!--    <div>-->
+<!--      <img [src]="item.url" alt="" [height]="item.height" [width]="item.width">-->
+<!--    </div>-->
   </div>
 <!--  <div class="menu">-->
 <!--    <div *ngFor="let item of sector2">{{item.name}}</div>-->
@@ -17,7 +17,7 @@
 <!--  </div>-->
   <div class="other-options" *ngFor="let item of sector4">
   <div class="horizontal" >
-    <div>
+    <div [class]="'icons'">
       <img [src]="item.url"
            [height]="item.height" [width]="item.width" alt="">
     </div>
