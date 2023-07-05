@@ -138,6 +138,10 @@ export class GraphEditorComponent implements OnInit {
     // prepare drag and drop
     this.setNodeInputMode();
 
+    this.graphComponent.graph.addNodeLayoutChangedListener((source, node, oldLayout)=>{
+      const layout = this.getNodeLayout(oldLayout)
+      node.tag = {id: node.tag.id, style: node.tag.style, layout: layout};
+    })
     this.initializeOverviewComponent(this.graphComponent)
 
     this.initialiseNeighbourhood();
