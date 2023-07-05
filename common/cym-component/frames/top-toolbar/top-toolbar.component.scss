@@ -4,10 +4,10 @@ cym-top-toolbar {
     grid-template-columns: var(--sidebar-width) 3fr auto  auto;
     align-content: center;
     align-items: center;
-    padding: var(--unit);
+    padding: var(--padding);
     height: var(--base-height);
     color: var(--primary-text-color);
-    gap: var(--unit);
+    gap: var(--grid-gap);
     width: var(--base-width);
     background-color: var(--theme-color-one);
 
@@ -21,7 +21,7 @@ cym-top-toolbar {
 
   .other-options {
     display: flex;
-    gap: var(--unit);
+    gap: var(--grid-gap);
     color: var(--primary-color-text);
     align-items:center;
 
