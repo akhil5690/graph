@@ -26,11 +26,11 @@ phases:
 
   post_build:
     commands:
-        # Clear S3 bucket
-        - aws s3 rm s3://dev-fusioncenter-ui-contentdeliverycymonix --recursive
+        # Clear S3 
+        - aws s3 rm s3://${Env}-fusioncenter-ui-contentdelivery --recursive
         - echo S3 bucket is cleared.
         # Copy dist folder to S3 bucket,As ofAngular 7, builds are stored inside an app folder in distribution and not at the root of the dist folder
-        - aws s3 cp dist s3://dev-fusioncenter-ui-contentdeliverycymonix --recursive --cache-control max-age=60
+        - aws s3 cp dist s3://${Env}-fusioncenter-ui-contentdelivery --recursive --cache-control max-age=60
         - echo Build completed on `date`
         - dir
 artifacts:
@@ -38,4 +38,3 @@ artifacts:
         - '**/*'
     discard-paths: yes
     base-directory: 'dist/*'
-
