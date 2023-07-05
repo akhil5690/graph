@@ -79,11 +79,6 @@ export class GraphEditorComponent implements OnInit {
     const divElement = this.graphContainer.nativeElement;
     this.graphComponent = new GraphComponent(divElement);
 
-    // make the graph editable
-    this.graphComponent.inputMode = new GraphEditorInputMode({
-      allowGroupingOperations: true
-    });
-
     // enable undoEngine
     this.graphComponent.graph.undoEngineEnabled = true;
 
@@ -532,13 +527,16 @@ export class GraphEditorComponent implements OnInit {
   }
 
   save() {
-    this.createJson()
+    this.createJson();
+    localStorage.setItem('graph', JSON.stringify(this.iGraph));
     //   api call for saving
   }
 
   load() {
     // api call for loading and creating graph
-    this.createGraph(this.iGraph, this.graphComponent);
+    const getJson = localStorage.getItem('graph')
+    const graphJson = getJson ? JSON.parse(getJson) : null;
+    this.createGraph(graphJson, this.graphComponent);
   }
 
   clickEvent(tool: { icon: string; toolName: string }) {
