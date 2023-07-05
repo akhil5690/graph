@@ -32,10 +32,11 @@ cym-top-toolbar {
     grid-template-columns: repeat(3, 1fr);
     text-align:center;
     align-items:center;
-    gap: calc(var(--unit)/2);
+    gap: calc(var(--grid-gap)/2);
   }
   .three > div{
-    padding:calc(var(--unit)/5);
+    padding:calc(var(--padding)/5);
+
   }
 
 

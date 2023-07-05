@@ -9,7 +9,7 @@ cym-launchpad-widget {
 
   .container {
     display: grid;
-    grid-template-columns: var(--sidebar-width) 3fr 1fr auto auto;
+    grid-template-columns: var(--sidebar-width) 3fr  auto auto;
     width: var(--base-width);
     align-content: center;
     align-items: center;
