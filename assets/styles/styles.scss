@@ -67,8 +67,8 @@ label {
 .card-main {
   display: grid;
   grid-auto-rows: var(--vertical-cards-loop);
-  row-gap: var(--border-radius);
-  padding:0 2rem 0 2rem;
+  row-gap: var(--grid-gap);
+  padding: 0 1rem 0 1rem;
   //align-items: center;
 }
 
@@ -83,7 +83,7 @@ label {
 
 .header-content{
   display: grid;
-  grid-gap: var(--grid-gap);
+  grid-gap: calc(var(--grid-gap)/2);
 }
 
 
