@@ -138,15 +138,16 @@ export class GraphEditorComponent implements OnInit {
     // prepare drag and drop
     this.setNodeInputMode();
 
-    this.graphComponent.graph.addNodeLayoutChangedListener((source, node, oldLayout)=>{
-      const layout = this.getNodeLayout(oldLayout)
-      node.tag = {id: node.tag.id, style: node.tag.style, layout: layout};
-    })
     this.initializeOverviewComponent(this.graphComponent)
 
     this.initialiseNeighbourhood();
 
     this.getNeighbourOption();
+
+    this.graphComponent.graph.addNodeLayoutChangedListener((source, node, oldLayout)=>{
+      const layout = this.getNodeLayout(oldLayout)
+      node.tag = {id: node.tag.id, style: node.tag.style, layout: layout};
+    })
 
   }
 
@@ -223,7 +224,7 @@ export class GraphEditorComponent implements OnInit {
 
       // add the new node to the graph
       this.graphComponent.graph.nodes.append(node);
-      this.save();
+      this.createJson();
     });
     this.hoverEvent(inputMode);
   }
@@ -331,7 +332,7 @@ export class GraphEditorComponent implements OnInit {
       };
     }
 
-    this.save();
+    this.createJson();
     this.createGraph(this.iGraph, this.graphComponent)
   }
   isFullscreen: boolean = false;
@@ -389,7 +390,7 @@ export class GraphEditorComponent implements OnInit {
       };
 
       this.graphComponent.graph.edges.append(edge);
-      this.save()
+      this.createJson()
     })
   }
 
@@ -575,6 +576,10 @@ export class GraphEditorComponent implements OnInit {
     this.cdr.detectChanges();
   }
 
+  save(){
+    this.createJson()
+  //   api call
+  }
   clickEvent(tool: { icon: string; toolName: string }) {
     // tools
     if (this.graphComponent) {
@@ -605,7 +610,7 @@ export class GraphEditorComponent implements OnInit {
           break;
         case 'copy':
           this.copy();
-          this.save();
+          this.createJson();
           break;
         case 'paste':
           this.paste()
@@ -614,7 +619,7 @@ export class GraphEditorComponent implements OnInit {
     }
   }
 
-  save() {
+  createJson() {
 
     // create json
     const jsonGraph: { nodes: any[], edges: any[] } = {
@@ -651,8 +656,6 @@ export class GraphEditorComponent implements OnInit {
     });
 
     console.log(jsonGraph);
-
-    // save the json in a variable
     this.iGraph = jsonGraph;
   }
 
@@ -699,8 +702,7 @@ export class GraphEditorComponent implements OnInit {
         }
       })
     }
-    this.save();
-    console.log(this.iGraph)
+    this.createJson();
     this.createGraph(this.iGraph, this.graphComponent)
   }
 
@@ -746,7 +748,7 @@ export class GraphEditorComponent implements OnInit {
 
     ICommand.PASTE.execute(null, this.graphComponent);
 
-    this.save();
+    this.createJson();
     this.createGraph(this.iGraph, this.graphComponent);
 
     // regain the selection back
@@ -792,7 +794,7 @@ export class GraphEditorComponent implements OnInit {
       }
     }
     this.originalNeighbourHood = jsonGraph;
-    this.save();
+    this.createJson();
     this.createGraph(jsonGraph, this.neighbourComponent)
     this.neighbourComponent.contentRect = new Rect(0, 0, 100, 100);
     this.neighbourComponent.fitGraphBounds()
