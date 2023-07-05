@@ -4,7 +4,7 @@ import {
   DefaultLabelStyle,
   DragDropEffects,
   EdgePathLabelModel,
-  EdgeSides,
+  EdgeSides, EdgeStyleDecorationInstaller,
   ExteriorLabelModel,
   GraphBuilder,
   GraphComponent,
@@ -19,18 +19,26 @@ import {
   Insets, IRectangle,
   License,
   Neighborhood,
-  NodeDropInputMode,
+  NodeDropInputMode, NodeStyleDecorationInstaller,
+  PolylineEdgeStyle,
   QueryContinueDragEventArgs,
   Rect,
   ShapeNodeShape, ShapeNodeShapeStringValues, ShapeNodeStyle,
   SimpleNode,
   Size,
-  SolidColorFill, Stroke,
+  SolidColorFill, Stroke, StyleDecorationZoomPolicy,
   SvgExport,
   TraversalDirection
 } from "yfiles";
 import licenseValue from "../../../license.json";
-import {addClass, createDemoGroupStyle, createShapeNodeStyle, initDemoStyles, removeClass} from "./demo-styles";
+import {
+  addClass,
+  createDemoGroupStyle,
+  createImageNodeStyle, createPolylineEdgeStyle,
+  createShapeNodeStyle,
+  initDemoStyles,
+  removeClass
+} from "./demo-styles";
 import {v4 as uuidv4} from 'uuid';
 
 @Component({
@@ -231,19 +239,57 @@ export class GraphEditorComponent implements OnInit {
     inputMode.itemHoverInputMode.discardInvalidItems = false
 // handle changes on the hovered items
     inputMode.itemHoverInputMode.addHoveredItemChangedListener((sender, args) => {
-      const hoverOut = args.oldItem
-      // e.g. remove the highlight from oldItem here
-      const hoverIn = args.item
+      const hoverItem = args.item
       // e.g. add a highlight to newItem here
+      const styleHighlight = this.graphComponent.highlightIndicatorManager
+      const orangeRed = Color.ORANGE_RED
+      const orangeStroke = new Stroke(orangeRed.r, orangeRed.g, orangeRed.b, 220, 3).freeze()
+      const decorator = this.graphComponent.graph.decorator
+      const highlightShape = new ShapeNodeStyle({
+        shape: ShapeNodeShape.ROUND_RECTANGLE,
+        stroke: orangeStroke,
+        fill: null
+      })
 
-      if (hoverIn instanceof INode) {
-        const stroke = this.getStrokeColor(hoverIn.style);
-        console.log('hover in')
+      const nodeStyleHighlight = new NodeStyleDecorationInstaller({
+        nodeStyle: highlightShape,
+        // that should be slightly larger than the real node
+        margins: 5,
+        // but have a fixed size in the view coordinates
+        zoomPolicy: StyleDecorationZoomPolicy.VIEW_COORDINATES
+      })
 
-      }
-      if (hoverOut instanceof INode) {
-        const stroke = this.getStrokeColor(hoverOut.style);
-        console.log('hover out')
+      const edgeStyle = new PolylineEdgeStyle({
+        stroke: orangeStroke,
+        // targetArrow: dummyCroppingArrow,
+        // sourceArrow: dummyCroppingArrow
+      })
+      const edgeStyleHighlight = new EdgeStyleDecorationInstaller({
+        edgeStyle,
+        zoomPolicy: StyleDecorationZoomPolicy.VIEW_COORDINATES
+      })
+
+      decorator.nodeDecorator.highlightDecorator.setImplementation(nodeStyleHighlight)
+      decorator.edgeDecorator.highlightDecorator.setFactory(edge =>
+        edgeStyleHighlight
+      )
+      // first remove previous highlights
+      styleHighlight.clearHighlights()
+      // then see where we are hovering over, now
+      const newItem = hoverItem
+      if (newItem !== null) {
+        // we highlight the item itself
+        styleHighlight.addHighlight(newItem)
+        if (newItem instanceof INode) {
+          // and if it's a node, we highlight all adjacent edges, too
+          for (const edge of this.graphComponent.graph.edgesAt(newItem)) {
+            styleHighlight.addHighlight(edge)
+          }
+        } else if (newItem instanceof IEdge) {
+          // if it's an edge - we highlight the adjacent nodes
+          styleHighlight.addHighlight(newItem.tag.sourceNode)
+          styleHighlight.addHighlight(newItem.tag.targetNode)
+        }
       }
     })
   }
@@ -414,15 +460,15 @@ export class GraphEditorComponent implements OnInit {
     const star8 = createShapeNodeStyle(ShapeNodeShape.STAR8);
     const star_up = createShapeNodeStyle(ShapeNodeShape.STAR5_UP);
     const pill = createShapeNodeStyle(ShapeNodeShape.PILL);
-
-
+    // const user = createImageNodeStyle("assets/image/add-user.svg")
     // const icon = createIconNode('assets/image/edit.svg')
     const defaultGroupNodeStyle = this.graphComponent.graph.groupNodeDefaults.style;
     const newGroup = createDemoGroupStyle({colorSetName: 'demo-palette-23', foldingEnabled: true})
 
     // create an array of all node styles
     const nodeStyles = [defaultNode, ellipse, rectangle, fatArrow, fatArrow2, hexagon, hexagon2, triangle, triangle2,
-      shearedRectangle, shearedRectangle2, trapez, trapez2, octagon, star5, star6, star8, star_up, pill, diamond, defaultGroupNodeStyle, newGroup]
+      shearedRectangle, shearedRectangle2, trapez, trapez2, octagon, star5, star6, star8,
+      star_up, pill, diamond, defaultGroupNodeStyle, newGroup]
 
     // create visual images for the nodes for panel
     nodeStyles.forEach((style: any): void => {
