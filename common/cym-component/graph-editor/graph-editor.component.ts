@@ -57,7 +57,7 @@ export class GraphEditorComponent implements OnInit {
     height: 20, width: 20
 
   }, {
-    toolName: 'refresh',
+    toolName: 'load',
     icon: 'assets/image/refresh.svg',
     height: 20, width: 20
   }, {
@@ -144,7 +144,7 @@ export class GraphEditorComponent implements OnInit {
 
     this.getNeighbourOption();
 
-    this.graphComponent.graph.addNodeLayoutChangedListener((source, node, oldLayout)=>{
+    this.graphComponent.graph.addNodeLayoutChangedListener((source, node, oldLayout) => {
       const layout = this.getNodeLayout(oldLayout)
       node.tag = {id: node.tag.id, style: node.tag.style, layout: layout};
     })
@@ -576,10 +576,16 @@ export class GraphEditorComponent implements OnInit {
     this.cdr.detectChanges();
   }
 
-  save(){
+  save() {
     this.createJson()
-  //   api call
+    //   api call for saving
   }
+
+  load() {
+    // api call for loading and creating graph
+    this.createGraph(this.iGraph, this.graphComponent);
+  }
+
   clickEvent(tool: { icon: string; toolName: string }) {
     // tools
     if (this.graphComponent) {
@@ -587,8 +593,8 @@ export class GraphEditorComponent implements OnInit {
         case 'save':
           this.save()
           break;
-        case 'refresh':
-          this.createGraph(this.iGraph, this.graphComponent);
+        case 'load':
+          this.load();
           break;
         case 'undo':
           ICommand.UNDO.execute(null, this.graphComponent)
