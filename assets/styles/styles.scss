@@ -72,11 +72,20 @@ label {
   //align-items: center;
 }
 
-.header-cont{
+
+.card-header{
+  display:grid;
+  grid-template-columns: 2fr 8fr;
   font-size:var(--unit);
   font-weight: var(--font-weight-bold);
-  padding: 0 0 1rem 0;
+  align-items:center
 }
+
+.header-content{
+  display: grid;
+  grid-gap: var(--grid-gap);
+}
+
 
 //.header-content-divs {
 //  display: grid;
@@ -92,6 +101,8 @@ label {
   column-gap:var(--unit);
 
 }
+
+
 
 .launchpad-cards {
   display: grid;
