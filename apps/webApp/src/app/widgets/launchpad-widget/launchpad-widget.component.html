@@ -44,7 +44,7 @@
       <cym-card *ngFor="let tool of launchpad" [cymClass]="'header-content'" >
         <cym-div header [cymClass]="'card-header'">{{tool.name}}
         </cym-div>
-        <cym-div card-content [cymClass]="'icon-grey'">{{tool.description}}</cym-div>
+        <cym-div card-content [cymClass]="'icon-grey'" *ngIf="tool?.description">{{tool.description}}</cym-div>
         <cym-div card-content [cymClass]="'card-divisions'">
           <cym-card-division *ngFor="let sub of tool.subGroup;index as i" [cymClass]="'launchpad-cards'"
                              [cardDetails]="sub"
