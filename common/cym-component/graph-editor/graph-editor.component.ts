@@ -1,5 +1,6 @@
 import {ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {
+  Arrow, ArrowType,
   Color,
   DefaultLabelStyle,
   DragDropEffects,
@@ -11,15 +12,15 @@ import {
   GraphEditorInputMode, GraphItemTypes,
   GraphOverviewComponent, GraphViewerInputMode,
   GroupNodeLabelModel,
-  GroupNodeStyle,
+  GroupNodeStyle, IArrow,
   ICommand,
-  IEdge,
+  IEdge, IEdgeStyle,
   IGraph,
   INode, INodeStyle,
   Insets, IRectangle,
   License,
   Neighborhood,
-  NodeDropInputMode,
+  NodeDropInputMode, PolylineEdgeStyle,
   QueryContinueDragEventArgs,
   Rect,
   ShapeNodeShape, ShapeNodeShapeStringValues, ShapeNodeStyle,
@@ -156,6 +157,32 @@ export class GraphEditorComponent implements OnInit {
     })
   }
 
+  edgeListener(inputMode: GraphEditorInputMode) {
+    inputMode.createEdgeInputMode.addEdgeCreatedListener((sender, evt) => {
+
+      const edge = evt.item;
+      const stroke = this.getEdgeStrokeColor(edge.style);
+      const arrow = this.getEdgeArrowStyle(edge.style);
+      const style = this.getEdgeStyle(stroke, arrow);
+
+      console.log(style)
+      const sourceNode = edge.sourceNode;
+      const targetNode = edge.targetNode;
+
+      edge.tag = {
+        id: uuidv4().toString(),
+        source: sourceNode?.tag?.id,
+        target: targetNode?.tag?.id,
+        sourceLabel: sourceNode?.tag?.label ? sourceNode?.tag?.label : sourceNode?.tag?.id,
+        targetLabel: targetNode?.tag?.label ? targetNode?.tag?.label : targetNode?.tag?.id,
+        style: style,
+      };
+
+      this.graphComponent.graph.edges.append(edge);
+      this.createJson()
+    })
+  }
+
   private nodeListener(inputMode: GraphEditorInputMode) {
     inputMode.addNodeCreatedListener((sender, evt) => {
       const node = evt.item
@@ -207,6 +234,10 @@ export class GraphEditorComponent implements OnInit {
     return {shape: shape, fill: fillColor, stroke: strokeColor}
   }
 
+  getEdgeStyle(stroke: string, arrow: { arrowType: ArrowType; arrowFill: string }) {
+    return {stroke: stroke, arrow: arrow}
+  }
+
   getShape(nodeStyle: INodeStyle) {
     const style = nodeStyle as ShapeNodeStyle;
     return style.shape;
@@ -226,6 +257,24 @@ export class GraphEditorComponent implements OnInit {
     const fill = style.fill as SolidColorFill
     const color = fill.color as Color;
     return this.rgbToHex(color)
+
+  }
+
+  getEdgeStrokeColor(edgeStyle: IEdgeStyle) {
+    const style = edgeStyle as PolylineEdgeStyle
+    const stroke = style.stroke as Stroke
+    const strokeFill = stroke.fill as SolidColorFill
+    const strokeColor = strokeFill.color as Color
+    return this.rgbToHex(strokeColor)
+  }
+
+  getEdgeArrowStyle(edgeStyle: IEdgeStyle) {
+    const style = edgeStyle as PolylineEdgeStyle;
+    const targetArr = style.targetArrow as Arrow;
+    const arrowType = targetArr.type;
+    const arrowFill = targetArr.fill as SolidColorFill;
+    const arrowFillColor = arrowFill.color as Color;
+    return {arrowFill:this.rgbToHex(arrowFillColor),arrowType:arrowType}
 
   }
 
@@ -322,27 +371,6 @@ export class GraphEditorComponent implements OnInit {
     this.neighbourComponent.fitGraphBounds()
   }
 
-
-  edgeListener(inputMode: GraphEditorInputMode) {
-    inputMode.createEdgeInputMode.addEdgeCreatedListener((sender, evt) => {
-
-      const edge = evt.item;
-      const sourceNode = edge.sourceNode;
-      const targetNode = edge.targetNode;
-
-      edge.tag = {
-        id: uuidv4().toString(),
-        source: sourceNode?.tag?.id,
-        target: targetNode?.tag?.id,
-        sourceLabel: sourceNode?.tag?.label ? sourceNode?.tag?.label : sourceNode?.tag?.id,
-        targetLabel: targetNode?.tag?.label ? targetNode?.tag?.label : targetNode?.tag?.id,
-        style: edge.style,
-      };
-
-      this.graphComponent.graph.edges.append(edge);
-      this.createJson()
-    })
-  }
 
   initializeDragAndDropPanel(): void {
     // get the div for panel
@@ -503,7 +531,15 @@ export class GraphEditorComponent implements OnInit {
     });
 
     const edgeNode = builder.createEdgesSource({
-      data: data.edges, id: "id", labels: ['label'], sourceId: "source", targetId: "target", style: "style"
+      data: data.edges,
+      id: "id",
+      labels: ['label'],
+      sourceId: "source",
+      targetId: "target",
+      style: (edgeStyle: any) => new PolylineEdgeStyle({
+        stroke: edgeStyle.style.stroke,
+        targetArrow: new Arrow({type: edgeStyle.style.arrow.arrowType, fill: edgeStyle.style.arrow.arrowFill})
+      })
     })
 
     edgeNode.edgeCreator.defaults.labels.style = new DefaultLabelStyle({
