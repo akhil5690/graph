@@ -95,10 +95,6 @@ export class GraphEditorComponent implements OnInit {
 
     this.getNeighbourOption();
 
-    this.graphComponent.graph.addNodeLayoutChangedListener((source, node, oldLayout) => {
-      const layout = this.getNodeLayout(oldLayout)
-      node.tag = {id: node.tag.id, style: node.tag.style, layout: layout};
-    })
 
   }
 
@@ -140,6 +136,7 @@ export class GraphEditorComponent implements OnInit {
 
     // start to prepare sidebar panel
     this.initializeDragAndDropPanel();
+
   }
 
   private leftClickListener(inputMode: GraphEditorInputMode | GraphViewerInputMode) {
@@ -274,7 +271,7 @@ export class GraphEditorComponent implements OnInit {
     const arrowType = targetArr.type;
     const arrowFill = targetArr.fill as SolidColorFill;
     const arrowFillColor = arrowFill.color as Color;
-    return {arrowFill:this.rgbToHex(arrowFillColor),arrowType:arrowType}
+    return {arrowFill: this.rgbToHex(arrowFillColor), arrowType: arrowType}
 
   }
 
@@ -517,7 +514,6 @@ export class GraphEditorComponent implements OnInit {
 
     // get the graph builder to create graph from json ie; initGraph
     const builder = new GraphBuilder()
-
     const sourceNode = builder.createNodesSource({
       data: data.nodes,
       id: "id",
@@ -552,8 +548,15 @@ export class GraphEditorComponent implements OnInit {
     edgeNode.edgeCreator.defaults.labels.layoutParameter = labelModel.createDefaultParameter();
 
     graphComponent.graph = builder.buildGraph();
+    this.initTutorialDefaults(graphComponent.graph);
+    this.layoutListener();
+  }
 
-    this.initTutorialDefaults(graphComponent.graph)
+  layoutListener() {
+    this.graphComponent.graph.addNodeLayoutChangedListener((source, node, oldLayout) => {
+      const layout = this.getNodeLayout(oldLayout)
+      node.tag = {id: node.tag.id, style: node.tag.style, layout: layout};
+    })
   }
 
   setFrame(isFilterOpen: boolean) {

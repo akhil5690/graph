@@ -62,7 +62,7 @@ export class DashboardWidgetComponent implements OnInit {
   }
 
   getSchemaData() {
-    this.cym.setLoader(true);
+    // this.cym.setLoader(true);
     this.graphService.getSchemaData({filter: false}).then((data) => {
       this.schema = data;
       this.copyData = data;// for creating the filter
