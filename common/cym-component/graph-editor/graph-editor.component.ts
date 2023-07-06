@@ -224,7 +224,7 @@ export class GraphEditorComponent implements OnInit {
       const orangeStroke = new Stroke(orangeRed.r, orangeRed.g, orangeRed.b, 220, 3).freeze()
       const decorator = this.graphComponent.graph.decorator
       const highlightShape = new ShapeNodeStyle({
-        shape: ShapeNodeShape.ROUND_RECTANGLE,
+        shape: 0,//ShapeNodeShape.ROUND_RECTANGLE,
         stroke: orangeStroke,
         fill: null
       })
