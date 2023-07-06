@@ -28,7 +28,7 @@ import {
   Size,
   SolidColorFill, Stroke, StyleDecorationZoomPolicy,
   SvgExport,
-  TraversalDirection, ImageNodeStyle
+  TraversalDirection, ImageNodeStyle, ILabel, LabelStyleDecorationInstaller
 } from "yfiles";
 import licenseValue from "../../../license.json";
 import {

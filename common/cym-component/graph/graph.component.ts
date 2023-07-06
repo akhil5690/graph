@@ -59,6 +59,7 @@ export class GraphComponents implements OnInit, OnChanges {
 
   selectedItem!: IEdge | INode | null;
   filter = false;
+  hoverBorder: any;
   @Input() data: any;
   @Input() layout: any = 'Organic';
   @ViewChild('graphComponent', {static: true}) graphContainer!: ElementRef;
@@ -263,12 +264,14 @@ export class GraphComponents implements OnInit, OnChanges {
       const hoverItem = args.item
       // e.g. add a highlight to newItem here
       const styleHighlight = this.graphComponent.highlightIndicatorManager
-      const orangeRed = Color.ORANGE_RED
-      const orangeStroke = new Stroke(orangeRed.r, orangeRed.g, orangeRed.b, 220, 3).freeze()
       const decorator = this.graphComponent.graph.decorator
+      const node1 = hoverItem
+      if (node1 instanceof INode) {
+        this.hoverBorder = node1.tag.hover_border_color
+      }
       const highlightShape = new ShapeNodeStyle({
-        shape: 1,//ShapeNodeShape.ROUND_RECTANGLE,
-        stroke: orangeStroke,
+        shape:ShapeNodeShape.ELLIPSE,
+        stroke: this.hoverBorder,
         fill: null
       })
 
@@ -281,7 +284,7 @@ export class GraphComponents implements OnInit, OnChanges {
       })
 
       const edgeStyle = new PolylineEdgeStyle({
-        stroke: orangeStroke,
+        stroke: this.hoverBorder,
         // targetArrow: IArrow.TRIANGLE,
         // sourceArrow:
       })
