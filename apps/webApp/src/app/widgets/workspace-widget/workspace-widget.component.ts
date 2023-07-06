@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'cym-workspace-widget',
@@ -6,6 +7,10 @@ import {Component} from '@angular/core';
   styleUrls: ['./workspace-widget.component.scss']
 })
 export class WorkspaceWidgetComponent {
+
+  constructor(private router: Router) {
+  }
+
   workspace: any = [{
     name: "Observables",
     cardDivision: [{
@@ -67,5 +72,9 @@ export class WorkspaceWidgetComponent {
       subHeader2: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no"
     }]
   }]
+
+  goToDashboard() {
+    this.router.navigate(['/launchpad']).then();
+  }
 }
 

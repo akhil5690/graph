@@ -1,37 +1,45 @@
 import {ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {
+  Arrow, ArrowType,
   Color,
   DefaultLabelStyle,
   DragDropEffects,
   EdgePathLabelModel,
-  EdgeSides,
+  EdgeSides, EdgeStyleDecorationInstaller,
   ExteriorLabelModel,
   GraphBuilder,
   GraphComponent,
   GraphEditorInputMode, GraphItemTypes,
   GraphOverviewComponent, GraphViewerInputMode,
   GroupNodeLabelModel,
-  GroupNodeStyle,
+  GroupNodeStyle, IArrow,
   ICommand,
-  IEdge,
+  IEdge, IEdgeStyle,
   IGraph,
   INode, INodeStyle,
   Insets, IRectangle,
   License,
   Neighborhood,
-  NodeDropInputMode,
+  NodeDropInputMode, PolylineEdgeStyle, NodeStyleDecorationInstaller,
   QueryContinueDragEventArgs,
   Rect,
   ShapeNodeShape, ShapeNodeShapeStringValues, ShapeNodeStyle,
   SimpleNode,
   Size,
-  SolidColorFill, Stroke,
+  SolidColorFill, Stroke, StyleDecorationZoomPolicy,
   SvgExport,
   TraversalDirection
 } from "yfiles";
 import licenseValue from "../../../license.json";
-import {addClass, createDemoGroupStyle, createShapeNodeStyle, initDemoStyles, removeClass} from "./demo-styles";
+import {
+  addClass,
+  createDemoGroupStyle,
+  createShapeNodeStyle,
+  initDemoStyles,
+  removeClass
+} from "./demo-styles";
 import {v4 as uuidv4} from 'uuid';
+import {graphTools} from "./graphTools";
 
 @Component({
   selector: 'cym-graph-editor',
@@ -51,52 +59,7 @@ export class GraphEditorComponent implements OnInit {
 
   private graphComponent!: GraphComponent;
   isFilterOpen: boolean = false;
-  toolBarItems = [{
-    toolName: 'save',
-    icon: 'assets/image/save.svg',
-    height: 20, width: 20
-
-  }, {
-    toolName: 'refresh',
-    icon: 'assets/image/refresh.svg',
-    height: 20, width: 20
-  }, {
-    toolName: 'zoomIn',
-    icon: 'assets/image/zoomIn.svg',
-    height: 20, width: 20
-  }, {
-    toolName: 'zoomOut',
-    icon: 'assets/image/zoomOut.svg',
-    height: 20, width: 20
-  }, {
-    toolName: 'undo',
-    icon: 'assets/image/undo.svg',
-    height: 15, width: 15
-  }, {
-    toolName: 'redo',
-    icon: 'assets/image/redo.svg',
-    height: 15, width: 15
-  },
-    {
-      toolName: 'fit',
-      icon: 'assets/image/fullscreen.svg',
-      height: 15, width: 15
-    }, {
-      toolName: 'cut',
-      icon: 'assets/image/cut.svg',
-      height: 15, width: 15
-    }, {
-      toolName: 'copy',
-      icon: 'assets/image/copy.svg',
-      height: 15, width: 15
-    }, {
-      toolName: 'paste',
-      icon: 'assets/image/paste.svg',
-      height: 15, width: 15
-
-    }
-
-  ]
+  toolBarItems = graphTools;
   selectedItem: any;
   showDetails!: boolean;
   iGraph: any = {};
@@ -108,7 +71,6 @@ export class GraphEditorComponent implements OnInit {
   selectedNode!: INode;
   private original: any;
   private originalNeighbourHood: any;
-
 
   constructor(private cdr: ChangeDetectorRef) {
   }
@@ -124,11 +86,6 @@ export class GraphEditorComponent implements OnInit {
     const divElement = this.graphContainer.nativeElement;
     this.graphComponent = new GraphComponent(divElement);
 
-    // make the graph editable
-    this.graphComponent.inputMode = new GraphEditorInputMode({
-      allowGroupingOperations: true
-    });
-
     // enable undoEngine
     this.graphComponent.graph.undoEngineEnabled = true;
 
@@ -143,6 +100,7 @@ export class GraphEditorComponent implements OnInit {
     this.initialiseNeighbourhood();
 
     this.getNeighbourOption();
+
 
   }
 
@@ -184,6 +142,7 @@ export class GraphEditorComponent implements OnInit {
 
     // start to prepare sidebar panel
     this.initializeDragAndDropPanel();
+
   }
 
   private leftClickListener(inputMode: GraphEditorInputMode | GraphViewerInputMode) {
@@ -198,6 +157,32 @@ export class GraphEditorComponent implements OnInit {
         this.getNeighbourGraph(evt.item)
 
       }
+    })
+  }
+
+  edgeListener(inputMode: GraphEditorInputMode) {
+    inputMode.createEdgeInputMode.addEdgeCreatedListener((sender, evt) => {
+
+      const edge = evt.item;
+      const stroke = this.getEdgeStrokeColor(edge.style);
+      const arrow = this.getEdgeArrowStyle(edge.style);
+      const style = this.getEdgeStyle(stroke, arrow);
+
+      console.log(style)
+      const sourceNode = edge.sourceNode;
+      const targetNode = edge.targetNode;
+
+      edge.tag = {
+        id: uuidv4().toString(),
+        source: sourceNode?.tag?.id,
+        target: targetNode?.tag?.id,
+        sourceLabel: sourceNode?.tag?.label ? sourceNode?.tag?.label : sourceNode?.tag?.id,
+        targetLabel: targetNode?.tag?.label ? targetNode?.tag?.label : targetNode?.tag?.id,
+        style: style,
+      };
+
+      this.graphComponent.graph.edges.append(edge);
+      this.createJson()
     })
   }
 
@@ -219,7 +204,7 @@ export class GraphEditorComponent implements OnInit {
 
       // add the new node to the graph
       this.graphComponent.graph.nodes.append(node);
-      this.save();
+      this.createJson();
     });
     this.hoverEvent(inputMode);
   }
@@ -231,25 +216,69 @@ export class GraphEditorComponent implements OnInit {
     inputMode.itemHoverInputMode.discardInvalidItems = false
 // handle changes on the hovered items
     inputMode.itemHoverInputMode.addHoveredItemChangedListener((sender, args) => {
-      const hoverOut = args.oldItem
-      // e.g. remove the highlight from oldItem here
-      const hoverIn = args.item
+      const hoverItem = args.item
       // e.g. add a highlight to newItem here
+      const styleHighlight = this.graphComponent.highlightIndicatorManager
+      const orangeRed = Color.ORANGE_RED
+      const orangeStroke = new Stroke(orangeRed.r, orangeRed.g, orangeRed.b, 220, 3).freeze()
+      const decorator = this.graphComponent.graph.decorator
+      const highlightShape = new ShapeNodeStyle({
+        shape: 0,//ShapeNodeShape.ROUND_RECTANGLE,
+        stroke: orangeStroke,
+        fill: null
+      })
 
-      if (hoverIn instanceof INode) {
-        const stroke = this.getStrokeColor(hoverIn.style);
-        console.log('hover in')
+      const nodeStyleHighlight = new NodeStyleDecorationInstaller({
+        nodeStyle: highlightShape,
+        // that should be slightly larger than the real node
+        margins: 5,
+        // but have a fixed size in the view coordinates
+        zoomPolicy: StyleDecorationZoomPolicy.VIEW_COORDINATES
+      })
 
-      }
-      if (hoverOut instanceof INode) {
-        const stroke = this.getStrokeColor(hoverOut.style);
-        console.log('hover out')
+      const edgeStyle = new PolylineEdgeStyle({
+        stroke: orangeStroke,
+        // targetArrow: IArrow.TRIANGLE,
+        // sourceArrow:
+      })
+      const edgeStyleHighlight = new EdgeStyleDecorationInstaller({
+        edgeStyle,
+        zoomPolicy: StyleDecorationZoomPolicy.VIEW_COORDINATES
+      })
+
+      decorator.nodeDecorator.highlightDecorator.setImplementation(nodeStyleHighlight)
+      decorator.edgeDecorator.highlightDecorator.setFactory(edge =>
+        edgeStyleHighlight
+      )
+      // first remove previous highlights
+      if (styleHighlight) {
+        styleHighlight?.clearHighlights()
+        // then see where we are hovering over, now
+        const newItem = hoverItem
+        if (newItem !== null) {
+          // we highlight the item itself
+          styleHighlight?.addHighlight(newItem)
+          if (newItem instanceof INode) {
+            // and if it's a node, we highlight all adjacent edges, too
+            for (const edge of this.graphComponent.graph.edgesAt(newItem)) {
+              styleHighlight?.addHighlight(edge)
+            }
+          } else if (newItem instanceof IEdge) {
+            // if it's an edge - we highlight the adjacent nodes
+            styleHighlight?.addHighlight(newItem)
+            styleHighlight?.addHighlight(newItem)
+          }
+        }
       }
     })
   }
 
   getStyleForSaving(shape: ShapeNodeShape, fillColor: string, strokeColor: string) {
     return {shape: shape, fill: fillColor, stroke: strokeColor}
+  }
+
+  getEdgeStyle(stroke: string, arrow: { arrowType: ArrowType; arrowFill: string }) {
+    return {stroke: stroke, arrow: arrow}
   }
 
   getShape(nodeStyle: INodeStyle) {
@@ -271,6 +300,24 @@ export class GraphEditorComponent implements OnInit {
     const fill = style.fill as SolidColorFill
     const color = fill.color as Color;
     return this.rgbToHex(color)
+
+  }
+
+  getEdgeStrokeColor(edgeStyle: IEdgeStyle) {
+    const style = edgeStyle as PolylineEdgeStyle
+    const stroke = style.stroke as Stroke
+    const strokeFill = stroke.fill as SolidColorFill
+    const strokeColor = strokeFill.color as Color
+    return this.rgbToHex(strokeColor)
+  }
+
+  getEdgeArrowStyle(edgeStyle: IEdgeStyle) {
+    const style = edgeStyle as PolylineEdgeStyle;
+    const targetArr = style.targetArrow as Arrow;
+    const arrowType = targetArr.type;
+    const arrowFill = targetArr.fill as SolidColorFill;
+    const arrowFillColor = arrowFill.color as Color;
+    return {arrowFill: this.rgbToHex(arrowFillColor), arrowType: arrowType}
 
   }
 
@@ -327,7 +374,7 @@ export class GraphEditorComponent implements OnInit {
       };
     }
 
-    this.save();
+    this.createJson();
     this.createGraph(this.iGraph, this.graphComponent)
   }
   isFullscreen: boolean = false;
@@ -368,27 +415,6 @@ export class GraphEditorComponent implements OnInit {
   }
 
 
-  edgeListener(inputMode: GraphEditorInputMode) {
-    inputMode.createEdgeInputMode.addEdgeCreatedListener((sender, evt) => {
-
-      const edge = evt.item;
-      const sourceNode = edge.sourceNode;
-      const targetNode = edge.targetNode;
-
-      edge.tag = {
-        id: uuidv4().toString(),
-        source: sourceNode?.tag?.id,
-        target: targetNode?.tag?.id,
-        sourceLabel: sourceNode?.tag?.label ? sourceNode?.tag?.label : sourceNode?.tag?.id,
-        targetLabel: targetNode?.tag?.label ? targetNode?.tag?.label : targetNode?.tag?.id,
-        style: edge.style,
-      };
-
-      this.graphComponent.graph.edges.append(edge);
-      this.save()
-    })
-  }
-
   initializeDragAndDropPanel(): void {
     // get the div for panel
     const panel = this.panelContainer.nativeElement;
@@ -414,7 +440,8 @@ export class GraphEditorComponent implements OnInit {
     const star8 = createShapeNodeStyle(ShapeNodeShape.STAR8);
     const star_up = createShapeNodeStyle(ShapeNodeShape.STAR5_UP);
     const pill = createShapeNodeStyle(ShapeNodeShape.PILL);
-
+    // const user = createImageNodeStyle("assets/image/add-user.svg")
+    // const arrowTriangle = createPolylineEdgeStyle("NONE","triangle",30)
 
     // const icon = createIconNode('assets/image/edit.svg')
     const defaultGroupNodeStyle = this.graphComponent.graph.groupNodeDefaults.style;
@@ -422,7 +449,8 @@ export class GraphEditorComponent implements OnInit {
 
     // create an array of all node styles
     const nodeStyles = [defaultNode, ellipse, rectangle, fatArrow, fatArrow2, hexagon, hexagon2, triangle, triangle2,
-      shearedRectangle, shearedRectangle2, trapez, trapez2, octagon, star5, star6, star8, star_up, pill, diamond, defaultGroupNodeStyle, newGroup]
+      shearedRectangle, shearedRectangle2, trapez, trapez2, octagon, star5, star6, star8,
+      star_up, pill, diamond, defaultGroupNodeStyle, newGroup]
 
     // create visual images for the nodes for panel
     nodeStyles.forEach((style: any): void => {
@@ -534,7 +562,6 @@ export class GraphEditorComponent implements OnInit {
 
     // get the graph builder to create graph from json ie; initGraph
     const builder = new GraphBuilder()
-
     const sourceNode = builder.createNodesSource({
       data: data.nodes,
       id: "id",
@@ -548,7 +575,15 @@ export class GraphEditorComponent implements OnInit {
     });
 
     const edgeNode = builder.createEdgesSource({
-      data: data.edges, id: "id", labels: ['label'], sourceId: "source", targetId: "target", style: "style"
+      data: data.edges,
+      id: "id",
+      labels: ['label'],
+      sourceId: "source",
+      targetId: "target",
+      style: (edgeStyle: any) => new PolylineEdgeStyle({
+        stroke: edgeStyle.style.stroke,
+        targetArrow: new Arrow({type: edgeStyle.style.arrow.arrowType, fill: edgeStyle.style.arrow.arrowFill})
+      })
     })
 
     edgeNode.edgeCreator.defaults.labels.style = new DefaultLabelStyle({
@@ -561,14 +596,34 @@ export class GraphEditorComponent implements OnInit {
     edgeNode.edgeCreator.defaults.labels.layoutParameter = labelModel.createDefaultParameter();
 
     graphComponent.graph = builder.buildGraph();
+    this.initTutorialDefaults(graphComponent.graph);
+    this.layoutListener();
+  }
 
-    this.initTutorialDefaults(graphComponent.graph)
+  layoutListener() {
+    this.graphComponent.graph.addNodeLayoutChangedListener((source, node, oldLayout) => {
+      const layout = this.getNodeLayout(oldLayout)
+      node.tag = {id: node.tag.id, style: node.tag.style, layout: layout};
+    })
   }
 
   setFrame(isFilterOpen: boolean) {
     // frame for sidebar and the graph
     this.isFilterOpen = isFilterOpen;
     this.cdr.detectChanges();
+  }
+
+  save() {
+    this.createJson();
+    localStorage.setItem('graph', JSON.stringify(this.iGraph));
+    //   api call for saving
+  }
+
+  load() {
+    // api call for loading and creating graph
+    const getJson = localStorage.getItem('graph')
+    const graphJson = getJson ? JSON.parse(getJson) : null;
+    this.createGraph(graphJson, this.graphComponent);
   }
 
   clickEvent(tool: { icon: string; toolName: string }) {
@@ -578,8 +633,8 @@ export class GraphEditorComponent implements OnInit {
         case 'save':
           this.save()
           break;
-        case 'refresh':
-          this.createGraph(this.iGraph, this.graphComponent);
+        case 'load':
+          this.load();
           break;
         case 'undo':
           ICommand.UNDO.execute(null, this.graphComponent)
@@ -601,7 +656,7 @@ export class GraphEditorComponent implements OnInit {
           break;
         case 'copy':
           this.copy();
-          this.save();
+          this.createJson();
           break;
         case 'paste':
           this.paste()
@@ -610,7 +665,7 @@ export class GraphEditorComponent implements OnInit {
     }
   }
 
-  save() {
+  createJson() {
 
     // create json
     const jsonGraph: { nodes: any[], edges: any[] } = {
@@ -647,8 +702,6 @@ export class GraphEditorComponent implements OnInit {
     });
 
     console.log(jsonGraph);
-
-    // save the json in a variable
     this.iGraph = jsonGraph;
   }
 
@@ -695,8 +748,7 @@ export class GraphEditorComponent implements OnInit {
         }
       })
     }
-    this.save();
-    console.log(this.iGraph)
+    this.createJson();
     this.createGraph(this.iGraph, this.graphComponent)
   }
 
@@ -742,7 +794,7 @@ export class GraphEditorComponent implements OnInit {
 
     ICommand.PASTE.execute(null, this.graphComponent);
 
-    this.save();
+    this.createJson();
     this.createGraph(this.iGraph, this.graphComponent);
 
     // regain the selection back
@@ -788,7 +840,7 @@ export class GraphEditorComponent implements OnInit {
       }
     }
     this.originalNeighbourHood = jsonGraph;
-    this.save();
+    this.createJson();
     this.createGraph(jsonGraph, this.neighbourComponent)
     this.neighbourComponent.contentRect = new Rect(0, 0, 100, 100);
     this.neighbourComponent.fitGraphBounds()

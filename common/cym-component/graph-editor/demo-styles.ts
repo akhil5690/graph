@@ -37,7 +37,7 @@ import {
   GroupNodeStyle,
   HorizontalTextAlignment,
   IGraph,
-  ILabelStyle,
+  ILabelStyle, ImageNodeStyle,
   Insets,
   LabelShape,
   OrientedRectangleIndicatorInstaller,
@@ -129,7 +129,7 @@ export function createDemoNodeStyle(
   colorSetName: ColorSetName = 'demo-orange'
 ): ShapeNodeStyle {
   return new ShapeNodeStyle({
-    shape:ShapeNodeShape.ROUND_RECTANGLE,
+    shape: ShapeNodeShape.ROUND_RECTANGLE,
     fill: colorSets[colorSetName].fill,
     stroke: `1.5px ${colorSets[colorSetName].stroke}`
   })
@@ -148,15 +148,29 @@ export function createShapeNodeStyle(
     stroke: `1.5px ${colorSets[colorSetName].stroke}`
   })
 }
+export function createImageNodeStyle(imageUrl:any
+):ImageNodeStyle {
+  return new ImageNodeStyle({
+    image: imageUrl,
+    // aspectRatio: imageAspectRatio,
+    // normalizedOutline: outlinePath
+  })
+}
 
-export function createIconShapeNodeStyle(
-  shape: ShapeNodeShape,
-  colorSetName: ColorSetName = 'demo-orange'
-): ShapeNodeStyle {
-  return new ShapeNodeStyle({
-    shape,
-    fill: colorSets[colorSetName].fill,
-    stroke: `1.5px ${colorSets[colorSetName].stroke}`
+export function createPolylineEdgeStyle(sourceArrow:any,targetArrow:any,smoothingLength:any
+):PolylineEdgeStyle {
+  return new PolylineEdgeStyle({
+    sourceArrow: sourceArrow,
+    targetArrow: targetArrow,
+    smoothingLength: smoothingLength
+  })
+}
+
+export function createIconNode(
+  imageUrl: string
+): ImageNodeStyle {
+  return new ImageNodeStyle({
+    image: imageUrl
   })
 }
 
