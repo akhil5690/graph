@@ -31,7 +31,7 @@ import {
   DefaultEdgePathCropper,
   DefaultLabelStyle,
   EdgeSelectionIndicatorInstaller,
-  Fill,
+  Fill, GeneralPath,
   GraphComponent,
   GroupNodeLabelModel,
   GroupNodeStyle,
@@ -41,7 +41,7 @@ import {
   Insets,
   LabelShape,
   OrientedRectangleIndicatorInstaller,
-  PolylineEdgeStyle,
+  PolylineEdgeStyle, Rect,
   RectangleIndicatorInstaller,
   ShapeNodeShape,
   ShapeNodeStyle,
@@ -148,17 +148,9 @@ export function createShapeNodeStyle(
     stroke: `1.5px ${colorSets[colorSetName].stroke}`
   })
 }
-export function createImageNodeStyle(imageUrl:any
-):ImageNodeStyle {
-  return new ImageNodeStyle({
-    image: imageUrl,
-    // aspectRatio: imageAspectRatio,
-    // normalizedOutline: outlinePath
-  })
-}
 
-export function createPolylineEdgeStyle(sourceArrow:any,targetArrow:any,smoothingLength:any
-):PolylineEdgeStyle {
+export function createPolylineEdgeStyle(sourceArrow: any, targetArrow: any, smoothingLength: any
+): PolylineEdgeStyle {
   return new PolylineEdgeStyle({
     sourceArrow: sourceArrow,
     targetArrow: targetArrow,
@@ -169,8 +161,11 @@ export function createPolylineEdgeStyle(sourceArrow:any,targetArrow:any,smoothin
 export function createIconNode(
   imageUrl: string
 ): ImageNodeStyle {
+  const outlinePath = new GeneralPath()
+  outlinePath.appendEllipse(new Rect(0, 0, 0.9, 0.9), true)
   return new ImageNodeStyle({
-    image: imageUrl
+    image: imageUrl,
+    normalizedOutline: outlinePath
   })
 }
 
