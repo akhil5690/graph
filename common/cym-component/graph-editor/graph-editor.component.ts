@@ -250,7 +250,7 @@ export class GraphEditorComponent implements OnInit {
       if (node.style instanceof ImageNodeStyle) {
         const imageStyle = node.style as ImageNodeStyle;
         const image = imageStyle.image;
-        const style = {image:image};
+        const style = {image: image};
         const layout = this.getNodeLayout(node.layout)
         node.tag = {id: uuidv4().toString(), style: style, layout: layout};
       } else if (node.style instanceof ShapeNodeStyle) {
@@ -632,11 +632,13 @@ export class GraphEditorComponent implements OnInit {
       data: data.nodes,
       id: "id",
       labels: ['label'],
-      style: (nodeStyle: any) => new ShapeNodeStyle({
+      style: (nodeStyle: any) => (!nodeStyle.style.image ? new ShapeNodeStyle({
         shape: nodeStyle.style.shape,
         fill: nodeStyle.style.fill,
         stroke: nodeStyle.style.stroke
-      }),
+      }) : new ImageNodeStyle({
+        image: nodeStyle.style.image
+      })),
       layout: (nodeLayout: INode) => new Rect(nodeLayout.layout.x, nodeLayout.layout.y, nodeLayout.layout.width, nodeLayout.layout.height)
     });
 
