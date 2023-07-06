@@ -48,3 +48,8 @@ pipelines:
             - aws ssm get-parameter --name "/${Env}/bucket/fusioncentre/source" --with-decryption --query "Parameter.Value" --output text --region $AWS_DEFAULT_REGION > s3bucket.txt
             - export S3_BUCKET=$(cat s3bucket.txt)
             - aws s3 --region $AWS_DEFAULT_REGION cp angular.zip s3://$S3_BUCKET #bvvv
+            - aws ssm delete-parameter --region $AWS_DEFAULT_REGION --name /$Env/cymonix/fusioncentre/version
+            #- aws ssm delete-parameter --region $AWS_DEFAULT_REGION --name /$Env/Cymonix/ssr/version
+            - echo $BITBUCKET_BUILD_NUMBER
+            - aws ssm put-parameter --region $AWS_DEFAULT_REGION --name /$Env/cymonix/fusioncentre/version --value 1.0.$BITBUCKET_BUILD_NUMBER --type String --overwrite
+            #- aws ssm put-parameter --region $AWS_DEFAULT_REGION --name /$Env/cymonix/ssr/version --value 1.0.$BITBUCKET_BUILD_NUMBER --type String --overwrite
