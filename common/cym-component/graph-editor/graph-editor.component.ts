@@ -524,7 +524,7 @@ export class GraphEditorComponent implements OnInit {
     })
   }
 
-  createNodeVisual(style: any): string {
+  createNodeVisual(style: ShapeNodeStyle|ImageNodeStyle): string {
 
     // get svg of the style for creating source url for image
     const exportComponent = new GraphComponent()
@@ -538,16 +538,23 @@ export class GraphEditorComponent implements OnInit {
 
   }
 
-  addNodeVisual(style: any, panel: Element): void {
+  addNodeVisual(style: ShapeNodeStyle|ImageNodeStyle, panel: Element): void {
     // set the div for image
     const div = document.createElement('div')
     div.setAttribute('style', 'width: 40px; height: 40px; margin: 10px auto; cursor: grab;');
 
     // set image
     const img = document.createElement('img')
-    img.setAttribute('style', 'width: auto; height: auto;')
-    img.setAttribute('src', this.createNodeVisual(style))
+    img.setAttribute('style', 'width: 40px; height: 40px;');
+    // img.setAttribute('src', this.createNodeVisual(style))
 
+    if (style instanceof ShapeNodeStyle) {
+      img.setAttribute('src', this.createNodeVisual(style))
+    }
+    if(style instanceof ImageNodeStyle){
+      img.setAttribute('style', 'width: 40px; height: 40px;');
+      img.setAttribute('src', <string>style.image)
+    }
     // initialise drag handler
     const startDrag = (): void => {
       const simpleNode = new SimpleNode()
