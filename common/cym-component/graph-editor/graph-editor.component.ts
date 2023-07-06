@@ -345,7 +345,7 @@ export class GraphEditorComponent implements OnInit {
             decorator.labelDecorator.highlightDecorator.setImplementation(labelStyleHighlight)
 
             styleHighlight?.addHighlight(newItem)
-            if(newItem.labels){
+            if(newItem.tag.label){
               styleHighlight.addHighlight(newItem?.labels?.get(0))
             }
 
