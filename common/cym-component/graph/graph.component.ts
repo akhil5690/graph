@@ -265,12 +265,9 @@ export class GraphComponents implements OnInit, OnChanges {
       // e.g. add a highlight to newItem here
       const styleHighlight = this.graphComponent.highlightIndicatorManager
       const decorator = this.graphComponent.graph.decorator
-      const node1 = hoverItem
-      if (node1 instanceof INode) {
-        this.hoverBorder = node1.tag.hover_border_color
-      }
+      this.hoverBorder = hoverItem.tag.hohover_border_color
       const highlightShape = new ShapeNodeStyle({
-        shape:ShapeNodeShape.ELLIPSE,
+        shape: ShapeNodeShape.ELLIPSE,
         stroke: this.hoverBorder,
         fill: null
       })
@@ -315,12 +312,12 @@ export class GraphComponents implements OnInit, OnChanges {
             const labelStyle = new DefaultLabelStyle({
               backgroundFill: 'white',
               textSize: 10,
-              verticalTextAlignment:'center',
-              horizontalTextAlignment:'center'
+              verticalTextAlignment: 'center',
+              horizontalTextAlignment: 'center'
             });
             const labelStyleHighlight = new LabelStyleDecorationInstaller({
               labelStyle,
-              zoomPolicy:StyleDecorationZoomPolicy.WORLD_COORDINATES
+              zoomPolicy: StyleDecorationZoomPolicy.WORLD_COORDINATES
             })
             decorator.labelDecorator.highlightDecorator.setImplementation(labelStyleHighlight)
 
@@ -348,12 +345,12 @@ export class GraphComponents implements OnInit, OnChanges {
     }
   }
 
-  checkFindings(evt: ItemClickedEventArgs<IModelItem>){
-    if (evt.item instanceof INode && evt.item.tag.findings === 'True')
-    {
+  checkFindings(evt: ItemClickedEventArgs<IModelItem>) {
+    if (evt.item instanceof INode && evt.item.tag.findings === 'True') {
       this.findingsClicked.emit(evt.item.tag)
     }
   }
+
   private buildLayout(graphComponent: GraphComponent, layoutType: string) {
     // set layout
     const layout = this.prepareLayout(layoutType);
