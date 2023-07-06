@@ -57,11 +57,11 @@ label {
 
 //overlay modal
 .p-dialog .p-dialog-content {
-  padding: var(--unit);
+  padding: var(--padding);
 }
 
 .p-dialog .p-dialog-footer {
-  padding: var(--unit);
+  padding: var(--padding);
 }
 
 .card-main {
@@ -99,7 +99,7 @@ label {
 .card-divisions {
   display: grid;
   grid-template-columns: repeat(auto-fill, 10rem);
-  column-gap: var(--unit);
+  column-gap: var(--grid-gap);
 }
 
 
