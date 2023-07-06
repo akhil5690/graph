@@ -28,7 +28,7 @@ import {
   Size,
   SolidColorFill, Stroke, StyleDecorationZoomPolicy,
   SvgExport,
-  TraversalDirection, ImageNodeStyle
+  TraversalDirection, ImageNodeStyle, LabelStyleDecorationInstaller
 } from "yfiles";
 import licenseValue from "../../../license.json";
 import {
@@ -39,6 +39,7 @@ import {
   removeClass
 } from "./demo-styles";
 import {v4 as uuidv4} from 'uuid';
+import {NONE_TYPE} from "@angular/compiler";
 
 // import {graphTools} from "./graphTools";
 
@@ -257,7 +258,7 @@ export class GraphEditorComponent implements OnInit {
         shape = this.getShape(node.style);
         fillColor = this.getFillColor(node.style);
         strokeColor = this.getStrokeColor(node.style);
-        style = this.getStyleForSaving(shape, fillColor, strokeColor,null);
+        style = this.getStyleForSaving(shape, fillColor, strokeColor, null);
         layout = this.getNodeLayout(node.layout);
         // set node tag for creating json
         node.tag = {id: uuidv4().toString(), style: style, layout: layout};
@@ -331,16 +332,28 @@ export class GraphEditorComponent implements OnInit {
             }
           } else if (newItem instanceof IEdge) {
             // if it's an edge - we highlight the adjacent nodes
+            const labelStyle = new DefaultLabelStyle({
+              backgroundFill: 'white',
+              textSize: 10,
+              verticalTextAlignment:'center',
+              horizontalTextAlignment:'center'
+            });
+            const labelStyleHighlight = new LabelStyleDecorationInstaller({
+              labelStyle,
+              zoomPolicy:StyleDecorationZoomPolicy.WORLD_COORDINATES
+            })
+            decorator.labelDecorator.highlightDecorator.setImplementation(labelStyleHighlight)
+
             styleHighlight?.addHighlight(newItem)
-            styleHighlight?.addHighlight(newItem)
+            styleHighlight.addHighlight(newItem.labels.get(0))
           }
         }
       }
     })
   }
 
-  getStyleForSaving(shape: ShapeNodeShape, fillColor: string, strokeColor: string,image:any) {
-    return {shape: shape, fill: fillColor, stroke: strokeColor,image}
+  getStyleForSaving(shape: ShapeNodeShape, fillColor: string, strokeColor: string, image: any) {
+    return {shape: shape, fill: fillColor, stroke: strokeColor, image}
   }
 
   getEdgeStyle(stroke: string, arrow: { arrowType: ArrowType; arrowFill: string }) {
