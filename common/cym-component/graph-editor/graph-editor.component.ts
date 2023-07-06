@@ -248,7 +248,11 @@ export class GraphEditorComponent implements OnInit {
       }
 
       if (node.style instanceof ImageNodeStyle) {
-
+        const imageStyle = node.style as ImageNodeStyle;
+        const image = imageStyle.image;
+        const style = {image:image};
+        const layout = this.getNodeLayout(node.layout)
+        node.tag = {id: uuidv4().toString(), style: style, layout: layout};
       } else if (node.style instanceof ShapeNodeStyle) {
         shape = this.getShape(node.style);
         fillColor = this.getFillColor(node.style);
@@ -870,7 +874,6 @@ export class GraphEditorComponent implements OnInit {
 
 
   getNeighbourGraph(node: INode) {
-    console.log('o', this.iGraph)
     this.original = {...this.iGraph}
     const jsonGraph: { nodes: any[], edges: any[] } = {
       nodes: [],
