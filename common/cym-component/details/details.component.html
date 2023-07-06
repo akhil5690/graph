@@ -11,7 +11,7 @@
 </div>
 
 <div *ngIf="type === 'editor'">
-  <div class="details-container" *ngIf="info[0].source">
+  <div class="details-container" *ngIf="info[0]?.source && info[0]?.id">
     <div class="title label">EDGE</div>
     <div class="grid">
       <div class="subtitle label">
@@ -47,7 +47,7 @@
       <cym-button [class]="'solid-button'" [label]="'Apply'" (click)="submit(edgeForm)"></cym-button>
     </div>
   </div>
-  <div class="details-container" *ngIf="!info[0].source">
+  <div class="details-container" *ngIf="!info[0]?.source && info[0]?.id">
     <div class="title label">NODE</div>
     <div class="grid">
       <div class="subtitle label">

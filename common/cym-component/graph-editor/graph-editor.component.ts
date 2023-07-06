@@ -28,7 +28,7 @@ import {
   Size,
   SolidColorFill, Stroke, StyleDecorationZoomPolicy,
   SvgExport,
-  TraversalDirection
+  TraversalDirection, ImageNodeStyle
 } from "yfiles";
 import licenseValue from "../../../license.json";
 import {
@@ -234,19 +234,30 @@ export class GraphEditorComponent implements OnInit {
 
   private nodeListener(inputMode: GraphEditorInputMode) {
     inputMode.addNodeCreatedListener((sender, evt) => {
-      const node = evt.item
-      const shape = this.getShape(node.style);
-      const fillColor = this.getFillColor(node.style)
-      const strokeColor = this.getStrokeColor(node.style);
-      const style = this.getStyleForSaving(shape, fillColor, strokeColor);
-      const layout = this.getNodeLayout(node.layout);
+      const node = evt.item;
+      let shape = null;
+      let fillColor = null;
+      let strokeColor = null;
+      let style = null;
+      let layout = null;
+
 
       if (node.style instanceof GroupNodeStyle) {
         console.log('is group')
       }
 
-      // set node tag for creating json
-      node.tag = {id: uuidv4().toString(), style: style, layout: layout};
+      if (node.style instanceof ImageNodeStyle) {
+
+      } else if (node.style instanceof ShapeNodeStyle) {
+        shape = this.getShape(node.style);
+        fillColor = this.getFillColor(node.style);
+        strokeColor = this.getStrokeColor(node.style);
+        style = this.getStyleForSaving(shape, fillColor, strokeColor);
+        layout = this.getNodeLayout(node.layout);
+        // set node tag for creating json
+        node.tag = {id: uuidv4().toString(), style: style, layout: layout};
+      }
+
 
       // add the new node to the graph
       this.graphComponent.graph.nodes.append(node);
