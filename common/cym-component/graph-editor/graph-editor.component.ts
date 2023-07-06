@@ -20,7 +20,7 @@ import {
   Insets, IRectangle,
   License,
   Neighborhood,
-  NodeDropInputMode, PolylineEdgeStyle,NodeStyleDecorationInstaller,
+  NodeDropInputMode, PolylineEdgeStyle, NodeStyleDecorationInstaller,
   QueryContinueDragEventArgs,
   Rect,
   ShapeNodeShape, ShapeNodeShapeStringValues, ShapeNodeStyle,
@@ -239,8 +239,8 @@ export class GraphEditorComponent implements OnInit {
 
       const edgeStyle = new PolylineEdgeStyle({
         stroke: orangeStroke,
-        // targetArrow: dummyCroppingArrow,
-        // sourceArrow: dummyCroppingArrow
+        // targetArrow: IArrow.TRIANGLE,
+        // sourceArrow:
       })
       const edgeStyleHighlight = new EdgeStyleDecorationInstaller({
         edgeStyle,
@@ -252,21 +252,23 @@ export class GraphEditorComponent implements OnInit {
         edgeStyleHighlight
       )
       // first remove previous highlights
-      styleHighlight.clearHighlights()
-      // then see where we are hovering over, now
-      const newItem = hoverItem
-      if (newItem !== null) {
-        // we highlight the item itself
-        styleHighlight.addHighlight(newItem)
-        if (newItem instanceof INode) {
-          // and if it's a node, we highlight all adjacent edges, too
-          for (const edge of this.graphComponent.graph.edgesAt(newItem)) {
-            styleHighlight.addHighlight(edge)
+      if (styleHighlight) {
+        styleHighlight?.clearHighlights()
+        // then see where we are hovering over, now
+        const newItem = hoverItem
+        if (newItem !== null) {
+          // we highlight the item itself
+          styleHighlight?.addHighlight(newItem)
+          if (newItem instanceof INode) {
+            // and if it's a node, we highlight all adjacent edges, too
+            for (const edge of this.graphComponent.graph.edgesAt(newItem)) {
+              styleHighlight?.addHighlight(edge)
+            }
+          } else if (newItem instanceof IEdge) {
+            // if it's an edge - we highlight the adjacent nodes
+            styleHighlight?.addHighlight(newItem)
+            styleHighlight?.addHighlight(newItem)
           }
-        } else if (newItem instanceof IEdge) {
-          // if it's an edge - we highlight the adjacent nodes
-          styleHighlight.addHighlight(newItem.tag.sourceNode)
-          styleHighlight.addHighlight(newItem.tag.targetNode)
         }
       }
     })
@@ -440,6 +442,8 @@ export class GraphEditorComponent implements OnInit {
     const star_up = createShapeNodeStyle(ShapeNodeShape.STAR5_UP);
     const pill = createShapeNodeStyle(ShapeNodeShape.PILL);
     // const user = createImageNodeStyle("assets/image/add-user.svg")
+    // const arrowTriangle = createPolylineEdgeStyle("NONE","triangle",30)
+
     // const icon = createIconNode('assets/image/edit.svg')
     const defaultGroupNodeStyle = this.graphComponent.graph.groupNodeDefaults.style;
     const newGroup = createDemoGroupStyle({colorSetName: 'demo-palette-23', foldingEnabled: true})
