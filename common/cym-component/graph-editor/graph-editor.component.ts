@@ -39,7 +39,7 @@ import {
   removeClass
 } from "./demo-styles";
 import {v4 as uuidv4} from 'uuid';
-import {graphTools} from "./graphTools";
+// import {graphTools} from "./graphTools";
 
 @Component({
   selector: 'cym-graph-editor',
@@ -59,7 +59,52 @@ export class GraphEditorComponent implements OnInit {
 
   private graphComponent!: GraphComponent;
   isFilterOpen: boolean = false;
-  toolBarItems = graphTools;
+  toolBarItems = [{
+    toolName: 'save',
+    icon: 'assets/image/save.svg',
+    height: 20, width: 20
+
+  }, {
+    toolName: 'refresh',
+    icon: 'assets/image/refresh.svg',
+    height: 20, width: 20
+  }, {
+    toolName: 'zoomIn',
+    icon: 'assets/image/zoomIn.svg',
+    height: 20, width: 20
+  }, {
+    toolName: 'zoomOut',
+    icon: 'assets/image/zoomOut.svg',
+    height: 20, width: 20
+  }, {
+    toolName: 'undo',
+    icon: 'assets/image/undo.svg',
+    height: 15, width: 15
+  }, {
+    toolName: 'redo',
+    icon: 'assets/image/redo.svg',
+    height: 15, width: 15
+  },
+    {
+      toolName: 'fit',
+      icon: 'assets/image/fullscreen.svg',
+      height: 15, width: 15
+    }, {
+      toolName: 'cut',
+      icon: 'assets/image/cut.svg',
+      height: 15, width: 15
+    }, {
+      toolName: 'copy',
+      icon: 'assets/image/copy.svg',
+      height: 15, width: 15
+    }, {
+      toolName: 'paste',
+      icon: 'assets/image/paste.svg',
+      height: 15, width: 15
+
+    }
+
+  ];
   selectedItem: any;
   showDetails!: boolean;
   iGraph: any = {};
