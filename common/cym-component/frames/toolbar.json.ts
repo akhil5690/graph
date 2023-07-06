@@ -21,7 +21,7 @@ export const toolbar = [{
     "position": "top",
     "type": "image",
     "sector": "3",
-    "height": "22",
+    "height": "24",
     "width": "22",
   },
   {

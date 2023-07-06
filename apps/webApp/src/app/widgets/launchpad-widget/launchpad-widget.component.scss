@@ -16,14 +16,16 @@ cym-launchpad-widget {
     padding: var(--unit);
     height: var(--top-toolbar-height);
     color: var(--primary-text-color);
-    gap: var(--unit);
+    gap: calc(var(--unit)/2);
     //background-color: black;
   }
 
   .icon-grey{
     color: var(--icon-grey);
   }
-
+  .p-breadcrumb ul li:last-child .p-menuitem-text {
+    color: var(--primary-color);
+  }
 
   .graph-container {
     display: grid;
