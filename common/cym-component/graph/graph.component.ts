@@ -29,7 +29,7 @@ import {
   INode,
   INodeStyle,
   InteriorLabelModel, ItemClickedEventArgs,
-  LabelCreator,
+  LabelCreator, LabelStyleDecorationInstaller,
   LayoutExecutor,
   License, Neighborhood,
   NodesSource, NodeStyleDecorationInstaller,
@@ -309,8 +309,20 @@ export class GraphComponents implements OnInit, OnChanges {
             }
           } else if (newItem instanceof IEdge) {
             // if it's an edge - we highlight the adjacent nodes
+            const labelStyle = new DefaultLabelStyle({
+              backgroundFill: 'white',
+              textSize: 10,
+              verticalTextAlignment:'center',
+              horizontalTextAlignment:'center'
+            });
+            const labelStyleHighlight = new LabelStyleDecorationInstaller({
+              labelStyle,
+              zoomPolicy:StyleDecorationZoomPolicy.WORLD_COORDINATES
+            })
+            decorator.labelDecorator.highlightDecorator.setImplementation(labelStyleHighlight)
+
             styleHighlight?.addHighlight(newItem)
-            styleHighlight?.addHighlight(newItem)
+            styleHighlight.addHighlight(newItem.labels.get(0))
           }
         }
       }
