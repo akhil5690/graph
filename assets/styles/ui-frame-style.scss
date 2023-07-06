@@ -63,7 +63,7 @@
 
 .header {
   grid-area: header;
-  background-color: var(--main-bg-color);
+  background-color:var(--theme-color-one);
 }
 
 .sidebar {
@@ -75,18 +75,19 @@
 .main {
   grid-area: main;
   color: var(--primary-text-color);
-  background-color: var(--main-bg-color);
+  background-color: var(--main-background);
   max-height: 100vh calc(2 * var(--top-toolbar-height));
   overflow-y: auto;
 }
 
 .footer {
   grid-area: footer;
-  color: var(--primary-text-color);
-  background-color: var(--secondary-background-color);
+  color: var(--secondary-text-color);
+  background-color: var(--theme-color-one);
   align-items: center;
   justify-items: center;
   display: grid;
+  font-size: 0.86rem;
 }
 
 .toggle {

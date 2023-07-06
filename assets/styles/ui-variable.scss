@@ -2,7 +2,7 @@
 
   //font size-
   --font-size: var(--unit);
-  --font24 : 1.7rem;
+  --font24 : 1.6rem;
   --font60 : 4.2rem;
   --font-weight-normal: 400;
   --font-weight-bold: 600;
@@ -48,35 +48,28 @@
   --pink2: #f1a7b4;
   --pink3: #f7d8e3;
   --primary-light-color: rgb(246 59 159 / 12%);
-
   --third-background-color: rgb(232, 232, 232);
   --secondary-background-color: #e7e7e7;
   --border-radius: calc(var(--unit) / 2);
   --grey-color:  #e6e6e6;
   --icon-grey:#585858;
-
   --dark-grey-color: #727272;
-
   --base-height:100%;
   --base-width: 100%;
-
   --border-width: 1px;
-
   --dark-theme: #171717;
   --bg-image-size: 1323px 804px;
-  --top-toolbar-height: 3.59rem;
+  --top-toolbar-height: 2.85rem;
   --column-graph-frame: 80vw 20vw;
   --column-menu-frame: 97vw 3vw;
   --graph-top-toolbar-height: 3rem;
-  --bottom-toolbar-height: 7vh;
+  --bottom-toolbar-height: 2.14rem;
   --main-height: calc(100vh - (var(--top-toolbar-height) + var(--bottom-toolbar-height)));
   --main-no-footer: calc(100vh - (var(--top-toolbar-height)));
   --sidebar-width: calc(var(--unit)*15);
-
   --component-header-color: rgb(214 27 119 / 51%);
-
   --vertical-cards-loop: calc(var(--unit)*15);
-  --card-height: calc(var(--unit)*13);
+  --card-height: calc(var(--unit)*11);
 
 
 

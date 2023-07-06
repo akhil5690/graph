@@ -9,7 +9,7 @@ export const toolbar = [{
   "top": "8",
   "left": "16",
 }, {
-  "url": "../../../../assets/image/chat.svg",
+  "url": "../../../../assets/image/help-web-button.svg",
   "position": "top",
   "type": "image",
   "sector": "3",

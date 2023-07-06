@@ -2,16 +2,16 @@ cym-workspace-widget{
   .workstation{
     display: grid;
     grid-template-columns: 3fr 2fr;
-    gap:var(--unit);
-    padding: var(--unit);
-    height:100%;
+    gap:var(--grid-gap);
+    padding: var(--padding);
+    height:var(--base-height);
 
   }
 
   .section1{
     display:grid;
     justify-content: center;
-    height: 100%;
+    height: var(--base-height);
     align-items: center;
     text-align: center;
   }
@@ -20,11 +20,7 @@ cym-workspace-widget{
     display: grid;
    padding: 1rem 2rem 1rem 2rem ;
 
-
   }
-
-
-
 
   .section2{
     display: grid;
@@ -33,8 +29,8 @@ cym-workspace-widget{
     text-align: center;
     justify-content: center;
     grid-gap: var(--unit);
-    height:100%;
-    width: 100%;
+    height:var(--base-height);
+    width: var(--base-height);
 
   }
 
@@ -43,16 +39,17 @@ cym-workspace-widget{
     grid-template-columns: 1fr;
     grid-template-rows: auto auto ;
     justify-content: center;
-    height:100%;
-    width: 100%;
+    height:var(--base-height);
+    width: var(--base-height);
     background-color:var(--primary-background-color)
 
   }
 
   .section2-head{
     text-align:left;
-    padding-left:var(--unit);
-    padding-top: var(--unit);
+    padding-left:var(--padding);
+    padding-top: var(--padding);
+    font-weight: var(--font-weight-bold);
 
 
   }
