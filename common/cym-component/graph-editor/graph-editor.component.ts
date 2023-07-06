@@ -33,12 +33,13 @@ import {
 import licenseValue from "../../../license.json";
 import {
   addClass,
-  createDemoGroupStyle,
+  createDemoGroupStyle, createIconNode,
   createShapeNodeStyle,
   initDemoStyles,
   removeClass
 } from "./demo-styles";
 import {v4 as uuidv4} from 'uuid';
+
 // import {graphTools} from "./graphTools";
 
 @Component({
@@ -488,14 +489,14 @@ export class GraphEditorComponent implements OnInit {
     // const user = createImageNodeStyle("assets/image/add-user.svg")
     // const arrowTriangle = createPolylineEdgeStyle("NONE","triangle",30)
 
-    // const icon = createIconNode('assets/image/edit.svg')
-    const defaultGroupNodeStyle = this.graphComponent.graph.groupNodeDefaults.style;
-    const newGroup = createDemoGroupStyle({colorSetName: 'demo-palette-23', foldingEnabled: true})
+    const icon = createIconNode('assets/image/edit.svg')
+    // const defaultGroupNodeStyle = this.graphComponent.graph.groupNodeDefaults.style;
+    // const newGroup = createDemoGroupStyle({colorSetName: 'demo-palette-23', foldingEnabled: true})
 
     // create an array of all node styles
     const nodeStyles = [defaultNode, ellipse, rectangle, fatArrow, fatArrow2, hexagon, hexagon2, triangle, triangle2,
       shearedRectangle, shearedRectangle2, trapez, trapez2, octagon, star5, star6, star8,
-      star_up, pill, diamond, defaultGroupNodeStyle, newGroup]
+      star_up, pill, diamond, icon]
 
     // create visual images for the nodes for panel
     nodeStyles.forEach((style: any): void => {
