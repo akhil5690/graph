@@ -16,7 +16,7 @@ cym-launchpad-widget {
     padding: var(--unit);
     height: var(--top-toolbar-height);
     color: var(--primary-text-color);
-    gap: calc(var(--unit)/2);
+    gap: var(--unit);
     //background-color: black;
   }
 
