@@ -148,6 +148,23 @@ export function createShapeNodeStyle(
     stroke: `1.5px ${colorSets[colorSetName].stroke}`
   })
 }
+export function createImageNodeStyle(imageUrl:any
+):ImageNodeStyle {
+  return new ImageNodeStyle({
+    image: imageUrl,
+    // aspectRatio: imageAspectRatio,
+    // normalizedOutline: outlinePath
+  })
+}
+
+export function createPolylineEdgeStyle(sourceArrow:any,targetArrow:any,smoothingLength:any
+):PolylineEdgeStyle {
+  return new PolylineEdgeStyle({
+    sourceArrow: sourceArrow,
+    targetArrow: targetArrow,
+    smoothingLength: smoothingLength
+  })
+}
 
 export function createIconNode(
   imageUrl: string

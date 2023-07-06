@@ -3,13 +3,13 @@ cym-bottom-toolbar {
     display: grid;
     height: var(--bottom-toolbar-height);
     grid-template-columns:4fr 1fr;
-    grid-gap: var(--unit);
-    padding-right: var(--unit);
+    grid-gap: var(--grid-gap);
+    padding-right: var(--padding);
   }
   .right-toolbar{
     display: grid;
     grid-template-columns: auto auto;
     align-items: center;
-    grid-gap: 1rem;
+    grid-gap: var(--grid-gap);
   }
 }
