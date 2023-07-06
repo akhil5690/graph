@@ -7,9 +7,10 @@ cym-top-toolbar {
     padding: var(--padding);
     height: var(--base-height);
     color: var(--primary-text-color);
-    gap: var(--grid-gap);
+    gap: calc(var(--grid-gap)/2);
     width: var(--base-width);
     background-color: var(--theme-color-one);
+
 
   }
 
@@ -20,8 +21,9 @@ cym-top-toolbar {
   }
 
   .other-options {
-    display: flex;
-    gap: var(--grid-gap);
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: calc(var(--grid-gap)/2);
     color: var(--primary-color-text);
     align-items:center;
 

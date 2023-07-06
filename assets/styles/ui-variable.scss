@@ -1,33 +1,67 @@
 :root {
+
+  //font size-
+  --font-size: var(--unit);
+  --font24 : 1.7rem;
+  --font60 : 4.2rem;
+  --font-weight-normal: 400;
+  --font-weight-bold: 600;
+  --font-weight-bolder: 1000;
+  --unit: 1rem;
+  --large-screen-font-size: 14px;
+  --medium-screen-font-size: 10px;
+  --font-family: 'san-fransisco', Roboto Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-family-bold: 'san-fransisco-bold', Roboto Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+//background color-
   --primary-background-color: white;
-  --main-bg-color: #EBEDEF;
+  --main-background:#EBEDEF;
+
+  //theme color-
   --primary-color: #2FB2C3;
   --primary-dark-color: #2896a4;
+  --theme-color-one: #292E3A;
+  --theme-color-two: #2FB2C3;
+
+  //validation error color-
   --red: #FF0000;
+
+  //text color-
+  --primary-text-color: black;
+  --secondary-text-color: white;
+
+  //grid gap-
+  --grid-gap : var(--unit);
+
+  //padding-
+  --padding : var(--unit);
+
+  //margin-
+  --margin : var(--unit) ;
+  --header-margin-bottom: 0 0 1rem 0;
+
+
+
+
+
+
   --pink2: #f1a7b4;
   --pink3: #f7d8e3;
   --primary-light-color: rgb(246 59 159 / 12%);
-  --primary-text-color: black;
-  --secondary-text-color: white;
+
   --third-background-color: rgb(232, 232, 232);
   --secondary-background-color: #e7e7e7;
   --border-radius: calc(var(--unit) / 2);
   --grey-color:  #e6e6e6;
   --icon-grey:#585858;
+
   --dark-grey-color: #727272;
-  --font-weight-normal: 400;
-  --font-weight-bold: 600;
-  --font-weight-bolder: 1000;
-  --unit: 1rem;
 
   --base-height:100%;
   --base-width: 100%;
-  --font-size: var(--unit);
-  --large-screen-font-size: 14px;
-  --medium-screen-font-size: 10px;
+
   --border-width: 1px;
-  --font-family: 'san-fransisco', Roboto Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  --font-family-bold: 'san-fransisco-bold', Roboto Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
   --dark-theme: #171717;
   --bg-image-size: 1323px 804px;
   --top-toolbar-height: 3.59rem;
@@ -40,20 +74,10 @@
   --sidebar-width: calc(var(--unit)*15);
 
   --component-header-color: rgb(214 27 119 / 51%);
-  --header-margin-bottom: 0 0 1rem 0;
-
-  --theme-color-one: #292E3A;
-  --theme-color-two: #2FB2C3;
 
   --vertical-cards-loop: calc(var(--unit)*15);
   --card-height: calc(var(--unit)*13);
 
-  --font24 : 1.7rem;
-  --font60 : 4.2rem;
-
-  --grid-gap : var(--unit);
-  --padding : var(--unit);
-  --margin : var(--unit) ;
 
 
 }

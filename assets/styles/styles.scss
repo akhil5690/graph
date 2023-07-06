@@ -14,7 +14,8 @@
 
 html, body {
   margin: 0;
-  background-color: var(--primary-background-color);
+  //background-color: var(--primary-background-color);
+  background-color: var(--main-background);
   font-size: var(--large-screen-font-size); // 14px = 1rem
   font-family: var(--font-family);
 
@@ -24,6 +25,7 @@ html, body {
   html, body {
     background-size: var(--bg-image-size);
     font-size: var(--medium-screen-font-size);
+
   }
 }
 
