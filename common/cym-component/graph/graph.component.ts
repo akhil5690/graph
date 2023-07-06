@@ -13,9 +13,9 @@ import {
 import {
   Arrow,
   ArrowType,
-  CircularLayout,
+  CircularLayout, Color,
   DefaultLabelStyle, EdgePathLabelModel,
-  EdgesSource, ExteriorLabelModel,
+  EdgesSource, EdgeStyleDecorationInstaller, ExteriorLabelModel,
   GraphBuilder,
   GraphComponent,
   GraphEditorInputMode,
@@ -32,13 +32,13 @@ import {
   LabelCreator,
   LayoutExecutor,
   License, Neighborhood,
-  NodesSource,
+  NodesSource, NodeStyleDecorationInstaller,
   OrganicLayout, OrthogonalLayout,
   Point,
   PolylineEdgeStyle, RadialLayout,
-  Rect,
+  Rect, ShapeNodeShape,
   ShapeNodeStyle,
-  Size, TraversalDirection
+  Size, Stroke, StyleDecorationZoomPolicy, TraversalDirection
 } from "yfiles";
 // import {data} from './data'
 import licenseValue from 'license.json';
@@ -250,7 +250,71 @@ export class GraphComponents implements OnInit, OnChanges {
       showHandleItems: GraphItemTypes.NONE
     });
     this.leftClickListener(inputMode);
+    this.hoverEvent(inputMode);
+  }
 
+  hoverEvent(inputMode: GraphEditorInputMode) {
+    inputMode.itemHoverInputMode.enabled = true
+    inputMode.itemHoverInputMode.hoverItems = GraphItemTypes.EDGE | GraphItemTypes.NODE
+// ignore items of other types which might be in front of them
+    inputMode.itemHoverInputMode.discardInvalidItems = false
+// handle changes on the hovered items
+    inputMode.itemHoverInputMode.addHoveredItemChangedListener((sender, args) => {
+      const hoverItem = args.item
+      // e.g. add a highlight to newItem here
+      const styleHighlight = this.graphComponent.highlightIndicatorManager
+      const orangeRed = Color.ORANGE_RED
+      const orangeStroke = new Stroke(orangeRed.r, orangeRed.g, orangeRed.b, 220, 3).freeze()
+      const decorator = this.graphComponent.graph.decorator
+      const highlightShape = new ShapeNodeStyle({
+        shape: 1,//ShapeNodeShape.ROUND_RECTANGLE,
+        stroke: orangeStroke,
+        fill: null
+      })
+
+      const nodeStyleHighlight = new NodeStyleDecorationInstaller({
+        nodeStyle: highlightShape,
+        // that should be slightly larger than the real node
+        margins: 5,
+        // but have a fixed size in the view coordinates
+        zoomPolicy: StyleDecorationZoomPolicy.VIEW_COORDINATES
+      })
+
+      const edgeStyle = new PolylineEdgeStyle({
+        stroke: orangeStroke,
+        // targetArrow: IArrow.TRIANGLE,
+        // sourceArrow:
+      })
+      const edgeStyleHighlight = new EdgeStyleDecorationInstaller({
+        edgeStyle,
+        zoomPolicy: StyleDecorationZoomPolicy.VIEW_COORDINATES
+      })
+
+      decorator.nodeDecorator.highlightDecorator.setImplementation(nodeStyleHighlight)
+      decorator.edgeDecorator.highlightDecorator.setFactory(edge =>
+        edgeStyleHighlight
+      )
+      // first remove previous highlights
+      if (styleHighlight) {
+        styleHighlight?.clearHighlights()
+        // then see where we are hovering over, now
+        const newItem = hoverItem
+        if (newItem !== null) {
+          // we highlight the item itself
+          styleHighlight?.addHighlight(newItem)
+          if (newItem instanceof INode) {
+            // and if it's a node, we highlight all adjacent edges, too
+            for (const edge of this.graphComponent.graph.edgesAt(newItem)) {
+              styleHighlight?.addHighlight(edge)
+            }
+          } else if (newItem instanceof IEdge) {
+            // if it's an edge - we highlight the adjacent nodes
+            styleHighlight?.addHighlight(newItem)
+            styleHighlight?.addHighlight(newItem)
+          }
+        }
+      }
+    })
   }
 
   private leftClickListener(inputMode: GraphViewerInputMode | GraphEditorInputMode) {

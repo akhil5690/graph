@@ -19,9 +19,11 @@ export class DetailsComponent implements OnChanges, OnInit {
   typeOptions: any;
 
   ngOnChanges(): void {
-    this.headers = Object.keys(this.data[0]);
-    console.log(this.data, this.headers)
-    this.getForm();
+    if (this.data[0]) {
+      this.headers = Object.keys(this.data[0]);
+      console.log(this.data, this.headers)
+      this.getForm();
+    }
   }
 
   getForm() {
@@ -40,18 +42,18 @@ export class DetailsComponent implements OnChanges, OnInit {
     },]
     if (this.info[0].source && this.info[0].target) {
       this.edgeForm = {
-        id: this.info[0].id,
-        label: this.info[0].label,
-        source: this.info[0].source,
-        target: this.info[0].target,
-        sourceLabel: this.info[0].sourceLabel,
-        targetLabel: this.info[0].targetLabel,
+        id: this.info[0]?.id,
+        label: this.info[0]?.label,
+        source: this.info[0]?.source,
+        target: this.info[0]?.target,
+        sourceLabel: this.info[0]?.sourceLabel,
+        targetLabel: this.info[0]?.targetLabel,
       };
     } else {
       this.nodeForm = {
-        id: this.info[0].id,
-        label: this.info[0].label,
-        properties: this.info[0].properties ? this.info[0].properties : []
+        id: this.info[0]?.id,
+        label: this.info[0]?.label,
+        properties: this.info[0]?.properties ? this.info[0]?.properties : []
       };
     }
   }
