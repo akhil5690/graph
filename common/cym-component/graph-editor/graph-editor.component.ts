@@ -250,14 +250,14 @@ export class GraphEditorComponent implements OnInit {
       if (node.style instanceof ImageNodeStyle) {
         const imageStyle = node.style as ImageNodeStyle;
         const image = imageStyle.image;
-        const style = {image: image};
+        const style = {fill: null, shape: null, stroke: null, image: image};
         const layout = this.getNodeLayout(node.layout)
         node.tag = {id: uuidv4().toString(), style: style, layout: layout};
       } else if (node.style instanceof ShapeNodeStyle) {
         shape = this.getShape(node.style);
         fillColor = this.getFillColor(node.style);
         strokeColor = this.getStrokeColor(node.style);
-        style = this.getStyleForSaving(shape, fillColor, strokeColor);
+        style = this.getStyleForSaving(shape, fillColor, strokeColor,null);
         layout = this.getNodeLayout(node.layout);
         // set node tag for creating json
         node.tag = {id: uuidv4().toString(), style: style, layout: layout};
@@ -289,7 +289,7 @@ export class GraphEditorComponent implements OnInit {
         this.shape = node1.tag.style.shape
       }
       const highlightShape = new ShapeNodeStyle({
-        shape: this.shape,//ShapeNodeShape.ROUND_RECTANGLE,
+        shape: this.shape ? this.shape : 0,//ShapeNodeShape.ROUND_RECTANGLE,
         stroke: orangeStroke,
         fill: null
       })
@@ -339,8 +339,8 @@ export class GraphEditorComponent implements OnInit {
     })
   }
 
-  getStyleForSaving(shape: ShapeNodeShape, fillColor: string, strokeColor: string) {
-    return {shape: shape, fill: fillColor, stroke: strokeColor}
+  getStyleForSaving(shape: ShapeNodeShape, fillColor: string, strokeColor: string,image:any) {
+    return {shape: shape, fill: fillColor, stroke: strokeColor,image}
   }
 
   getEdgeStyle(stroke: string, arrow: { arrowType: ArrowType; arrowFill: string }) {
@@ -509,7 +509,7 @@ export class GraphEditorComponent implements OnInit {
     // const user = createImageNodeStyle("assets/image/add-user.svg")
     // const arrowTriangle = createPolylineEdgeStyle("NONE","triangle",30)
 
-    const icon = createIconNode('assets/image/edit.svg')
+    const icon = createIconNode('assets/image/dragdropImage/People1.svg')
     // const defaultGroupNodeStyle = this.graphComponent.graph.groupNodeDefaults.style;
     // const newGroup = createDemoGroupStyle({colorSetName: 'demo-palette-23', foldingEnabled: true})
 
@@ -524,7 +524,7 @@ export class GraphEditorComponent implements OnInit {
     })
   }
 
-  createNodeVisual(style: ShapeNodeStyle|ImageNodeStyle): string {
+  createNodeVisual(style: ShapeNodeStyle | ImageNodeStyle): string {
 
     // get svg of the style for creating source url for image
     const exportComponent = new GraphComponent()
@@ -538,7 +538,7 @@ export class GraphEditorComponent implements OnInit {
 
   }
 
-  addNodeVisual(style: ShapeNodeStyle|ImageNodeStyle, panel: Element): void {
+  addNodeVisual(style: ShapeNodeStyle | ImageNodeStyle, panel: Element): void {
     // set the div for image
     const div = document.createElement('div')
     div.setAttribute('style', 'width: 40px; height: 40px; margin: 10px auto; cursor: grab;');
@@ -551,7 +551,7 @@ export class GraphEditorComponent implements OnInit {
     if (style instanceof ShapeNodeStyle) {
       img.setAttribute('src', this.createNodeVisual(style))
     }
-    if(style instanceof ImageNodeStyle){
+    if (style instanceof ImageNodeStyle) {
       img.setAttribute('style', 'width: 40px; height: 40px;');
       img.setAttribute('src', <string>style.image)
     }
