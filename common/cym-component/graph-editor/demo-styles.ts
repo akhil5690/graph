@@ -37,7 +37,7 @@ import {
   GroupNodeStyle,
   HorizontalTextAlignment,
   IGraph,
-  ILabelStyle,
+  ILabelStyle, ImageNodeStyle,
   Insets,
   LabelShape,
   OrientedRectangleIndicatorInstaller,
@@ -129,7 +129,7 @@ export function createDemoNodeStyle(
   colorSetName: ColorSetName = 'demo-orange'
 ): ShapeNodeStyle {
   return new ShapeNodeStyle({
-    shape:ShapeNodeShape.ROUND_RECTANGLE,
+    shape: ShapeNodeShape.ROUND_RECTANGLE,
     fill: colorSets[colorSetName].fill,
     stroke: `1.5px ${colorSets[colorSetName].stroke}`
   })
@@ -149,14 +149,11 @@ export function createShapeNodeStyle(
   })
 }
 
-export function createIconShapeNodeStyle(
-  shape: ShapeNodeShape,
-  colorSetName: ColorSetName = 'demo-orange'
-): ShapeNodeStyle {
-  return new ShapeNodeStyle({
-    shape,
-    fill: colorSets[colorSetName].fill,
-    stroke: `1.5px ${colorSets[colorSetName].stroke}`
+export function createIconNode(
+  imageUrl: string
+): ImageNodeStyle {
+  return new ImageNodeStyle({
+    image: imageUrl
   })
 }
 

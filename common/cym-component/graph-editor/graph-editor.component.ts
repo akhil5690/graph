@@ -15,7 +15,7 @@ import {
   GroupNodeStyle, IArrow,
   ICommand,
   IEdge, IEdgeStyle,
-  IGraph,
+  IGraph, ImageNodeStyle,
   INode, INodeStyle,
   Insets, IRectangle,
   License,
@@ -31,7 +31,14 @@ import {
   TraversalDirection
 } from "yfiles";
 import licenseValue from "../../../license.json";
-import {addClass, createDemoGroupStyle, createShapeNodeStyle, initDemoStyles, removeClass} from "./demo-styles";
+import {
+  addClass,
+  createDemoGroupStyle,
+  createIconNode,
+  createShapeNodeStyle,
+  initDemoStyles,
+  removeClass
+} from "./demo-styles";
 import {v4 as uuidv4} from 'uuid';
 import {graphTools} from "./graphTools";
 
@@ -186,8 +193,15 @@ export class GraphEditorComponent implements OnInit {
       const shape = this.getShape(node.style);
       const fillColor = this.getFillColor(node.style)
       const strokeColor = this.getStrokeColor(node.style);
-      const style = this.getStyleForSaving(shape, fillColor, strokeColor);
-      const layout = this.getNodeLayout(node.layout);
+      let style = null;
+      let layout = null;
+      if (node.style instanceof ImageNodeStyle) {
+
+      } else {
+        style = this.getStyleForSaving(shape, fillColor, strokeColor);
+
+        layout = this.getNodeLayout(node.layout);
+      }
 
       if (node.style instanceof GroupNodeStyle) {
         console.log('is group')
@@ -242,17 +256,17 @@ export class GraphEditorComponent implements OnInit {
 
   getStrokeColor(nodeStyle: INodeStyle) {
     const style = nodeStyle as ShapeNodeStyle
-    const stroke = style.stroke as Stroke
-    const strokeFill = stroke.fill as SolidColorFill
-    const strokeColor = strokeFill.color as Color
+    const stroke = style?.stroke as Stroke
+    const strokeFill = stroke?.fill as SolidColorFill
+    const strokeColor = strokeFill?.color as Color
     return this.rgbToHex(strokeColor)
 
   }
 
   getFillColor(nodeStyle: INodeStyle) {
     const style = nodeStyle as ShapeNodeStyle
-    const fill = style.fill as SolidColorFill
-    const color = fill.color as Color;
+    const fill = style?.fill as SolidColorFill
+    const color = fill?.color as Color;
     return this.rgbToHex(color)
 
   }
@@ -260,8 +274,8 @@ export class GraphEditorComponent implements OnInit {
   getEdgeStrokeColor(edgeStyle: IEdgeStyle) {
     const style = edgeStyle as PolylineEdgeStyle
     const stroke = style.stroke as Stroke
-    const strokeFill = stroke.fill as SolidColorFill
-    const strokeColor = strokeFill.color as Color
+    const strokeFill = stroke?.fill as SolidColorFill
+    const strokeColor = strokeFill?.color as Color
     return this.rgbToHex(strokeColor)
   }
 
@@ -396,13 +410,11 @@ export class GraphEditorComponent implements OnInit {
     const pill = createShapeNodeStyle(ShapeNodeShape.PILL);
 
 
-    // const icon = createIconNode('assets/image/edit.svg')
-    const defaultGroupNodeStyle = this.graphComponent.graph.groupNodeDefaults.style;
-    const newGroup = createDemoGroupStyle({colorSetName: 'demo-palette-23', foldingEnabled: true})
+    const icon = createIconNode('assets/image/edit.svg')
 
     // create an array of all node styles
     const nodeStyles = [defaultNode, ellipse, rectangle, fatArrow, fatArrow2, hexagon, hexagon2, triangle, triangle2,
-      shearedRectangle, shearedRectangle2, trapez, trapez2, octagon, star5, star6, star8, star_up, pill, diamond, defaultGroupNodeStyle, newGroup]
+      shearedRectangle, shearedRectangle2, trapez, trapez2, octagon, star5, star6, star8, star_up, pill, diamond, icon]
 
     // create visual images for the nodes for panel
     nodeStyles.forEach((style: any): void => {
