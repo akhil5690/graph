@@ -109,6 +109,7 @@ export class GraphEditorComponent implements OnInit {
   selectedItem: any;
   showDetails!: boolean;
   iGraph: any = {};
+  shape: any;
   private nodeSelection: any;
   private edgeSelection: any;
 
@@ -279,8 +280,12 @@ export class GraphEditorComponent implements OnInit {
       const orangeRed = Color.ORANGE_RED
       const orangeStroke = new Stroke(orangeRed.r, orangeRed.g, orangeRed.b, 220, 3).freeze()
       const decorator = this.graphComponent.graph.decorator
+      const node1 = hoverItem
+      if (node1 instanceof INode) {
+        this.shape = node1.tag.style.shape
+      }
       const highlightShape = new ShapeNodeStyle({
-        shape: 0,//ShapeNodeShape.ROUND_RECTANGLE,
+        shape: this.shape,//ShapeNodeShape.ROUND_RECTANGLE,
         stroke: orangeStroke,
         fill: null
       })
