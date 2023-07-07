@@ -328,7 +328,22 @@ export class GraphEditorComponent implements OnInit {
           if (newItem instanceof INode) {
             // and if it's a node, we highlight all adjacent edges, too
             for (const edge of this.graphComponent.graph.edgesAt(newItem)) {
+
+              const labelStyle = new DefaultLabelStyle({
+                backgroundFill: 'white',
+                textSize: 10,
+                verticalTextAlignment:'center',
+                horizontalTextAlignment:'center'
+              });
+              const labelStyleHighlight = new LabelStyleDecorationInstaller({
+                labelStyle,
+                zoomPolicy:StyleDecorationZoomPolicy.WORLD_COORDINATES
+              })
+              decorator.labelDecorator.highlightDecorator.setImplementation(labelStyleHighlight)
               styleHighlight?.addHighlight(edge)
+              if(edge.tag.label){
+                styleHighlight.addHighlight(edge?.labels?.get(0))
+              }
             }
           } else if (newItem instanceof IEdge) {
             // if it's an edge - we highlight the adjacent nodes
