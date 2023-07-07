@@ -96,16 +96,16 @@ export function initDemoStyles(
   }
 
   theme.node = theme.node || 'demo-orange'
-  theme.nodeLabel = theme.nodeLabel || theme.node
+  // theme.nodeLabel = theme.nodeLabel || theme.node
   theme.edge = theme.edge || theme.node || 'demo-orange'
-  theme.edgeLabel = theme.edgeLabel || theme.edge
+  // theme.edgeLabel = theme.edgeLabel || theme.edge
   theme.group = theme.group || 'demo-palette-12'
   theme.groupLabel = theme.groupLabel || theme.group
 
   graph.nodeDefaults.style = shape
     ? createShapeNodeStyle(shape, theme.node)
     : createDemoNodeStyle(theme.node)
-  graph.nodeDefaults.labels.style = createDemoNodeLabelStyle(theme.nodeLabel)
+  // graph.nodeDefaults.labels.style = createDemoNodeLabelStyle(theme.nodeLabel)
 
   graph.groupNodeDefaults.style = createDemoGroupStyle({
     colorSetName: theme.group,
@@ -119,7 +119,7 @@ export function initDemoStyles(
   graph.decorator.portDecorator.edgePathCropperDecorator.setImplementation(
     new DefaultEdgePathCropper({cropAtPort: false, extraCropLength})
   )
-  graph.edgeDefaults.labels.style = createDemoEdgeLabelStyle(theme.edgeLabel)
+  // graph.edgeDefaults.labels.style = createDemoEdgeLabelStyle(theme.edgeLabel)
 }
 
 /**

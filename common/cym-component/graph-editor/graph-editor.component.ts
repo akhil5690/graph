@@ -468,9 +468,6 @@ export class GraphEditorComponent implements OnInit {
         layout: owner.tag.layout
       };
     }
-
-    this.createJson();
-    this.createGraph(this.iGraph, this.graphComponent)
   }
   isFullscreen: boolean = false;
 
@@ -700,7 +697,6 @@ export class GraphEditorComponent implements OnInit {
     edgeNode.edgeCreator.defaults.labels.layoutParameter = labelModel.createDefaultParameter();
 
     graphComponent.graph = builder.buildGraph();
-    this.initTutorialDefaults(graphComponent.graph);
     this.layoutListener();
   }
 
@@ -760,7 +756,7 @@ export class GraphEditorComponent implements OnInit {
           break;
         case 'copy':
           this.copy();
-          this.createJson();
+          // this.createJson();
           break;
         case 'paste':
           this.paste()
