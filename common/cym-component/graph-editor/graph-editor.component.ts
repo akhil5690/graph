@@ -230,7 +230,6 @@ export class GraphEditorComponent implements OnInit {
       };
 
       this.graphComponent.graph.edges.append(edge);
-      this.createJson()
     })
   }
 
@@ -267,7 +266,6 @@ export class GraphEditorComponent implements OnInit {
 
       // add the new node to the graph
       this.graphComponent.graph.nodes.append(node);
-      this.createJson();
     });
     this.hoverEvent(inputMode);
   }
