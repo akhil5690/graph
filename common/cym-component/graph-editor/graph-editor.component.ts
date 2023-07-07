@@ -656,7 +656,52 @@ export class GraphEditorComponent implements OnInit {
       autoRotation: true
     }).createRatioParameter({sideOfEdge: EdgeSides.BELOW_EDGE})
   }
+  changeEdgeNode(property: any) {
+    // setting the manipulated graph properties to the graph
+    if (property.source) {
 
+      this.graphComponent.graph.edges.forEach((data) => {
+
+        const source = this.graphComponent.graph.nodes.find((node) =>
+          (node.tag.label === property.sourceLabel || node.tag.id === property.sourceLabel))?.tag.id;
+
+        const target = this.graphComponent.graph.nodes.find((node) =>
+          (node.tag.label === property.targetLabel || node.tag.id === property.targetLabel))?.tag.id;
+
+        if (data.tag.id === property.id) {
+          data.tag = {
+            id: data.tag.id,
+            source: source,
+            target: target,
+            label: !this.validateLabel(property.label, 'edge') ? property.label : null,
+            sourceLabel: property.sourceLabel, targetLabel: property.targetLabel,
+            style: data.tag.style,
+            layout: data.tag.layout
+          }
+        }
+      })
+    } else {
+      this.graphComponent.graph.nodes.forEach((data) => {
+        if (data.tag.id === property.id) {
+
+          const oldLabel = data.tag.label
+
+          data.tag = {
+            id: data.tag.id,
+            label: !this.validateLabel(property.label, 'node') ? property.label : null,
+            style: data.tag.style,
+            layout: data.tag.layout,
+            properties: property.properties
+          }
+
+          this.replaceEdgeTag(data.tag.id, data.tag.label, oldLabel)
+
+        }
+      })
+    }
+    // this.createJson();
+    // this.createGraph(this.iGraph, this.graphComponent)
+  }
   createGraph(data: any, graphComponent: GraphComponent): void {
 
     // get the graph builder to create graph from json ie; initGraph
@@ -697,6 +742,7 @@ export class GraphEditorComponent implements OnInit {
     edgeNode.edgeCreator.defaults.labels.layoutParameter = labelModel.createDefaultParameter();
 
     graphComponent.graph = builder.buildGraph();
+    this.initTutorialDefaults(graphComponent.graph);
     this.layoutListener();
   }
 
@@ -756,7 +802,6 @@ export class GraphEditorComponent implements OnInit {
           break;
         case 'copy':
           this.copy();
-          // this.createJson();
           break;
         case 'paste':
           this.paste()
@@ -805,52 +850,7 @@ export class GraphEditorComponent implements OnInit {
     this.iGraph = jsonGraph;
   }
 
-  changeEdgeNode(property: any) {
-    // setting the manipulated graph properties to the graph
-    if (property.source) {
 
-      this.graphComponent.graph.edges.forEach((data) => {
-
-        const source = this.graphComponent.graph.nodes.find((node) =>
-          (node.tag.label === property.sourceLabel || node.tag.id === property.sourceLabel))?.tag.id;
-
-        const target = this.graphComponent.graph.nodes.find((node) =>
-          (node.tag.label === property.targetLabel || node.tag.id === property.targetLabel))?.tag.id;
-
-        if (data.tag.id === property.id) {
-          data.tag = {
-            id: data.tag.id,
-            source: source,
-            target: target,
-            label: !this.validateLabel(property.label, 'edge') ? property.label : null,
-            sourceLabel: property.sourceLabel, targetLabel: property.targetLabel,
-            style: data.tag.style,
-            layout: data.tag.layout
-          }
-        }
-      })
-    } else {
-      this.graphComponent.graph.nodes.forEach((data) => {
-        if (data.tag.id === property.id) {
-
-          const oldLabel = data.tag.label
-
-          data.tag = {
-            id: data.tag.id,
-            label: !this.validateLabel(property.label, 'node') ? property.label : null,
-            style: data.tag.style,
-            layout: data.tag.layout,
-            properties: property.properties
-          }
-
-          this.replaceEdgeTag(data.tag.id, data.tag.label, oldLabel)
-
-        }
-      })
-    }
-    this.createJson();
-    this.createGraph(this.iGraph, this.graphComponent)
-  }
 
   private validateLabel(label: string, type: string) {
     // label shouldn't be same
@@ -863,10 +863,6 @@ export class GraphEditorComponent implements OnInit {
   }
 
   private copy() {
-    // store the selected nodes and edges
-    this.nodeSelection = this.graphComponent.selection.selectedNodes.toList().map((node) => node.tag.id);
-    this.edgeSelection = this.graphComponent.selection.selectedEdges.toList().map((edge) => edge.tag.id);
-
     // copy the items
     ICommand.COPY.execute(null, this.graphComponent);
     this.graphComponent.clipboard.fromClipboardCopier.addNodeCopiedListener((sender, evt) => {
@@ -893,9 +889,6 @@ export class GraphEditorComponent implements OnInit {
   private paste() {
 
     ICommand.PASTE.execute(null, this.graphComponent);
-
-    this.createJson();
-    this.createGraph(this.iGraph, this.graphComponent);
 
     // regain the selection back
     this.graphComponent.graph.nodes.forEach((node) => {
