@@ -104,6 +104,10 @@ export class GraphEditorComponent implements OnInit {
       icon: 'assets/image/paste.svg',
       height: 15, width: 15
 
+    },{
+      toolName: 'delete',
+      icon: 'assets/image/IconCancel.svg',
+      height: 15, width: 15
     }
 
   ];
@@ -764,6 +768,9 @@ export class GraphEditorComponent implements OnInit {
           break;
         case 'paste':
           this.paste()
+          break;
+        case 'delete':
+          ICommand.DELETE.execute(null, this.graphComponent)
           break;
       }
     }
