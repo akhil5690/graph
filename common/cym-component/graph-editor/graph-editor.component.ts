@@ -703,8 +703,8 @@ export class GraphEditorComponent implements OnInit {
         }
       })
     }
-    // this.createJson();
-    // this.createGraph(this.iGraph, this.graphComponent)
+    this.createJson();
+    this.createGraph(this.iGraph, this.graphComponent)
   }
   createGraph(data: any, graphComponent: GraphComponent): void {
 
