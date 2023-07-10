@@ -11,17 +11,20 @@
     </div>
     <cym-right-sidebar [type]="'editor'" [showDetails]="showDetails" [details]="selectedItem"
                        (edgeNodeProperty)="changeEdgeNode($event)" (isRightSidebarOpen)="setFrame($event)">
-      <div panel>
-        <div class="subtitle">Shapes</div>
-        <div class="drag-and-drop-panel" #shapes>
+      <p-accordion [multiple]="true" panel>
+        <p-accordionTab header="Shapes">
+          <div #shapes></div>
 
-        </div>
-        <div class="subtitle">Business</div>
+        </p-accordionTab>
 
-        <div class="drag-and-drop-panel" #images>
-        </div>
+        <p-accordionTab header="Business">
+          <div class="drag-and-drop-panel" #images>
+          </div>
+        </p-accordionTab>
 
-      </div>
+
+
+      </p-accordion>
     </cym-right-sidebar>
   </div>
 
