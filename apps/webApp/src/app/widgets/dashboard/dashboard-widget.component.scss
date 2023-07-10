@@ -31,7 +31,7 @@ cym-dashboard-widget {
   .three-tab-container {
     div {
       display: grid;
-      height: 2.85rem;
+      height:var(--graph-tool-bar-height);
       align-items: center;
       cursor:pointer;
     }
@@ -48,12 +48,11 @@ cym-dashboard-widget {
     div {
       display: grid;
       height: var(--tiny-icon-height);
-	  width: var(--tiny-icon-width);
+	    width: var(--tiny-icon-width);
       align-items: center;
       justify-content: center;
       cursor:pointer;
     }
-
     display: grid;
     grid-template-columns: repeat(10 , 40px);
     grid-gap: 0;
