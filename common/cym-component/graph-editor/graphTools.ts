@@ -40,7 +40,10 @@ export const GraphTools = [{
     toolName: 'paste',
     icon: 'assets/image/paste.svg',
     height: 15, width: 15
-
+  },{
+    toolName: 'delete',
+    icon: 'assets/image/IconCancel.svg',
+    height: 15, width: 15
   }
 
 ]
