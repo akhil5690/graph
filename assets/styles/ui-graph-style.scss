@@ -31,13 +31,13 @@
 }
 
 .graph-sidebar {
-  height: 85vh;
-  width: 80vw;
+  height: var(--graph-sidebar-height);
+  width: var(--graph-sidebar-width);
 }
 
 .graph {
-  height: 85vh;
-  width: 100vw;
+  height: var(--graph-height);
+  width: var(--graph-width);
 }
 
 #graphComponent{
