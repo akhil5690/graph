@@ -54,9 +54,10 @@ cym-dashboard-widget {
     }
 
     display: grid;
-    grid-template-columns: repeat(16 , 1fr);
+    grid-template-columns: repeat(10 , 50px);
     grid-gap: 5px;
     align-items: center;
+    justify-content:center;
   }
 
   .twentytwo{
