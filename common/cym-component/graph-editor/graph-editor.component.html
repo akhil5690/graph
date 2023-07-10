@@ -11,7 +11,11 @@
     </div>
     <cym-right-sidebar [type]="'editor'" [showDetails]="showDetails" [details]="selectedItem"
                        (edgeNodeProperty)="changeEdgeNode($event)" (isRightSidebarOpen)="setFrame($event)">
-      <div id="drag-and-drop-panel" panel #panel></div>
+      <div panel>
+        <div  class="drag-and-drop-panel" #shapes></div>
+        <div  class="drag-and-drop-panel" #images></div>
+
+      </div>
     </cym-right-sidebar>
   </div>
 

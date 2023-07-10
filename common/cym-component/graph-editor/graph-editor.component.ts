@@ -55,7 +55,8 @@ export class GraphEditorComponent implements OnInit {
   @ViewChild('overViewComponent', {static: true}) overViewContainer!: ElementRef;
   @ViewChild('neighbour', {static: true}) neighbour!: ElementRef;
 
-  @ViewChild('panel', {static: true}) panelContainer!: ElementRef;
+  @ViewChild('shapes', {static: true}) shapeNodeContainer!: ElementRef;
+  @ViewChild('images', {static: true}) imageNodeContainer!: ElementRef;
   private overviewComponent!: GraphOverviewComponent;
   private neighbourComponent!: GraphComponent;
 
@@ -104,7 +105,7 @@ export class GraphEditorComponent implements OnInit {
       icon: 'assets/image/paste.svg',
       height: 15, width: 15
 
-    },{
+    }, {
       toolName: 'delete',
       icon: 'assets/image/IconCancel.svg',
       height: 15, width: 15
@@ -334,16 +335,16 @@ export class GraphEditorComponent implements OnInit {
               const labelStyle = new DefaultLabelStyle({
                 backgroundFill: 'white',
                 textSize: 10,
-                verticalTextAlignment:'center',
-                horizontalTextAlignment:'center'
+                verticalTextAlignment: 'center',
+                horizontalTextAlignment: 'center'
               });
               const labelStyleHighlight = new LabelStyleDecorationInstaller({
                 labelStyle,
-                zoomPolicy:StyleDecorationZoomPolicy.WORLD_COORDINATES
+                zoomPolicy: StyleDecorationZoomPolicy.WORLD_COORDINATES
               })
               decorator.labelDecorator.highlightDecorator.setImplementation(labelStyleHighlight)
               styleHighlight?.addHighlight(edge)
-              if(edge.tag.label){
+              if (edge.tag.label) {
                 styleHighlight.addHighlight(edge?.labels?.get(0))
               }
             }
@@ -352,17 +353,17 @@ export class GraphEditorComponent implements OnInit {
             const labelStyle = new DefaultLabelStyle({
               backgroundFill: 'white',
               textSize: 10,
-              verticalTextAlignment:'center',
-              horizontalTextAlignment:'center'
+              verticalTextAlignment: 'center',
+              horizontalTextAlignment: 'center'
             });
             const labelStyleHighlight = new LabelStyleDecorationInstaller({
               labelStyle,
-              zoomPolicy:StyleDecorationZoomPolicy.WORLD_COORDINATES
+              zoomPolicy: StyleDecorationZoomPolicy.WORLD_COORDINATES
             })
             decorator.labelDecorator.highlightDecorator.setImplementation(labelStyleHighlight)
 
             styleHighlight?.addHighlight(newItem)
-            if(newItem.tag.label){
+            if (newItem.tag.label) {
               styleHighlight.addHighlight(newItem?.labels?.get(0))
             }
 
@@ -513,7 +514,8 @@ export class GraphEditorComponent implements OnInit {
 
   initializeDragAndDropPanel(): void {
     // get the div for panel
-    const panel = this.panelContainer.nativeElement;
+    const shapes = this.shapeNodeContainer.nativeElement;
+    const image = this.imageNodeContainer.nativeElement;
 
     // set the node styles
     const defaultNode = this.graphComponent.graph.nodeDefaults.style
@@ -544,14 +546,22 @@ export class GraphEditorComponent implements OnInit {
     // const newGroup = createDemoGroupStyle({colorSetName: 'demo-palette-23', foldingEnabled: true})
 
     // create an array of all node styles
-    const nodeStyles = [defaultNode, ellipse, rectangle, fatArrow, fatArrow2, hexagon, hexagon2, triangle, triangle2,
-      shearedRectangle, shearedRectangle2, trapez, trapez2, octagon, star5, star6, star8,
-      star_up, pill, diamond, icon]
+    const dragDropElements = [{
+      style: [defaultNode, ellipse, rectangle, fatArrow, fatArrow2, hexagon, hexagon2, triangle, triangle2,
+        shearedRectangle, shearedRectangle2, trapez, trapez2, octagon, star5, star6, star8,
+        star_up, pill, diamond
+      ], panel: shapes
+    },{
+      style: [icon], panel: image
+    }]
 
-    // create visual images for the nodes for panel
-    nodeStyles.forEach((style: any): void => {
-      this.addNodeVisual(style, panel)
+    dragDropElements.forEach((element)=>{
+      element['style'].forEach((style: any): void => {
+        this.addNodeVisual(style, element['panel'])
+      })
     })
+    // create visual images for the nodes for panel
+
   }
 
   createNodeVisual(style: ShapeNodeStyle | ImageNodeStyle): string {
@@ -660,6 +670,7 @@ export class GraphEditorComponent implements OnInit {
       autoRotation: true
     }).createRatioParameter({sideOfEdge: EdgeSides.BELOW_EDGE})
   }
+
   changeEdgeNode(property: any) {
     // setting the manipulated graph properties to the graph
     if (property.source) {
@@ -706,6 +717,7 @@ export class GraphEditorComponent implements OnInit {
     this.createJson();
     this.createGraph(this.iGraph, this.graphComponent)
   }
+
   createGraph(data: any, graphComponent: GraphComponent): void {
 
     // get the graph builder to create graph from json ie; initGraph
@@ -856,7 +868,6 @@ export class GraphEditorComponent implements OnInit {
     console.log(jsonGraph);
     this.iGraph = jsonGraph;
   }
-
 
 
   private validateLabel(label: string, type: string) {

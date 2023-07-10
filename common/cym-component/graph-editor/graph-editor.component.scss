@@ -1,8 +1,8 @@
 cym-graph-editor {
 
-  div#drag-and-drop-panel {
+  .drag-and-drop-panel {
     width: 20vw;
     display: grid;
-    grid-template-columns: repeat(4, auto);
+    grid-template-columns: repeat(4, 4.5vw);
   }
 }
