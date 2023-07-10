@@ -12,8 +12,14 @@
     <cym-right-sidebar [type]="'editor'" [showDetails]="showDetails" [details]="selectedItem"
                        (edgeNodeProperty)="changeEdgeNode($event)" (isRightSidebarOpen)="setFrame($event)">
       <div panel>
-        <div  class="drag-and-drop-panel" #shapes></div>
-        <div  class="drag-and-drop-panel" #images></div>
+        <div class="subtitle">Shapes</div>
+        <div class="drag-and-drop-panel" #shapes>
+
+        </div>
+        <div class="subtitle">Business</div>
+
+        <div class="drag-and-drop-panel" #images>
+        </div>
 
       </div>
     </cym-right-sidebar>
@@ -30,8 +36,9 @@
         <p-dropdown [options]="neighboursOptions" [(ngModel)]="selectedNeighbour"
                     (ngModelChange)="getNeighbourGraph(selectedNode)" optionLabel="name"
                     optionValue="value"></p-dropdown>
-        <img src="assets/image/fullscreen.svg" *ngIf="!isFullscreen" alt="" (click)="switch(true)"  class="tools">
-        <img src="assets/image/undo.svg" height="20" width="20" alt="" *ngIf="isFullscreen" (click)="switch(false)"  class="tools">
+        <img src="assets/image/fullscreen.svg" *ngIf="!isFullscreen" alt="" (click)="switch(true)" class="tools">
+        <img src="assets/image/undo.svg" height="20" width="20" alt="" *ngIf="isFullscreen" (click)="switch(false)"
+             class="tools">
       </div>
       <div>
         <div id="neighbour" #neighbour></div>
