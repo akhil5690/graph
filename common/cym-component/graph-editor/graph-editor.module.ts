@@ -5,6 +5,7 @@ import {RightSidebarModule} from "../right-sidebar/right-sidebar.module";
 import {DropdownModule} from "primeng/dropdown";
 import {FormsModule} from "@angular/forms";
 import {OverviewComponent} from "../overview/overview.component";
+import {AccordionModule} from "primeng/accordion";
 
 @NgModule({
   declarations: [GraphEditorComponent, OverviewComponent],
@@ -12,7 +13,8 @@ import {OverviewComponent} from "../overview/overview.component";
     CommonModule,
     RightSidebarModule,
     DropdownModule,
-    FormsModule
+    FormsModule,
+    AccordionModule
   ], exports: [GraphEditorComponent, OverviewComponent]
 })
 export class GraphEditorModule {
