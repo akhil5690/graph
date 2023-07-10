@@ -2,9 +2,9 @@ image: python:3.8.10
 
 pipelines:
   branches:
-    qa-e2:
+    qa:
       - step:
-          deployment: qa-e2
+          deployment: qa
           script:
             - apt-get update
             - apt-get install -y zip
