@@ -40,6 +40,7 @@ import {
 } from "./demo-styles";
 import {v4 as uuidv4} from 'uuid';
 import {NONE_TYPE} from "@angular/compiler";
+import {GraphTools} from "./graphTools";
 
 // import {graphTools} from "./graphTools";
 
@@ -55,58 +56,14 @@ export class GraphEditorComponent implements OnInit {
   @ViewChild('overViewComponent', {static: true}) overViewContainer!: ElementRef;
   @ViewChild('neighbour', {static: true}) neighbour!: ElementRef;
 
-  @ViewChild('panel', {static: true}) panelContainer!: ElementRef;
+  @ViewChild('shapes', {static: true}) shapeNodeContainer!: ElementRef;
+  @ViewChild('images', {static: true}) imageNodeContainer!: ElementRef;
   private overviewComponent!: GraphOverviewComponent;
   private neighbourComponent!: GraphComponent;
 
   private graphComponent!: GraphComponent;
   isFilterOpen: boolean = false;
-  toolBarItems = [{
-    toolName: 'save',
-    icon: 'assets/image/save.svg',
-    height: 20, width: 20
-
-  }, {
-    toolName: 'refresh',
-    icon: 'assets/image/refresh.svg',
-    height: 20, width: 20
-  }, {
-    toolName: 'zoomIn',
-    icon: 'assets/image/zoomIn.svg',
-    height: 20, width: 20
-  }, {
-    toolName: 'zoomOut',
-    icon: 'assets/image/zoomOut.svg',
-    height: 20, width: 20
-  }, {
-    toolName: 'undo',
-    icon: 'assets/image/undo.svg',
-    height: 15, width: 15
-  }, {
-    toolName: 'redo',
-    icon: 'assets/image/redo.svg',
-    height: 15, width: 15
-  },
-    {
-      toolName: 'fit',
-      icon: 'assets/image/fullscreen.svg',
-      height: 15, width: 15
-    }, {
-      toolName: 'cut',
-      icon: 'assets/image/cut.svg',
-      height: 15, width: 15
-    }, {
-      toolName: 'copy',
-      icon: 'assets/image/copy.svg',
-      height: 15, width: 15
-    }, {
-      toolName: 'paste',
-      icon: 'assets/image/paste.svg',
-      height: 15, width: 15
-
-    }
-
-  ];
+  toolBarItems = GraphTools;
   selectedItem: any;
   showDetails!: boolean;
   iGraph: any = {};
@@ -119,6 +76,9 @@ export class GraphEditorComponent implements OnInit {
   selectedNode!: INode;
   private original: any;
   private originalNeighbourHood: any;
+  private shapeStyleDragDrop: any;
+  private imageStyleDragDrop:any;
+  private dragDropElements: any;
 
   constructor(private cdr: ChangeDetectorRef) {
   }
@@ -134,6 +94,82 @@ export class GraphEditorComponent implements OnInit {
     const divElement = this.graphContainer.nativeElement;
     this.graphComponent = new GraphComponent(divElement);
 
+    this.shapeStyleDragDrop = [ShapeNodeShape.ROUND_RECTANGLE, ShapeNodeShape.ELLIPSE, ShapeNodeShape.RECTANGLE,
+      ShapeNodeShape.DIAMOND, ShapeNodeShape.FAT_ARROW, ShapeNodeShape.FAT_ARROW2, ShapeNodeShape.HEXAGON,
+      ShapeNodeShape.HEXAGON2, ShapeNodeShape.TRIANGLE, ShapeNodeShape.TRIANGLE2, ShapeNodeShape.SHEARED_RECTANGLE,
+      ShapeNodeShape.SHEARED_RECTANGLE2, ShapeNodeShape.TRAPEZ, ShapeNodeShape.TRAPEZ2, ShapeNodeShape.OCTAGON,
+      ShapeNodeShape.STAR5, ShapeNodeShape.STAR6, ShapeNodeShape.STAR8, ShapeNodeShape.STAR5_UP, ShapeNodeShape.PILL]
+    this.imageStyleDragDrop=['assets/image/dragdropImage/People1.svg',
+      'assets/image/dragdropImage/business/Asset 1.svg',
+      'assets/image/dragdropImage/business/Asset 2.svg',
+      'assets/image/dragdropImage/business/Asset 3.svg',
+      'assets/image/dragdropImage/business/Asset 4.svg',
+      'assets/image/dragdropImage/business/Asset 5.svg',
+      'assets/image/dragdropImage/business/Asset 6.svg',
+      'assets/image/dragdropImage/business/Asset 7.svg',
+      'assets/image/dragdropImage/business/Asset 8.svg',
+      'assets/image/dragdropImage/business/Asset 9.svg',
+      'assets/image/dragdropImage/business/Asset 10.svg',
+      'assets/image/dragdropImage/business/Asset 11.svg',
+      'assets/image/dragdropImage/business/Asset 12.svg',
+      'assets/image/dragdropImage/business/Asset 14.svg',
+      'assets/image/dragdropImage/business/Asset 15.svg',
+      'assets/image/dragdropImage/business/Asset 16.svg',
+      'assets/image/dragdropImage/business/Asset 17.svg',
+      'assets/image/dragdropImage/business/Asset 18.svg',
+      'assets/image/dragdropImage/business/Asset 19.svg',
+      'assets/image/dragdropImage/business/Asset 20.svg',
+      'assets/image/dragdropImage/business/Asset 21.svg',
+      'assets/image/dragdropImage/business/Asset 22.svg',
+      'assets/image/dragdropImage/business/Asset 23.svg',
+      'assets/image/dragdropImage/business/Asset 26.svg',
+      'assets/image/dragdropImage/business/Asset 27.svg',
+      'assets/image/dragdropImage/business/Asset 28.svg',
+      'assets/image/dragdropImage/business/Asset 29.svg',
+      'assets/image/dragdropImage/business/Asset 30.svg',
+      'assets/image/dragdropImage/business/Asset 31.svg',
+      'assets/image/dragdropImage/business/Asset 32.svg',
+      'assets/image/dragdropImage/business/Asset 34.svg',
+      'assets/image/dragdropImage/business/Asset 35.svg',
+      'assets/image/dragdropImage/business/Asset 36.svg',
+      'assets/image/dragdropImage/business/Asset 37.svg',
+      'assets/image/dragdropImage/business/Asset 38.svg',
+      'assets/image/dragdropImage/business/Asset 39.svg',
+      'assets/image/dragdropImage/business/Asset 40.svg',
+      'assets/image/dragdropImage/business/Asset 43.svg',
+      'assets/image/dragdropImage/business/Asset 44.svg',
+      'assets/image/dragdropImage/business/Asset 45.svg',
+      'assets/image/dragdropImage/business/Asset 46.svg',
+      'assets/image/dragdropImage/business/Asset 47.svg',
+      'assets/image/dragdropImage/business/Asset 48.svg',
+      'assets/image/dragdropImage/business/Asset 49.svg',
+      'assets/image/dragdropImage/business/Asset 52.svg',
+      'assets/image/dragdropImage/business/Asset 53.svg',
+      'assets/image/dragdropImage/business/Asset 54.svg',
+      'assets/image/dragdropImage/business/Asset 55.svg',
+      'assets/image/dragdropImage/business/Asset 56.svg',
+      'assets/image/dragdropImage/business/Asset 57.svg',
+      'assets/image/dragdropImage/business/Asset 58.svg',
+      'assets/image/dragdropImage/business/Asset 59.svg',
+      'assets/image/dragdropImage/business/Asset 60.svg',
+      'assets/image/dragdropImage/business/Asset 61.svg',
+      'assets/image/dragdropImage/business/Asset 62.svg',
+      'assets/image/dragdropImage/business/Asset 63.svg',
+      'assets/image/dragdropImage/business/Asset 64.svg',
+      'assets/image/dragdropImage/business/Asset 65.svg',
+      'assets/image/dragdropImage/business/Asset 66.svg',
+      'assets/image/dragdropImage/business/Asset 67.svg',
+      'assets/image/dragdropImage/business/Asset 68.svg',
+      'assets/image/dragdropImage/business/Asset 69.svg',
+      'assets/image/dragdropImage/business/Asset 70.svg',
+      'assets/image/dragdropImage/business/Asset 71.svg',
+      'assets/image/dragdropImage/business/Asset 72.svg',
+      'assets/image/dragdropImage/business/Asset 73.svg',
+      'assets/image/dragdropImage/business/Asset 74.svg',
+      'assets/image/dragdropImage/business/Asset 75.svg',
+      'assets/image/dragdropImage/business/Asset 76.svg',
+      'assets/image/dragdropImage/business/Asset 77.svg',
+      'assets/image/dragdropImage/business/Asset 78.svg']
     // enable undoEngine
     this.graphComponent.graph.undoEngineEnabled = true;
 
@@ -230,7 +266,6 @@ export class GraphEditorComponent implements OnInit {
       };
 
       this.graphComponent.graph.edges.append(edge);
-      this.createJson()
     })
   }
 
@@ -267,7 +302,6 @@ export class GraphEditorComponent implements OnInit {
 
       // add the new node to the graph
       this.graphComponent.graph.nodes.append(node);
-      this.createJson();
     });
     this.hoverEvent(inputMode);
   }
@@ -328,24 +362,39 @@ export class GraphEditorComponent implements OnInit {
           if (newItem instanceof INode) {
             // and if it's a node, we highlight all adjacent edges, too
             for (const edge of this.graphComponent.graph.edgesAt(newItem)) {
+
+              const labelStyle = new DefaultLabelStyle({
+                backgroundFill: 'white',
+                textSize: 10,
+                verticalTextAlignment: 'center',
+                horizontalTextAlignment: 'center'
+              });
+              const labelStyleHighlight = new LabelStyleDecorationInstaller({
+                labelStyle,
+                zoomPolicy: StyleDecorationZoomPolicy.WORLD_COORDINATES
+              })
+              decorator.labelDecorator.highlightDecorator.setImplementation(labelStyleHighlight)
               styleHighlight?.addHighlight(edge)
+              if (edge.tag.label) {
+                styleHighlight.addHighlight(edge?.labels?.get(0))
+              }
             }
           } else if (newItem instanceof IEdge) {
             // if it's an edge - we highlight the adjacent nodes
             const labelStyle = new DefaultLabelStyle({
               backgroundFill: 'white',
               textSize: 10,
-              verticalTextAlignment:'center',
-              horizontalTextAlignment:'center'
+              verticalTextAlignment: 'center',
+              horizontalTextAlignment: 'center'
             });
             const labelStyleHighlight = new LabelStyleDecorationInstaller({
               labelStyle,
-              zoomPolicy:StyleDecorationZoomPolicy.WORLD_COORDINATES
+              zoomPolicy: StyleDecorationZoomPolicy.WORLD_COORDINATES
             })
             decorator.labelDecorator.highlightDecorator.setImplementation(labelStyleHighlight)
 
             styleHighlight?.addHighlight(newItem)
-            if(newItem.tag.label){
+            if (newItem.tag.label) {
               styleHighlight.addHighlight(newItem?.labels?.get(0))
             }
 
@@ -455,9 +504,6 @@ export class GraphEditorComponent implements OnInit {
         layout: owner.tag.layout
       };
     }
-
-    this.createJson();
-    this.createGraph(this.iGraph, this.graphComponent)
   }
   isFullscreen: boolean = false;
 
@@ -499,45 +545,34 @@ export class GraphEditorComponent implements OnInit {
 
   initializeDragAndDropPanel(): void {
     // get the div for panel
-    const panel = this.panelContainer.nativeElement;
+    const shapes = this.shapeNodeContainer.nativeElement;
+    const businessImage = this.imageNodeContainer.nativeElement;
 
     // set the node styles
-    const defaultNode = this.graphComponent.graph.nodeDefaults.style
-    const ellipse = createShapeNodeStyle(ShapeNodeShape.ELLIPSE);
-    const rectangle = createShapeNodeStyle(ShapeNodeShape.RECTANGLE);
-    const diamond = createShapeNodeStyle(ShapeNodeShape.DIAMOND);
-    const fatArrow = createShapeNodeStyle(ShapeNodeShape.FAT_ARROW);
-    const fatArrow2 = createShapeNodeStyle(ShapeNodeShape.FAT_ARROW2);
-    const hexagon = createShapeNodeStyle(ShapeNodeShape.HEXAGON);
-    const hexagon2 = createShapeNodeStyle(ShapeNodeShape.HEXAGON2);
-    const triangle = createShapeNodeStyle(ShapeNodeShape.TRIANGLE);
-    const triangle2 = createShapeNodeStyle(ShapeNodeShape.TRIANGLE2);
-    const shearedRectangle = createShapeNodeStyle(ShapeNodeShape.SHEARED_RECTANGLE);
-    const shearedRectangle2 = createShapeNodeStyle(ShapeNodeShape.SHEARED_RECTANGLE2);
-    const trapez = createShapeNodeStyle(ShapeNodeShape.TRAPEZ);
-    const trapez2 = createShapeNodeStyle(ShapeNodeShape.TRAPEZ2);
-    const octagon = createShapeNodeStyle(ShapeNodeShape.OCTAGON);
-    const star5 = createShapeNodeStyle(ShapeNodeShape.STAR5);
-    const star6 = createShapeNodeStyle(ShapeNodeShape.STAR6);
-    const star8 = createShapeNodeStyle(ShapeNodeShape.STAR8);
-    const star_up = createShapeNodeStyle(ShapeNodeShape.STAR5_UP);
-    const pill = createShapeNodeStyle(ShapeNodeShape.PILL);
     // const user = createImageNodeStyle("assets/image/add-user.svg")
     // const arrowTriangle = createPolylineEdgeStyle("NONE","triangle",30)
 
-    const icon = createIconNode('assets/image/dragdropImage/People1.svg')
-    // const defaultGroupNodeStyle = this.graphComponent.graph.groupNodeDefaults.style;
-    // const newGroup = createDemoGroupStyle({colorSetName: 'demo-palette-23', foldingEnabled: true})
 
     // create an array of all node styles
-    const nodeStyles = [defaultNode, ellipse, rectangle, fatArrow, fatArrow2, hexagon, hexagon2, triangle, triangle2,
-      shearedRectangle, shearedRectangle2, trapez, trapez2, octagon, star5, star6, star8,
-      star_up, pill, diamond, icon]
+    this.dragDropElements = [{
+      id: 0,
+      header: 'Shapes',
+      style: this.getShapeStyle(this.shapeStyleDragDrop),
+      panel: shapes
+    }, {
+      id: 1,
+      header: 'Image',
+      style: this.getBusinessImage(this.imageStyleDragDrop),
+      panel: businessImage
+    }]
 
-    // create visual images for the nodes for panel
-    nodeStyles.forEach((style: any): void => {
-      this.addNodeVisual(style, panel)
+    this.dragDropElements.forEach((element:any) => {
+      element['style'].forEach((style: any): void => {
+        this.addNodeVisual(style, element['panel'])
+      })
     })
+    // create visual images for the nodes for panel
+
   }
 
   createNodeVisual(style: ShapeNodeStyle | ImageNodeStyle): string {
@@ -647,6 +682,53 @@ export class GraphEditorComponent implements OnInit {
     }).createRatioParameter({sideOfEdge: EdgeSides.BELOW_EDGE})
   }
 
+  changeEdgeNode(property: any) {
+    // setting the manipulated graph properties to the graph
+    if (property.source) {
+
+      this.graphComponent.graph.edges.forEach((data) => {
+
+        const source = this.graphComponent.graph.nodes.find((node) =>
+          (node.tag.label === property.sourceLabel || node.tag.id === property.sourceLabel))?.tag.id;
+
+        const target = this.graphComponent.graph.nodes.find((node) =>
+          (node.tag.label === property.targetLabel || node.tag.id === property.targetLabel))?.tag.id;
+
+        if (data.tag.id === property.id) {
+          data.tag = {
+            id: data.tag.id,
+            source: source,
+            target: target,
+            label: !this.validateLabel(property.label, 'edge') ? property.label : null,
+            sourceLabel: property.sourceLabel, targetLabel: property.targetLabel,
+            style: data.tag.style,
+            layout: data.tag.layout
+          }
+        }
+      })
+    } else {
+      this.graphComponent.graph.nodes.forEach((data) => {
+        if (data.tag.id === property.id) {
+
+          const oldLabel = data.tag.label
+
+          data.tag = {
+            id: data.tag.id,
+            label: !this.validateLabel(property.label, 'node') ? property.label : null,
+            style: data.tag.style,
+            layout: data.tag.layout,
+            properties: property.properties
+          }
+
+          this.replaceEdgeTag(data.tag.id, data.tag.label, oldLabel)
+
+        }
+      })
+    }
+    this.createJson();
+    this.createGraph(this.iGraph, this.graphComponent)
+  }
+
   createGraph(data: any, graphComponent: GraphComponent): void {
 
     // get the graph builder to create graph from json ie; initGraph
@@ -747,10 +829,12 @@ export class GraphEditorComponent implements OnInit {
           break;
         case 'copy':
           this.copy();
-          this.createJson();
           break;
         case 'paste':
           this.paste()
+          break;
+        case 'delete':
+          ICommand.DELETE.execute(null, this.graphComponent)
           break;
       }
     }
@@ -796,52 +880,6 @@ export class GraphEditorComponent implements OnInit {
     this.iGraph = jsonGraph;
   }
 
-  changeEdgeNode(property: any) {
-    // setting the manipulated graph properties to the graph
-    if (property.source) {
-
-      this.graphComponent.graph.edges.forEach((data) => {
-
-        const source = this.graphComponent.graph.nodes.find((node) =>
-          (node.tag.label === property.sourceLabel || node.tag.id === property.sourceLabel))?.tag.id;
-
-        const target = this.graphComponent.graph.nodes.find((node) =>
-          (node.tag.label === property.targetLabel || node.tag.id === property.targetLabel))?.tag.id;
-
-        if (data.tag.id === property.id) {
-          data.tag = {
-            id: data.tag.id,
-            source: source,
-            target: target,
-            label: !this.validateLabel(property.label, 'edge') ? property.label : null,
-            sourceLabel: property.sourceLabel, targetLabel: property.targetLabel,
-            style: data.tag.style,
-            layout: data.tag.layout
-          }
-        }
-      })
-    } else {
-      this.graphComponent.graph.nodes.forEach((data) => {
-        if (data.tag.id === property.id) {
-
-          const oldLabel = data.tag.label
-
-          data.tag = {
-            id: data.tag.id,
-            label: !this.validateLabel(property.label, 'node') ? property.label : null,
-            style: data.tag.style,
-            layout: data.tag.layout,
-            properties: property.properties
-          }
-
-          this.replaceEdgeTag(data.tag.id, data.tag.label, oldLabel)
-
-        }
-      })
-    }
-    this.createJson();
-    this.createGraph(this.iGraph, this.graphComponent)
-  }
 
   private validateLabel(label: string, type: string) {
     // label shouldn't be same
@@ -854,10 +892,6 @@ export class GraphEditorComponent implements OnInit {
   }
 
   private copy() {
-    // store the selected nodes and edges
-    this.nodeSelection = this.graphComponent.selection.selectedNodes.toList().map((node) => node.tag.id);
-    this.edgeSelection = this.graphComponent.selection.selectedEdges.toList().map((edge) => edge.tag.id);
-
     // copy the items
     ICommand.COPY.execute(null, this.graphComponent);
     this.graphComponent.clipboard.fromClipboardCopier.addNodeCopiedListener((sender, evt) => {
@@ -884,9 +918,6 @@ export class GraphEditorComponent implements OnInit {
   private paste() {
 
     ICommand.PASTE.execute(null, this.graphComponent);
-
-    this.createJson();
-    this.createGraph(this.iGraph, this.graphComponent);
 
     // regain the selection back
     this.graphComponent.graph.nodes.forEach((node) => {
@@ -966,5 +997,22 @@ export class GraphEditorComponent implements OnInit {
         ICommand.FIT_GRAPH_BOUNDS.execute(null, this.graphComponent);
       }
     }
+  }
+
+  private getShapeStyle(shapeStyleDragDrop: any) {
+    let allShapeNodeStyle: ShapeNodeStyle[] = [];
+    shapeStyleDragDrop.forEach((style: any) => {
+      allShapeNodeStyle.push(createShapeNodeStyle(style))
+    });
+
+    return allShapeNodeStyle;
+  }
+  private getBusinessImage(imageStyleDragDrop: any) {
+    let allBusinessImage: ImageNodeStyle[] = [];
+    imageStyleDragDrop.forEach((image: any) => {
+      allBusinessImage.push(createIconNode(image))
+    });
+
+    return allBusinessImage;
   }
 }
