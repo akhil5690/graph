@@ -515,7 +515,7 @@ export class GraphEditorComponent implements OnInit {
   initializeDragAndDropPanel(): void {
     // get the div for panel
     const shapes = this.shapeNodeContainer.nativeElement;
-    const image = this.imageNodeContainer.nativeElement;
+    const businessImage = this.imageNodeContainer.nativeElement;
 
     // set the node styles
     const defaultNode = this.graphComponent.graph.nodeDefaults.style
@@ -544,6 +544,77 @@ export class GraphEditorComponent implements OnInit {
     const icon = createIconNode('assets/image/dragdropImage/People1.svg')
     // const defaultGroupNodeStyle = this.graphComponent.graph.groupNodeDefaults.style;
     // const newGroup = createDemoGroupStyle({colorSetName: 'demo-palette-23', foldingEnabled: true})
+    const businessAsset1 = createIconNode('assets/image/dragdropImage/business/Asset 1.svg');
+    const businessAsset2 = createIconNode('assets/image/dragdropImage/business/Asset 2.svg');
+    const businessAsset3 = createIconNode('assets/image/dragdropImage/business/Asset 3.svg');
+    const businessAsset4 = createIconNode('assets/image/dragdropImage/business/Asset 4.svg');
+    const businessAsset5 = createIconNode('assets/image/dragdropImage/business/Asset 5.svg');
+    const businessAsset6 = createIconNode('assets/image/dragdropImage/business/Asset 6.svg');
+    const businessAsset7 = createIconNode('assets/image/dragdropImage/business/Asset 7.svg');
+    const businessAsset8 = createIconNode('assets/image/dragdropImage/business/Asset 8.svg');
+    const businessAsset9 = createIconNode('assets/image/dragdropImage/business/Asset 9.svg');
+    const businessAsset10 = createIconNode('assets/image/dragdropImage/business/Asset 10.svg');
+    const businessAsset11 = createIconNode('assets/image/dragdropImage/business/Asset 11.svg');
+    const businessAsset12 = createIconNode('assets/image/dragdropImage/business/Asset 12.svg');
+    const businessAsset14 = createIconNode('assets/image/dragdropImage/business/Asset 14.svg');
+    const businessAsset15 = createIconNode('assets/image/dragdropImage/business/Asset 15.svg');
+    const businessAsset16 = createIconNode('assets/image/dragdropImage/business/Asset 16.svg');
+    const businessAsset17 = createIconNode('assets/image/dragdropImage/business/Asset 17.svg');
+    const businessAsset18 = createIconNode('assets/image/dragdropImage/business/Asset 18.svg');
+    const businessAsset19 = createIconNode('assets/image/dragdropImage/business/Asset 19.svg');
+    const businessAsset20 = createIconNode('assets/image/dragdropImage/business/Asset 20.svg');
+    const businessAsset21 = createIconNode('assets/image/dragdropImage/business/Asset 21.svg');
+    const businessAsset22 = createIconNode('assets/image/dragdropImage/business/Asset 22.svg');
+    const businessAsset23 = createIconNode('assets/image/dragdropImage/business/Asset 23.svg');
+    const businessAsset26 = createIconNode('assets/image/dragdropImage/business/Asset 26.svg');
+    const businessAsset27 = createIconNode('assets/image/dragdropImage/business/Asset 27.svg');
+    const businessAsset28 = createIconNode('assets/image/dragdropImage/business/Asset 28.svg');
+    const businessAsset29 = createIconNode('assets/image/dragdropImage/business/Asset 29.svg');
+    const businessAsset30 = createIconNode('assets/image/dragdropImage/business/Asset 30.svg');
+    const businessAsset31 = createIconNode('assets/image/dragdropImage/business/Asset 31.svg');
+    const businessAsset32 = createIconNode('assets/image/dragdropImage/business/Asset 32.svg');
+    const businessAsset34 = createIconNode('assets/image/dragdropImage/business/Asset 34.svg');
+    const businessAsset35 = createIconNode('assets/image/dragdropImage/business/Asset 35.svg');
+    const businessAsset36 = createIconNode('assets/image/dragdropImage/business/Asset 36.svg');
+    const businessAsset37 = createIconNode('assets/image/dragdropImage/business/Asset 37.svg');
+    const businessAsset38 = createIconNode('assets/image/dragdropImage/business/Asset 38.svg');
+    const businessAsset39 = createIconNode('assets/image/dragdropImage/business/Asset 39.svg');
+    const businessAsset40 = createIconNode('assets/image/dragdropImage/business/Asset 40.svg');
+    const businessAsset43 = createIconNode('assets/image/dragdropImage/business/Asset 43.svg');
+    const businessAsset44 = createIconNode('assets/image/dragdropImage/business/Asset 44.svg');
+    const businessAsset45 = createIconNode('assets/image/dragdropImage/business/Asset 45.svg');
+    const businessAsset46 = createIconNode('assets/image/dragdropImage/business/Asset 46.svg');
+    const businessAsset47 = createIconNode('assets/image/dragdropImage/business/Asset 47.svg');
+    const businessAsset48 = createIconNode('assets/image/dragdropImage/business/Asset 48.svg');
+    const businessAsset49 = createIconNode('assets/image/dragdropImage/business/Asset 49.svg');
+    const businessAsset52 = createIconNode('assets/image/dragdropImage/business/Asset 52.svg');
+    const businessAsset53 = createIconNode('assets/image/dragdropImage/business/Asset 53.svg');
+    const businessAsset54 = createIconNode('assets/image/dragdropImage/business/Asset 54.svg');
+    const businessAsset55 = createIconNode('assets/image/dragdropImage/business/Asset 55.svg');
+    const businessAsset56 = createIconNode('assets/image/dragdropImage/business/Asset 56.svg');
+    const businessAsset57 = createIconNode('assets/image/dragdropImage/business/Asset 57.svg');
+    const businessAsset58 = createIconNode('assets/image/dragdropImage/business/Asset 58.svg');
+    const businessAsset59 = createIconNode('assets/image/dragdropImage/business/Asset 59.svg');
+    const businessAsset60 = createIconNode('assets/image/dragdropImage/business/Asset 60.svg');
+    const businessAsset61 = createIconNode('assets/image/dragdropImage/business/Asset 61.svg');
+    const businessAsset62 = createIconNode('assets/image/dragdropImage/business/Asset 62.svg');
+    const businessAsset63 = createIconNode('assets/image/dragdropImage/business/Asset 63.svg');
+    const businessAsset64 = createIconNode('assets/image/dragdropImage/business/Asset 64.svg');
+    const businessAsset65 = createIconNode('assets/image/dragdropImage/business/Asset 65.svg');
+    const businessAsset66 = createIconNode('assets/image/dragdropImage/business/Asset 66.svg');
+    const businessAsset67 = createIconNode('assets/image/dragdropImage/business/Asset 67.svg');
+    const businessAsset68 = createIconNode('assets/image/dragdropImage/business/Asset 68.svg');
+    const businessAsset69 = createIconNode('assets/image/dragdropImage/business/Asset 69.svg');
+    const businessAsset70 = createIconNode('assets/image/dragdropImage/business/Asset 70.svg');
+    const businessAsset71 = createIconNode('assets/image/dragdropImage/business/Asset 71.svg');
+    const businessAsset72 = createIconNode('assets/image/dragdropImage/business/Asset 72.svg');
+    const businessAsset73 = createIconNode('assets/image/dragdropImage/business/Asset 73.svg');
+    const businessAsset74 = createIconNode('assets/image/dragdropImage/business/Asset 74.svg');
+    const businessAsset75 = createIconNode('assets/image/dragdropImage/business/Asset 75.svg');
+    const businessAsset76 = createIconNode('assets/image/dragdropImage/business/Asset 76.svg');
+    const businessAsset77 = createIconNode('assets/image/dragdropImage/business/Asset 77.svg');
+    const businessAsset78 = createIconNode('assets/image/dragdropImage/business/Asset 78.svg');
+
 
     // create an array of all node styles
     const dragDropElements = [{
@@ -551,11 +622,25 @@ export class GraphEditorComponent implements OnInit {
         shearedRectangle, shearedRectangle2, trapez, trapez2, octagon, star5, star6, star8,
         star_up, pill, diamond
       ], panel: shapes
-    },{
-      style: [icon], panel: image
+    }, {
+      style: [icon, businessAsset1, businessAsset2, businessAsset3, businessAsset4, businessAsset5,
+        businessAsset6, businessAsset7, businessAsset8, businessAsset9, businessAsset10,
+        businessAsset11, businessAsset12, businessAsset14, businessAsset15, businessAsset16,
+        businessAsset17, businessAsset18, businessAsset19, businessAsset20, businessAsset21,
+        businessAsset22, businessAsset23, businessAsset26, businessAsset27, businessAsset28,
+        businessAsset29, businessAsset30, businessAsset31, businessAsset32, businessAsset34,
+        businessAsset35, businessAsset36, businessAsset37, businessAsset38, businessAsset39,
+        businessAsset40, businessAsset43, businessAsset44, businessAsset45, businessAsset46,
+        businessAsset47, businessAsset48, businessAsset49, businessAsset52, businessAsset53,
+        businessAsset54, businessAsset55, businessAsset56, businessAsset57, businessAsset58,
+        businessAsset59, businessAsset60, businessAsset61, businessAsset62, businessAsset63,
+        businessAsset64, businessAsset65, businessAsset66, businessAsset67, businessAsset68,
+        businessAsset69, businessAsset70, businessAsset71, businessAsset72, businessAsset73,
+        businessAsset74, businessAsset75, businessAsset76, businessAsset77, businessAsset78
+      ], panel: businessImage
     }]
 
-    dragDropElements.forEach((element)=>{
+    dragDropElements.forEach((element) => {
       element['style'].forEach((style: any): void => {
         this.addNodeVisual(style, element['panel'])
       })
