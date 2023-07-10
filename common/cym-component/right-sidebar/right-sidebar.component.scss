@@ -11,21 +11,32 @@ cym-right-sidebar {
   }
 
   .menu-panel {
-    display: flex;
-    padding: 1.5rem;
-    flex-direction: column;
-    gap: var(--unit);
+    display: grid;
+    grid-template-rows: repeat(auto-fit , 40px);
+    //padding: calc(var(--padding) + 0.5rem);
+    gap: var(--grid-gap);
     background-color: var(--theme-color-one);
     align-items: center;
+    justify-content:center;
     //border: 2px solid var(--third-background-color);
     border-top: none;
+    color:var(--icon-color);
+    width:var(--tiny-icon-width)
+  }
+
+  .menu-panel{
+    div:hover{
+      background-color:var(--primary-color);
+
+    }
+
   }
 
   .details-panel {
-    padding: 1rem;
+    padding: var(--padding);
     overflow-y: auto;
     overflow-x: hidden;
-    width: 20vw
+    width: 20vw;
   }
 
   .tab {
@@ -34,6 +45,6 @@ cym-right-sidebar {
 
   .grid {
     display: grid;
-    gap: 1rem;
+    gap: var(--grid-gap);
   }
 }
