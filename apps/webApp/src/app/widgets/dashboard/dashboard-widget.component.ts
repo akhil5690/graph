@@ -24,9 +24,10 @@ export class DashboardWidgetComponent implements OnInit {
   openFindingsPopup: boolean = false;
   findingsGraph: any;
   selectedFindings: any;
+  tabType = 0;
+
   constructor(private cdr: ChangeDetectorRef, private graphService: GraphService, private router: Router, private cym: CymService, private messageService: MessageService) {
   }
-
 
 
   ngOnInit() {
@@ -97,8 +98,8 @@ export class DashboardWidgetComponent implements OnInit {
     }
   }
 
-  private errorMessageConstructor(e:string) {
-    this.messageService.add({ severity: 'error', summary: 'Error', detail: e});
+  private errorMessageConstructor(e: string) {
+    this.messageService.add({severity: 'error', summary: 'Error', detail: e});
 
   }
 }
