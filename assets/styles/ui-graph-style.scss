@@ -1,19 +1,19 @@
 .overview {
   position: absolute;
-  top: 40px;
+  top: 2.85rem;
   margin: var(--margin24);
 }
 
 #overview, #neighbour {
-  width: 190px;
-  height: 175px;
+  width: var(--overview-neighbour-width);
+  height: var(--overview-neighbour-height);
   background-color: var(--primary-background-color);
   border:1px solid var(--theme-color-one);
 }
 
 .neighbour {
   position: absolute;
-  top: 280px;
+  top: 20rem;
   margin: var(--margin24);
 
 }
@@ -90,7 +90,7 @@ span#pr_id_2_label {
   top: 0;
   bottom: 0;
   height: var(--graph-top-toolbar-height);
-  width: 100%;
+  width: var(--base-width);
   background-color: var(--theme-color-one);
   display: inline-flex;
   align-items: center;
