@@ -55,5 +55,9 @@ cym-right-sidebar {
     display: grid;
     gap: var(--grid-gap);
   }
+
+  .displayNone{
+    display:none;
+  }
 }
 

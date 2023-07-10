@@ -19,7 +19,7 @@
   </div>
 
   <!-- sidebar panel -->
-  <div class="details-panel" *ngIf="openPopUp">
+  <div class="details-panel" [ngClass]="openPopUp?'':'displayNone'">
     <!--   opens on click of nodes or edges for the details-->
     <div *ngIf="items && tab === 'details'">
       <!--      <app-details [data]="items"></app-details>-->
@@ -56,7 +56,7 @@
 
     </div>
 
-    <div *ngIf="tab === 'edit'">
+    <div [ngClass]="tab === 'edit'?'':'displayNone'">
       <ng-content select="[panel]"></ng-content>
     </div>
   </div>

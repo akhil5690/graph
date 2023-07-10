@@ -61,6 +61,7 @@ export class GraphComponents implements OnInit, OnChanges {
   filter = false;
   hoverBorder: any;
   @Input() data: any;
+  @Input() tools:any;
   @Input() layout: any = 'Organic';
   @ViewChild('graphComponent', {static: true}) graphContainer!: ElementRef;
   @ViewChild('overViewComponent', {static: true}) overViewContainer!: ElementRef;
@@ -106,6 +107,7 @@ export class GraphComponents implements OnInit, OnChanges {
     if (this.data) {
       // start creating graph
       this.run();
+      this.clickEvent(this.tools);
     }
   }
 
