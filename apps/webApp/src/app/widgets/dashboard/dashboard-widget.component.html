@@ -1,31 +1,93 @@
-<cym-widget-frame [frame_type]="'header-main-frame'">
-  <div header>
-  </div>
+<cym-widget-frame [frame_type]="'header-main-footer-frame'">
+  <cym-top-toolbar header> </cym-top-toolbar>
 
   <div main>
-    <div class="schema-toolbar">
-      <p-tabView styleClass="tabview-custom">
-        <p-tabPanel>
-          <ng-template pTemplate="header">
-            <span (click)="getSchemaData()">SCHEMA</span>
-          </ng-template>
-          <cym-graph [layout]="layout" [data]="schema"></cym-graph>
-        </p-tabPanel>
-        <p-tabPanel header="Header II">
-          <ng-template pTemplate="header">
-            <span (click)="getGraphData()">EXPLORER</span>
-          </ng-template>
-          <cym-graph [layout]="layout" [data]="explorer" (findingsClicked)="loadFindings($event)"
-                     (refreshGraph)="refreshGraph($event)"></cym-graph>
-        </p-tabPanel>
-        <p-tabPanel header="Header II">
-          <ng-template pTemplate="header">
-            <span>EDITOR</span>
-          </ng-template>
-          <cym-graph-editor></cym-graph-editor>
-        </p-tabPanel>
-      </p-tabView>
-    </div>
+
+
+    <!--    <div class="schema-toolbar">-->
+    <!--         <p-tabView styleClass="tabview-custom">-->
+    <!--           <p-tabPanel>-->
+    <!--             <ng-template pTemplate="header">-->
+    <!--               <span (click)="getSchemaData()">SCHEMA</span>-->
+    <!--             </ng-template>-->
+    <!--             <cym-graph [layout]="layout" [data]="schema"></cym-graph>-->
+    <!--           </p-tabPanel>-->
+    <!--           <p-tabPanel header="Header II">-->
+    <!--             <ng-template pTemplate="header">-->
+    <!--               <span (click)="getGraphData()">EXPLORER</span>-->
+    <!--             </ng-template>-->
+    <!--             <cym-graph [layout]="layout" [data]="explorer" (findingsClicked)="loadFindings($event)"-->
+    <!--                        (refreshGraph)="refreshGraph($event)"></cym-graph>-->
+    <!--           </p-tabPanel>-->
+    <!--           <p-tabPanel header="Header II">-->
+    <!--             <ng-template pTemplate="header">-->
+    <!--               <span>EDITOR</span>-->
+    <!--             </ng-template>-->
+    <!--             <cym-graph-editor></cym-graph-editor>-->
+    <!--           </p-tabPanel>-->
+    <!--         </p-tabView>-->
+    <!--       </div>-->
+
+
+    <cym-div [cymClass]="'dash-tool-container'">
+      <div class="three-tab-container">
+        <div > Schema</div>
+        <div > Explorer</div>
+        <div > Editor</div>
+      </div>
+
+      <div class="graph-tool-icons">
+
+
+        <div> </div>
+        <div> </div>
+        <div> </div>
+        <div > <img src="assets/image/fit.svg" class="twentytwo"></div>
+        <div > <img src="assets/image/zoomIn.svg" class="twentytwo"></div>
+        <div > <img src="assets/image/zoomOut.svg" class="twentytwo"></div>
+        <div>  <img src="assets/image/eye.svg" class="twentytwo"> </div>
+        <div>  <img src="assets/image/save.svg" class="twentytwo"> </div>
+        <div > <img src="assets/image/fullscreen.svg" class="twentytwo"> </div>
+        <div > <img src="assets/image/paste.svg" class="twentytwo"> </div>
+        <div > <img src="assets/image/redo.svg" class="twentytwo"></div>
+        <div > <img src="assets/image/refresh.svg" class="twentytwo"> </div>
+        <div > <img src="assets/image/undo.svg" class="twentytwo"></div>
+        <div>  </div>
+        <div> </div>
+        <div> </div>
+
+      </div>
+
+      <div class="three-tab-container">
+        <div >Palette</div>
+        <div >Properties</div>
+        <div >Diagram</div>
+      </div>
+    </cym-div>
+
+        <div class="schema-toolbar">
+             <p-tabView styleClass="tabview-custom">
+               <p-tabPanel>
+                 <ng-template pTemplate="header">
+                   <span (click)="getSchemaData()">SCHEMA</span>
+                 </ng-template>
+                 <cym-graph [layout]="layout" [data]="schema"></cym-graph>
+               </p-tabPanel>
+               <p-tabPanel header="Header II">
+                 <ng-template pTemplate="header">
+                   <span (click)="getGraphData()">EXPLORER</span>
+                 </ng-template>
+                 <cym-graph [layout]="layout" [data]="explorer" (findingsClicked)="loadFindings($event)"
+                            (refreshGraph)="refreshGraph($event)"></cym-graph>
+               </p-tabPanel>
+               <p-tabPanel header="Header II">
+                 <ng-template pTemplate="header">
+                   <span>EDITOR</span>
+                 </ng-template>
+                 <cym-graph-editor></cym-graph-editor>
+               </p-tabPanel>
+             </p-tabView>
+           </div>
 
     <p-dialog [modal]="true" *ngIf="openFindingsPopup" [(visible)]="openFindingsPopup" (onHide)="openFindingsPopup =false" class="popup">
       <ng-template pTemplate="header">
@@ -36,4 +98,10 @@
 
     <p-toast></p-toast>
   </div>
+  <cym-div footer>Copyright - Cymonix - 2023</cym-div>
 </cym-widget-frame>
+
+
+
+
+

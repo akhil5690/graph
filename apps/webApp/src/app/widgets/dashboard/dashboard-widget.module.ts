@@ -14,6 +14,8 @@ import {TabViewModule} from "primeng/tabview";
 import {GraphEditorModule} from "../../../../../../common/cym-component/graph-editor/graph-editor.module";
 import {DialogModule} from "primeng/dialog";
 import {ToastModule} from "primeng/toast";
+import {CymDivModule} from "../../../../../../common/cym-containers/cym-div/cym-div.module";
+import {TopToolbarModule} from "../../../../../../common/cym-component/frames/top-toolbar/top-toolbar.module";
 
 
 @NgModule({
@@ -31,6 +33,8 @@ import {ToastModule} from "primeng/toast";
     GraphEditorModule,
     DialogModule,
     ToastModule,
+    CymDivModule,
+    TopToolbarModule,
   ],
   providers:[GraphService,HttpHandler],
   exports: [DashboardWidgetComponent]

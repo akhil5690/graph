@@ -12,6 +12,8 @@ import {MessageService} from "primeng/api";
   providers: [MessageService]
 })
 export class DashboardWidgetComponent implements OnInit {
+
+
   details: any;
   frameType!: string;
   explorer: any;
@@ -22,9 +24,10 @@ export class DashboardWidgetComponent implements OnInit {
   openFindingsPopup: boolean = false;
   findingsGraph: any;
   selectedFindings: any;
-
   constructor(private cdr: ChangeDetectorRef, private graphService: GraphService, private router: Router, private cym: CymService, private messageService: MessageService) {
   }
+
+
 
   ngOnInit() {
     this.getSchemaData()
