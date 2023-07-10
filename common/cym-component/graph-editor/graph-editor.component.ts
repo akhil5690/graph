@@ -140,6 +140,11 @@ export class GraphEditorComponent implements OnInit {
     const divElement = this.graphContainer.nativeElement;
     this.graphComponent = new GraphComponent(divElement);
 
+    this.shapeStyleDragDrop = [ShapeNodeShape.ROUND_RECTANGLE, ShapeNodeShape.ELLIPSE, ShapeNodeShape.RECTANGLE,
+      ShapeNodeShape.DIAMOND, ShapeNodeShape.FAT_ARROW, ShapeNodeShape.FAT_ARROW2, ShapeNodeShape.HEXAGON,
+      ShapeNodeShape.HEXAGON2, ShapeNodeShape.TRIANGLE, ShapeNodeShape.TRIANGLE2, ShapeNodeShape.SHEARED_RECTANGLE,
+      ShapeNodeShape.SHEARED_RECTANGLE2, ShapeNodeShape.TRAPEZ, ShapeNodeShape.TRAPEZ2, ShapeNodeShape.OCTAGON,
+      ShapeNodeShape.STAR5, ShapeNodeShape.STAR6, ShapeNodeShape.STAR8, ShapeNodeShape.STAR5_UP, ShapeNodeShape.PILL]
     // enable undoEngine
     this.graphComponent.graph.undoEngineEnabled = true;
 
@@ -519,11 +524,6 @@ export class GraphEditorComponent implements OnInit {
     const businessImage = this.imageNodeContainer.nativeElement;
 
     // set the node styles
-    this.shapeStyleDragDrop = [ShapeNodeShape.ROUND_RECTANGLE, ShapeNodeShape.ELLIPSE, ShapeNodeShape.RECTANGLE,
-      ShapeNodeShape.DIAMOND, ShapeNodeShape.FAT_ARROW, ShapeNodeShape.FAT_ARROW2, ShapeNodeShape.HEXAGON,
-      ShapeNodeShape.HEXAGON2, ShapeNodeShape.TRIANGLE, ShapeNodeShape.TRIANGLE2, ShapeNodeShape.SHEARED_RECTANGLE,
-      ShapeNodeShape.SHEARED_RECTANGLE2, ShapeNodeShape.TRAPEZ, ShapeNodeShape.TRAPEZ2, ShapeNodeShape.OCTAGON,
-      ShapeNodeShape.STAR5, ShapeNodeShape.STAR6, ShapeNodeShape.STAR8, ShapeNodeShape.STAR5_UP, ShapeNodeShape.PILL]
     // const user = createImageNodeStyle("assets/image/add-user.svg")
     // const arrowTriangle = createPolylineEdgeStyle("NONE","triangle",30)
 
