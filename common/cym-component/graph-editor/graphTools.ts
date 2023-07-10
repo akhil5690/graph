@@ -1,4 +1,4 @@
-export const graphTools = [{
+export const GraphTools = [{
   toolName: 'save',
   icon: 'assets/image/save.svg',
   height: 20, width: 20

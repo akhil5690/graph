@@ -40,6 +40,7 @@ import {
 } from "./demo-styles";
 import {v4 as uuidv4} from 'uuid';
 import {NONE_TYPE} from "@angular/compiler";
+import {GraphTools} from "./graphTools";
 
 // import {graphTools} from "./graphTools";
 
@@ -62,56 +63,7 @@ export class GraphEditorComponent implements OnInit {
 
   private graphComponent!: GraphComponent;
   isFilterOpen: boolean = false;
-  toolBarItems = [{
-    toolName: 'save',
-    icon: 'assets/image/save.svg',
-    height: 20, width: 20
-
-  }, {
-    toolName: 'refresh',
-    icon: 'assets/image/refresh.svg',
-    height: 20, width: 20
-  }, {
-    toolName: 'zoomIn',
-    icon: 'assets/image/zoomIn.svg',
-    height: 20, width: 20
-  }, {
-    toolName: 'zoomOut',
-    icon: 'assets/image/zoomOut.svg',
-    height: 20, width: 20
-  }, {
-    toolName: 'undo',
-    icon: 'assets/image/undo.svg',
-    height: 15, width: 15
-  }, {
-    toolName: 'redo',
-    icon: 'assets/image/redo.svg',
-    height: 15, width: 15
-  },
-    {
-      toolName: 'fit',
-      icon: 'assets/image/fullscreen.svg',
-      height: 15, width: 15
-    }, {
-      toolName: 'cut',
-      icon: 'assets/image/cut.svg',
-      height: 15, width: 15
-    }, {
-      toolName: 'copy',
-      icon: 'assets/image/copy.svg',
-      height: 15, width: 15
-    }, {
-      toolName: 'paste',
-      icon: 'assets/image/paste.svg',
-      height: 15, width: 15
-
-    }, {
-      toolName: 'delete',
-      icon: 'assets/image/IconCancel.svg',
-      height: 15, width: 15
-    }
-
-  ];
+  toolBarItems = GraphTools;
   selectedItem: any;
   showDetails!: boolean;
   iGraph: any = {};
@@ -126,6 +78,7 @@ export class GraphEditorComponent implements OnInit {
   private originalNeighbourHood: any;
   private shapeStyleDragDrop: any;
   private imageStyleDragDrop:any;
+  private dragDropElements: any;
 
   constructor(private cdr: ChangeDetectorRef) {
   }
@@ -601,15 +554,19 @@ export class GraphEditorComponent implements OnInit {
 
 
     // create an array of all node styles
-    const dragDropElements = [{
+    this.dragDropElements = [{
+      id: 0,
+      header: 'Shapes',
       style: this.getShapeStyle(this.shapeStyleDragDrop),
       panel: shapes
     }, {
-      style:this.getBusinessImage(this.imageStyleDragDrop),
+      id: 1,
+      header: 'Image',
+      style: this.getBusinessImage(this.imageStyleDragDrop),
       panel: businessImage
     }]
 
-    dragDropElements.forEach((element) => {
+    this.dragDropElements.forEach((element:any) => {
       element['style'].forEach((style: any): void => {
         this.addNodeVisual(style, element['panel'])
       })
