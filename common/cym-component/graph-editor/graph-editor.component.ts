@@ -124,6 +124,7 @@ export class GraphEditorComponent implements OnInit {
   selectedNode!: INode;
   private original: any;
   private originalNeighbourHood: any;
+  private shapeStyleDragDrop: any;
 
   constructor(private cdr: ChangeDetectorRef) {
   }
@@ -518,26 +519,11 @@ export class GraphEditorComponent implements OnInit {
     const businessImage = this.imageNodeContainer.nativeElement;
 
     // set the node styles
-    const defaultNode = this.graphComponent.graph.nodeDefaults.style
-    const ellipse = createShapeNodeStyle(ShapeNodeShape.ELLIPSE);
-    const rectangle = createShapeNodeStyle(ShapeNodeShape.RECTANGLE);
-    const diamond = createShapeNodeStyle(ShapeNodeShape.DIAMOND);
-    const fatArrow = createShapeNodeStyle(ShapeNodeShape.FAT_ARROW);
-    const fatArrow2 = createShapeNodeStyle(ShapeNodeShape.FAT_ARROW2);
-    const hexagon = createShapeNodeStyle(ShapeNodeShape.HEXAGON);
-    const hexagon2 = createShapeNodeStyle(ShapeNodeShape.HEXAGON2);
-    const triangle = createShapeNodeStyle(ShapeNodeShape.TRIANGLE);
-    const triangle2 = createShapeNodeStyle(ShapeNodeShape.TRIANGLE2);
-    const shearedRectangle = createShapeNodeStyle(ShapeNodeShape.SHEARED_RECTANGLE);
-    const shearedRectangle2 = createShapeNodeStyle(ShapeNodeShape.SHEARED_RECTANGLE2);
-    const trapez = createShapeNodeStyle(ShapeNodeShape.TRAPEZ);
-    const trapez2 = createShapeNodeStyle(ShapeNodeShape.TRAPEZ2);
-    const octagon = createShapeNodeStyle(ShapeNodeShape.OCTAGON);
-    const star5 = createShapeNodeStyle(ShapeNodeShape.STAR5);
-    const star6 = createShapeNodeStyle(ShapeNodeShape.STAR6);
-    const star8 = createShapeNodeStyle(ShapeNodeShape.STAR8);
-    const star_up = createShapeNodeStyle(ShapeNodeShape.STAR5_UP);
-    const pill = createShapeNodeStyle(ShapeNodeShape.PILL);
+    this.shapeStyleDragDrop = [ShapeNodeShape.ROUND_RECTANGLE, ShapeNodeShape.ELLIPSE, ShapeNodeShape.RECTANGLE,
+      ShapeNodeShape.DIAMOND, ShapeNodeShape.FAT_ARROW, ShapeNodeShape.FAT_ARROW2, ShapeNodeShape.HEXAGON,
+      ShapeNodeShape.HEXAGON2, ShapeNodeShape.TRIANGLE, ShapeNodeShape.TRIANGLE2, ShapeNodeShape.SHEARED_RECTANGLE,
+      ShapeNodeShape.SHEARED_RECTANGLE2, ShapeNodeShape.TRAPEZ, ShapeNodeShape.TRAPEZ2, ShapeNodeShape.OCTAGON,
+      ShapeNodeShape.STAR5, ShapeNodeShape.STAR6, ShapeNodeShape.STAR8, ShapeNodeShape.STAR5_UP, ShapeNodeShape.PILL]
     // const user = createImageNodeStyle("assets/image/add-user.svg")
     // const arrowTriangle = createPolylineEdgeStyle("NONE","triangle",30)
 
@@ -618,10 +604,8 @@ export class GraphEditorComponent implements OnInit {
 
     // create an array of all node styles
     const dragDropElements = [{
-      style: [defaultNode, ellipse, rectangle, fatArrow, fatArrow2, hexagon, hexagon2, triangle, triangle2,
-        shearedRectangle, shearedRectangle2, trapez, trapez2, octagon, star5, star6, star8,
-        star_up, pill, diamond
-      ], panel: shapes
+      style: this.getShapeStyle(this.shapeStyleDragDrop),
+      panel: shapes
     }, {
       style: [icon, businessAsset1, businessAsset2, businessAsset3, businessAsset4, businessAsset5,
         businessAsset6, businessAsset7, businessAsset8, businessAsset9, businessAsset10,
@@ -1071,5 +1055,14 @@ export class GraphEditorComponent implements OnInit {
         ICommand.FIT_GRAPH_BOUNDS.execute(null, this.graphComponent);
       }
     }
+  }
+
+  private getShapeStyle(shapeStyleDragDrop: any) {
+    let allShapeNodeStyle: ShapeNodeStyle[] = [];
+    shapeStyleDragDrop.forEach((style: any) => {
+      allShapeNodeStyle.push(createShapeNodeStyle(style))
+    });
+
+    return allShapeNodeStyle;
   }
 }
