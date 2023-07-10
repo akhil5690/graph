@@ -1,3 +1,6 @@
+
+
+
 cym-right-sidebar {
   .right-sidebar {
     display: grid;
@@ -7,21 +10,20 @@ cym-right-sidebar {
     background: white;
     right: 0;
     overflow: hidden;
-    height: 85vh;
+    height: var(--right-side-bar-height);
   }
 
   .menu-panel {
     display: grid;
-    grid-template-rows: repeat(auto-fit , 40px);
+    grid-template-rows: repeat(auto-fit , 50px);
     //padding: calc(var(--padding) + 0.5rem);
     gap: var(--grid-gap);
     background-color: var(--theme-color-one);
-    align-items: center;
     justify-content:center;
-    //border: 2px solid var(--third-background-color);
+    //border: 2px solid var(--theme-color-one);
     border-top: none;
     color:var(--icon-color);
-    width:var(--tiny-icon-width)
+
   }
 
   .menu-panel{
@@ -48,3 +50,4 @@ cym-right-sidebar {
     gap: var(--grid-gap);
   }
 }
+
