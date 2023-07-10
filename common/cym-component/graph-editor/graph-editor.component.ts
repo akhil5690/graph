@@ -1,4 +1,13 @@
-import {ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+  ViewChild,
+  ViewEncapsulation
+} from '@angular/core';
 import {
   Arrow, ArrowType,
   Color,
@@ -76,7 +85,7 @@ export class GraphEditorComponent implements OnInit {
   private originalNeighbourHood: any;
   private shapeStyleDragDrop: any;
   private imageStyleDragDrop: any;
-  private dragDropElements: any;
+  dragDropElements: any;
 
   constructor(private cdr: ChangeDetectorRef) {
   }
@@ -469,32 +478,37 @@ export class GraphEditorComponent implements OnInit {
 
   initializeDragAndDropPanel(): void {
     // get the div for panel
-    const shapes = this.shapeNodeContainer.nativeElement;
-    const businessImage = this.imageNodeContainer.nativeElement;
+    let shapes ;
+    let businessImage ;
 
     // set the node styles
     // const user = createImageNodeStyle("assets/image/add-user.svg")
     // const arrowTriangle = createPolylineEdgeStyle("NONE","triangle",30)
 
+    setTimeout(()=>{
+      shapes = document.getElementById('item1');
+      businessImage= document.getElementById('item2');
+      console.log(shapes,businessImage);
+      // create an array of all node styles
+      this.dragDropElements = [{
+        id: 0,
+        header: 'Shapes',
+        style: this.getShapeStyle(this.shapeStyleDragDrop),
+        panel: shapes
+      }, {
+        id: 1,
+        header: 'Business',
+        style: this.getBusinessImage(this.imageStyleDragDrop),
+        panel: businessImage
+      }]
 
-    // create an array of all node styles
-    this.dragDropElements = [{
-      id: 0,
-      header: 'Shapes',
-      style: this.getShapeStyle(this.shapeStyleDragDrop),
-      panel: shapes
-    }, {
-      id: 1,
-      header: 'Image',
-      style: this.getBusinessImage(this.imageStyleDragDrop),
-      panel: businessImage
-    }]
-
-    this.dragDropElements.forEach((element: any) => {
-      element['style'].forEach((style: any): void => {
-        this.addNodeVisual(style, element['panel'])
+      this.dragDropElements.forEach((element: any) => {
+        element['style'].forEach((style: any): void => {
+          this.addNodeVisual(style, element['panel'])
+        })
       })
-    })
+    },50)
+
     // create visual images for the nodes for panel
 
   }
