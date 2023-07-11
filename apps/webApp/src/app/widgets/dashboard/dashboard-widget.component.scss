@@ -56,7 +56,7 @@ cym-dashboard-widget {
     display: grid;
     grid-template-columns: repeat(auto-fit , 50px);
     grid-gap: 0;
-
+    align-items: center;
     justify-content:center;
   }
 

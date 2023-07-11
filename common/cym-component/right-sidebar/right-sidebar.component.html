@@ -26,7 +26,7 @@
       <cym-details [type]="type" [data]="items" [info]="items" (property)="property($event)"></cym-details>
     </div>
     <!--   opens on click of filter  from tab -->
-    <div *ngIf="tab === 'filter'">
+    <div *ngIf="tab === 'filter'" class="filter">
       <p>Property</p>
       <p-autoComplete [(ngModel)]="selectedProp" [suggestions]="suggestedList" (ngModelChange)="getValue(selectedProp)"
                       (completeMethod)="search($event,this.properties)" field="name" [dropdown]="true">

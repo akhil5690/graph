@@ -54,7 +54,7 @@ export const Shapes = [ShapeNodeShape.ROUND_RECTANGLE, ShapeNodeShape.ELLIPSE, S
   ShapeNodeShape.SHEARED_RECTANGLE2, ShapeNodeShape.TRAPEZ, ShapeNodeShape.TRAPEZ2, ShapeNodeShape.OCTAGON,
   ShapeNodeShape.STAR5, ShapeNodeShape.STAR6, ShapeNodeShape.STAR8, ShapeNodeShape.STAR5_UP, ShapeNodeShape.PILL]
 
-export const Business = ['assets/image/dragdropImage/People1.svg',
+export const Business = [
   'assets/image/dragdropImage/business/Asset 1.svg',
   'assets/image/dragdropImage/business/Asset 2.svg',
   'assets/image/dragdropImage/business/Asset 3.svg',
