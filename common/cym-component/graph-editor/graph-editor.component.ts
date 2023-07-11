@@ -671,7 +671,6 @@ export class GraphEditorComponent implements AfterViewInit,OnInit {
   }
 
   createGraph(data: any, graphComponent: GraphComponent): void {
-    // this.clickEvent(this.tools);
     // get the graph builder to create graph from json ie; initGraph
     const builder = new GraphBuilder()
     const sourceNode = builder.createNodesSource({
