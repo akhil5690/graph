@@ -203,8 +203,6 @@ export class GraphEditorComponent implements AfterViewInit, OnInit {
       const stroke = this.getEdgeStrokeColor(edge.style);
       const arrow = this.getEdgeArrowStyle(edge.style);
       const style = this.getEdgeStyle(stroke, arrow);
-
-      console.log(style)
       const sourceNode = edge.sourceNode;
       const targetNode = edge.targetNode;
 
@@ -433,7 +431,6 @@ export class GraphEditorComponent implements AfterViewInit, OnInit {
     const owner = label.owner;
 
     if (owner instanceof INode) {
-      console.log(this.validateLabel(label.text, 'node'));
       owner.tag = {
         id: owner.tag.id,
         label: !this.validateLabel(label.text, 'node') ? label.text : null,
@@ -504,10 +501,9 @@ export class GraphEditorComponent implements AfterViewInit, OnInit {
     setTimeout(() => {
 
       this.dragDropElements.forEach((element: any, index: number) => {
+        const id = 'item' + index
+        const ele = document.getElementById(id);
         element['style'].forEach((style: any): void => {
-          const id = 'item' + index
-          const ele = document.getElementById(id);
-          console.log(ele)
           if (ele) {
             this.addNodeVisual(style, ele)
           }
@@ -669,8 +665,10 @@ export class GraphEditorComponent implements AfterViewInit, OnInit {
         }
       })
     }
-    this.createJson();
-    this.createGraph(this.iGraph, this.graphComponent)
+    // this.createJson();
+    // this.createGraph(this.iGraph, this.graphComponent)
+
+    this.cdr.detectChanges();
   }
 
   createGraph(data: any, graphComponent: GraphComponent): void {
