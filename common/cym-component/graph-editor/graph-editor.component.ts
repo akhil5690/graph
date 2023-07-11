@@ -667,6 +667,7 @@ export class GraphEditorComponent implements AfterViewInit, OnInit {
         }
       })
     }
+    this.createJson();
     this.createGraph(this.iGraph, this.graphComponent)
     this.printGraph();
     this.cdr.detectChanges();

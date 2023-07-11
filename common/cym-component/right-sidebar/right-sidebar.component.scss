@@ -1,6 +1,4 @@
 
-
-
 cym-right-sidebar {
   .right-sidebar {
     display: grid;
@@ -14,37 +12,42 @@ cym-right-sidebar {
   }
 
   .menu-panel {
-    div{
+    div {
       display: grid;
       height: var(--tiny-icon-height);
       width: var(--tiny-icon-width);
       align-items: center;
       justify-content: center;
-      cursor:pointer;
+      cursor: pointer;
     }
+
     display: grid;
-    grid-template-rows: repeat(auto-fit , 50px);
+    grid-template-rows: repeat(auto-fit, 50px);
     //padding: calc(var(--padding) + 0.5rem);
     //gap: var(--grid-gap);
     background-color: var(--theme-color-one);
-    justify-content:center;
+    justify-content: center;
     //border: 2px solid var(--theme-color-one);
     border-top: none;
-    color:var(--icon-color);
-    align-items:center;
+    color: var(--icon-color);
+    align-items: center;
 
   }
 
-  .menu-panel> div:hover{
-      background-color:var(--primary-color);
+  .menu-panel > div:hover {
+    background-color: var(--primary-color);
 
   }
 
   .details-panel {
-    padding: var(--padding);
+    padding: 0;
     overflow-y: auto;
     overflow-x: hidden;
     width: 20vw;
+  }
+
+  .filter {
+    padding-left: var(--unit)
   }
 
   .tab {
@@ -56,8 +59,8 @@ cym-right-sidebar {
     gap: var(--grid-gap);
   }
 
-  .displayNone{
-    display:none;
+  .displayNone {
+    display: none;
   }
 }
 
