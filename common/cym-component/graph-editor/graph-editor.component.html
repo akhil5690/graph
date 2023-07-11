@@ -11,20 +11,15 @@
     </div>
     <cym-right-sidebar [type]="'editor'" [showDetails]="showDetails" [details]="selectedItem"
                        (edgeNodeProperty)="changeEdgeNode($event)" (isRightSidebarOpen)="setFrame($event)">
-      <p-accordion [multiple]="true" panel>
-        <p-accordionTab header="Shapes">
-          <div  class="drag-and-drop-panel" id="item0"></div>
+      <div panel>
+        <p-accordion [multiple]="true">
+        <p-accordionTab *ngFor="let item of dragDropElements;let i=index" >
+          <div class="drag-and-drop-panel" [id]="'item'+i"></div>
         </p-accordionTab>
-
-        <p-accordionTab header="Business">
-          <div class="drag-and-drop-panel" id="item1" #images>
-          </div>
-        </p-accordionTab>
-
-
-
-      </p-accordion>
+        </p-accordion>
+      </div>
     </cym-right-sidebar>
+
   </div>
 
   <cym-overview>

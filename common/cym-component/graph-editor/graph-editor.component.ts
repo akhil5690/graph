@@ -57,7 +57,7 @@ import {Business, GraphTools, Shapes} from "./graphUtils";
   styleUrls: ['./graph-editor.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class GraphEditorComponent implements OnInit {
+export class GraphEditorComponent implements AfterViewInit,OnInit {
   @Input() data: any;
   @Input() tools: any;
   @ViewChild('graphContainer', {static: true}) graphContainer!: ElementRef;
@@ -90,9 +90,26 @@ export class GraphEditorComponent implements OnInit {
 
   constructor(private cdr: ChangeDetectorRef) {
   }
-
   ngOnInit() {
+    this.shapeStyleDragDrop = Shapes
+    this.imageStyleDragDrop = Business
+    this.dragDropElements = [{
+      id: 0,
+      headers: 'Shapes',
+      style: this.getShapeStyle(this.shapeStyleDragDrop),
+    }, {
+      id: 1,
+      headers: 'Business',
+      style: this.getBusinessImage(this.imageStyleDragDrop),
+    }];
+
+
+  }
+
+  ngAfterViewInit() {
+
     this.run();
+
     // this.clickEvent(this.tools);
   }
 
@@ -102,9 +119,6 @@ export class GraphEditorComponent implements OnInit {
     // get the canvas for drawing graph
     const divElement = this.graphContainer.nativeElement;
     this.graphComponent = new GraphComponent(divElement);
-
-    this.shapeStyleDragDrop = Shapes
-    this.imageStyleDragDrop = Business
     // enable undoEngine
     this.graphComponent.graph.undoEngineEnabled = true;
 
@@ -485,28 +499,18 @@ export class GraphEditorComponent implements OnInit {
     // const arrowTriangle = createPolylineEdgeStyle("NONE","triangle",30)
 
     setTimeout(() => {
-      // create an array of all node styles
-      this.dragDropElements = [{
-        id: 0,
-        headers: 'Shapes',
-        style: this.getShapeStyle(this.shapeStyleDragDrop),
-      }, {
-        id: 1,
-        headers: 'Business',
-        style: this.getBusinessImage(this.imageStyleDragDrop),
-      }]
 
       this.dragDropElements.forEach((element: any, index: number) => {
         element['style'].forEach((style: any): void => {
-          const id = 'item'+ index
+          const id = 'item' + index
           const ele = document.getElementById(id);
           console.log(ele)
-          if (ele){
-            this.addNodeVisual(style,ele)
+          if (ele) {
+            this.addNodeVisual(style, ele)
           }
         })
       })
-    }, 50)
+    }, 0)
 
     // create visual images for the nodes for panel
 
