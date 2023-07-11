@@ -488,7 +488,8 @@ export class GraphEditorComponent implements AfterViewInit, OnInit {
     const container = this.neighbour.nativeElement;
     this.neighbourComponent = new GraphComponent(container);
     this.neighbourComponent.contentRect = new Rect(0, 0, 100, 100);
-    this.neighbourComponent.fitGraphBounds()
+    this.neighbourComponent.fitGraphBounds();
+    this.cdr.detectChanges();
   }
 
 
@@ -667,9 +668,9 @@ export class GraphEditorComponent implements AfterViewInit, OnInit {
         }
       })
     }
+    this.printGraph();
     this.createJson();
     this.createGraph(this.iGraph, this.graphComponent)
-    this.printGraph();
     this.cdr.detectChanges();
   }
 
@@ -913,7 +914,8 @@ export class GraphEditorComponent implements AfterViewInit, OnInit {
     this.createJson();
     this.createGraph(jsonGraph, this.neighbourComponent)
     this.neighbourComponent.contentRect = new Rect(0, 0, 100, 100);
-    this.neighbourComponent.fitGraphBounds()
+    this.neighbourComponent.fitGraphBounds();
+    this.cdr.detectChanges();
   }
 
   private getNeighbourOption() {
@@ -923,7 +925,8 @@ export class GraphEditorComponent implements AfterViewInit, OnInit {
       name: 'Successor', value: TraversalDirection.SUCCESSOR
     }, {
       name: 'Predecessor', value: TraversalDirection.PREDECESSOR
-    },]
+    },];
+    this.cdr.detectChanges();
   }
 
   switch(isFullscreen: boolean) {
