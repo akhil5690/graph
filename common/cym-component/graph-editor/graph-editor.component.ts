@@ -433,7 +433,7 @@ export class GraphEditorComponent implements AfterViewInit, OnInit {
     if (owner instanceof INode) {
       owner.tag = {
         id: owner.tag.id,
-        label: !this.validateLabel(label.text, 'node') ? label.text : null,
+        label: !this.validateLabel(label.text, owner.tag.id, 'node') ? label.text : null,
         style: owner.tag.style,
         layout: owner.tag.layout
       };
@@ -639,7 +639,7 @@ export class GraphEditorComponent implements AfterViewInit, OnInit {
             id: data.tag.id,
             source: source,
             target: target,
-            label: !this.validateLabel(property.label, 'edge') ? property.label : null,
+            label: !this.validateLabel(property.label, property.id, 'edge') ? property.label : null,
             sourceLabel: property.sourceLabel, targetLabel: property.targetLabel,
             style: data.tag.style,
             layout: data.tag.layout
@@ -649,12 +649,14 @@ export class GraphEditorComponent implements AfterViewInit, OnInit {
     } else {
       this.graphComponent.graph.nodes.forEach((data) => {
         if (data.tag.id === property.id) {
-
+          let label;
           const oldLabel = data.tag.label
-
+          if (!this.validateLabel(property.label, property.id, 'node')) {
+            label = property.label
+          }
           data.tag = {
             id: data.tag.id,
-            label: !this.validateLabel(property.label, 'node') ? property.label : null,
+            label: label,
             style: data.tag.style,
             layout: data.tag.layout,
             properties: property.properties
@@ -665,15 +667,14 @@ export class GraphEditorComponent implements AfterViewInit, OnInit {
         }
       })
     }
-    // this.createJson();
-    // this.createGraph(this.iGraph, this.graphComponent)
+    this.createGraph(this.iGraph, this.graphComponent)
     this.printGraph();
     this.cdr.detectChanges();
   }
 
-  printGraph(){
-    this.graphComponent.graph.nodes.forEach((node)=>{
-      console.log(node)
+  printGraph() {
+    this.graphComponent.graph.nodes.forEach((node) => {
+      console.log(node.tag)
     })
   }
 
@@ -798,10 +799,11 @@ export class GraphEditorComponent implements AfterViewInit, OnInit {
     this.graphComponent.graph.nodes.forEach((node) => {
 
       const jsonNode = {
-        id: node?.tag?.id,
-        label: node?.tag?.label,
-        style: node.tag.style, layout: node.tag.layout,
-        properties: node.tag?.properties
+        id: (node.tag?.id) ? node?.tag?.id : null,
+        label: (node.tag?.label) ? node.tag.label : null,
+        style: (node.tag?.style) ? node.tag.style : null,
+        layout: (node.tag?.layout) ? node.tag.layout : null,
+        properties: (node.tag?.properties) ? node.tag?.properties : null
       };
 
       jsonGraph.nodes.push(jsonNode);
@@ -827,12 +829,12 @@ export class GraphEditorComponent implements AfterViewInit, OnInit {
   }
 
 
-  private validateLabel(label: string, type: string) {
+  private validateLabel(label: string, id: any, type: string) {
     // label shouldn't be same
     if (type === 'edge') {
       return this.graphComponent.graph.edges.find((edge) => edge.tag.label === label)
     } else {
-      return this.graphComponent.graph.nodes.find((node) => node.tag.label === label)
+      return this.graphComponent.graph.nodes.find((node) => (node.tag.id !== id && node.tag.label === label))
     }
 
   }
