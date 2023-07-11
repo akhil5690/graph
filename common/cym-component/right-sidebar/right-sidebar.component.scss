@@ -1,3 +1,6 @@
+
+
+
 cym-right-sidebar {
   .right-sidebar {
     display: grid;
@@ -7,25 +10,36 @@ cym-right-sidebar {
     background: white;
     right: 0;
     overflow: hidden;
-    height: 85vh;
+    height: var(--right-side-bar-height);
   }
 
   .menu-panel {
-    display: flex;
-    padding: 1.5rem;
-    flex-direction: column;
-    gap: var(--unit);
+    display: grid;
+    grid-template-rows: repeat(auto-fit , 50px);
+    //padding: calc(var(--padding) + 0.5rem);
+    gap: var(--grid-gap);
     background-color: var(--theme-color-one);
-    align-items: center;
-    //border: 2px solid var(--third-background-color);
+    justify-content:center;
+    //border: 2px solid var(--theme-color-one);
     border-top: none;
+    color:var(--icon-color);
+    align-items:center;
+
+  }
+
+  .menu-panel{
+    div:hover{
+      background-color:var(--primary-color);
+
+    }
+
   }
 
   .details-panel {
-    padding: 1rem;
+    padding: var(--padding);
     overflow-y: auto;
     overflow-x: hidden;
-    width: 20vw
+    width: 20vw;
   }
 
   .tab {
@@ -34,10 +48,11 @@ cym-right-sidebar {
 
   .grid {
     display: grid;
-    gap: 1rem;
+    gap: var(--grid-gap);
   }
 
   .displayNone{
     display:none;
   }
 }
+

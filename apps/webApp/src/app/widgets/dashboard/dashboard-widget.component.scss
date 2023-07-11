@@ -1,21 +1,79 @@
 
+
+
 cym-dashboard-widget {
   .schema-toolbar {
     height: 3rem;
-    width: 100%;
+    width: var(--base-width);
 
   }
-
   .popup {
     .p-dialog {
       display: flex;
       flex-direction: column;
       pointer-events: auto;
-      max-height: 100%;
+      max-height: var(--base-height);
       width: 100vw;
       transform: scale(1);
       position: relative;
     }
   }
+  .dash-tool-container {
+    display: grid;
+    grid-template-columns: 1.5fr 7fr 1.5fr;
+    background-color: var(--theme-color-one);
+    width: var(--base-width);
+    height:var(--graph-tool-bar-height);
+    text-align: center;
+
+  }
+
+  .three-tab-container {
+    div {
+      display: grid;
+      height:var(--graph-tool-bar-height);
+      align-items: center;
+      cursor:pointer;
+    }
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: var(--grid-gap);
+    color: var(--secondary-text-color);
+    align-items: center;
+    justify-content: center;
+
+  }
+
+  .graph-tool-icons {
+    div {
+      display: grid;
+      height: var(--tiny-icon-height);
+	    width: var(--tiny-icon-width);
+      align-items: center;
+      justify-content: center;
+      cursor:pointer;
+    }
+    display: grid;
+    grid-template-columns: repeat(auto-fit , 40px);
+    grid-gap: 0;
+    align-items: center;
+    justify-content:center;
+  }
+
+  .set-icon{
+    height:var(--graph-tool-icon-height);
+    width:var(--graph-tool-icon-width);
+  }
+
+  .graph-tool-icons > div:hover, .three-tab-container > div:hover {
+    background-color: var(--primary-color);
+    color: white;
+
+  }
+
+
+
 
 }
+
+

@@ -39,6 +39,29 @@
   //margin-
   --margin : var(--unit) ;
   --header-margin-bottom: 0 0 1rem 0;
+  --margin24: 1.6rem;
+
+  //overview and neighbour -
+  --overview-neighbour-width: 190px;
+  --overview-neighbour-height: 175px;
+
+  //graph-tool-bar-height-
+  --graph-tool-bar-height:2.857rem;
+
+  //graph-page-icon -
+  --graph-tool-icon-height:1.42rem;
+  --graph-tool-icon-width :1.42rem;
+  --icon-color: white;
+
+  //garph-sidebar -
+  --graph-sidebar-height: 85vh;
+  --graph-sidebar-width: 80vw;
+
+  --graph-height:85vh;
+  --graph-width : 100vw;
+
+  //right-side-bar-
+  --right-side-bar-height: 85vh;
 
 
 
@@ -70,6 +93,8 @@
   --component-header-color: rgb(214 27 119 / 51%);
   --vertical-cards-loop: calc(var(--unit)*15);
   --card-height: calc(var(--unit)*11);
+  --tiny-icon-height: 2.857rem;
+  --tiny-icon-width: 2.857rem;
 
 
 
