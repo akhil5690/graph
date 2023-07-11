@@ -59,7 +59,7 @@ import {Business, GraphTools, Shapes} from "./graphUtils";
 })
 export class GraphEditorComponent implements OnInit {
   @Input() data: any;
-  @Input() tools:any;
+  @Input() tools: any;
   @ViewChild('graphContainer', {static: true}) graphContainer!: ElementRef;
   @ViewChild('overViewComponent', {static: true}) overViewContainer!: ElementRef;
   @ViewChild('neighbour', {static: true}) neighbour!: ElementRef;
@@ -479,37 +479,34 @@ export class GraphEditorComponent implements OnInit {
 
 
   initializeDragAndDropPanel(): void {
-    // get the div for panel
-    let shapes ;
-    let businessImage ;
 
     // set the node styles
     // const user = createImageNodeStyle("assets/image/add-user.svg")
     // const arrowTriangle = createPolylineEdgeStyle("NONE","triangle",30)
 
-    setTimeout(()=>{
-      shapes = document.getElementById('item1');
-      businessImage= document.getElementById('item2');
-      console.log(shapes,businessImage);
+    setTimeout(() => {
       // create an array of all node styles
       this.dragDropElements = [{
         id: 0,
-        header: 'Shapes',
+        headers: 'Shapes',
         style: this.getShapeStyle(this.shapeStyleDragDrop),
-        panel: shapes
       }, {
         id: 1,
-        header: 'Business',
+        headers: 'Business',
         style: this.getBusinessImage(this.imageStyleDragDrop),
-        panel: businessImage
       }]
 
-      this.dragDropElements.forEach((element: any) => {
+      this.dragDropElements.forEach((element: any, index: number) => {
         element['style'].forEach((style: any): void => {
-          this.addNodeVisual(style, element['panel'])
+          const id = 'item'+ index
+          const ele = document.getElementById(id);
+          console.log(ele)
+          if (ele){
+            this.addNodeVisual(style,ele)
+          }
         })
       })
-    },50)
+    }, 50)
 
     // create visual images for the nodes for panel
 
