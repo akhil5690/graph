@@ -52,6 +52,7 @@ import {GraphTools} from "./graphTools";
 })
 export class GraphEditorComponent implements OnInit {
   @Input() data: any;
+  @Input() tools:any;
   @ViewChild('graphContainer', {static: true}) graphContainer!: ElementRef;
   @ViewChild('overViewComponent', {static: true}) overViewContainer!: ElementRef;
   @ViewChild('neighbour', {static: true}) neighbour!: ElementRef;
@@ -85,6 +86,7 @@ export class GraphEditorComponent implements OnInit {
 
   ngOnInit() {
     this.run();
+    // this.clickEvent(this.tools);
   }
 
   run() {
@@ -730,7 +732,7 @@ export class GraphEditorComponent implements OnInit {
   }
 
   createGraph(data: any, graphComponent: GraphComponent): void {
-
+    this.clickEvent(this.tools);
     // get the graph builder to create graph from json ie; initGraph
     const builder = new GraphBuilder()
     const sourceNode = builder.createNodesSource({
