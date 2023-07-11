@@ -57,7 +57,7 @@ import {Business, GraphTools, Shapes} from "./graphUtils";
   styleUrls: ['./graph-editor.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class GraphEditorComponent implements AfterViewInit,OnInit {
+export class GraphEditorComponent implements AfterViewInit, OnInit {
   @Input() data: any;
   // @Input() tools: any;
   @ViewChild('graphContainer', {static: true}) graphContainer!: ElementRef;
@@ -90,7 +90,19 @@ export class GraphEditorComponent implements AfterViewInit,OnInit {
 
   constructor(private cdr: ChangeDetectorRef) {
   }
+
   ngOnInit() {
+    this.createDragDropNodeStyle();
+  }
+
+  ngAfterViewInit() {
+
+    this.run();
+
+    // this.clickEvent(this.tools);
+  }
+
+  createDragDropNodeStyle() {
     this.shapeStyleDragDrop = Shapes
     this.imageStyleDragDrop = Business
     this.dragDropElements = [{
@@ -102,15 +114,6 @@ export class GraphEditorComponent implements AfterViewInit,OnInit {
       headers: 'Business',
       style: this.getBusinessImage(this.imageStyleDragDrop),
     }];
-
-
-  }
-
-  ngAfterViewInit() {
-
-    this.run();
-
-    // this.clickEvent(this.tools);
   }
 
   run() {
