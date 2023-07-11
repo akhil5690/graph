@@ -13,7 +13,7 @@
                        (edgeNodeProperty)="changeEdgeNode($event)" (isRightSidebarOpen)="setFrame($event)">
       <div panel>
         <p-accordion [multiple]="true">
-        <p-accordionTab *ngFor="let item of dragDropElements;let i=index" >
+        <p-accordionTab *ngFor="let item of dragDropElements;let i=index" [header]="item.headers">
           <div class="drag-and-drop-panel" [id]="'item'+i"></div>
         </p-accordionTab>
         </p-accordion>
