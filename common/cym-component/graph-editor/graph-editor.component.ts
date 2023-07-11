@@ -533,7 +533,7 @@ export class GraphEditorComponent implements AfterViewInit, OnInit {
   addNodeVisual(style: ShapeNodeStyle | ImageNodeStyle, panel: Element): void {
     // set the div for image
     const div = document.createElement('div')
-    div.setAttribute('style', 'width: 40px; height: 40px; margin: 10px auto; cursor: grab;');
+    div.setAttribute('style', 'width: 30px; height: 30px; margin: 10px auto; cursor: grab;');
 
     // set image
     const img = document.createElement('img')
@@ -845,16 +845,22 @@ export class GraphEditorComponent implements AfterViewInit, OnInit {
     // copy the items
     ICommand.COPY.execute(null, this.graphComponent);
     this.graphComponent.clipboard.fromClipboardCopier.addNodeCopiedListener((sender, evt) => {
+      const node = evt.original
+      const shape = this.getShape(node.style);
+      const fillColor = this.getFillColor(node.style);
+      const strokeColor = this.getStrokeColor(node.style);
+      const style = this.getStyleForSaving(shape, fillColor, strokeColor, null);
+      const layout = this.getNodeLayout(node.layout);
       // shift the position of the copied node 5px from the original node
       this.graphComponent.graph.setNodeLayout(evt.copy, new Rect(evt.copy.layout.x + 5, evt.copy.layout.y, evt.copy.layout.width, evt.copy.layout.height))
-      evt.copy.tag = {id: uuidv4(), label: undefined, style: evt.original.style, layout: evt.copy.layout};
+      evt.copy.tag = {id: uuidv4(), label: null, style: style, layout: layout};
 
     })
 
     this.graphComponent.clipboard.fromClipboardCopier.addEdgeCopiedListener((sender, evt) => {
       evt.copy.tag = {
         id: uuidv4(),
-        label: undefined,
+        label: null,
         source: evt.copy.sourceNode?.tag?.id,
         target: evt.copy.targetNode?.tag?.id,
         style: evt.copy.tag.style
@@ -868,14 +874,6 @@ export class GraphEditorComponent implements AfterViewInit, OnInit {
   private paste() {
 
     ICommand.PASTE.execute(null, this.graphComponent);
-
-    // regain the selection back
-    this.graphComponent.graph.nodes.forEach((node) => {
-      // this.graphComponent.selection.setSelected(node, true);
-      if (this.nodeSelection.includes(node.tag.id)) {
-        this.graphComponent.selection.setSelected(node, true);
-      }
-    })
   }
 
 
