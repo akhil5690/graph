@@ -57,9 +57,9 @@ import {Business, GraphTools, Shapes} from "./graphUtils";
   styleUrls: ['./graph-editor.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class GraphEditorComponent implements OnInit {
+export class GraphEditorComponent implements AfterViewInit, OnInit {
   @Input() data: any;
-  @Input() tools:any;
+  // @Input() tools: any;
   @ViewChild('graphContainer', {static: true}) graphContainer!: ElementRef;
   @ViewChild('overViewComponent', {static: true}) overViewContainer!: ElementRef;
   @ViewChild('neighbour', {static: true}) neighbour!: ElementRef;
@@ -92,8 +92,28 @@ export class GraphEditorComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.createDragDropNodeStyle();
+  }
+
+  ngAfterViewInit() {
+
     this.run();
+
     // this.clickEvent(this.tools);
+  }
+
+  createDragDropNodeStyle() {
+    this.shapeStyleDragDrop = Shapes
+    this.imageStyleDragDrop = Business
+    this.dragDropElements = [{
+      id: 0,
+      headers: 'Shapes',
+      style: this.getShapeStyle(this.shapeStyleDragDrop),
+    }, {
+      id: 1,
+      headers: 'Business',
+      style: this.getBusinessImage(this.imageStyleDragDrop),
+    }];
   }
 
   run() {
@@ -102,9 +122,6 @@ export class GraphEditorComponent implements OnInit {
     // get the canvas for drawing graph
     const divElement = this.graphContainer.nativeElement;
     this.graphComponent = new GraphComponent(divElement);
-
-    this.shapeStyleDragDrop = Shapes
-    this.imageStyleDragDrop = Business
     // enable undoEngine
     this.graphComponent.graph.undoEngineEnabled = true;
 
@@ -186,8 +203,6 @@ export class GraphEditorComponent implements OnInit {
       const stroke = this.getEdgeStrokeColor(edge.style);
       const arrow = this.getEdgeArrowStyle(edge.style);
       const style = this.getEdgeStyle(stroke, arrow);
-
-      console.log(style)
       const sourceNode = edge.sourceNode;
       const targetNode = edge.targetNode;
 
@@ -416,7 +431,6 @@ export class GraphEditorComponent implements OnInit {
     const owner = label.owner;
 
     if (owner instanceof INode) {
-      console.log(this.validateLabel(label.text, 'node'));
       owner.tag = {
         id: owner.tag.id,
         label: !this.validateLabel(label.text, 'node') ? label.text : null,
@@ -479,37 +493,23 @@ export class GraphEditorComponent implements OnInit {
 
 
   initializeDragAndDropPanel(): void {
-    // get the div for panel
-    let shapes ;
-    let businessImage ;
 
     // set the node styles
     // const user = createImageNodeStyle("assets/image/add-user.svg")
     // const arrowTriangle = createPolylineEdgeStyle("NONE","triangle",30)
 
-    setTimeout(()=>{
-      shapes = document.getElementById('item1');
-      businessImage= document.getElementById('item2');
-      console.log(shapes,businessImage);
-      // create an array of all node styles
-      this.dragDropElements = [{
-        id: 0,
-        header: 'Shapes',
-        style: this.getShapeStyle(this.shapeStyleDragDrop),
-        panel: shapes
-      }, {
-        id: 1,
-        header: 'Business',
-        style: this.getBusinessImage(this.imageStyleDragDrop),
-        panel: businessImage
-      }]
+    setTimeout(() => {
 
-      this.dragDropElements.forEach((element: any) => {
+      this.dragDropElements.forEach((element: any, index: number) => {
+        const id = 'item' + index
+        const ele = document.getElementById(id);
         element['style'].forEach((style: any): void => {
-          this.addNodeVisual(style, element['panel'])
+          if (ele) {
+            this.addNodeVisual(style, ele)
+          }
         })
       })
-    },50)
+    }, 0)
 
     // create visual images for the nodes for panel
 
@@ -665,12 +665,19 @@ export class GraphEditorComponent implements OnInit {
         }
       })
     }
-    this.createJson();
-    this.createGraph(this.iGraph, this.graphComponent)
+    // this.createJson();
+    // this.createGraph(this.iGraph, this.graphComponent)
+    this.printGraph();
+    this.cdr.detectChanges();
+  }
+
+  printGraph(){
+    this.graphComponent.graph.nodes.forEach((node)=>{
+      console.log(node)
+    })
   }
 
   createGraph(data: any, graphComponent: GraphComponent): void {
-    this.clickEvent(this.tools);
     // get the graph builder to create graph from json ie; initGraph
     const builder = new GraphBuilder()
     const sourceNode = builder.createNodesSource({
@@ -816,7 +823,6 @@ export class GraphEditorComponent implements OnInit {
       jsonGraph.edges.push(jsonEdge);
     });
 
-    console.log(jsonGraph);
     this.iGraph = jsonGraph;
   }
 
