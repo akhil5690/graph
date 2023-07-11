@@ -4,7 +4,7 @@
 cym-dashboard-widget {
   .schema-toolbar {
     height: 3rem;
-    width: 100%;
+    width: var(--base-width);
 
   }
   .popup {
@@ -12,7 +12,7 @@ cym-dashboard-widget {
       display: flex;
       flex-direction: column;
       pointer-events: auto;
-      max-height: 100%;
+      max-height: var(--base-height);
       width: 100vw;
       transform: scale(1);
       position: relative;
@@ -22,8 +22,8 @@ cym-dashboard-widget {
     display: grid;
     grid-template-columns: 1.5fr 7fr 1.5fr;
     background-color: var(--theme-color-one);
-    width: 100%;
-    height: 2.85rem;
+    width: var(--base-width);
+    height:var(--graph-tool-bar-height);
     text-align: center;
 
   }
@@ -31,13 +31,13 @@ cym-dashboard-widget {
   .three-tab-container {
     div {
       display: grid;
-      height: 2.85rem;
+      height:var(--graph-tool-bar-height);
       align-items: center;
       cursor:pointer;
     }
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 1rem;
+    grid-gap: var(--grid-gap);
     color: var(--secondary-text-color);
     align-items: center;
     justify-content: center;
@@ -48,12 +48,11 @@ cym-dashboard-widget {
     div {
       display: grid;
       height: var(--tiny-icon-height);
-	  width: var(--tiny-icon-width);
+	    width: var(--tiny-icon-width);
       align-items: center;
       justify-content: center;
       cursor:pointer;
     }
-
     display: grid;
     grid-template-columns: repeat(auto-fit , 40px);
     grid-gap: 0;
@@ -61,9 +60,9 @@ cym-dashboard-widget {
     justify-content:center;
   }
 
-  .twentytwo{
-    height:20px;
-    width:20px;
+  .set-icon{
+    height:var(--graph-tool-icon-height);
+    width:var(--graph-tool-icon-width);
   }
 
   .graph-tool-icons > div:hover, .three-tab-container > div:hover {
