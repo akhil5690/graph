@@ -2,8 +2,8 @@
 
   //font size-
   --font-size: var(--unit);
-  --font24 : 1.6rem;
-  --font60 : 4.2rem;
+  --font24: 1.6rem;
+  --font60: 4.2rem;
   --font-weight-normal: 400;
   --font-weight-bold: 600;
   --font-weight-bolder: 1000;
@@ -13,9 +13,9 @@
   --font-family: 'san-fransisco', Roboto Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --font-family-bold: 'san-fransisco-bold', Roboto Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 
-//background color-
+  //background color-
   --primary-background-color: white;
-  --main-background:#EBEDEF;
+  --main-background: #EBEDEF;
 
   //theme color-
   --primary-color: #2FB2C3;
@@ -31,13 +31,13 @@
   --secondary-text-color: white;
 
   //grid gap-
-  --grid-gap : var(--unit);
+  --grid-gap: var(--unit);
 
   //padding-
-  --padding : var(--unit);
+  --padding: var(--unit);
 
   //margin-
-  --margin : var(--unit) ;
+  --margin: var(--unit);
   --header-margin-bottom: 0 0 1rem 0;
   --margin24: 1.6rem;
 
@@ -46,26 +46,22 @@
   --overview-neighbour-height: 175px;
 
   //graph-tool-bar-height-
-  --graph-tool-bar-height:2.857rem;
+  --graph-tool-bar-height: 2.857rem;
 
   //graph-page-icon -
-  --graph-tool-icon-height:1.42rem;
-  --graph-tool-icon-width :1.42rem;
+  --graph-tool-icon-height: 1.42rem;
+  --graph-tool-icon-width: 1.42rem;
   --icon-color: white;
 
   //graph-sidebar -
   --graph-sidebar-height: 85vh;
   --graph-sidebar-width: 80vw;
 
-  --graph-height:85vh;
-  --graph-width : 100vw;
+  --graph-height: 85vh;
+  --graph-width: 100vw;
 
   //right-side-bar-
   --right-side-bar-height: 85vh;
-
-
-
-
 
 
   --pink2: #f1a7b4;
@@ -74,10 +70,10 @@
   --third-background-color: rgb(232, 232, 232);
   --secondary-background-color: #e7e7e7;
   --border-radius: calc(var(--unit) / 2);
-  --grey-color:  #e6e6e6;
-  --icon-grey:#585858;
+  --grey-color: #e6e6e6;
+  --icon-grey: #585858;
   --dark-grey-color: #727272;
-  --base-height:100%;
+  --base-height: 100%;
   --base-width: 100%;
   --border-width: 1px;
   --dark-theme: #171717;
@@ -89,13 +85,14 @@
   --bottom-toolbar-height: 2.14rem;
   --main-height: calc(100vh - (var(--top-toolbar-height) + var(--bottom-toolbar-height)));
   --main-no-footer: calc(100vh - (var(--top-toolbar-height)));
-  --sidebar-width: calc(var(--unit)*15);
+  --sidebar-width: calc(var(--unit) * 15);
   --component-header-color: rgb(214 27 119 / 51%);
-  --vertical-cards-loop: calc(var(--unit)*15);
-  --card-height: calc(var(--unit)*11);
+  --vertical-cards-loop: calc(var(--unit) * 15);
+  --card-height: calc(var(--unit) * 11);
   --tiny-icon-height: 2.857rem;
   --tiny-icon-width: 2.857rem;
 
 
-
+  //test
+  --menu-side-bar-height: 50px;
 }
