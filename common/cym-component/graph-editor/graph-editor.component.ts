@@ -667,8 +667,14 @@ export class GraphEditorComponent implements AfterViewInit, OnInit {
     }
     // this.createJson();
     // this.createGraph(this.iGraph, this.graphComponent)
-
+    this.printGraph();
     this.cdr.detectChanges();
+  }
+
+  printGraph(){
+    this.graphComponent.graph.nodes.forEach((node)=>{
+      console.log(node)
+    })
   }
 
   createGraph(data: any, graphComponent: GraphComponent): void {
@@ -817,7 +823,6 @@ export class GraphEditorComponent implements AfterViewInit, OnInit {
       jsonGraph.edges.push(jsonEdge);
     });
 
-    console.log(jsonGraph);
     this.iGraph = jsonGraph;
   }
 
