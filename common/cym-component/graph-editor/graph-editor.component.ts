@@ -521,7 +521,7 @@ export class GraphEditorComponent implements AfterViewInit, OnInit {
     // get svg of the style for creating source url for image
     const exportComponent = new GraphComponent()
     const exportGraph = exportComponent.graph
-    exportGraph.createNode(new Rect(0, 0, 40, 40), style)
+    exportGraph.createNode(new Rect(0, 0, 30, 30), style)
     exportComponent.updateContentRect(new Insets(5))
     const svgExport = new SvgExport(exportComponent.contentRect)
     const svg = svgExport.exportSvg(exportComponent)
@@ -533,7 +533,7 @@ export class GraphEditorComponent implements AfterViewInit, OnInit {
   addNodeVisual(style: ShapeNodeStyle | ImageNodeStyle, panel: Element): void {
     // set the div for image
     const div = document.createElement('div')
-    div.setAttribute('style', 'width: 30px; height: 30px; margin: 10px auto; cursor: grab;');
+    div.setAttribute('style', 'width: auto; height: 30px; margin: 10px auto; cursor: grab;');
 
     // set image
     const img = document.createElement('img')
@@ -544,13 +544,13 @@ export class GraphEditorComponent implements AfterViewInit, OnInit {
       img.setAttribute('src', this.createNodeVisual(style))
     }
     if (style instanceof ImageNodeStyle) {
-      img.setAttribute('style', 'width: 30px; height: 30px;');
+      // img.setAttribute('style', 'width: 30px; height: 30px;');
       img.setAttribute('src', <string>style.image)
     }
     // initialise drag handler
     const startDrag = (): void => {
       const simpleNode = new SimpleNode()
-      simpleNode.layout = new Rect(0, 0, 40, 40)
+      simpleNode.layout = new Rect(0, 0, 30, 30)
       simpleNode.style = style.clone()
       const dragPreview = document.createElement('div')
       dragPreview.appendChild(img.cloneNode(true))
@@ -611,7 +611,7 @@ export class GraphEditorComponent implements AfterViewInit, OnInit {
     graph.groupNodeDefaults.labels.layoutParameter =
       new GroupNodeLabelModel().createDefaultParameter()
 
-    graph.nodeDefaults.size = new Size(40, 40)
+    graph.nodeDefaults.size = new Size(30, 30)
 
     graph.nodeDefaults.labels.layoutParameter = new ExteriorLabelModel({
       insets: 5
