@@ -3,7 +3,7 @@ cym-graph-editor {
   .drag-and-drop-panel {
     width: 20vw;
     display: grid;
-    grid-template-columns: repeat(4, 4.5vw);
+    grid-template-columns: repeat(5, 4rem);
   }
 
   span#pr_id_5_label  {

@@ -536,14 +536,14 @@ export class GraphEditorComponent implements AfterViewInit, OnInit {
 
     // set image
     const img = document.createElement('img')
-    img.setAttribute('style', 'width: 40px; height: 40px;');
+    img.setAttribute('style', 'width: 30px; height: 30px;');
     // img.setAttribute('src', this.createNodeVisual(style))
 
     if (style instanceof ShapeNodeStyle) {
       img.setAttribute('src', this.createNodeVisual(style))
     }
     if (style instanceof ImageNodeStyle) {
-      img.setAttribute('style', 'width: 40px; height: 40px;');
+      img.setAttribute('style', 'width: 30px; height: 30px;');
       img.setAttribute('src', <string>style.image)
     }
     // initialise drag handler
