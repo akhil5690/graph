@@ -14,10 +14,18 @@ cym-right-sidebar {
   }
 
   .menu-panel {
+    div{
+      display: grid;
+      height: var(--tiny-icon-height);
+      width: var(--tiny-icon-width);
+      align-items: center;
+      justify-content: center;
+      cursor:pointer;
+    }
     display: grid;
     grid-template-rows: repeat(auto-fit , 50px);
     //padding: calc(var(--padding) + 0.5rem);
-    gap: var(--grid-gap);
+    //gap: var(--grid-gap);
     background-color: var(--theme-color-one);
     justify-content:center;
     //border: 2px solid var(--theme-color-one);
@@ -27,11 +35,8 @@ cym-right-sidebar {
 
   }
 
-  .menu-panel{
-    div:hover{
+  .menu-panel> div:hover{
       background-color:var(--primary-color);
-
-    }
 
   }
 
