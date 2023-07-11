@@ -1,14 +1,11 @@
 <!--<cym-card>-->
 <!--{{cardDivision}}-->
 <!--</cym-card>-->
-<div [class]="cymClass" (click)="cardClick(cardDetails.routPath)">
-  <div>
-
-  </div>
-  <div class="box-color" [ngStyle]="{background: cardDetails.bgColor}" *ngIf="cardDetails?.image === null">
+<div [class]="cymClass" (click)="cardClick(cardDetails.routPath)" >
+  <div class="box-color" [ngStyle]="{background: cardDetails.bgColor}" *ngIf="cardDetails?.image === null" >
     <span>{{getAbbrevation(cardDetails.cardLabel)}}</span>
   </div>
-  <img [src]="cardDetails?.image" alt="">
+  <img [src]="cardDetails?.image" alt="" class="card-division-image">
   <div *ngIf="cardDetails.cardcardLabel!==null">
     {{cardDetails.cardLabel}}
   </div>

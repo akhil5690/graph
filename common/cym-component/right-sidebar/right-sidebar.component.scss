@@ -22,6 +22,8 @@ cym-right-sidebar {
       justify-content: center;
       cursor:pointer;
     }
+    //display:flex;
+    //flex-flow: row-reverse;
     display: grid;
     grid-template-rows: repeat(auto-fit , 50px);
     //padding: calc(var(--padding) + 0.5rem);

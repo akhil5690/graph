@@ -16,6 +16,9 @@ import {DialogModule} from "primeng/dialog";
 import {ToastModule} from "primeng/toast";
 import {CymDivModule} from "../../../../../../common/cym-containers/cym-div/cym-div.module";
 import {TopToolbarModule} from "../../../../../../common/cym-component/frames/top-toolbar/top-toolbar.module";
+import {
+  CymSecondaryToolbarModule
+} from "../../../../../../common/cym-containers/cym-secondary-toolbar/cym-secondary-toolbar.module";
 
 
 @NgModule({
@@ -35,6 +38,7 @@ import {TopToolbarModule} from "../../../../../../common/cym-component/frames/to
     ToastModule,
     CymDivModule,
     TopToolbarModule,
+    CymSecondaryToolbarModule,
   ],
   providers:[GraphService,HttpHandler],
   exports: [DashboardWidgetComponent]

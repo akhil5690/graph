@@ -1,7 +1,11 @@
 <cym-widget-frame [frame_type]="'header-main-footer-frame'">
   <cym-top-toolbar header></cym-top-toolbar>
+  <
 
   <div main>
+    <cym-div [cymClass]="'secondary-tool'">
+      <cym-secondary-toolbar></cym-secondary-toolbar>
+    </cym-div>
     <cym-div [cymClass]="'dash-tool-container'">
       <div class="three-tab-container">
         <div (click)="tabType=0; getSchemaData()"> Schema</div>

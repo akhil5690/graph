@@ -37,7 +37,7 @@ cym-dashboard-widget {
     }
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: var(--grid-gap);
+    //grid-gap: var(--grid-gap);
     color: var(--secondary-text-color);
     align-items: center;
     justify-content: center;
@@ -54,9 +54,9 @@ cym-dashboard-widget {
       cursor:pointer;
     }
     display: grid;
-    grid-template-columns: repeat(auto-fit , 40px);
+    grid-template-columns: repeat(auto-fit , 50px);
     grid-gap: 0;
-    align-items: center;
+
     justify-content:center;
   }
 
@@ -70,6 +70,9 @@ cym-dashboard-widget {
     color: white;
 
   }
+
+
+
 
 
 
