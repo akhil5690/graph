@@ -49,7 +49,7 @@ import {
 } from "./demo-styles";
 import {v4 as uuidv4} from 'uuid';
 import {NONE_TYPE} from "@angular/compiler";
-import {Business, GraphTools, Shapes} from "./graphUtils";
+import {Business, GraphTools, Shapes, Vehicle} from "./graphUtils";
 
 @Component({
   selector: 'cym-graph-editor',
@@ -85,8 +85,9 @@ export class GraphEditorComponent implements AfterViewInit, OnInit {
   private original: any;
   private originalNeighbourHood: any;
   private shapeStyleDragDrop: any;
-  private imageStyleDragDrop: any;
+  private businessImg: any;
   dragDropElements: any;
+  private vehicle: any;
 
   constructor(private cdr: ChangeDetectorRef) {
   }
@@ -104,15 +105,20 @@ export class GraphEditorComponent implements AfterViewInit, OnInit {
 
   createDragDropNodeStyle() {
     this.shapeStyleDragDrop = Shapes
-    this.imageStyleDragDrop = Business
+    this.businessImg = Business
+    this.vehicle = Vehicle
     this.dragDropElements = [{
       id: 0,
       headers: 'Shapes',
-      style: this.getShapeStyle(this.shapeStyleDragDrop),
+      style: this.getNodeStyleForDragDrop('shape',this.shapeStyleDragDrop),
     }, {
       id: 1,
       headers: 'Business',
-      style: this.getBusinessImage(this.imageStyleDragDrop),
+      style: this.getNodeStyleForDragDrop('image',this.businessImg),
+    },{
+      id: 2,
+      headers: 'Vehicle',
+      style: this.getNodeStyleForDragDrop('image',this.vehicle),
     }];
   }
 
@@ -949,21 +955,19 @@ export class GraphEditorComponent implements AfterViewInit, OnInit {
     }
   }
 
-  private getShapeStyle(shapeStyleDragDrop: any) {
-    let allShapeNodeStyle: ShapeNodeStyle[] = [];
-    shapeStyleDragDrop.forEach((style: any) => {
-      allShapeNodeStyle.push(createShapeNodeStyle(style))
-    });
+  private getNodeStyleForDragDrop(type:string,style: any){
+    let styleList:any = [];
+    if (type === 'shape'){
+      style.forEach((shapeStyle: any) => {
+        styleList.push(createShapeNodeStyle(shapeStyle))
+      });
+    }
+    else{
+      style.forEach((imageStyle: any) => {
+        styleList.push(createIconNode(imageStyle))
+      });
+    }
 
-    return allShapeNodeStyle;
-  }
-
-  private getBusinessImage(imageStyleDragDrop: any) {
-    let allBusinessImage: ImageNodeStyle[] = [];
-    imageStyleDragDrop.forEach((image: any) => {
-      allBusinessImage.push(createIconNode(image))
-    });
-
-    return allBusinessImage;
+    return styleList;
   }
 }

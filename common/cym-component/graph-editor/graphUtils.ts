@@ -125,3 +125,25 @@ export const Business = [
   'assets/image/dragdropImage/business/Asset 76.svg',
   'assets/image/dragdropImage/business/Asset 77.svg',
   'assets/image/dragdropImage/business/Asset 78.svg']
+
+
+export const Vehicle = [
+  'assets/image/dragdropImage/vehicle/vehicle (1).svg',
+  'assets/image/dragdropImage/vehicle/vehicle (2).svg',
+  'assets/image/dragdropImage/vehicle/vehicle (3).svg',
+  'assets/image/dragdropImage/vehicle/vehicle (4).svg',
+  'assets/image/dragdropImage/vehicle/vehicle (5).svg',
+  'assets/image/dragdropImage/vehicle/vehicle (6).svg',
+  'assets/image/dragdropImage/vehicle/vehicle (7).svg',
+  'assets/image/dragdropImage/vehicle/vehicle (8).svg',
+  'assets/image/dragdropImage/vehicle/vehicle (9).svg',
+  'assets/image/dragdropImage/vehicle/vehicle (10).svg',
+
+];
+export const Finance = [];
+
+export const Automotive = [];
+
+export const FileImg = [];
+export const People = [];
+export const Social = [];
