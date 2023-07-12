@@ -28,17 +28,18 @@
 <!--  <cym-div footer>Copyright</cym-div>-->
 <!--</cym-widget-frame>-->
 
-<cym-widget-frame [frame_type]="'header-main-footer-frame'">
+<cym-widget-frame [frame_type]="'header-breadcrumbs-main-footer-frame'">
   <!--  <cym-toolbar header>-->
   <!--    <cym-div class="container" (click)="showGraph()">-->
   <!--      Dashboard-->
   <!--    </cym-div>-->
   <!--  </cym-toolbar>-->
   <cym-top-toolbar header></cym-top-toolbar>
+  <cym-secondary-toolbar breadcrumbs ></cym-secondary-toolbar>
   <cym-div main >
-    <cym-div [cymClass]="'secondary-toolbar'">
-      <cym-secondary-toolbar></cym-secondary-toolbar>
-    </cym-div>
+<!--    <cym-div [cymClass]="'secondary-toolbar'">-->
+
+<!--    </cym-div>-->
 
     <cym-div [cymClass]="'card-main'">
       <cym-card *ngFor="let tool of launchpad" [cymClass]="'header-content'" >
