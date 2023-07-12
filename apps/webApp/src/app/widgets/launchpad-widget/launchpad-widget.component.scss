@@ -6,7 +6,6 @@ cym-launchpad-widget {
     justify-items: center;
     align-items: center;
   }
-
   .container {
     display: grid;
     grid-template-columns: var(--sidebar-width) 3fr  auto auto;
@@ -20,14 +19,12 @@ cym-launchpad-widget {
 
     //background-color: black;
   }
-
   .icon-grey{
     color: var(--icon-grey);
   }
   .p-breadcrumb ul li:last-child .p-menuitem-text {
     color: var(--primary-color);
   }
-
   .graph-container {
     display: grid;
     justify-items: center;

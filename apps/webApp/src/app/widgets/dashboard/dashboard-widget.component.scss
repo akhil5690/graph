@@ -2,11 +2,10 @@
 
 
 cym-dashboard-widget {
-  .schema-toolbar {
-    height: 3rem;
-    width: var(--base-width);
-
-  }
+  //.schema-toolbar {
+  //  height: 3rem;
+  //  width: var(--base-width);
+  //}
   .popup {
     .p-dialog {
       display: flex;
@@ -25,9 +24,7 @@ cym-dashboard-widget {
     width: var(--base-width);
     height:var(--graph-tool-bar-height);
     text-align: center;
-
   }
-
   .three-tab-container {
     div {
       display: grid;
@@ -41,9 +38,7 @@ cym-dashboard-widget {
     color: var(--secondary-text-color);
     align-items: center;
     justify-content: center;
-
   }
-
   .graph-tool-icons {
     div {
       display: grid;
@@ -54,21 +49,24 @@ cym-dashboard-widget {
       cursor:pointer;
     }
     display: grid;
-    grid-template-columns: repeat(auto-fit , 50px);
-    grid-gap: 0;
+    grid-template-columns: repeat(auto-fit , var(--icon-box-size));
     align-items: center;
     justify-content:center;
   }
-
   .set-icon{
     height:var(--graph-tool-icon-height);
     width:var(--graph-tool-icon-width);
   }
-
   .graph-tool-icons > div:hover, .three-tab-container > div:hover {
     background-color: var(--primary-color);
     color: white;
   }
+  .breadcrumbs{
+    background-color: var(--theme-color-one);
+  }
+
+
+
 
 
 

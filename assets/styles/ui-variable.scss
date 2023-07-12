@@ -79,6 +79,8 @@
   --secondary-tool-icon-height:1rem;
   --secondary-tool-icon-width:1rem;
   --icon-color: white;
+  --icon-box-size:2.85rem;
+
 
   //icon-image-
   --card-division-img-size:6rem; //launchpad page
@@ -87,8 +89,6 @@
   //menu-right-toolbar-
   --right-toolbar-height:30px;
   --right-toolbar-width:30px;
-
-
 
 
   --pink2: #f1a7b4;
@@ -118,6 +118,17 @@
   --card-height: calc(var(--unit)*11);
 
 
+
+  --signin-container-width: 27.2rem ;
+
+  --scroll-border-radius :1.428rem;
+
+  --otp-box-height: 3.5rem;
+  --otp-box-width: 3.5rem;
+  --otp-font-size: 1.5rem;
+
+  --overview-start:2.85rem;
+  --neighbour-start:20rem;
 
 
 

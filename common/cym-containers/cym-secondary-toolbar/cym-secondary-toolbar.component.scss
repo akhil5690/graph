@@ -3,7 +3,7 @@ cym-secondary-toolbar {
     display: grid;
     grid-template-columns: 8fr auto auto auto ;
     align-items: center;
-    height: 30px;
+    height: var(--secondary-toolbar-height);
     color: var(--primary-text-color);
     gap: var(--grid-gap);
     width: var(--base-width);
