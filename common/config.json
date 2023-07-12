@@ -1,4 +1,4 @@
 {
-  "schema": "https://h9weja3p76.execute-api.us-east-2.amazonaws.com/Stage/GetSchemaAPI",
-  "graph": "https://d5i53umoy3.execute-api.us-east-2.amazonaws.com/Stage/NeptuneDataQuery"
+  "schema": "https://3264khiyek.execute-api.us-east-1.amazonaws.com/Stage/GetSchemaAPI",
+  "graph": "https://l6lf5jf3xe.execute-api.us-east-1.amazonaws.com/Stage/NeptuneDataQuery"
 }

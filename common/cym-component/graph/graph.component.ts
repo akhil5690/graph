@@ -61,6 +61,7 @@ export class GraphComponents implements OnInit, OnChanges {
   filter = false;
   hoverBorder: any;
   @Input() data: any;
+  @Input() tools: any;
   @Input() layout: any = 'Organic';
   @ViewChild('graphComponent', {static: true}) graphContainer!: ElementRef;
   @ViewChild('overViewComponent', {static: true}) overViewContainer!: ElementRef;
@@ -106,6 +107,7 @@ export class GraphComponents implements OnInit, OnChanges {
     if (this.data) {
       // start creating graph
       this.run();
+      this.clickEvent(this.tools);
     }
   }
 
@@ -265,7 +267,7 @@ export class GraphComponents implements OnInit, OnChanges {
       // e.g. add a highlight to newItem here
       const styleHighlight = this.graphComponent.highlightIndicatorManager
       const decorator = this.graphComponent.graph.decorator
-      this.hoverBorder = hoverItem.tag.hohover_border_color
+      this.hoverBorder = hoverItem.tag.hover_border_color
       const highlightShape = new ShapeNodeStyle({
         shape: ShapeNodeShape.ELLIPSE,
         stroke: this.hoverBorder,
@@ -309,16 +311,16 @@ export class GraphComponents implements OnInit, OnChanges {
               const labelStyle = new DefaultLabelStyle({
                 backgroundFill: 'white',
                 textSize: 10,
-                verticalTextAlignment:'center',
-                horizontalTextAlignment:'center'
+                verticalTextAlignment: 'center',
+                horizontalTextAlignment: 'center'
               });
               const labelStyleHighlight = new LabelStyleDecorationInstaller({
                 labelStyle,
-                zoomPolicy:StyleDecorationZoomPolicy.WORLD_COORDINATES
+                zoomPolicy: StyleDecorationZoomPolicy.WORLD_COORDINATES
               })
               decorator.labelDecorator.highlightDecorator.setImplementation(labelStyleHighlight)
               styleHighlight?.addHighlight(edge)
-              if(edge.tag.label){
+              if (edge.tag.label) {
                 styleHighlight.addHighlight(edge?.labels?.get(0))
               }
             }
@@ -327,17 +329,17 @@ export class GraphComponents implements OnInit, OnChanges {
             const labelStyle = new DefaultLabelStyle({
               backgroundFill: 'white',
               textSize: 10,
-              verticalTextAlignment:'center',
-              horizontalTextAlignment:'center'
+              verticalTextAlignment: 'center',
+              horizontalTextAlignment: 'center'
             });
             const labelStyleHighlight = new LabelStyleDecorationInstaller({
               labelStyle,
-              zoomPolicy:StyleDecorationZoomPolicy.WORLD_COORDINATES
+              zoomPolicy: StyleDecorationZoomPolicy.WORLD_COORDINATES
             })
             decorator.labelDecorator.highlightDecorator.setImplementation(labelStyleHighlight)
 
             styleHighlight?.addHighlight(newItem)
-            if(newItem.tag.label){
+            if (newItem.tag.label) {
               styleHighlight.addHighlight(newItem?.labels?.get(0))
             }
           }

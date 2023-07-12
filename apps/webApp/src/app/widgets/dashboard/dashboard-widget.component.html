@@ -1,25 +1,23 @@
 <cym-widget-frame [frame_type]="'header-main-footer-frame'">
   <cym-top-toolbar header></cym-top-toolbar>
+  <
 
   <div main>
+    <cym-div [cymClass]="'secondary-tool'">
+      <cym-secondary-toolbar></cym-secondary-toolbar>
+    </cym-div>
     <cym-div [cymClass]="'dash-tool-container'">
       <div class="three-tab-container">
-        <div (click)="tabType=0; getSchemaData()"> Schema</div>
-        <div (click)=" tabType=1; getGraphData()"> Explorer</div>
-        <div (click)="tabType = 2"> Editor</div>
+        <div (click)="tabType=0; getSchemaData()" [ngClass]="tabType === 0?'active-class':''"> Schema</div>
+        <div (click)=" tabType=1; getGraphData()" [ngClass]="tabType === 1?'active-class':''"> Explorer</div>
+        <div (click)="tabType = 2;editor()" [ngClass]="tabType === 2?'active-class':''"> Editor</div>
       </div>
 
       <div class="graph-tool-icons">
-        <div><img src="assets/image/fit.svg" class="twentytwo"></div>
-        <div><img src="assets/image/zoomIn.svg" class="twentytwo"></div>
-        <div><img src="assets/image/zoomOut.svg" class="twentytwo"></div>
-        <div><img src="assets/image/eye.svg" class="twentytwo"></div>
-        <div><img src="assets/image/save.svg" class="twentytwo"></div>
-        <div><img src="assets/image/fullscreen.svg" class="twentytwo"></div>
-        <div><img src="assets/image/paste.svg" class="twentytwo"></div>
-        <div><img src="assets/image/redo.svg" class="twentytwo"></div>
-        <div><img src="assets/image/refresh.svg" class="twentytwo"></div>
-        <div><img src="assets/image/undo.svg" class="twentytwo"></div>
+        <div *ngFor="let tools of toolBarItems">
+          <img (click)="selectedTool(tools)" [src]="tools.icon" [alt]="tools.toolName" [height]="tools.height"
+               [width]="tools.width" class="set-icon">
+        </div>
       </div>
 
       <div class="three-tab-container">
@@ -34,7 +32,7 @@
                  (refreshGraph)="refreshGraph($event)"></cym-graph>
       <cym-graph-editor *ngIf="tabType===2"></cym-graph-editor>
     </div>
-
+    <!--    [tools]="this.toolSelected"-->
 
     <p-dialog [modal]="true" *ngIf="openFindingsPopup" [(visible)]="openFindingsPopup"
               (onHide)="openFindingsPopup =false" class="popup">

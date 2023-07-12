@@ -1,9 +1,9 @@
 cym-secondary-toolbar {
   .container {
     display: grid;
-    grid-template-columns:8fr auto auto auto ;
+    grid-template-columns: 8fr auto auto auto ;
     align-items: center;
-    height: var(--base-height);
+    height: 30px;
     color: var(--primary-text-color);
     gap: var(--grid-gap);
     width: var(--base-width);
@@ -42,6 +42,11 @@ cym-secondary-toolbar {
 
   .icons{
     text-align:right;
+  }
+
+  .secondary-tool-icon{
+    height:var(--secondary-tool-icon-height);
+    width:var(--secondary-tool-icon-width);
   }
 
 }

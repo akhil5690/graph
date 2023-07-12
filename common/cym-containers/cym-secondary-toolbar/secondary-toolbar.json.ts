@@ -13,8 +13,8 @@ export const secondaryToolbar = [
     "position": "top",
     "type": "image",
     "sector": "4",
-    "height": "16",
-    "width": "16"
+    "height": "14",
+    "width": "14"
   },
   {
     "url": "../../../../assets/image/star.svg",
@@ -22,8 +22,8 @@ export const secondaryToolbar = [
     "position": "top",
     "type": "image",
     "sector": "4",
-    "height": "15.35",
-    "width": "16"
+    "height": "14",
+    "width": "14"
   },
   {
     "url": "../../../../assets/image/testing.svg",
@@ -31,8 +31,8 @@ export const secondaryToolbar = [
     "position": "top",
     "type": "image",
     "sector": "4",
-    "height": "16",
-    "width": "16"
+    "height": "14",
+    "width": "14"
   },
 
 ]

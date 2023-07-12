@@ -21,7 +21,6 @@ export class DetailsComponent implements OnChanges, OnInit {
   ngOnChanges(): void {
     if (this.data[0]) {
       this.headers = Object.keys(this.data[0]);
-      console.log(this.data, this.headers)
       this.getForm();
     }
   }

@@ -15,18 +15,17 @@
 html, body {
   margin: 0;
   background-color: var(--primary-background-color);
-  font-size: var(--large-screen-font-size); // 14px = 1rem
+  font-size: 14px; // 14px = 1rem
   font-family: var(--font-family);
-
 }
 
-@media screen and (max-width: 1280px) {
-  html, body {
-    background-size: var(--bg-image-size);
-    font-size: var(--medium-screen-font-size);
-
-  }
-}
+//@media screen and (max-width: 1280px) {
+//  html, body {
+//    background-size: var(--bg-image-size);
+//    font-size: var(--medium-screen-font-size);
+//
+//  }
+//}
 
 a {
   text-decoration-line: none;
@@ -69,9 +68,11 @@ label {
   display: grid;
   grid-auto-rows: var(--vertical-cards-loop);
   row-gap: var(--grid-gap);
-  padding: 0 1rem 0 1rem;
+  padding: var(--padding);
+
   //align-items: center;
 }
+
 
 
 .card-header{
@@ -98,10 +99,18 @@ label {
 //}
 
 .card-divisions {
+  //img{
+  //  height:var(--card-division-img-size);
+  //}
   display: grid;
   grid-template-columns: repeat(auto-fill, 10rem);
   column-gap: var(--grid-gap);
 }
+
+.card-division-image {
+  height:var(--card-division-img-size);
+}
+
 
 
 
@@ -110,7 +119,7 @@ label {
   height: var(--card-height);
   background: #FFFFFF 0% 0% no-repeat padding-box;
   //box-shadow: 0px 3px 6px #00000029;
-  grid-template-rows: 1fr 6fr 3fr;
+  grid-template-rows:  8fr 2fr;
   padding: var(--border-radius);
   align-items: center;
   justify-items: center;
@@ -180,3 +189,6 @@ label {
   color: #6c757d;
 }
 
+.active-class {
+  background: var(--primary-color);
+}
