@@ -49,7 +49,18 @@ import {
 } from "./demo-styles";
 import {v4 as uuidv4} from 'uuid';
 import {NONE_TYPE} from "@angular/compiler";
-import {Business, GraphTools, Shapes, Vehicle} from "./graphUtils";
+import {
+  Automotive,
+  Business,
+  FileImg,
+  Finance,
+  GraphTools,
+  Network,
+  People,
+  Shapes,
+  Social,
+  Vehicle
+} from "./graphUtils";
 
 @Component({
   selector: 'cym-graph-editor',
@@ -88,6 +99,12 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
   private businessImg: any;
   dragDropElements: any;
   private vehicle: any;
+  private finance: any;
+  private automotive: any;
+  private social: any;
+  private people: any;
+  private file: any;
+  private network: any;
 
   constructor(private cdr: ChangeDetectorRef) {
   }
@@ -108,6 +125,12 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
     this.shapeStyleDragDrop = Shapes
     this.businessImg = Business
     this.vehicle = Vehicle
+    this.finance = Finance
+    this.automotive = Automotive
+    this.social = Social
+    this.people = People
+    this.file = FileImg;
+    this.network = Network;
     this.dragDropElements = [{
       id: 0,
       headers: 'Shapes',
@@ -120,6 +143,30 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
       id: 2,
       headers: 'Vehicle',
       style: this.getNodeStyleForDragDrop('image', this.vehicle),
+    }, {
+      id: 3,
+      headers: 'Finance',
+      style: this.getNodeStyleForDragDrop('image', this.finance),
+    }, {
+      id: 4,
+      headers: 'Automotive',
+      style: this.getNodeStyleForDragDrop('image', this.automotive),
+    }, {
+      id: 5,
+      headers: 'Social',
+      style: this.getNodeStyleForDragDrop('image', this.social),
+    }, {
+      id: 6,
+      headers: 'People',
+      style: this.getNodeStyleForDragDrop('image', this.people),
+    }, {
+      id: 7,
+      headers: 'Files',
+      style: this.getNodeStyleForDragDrop('image', this.file),
+    }, {
+      id: 8,
+      headers: 'Network',
+      style: this.getNodeStyleForDragDrop('image', this.network),
     }];
   }
 
