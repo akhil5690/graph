@@ -25,6 +25,8 @@ export class DashboardWidgetComponent implements OnInit {
   findingsGraph: any;
   selectedFindings: any;
   tabType = 0;
+  toolBarItems: any;
+  toolSelected: any;
 
   constructor(private cdr: ChangeDetectorRef, private graphService: GraphService, private router: Router, private cym: CymService, private messageService: MessageService) {
   }
@@ -35,6 +37,21 @@ export class DashboardWidgetComponent implements OnInit {
   }
 
   getGraphData() {
+    this.toolBarItems = [{
+      toolName: 'toggle',
+      icon: 'assets/image/overview.svg'
+    },
+      {
+        toolName: 'zoomIn',
+        icon: 'assets/image/zoomIn.svg'
+      }, {
+        toolName: 'zoomOut',
+        icon: 'assets/image/zoomOut.svg'
+      }, {
+        toolName: 'fitContent',
+        icon: 'assets/image/fit.svg'
+      },
+    ]
     this.cym.setLoader(true);
     this.graphService.getGraphData({
       "filter": false,
@@ -66,6 +83,21 @@ export class DashboardWidgetComponent implements OnInit {
   }
 
   getSchemaData() {
+    this.toolBarItems = [{
+      toolName: 'toggle',
+      icon: 'assets/image/overview.svg'
+    },
+      {
+        toolName: 'zoomIn',
+        icon: 'assets/image/zoomIn.svg'
+      }, {
+        toolName: 'zoomOut',
+        icon: 'assets/image/zoomOut.svg'
+      }, {
+        toolName: 'fitContent',
+        icon: 'assets/image/fit.svg'
+      },
+    ]
     // this.cym.setLoader(true);
     this.graphService.getSchemaData({filter: false}).then((data) => {
       this.schema = data;
@@ -77,6 +109,59 @@ export class DashboardWidgetComponent implements OnInit {
       this.cym.setLoader(false);
 
     })
+  }
+
+  editor() {
+    this.toolBarItems = [{
+      toolName: 'save',
+      icon: 'assets/image/save.svg',
+      height: 20, width: 20
+
+    }, {
+      toolName: 'load',
+      icon: 'assets/image/refresh.svg',
+      height: 20, width: 20
+    }, {
+      toolName: 'zoomIn',
+      icon: 'assets/image/zoomIn.svg',
+      height: 20, width: 20
+    }, {
+      toolName: 'zoomOut',
+      icon: 'assets/image/zoomOut.svg',
+      height: 20, width: 20
+    }, {
+      toolName: 'undo',
+      icon: 'assets/image/undo.svg',
+      height: 15, width: 15
+    }, {
+      toolName: 'redo',
+      icon: 'assets/image/redo.svg',
+      height: 15, width: 15
+    },
+      {
+        toolName: 'fit',
+        icon: 'assets/image/fullscreen.svg',
+        height: 15, width: 15
+      }, {
+        toolName: 'cut',
+        icon: 'assets/image/cut.svg',
+        height: 15, width: 15
+      }, {
+        toolName: 'copy',
+        icon: 'assets/image/copy.svg',
+        height: 15, width: 15
+      }, {
+        toolName: 'paste',
+        icon: 'assets/image/paste.svg',
+        height: 15, width: 15
+      }, {
+        toolName: 'delete',
+        icon: 'assets/image/IconCancel.svg',
+        height: 15, width: 15
+      }
+
+    ]
+
   }
 
   loadFindings(findings: any) {
@@ -101,5 +186,9 @@ export class DashboardWidgetComponent implements OnInit {
   private errorMessageConstructor(e: string) {
     this.messageService.add({severity: 'error', summary: 'Error', detail: e});
 
+  }
+
+  selectedTool(tools: any) {
+    this.toolSelected = tools;
   }
 }

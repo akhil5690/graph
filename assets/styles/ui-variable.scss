@@ -1,17 +1,19 @@
 :root {
 
   //font size-
+  --unit: 1rem;
   --font-size: var(--unit);
-  --font24 : 1.6rem;
-  --font60 : 4.2rem;
+  --font24: 1.6rem;
+  --font60: 4.2rem;
   --font-weight-normal: 400;
   --font-weight-bold: 600;
   --font-weight-bolder: 1000;
-  --unit: 1rem;
   --large-screen-font-size: 14px;
   --medium-screen-font-size: 10px;
-  --font-family: 'san-fransisco', Roboto Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  --font-family-bold: 'san-fransisco-bold', Roboto Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  //--font-family: 'san-fransisco', Roboto Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  //--font-family-bold: 'san-fransisco-bold', Roboto Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-family: 'JamGrotesque-Regular', Roboto Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-family-bold: 'JamGrotesque-Bold', Roboto Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 
 //background color-
   --primary-background-color: white;
@@ -32,9 +34,11 @@
 
   //grid gap-
   --grid-gap : var(--unit);
+  --grid-gap16 : 1.142rem;
 
   //padding-
   --padding : var(--unit);
+  --padding24:1.714rem;
 
   //margin-
   --margin : var(--unit) ;
@@ -48,9 +52,41 @@
   //graph-tool-bar-height-
   --graph-tool-bar-height:2.857rem;
 
+  //graph-page-icon -
+  --graph-tool-icon-height:1.42rem;
+  --graph-tool-icon-width :1.42rem;
 
 
+  //graph-sidebar -
+  --graph-sidebar-height: 85vh;
+  --graph-sidebar-width: 80vw;
 
+  --graph-height:85vh;
+  --graph-width : 100vw;
+
+  //right-side-bar-
+  --right-side-bar-height: 85vh;
+
+//toolbars:
+  --secondary-toolbar-height:2.14rem;
+  --top-toolbar-height: 2.85rem; //(40px)
+  --bottom-toolbar-height: 2.14rem; //(30px)
+
+  //icon-related-styles
+  --icon-height:1.8rem; // 25x for launch pad and workspace
+  --tiny-icon-height: 2.857rem;
+  --tiny-icon-width: 2.857rem;
+  --secondary-tool-icon-height:1rem;
+  --secondary-tool-icon-width:1rem;
+  --icon-color: white;
+
+  //icon-image-
+  --card-division-img-size:6rem; //launchpad page
+
+
+  //menu-right-toolbar-
+  --right-toolbar-height:30px;
+  --right-toolbar-width:30px;
 
 
 
@@ -69,19 +105,21 @@
   --border-width: 1px;
   --dark-theme: #171717;
   --bg-image-size: 1323px 804px;
-  --top-toolbar-height: 2.85rem;
+
   --column-graph-frame: 80vw 20vw;
   --column-menu-frame: 97vw 3vw;
   --graph-top-toolbar-height: 3rem;
-  --bottom-toolbar-height: 2.14rem;
-  --main-height: calc(100vh - (var(--top-toolbar-height) + var(--bottom-toolbar-height)));
+
+  --main-height: calc(100vh - (var(--top-toolbar-height)  + var(--bottom-toolbar-height)));
   --main-no-footer: calc(100vh - (var(--top-toolbar-height)));
   --sidebar-width: calc(var(--unit)*15);
   --component-header-color: rgb(214 27 119 / 51%);
   --vertical-cards-loop: calc(var(--unit)*15);
   --card-height: calc(var(--unit)*11);
-  --tiny-icon-height: 2.857rem;
-  --tiny-icon-width: 2.857rem;
+
+
+
+
 
 
 
