@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   ChangeDetectorRef,
   Component,
   ElementRef,
@@ -50,7 +51,7 @@ import {GraphService} from "../../cym-services/graph/graph.service";
   styleUrls: ['./graph.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class GraphComponents implements OnInit, OnChanges {
+export class GraphComponents implements OnInit, OnChanges ,AfterViewInit{
   // data = data;
   visible = true;
   // data: any;
@@ -102,13 +103,19 @@ export class GraphComponents implements OnInit, OnChanges {
   ngOnInit() {
     this.getNeighbourOption();
   }
+  ngAfterViewInit(){
+    // if (this.data) {
+    //   // start creating graph
+    //   this.run();
+    // }
+  }
 
   ngOnChanges() {
     if (this.data) {
       // start creating graph
       this.run();
-      this.clickEvent(this.tools);
     }
+    this.clickEvent(this.tools);
   }
 
   private run() {
@@ -267,7 +274,7 @@ export class GraphComponents implements OnInit, OnChanges {
       // e.g. add a highlight to newItem here
       const styleHighlight = this.graphComponent.highlightIndicatorManager
       const decorator = this.graphComponent.graph.decorator
-      this.hoverBorder = hoverItem.tag.hover_border_color
+      this.hoverBorder = hoverItem?.tag.hover_border_color
       const highlightShape = new ShapeNodeStyle({
         shape: ShapeNodeShape.ELLIPSE,
         stroke: this.hoverBorder,
@@ -507,7 +514,7 @@ export class GraphComponents implements OnInit, OnChanges {
 
   // toolbar event handling
   clickEvent(tool: { icon: string; toolName: string }) {
-    if (this.graphComponent) {
+    if (this.graphComponent && tool) {
       switch (tool.toolName) {
         case 'toggle':
           this.toggle();

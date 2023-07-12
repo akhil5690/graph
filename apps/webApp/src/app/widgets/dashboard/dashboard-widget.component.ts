@@ -188,7 +188,11 @@ export class DashboardWidgetComponent implements OnInit {
 
   }
 
-  selectedTool(tools: any) {
-    this.toolSelected = tools;
+  selectedTool(event: any) {
+    this.toolSelected = event;
+    setTimeout(()=>{
+      this.toolSelected=null;
+      this.cdr.detectChanges()
+    },0)
   }
 }
