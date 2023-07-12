@@ -20,7 +20,7 @@ cym-dashboard-widget {
   }
   .dash-tool-container {
     display: grid;
-    grid-template-columns: 1.5fr 7fr 1.5fr;
+    grid-template-columns: 2fr 6fr 2fr;
     background-color: var(--theme-color-one);
     width: var(--base-width);
     height:var(--graph-tool-bar-height);
@@ -71,8 +71,9 @@ cym-dashboard-widget {
 
   }
 
-
-
+  .secondary-tool {
+    padding: 0 1rem 0 1rem;
+  }
 
 
 
