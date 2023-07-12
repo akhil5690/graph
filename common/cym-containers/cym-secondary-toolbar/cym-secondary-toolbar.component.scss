@@ -4,9 +4,11 @@ cym-secondary-toolbar {
     grid-template-columns: 8fr auto auto auto ;
     align-items: center;
     height: var(--secondary-toolbar-height);
-    color: var(--primary-text-color);
+    //color: var(--primary-text-color);
     gap: var(--grid-gap);
     width: var(--base-width);
+    padding: 0 1rem 0 1rem;
+
   }
 
   .breadstar{
@@ -47,6 +49,20 @@ cym-secondary-toolbar {
   .secondary-tool-icon{
     height:var(--secondary-tool-icon-height);
     width:var(--secondary-tool-icon-width);
+  }
+
+  .secondary-tool{
+    background-color: var(--theme-color-one);
+    color:var(--secondary-text-color);
+
+    .p-breadcrumb ul .p-menuitem-text {
+      color: var(--main-background);
+    }
+    .pi-chevron-right:before{
+      color: var(--main-background);
+    }
+
+
   }
 
 }

@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation} from '@angular/core';
+import {Component, Input, ViewEncapsulation} from '@angular/core';
 import {toolbar} from "../../cym-component/frames/toolbar.json";
 import {secondaryToolbar} from "./secondary-toolbar.json";
 import {Router} from "@angular/router";
@@ -10,6 +10,9 @@ import {Router} from "@angular/router";
   encapsulation: ViewEncapsulation.None,
 })
 export class CymSecondaryToolbarComponent {
+
+  @Input() CymSecondaryToolbar!:string;
+
   constructor(private router: Router) {
   }
 
