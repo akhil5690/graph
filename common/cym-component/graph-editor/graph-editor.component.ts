@@ -58,7 +58,7 @@ import {
   Shapes,
   Social,
   Vehicle
-} from "./graphUtils";
+} from "./graphDragDrop";
 import {CymService} from "../../cym-services/systemService/cymSystemService";
 
 @Component({
