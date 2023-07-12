@@ -21,7 +21,7 @@
   right: 0;
   width: 30%;
   height: 100%;
-  padding: 1rem;
+  padding: var(--padding);
 }
 
 //yfiles scrollbar
@@ -64,13 +64,13 @@ yfiles-canvascomponent .yfiles-scrollbar.yfiles-scrollbar-horizontal,
 .yfiles-scrollbar-slider {
   border: 0;
   background: var(--third-background-color);
-  border-radius: 20px;
+  border-radius: var(--scroll-border-radius);
 }
 
 .class_otp {
-  height: 3.5rem !important;
-  width: 3.5rem !important;
-  font-size: 1.5rem !important;
+  height: var(--otp-box-height) !important;
+  width: var(--otp-box-height) !important;
+  font-size: var(--otp-font-size) !important;
 
 }
 

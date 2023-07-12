@@ -1,56 +1,46 @@
 cym-sign-in {
   .signIn-container {
     display: grid;
-    width: 27.2rem;
-    gap: 1rem;
+    width: var(--signin-container-width);
+    gap: var(--grid-gap);
   }
-
   .main-container {
     display: grid;
     justify-items: center;
     justify-content: center;
     margin-top: 2%;
-
   }
 
   .form-container {
     display: grid;
-    grid-gap: var(--unit);
+    grid-gap: var(--grid-gap);
   }
-
   .forgot {
     text-align: center;
   }
-
   .subtitle, .title {
     text-align: center;
   }
-
   .newtocym {
     border-top: 0.1rem black solid;
     align-items: center;
-    padding: 0.6rem;
+    padding: var(--padding);
   }
-
   small {
     font-size: var(--unit);
   }
-
   .new {
     text-align: center;
   }
-
   .create {
     font-size: var(--unit);
     text-align: center;
   }
-
   a:hover {
     text-decoration-line: underline;
     text-align: center;
     font-size: var(--unit);
   }
-
   .three-row-container , span{
     color: var(--red);
   }

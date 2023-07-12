@@ -4,7 +4,7 @@ input.p-inputtext.p-component.p-element.search-bar {
   background: var(--third-background-color);
   color: black;
   text-align: center;
-  padding: 0.7rem;
+  padding: calc(var(--padding)/2);
 }
 
 .p-input-icon-left > i {
@@ -16,5 +16,5 @@ input.p-inputtext.p-component.p-element.search-bar {
 }
 span.ui-form-labels {
   display: flex;
-  gap: 0.5rem;
+  gap: calc(var(--grid-gap)/2);
 }

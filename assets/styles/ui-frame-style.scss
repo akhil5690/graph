@@ -77,7 +77,8 @@
 }
 .breadcrumbs{
   grid-area: breadcrumbs;
-  padding: 0 1rem 0 1rem;
+  padding: 0 var(--padding) 0 var(--padding);
+  background-color: var(--main-background);
 }
 .sidebar {
   grid-area: sidebar;
@@ -103,6 +104,6 @@
   font-size: 0.86rem;
 }
 
-.toggle {
-  width: 10rem;
-}
+//.toggle {
+//  width: 10rem;
+//}

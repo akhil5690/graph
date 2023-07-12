@@ -1,6 +1,6 @@
 .overview {
   position: absolute;
-  top: 2.85rem;
+  top: var(--overview-start);
   margin: var(--margin24);
 }
 
@@ -13,7 +13,7 @@
 
 .neighbour {
   position: absolute;
-  top: 20rem;
+  top: var(--neighbour-start);
   margin: var(--margin24);
 
 }
