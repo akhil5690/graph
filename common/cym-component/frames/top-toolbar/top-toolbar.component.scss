@@ -38,12 +38,19 @@ cym-top-toolbar {
 
   .three{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, auto);
     gap: calc(var(--grid-gap)/2);
   }
   .three > div{
     padding:calc(var(--padding)/5);
+  }
+  .icon-height{
+    height:var(--icon-height);
+    width:var(--icon-width);
 
+  }
+  .line-height{
+    height:2rem;
   }
 
 

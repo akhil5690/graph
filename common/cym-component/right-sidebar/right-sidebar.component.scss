@@ -1,4 +1,6 @@
 
+
+
 cym-right-sidebar {
   .right-sidebar {
     display: grid;
@@ -12,17 +14,17 @@ cym-right-sidebar {
   }
 
   .menu-panel {
-    div {
+    div{
       display: grid;
       height: var(--tiny-icon-height);
       width: var(--tiny-icon-width);
       align-items: center;
       justify-content: center;
-      cursor: pointer;
+      cursor:pointer;
     }
 
     display: grid;
-    grid-template-rows: repeat(auto-fit, var(--menu-side-bar-height));
+    grid-template-rows: repeat(auto-fit , 50px);
     //padding: calc(var(--padding) + 0.5rem);
     //gap: var(--grid-gap);
     background-color: var(--theme-color-one);
@@ -59,8 +61,8 @@ cym-right-sidebar {
     gap: var(--grid-gap);
   }
 
-  .displayNone {
-    display: none;
+  .displayNone{
+    display:none;
   }
 }
 
