@@ -268,7 +268,6 @@ export class GraphComponents implements OnInit, OnChanges {
       const styleHighlight = this.graphComponent.highlightIndicatorManager
       const decorator = this.graphComponent.graph.decorator
       this.hoverBorder = hoverItem.tag.hover_border_color
-      console.log(this.hoverBorder,"hover");
       const highlightShape = new ShapeNodeStyle({
         shape: ShapeNodeShape.ELLIPSE,
         stroke: this.hoverBorder,
