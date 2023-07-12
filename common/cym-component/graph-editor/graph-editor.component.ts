@@ -49,7 +49,18 @@ import {
 } from "./demo-styles";
 import {v4 as uuidv4} from 'uuid';
 import {NONE_TYPE} from "@angular/compiler";
-import {Automotive, Business, FileImg, Finance, GraphTools, People, Shapes, Social, Vehicle} from "./graphUtils";
+import {
+  Automotive,
+  Business,
+  FileImg,
+  Finance,
+  GraphTools,
+  Network,
+  People,
+  Shapes,
+  Social,
+  Vehicle
+} from "./graphUtils";
 
 @Component({
   selector: 'cym-graph-editor',
@@ -93,6 +104,7 @@ export class GraphEditorComponent implements AfterViewInit, OnInit {
   private social: any;
   private people: any;
   private file: any;
+  private network: any;
 
   constructor(private cdr: ChangeDetectorRef) {
   }
@@ -117,6 +129,7 @@ export class GraphEditorComponent implements AfterViewInit, OnInit {
     this.social = Social
     this.people = People
     this.file = FileImg;
+    this.network = Network;
     this.dragDropElements = [{
       id: 0,
       headers: 'Shapes',
@@ -149,6 +162,10 @@ export class GraphEditorComponent implements AfterViewInit, OnInit {
       id: 7,
       headers: 'Files',
       style: this.getNodeStyleForDragDrop('image', this.file),
+    }, {
+      id: 8,
+      headers: 'Network',
+      style: this.getNodeStyleForDragDrop('image', this.network),
     }];
   }
 
