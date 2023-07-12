@@ -28,7 +28,7 @@ export class DashboardWidgetComponent implements OnInit {
   toolBarItems: any;
   toolSelected: any;
 
-  constructor(private cdr: ChangeDetectorRef, private graphService: GraphService, private router: Router, private cym: CymService, private messageService: MessageService) {
+  constructor(private systemService:CymService,private cdr: ChangeDetectorRef, private graphService: GraphService, private router: Router, private cym: CymService, private messageService: MessageService) {
   }
 
 
@@ -189,10 +189,6 @@ export class DashboardWidgetComponent implements OnInit {
   }
 
   selectedTool(event: any) {
-    this.toolSelected = event;
-    setTimeout(()=>{
-      this.toolSelected=null;
-      this.cdr.detectChanges()
-    },0)
+    this.systemService.setToolClick(event);
   }
 }

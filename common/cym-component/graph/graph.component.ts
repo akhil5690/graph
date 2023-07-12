@@ -44,6 +44,7 @@ import {
 // import {data} from './data'
 import licenseValue from 'license.json';
 import {GraphService} from "../../cym-services/graph/graph.service";
+import {CymService} from 'common/cym-services/systemService/cymSystemService';
 
 @Component({
   selector: 'cym-graph',
@@ -51,7 +52,7 @@ import {GraphService} from "../../cym-services/graph/graph.service";
   styleUrls: ['./graph.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class GraphComponents implements OnInit, OnChanges ,AfterViewInit{
+export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
   // data = data;
   visible = true;
   // data: any;
@@ -97,13 +98,17 @@ export class GraphComponents implements OnInit, OnChanges ,AfterViewInit{
   originalNeighbourhood: any;
   showDetails!: boolean;
 
-  constructor(private cdr: ChangeDetectorRef) {
+  constructor(private cdr: ChangeDetectorRef, private systemService: CymService) {
   }
 
   ngOnInit() {
     this.getNeighbourOption();
+    this.systemService.toolClick.subscribe(tool => {
+      this.clickEvent(tool)
+    })
   }
-  ngAfterViewInit(){
+
+  ngAfterViewInit() {
     // if (this.data) {
     //   // start creating graph
     //   this.run();
@@ -115,7 +120,7 @@ export class GraphComponents implements OnInit, OnChanges ,AfterViewInit{
       // start creating graph
       this.run();
     }
-    this.clickEvent(this.tools);
+    // this.clickEvent(this.tools);
   }
 
   private run() {

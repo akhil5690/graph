@@ -61,6 +61,7 @@ import {
   Social,
   Vehicle
 } from "./graphUtils";
+import {CymService} from "../../cym-services/systemService/cymSystemService";
 
 @Component({
   selector: 'cym-graph-editor',
@@ -106,11 +107,14 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
   private file: any;
   private network: any;
 
-  constructor(private cdr: ChangeDetectorRef) {
+  constructor(private cdr: ChangeDetectorRef, private systemService: CymService) {
   }
 
   ngOnInit() {
     this.createDragDropNodeStyle();
+    this.systemService.toolClick.subscribe(tool => {
+      this.clickEvent(tool)
+    })
   }
 
   ngAfterViewInit() {
@@ -118,7 +122,6 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    this.clickEvent(this.tools);
   }
 
   createDragDropNodeStyle() {
