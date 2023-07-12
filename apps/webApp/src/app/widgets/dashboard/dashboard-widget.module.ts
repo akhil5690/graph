@@ -19,27 +19,29 @@ import {TopToolbarModule} from "../../../../../../common/cym-component/frames/to
 import {
   CymSecondaryToolbarModule
 } from "../../../../../../common/cym-containers/cym-secondary-toolbar/cym-secondary-toolbar.module";
+import {CymInputModule} from "../../../../../../common/cym-component/form/cym-input/cym-input.module";
 
 
 @NgModule({
   declarations: [DashboardWidgetComponent],
-  imports: [
-    CommonModule,
-    InputTextModule,
-    ButtonModule,
-    SignInModule,
-    GraphModule,
-    RightSidebarModule,
-    HttpClientModule,
-    WidgetFrameModule,
-    TabViewModule,
-    GraphEditorModule,
-    DialogModule,
-    ToastModule,
-    CymDivModule,
-    TopToolbarModule,
-    CymSecondaryToolbarModule,
-  ],
+    imports: [
+        CommonModule,
+        InputTextModule,
+        ButtonModule,
+        SignInModule,
+        GraphModule,
+        RightSidebarModule,
+        HttpClientModule,
+        WidgetFrameModule,
+        TabViewModule,
+        GraphEditorModule,
+        DialogModule,
+        ToastModule,
+        CymDivModule,
+        TopToolbarModule,
+        CymSecondaryToolbarModule,
+        CymInputModule,
+    ],
   providers:[GraphService,HttpHandler],
   exports: [DashboardWidgetComponent]
 })

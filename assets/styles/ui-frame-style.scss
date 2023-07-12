@@ -17,6 +17,17 @@
       "main"
       "footer";
 }
+//
+//.header-secondarytoolbar-main-footer-frame {
+//  display: grid;
+//  grid-template-columns:var(--base-width);
+//  grid-template-rows: var(--top-toolbar-height) var(--main-height) var(--bottom-toolbar-height);
+//  grid-template-areas:
+//      "header"
+//      "secondarytoolbar"
+//      "main"
+//      "footer";
+//}
 
 .only-main {
   display: grid;
