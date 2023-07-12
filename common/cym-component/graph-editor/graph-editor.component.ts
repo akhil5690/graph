@@ -3,7 +3,7 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
-  Input,
+  Input, OnChanges,
   OnInit,
   ViewChild,
   ViewEncapsulation
@@ -68,9 +68,9 @@ import {
   styleUrls: ['./graph-editor.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class GraphEditorComponent implements AfterViewInit, OnInit {
+export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
   @Input() data: any;
-  // @Input() tools: any;
+  @Input() tools: any;
   @ViewChild('graphContainer', {static: true}) graphContainer!: ElementRef;
   @ViewChild('overViewComponent', {static: true}) overViewContainer!: ElementRef;
   @ViewChild('neighbour', {static: true}) neighbour!: ElementRef;
@@ -114,10 +114,11 @@ export class GraphEditorComponent implements AfterViewInit, OnInit {
   }
 
   ngAfterViewInit() {
-
     this.run();
+  }
 
-    // this.clickEvent(this.tools);
+  ngOnChanges() {
+    this.clickEvent(this.tools);
   }
 
   createDragDropNodeStyle() {
@@ -804,7 +805,7 @@ export class GraphEditorComponent implements AfterViewInit, OnInit {
 
   clickEvent(tool: { icon: string; toolName: string }) {
     // tools
-    if (this.graphComponent) {
+    if (this.graphComponent && tool) {
       switch (tool.toolName) {
         case 'save':
           this.save()
@@ -813,22 +814,23 @@ export class GraphEditorComponent implements AfterViewInit, OnInit {
           this.load();
           break;
         case 'undo':
-          ICommand.UNDO.execute(null, this.graphComponent)
+          ICommand.UNDO.execute(null, this.graphComponent);
           break;
         case 'zoomIn':
-          ICommand.INCREASE_ZOOM.execute(null, this.graphComponent)
+          ICommand.INCREASE_ZOOM.execute(null, this.graphComponent);
+
           break;
         case 'zoomOut':
-          ICommand.DECREASE_ZOOM.execute(null, this.graphComponent)
+          ICommand.DECREASE_ZOOM.execute(null, this.graphComponent);
           break;
         case 'fit':
-          ICommand.FIT_CONTENT.execute(null, this.graphComponent)
+          ICommand.FIT_CONTENT.execute(null, this.graphComponent);
           break;
         case 'redo':
-          ICommand.REDO.execute(null, this.graphComponent)
+          ICommand.REDO.execute(null, this.graphComponent);
           break;
         case 'cut':
-          ICommand.CUT.execute(null, this.graphComponent)
+          ICommand.CUT.execute(null, this.graphComponent);
           break;
         case 'copy':
           this.copy();
@@ -837,7 +839,7 @@ export class GraphEditorComponent implements AfterViewInit, OnInit {
           this.paste()
           break;
         case 'delete':
-          ICommand.DELETE.execute(null, this.graphComponent)
+          ICommand.DELETE.execute(null, this.graphComponent);
           break;
       }
     }

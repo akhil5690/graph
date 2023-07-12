@@ -1,11 +1,11 @@
 <div class="graph-main">
-  <div class="graph-toolbar">
-    <div *ngFor="let tool of toolBarItems">
-      <div (click)="clickEvent(tool)" class="tools">
-        <img [src]="tool.icon" [alt]="tool.toolName" [height]="tool.height" [width]="tool.width">
-      </div>
-    </div>
-  </div>
+<!--  <div class="graph-toolbar">-->
+<!--    <div *ngFor="let tool of toolBarItems">-->
+<!--      <div (click)="clickEvent(tool)" class="tools">-->
+<!--        <img [src]="tool.icon" [alt]="tool.toolName" [height]="tool.height" [width]="tool.width">-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
   <div class="graph-container">
     <div id="graphComponent" #graphContainer [ngClass]="this.isFilterOpen?'graph-sidebar':'graph'">
     </div>

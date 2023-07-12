@@ -11,8 +11,10 @@
 
       <div class="graph-tool-icons">
         <div *ngFor="let tools of toolBarItems">
-          <img (click)="selectedTool(tools)" [src]="tools.icon" [alt]="tools.toolName" [height]="tools.height"
-               [width]="tools.width" class="set-icon">
+          <div (click)="selectedTool(tools)">
+            <img [src]="tools.icon" [alt]="tools.toolName" [height]="tools.height"
+                 [width]="tools.width" class="set-icon">
+          </div>
         </div>
       </div>
 
@@ -23,13 +25,11 @@
       </div>
     </cym-div>
     <div>
-      <cym-graph *ngIf="tabType===0" [layout]="layout" [data]="schema"></cym-graph>
+      <cym-graph *ngIf="tabType===0" [layout]="layout" [data]="schema" [tools]="this.toolSelected"></cym-graph>
       <cym-graph *ngIf="tabType===1" [layout]="layout" [data]="explorer" (findingsClicked)="loadFindings($event)"
                  (refreshGraph)="refreshGraph($event)"></cym-graph>
-      <cym-graph-editor *ngIf="tabType===2"></cym-graph-editor>
+      <cym-graph-editor *ngIf="tabType===2" [tools]="this.toolSelected"></cym-graph-editor>
     </div>
-    <!--    [tools]="this.toolSelected"-->
-
     <p-dialog [modal]="true" *ngIf="openFindingsPopup" [(visible)]="openFindingsPopup"
               (onHide)="openFindingsPopup =false" class="popup">
       <ng-template pTemplate="header">
