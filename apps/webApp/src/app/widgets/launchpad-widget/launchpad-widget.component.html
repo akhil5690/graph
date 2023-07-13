@@ -1,46 +1,8 @@
-<!--<cym-widget-frame [frame_type]="'header-main-footer-frame'">-->
-<!--  &lt;!&ndash;  <cym-toolbar header>&ndash;&gt;-->
-<!--  &lt;!&ndash;    <cym-div class="container" (click)="showGraph()">&ndash;&gt;-->
-<!--  &lt;!&ndash;      Dashboard&ndash;&gt;-->
-<!--  &lt;!&ndash;    </cym-div>&ndash;&gt;-->
-<!--  &lt;!&ndash;  </cym-toolbar>&ndash;&gt;-->
-<!--  <cym-top-toolbar header ></cym-top-toolbar>-->
-<!--  <cym-div main >-->
-<!--    <cym-div >-->
-<!--      <cym-secondary-toolbar></cym-secondary-toolbar>-->
-<!--    </cym-div>-->
-
-<!--    <cym-div [cymClass]="'card-main'">-->
-<!--      <cym-card *ngFor="let tool of launchpad">-->
-<!--        <cym-div header [cymClass]="'content-header'">-->
-<!--          {{tool.name}}-->
-<!--        </cym-div>-->
-<!--        <cym-div card-content>{{tool.description}}</cym-div>-->
-<!--        <cym-div card-content [cymClass]="'card-divisions'">-->
-<!--          <cym-card-division *ngFor="let sub of tool.subGroup;index as i" [cymClass]="'launchpad-cards'"-->
-<!--                             [cardDetails]="sub"-->
-<!--                             (cardClickEvent)="showGraph($event)" >-->
-<!--          </cym-card-division>-->
-<!--        </cym-div>-->
-<!--      </cym-card>-->
-<!--    </cym-div>-->
-<!--  </cym-div>-->
-<!--  <cym-div footer>Copyright</cym-div>-->
-<!--</cym-widget-frame>-->
 
 <cym-widget-frame [frame_type]="'header-breadcrumbs-main-footer-frame'">
-  <!--  <cym-toolbar header>-->
-  <!--    <cym-div class="container" (click)="showGraph()">-->
-  <!--      Dashboard-->
-  <!--    </cym-div>-->
-  <!--  </cym-toolbar>-->
   <cym-top-toolbar header></cym-top-toolbar>
-  <cym-secondary-toolbar breadcrumbs ></cym-secondary-toolbar>
+  <cym-secondary-toolbar breadcrumbs [breadcrumbItems]="breadcrumbItems"></cym-secondary-toolbar>
   <cym-div main >
-<!--    <cym-div [cymClass]="'secondary-toolbar'">-->
-
-<!--    </cym-div>-->
-
     <cym-div [cymClass]="'card-main'">
       <cym-card *ngFor="let tool of launchpad" [cymClass]="'header-content'" >
         <cym-div header [cymClass]="'card-header'">{{tool.name}}

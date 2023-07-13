@@ -1,4 +1,20 @@
-export const GraphTools = [{
+export const ExplorerTools = [{
+  toolName: 'toggle',
+  icon: 'assets/image/overview.svg'
+},
+  {
+    toolName: 'zoomIn',
+    icon: 'assets/image/zoomIn.svg'
+  }, {
+    toolName: 'zoomOut',
+    icon: 'assets/image/zoomOut.svg'
+  }, {
+    toolName: 'fitContent',
+    icon: 'assets/image/fit.svg'
+  },
+];
+
+export const EditorTools = [{
   toolName: 'save',
   icon: 'assets/image/save.svg',
   height: 20, width: 20
@@ -40,10 +56,45 @@ export const GraphTools = [{
     toolName: 'paste',
     icon: 'assets/image/paste.svg',
     height: 15, width: 15
-  },{
+  }, {
     toolName: 'delete',
     icon: 'assets/image/IconCancel.svg',
     height: 15, width: 15
   }
 
-]
+];
+
+export const RightTabForEditor = [
+  {
+    toolName: 'palletes',
+    icon: 'assets/image/palletes.svg',
+    tab:'edit'
+  },
+  {
+    toolName: 'styles',
+    icon: 'assets/image/brush.svg',
+    tab:'filter'
+  },
+  {
+    toolName: 'details',
+    icon: 'assets/image/detail.svg',
+    tab:'details'
+  }
+];
+export const RightTabForExplorer = [
+  {
+    toolName: 'details',
+    icon: 'assets/image/detail.svg',
+    tab:'details'
+  },
+  {
+    toolName: 'styles',
+    icon: 'assets/image/filter.svg',
+    tab:'filter'
+  },
+  {
+    toolName: 'analysis',
+    icon: 'assets/image/analysis.svg',
+    tab:'analysis'
+  }
+];

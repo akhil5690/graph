@@ -29,13 +29,13 @@ cym-details {
     display: grid;
     grid-template-columns: 1fr 1fr;
     overflow-wrap: anywhere;
-    gap: 1rem;
-    padding: 0.5rem;
+    gap: var(--grid-gap);
+    padding:calc(var(--padding)/2);
   }
 
   .grid {
     display: grid;
-    gap: 0.5rem;
+    gap: calc(var(--grid-gap)/2);
   }
 
   .capitalize {

@@ -3,6 +3,7 @@ import {GraphService} from "../../../../../../common/cym-services/graph/graph.se
 import {Router} from "@angular/router";
 import {CymService} from "../../../../../../common/cym-services/systemService/cymSystemService";
 import {MessageService} from "primeng/api";
+import {EditorTools, ExplorerTools, RightTabForEditor, RightTabForExplorer} from "./dashboard-tools";
 
 @Component({
   selector: 'cym-dashboard-widget',
@@ -15,9 +16,7 @@ export class DashboardWidgetComponent implements OnInit {
 
 
   details: any;
-  frameType!: string;
   explorer: any;
-  filterOptions: any;
   copyData: any;
   layout: any;
   schema: any;
@@ -26,37 +25,32 @@ export class DashboardWidgetComponent implements OnInit {
   selectedFindings: any;
   tabType = 0;
   toolBarItems: any;
+  rightTab: any;
   toolSelected: any;
+  breadcrumbItems: any;
+  tabSelected: any;
+  isRightSidebarOpen: any;
 
-  constructor(private cdr: ChangeDetectorRef, private graphService: GraphService, private router: Router, private cym: CymService, private messageService: MessageService) {
+  constructor(private systemService: CymService, private cdr: ChangeDetectorRef, private graphService: GraphService, private router: Router, private cym: CymService, private messageService: MessageService) {
   }
 
 
   ngOnInit() {
-    this.getSchemaData()
+    this.getSchemaData();
+    this.breadcrumbItems = [{label: 'Workspace', routerLink: '/workspace'},
+      {label: 'Launchpad', routerLink: '/launchpad'},
+      {label: 'Dashboard', routerLink: '/launchpad/dashboard'}];
   }
 
   getGraphData() {
-    this.toolBarItems = [{
-      toolName: 'toggle',
-      icon: 'assets/image/overview.svg'
-    },
-      {
-        toolName: 'zoomIn',
-        icon: 'assets/image/zoomIn.svg'
-      }, {
-        toolName: 'zoomOut',
-        icon: 'assets/image/zoomOut.svg'
-      }, {
-        toolName: 'fitContent',
-        icon: 'assets/image/fit.svg'
-      },
-    ]
+    this.toolBarItems = ExplorerTools;
+    this.rightTab = RightTabForExplorer;
+    this.rightSidebarTabs(null);
     this.cym.setLoader(true);
     this.graphService.getGraphData({
       "filter": false,
       "property": "~id",
-      "value": "806000659309"
+      "value": "746454863131"
     }).then((data) => {
       this.explorer = data;
       this.copyData = data;// for creating the filter
@@ -69,6 +63,8 @@ export class DashboardWidgetComponent implements OnInit {
   }
 
   refreshGraph(params: any) {
+    this.toolBarItems = ExplorerTools;
+    this.rightTab = RightTabForExplorer;
     // on filtering get new graph data
     this.explorer = null;
     this.cym.setLoader(true);
@@ -83,21 +79,9 @@ export class DashboardWidgetComponent implements OnInit {
   }
 
   getSchemaData() {
-    this.toolBarItems = [{
-      toolName: 'toggle',
-      icon: 'assets/image/overview.svg'
-    },
-      {
-        toolName: 'zoomIn',
-        icon: 'assets/image/zoomIn.svg'
-      }, {
-        toolName: 'zoomOut',
-        icon: 'assets/image/zoomOut.svg'
-      }, {
-        toolName: 'fitContent',
-        icon: 'assets/image/fit.svg'
-      },
-    ]
+    this.toolBarItems = ExplorerTools;
+    this.rightTab = RightTabForExplorer;
+    this.rightSidebarTabs(null);
     // this.cym.setLoader(true);
     this.graphService.getSchemaData({filter: false}).then((data) => {
       this.schema = data;
@@ -112,56 +96,9 @@ export class DashboardWidgetComponent implements OnInit {
   }
 
   editor() {
-    this.toolBarItems = [{
-      toolName: 'save',
-      icon: 'assets/image/save.svg',
-      height: 20, width: 20
-
-    }, {
-      toolName: 'load',
-      icon: 'assets/image/refresh.svg',
-      height: 20, width: 20
-    }, {
-      toolName: 'zoomIn',
-      icon: 'assets/image/zoomIn.svg',
-      height: 20, width: 20
-    }, {
-      toolName: 'zoomOut',
-      icon: 'assets/image/zoomOut.svg',
-      height: 20, width: 20
-    }, {
-      toolName: 'undo',
-      icon: 'assets/image/undo.svg',
-      height: 15, width: 15
-    }, {
-      toolName: 'redo',
-      icon: 'assets/image/redo.svg',
-      height: 15, width: 15
-    },
-      {
-        toolName: 'fit',
-        icon: 'assets/image/fullscreen.svg',
-        height: 15, width: 15
-      }, {
-        toolName: 'cut',
-        icon: 'assets/image/cut.svg',
-        height: 15, width: 15
-      }, {
-        toolName: 'copy',
-        icon: 'assets/image/copy.svg',
-        height: 15, width: 15
-      }, {
-        toolName: 'paste',
-        icon: 'assets/image/paste.svg',
-        height: 15, width: 15
-      }, {
-        toolName: 'delete',
-        icon: 'assets/image/IconCancel.svg',
-        height: 15, width: 15
-      }
-
-    ]
-
+    this.toolBarItems = EditorTools;
+    this.rightTab = RightTabForEditor;
+    this.rightSidebarTabs(null);
   }
 
   loadFindings(findings: any) {
@@ -189,10 +126,19 @@ export class DashboardWidgetComponent implements OnInit {
   }
 
   selectedTool(event: any) {
-    this.toolSelected = event;
-    setTimeout(()=>{
-      this.toolSelected=null;
-      this.cdr.detectChanges()
-    },0)
+    this.systemService.setToolClick(event);
+  }
+
+  rightSidebarTabs(tab: any) {
+    this.systemService.setRightSideTabClick(tab);
+  }
+
+  setActive(i: number) {
+    return this.tabSelected === i ? 'active-class' : '';
+  }
+
+  toggleRightSidebar(isRightSidebarOpen: any) {
+    this.isRightSidebarOpen = !isRightSidebarOpen;
+    this.systemService.setRightSideToolbarOpen(this.isRightSidebarOpen)
   }
 }

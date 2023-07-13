@@ -3,50 +3,52 @@ cym-secondary-toolbar {
     display: grid;
     grid-template-columns: 8fr auto auto auto ;
     align-items: center;
-    height: 30px;
-    color: var(--primary-text-color);
+    height: var(--secondary-toolbar-height);
     gap: var(--grid-gap);
     width: var(--base-width);
+    padding: 0 var(--padding) 0 var(--padding);
+    background-color: var(--breadcrumb-toolbar-color);
+    color:var(--breadcrumb-font-color);
   }
-
   .breadstar{
     display: grid;
     grid-template-columns: auto;
     align-items: center;
   }
-
   .menu {
     display: grid;
     grid-template-columns: repeat(10, 1fr);
     gap: calc(var(--grip-gap)/2);
   }
-
-
   .horizontal{
     display: grid;
     grid-template-columns: auto auto;
     gap: 0.3rem;
   }
-
   .other-options {
     display: grid;
     grid-template-columns: auto auto auto;
     grid-gap: var(--grip-gap) ;
   }
-
   .p-breadcrumb.p-component {
     background: none;
     border: none;
     padding:0;
   }
-
   .icons{
     text-align:right;
   }
-
   .secondary-tool-icon{
     height:var(--secondary-tool-icon-height);
     width:var(--secondary-tool-icon-width);
+  }
+
+  .p-breadcrumb ul li .p-menuitem-link .p-menuitem-text {
+    color: var(--breadcrumb-font-color);
+  }
+
+  .pi-chevron-right:before{
+    color:var(--breadcrumb-font-color);
   }
 
 }
