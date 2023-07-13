@@ -19,6 +19,8 @@ export class CymService implements OnDestroy {
   // network status
   private rightSideTabClickSubject = new BehaviorSubject<any>(null);
   rightSideTabClick = this.rightSideTabClickSubject.asObservable();
+  private rightSidebarOpenSub = new BehaviorSubject<any>(null);
+  isRightSidebarOpenSub = this.rightSidebarOpenSub.asObservable();
 
 
   constructor() {
@@ -38,6 +40,9 @@ export class CymService implements OnDestroy {
 
   setRightSideTabClick(value: any) {
     this.rightSideTabClickSubject.next(value);
+  }
+  setRightSideToolbarOpen(value: any) {
+    this.rightSidebarOpenSub.next(value);
   }
 
 }

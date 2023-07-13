@@ -29,6 +29,7 @@ export class DashboardWidgetComponent implements OnInit {
   toolSelected: any;
   breadcrumbItems: any;
   tabSelected: any;
+  isRightSidebarOpen: any;
 
   constructor(private systemService: CymService, private cdr: ChangeDetectorRef, private graphService: GraphService, private router: Router, private cym: CymService, private messageService: MessageService) {
   }
@@ -49,7 +50,7 @@ export class DashboardWidgetComponent implements OnInit {
     this.graphService.getGraphData({
       "filter": false,
       "property": "~id",
-      "value": "806000659309"
+      "value": "746454863131"
     }).then((data) => {
       this.explorer = data;
       this.copyData = data;// for creating the filter
@@ -129,10 +130,15 @@ export class DashboardWidgetComponent implements OnInit {
   }
 
   rightSidebarTabs(tab: any) {
-    this.systemService.setRightSideTabClick(tab)
+    this.systemService.setRightSideTabClick(tab);
   }
 
   setActive(i: number) {
-    return this.tabSelected === i ? 'active-class' : ''
+    return this.tabSelected === i ? 'active-class' : '';
+  }
+
+  toggleRightSidebar(isRightSidebarOpen: any) {
+    this.isRightSidebarOpen = !isRightSidebarOpen;
+    this.systemService.setRightSideToolbarOpen(this.isRightSidebarOpen)
   }
 }

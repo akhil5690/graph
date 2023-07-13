@@ -68,13 +68,13 @@ cym-dashboard-widget {
   }
 
   // rightsidebar tab : Pallete, style,details
-  .set-center {
-    text-align: center;
+  .set-image {
+    height: 15px
   }
 
   .tab-container {
     display: grid;
-    grid-template-columns: repeat(3,auto);
+    grid-template-columns:0.54fr 1fr 1fr 1fr;
     align-items: center;
   }
 
@@ -95,6 +95,11 @@ cym-dashboard-widget {
     outline: 0 none;
     outline-offset: 0;
     box-shadow: none;  //Accordian box on focus
+  }
+  .close-right-sidebar {
+    @extend .tab-container;
+    grid-template-columns: 3rem;
+    justify-content: end;
   }
 }
 
