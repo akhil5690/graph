@@ -31,8 +31,6 @@ export class RightSidebarComponent implements OnChanges, OnInit {
   selectedVal: any;
   suggestedList: any;
   layout: any;
-  selectedLayoutOpt: any;
-  isFindings: any;
   value: any;
 
   constructor(private graphservice: GraphService, private cymService: CymService) {
@@ -46,14 +44,10 @@ export class RightSidebarComponent implements OnChanges, OnInit {
   ngOnInit() {
     this.cymService.rightSideTabClick.subscribe((tab) => {
       this.tab = tab;
-      if (tab) {
-        this.openPopUp = !(tab === 'details' && !this.items);
-      }
-
     });
     this.cymService.isRightSidebarOpenSub.subscribe((isOpen) => {
       this.isRightSidebarOpen.emit(isOpen);
-      this.openPopUp = isOpen && !(this.tab === 'details' && !this.items);
+      this.openPopUp = isOpen;
     });
 
     // dropdown properties
@@ -71,28 +65,12 @@ export class RightSidebarComponent implements OnChanges, OnInit {
     this.isRightSidebarOpen.emit(this.openPopUp);
   }
 
-  tabs(tab: string) {
-    this.openPopUp = true;
-    this.tab = tab;
-    this.isRightSidebarOpen.emit(this.openPopUp);
-    if (tab === 'details' && !this.showDetails) {
-      this.openPopUp = false;
-      this.isRightSidebarOpen.emit(this.openPopUp);
-    }
-  }
 
   private selectedGraphItem() {
     // get the node or the edge that is clicked
-    if (this.details && this.showDetails) {
-      this.items = [this.details.tag];
-      // this.nodeData = this.items.flatMap((item: any) =>
-      //   Object.entries(item).map(([label, value]) => ({label, value}))
-      // );
-      this.openPopUp = true;
-      this.tab = 'details'
-    } else {
-      this.openPopUp = false
-    }
+    this.items = [this.details.tag];
+    this.openPopUp = true;
+    this.tab = 'details';
     this.isRightSidebarOpen.emit(this.openPopUp);
   }
 
