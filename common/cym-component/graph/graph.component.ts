@@ -217,7 +217,7 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
 
     // style edge label
     edgesSource.edgeCreator.defaults.labels.style = this.getEdgeLabel({
-      backgroundFill: 'white',
+      backgroundFill: '#EBEDEF',
       textSize: 10
     });
 
