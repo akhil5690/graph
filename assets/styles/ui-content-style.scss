@@ -1,6 +1,6 @@
 .title {
   @extend .ui-base-style;
-  font-size: var(--font60);
+  font-size: var(--font56);
   color: var(--primary-text-color);
   font-weight: var(--font-weight-bold);
   border: none;
@@ -8,7 +8,7 @@
 }
 .subtitle{
   @extend .ui-base-style;
-  font-size: var(--font24);
+  font-size: var(--font22);
   font-weight: var(--font-weight-bold);
   font-family:var(--font-family-bold);
   border: none;
