@@ -85,7 +85,7 @@ export const RightTabForExplorer = [
   {
     toolName: 'details',
     icon: 'assets/image/detail.svg',
-    tab:'edit'
+    tab:'details'
   },
   {
     toolName: 'styles',
@@ -95,6 +95,6 @@ export const RightTabForExplorer = [
   {
     toolName: 'analysis',
     icon: 'assets/image/analysis.svg',
-    tab:'details'
+    tab:'analysis'
   }
 ];
