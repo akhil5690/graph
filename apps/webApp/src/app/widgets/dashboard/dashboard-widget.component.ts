@@ -189,4 +189,8 @@ export class DashboardWidgetComponent implements OnInit {
   selectedTool(event: any) {
     this.systemService.setToolClick(event);
   }
+
+  rightSidebarTabs(tab: string) {
+    this.systemService.setRightSideTabClick(tab)
+  }
 }

@@ -1,4 +1,4 @@
-import {EventEmitter, Injectable, OnDestroy} from '@angular/core';
+import { Injectable, OnDestroy} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 
 @Injectable({
@@ -16,6 +16,11 @@ export class CymService implements OnDestroy {
   private toolBarClick = new BehaviorSubject<any>({});
   toolClick = this.toolBarClick.asObservable();
 
+  // network status
+  private rightSideTabClickSubject = new BehaviorSubject<string>('');
+  rightSideTabClick = this.rightSideTabClickSubject.asObservable();
+
+
   constructor() {
   }
 
@@ -26,13 +31,14 @@ export class CymService implements OnDestroy {
     this.isLoadingSubject.next(value);
   }
 
-  /*
-  ** value ={
-  * event: toolEvent, id: randomMath()}
-  *
-   */
+
   setToolClick(value: any) {
     this.toolBarClick.next(value);
   }
+
+  setRightSideTabClick(value: any) {
+    this.rightSideTabClickSubject.next(value);
+  }
+
 }
 

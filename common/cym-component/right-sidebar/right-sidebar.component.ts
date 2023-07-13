@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewEncapsulation} from '@angular/core';
-import {data} from "../graph/data";
 import {GraphService} from "../../cym-services/graph/graph.service";
+import {CymService} from "../../cym-services/systemService/cymSystemService";
 
 @Component({
   selector: 'cym-right-sidebar',
@@ -12,7 +12,7 @@ export class RightSidebarComponent implements OnChanges, OnInit {
   items: any;
   nodeData: any;
   openPopUp = false;
-  @Output() edgeNodeProperty = new EventEmitter()
+  @Output() edgeNodeProperty = new EventEmitter();
 
   @Input() details: any;
   @Input() data: any;
@@ -35,7 +35,7 @@ export class RightSidebarComponent implements OnChanges, OnInit {
   isFindings: any;
   value: any;
 
-  constructor(private graphservice: GraphService) {
+  constructor(private graphservice: GraphService,private cymService:CymService) {
   }
 
   ngOnChanges(): void {
@@ -44,6 +44,11 @@ export class RightSidebarComponent implements OnChanges, OnInit {
   }
 
   ngOnInit() {
+    this.cymService.rightSideTabClick.subscribe((tab)=>{
+      this.tab = tab;
+      this.openPopUp = true;
+    });
+
     // dropdown properties
     this.properties = [
       {name: 'Account Id', code: '~id'},
@@ -52,15 +57,6 @@ export class RightSidebarComponent implements OnChanges, OnInit {
       {name: 'Tag', code: 'tags'},
     ];
 
-    // this.layout = [
-    //   {name: 'Organic', code: 'Organic'},
-    //   {name: 'Hierarchy', code: 'Hierarchy'},
-    //   {name: 'Orthogonal', code: 'Orthogonal'},
-    //   {name: 'Circular', code: 'Circular'},
-    //   {name: 'Radial', code: 'Radial'},
-    // ];
-
-    this.layout = [{}]
   }
 
   open(isOpen: boolean) {
@@ -123,7 +119,7 @@ export class RightSidebarComponent implements OnChanges, OnInit {
       filter: false,
       property: this.selectedProp.code,
       value: this.value
-    }
+    };
     // send params to dashboard and get new graph on filter
     this.filterGraph.emit(params)
   }
