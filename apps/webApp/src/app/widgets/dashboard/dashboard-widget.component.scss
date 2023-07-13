@@ -18,7 +18,7 @@ cym-dashboard-widget {
 
   .dash-tool-container {
     display: grid;
-    grid-template-columns: 2fr 6fr 2fr;
+    grid-template-columns:2fr 7.5fr 3fr;
     background-color: var(--theme-color-one);
     width: var(--base-width);
     height: var(--graph-tool-bar-height);
@@ -68,24 +68,31 @@ cym-dashboard-widget {
   }
 
   // rightsidebar tab : Pallete, style,details
-  .set-center {
-    text-align: center;
+  .set-image {
+    height: 15px
   }
 
   .tab-container {
     display: grid;
-    grid-template-columns: repeat(3,auto);
+    grid-template-columns:0.54fr 1fr 1fr 1fr;
     align-items: center;
   }
 
-  .rightTab{
+  .close-right-sidebar {
+    @extend .tab-container;
+    grid-template-columns: 3rem;
+    justify-content: end;
+  }
+
+  .rightTab {
     padding: calc(var(--unit) / 2);
     height: var(--graph-top-toolbar-height);
     display: grid;
     justify-content: center;
     align-items: center;
   }
-  .rightTab:hover{
+
+  .rightTab:hover {
     background-color: var(--primary-color);
   }
 }
