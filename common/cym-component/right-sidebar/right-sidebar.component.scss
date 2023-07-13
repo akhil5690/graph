@@ -6,33 +6,11 @@ cym-right-sidebar {
     display: grid;
     position: relative;
     grid-template-rows: auto;
-    grid-template-columns: 3vw auto;
+    grid-template-columns: auto;
     background: white;
     right: 0;
     overflow: hidden;
     height: var(--right-side-bar-height);
-  }
-
-  .menu-panel {
-    div{
-      display: grid;
-      height: var(--tiny-icon-height);
-      width: var(--tiny-icon-width);
-      align-items: center;
-      justify-content: center;
-      cursor:pointer;
-    }
-    display: grid;
-    grid-template-rows: repeat(auto-fit , var(--icon-box-size));
-    //padding: calc(var(--padding) + 0.5rem);
-    //gap: var(--grid-gap);
-    background-color: var(--theme-color-one);
-    justify-content: center;
-    //border: 2px solid var(--theme-color-one);
-    border-top: none;
-    color: var(--icon-color);
-    align-items: center;
-
   }
 
   .menu-panel > div:hover {

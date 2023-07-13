@@ -10,11 +10,14 @@ import {CymService} from "../../../../../../common/cym-services/systemService/cy
   encapsulation: ViewEncapsulation.None
 })
 export class LaunchpadWidgetComponent implements OnInit {
+  breadcrumbItems: any;
   constructor(private router: Router, private cym: CymService) {
   }
 
   ngOnInit() {
     this.cym.setLoader(true);
+    this.breadcrumbItems = [{label: 'Workspace', routerLink: '/workspace'},
+      {label: 'Launchpad', routerLink: '/launchpad'}];
     setTimeout(() => {
       this.cym.setLoader(false)
     }, 1000);

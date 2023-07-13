@@ -1,6 +1,4 @@
 
-
-
 cym-dashboard-widget {
   .popup {
     .p-dialog {
@@ -13,21 +11,24 @@ cym-dashboard-widget {
       position: relative;
     }
   }
+
   .dash-tool-container {
     display: grid;
     grid-template-columns: 2fr 6fr 2fr;
     background-color: var(--theme-color-one);
     width: var(--base-width);
-    height:var(--graph-tool-bar-height);
+    height: var(--graph-tool-bar-height);
     text-align: center;
   }
+
   .three-tab-container {
     div {
       display: grid;
-      height:var(--graph-tool-bar-height);
+      height: var(--graph-tool-bar-height);
       align-items: center;
-      cursor:pointer;
+      cursor: pointer;
     }
+
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     //grid-gap: var(--grid-gap);
@@ -35,47 +36,54 @@ cym-dashboard-widget {
     align-items: center;
     justify-content: center;
   }
+
   .graph-tool-icons {
     div {
       display: grid;
       height: var(--tiny-icon-height);
-	    width: var(--tiny-icon-width);
+      width: var(--tiny-icon-width);
       align-items: center;
       justify-content: center;
-      cursor:pointer;
+      cursor: pointer;
     }
+
     display: grid;
-    grid-template-columns: repeat(auto-fit , var(--icon-box-size));
+    grid-template-columns: repeat(auto-fit, var(--icon-box-size));
     align-items: center;
-    justify-content:center;
+    justify-content: center;
   }
-  .set-icon{
-    height:var(--graph-tool-icon-height);
-    width:var(--graph-tool-icon-width);
+
+  .set-icon {
+    height: var(--graph-tool-icon-height);
+    width: var(--graph-tool-icon-width);
   }
+
   .graph-tool-icons > div:hover, .three-tab-container > div:hover {
     background-color: var(--primary-color);
     color: white;
   }
-  //.breadcrumbs{
-  //  background-color: var(--theme-color-one);
-  //}
 
+  // rightsidebar tab : Pallete, style,details
+  .set-center {
+    text-align: center;
+  }
 
-  //.secondary-tool{
-  //  background-color: red;
-  //}
+  .tab-container {
+    display: grid;
+    grid-template-columns: repeat(3,auto);
+    align-items: center;
+  }
 
-
-
-
-
-
-
-
-
-
-
+  .rightTab{
+    padding: calc(var(--unit) / 2);
+    height: var(--graph-top-toolbar-height);
+    display: grid;
+    justify-content: center;
+    align-items: center;
+  }
+  .rightTab:hover{
+    background-color: var(--primary-color);
+  }
 }
 
 
