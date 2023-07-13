@@ -18,10 +18,12 @@
         </div>
       </div>
 
-      <div class="three-tab-container">
-        <div (click)="rightSidebarTabs('edit')">Palette</div>
-        <div (click)="rightSidebarTabs('filter')">Filter</div>
-        <div (click)="rightSidebarTabs('details')">Diagram</div>
+      <div class="tab-container">
+        <div *ngFor="let tools of rightTab;let i=index">
+          <div (click)="rightSidebarTabs(tools.tab);tabSelected = i" [ngClass]="setActive(i)" class="rightTab">
+            <img [src]="tools.icon" [alt]="tools.toolName" class="set-center">
+          </div>
+        </div>
       </div>
     </cym-div>
     <div>
