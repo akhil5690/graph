@@ -12,6 +12,7 @@ import {Router} from "@angular/router";
 export class CymSecondaryToolbarComponent {
 
   @Input() CymSecondaryToolbar!:string;
+  @Input() breadcrumbItems: any;
 
   constructor(private router: Router) {
   }
@@ -21,15 +22,9 @@ export class CymSecondaryToolbarComponent {
   sector2: any;
   sector3: any;
   sector4: any;
-  breadcrumbItems: any;
+
 
   ngOnInit() {
-    this.breadcrumbItems = [{label: 'Workspace', routerLink: '/workspace'},
-      {label: 'Launchpad',routerLink: '/launchpad'}
-    ];
-
-    // ,routerLink: this.router.navigate(['launchpad'])
-    // ,routerLink: this.router.navigate(['workspace'])
     this.sector1 = this.secondaryItems.filter((toolbar: any) => {
       return toolbar.sector === "1" && toolbar.position === "top";
     });

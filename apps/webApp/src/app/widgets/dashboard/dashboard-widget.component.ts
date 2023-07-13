@@ -27,6 +27,7 @@ export class DashboardWidgetComponent implements OnInit {
   toolBarItems: any;
   rightTab: any;
   toolSelected: any;
+  breadcrumbItems: any;
   tabSelected: any;
 
   constructor(private systemService: CymService, private cdr: ChangeDetectorRef, private graphService: GraphService, private router: Router, private cym: CymService, private messageService: MessageService) {
@@ -34,7 +35,10 @@ export class DashboardWidgetComponent implements OnInit {
 
 
   ngOnInit() {
-    this.getSchemaData()
+    this.getSchemaData();
+    this.breadcrumbItems = [{label: 'Workspace', routerLink: '/workspace'},
+      {label: 'Launchpad', routerLink: '/launchpad'},
+      {label: 'Dashboard', routerLink: '/launchpad/dashboard'}];
   }
 
   getGraphData() {
