@@ -1,23 +1,4 @@
 <div class="right-sidebar">
-  <!--  tabs-->
-  <div class="menu-panel">
-    <div *ngIf="!openPopUp" (click)="open(true)">
-      <i class="pi pi-arrow-left"></i>
-    </div>
-    <div *ngIf="openPopUp" (click)="open(false)">
-      <i class="pi pi-arrow-right"></i>
-    </div>
-    <div (click)="tabs('details')" class="tab">
-      <img src="assets/image/information.svg" alt="" height="15" width="15">
-    </div>
-    <div (click)="tabs('filter')" class="tab">
-      <img src="assets/image/filter.svg" alt="" height="15" width="15">
-    </div>
-    <div (click)="tabs('edit')" class="tab">
-      <img src="assets/image/edit.svg" alt="" height="15" width="15">
-    </div>
-  </div>
-
   <!-- sidebar panel -->
   <div class="details-panel" [ngClass]="openPopUp?'':'displayNone'">
     <!--   opens on click of nodes or edges for the details-->

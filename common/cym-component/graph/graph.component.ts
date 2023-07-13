@@ -14,8 +14,7 @@ import {
 import {
   Arrow,
   ArrowType,
-  CircularLayout, Color,
-  DefaultLabelStyle, EdgePathLabelModel,
+  CircularLayout, DefaultLabelStyle, EdgePathLabelModel,
   EdgesSource, EdgeStyleDecorationInstaller, ExteriorLabelModel,
   GraphBuilder,
   GraphComponent,
@@ -35,15 +34,12 @@ import {
   License, Neighborhood,
   NodesSource, NodeStyleDecorationInstaller,
   OrganicLayout, OrthogonalLayout,
-  Point,
   PolylineEdgeStyle, RadialLayout,
   Rect, ShapeNodeShape,
   ShapeNodeStyle,
-  Size, Stroke, StyleDecorationZoomPolicy, TraversalDirection
+  Size, StyleDecorationZoomPolicy, TraversalDirection
 } from "yfiles";
-// import {data} from './data'
 import licenseValue from 'license.json';
-import {GraphService} from "../../cym-services/graph/graph.service";
 import {CymService} from 'common/cym-services/systemService/cymSystemService';
 
 @Component({
@@ -69,26 +65,11 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
   @ViewChild('overViewComponent', {static: true}) overViewContainer!: ElementRef;
   @ViewChild('neighbour', {static: true}) neighbour!: ElementRef;
 
-  @Output() refreshGraph = new EventEmitter()
-  @Output() findingsClicked = new EventEmitter()
+  @Output() refreshGraph = new EventEmitter();
+  @Output() findingsClicked = new EventEmitter();
 
 
   // graph toolbar tools
-  toolBarItems = [{
-    toolName: 'toggle',
-    icon: 'assets/image/overview.svg'
-  },
-    {
-      toolName: 'zoomIn',
-      icon: 'assets/image/zoomIn.svg'
-    }, {
-      toolName: 'zoomOut',
-      icon: 'assets/image/zoomOut.svg'
-    }, {
-      toolName: 'fitContent',
-      icon: 'assets/image/fit.svg'
-    },
-  ]
   overviewComponent!: GraphOverviewComponent;
   isFilterOpen = false;
   neighboursOptions: any;
@@ -128,7 +109,7 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
     License.value = licenseValue;
 
     // creates a component to store graph
-    this.initializeGraphComponent()
+    this.initializeGraphComponent();
 
     // editable mode for graph like creating node, adding/updating label, resizing node etc,.
     this.setInputMode(this.graphComponent);
@@ -137,7 +118,7 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
     // fit the whole graph into the canvas
     setTimeout(() => {
       this.fitContent();
-    }, 100)
+    }, 100);
 
     // create overview component to view and navigate the graph in graph component
     this.initializeOverviewComponent(this.graphComponent);
@@ -157,7 +138,7 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
     this.buildGraph(graphComponent, builder);
 
     // set the layout on filter
-    this.layout = this.getLayout(this.filter, this.layout)
+    this.layout = this.getLayout(this.filter, this.layout);
 
     // start building layout, example: Organic layout
     this.buildLayout(graphComponent, this.layout);
@@ -184,7 +165,7 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
       labels: ["label"],
       sourceId: "source",
       targetId: "target"
-    })
+    });
 
     // add style to node
     this.styleNode(nodesSource);
@@ -206,7 +187,7 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
     labelCreator.defaults.layoutParameter = this.labelPlacement(ExteriorLabelModel.SOUTH);
     const iconCreator = nodesSource.nodeCreator.createLabelBinding();
     // null check
-    iconCreator.textProvider = node => (node.imageUrl != null ? '' : null)
+    iconCreator.textProvider = node => (node.imageUrl != null ? '' : null);
     iconCreator.styleProvider = node =>
       (new IconLabelStyle({
         icon: node.imageUrl,
@@ -215,7 +196,7 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
       }));
     const findingIcon = nodesSource.nodeCreator.createLabelBinding();
     // null check
-    findingIcon.textProvider = node => (node.findingsUrl != null ? '' : null)
+    findingIcon.textProvider = node => (node.findingsUrl != null ? '' : null);
     findingIcon.styleProvider = node =>
       (new IconLabelStyle({
         icon: node.findingsUrl,
@@ -238,7 +219,7 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
     edgesSource.edgeCreator.defaults.labels.style = this.getEdgeLabel({
       backgroundFill: 'white',
       textSize: 10
-    })
+    });
 
     // aligning the edge label
     const labelModel = new EdgePathLabelModel({distance: 50});
@@ -269,22 +250,22 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
   }
 
   hoverEvent(inputMode: GraphEditorInputMode) {
-    inputMode.itemHoverInputMode.enabled = true
-    inputMode.itemHoverInputMode.hoverItems = GraphItemTypes.EDGE | GraphItemTypes.NODE
+    inputMode.itemHoverInputMode.enabled = true;
+    inputMode.itemHoverInputMode.hoverItems = GraphItemTypes.EDGE | GraphItemTypes.NODE;
 // ignore items of other types which might be in front of them
-    inputMode.itemHoverInputMode.discardInvalidItems = false
+    inputMode.itemHoverInputMode.discardInvalidItems = false;
 // handle changes on the hovered items
     inputMode.itemHoverInputMode.addHoveredItemChangedListener((sender, args) => {
-      const hoverItem = args.item
+      const hoverItem = args.item;
       // e.g. add a highlight to newItem here
-      const styleHighlight = this.graphComponent.highlightIndicatorManager
-      const decorator = this.graphComponent.graph.decorator
-      this.hoverBorder = hoverItem?.tag.hover_border_color
+      const styleHighlight = this.graphComponent.highlightIndicatorManager;
+      const decorator = this.graphComponent.graph.decorator;
+      this.hoverBorder = hoverItem?.tag.hover_border_color;
       const highlightShape = new ShapeNodeStyle({
         shape: ShapeNodeShape.ELLIPSE,
         stroke: this.hoverBorder,
         fill: null
-      })
+      });
 
       const nodeStyleHighlight = new NodeStyleDecorationInstaller({
         nodeStyle: highlightShape,
@@ -292,30 +273,30 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
         margins: 5,
         // but have a fixed size in the view coordinates
         zoomPolicy: StyleDecorationZoomPolicy.VIEW_COORDINATES
-      })
+      });
 
       const edgeStyle = new PolylineEdgeStyle({
         stroke: this.hoverBorder,
         // targetArrow: IArrow.TRIANGLE,
         // sourceArrow:
-      })
+      });
       const edgeStyleHighlight = new EdgeStyleDecorationInstaller({
         edgeStyle,
         zoomPolicy: StyleDecorationZoomPolicy.VIEW_COORDINATES
-      })
+      });
 
-      decorator.nodeDecorator.highlightDecorator.setImplementation(nodeStyleHighlight)
-      decorator.edgeDecorator.highlightDecorator.setFactory(edge =>
+      decorator.nodeDecorator.highlightDecorator.setImplementation(nodeStyleHighlight);
+      decorator.edgeDecorator.highlightDecorator.setFactory(() =>
         edgeStyleHighlight
-      )
+      );
       // first remove previous highlights
       if (styleHighlight) {
-        styleHighlight?.clearHighlights()
+        styleHighlight?.clearHighlights();
         // then see where we are hovering over, now
-        const newItem = hoverItem
+        const newItem = hoverItem;
         if (newItem !== null) {
           // we highlight the item itself
-          styleHighlight?.addHighlight(newItem)
+          styleHighlight?.addHighlight(newItem);
           if (newItem instanceof INode) {
             // and if it's a node, we highlight all adjacent edges, too
             for (const edge of this.graphComponent.graph.edgesAt(newItem)) {
@@ -329,9 +310,9 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
               const labelStyleHighlight = new LabelStyleDecorationInstaller({
                 labelStyle,
                 zoomPolicy: StyleDecorationZoomPolicy.WORLD_COORDINATES
-              })
-              decorator.labelDecorator.highlightDecorator.setImplementation(labelStyleHighlight)
-              styleHighlight?.addHighlight(edge)
+              });
+              decorator.labelDecorator.highlightDecorator.setImplementation(labelStyleHighlight);
+              styleHighlight?.addHighlight(edge);
               if (edge.tag.label) {
                 styleHighlight.addHighlight(edge?.labels?.get(0))
               }
@@ -347,10 +328,10 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
             const labelStyleHighlight = new LabelStyleDecorationInstaller({
               labelStyle,
               zoomPolicy: StyleDecorationZoomPolicy.WORLD_COORDINATES
-            })
-            decorator.labelDecorator.highlightDecorator.setImplementation(labelStyleHighlight)
+            });
+            decorator.labelDecorator.highlightDecorator.setImplementation(labelStyleHighlight);
 
-            styleHighlight?.addHighlight(newItem)
+            styleHighlight?.addHighlight(newItem);
             if (newItem.tag.label) {
               styleHighlight.addHighlight(newItem?.labels?.get(0))
             }
@@ -391,7 +372,7 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
       graphComponent: graphComponent,
       layout: layout ? layout : new OrganicLayout({minimumNodeDistance: 90, nodeEdgeOverlapAvoided: true}),
       duration: '0.5s',
-    })
+    });
 
     // start executing the layout
     layoutExecutor.start().then();
@@ -500,9 +481,6 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
     return new LayoutExecutor(options);
   }
 
-  private getNode(graphComponent: GraphComponent, label: string) {
-    return graphComponent.graph.nodes.find(n => n.tag.label === label);
-  }
 
   // toolbar functionality
   zooIn() {
@@ -543,7 +521,7 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
 
 
   refreshData(params: any) {
-    console.log(params)
+    console.log(params);
     this.refreshGraph.emit(params);
   }
 
@@ -568,9 +546,9 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
       });
       algorithm.maximumDistance = algorithm.traversalDirection === TraversalDirection.BOTH ? 1 : 2;
       const result = algorithm.run(this.graphComponent.graph);
-      jsonGraph.nodes.push(node?.tag)
+      jsonGraph.nodes.push(node?.tag);
       for (const neighbor of result.neighbors) {
-        jsonGraph.nodes.push(neighbor?.tag)
+        jsonGraph.nodes.push(neighbor?.tag);
         if (algorithm.traversalDirection === TraversalDirection.SUCCESSOR) {
           this.graphComponent.graph.inEdgesAt(neighbor).forEach((edge) => {
             jsonGraph.edges.push(edge?.tag)
@@ -589,7 +567,7 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
       }
 
       this.originalNeighbourhood = jsonGraph;
-      this.createGraph(jsonGraph, this.neighbourComponent)
+      this.createGraph(jsonGraph, this.neighbourComponent);
       this.neighbourComponent.zoomTo(this.neighbourComponent.contentRect);
       this.cdr.detectChanges();
     }

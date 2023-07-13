@@ -15,9 +15,7 @@ export class DashboardWidgetComponent implements OnInit {
 
 
   details: any;
-  frameType!: string;
   explorer: any;
-  filterOptions: any;
   copyData: any;
   layout: any;
   schema: any;
@@ -51,7 +49,7 @@ export class DashboardWidgetComponent implements OnInit {
         toolName: 'fitContent',
         icon: 'assets/image/fit.svg'
       },
-    ]
+    ];
     this.cym.setLoader(true);
     this.graphService.getGraphData({
       "filter": false,
@@ -97,7 +95,7 @@ export class DashboardWidgetComponent implements OnInit {
         toolName: 'fitContent',
         icon: 'assets/image/fit.svg'
       },
-    ]
+    ];
     // this.cym.setLoader(true);
     this.graphService.getSchemaData({filter: false}).then((data) => {
       this.schema = data;
@@ -190,5 +188,9 @@ export class DashboardWidgetComponent implements OnInit {
 
   selectedTool(event: any) {
     this.systemService.setToolClick(event);
+  }
+
+  rightSidebarTabs(tab: string) {
+    this.systemService.setRightSideTabClick(tab)
   }
 }
