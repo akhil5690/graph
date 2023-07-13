@@ -21,7 +21,7 @@
 .header-breadcrumbs-main-footer-frame {
   display: grid;
   grid-template-columns:var(--base-width);
-  grid-template-rows: var(--top-toolbar-height)  var(--secondary-toolbar-height) var(--main-height) var(--bottom-toolbar-height);
+  grid-template-rows: var(--top-toolbar-height)  var(--secondary-toolbar-height) var(--main-height-seconadry) var(--bottom-toolbar-height);
   grid-template-areas:
       "header"
       "breadcrumbs"
@@ -78,7 +78,7 @@
 .breadcrumbs{
   grid-area: breadcrumbs;
   //padding: 0 var(--padding) 0 var(--padding);
-  background-color: var(--main-background);
+
 }
 .sidebar {
   grid-area: sidebar;

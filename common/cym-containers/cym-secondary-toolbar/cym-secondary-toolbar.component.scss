@@ -4,65 +4,51 @@ cym-secondary-toolbar {
     grid-template-columns: 8fr auto auto auto ;
     align-items: center;
     height: var(--secondary-toolbar-height);
-    //color: var(--primary-text-color);
     gap: var(--grid-gap);
     width: var(--base-width);
-    padding: 0 1rem 0 1rem;
-
+    padding: 0 var(--padding) 0 var(--padding);
+    background-color: var(--breadcrumb-toolbar-color);
+    color:var(--breadcrumb-font-color);
   }
-
   .breadstar{
     display: grid;
     grid-template-columns: auto;
     align-items: center;
   }
-
   .menu {
     display: grid;
     grid-template-columns: repeat(10, 1fr);
     gap: calc(var(--grip-gap)/2);
   }
-
-
   .horizontal{
     display: grid;
     grid-template-columns: auto auto;
     gap: 0.3rem;
   }
-
   .other-options {
     display: grid;
     grid-template-columns: auto auto auto;
     grid-gap: var(--grip-gap) ;
   }
-
   .p-breadcrumb.p-component {
     background: none;
     border: none;
     padding:0;
   }
-
   .icons{
     text-align:right;
   }
-
   .secondary-tool-icon{
     height:var(--secondary-tool-icon-height);
     width:var(--secondary-tool-icon-width);
   }
 
-  .secondary-tool{
-    background-color: var(--theme-color-one);
-    color:var(--secondary-text-color);
+  .p-breadcrumb ul li .p-menuitem-link .p-menuitem-text {
+    color: var(--breadcrumb-font-color);
+  }
 
-    .p-breadcrumb ul .p-menuitem-text {
-      color: var(--main-background);
-    }
-    .pi-chevron-right:before{
-      color: var(--main-background);
-    }
-
-
+  .pi-chevron-right:before{
+    color:var(--breadcrumb-font-color);
   }
 
 }
