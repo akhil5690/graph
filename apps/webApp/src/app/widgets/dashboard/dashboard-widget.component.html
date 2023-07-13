@@ -25,10 +25,10 @@
       </div>
     </cym-div>
     <div>
-      <cym-graph *ngIf="tabType===0" [layout]="layout" [data]="schema" [tools]="this.toolSelected"></cym-graph>
+      <cym-graph *ngIf="tabType===0" [layout]="layout" [data]="schema"></cym-graph>
       <cym-graph *ngIf="tabType===1" [layout]="layout" [data]="explorer" (findingsClicked)="loadFindings($event)"
                  (refreshGraph)="refreshGraph($event)"></cym-graph>
-      <cym-graph-editor *ngIf="tabType===2" [tools]="this.toolSelected"></cym-graph-editor>
+      <cym-graph-editor *ngIf="tabType===2" ></cym-graph-editor>
     </div>
     <p-dialog [modal]="true" *ngIf="openFindingsPopup" [(visible)]="openFindingsPopup"
               (onHide)="openFindingsPopup =false" class="popup">
