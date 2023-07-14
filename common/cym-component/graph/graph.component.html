@@ -2,7 +2,7 @@
   <div class="graph-container">
     <div id="graphComponent" #graphComponent [ngClass]="this.isFilterOpen?'graph-sidebar':'graph'">
     </div>
-    <cym-right-sidebar [showDetails]="showDetails" [details]="selectedItem" [data]="data" (filterGraph)="refreshData($event)"
+    <cym-right-sidebar [details]="selectedItem" [data]="data" (filterGraph)="refreshData($event)"
                        (isRightSidebarOpen)="setFrame($event)">
     </cym-right-sidebar>
   </div>

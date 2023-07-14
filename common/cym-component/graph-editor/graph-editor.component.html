@@ -2,7 +2,7 @@
   <div class="graph-container">
     <div id="graphComponent" #graphContainer [ngClass]="this.isFilterOpen?'graph-sidebar':'graph'">
     </div>
-    <cym-right-sidebar [type]="'editor'" [showDetails]="showDetails" [details]="selectedItem"
+    <cym-right-sidebar [type]="'editor'" [details]="selectedItem"
                        (edgeNodeProperty)="changeEdgeNode($event)" (isRightSidebarOpen)="setFrame($event)">
       <div panel>
         <p-accordion [activeIndex]="0">

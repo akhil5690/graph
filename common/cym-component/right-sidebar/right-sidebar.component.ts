@@ -16,7 +16,6 @@ export class RightSidebarComponent implements OnChanges, OnInit {
 
   @Input() details: any;
   @Input() data: any;
-  @Input() showDetails: any;
   @Input() type: any;
   // data = data;
   @Input() filterOptions: any;
@@ -61,7 +60,7 @@ export class RightSidebarComponent implements OnChanges, OnInit {
   }
 
   open(isOpen: boolean) {
-    this.openPopUp = isOpen && this.showDetails;
+    this.openPopUp = isOpen ;
     this.isRightSidebarOpen.emit(this.openPopUp);
   }
 
