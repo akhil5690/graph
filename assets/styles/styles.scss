@@ -171,11 +171,14 @@ label {
     @extend .ui-base-border-bottom !optional;
   }
   .rightTab:hover{
-    @extend ui-base-active-class !optional;
+    @extend .ui-base-active-class !optional;
     border-bottom-color: var(--primary-color);
   }
 
   .three-tab-container {
+    .active-class{
+      @extend .ui-base-active-class !optional;
+    }
     div {
       display: grid;
       height: var(--graph-tool-bar-height);
@@ -190,9 +193,12 @@ label {
 
   }
 
-.three-tab-container>div:hover {
-  @extend .active-class !optional;
-  border-bottom-color: var(--primary-color);
+.three-tab-container>div:hover{
+  @extend .ui-base-active-class !optional;
+}
+ .active-class{
+   @extend .ui-base-active-class !optional;
+
 }
 
 
