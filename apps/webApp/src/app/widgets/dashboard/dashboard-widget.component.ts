@@ -36,8 +36,8 @@ export class DashboardWidgetComponent implements OnInit {
 
 
   ngOnInit() {
-    this.systemService.selectedGraphItem.subscribe((item)=>{
-      if (item){
+    this.systemService.selectedGraphItem.subscribe((item) => {
+      if (item) {
         this.toggleRightSidebar(false)
       }
     });
@@ -146,12 +146,22 @@ export class DashboardWidgetComponent implements OnInit {
 
   toggleRightSidebar(isRightSidebarOpen: any) {
     this.isRightSidebarOpen = !isRightSidebarOpen;
-    this.systemService.setRightSideToolbarOpen(this.isRightSidebarOpen)
+    this.systemService.setRightSideToolbarOpen(this.isRightSidebarOpen);
+    this.setDefault(isRightSidebarOpen);
+  }
+
+  setDefault(isRightSidebarOpen: any){
+    if (isRightSidebarOpen) {
+      if ((this.tabType === 0 || this.tabType === 1)) {
+        this.systemService.setRightSideTabClick('details')
+      } else {
+        this.systemService.setRightSideTabClick('edit')
+      }
+    }
   }
 
   private resetRightSidebar() {
     this.systemService.setGraphItem(null);
     this.toggleRightSidebar(true);
-    this.rightSidebarTabs(null);
   }
 }
