@@ -27,4 +27,19 @@ cym-graph-editor {
     flex-direction: row-reverse;
     justify-content: space-between;
   }
+
+  .p-accordion .p-accordion-header, .p-accordion-header-link {
+    background: var(--theme-color-one);
+    color: #343a40;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    height: 40px;
+
+    .p-component, .p-component *{
+      background: var(--theme-color-one);
+      padding:0;
+
+    }
+
+  }
 }
