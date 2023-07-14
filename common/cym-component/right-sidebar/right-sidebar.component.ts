@@ -24,7 +24,7 @@ export class RightSidebarComponent implements OnChanges, OnInit {
   @Output() filterGraph = new EventEmitter();
   @Output() selectedLayout = new EventEmitter();
   @Output() filterByFinding = new EventEmitter();
-  tab = 'details';
+  tab = '';
   properties: any;
   values: any;
   selectedProp: any;
@@ -35,7 +35,7 @@ export class RightSidebarComponent implements OnChanges, OnInit {
   isFindings: any;
   value: any;
 
-  constructor(private graphservice: GraphService,private cymService:CymService) {
+  constructor(private graphservice: GraphService, private cymService: CymService) {
   }
 
   ngOnChanges(): void {
@@ -44,9 +44,16 @@ export class RightSidebarComponent implements OnChanges, OnInit {
   }
 
   ngOnInit() {
-    this.cymService.rightSideTabClick.subscribe((tab)=>{
+    this.cymService.rightSideTabClick.subscribe((tab) => {
       this.tab = tab;
-      this.openPopUp = true;
+      if (tab) {
+        this.openPopUp = !(tab === 'details' && !this.items);
+      }
+
+    });
+    this.cymService.isRightSidebarOpenSub.subscribe((isOpen) => {
+      this.isRightSidebarOpen.emit(isOpen);
+      this.openPopUp = isOpen && !(this.tab === 'details' && !this.items);
     });
 
     // dropdown properties
@@ -83,8 +90,7 @@ export class RightSidebarComponent implements OnChanges, OnInit {
       // );
       this.openPopUp = true;
       this.tab = 'details'
-    }
-    else{
+    } else {
       this.openPopUp = false
     }
     this.isRightSidebarOpen.emit(this.openPopUp);

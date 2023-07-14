@@ -17,23 +17,13 @@ html, body {
   background-color: var(--primary-background-color);
   font-size: 14px; // 14px = 1rem
   font-family: var(--font-family);
-}
 
-//@media screen and (max-width: 1280px) {
-//  html, body {
-//    background-size: var(--bg-image-size);
-//    font-size: var(--medium-screen-font-size);
-//
-//  }
-//}
+}
 
 a {
   text-decoration-line: none;
   color: var(--primary-color);
 }
-
-
-
 
 label {
   color: var(--primary-text-color);
@@ -88,20 +78,7 @@ label {
   grid-template-rows: 1fr 9fr;
   grid-gap: calc(var(--grid-gap)/2);
 }
-
-
-//.header-content-divs {
-//  display: grid;
-//  grid-template-rows: 2rem auto;
-//  background: white;
-//  padding: var(--unit);
-//  height: var(--vertical-cards-loop);
-//}
-
 .card-divisions {
-  //img{
-  //  height:var(--card-division-img-size);
-  //}
   display: grid;
   grid-template-columns: repeat(auto-fill, 10rem);
   column-gap: var(--grid-gap);
@@ -111,14 +88,10 @@ label {
   height:var(--card-division-img-size);
 }
 
-
-
-
 .launchpad-cards {
   display: grid;
   height: var(--card-height);
   background: #FFFFFF 0% 0% no-repeat padding-box;
-  //box-shadow: 0px 3px 6px #00000029;
   grid-template-rows:  8fr 2fr;
   padding: var(--border-radius);
   align-items: center;
@@ -190,5 +163,6 @@ label {
 }
 
 .active-class {
-  background: var(--primary-color);
+  border-bottom-color: var(--primary-color);
+  height: var(--graph-top-toolbar-height);
 }

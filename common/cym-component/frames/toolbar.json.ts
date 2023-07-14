@@ -30,7 +30,7 @@ export const toolbar = [{
     "type": "image",
     "sector": "3",
     "height": "22",
-    "width": "22",
+    "width": "20",
   },
   // {
   //   "url": "../../../../assets/image/Icon awesome-caret-up.svg",

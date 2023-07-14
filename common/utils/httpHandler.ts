@@ -8,7 +8,7 @@ export class HttpHandler {
   constructor(private http: HttpClient) {
   }
 
-  getData(apiUrl: string, params?: HttpParams) {
+  getData(apiUrl: string, params?: HttpParams | any) {
     return new Promise((resolve, reject) => {
       this.http.get(apiUrl, {params: params}).subscribe({
         next: (data) => {

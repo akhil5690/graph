@@ -28,11 +28,10 @@ cym-top-toolbar {
     align-items:center;
 
   }
-
   .lines{
     display:grid;
     grid-template-columns: auto auto  ;
-    grid-gap:var(--grid-gap);
+    gap: var(--grid-gap);
     align-items:center
   }
 
@@ -40,6 +39,7 @@ cym-top-toolbar {
     display: grid;
     grid-template-columns: repeat(3, auto);
     gap: calc(var(--grid-gap)/2);
+
   }
   .three > div{
     padding:calc(var(--padding)/5);
@@ -50,7 +50,9 @@ cym-top-toolbar {
 
   }
   .line-height{
-    height:2rem;
+    height:1.8rem;
+
+
   }
 
 
