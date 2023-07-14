@@ -3,62 +3,61 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
-  Input, OnChanges,
+  Input,
+  OnChanges,
   OnInit,
   ViewChild,
   ViewEncapsulation
 } from '@angular/core';
 import {
-  Arrow, ArrowType,
+  Arrow,
+  ArrowType,
   Color,
   DefaultLabelStyle,
   DragDropEffects,
   EdgePathLabelModel,
-  EdgeSides, EdgeStyleDecorationInstaller,
+  EdgeSides,
+  EdgeStyleDecorationInstaller,
   ExteriorLabelModel,
   GraphBuilder,
   GraphComponent,
-  GraphEditorInputMode, GraphItemTypes,
-  GraphOverviewComponent, GraphViewerInputMode,
+  GraphEditorInputMode,
+  GraphItemTypes,
+  GraphOverviewComponent,
+  GraphViewerInputMode,
   GroupNodeLabelModel,
   GroupNodeStyle,
   ICommand,
-  IEdge, IEdgeStyle,
+  IEdge,
+  IEdgeStyle,
   IGraph,
-  INode, INodeStyle,
-  Insets, IRectangle,
+  ImageNodeStyle,
+  INode,
+  INodeStyle,
+  Insets,
+  IRectangle,
+  LabelStyleDecorationInstaller,
   License,
   Neighborhood,
-  NodeDropInputMode, PolylineEdgeStyle, NodeStyleDecorationInstaller,
+  NodeDropInputMode,
+  NodeStyleDecorationInstaller,
+  PolylineEdgeStyle,
   QueryContinueDragEventArgs,
   Rect,
-  ShapeNodeShape, ShapeNodeStyle,
+  ShapeNodeShape,
+  ShapeNodeStyle,
   SimpleNode,
   Size,
-  SolidColorFill, Stroke, StyleDecorationZoomPolicy,
+  SolidColorFill,
+  Stroke,
+  StyleDecorationZoomPolicy,
   SvgExport,
-  TraversalDirection, ImageNodeStyle, LabelStyleDecorationInstaller
+  TraversalDirection
 } from "yfiles";
 import licenseValue from "../../../license.json";
-import {
-  addClass,
-  createIconNode,
-  createShapeNodeStyle,
-  initDemoStyles,
-  removeClass
-} from "./demo-styles";
+import {addClass, createIconNode, createShapeNodeStyle, initDemoStyles, removeClass} from "./demo-styles";
 import {v4 as uuidv4} from 'uuid';
-import {
-  Automotive,
-  Business,
-  FileImg,
-  Finance,
-  Network,
-  People,
-  Shapes,
-  Social,
-  Vehicle
-} from "./graphDragDrop";
+import {Automotive, Business, FileImg, Finance, Network, People, Shapes, Social, Vehicle} from "./graphDragDrop";
 import {CymService} from "../../cym-services/systemService/cymSystemService";
 
 @Component({
@@ -241,7 +240,6 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
       if (evt.item instanceof INode && !this.isFullscreen) {
         this.selectedNode = evt.item;
         this.getNeighbourGraph(evt.item)
-
       }
     })
   }
@@ -332,19 +330,17 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
       const nodeStyleHighlight = new NodeStyleDecorationInstaller({
         nodeStyle: highlightShape,
         // that should be slightly larger than the real node
-        margins: 5,
+        margins: 0,
         // but have a fixed size in the view coordinates
-        zoomPolicy: StyleDecorationZoomPolicy.VIEW_COORDINATES
+        zoomPolicy: StyleDecorationZoomPolicy.WORLD_COORDINATES
       });
-
       const edgeStyle = new PolylineEdgeStyle({
         stroke: orangeStroke,
-        // targetArrow: IArrow.TRIANGLE,
-        // sourceArrow:
+        // targetArrow:IArrow.TRIANGLE,
       });
       const edgeStyleHighlight = new EdgeStyleDecorationInstaller({
         edgeStyle,
-        zoomPolicy: StyleDecorationZoomPolicy.VIEW_COORDINATES
+        zoomPolicy: StyleDecorationZoomPolicy.WORLD_COORDINATES
       });
 
       decorator.nodeDecorator.highlightDecorator.setImplementation(nodeStyleHighlight);
@@ -397,12 +393,12 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
             if (newItem.tag.label) {
               styleHighlight.addHighlight(newItem?.labels?.get(0))
             }
-
           }
         }
       }
     })
   }
+
 
   getStyleForSaving(shape: ShapeNodeShape, fillColor: string, strokeColor: string, image: any) {
     return {shape: shape, fill: fillColor, stroke: strokeColor, image}

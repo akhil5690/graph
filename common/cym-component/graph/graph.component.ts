@@ -15,12 +15,12 @@ import {
   Arrow,
   ArrowType,
   CircularLayout, DefaultLabelStyle, EdgePathLabelModel,
-  EdgesSource, EdgeStyleDecorationInstaller, ExteriorLabelModel,
+  EdgesSource, EdgeStyleDecorationInstaller, ExteriorLabelModel, GeneralPath,
   GraphBuilder,
   GraphComponent,
   GraphEditorInputMode,
   GraphItemTypes,
-  GraphOverviewComponent, GraphViewerInputMode, HierarchicLayout, ICommand,
+  GraphOverviewComponent, GraphViewerInputMode, HierarchicLayout, IArrow, ICommand,
   IconLabelStyle,
   IEdge,
   IEdgeStyle,
@@ -58,6 +58,7 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
   selectedItem!: IEdge | INode | null;
   filter = false;
   hoverBorder: any;
+  hoverEdge: any;
   @Input() data: any;
   @Input() tools: any;
   @Input() layout: any = 'Organic';
@@ -178,8 +179,8 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
   private styleNode(nodesSource: NodesSource<any>) {
     // set node size
     nodesSource.nodeCreator.defaults.size = this.getSize(30, 30)
-
   }
+
 
   // add icon to the node. In yfiles it is considered as label
   private styleIconLabel(nodesSource: NodesSource<any>) {
@@ -254,6 +255,9 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
     inputMode.itemHoverInputMode.hoverItems = GraphItemTypes.EDGE | GraphItemTypes.NODE;
 // ignore items of other types which might be in front of them
     inputMode.itemHoverInputMode.discardInvalidItems = false;
+    // this.graphComponent.graph.edges.forEach(edge=>{
+    //   console.log(edge.tag,"edge tag");
+    // })
 // handle changes on the hovered items
     inputMode.itemHoverInputMode.addHoveredItemChangedListener((sender, args) => {
       const hoverItem = args.item;
@@ -263,26 +267,34 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
       this.hoverBorder = hoverItem?.tag.hover_border_color;
       const highlightShape = new ShapeNodeStyle({
         shape: ShapeNodeShape.ELLIPSE,
-        stroke: this.hoverBorder,
+        stroke: `4px ${this.hoverBorder}`,
         fill: null
       });
 
       const nodeStyleHighlight = new NodeStyleDecorationInstaller({
         nodeStyle: highlightShape,
         // that should be slightly larger than the real node
-        margins: 1,
+        margins: 0,
         // but have a fixed size in the view coordinates
-        zoomPolicy: StyleDecorationZoomPolicy.VIEW_COORDINATES
+        zoomPolicy: StyleDecorationZoomPolicy.WORLD_COORDINATES
       });
 
       const edgeStyle = new PolylineEdgeStyle({
-        stroke: this.hoverBorder,
-        // targetArrow: IArrow.TRIANGLE,
-        // sourceArrow:
+        stroke: `4px ${this.hoverBorder}`,
+        targetArrow: this.arrow({
+          type: ArrowType.TRIANGLE,
+          fill: this.hoverBorder
+        }),
+        // sourceArrow: this.arrow({
+        //   type: ArrowType.TRIANGLE,
+        //   fill: this.hoverBorder
+        // })
       });
+      console.log(this.hoverBorder);
+
       const edgeStyleHighlight = new EdgeStyleDecorationInstaller({
         edgeStyle,
-        zoomPolicy: StyleDecorationZoomPolicy.VIEW_COORDINATES
+        zoomPolicy: StyleDecorationZoomPolicy.WORLD_COORDINATES,
       });
 
       decorator.nodeDecorator.highlightDecorator.setImplementation(nodeStyleHighlight);
@@ -302,7 +314,7 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
             for (const edge of this.graphComponent.graph.edgesAt(newItem)) {
 
               const labelStyle = new DefaultLabelStyle({
-                backgroundFill: 'white',
+                backgroundFill: '#EBEDEF',
                 textSize: 10,
                 verticalTextAlignment: 'center',
                 horizontalTextAlignment: 'center'
@@ -320,7 +332,7 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
           } else if (newItem instanceof IEdge) {
             // if it's an edge - we highlight the adjacent nodes
             const labelStyle = new DefaultLabelStyle({
-              backgroundFill: 'white',
+              backgroundFill: '#EBEDEF',
               textSize: 10,
               verticalTextAlignment: 'center',
               horizontalTextAlignment: 'center'
@@ -330,7 +342,6 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
               zoomPolicy: StyleDecorationZoomPolicy.WORLD_COORDINATES
             });
             decorator.labelDecorator.highlightDecorator.setImplementation(labelStyleHighlight);
-
             styleHighlight?.addHighlight(newItem);
             if (newItem.tag.label) {
               styleHighlight.addHighlight(newItem?.labels?.get(0))
