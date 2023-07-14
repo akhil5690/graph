@@ -36,9 +36,10 @@ export class DashboardWidgetComponent implements OnInit {
 
 
   ngOnInit() {
-    this.systemService.selectedGraphItem.subscribe((item)=>{
-      if (item){
-        this.toggleRightSidebar(false)
+    this.systemService.selectedGraphItem.subscribe((item) => {
+      if (item) {
+        this.toggleRightSidebar(false);
+        this.rightSidebarTabs('details')
       }
     });
     this.getSchemaData();
@@ -48,6 +49,7 @@ export class DashboardWidgetComponent implements OnInit {
   }
 
   getGraphData() {
+    // on click of explorer
     this.toolBarItems = ExplorerTools;
     this.rightTab = RightTabForExplorer;
     this.resetRightSidebar();
@@ -69,6 +71,7 @@ export class DashboardWidgetComponent implements OnInit {
   }
 
   refreshGraph(params: any) {
+    // when you apply filter
     this.toolBarItems = ExplorerTools;
     this.rightTab = RightTabForExplorer;
     this.resetRightSidebar();
@@ -86,10 +89,11 @@ export class DashboardWidgetComponent implements OnInit {
   }
 
   getSchemaData() {
+    // on click of schema
     this.toolBarItems = ExplorerTools;
     this.rightTab = RightTabForExplorer;
     this.resetRightSidebar();
-    // this.cym.setLoader(true);
+    this.cym.setLoader(true);
     this.graphService.getSchemaData({filter: false}).then((data) => {
       this.schema = data;
       this.copyData = data;// for creating the filter
@@ -103,14 +107,15 @@ export class DashboardWidgetComponent implements OnInit {
   }
 
   editor() {
+    // on click if the editor
     this.toolBarItems = EditorTools;
     this.rightTab = RightTabForEditor;
     this.resetRightSidebar();
   }
 
   loadFindings(findings: any) {
-    this.selectedFindings = findings;
     // for opening findings pop up and show graph
+    this.selectedFindings = findings;
     if (findings) {
       this.openFindingsPopup = true;
       this.cym.setLoader(true);
@@ -133,25 +138,52 @@ export class DashboardWidgetComponent implements OnInit {
   }
 
   selectedTool(event: any) {
+    // on click of the graph tools
     this.systemService.setToolClick(event);
   }
 
   rightSidebarTabs(tab: any) {
+    // set the rightside on click of the tabs and also on click of the node details tab will open
     this.systemService.setRightSideTabClick(tab);
+    this.tabSelected = tab;
   }
 
-  setActive(i: number) {
-    return this.tabSelected === i ? 'active-class' : '';
+  setActive(tab: string) {
+    return this.tabSelected === tab ? 'active-class' : '';
   }
 
   toggleRightSidebar(isRightSidebarOpen: any) {
+    // toggle on click of the open/close icon
     this.isRightSidebarOpen = !isRightSidebarOpen;
-    this.systemService.setRightSideToolbarOpen(this.isRightSidebarOpen)
+    this.setDefault(isRightSidebarOpen);
+    this.restrictToggle();
+    this.systemService.setRightSideToolbarOpen(this.isRightSidebarOpen);
+
+  }
+
+  restrictToggle() {
+    // don't toggle if the data is not loaded
+    if ((this.tabType === 0 && !this.schema) || (this.tabType === 1 && !this.explorer)) {
+      this.isRightSidebarOpen = false;
+      this.errorMessageConstructor('No data to load the panel')
+    }
+  }
+
+  setDefault(isRightSidebarOpen: any) {
+    // by default keep the first one active
+    if (isRightSidebarOpen) {
+      if ((this.tabType === 0 || this.tabType === 1)) {
+        this.systemService.setRightSideTabClick('details')
+      } else {
+        this.systemService.setRightSideTabClick('edit')
+      }
+    }
   }
 
   private resetRightSidebar() {
+    // on switching the clear the node selected item and close the sidebar
     this.systemService.setGraphItem(null);
-    this.toggleRightSidebar(true);
-    this.rightSidebarTabs(null);
+    this.isRightSidebarOpen = false;
+    this.systemService.setRightSideToolbarOpen(this.isRightSidebarOpen);
   }
 }

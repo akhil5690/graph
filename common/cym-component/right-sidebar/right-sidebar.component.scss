@@ -10,7 +10,7 @@ cym-right-sidebar {
     background: white;
     right: 0;
     overflow: hidden;
-    height: var(--right-side-bar-height);
+    height: var(--graph-height);
   }
 
   .menu-panel > div:hover {
@@ -41,5 +41,19 @@ cym-right-sidebar {
   .displayNone{
     display:none;
   }
+
+// .p-accordion-header{
+//  display: flex;
+//  flex-direction: row-reverse;
+//  justify-content: space-between;
+//}
+
+.emptyMessage{
+  height: var(--graph-height);
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  text-align: center;
+}
 }
 

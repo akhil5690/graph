@@ -125,6 +125,7 @@ label {
 }
 
 
+
 .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
   background: var(--primary-color);
   color: var(--primary-color-text);
@@ -162,39 +163,43 @@ label {
   color: #6c757d;
 }
 
-.rightTab {
-  padding: calc(var(--unit) / 2);
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  @extend .ui-base-border-bottom !optional;
-}
-
-.rightTab:hover {
-  @extend ui-base-active-class !optional;
-  border-bottom-color: var(--primary-color);
-}
-
-.three-tab-container {
-  div {
+  .rightTab{
+    padding: calc(var(--unit) / 2);
     display: grid;
-    height: var(--graph-tool-bar-height);
+    justify-content: center;
     align-items: center;
     cursor: pointer;
     @extend .ui-base-border-bottom !optional;
   }
+  .rightTab:hover{
+    @extend .ui-base-active-class !optional;
+    border-bottom-color: var(--primary-color);
+  }
 
-  display: grid;
-  grid-template-columns: repeat(3, var(--three-row-container-column-width));
-  color: var(--breadcrumb-font-color);
-  align-items: center;
+  .three-tab-container {
+    .active-class{
+      @extend .ui-base-active-class !optional;
+    }
+    div {
+      display: grid;
+      height: var(--graph-tool-bar-height);
+      align-items: center;
+      cursor: pointer;
+      @extend .ui-base-border-bottom !optional;
+    }
+    display: grid;
+    grid-template-columns: repeat(3 , var(--three-row-container-column-width));
+    color:var(--breadcrumb-font-color);
+    align-items: center;
 
+  }
+
+.three-tab-container>div:hover{
+  @extend .ui-base-active-class !optional;
 }
+ .active-class{
+   @extend .ui-base-active-class !optional;
 
-.three-tab-container > div:hover {
-  @extend .active-class !optional;
-  border-bottom-color: var(--primary-color);
 }
 
 

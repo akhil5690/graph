@@ -1,7 +1,7 @@
 
 <cym-widget-frame [frame_type]="'header-breadcrumbs-main-footer-frame'">
   <cym-top-toolbar header></cym-top-toolbar>
-  <cym-secondary-toolbar breadcrumbs [breadcrumbItems]="breadcrumbItems"></cym-secondary-toolbar>
+  <cym-secondary-toolbar breadcrumbs [breadcrumbItems]="breadcrumbItems"  [CymSecondaryToolbar]="'secondary-tool'" ></cym-secondary-toolbar>
   <cym-div main >
     <cym-div [cymClass]="'card-main'">
       <cym-card *ngFor="let tool of launchpad" [cymClass]="'header-content'" >
