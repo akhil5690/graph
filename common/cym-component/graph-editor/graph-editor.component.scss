@@ -28,12 +28,28 @@ cym-graph-editor {
     justify-content: space-between;
   }
 
-  .p-accordion .p-accordion-header, .p-accordion-header-link {
-    background: var(--theme-color-one);
-    color: #343a40;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-    height: 40px;
-    }
+
+  .p-accordion .p-accordion-header:not(.p-disabled).p-highlight .p-accordion-header-link {
+    background-color:var(--theme-color-one);
+    color: var(--primary-color-text);
+  }
+  .p-accordion .p-accordion-header .p-accordion-header-link {
+    padding: var(--padding);
+    border: var(--border-width) solid #dee2e6;
+    background: var(--secondary-text-color);
+    color: var(secondary-text-color);
+    height: var(--accordian-header-height);
+    font-weight: var(--font-weight-bold);
+     border-radius:0;
+    transition: box-shadow 0.2s;
+  }
+  .p-accordion .p-accordion-header:not(.p-disabled).p-highlight .p-accordion-header-link:hover{
+    background-color:var(--theme-color-one);
+    color: var(--secondary-text-color);
+  }
+  .p-accordion p-accordiontab .p-accordion-tab{
+    margin:0;
+  }
+
 
 }
