@@ -17,7 +17,7 @@ cym-dashboard-widget {
       height: var(--graph-tool-bar-height);
     }
     display: grid;
-    grid-template-columns: 2fr 7.5fr 3fr; // purposefull
+    grid-template-columns: 2.5fr 5.5fr 2.5fr; // purposefull
     background-color: var(--graph-toolbar-bgcolor);
     width: var(--base-width);
     text-align: center;
