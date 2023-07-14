@@ -344,7 +344,7 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
   private leftClickListener(inputMode: GraphViewerInputMode | GraphEditorInputMode) {
     inputMode.addItemLeftClickedListener((sender, evt) => {
       this.selectedItem = evt.item instanceof IEdge || evt.item instanceof INode ? evt.item : null;
-      this.showDetails = true;
+      this.systemService.setGraphItem(this.selectedItem);
       this.checkNeighbour(evt);
       this.checkFindings(evt);
     })

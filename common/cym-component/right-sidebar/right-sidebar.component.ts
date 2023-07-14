@@ -14,7 +14,6 @@ export class RightSidebarComponent implements OnChanges, OnInit {
   openPopUp = false;
   @Output() edgeNodeProperty = new EventEmitter();
 
-  @Input() details: any;
   @Input() data: any;
   @Input() type: any;
   // data = data;
@@ -36,8 +35,6 @@ export class RightSidebarComponent implements OnChanges, OnInit {
   }
 
   ngOnChanges(): void {
-    // get the node or the edge that is clicked
-    this.selectedGraphItem()
   }
 
   ngOnInit() {
@@ -47,6 +44,13 @@ export class RightSidebarComponent implements OnChanges, OnInit {
     this.cymService.isRightSidebarOpenSub.subscribe((isOpen) => {
       this.isRightSidebarOpen.emit(isOpen);
       this.openPopUp = isOpen;
+    });
+
+    this.cymService.selectedGraphItem.subscribe((graphItem)=>{
+      this.items = [graphItem?.tag];
+      this.openPopUp = true;
+      this.tab = 'details';
+      this.isRightSidebarOpen.emit(this.openPopUp);
     });
 
     // dropdown properties
@@ -59,19 +63,6 @@ export class RightSidebarComponent implements OnChanges, OnInit {
 
   }
 
-  open(isOpen: boolean) {
-    this.openPopUp = isOpen ;
-    this.isRightSidebarOpen.emit(this.openPopUp);
-  }
-
-
-  private selectedGraphItem() {
-    // get the node or the edge that is clicked
-    this.items = [this.details.tag];
-    this.openPopUp = true;
-    this.tab = 'details';
-    this.isRightSidebarOpen.emit(this.openPopUp);
-  }
 
   getValue(selectedProp: any) {
     // on selecting property from autocomplete get the dropdown for value field
@@ -105,11 +96,6 @@ export class RightSidebarComponent implements OnChanges, OnInit {
     };
     // send params to dashboard and get new graph on filter
     this.filterGraph.emit(params)
-  }
-
-  layoutChange(selectedLayout: any) {
-    // send the layout which is selected from dropdown
-    this.selectedLayout.emit(selectedLayout.name)
   }
 
   property($event: any) {
