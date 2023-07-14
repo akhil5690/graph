@@ -270,7 +270,7 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
       const nodeStyleHighlight = new NodeStyleDecorationInstaller({
         nodeStyle: highlightShape,
         // that should be slightly larger than the real node
-        margins: 5,
+        margins: 1,
         // but have a fixed size in the view coordinates
         zoomPolicy: StyleDecorationZoomPolicy.VIEW_COORDINATES
       });
