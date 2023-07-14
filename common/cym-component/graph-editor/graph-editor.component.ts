@@ -164,6 +164,7 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
       headers: 'Network',
       style: this.getNodeStyleForDragDrop('image', this.network),
     }];
+
   }
 
   run() {
@@ -180,6 +181,7 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
 
     // prepare drag and drop
     this.setNodeInputMode();
+    this.initializeDragAndDropPanel();
 
     this.initializeOverviewComponent(this.graphComponent);
 
@@ -226,9 +228,6 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
     // on click of node get the sidebar open with the node properties
     this.leftClickListener(inputMode);
 
-    // start to prepare sidebar panel
-    this.initializeDragAndDropPanel();
-
   }
 
   private leftClickListener(inputMode: GraphEditorInputMode | GraphViewerInputMode) {
@@ -237,7 +236,7 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
       this.showDetails = true;
 
       this.selectedItem = evt.item instanceof IEdge || evt.item instanceof INode ? evt.item : null;
-
+      this.systemService.setGraphItem(this.selectedItem);
       if (evt.item instanceof INode && !this.isFullscreen) {
         this.selectedNode = evt.item;
         this.getNeighbourGraph(evt.item)
@@ -926,6 +925,7 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
 
 
   getNeighbourGraph(node: INode) {
+    this.createJson();
     this.original = {...this.iGraph};
     const jsonGraph: { nodes: any[], edges: any[] } = {
       nodes: [],
@@ -984,15 +984,19 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
         this.createGraph(this.original, this.neighbourComponent);
         const inputMode = this.graphComponent.inputMode = new GraphViewerInputMode();
         this.leftClickListener(inputMode);
-        this.neighbourComponent.zoomTo(this.neighbourComponent.contentRect);
+        // this.neighbourComponent.zoomTo(this.neighbourComponent.contentRect);
         ICommand.FIT_GRAPH_BOUNDS.execute(null, this.graphComponent);
+        ICommand.FIT_GRAPH_BOUNDS.execute(null, this.neighbourComponent);
+
       } else {
         this.showDetails = false;
         this.createGraph(this.iGraph, this.graphComponent);
         this.createGraph(this.originalNeighbourHood, this.neighbourComponent);
         this.setNodeInputMode();
-        this.neighbourComponent.zoomTo(this.neighbourComponent.contentRect);
+        // this.neighbourComponent.zoomTo(this.neighbourComponent.contentRect);
         ICommand.FIT_GRAPH_BOUNDS.execute(null, this.graphComponent);
+        ICommand.FIT_GRAPH_BOUNDS.execute(null, this.neighbourComponent);
+
       }
     }
   }

@@ -13,64 +13,38 @@ cym-dashboard-widget {
   }
 
   .dash-tool-container {
+    div{
+      height: var(--graph-tool-bar-height);
+    }
     display: grid;
-    grid-template-columns: 2fr 6fr 2fr;
+    grid-template-columns: 2fr 7.5fr 3fr; // purposefull
     background-color: var(--graph-toolbar-bgcolor);
     width: var(--base-width);
-    height: var(--graph-tool-bar-height);
     text-align: center;
     color:var(--graph-toolbar-font-color)
   }
 
-  .three-tab-container {
-    div {
-      display: grid;
-      height: var(--graph-tool-bar-height);
-      align-items: center;
-      cursor: pointer;
-      border:4px solid white;
-    }
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    //grid-gap: var(--grid-gap);
-    color:var(--breadcrumb-font-color);
-    align-items: center;
-    justify-content: center;
 
-
-  }
 
   .graph-tool-icons {
     div {
       display: grid;
-      height: var(--tiny-icon-height);
-      width: var(--tiny-icon-width);
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      border:4px solid white;
     }
     display: grid;
     grid-template-columns: repeat(auto-fit, var(--icon-box-size));
     align-items: center;
     justify-content: center;
 
-
   }
-
   .set-icon {
     height: var(--graph-tool-icon-height);
     width: var(--graph-tool-icon-width);
   }
 
-  .graph-tool-icons>div:hover, .three-tab-container>div:hover {
-    border-bottom-color: var(--primary-color);
-  }
 
-  // rightsidebar tab : Pallete, style,details
-  .set-image {
-    height: 15px
-  }
 
   .tab-container {
     display: grid;
@@ -78,18 +52,6 @@ cym-dashboard-widget {
     align-items: center;
   }
 
-  .rightTab{
-    padding: calc(var(--unit) / 2);
-    height: var(--graph-top-toolbar-height);
-    display: grid;
-    justify-content: center;
-    align-items: center;
-    border:4px solid white;
-    cursor: pointer;
-  }
-  .rightTab:hover{
-    border-bottom-color: var(--primary-color);
-  }
 
   .p-accordion .p-accordion-header:not(.p-disabled) .p-accordion-header-link:focus {
     outline: 0 none;
@@ -101,6 +63,8 @@ cym-dashboard-widget {
     grid-template-columns: 3rem;
     justify-content: end;
   }
+
+
 }
 
 

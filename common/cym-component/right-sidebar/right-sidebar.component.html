@@ -2,10 +2,13 @@
   <!-- sidebar panel -->
   <div class="details-panel" [ngClass]="openPopUp?'':'displayNone'">
     <!--   opens on click of nodes or edges for the details-->
-    <div *ngIf="items && tab === 'details'">
-      <!--      <app-details [data]="items"></app-details>-->
-      <cym-details [type]="type" [data]="items" [info]="items" (property)="property($event)"></cym-details>
+    <div *ngIf="tab === 'details'">
+      <div *ngIf="items;else emptyMessage">
+        <cym-details [type]="type" [data]="items" [info]="items" (property)="property($event)"></cym-details>
+      </div>
+      <ng-template #emptyMessage>Click on Node</ng-template>
     </div>
+
     <!--   opens on click of filter  from tab -->
     <div *ngIf="tab === 'filter'" class="filter">
       <p>Property</p>
