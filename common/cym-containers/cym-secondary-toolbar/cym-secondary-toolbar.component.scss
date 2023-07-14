@@ -43,8 +43,9 @@ cym-secondary-toolbar {
     width:var(--secondary-tool-icon-width);
   }
 
-  .p-breadcrumb ul li .p-menuitem-link .p-menuitem-text {
-    color: var(--breadcrumb-font-color);
+
+  .p-breadcrumb ul li:last-child .p-menuitem-text {
+    color: var(--primary-color);
   }
 
   .pi-chevron-right:before{
