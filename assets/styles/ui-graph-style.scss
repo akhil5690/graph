@@ -8,7 +8,7 @@
   width: var(--overview-neighbour-width);
   height: var(--overview-neighbour-height);
   background-color: var(--primary-background-color);
-  border:var(--border-width) solid var(--theme-color-one);
+  border: var(--border-width) solid var(--theme-color-one);
 }
 
 .neighbour {
@@ -41,8 +41,8 @@
   width: var(--graph-width);
 }
 
-#graphComponent{
-  background-color:var(--main-bg-color)
+#graphComponent {
+  background-color: var(--main-bg-color)
 }
 
 .p-dropdown.p-component {
@@ -58,7 +58,7 @@
 }
 
 
-span#pr_id_2_label , span#pr_id_3_label , span#pr_id_4_label{
+span#pr_id_2_label, span#pr_id_3_label, span#pr_id_4_label {
   padding: 0;
   font-family: var(--font-family);
   font-size: var(--font-size);
@@ -66,17 +66,18 @@ span#pr_id_2_label , span#pr_id_3_label , span#pr_id_4_label{
 }
 
 
-
 .panel-header {
   //font-weight: var(--font-weight-bold);
   font-size: var(--font-size);
   background: var(--theme-color-one);
-  padding: calc(var(--padding)/1.2);
+  padding: calc(var(--padding) / 1.2);
   color: var(--primary-color-text);
-  display: flex;
   //gap: var(--unit);
-  text-align:center;
-
+  text-align: center;
+  display: grid;
+  grid-template-columns:8fr 1fr;
+  align-items: center;
+  justify-items: start;
 }
 
 .graph-main {
