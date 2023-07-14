@@ -17,7 +17,7 @@ cym-dashboard-widget {
       height: var(--graph-tool-bar-height);
     }
     display: grid;
-    grid-template-columns: 2fr 6fr 2fr;
+    grid-template-columns: 2fr 7.5fr 3fr; // purposefull
     background-color: var(--graph-toolbar-bgcolor);
     width: var(--base-width);
     text-align: center;
@@ -45,11 +45,6 @@ cym-dashboard-widget {
   }
 
 
-
-  // rightsidebar tab : Pallete, style,details
-  .set-image {
-    height: 15px
-  }
 
   .tab-container {
     display: grid;

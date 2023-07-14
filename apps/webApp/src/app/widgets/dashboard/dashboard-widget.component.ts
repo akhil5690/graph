@@ -36,9 +36,10 @@ export class DashboardWidgetComponent implements OnInit {
 
 
   ngOnInit() {
-    this.systemService.selectedGraphItem.subscribe((item)=>{
-      if (item){
-        this.toggleRightSidebar(false)
+    this.systemService.selectedGraphItem.subscribe((item) => {
+      if (item) {
+        this.toggleRightSidebar(false);
+        this.rightSidebarTabs('details')
       }
     });
     this.getSchemaData();
@@ -138,20 +139,31 @@ export class DashboardWidgetComponent implements OnInit {
 
   rightSidebarTabs(tab: any) {
     this.systemService.setRightSideTabClick(tab);
+    this.tabSelected = tab;
   }
 
-  setActive(i: number) {
-    return this.tabSelected === i ? 'active-class' : '';
+  setActive(tab: string) {
+    return this.tabSelected === tab ? 'active-class' : '';
   }
 
   toggleRightSidebar(isRightSidebarOpen: any) {
     this.isRightSidebarOpen = !isRightSidebarOpen;
-    this.systemService.setRightSideToolbarOpen(this.isRightSidebarOpen)
+    this.systemService.setRightSideToolbarOpen(this.isRightSidebarOpen);
+    this.setDefault(isRightSidebarOpen);
+  }
+
+  setDefault(isRightSidebarOpen: any){
+    if (isRightSidebarOpen) {
+      if ((this.tabType === 0 || this.tabType === 1)) {
+        this.systemService.setRightSideTabClick('details')
+      } else {
+        this.systemService.setRightSideTabClick('edit')
+      }
+    }
   }
 
   private resetRightSidebar() {
     this.systemService.setGraphItem(null);
     this.toggleRightSidebar(true);
-    this.rightSidebarTabs(null);
   }
 }
