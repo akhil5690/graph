@@ -1,14 +1,20 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
+import {workSpaceService} from "../../../../../../common/cym-services/workspace/workspace.service";
 
 @Component({
   selector: 'cym-workspace-widget',
   templateUrl: './workspace-widget.component.html',
   styleUrls: ['./workspace-widget.component.scss']
 })
-export class WorkspaceWidgetComponent {
+export class WorkspaceWidgetComponent implements OnInit {
 
-  constructor(private router: Router) {
+
+  constructor(private router: Router, private workSpaceService: workSpaceService) {
+  }
+
+  ngOnInit() {
+    this.getWorkSpace();
   }
 
   workspace: any = [{
@@ -75,6 +81,12 @@ export class WorkspaceWidgetComponent {
 
   goToDashboard() {
     this.router.navigate(['/launchpad']).then();
+  }
+
+  getWorkSpace() {
+    this.workSpaceService.getAllWorkspace({}).then((res) => {
+      console.log('===>', res);
+    })
   }
 }
 

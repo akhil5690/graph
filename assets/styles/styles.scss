@@ -163,6 +163,6 @@ label {
 }
 
 .active-class {
-  background: var(--primary-color);
+  border-bottom-color: var(--primary-color);
   height: var(--graph-top-toolbar-height);
 }
