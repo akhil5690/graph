@@ -45,7 +45,8 @@ export class DashboardWidgetComponent implements OnInit {
   getGraphData() {
     this.toolBarItems = ExplorerTools;
     this.rightTab = RightTabForExplorer;
-    this.rightSidebarTabs(null);
+    this.resetRightSidebar();
+    this.systemService.setGraphItem(null);
     this.cym.setLoader(true);
     this.graphService.getGraphData({
       "filter": false,
@@ -65,6 +66,7 @@ export class DashboardWidgetComponent implements OnInit {
   refreshGraph(params: any) {
     this.toolBarItems = ExplorerTools;
     this.rightTab = RightTabForExplorer;
+    this.resetRightSidebar();
     // on filtering get new graph data
     this.explorer = null;
     this.cym.setLoader(true);
@@ -81,7 +83,7 @@ export class DashboardWidgetComponent implements OnInit {
   getSchemaData() {
     this.toolBarItems = ExplorerTools;
     this.rightTab = RightTabForExplorer;
-    this.rightSidebarTabs(null);
+    this.resetRightSidebar();
     // this.cym.setLoader(true);
     this.graphService.getSchemaData({filter: false}).then((data) => {
       this.schema = data;
@@ -98,7 +100,7 @@ export class DashboardWidgetComponent implements OnInit {
   editor() {
     this.toolBarItems = EditorTools;
     this.rightTab = RightTabForEditor;
-    this.rightSidebarTabs(null);
+    this.resetRightSidebar();
   }
 
   loadFindings(findings: any) {
@@ -140,5 +142,11 @@ export class DashboardWidgetComponent implements OnInit {
   toggleRightSidebar(isRightSidebarOpen: any) {
     this.isRightSidebarOpen = !isRightSidebarOpen;
     this.systemService.setRightSideToolbarOpen(this.isRightSidebarOpen)
+  }
+
+  private resetRightSidebar() {
+    this.systemService.setGraphItem(null);
+    this.toggleRightSidebar(true);
+    this.rightSidebarTabs(null);
   }
 }
