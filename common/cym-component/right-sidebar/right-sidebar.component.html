@@ -6,7 +6,11 @@
       <div *ngIf="items;else emptyMessage">
         <cym-details [type]="type" [data]="items" [info]="items" (property)="property($event)"></cym-details>
       </div>
-      <ng-template #emptyMessage>Click on Node</ng-template>
+      <ng-template #emptyMessage>
+        <div class="emptyMessage">
+          Please select a node or an edge to load the data properties
+        </div>
+      </ng-template>
     </div>
 
     <!--   opens on click of filter  from tab -->
@@ -34,9 +38,9 @@
       <!--          </div>-->
       <!--        </ng-template>-->
       <!--      </p-autoComplete>-->
-<!--      <p>Layout</p>-->
-<!--      <p-dropdown [options]="layout" [(ngModel)]="selectedLayoutOpt" optionLabel="name"-->
-<!--                  (ngModelChange)="layoutChange(selectedLayoutOpt)"></p-dropdown>-->
+      <!--      <p>Layout</p>-->
+      <!--      <p-dropdown [options]="layout" [(ngModel)]="selectedLayoutOpt" optionLabel="name"-->
+      <!--                  (ngModelChange)="layoutChange(selectedLayoutOpt)"></p-dropdown>-->
 
     </div>
 

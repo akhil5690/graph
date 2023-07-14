@@ -28,11 +28,12 @@
 
 .graph-container {
   display: flex;
-
+  height: var(--graph-height);
+  overflow:hidden;
 }
 
 .graph-sidebar {
-  height: var(--graph-sidebar-height);
+  height:  var(--graph-height);
   width: var(--graph-sidebar-width);
 }
 
