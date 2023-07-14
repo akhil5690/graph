@@ -239,7 +239,6 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
 
       this.selectedItem = evt.item instanceof IEdge || evt.item instanceof INode ? evt.item : null;
       this.systemService.setGraphItem(this.selectedItem);
-
       if (evt.item instanceof INode && !this.isFullscreen) {
         this.selectedNode = evt.item;
         this.getNeighbourGraph(evt.item)

@@ -36,6 +36,11 @@ export class DashboardWidgetComponent implements OnInit {
 
 
   ngOnInit() {
+    this.systemService.selectedGraphItem.subscribe((item)=>{
+      if (item){
+        this.toggleRightSidebar(false)
+      }
+    });
     this.getSchemaData();
     this.breadcrumbItems = [{label: 'Workspace', routerLink: '/workspace'},
       {label: 'Launchpad', routerLink: '/launchpad'},
