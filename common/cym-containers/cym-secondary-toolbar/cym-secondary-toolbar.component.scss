@@ -7,7 +7,7 @@ cym-secondary-toolbar {
     gap: var(--grid-gap);
     width: var(--base-width);
     padding: 0 var(--padding) 0 var(--padding);
-    background-color: var(--breadcrumb-toolbar-color);
+    background-color: var(--main-background);
     color:var(--breadcrumb-font-color);
   }
   .breadstar{
@@ -51,6 +51,7 @@ cym-secondary-toolbar {
   .pi-chevron-right:before{
     color:var(--breadcrumb-font-color);
   }
+
 
 }
 

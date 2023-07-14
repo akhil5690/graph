@@ -20,27 +20,11 @@ cym-dashboard-widget {
     grid-template-columns: 2fr 6fr 2fr;
     background-color: var(--graph-toolbar-bgcolor);
     width: var(--base-width);
-    height: var(--graph-tool-bar-height);
     text-align: center;
     color:var(--graph-toolbar-font-color)
   }
 
-  .three-tab-container {
-    div {
-      display: grid;
-      height: var(--graph-tool-bar-height);
-      align-items: center;
-      cursor: pointer;
-      border-bottom:4px solid white;
-    }
-    display: grid;
-    grid-template-columns: repeat(3 , 7.42rem);
-    color:var(--breadcrumb-font-color);
-    align-items: center;
-    justify-content: center;
 
-
-  }
 
   .graph-tool-icons {
     div {
@@ -48,28 +32,19 @@ cym-dashboard-widget {
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      justify-content: center;
-      border-bottom:4px solid white;
-
-
     }
     display: grid;
     grid-template-columns: repeat(auto-fit, var(--icon-box-size));
     align-items: center;
     justify-content: center;
-    height: var(--graph-tool-bar-height);
-
-
-
 
   }
   .set-icon {
     height: var(--graph-tool-icon-height);
     width: var(--graph-tool-icon-width);
   }
-  .graph-tool-icons>div:hover, .three-tab-container>div:hover {
-    border-bottom-color: var(--primary-color);
-  }
+
+
 
   // rightsidebar tab : Pallete, style,details
   .set-image {
@@ -82,17 +57,6 @@ cym-dashboard-widget {
     align-items: center;
   }
 
-  .rightTab{
-    padding: calc(var(--unit) / 2);
-    display: grid;
-    justify-content: center;
-    align-items: center;
-    border-bottom:4px solid white;
-    cursor: pointer;
-  }
-  .rightTab:hover{
-    border-bottom-color: var(--primary-color);
-  }
 
   .p-accordion .p-accordion-header:not(.p-disabled) .p-accordion-header-link:focus {
     outline: 0 none;
@@ -104,6 +68,8 @@ cym-dashboard-widget {
     grid-template-columns: 3rem;
     justify-content: end;
   }
+
+
 }
 
 

@@ -71,11 +71,12 @@ span#pr_id_2_label , span#pr_id_3_label , span#pr_id_4_label{
   //font-weight: var(--font-weight-bold);
   font-size: var(--font-size);
   background: var(--theme-color-one);
-  padding: var(--padding);
+  padding: calc(var(--padding)/1.2);
   color: var(--primary-color-text);
   display: flex;
   //gap: var(--unit);
   text-align:center;
+
 }
 
 .graph-main {
