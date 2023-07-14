@@ -38,7 +38,8 @@ export class DashboardWidgetComponent implements OnInit {
   ngOnInit() {
     this.systemService.selectedGraphItem.subscribe((item) => {
       if (item) {
-        this.toggleRightSidebar(false)
+        this.toggleRightSidebar(false);
+        this.rightSidebarTabs('details')
       }
     });
     this.getSchemaData();
@@ -138,10 +139,11 @@ export class DashboardWidgetComponent implements OnInit {
 
   rightSidebarTabs(tab: any) {
     this.systemService.setRightSideTabClick(tab);
+    this.tabSelected = tab;
   }
 
-  setActive(i: number) {
-    return this.tabSelected === i ? 'active-class' : '';
+  setActive(tab: string) {
+    return this.tabSelected === tab ? 'active-class' : '';
   }
 
   toggleRightSidebar(isRightSidebarOpen: any) {

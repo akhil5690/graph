@@ -24,7 +24,7 @@
         <div class="rightTab" *ngIf="!isRightSidebarOpen" (click)="toggleRightSidebar(isRightSidebarOpen)"><img
           src="assets/image/left-arrow.svg" alt="" class="set-icon"></div>
         <div *ngFor="let tools of rightTab;let i=index">
-          <div *ngIf="isRightSidebarOpen" (click)="rightSidebarTabs(tools.tab);tabSelected = i" [ngClass]="setActive(i)" class="rightTab">
+          <div *ngIf="isRightSidebarOpen" (click)="rightSidebarTabs(tools.tab);" [ngClass]="setActive(tools.tab)" class="rightTab">
             <img [src]="tools.icon" [alt]="tools.toolName" class="set-icon">
           </div>
         </div>
