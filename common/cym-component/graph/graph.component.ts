@@ -217,7 +217,7 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
 
     // style edge label
     edgesSource.edgeCreator.defaults.labels.style = this.getEdgeLabel({
-      backgroundFill: 'white',
+      backgroundFill: '#EBEDEF',
       textSize: 10
     });
 
@@ -270,7 +270,7 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
       const nodeStyleHighlight = new NodeStyleDecorationInstaller({
         nodeStyle: highlightShape,
         // that should be slightly larger than the real node
-        margins: 5,
+        margins: 1,
         // but have a fixed size in the view coordinates
         zoomPolicy: StyleDecorationZoomPolicy.VIEW_COORDINATES
       });
@@ -344,7 +344,7 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
   private leftClickListener(inputMode: GraphViewerInputMode | GraphEditorInputMode) {
     inputMode.addItemLeftClickedListener((sender, evt) => {
       this.selectedItem = evt.item instanceof IEdge || evt.item instanceof INode ? evt.item : null;
-      this.showDetails = true;
+      this.systemService.setGraphItem(this.selectedItem);
       this.checkNeighbour(evt);
       this.checkFindings(evt);
     })
