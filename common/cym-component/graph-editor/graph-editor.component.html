@@ -22,7 +22,7 @@
   <div class="neighbour">
     <div class="container">
       <div class="panel-header">
-        <p-dropdown [options]="neighboursOptions" [(ngModel)]="selectedNeighbour"
+        <p-dropdown [options]="neighboursOptions" [(ngModel)]="selectedNeighbour" class="max-dropdown-width"
                     (ngModelChange)="getNeighbourGraph(selectedNode)" optionLabel="name"
                     optionValue="value"></p-dropdown>
         <img src="assets/image/fullscreen.svg" *ngIf="!isFullscreen" alt="" (click)="switch(true)" class="tools">
