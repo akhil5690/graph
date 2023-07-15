@@ -527,14 +527,13 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
       this.overviewComponent = new GraphOverviewComponent(container, graphComponent);
     }
     this.overviewComponent.autoDrag = true;
-    this.overviewComponent.fitContent();
+    ICommand.FIT_CONTENT.execute(null,this.overviewComponent);
   }
 
   private initialiseNeighbourhood() {
     const container = this.neighbour.nativeElement;
     this.neighbourComponent = new GraphComponent(container);
-    this.neighbourComponent.contentRect = new Rect(0, 0, 100, 100);
-    this.neighbourComponent.fitGraphBounds();
+    ICommand.FIT_CONTENT.execute(null,this.neighbourComponent);
     this.cdr.detectChanges();
   }
 
@@ -985,8 +984,8 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
         const inputMode = this.graphComponent.inputMode = new GraphViewerInputMode();
         this.leftClickListener(inputMode);
         // this.neighbourComponent.zoomTo(this.neighbourComponent.contentRect);
-        ICommand.FIT_GRAPH_BOUNDS.execute(null, this.graphComponent);
-        ICommand.FIT_GRAPH_BOUNDS.execute(null, this.neighbourComponent);
+        ICommand.FIT_CONTENT.execute(null, this.graphComponent);
+        ICommand.FIT_CONTENT.execute(null, this.neighbourComponent);
 
       } else {
         this.showDetails = false;
@@ -994,8 +993,8 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
         this.createGraph(this.originalNeighbourHood, this.neighbourComponent);
         this.setNodeInputMode();
         // this.neighbourComponent.zoomTo(this.neighbourComponent.contentRect);
-        ICommand.FIT_GRAPH_BOUNDS.execute(null, this.graphComponent);
-        ICommand.FIT_GRAPH_BOUNDS.execute(null, this.neighbourComponent);
+        ICommand.FIT_CONTENT.execute(null, this.graphComponent);
+        ICommand.FIT_CONTENT.execute(null, this.neighbourComponent);
 
       }
     }
