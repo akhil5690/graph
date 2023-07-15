@@ -79,6 +79,7 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
   private neighbourComponent!: GraphComponent;
 
   private graphComponent!: GraphComponent;
+  private builder!: GraphBuilder;
   isFilterOpen: boolean = false;
   selectedItem: any;
   showDetails!: boolean;
@@ -527,13 +528,13 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
       this.overviewComponent = new GraphOverviewComponent(container, graphComponent);
     }
     this.overviewComponent.autoDrag = true;
-    ICommand.FIT_CONTENT.execute(null,this.overviewComponent);
+    ICommand.FIT_CONTENT.execute(null, this.overviewComponent);
   }
 
   private initialiseNeighbourhood() {
     const container = this.neighbour.nativeElement;
     this.neighbourComponent = new GraphComponent(container);
-    ICommand.FIT_CONTENT.execute(null,this.neighbourComponent);
+    ICommand.FIT_CONTENT.execute(null, this.neighbourComponent);
     this.cdr.detectChanges();
   }
 
@@ -727,8 +728,8 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
 
   createGraph(data: any, graphComponent: GraphComponent): void {
     // get the graph builder to create graph from json ie; initGraph
-    const builder = new GraphBuilder();
-    const sourceNode = builder.createNodesSource({
+    this.builder = new GraphBuilder();
+    const sourceNode = this.builder.createNodesSource({
       data: data.nodes,
       id: "id",
       labels: ['label'],
@@ -742,7 +743,7 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
       layout: (nodeLayout: INode) => new Rect(nodeLayout.layout.x, nodeLayout.layout.y, nodeLayout.layout.width, nodeLayout.layout.height)
     });
 
-    const edgeNode = builder.createEdgesSource({
+    const edgeNode = this.builder.createEdgesSource({
       data: data.edges,
       id: "id",
       labels: ['label'],
@@ -763,7 +764,7 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
 
     edgeNode.edgeCreator.defaults.labels.layoutParameter = labelModel.createDefaultParameter();
 
-    graphComponent.graph = builder.buildGraph();
+    graphComponent.graph = this.builder.buildGraph();
     this.initTutorialDefaults(graphComponent.graph);
     this.layoutListener();
   }
