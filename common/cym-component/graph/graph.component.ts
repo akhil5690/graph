@@ -255,10 +255,10 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
     inputMode.itemHoverInputMode.hoverItems = GraphItemTypes.EDGE | GraphItemTypes.NODE;
 // ignore items of other types which might be in front of them
     inputMode.itemHoverInputMode.discardInvalidItems = false;
-    // this.graphComponent.graph.edges.forEach(edge=>{
-    //   console.log(edge.tag,"edge tag");
-    // })
-// handle changes on the hovered items
+    this.graphHighlight(inputMode);
+  }
+
+  graphHighlight(inputMode: GraphEditorInputMode){
     inputMode.itemHoverInputMode.addHoveredItemChangedListener((sender, args) => {
       const hoverItem = args.item;
       // e.g. add a highlight to newItem here
@@ -290,8 +290,6 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
         //   fill: this.hoverBorder
         // })
       });
-      console.log(this.hoverBorder);
-
       const edgeStyleHighlight = new EdgeStyleDecorationInstaller({
         edgeStyle,
         zoomPolicy: StyleDecorationZoomPolicy.WORLD_COORDINATES,
