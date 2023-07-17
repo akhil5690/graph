@@ -17,7 +17,7 @@ export const toolbar = [{
   "width": "22",
 },
   {
-    "url": "../../../../assets/image/notifications.svg",
+    "url": "../../../../assets/image/bell.svg",
     "position": "top",
     "type": "image",
     "sector": "3",

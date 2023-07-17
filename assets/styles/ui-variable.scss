@@ -3,6 +3,7 @@
   //font size-
   --unit: 1rem;
   --font-size: var(--unit);
+  --font-size16 : 1.142rem;
   --font22: 1.571rem;
   --font56: 4rem;
   --font-weight-normal: 400;
@@ -18,6 +19,7 @@
   //background color-
   --primary-background-color: white;
   --main-background: #EBEDEF;
+  --secondary-background-color: #e7e7e7;
 
   //theme color-
   --primary-color: #2FB2C3;
@@ -46,13 +48,14 @@
   --margin24: 1.6rem;
 
   //overview and neighbour -
-  --overview-neighbour-width: 15rem;
-  --overview-neighbour-height: 11rem;
+  --overview-neighbour-width: 14rem;
+  --overview-neighbour-height: 10rem;
   --overview-start: 0;
   --neighbour-start: 15rem;
 
   //graph-tool-bar-height-
   --graph-tool-bar-height: 2.857rem;
+  --graph-toolbar-icon-hover: #e7e7e7;
 
   //graph-page-icon -
   --graph-tool-icon-height: 1.42rem;
@@ -80,6 +83,7 @@
   --tiny-icon-width: 2.857rem;
   --icon-color: white;
   --icon-box-size: 2.85rem;
+  --line-color:#B6B6B6;
 
   //breadcrumbs related styles//
   --breadcrumb-toolbar-bgcolor: #FFFFFF;
@@ -93,8 +97,7 @@
   --graph-toolbar-bgcolor: #FFFFFF;
   --graph-toolbar-font-color: #585858;
   --graph-toolbar-icon-color: #585858;
-
-
+--graph-top-toolbar-height: 3rem;
   //icon-image-
   --card-division-img-size: 6rem; //launchpad page
 
@@ -107,46 +110,53 @@
   --otp-box-width: 3.5rem;
   --otp-font-size: 1.5rem;
 
+  //border related styles
+  --border-width: 1px;
+  --border-radius: calc(var(--unit) / 2);
+  --scroll-border-radius :1.428rem;
 
+  //header related styles
+  --panel-header-height:2.857rem;
+  --accordian-header-height:2.857rem;
+
+
+  //card related styles
+
+
+
+
+  --sidebar-width: calc(var(--unit)*15);
   --pink2: #f1a7b4;
   --pink3: #f7d8e3;
   --primary-light-color: rgb(246 59 159 / 12%);
   --third-background-color: rgb(232, 232, 232);
-  --secondary-background-color: #e7e7e7;
-  --border-radius: calc(var(--unit) / 2);
+
+
   --grey-color: #e6e6e6;
   --icon-grey: #585858;
   --dark-grey-color: #727272;
   --base-height: 100%;
   --base-width: 100%;
-  --border-width: 1px;
+
   --dark-theme: #171717;
   --bg-image-size: 1323px 804px;
 
   --column-graph-frame: 80vw 20vw;
   --column-menu-frame: 97vw 3vw;
-  --graph-top-toolbar-height: 3rem;
+
 
 
   --main-height: calc(100vh - (var(--top-toolbar-height) + var(--bottom-toolbar-height)));
   --main-height-seconadry: calc(100vh - (var(--top-toolbar-height) + var(--bottom-toolbar-height) + var(--secondary-toolbar-height)));
   --main-no-footer: calc(100vh - (var(--top-toolbar-height)));
-  --sidebar-width: calc(var(--unit) * 15);
   --component-header-color: rgb(214 27 119 / 51%);
   --vertical-cards-loop: calc(var(--unit) * 15);
   --card-height: calc(var(--unit) * 11);
 
   --active-border-bottom-size: 0.285rem;
 
-  --accordian-header-height: 2.857rem;
 
   --signin-container-width: 27.2rem;
-
-  --panel-header-height: 2.857rem;
-
-  --scroll-border-radius: 1.428rem;
-
-  --line-color: #B6B6B6;
 
   --three-row-container-column-width: 7.42rem;
 

@@ -19,10 +19,18 @@
         </div>
       </div>
       <div [ngClass]="isRightSidebarOpen?'tab-container':'close-right-sidebar'">
-        <div class="rightTab" *ngIf="isRightSidebarOpen" (click)="toggleRightSidebar(isRightSidebarOpen)"><img
-          src="assets/image/rightArrow.svg" alt="" class="set-icon"></div>
-        <div class="rightTab" *ngIf="!isRightSidebarOpen" (click)="toggleRightSidebar(isRightSidebarOpen)"><img
-          src="assets/image/left-arrow.svg" alt="" class="set-icon"></div>
+        <div class="graph-tool-icons" *ngIf="isRightSidebarOpen" (click)="toggleRightSidebar(isRightSidebarOpen)">
+          <div>
+            <img
+              src="assets/image/rightArrow.svg" alt="" class="set-icon">
+          </div>
+        </div>
+        <div  class="graph-tool-icons" *ngIf="!isRightSidebarOpen" (click)="toggleRightSidebar(isRightSidebarOpen)">
+          <div>
+            <img
+              src="assets/image/left-arrow.svg" alt="" class="set-icon">
+          </div>
+        </div>
         <div *ngFor="let tools of rightTab;let i=index">
           <div *ngIf="isRightSidebarOpen" (click)="rightSidebarTabs(tools.tab);" [ngClass]="setActive(tools.tab)" class="rightTab">
             <img [src]="tools.icon" [alt]="tools.toolName" class="set-icon">
