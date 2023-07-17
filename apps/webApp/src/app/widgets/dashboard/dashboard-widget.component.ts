@@ -155,7 +155,7 @@ export class DashboardWidgetComponent implements OnInit {
   toggleRightSidebar(isRightSidebarOpen: any) {
     // toggle on click of the open/close icon
     this.isRightSidebarOpen = !isRightSidebarOpen;
-    this.setDefault(isRightSidebarOpen);
+    this.setDefault(this.isRightSidebarOpen);
     this.restrictToggle();
     this.systemService.setRightSideToolbarOpen(this.isRightSidebarOpen);
 
@@ -173,9 +173,13 @@ export class DashboardWidgetComponent implements OnInit {
     // by default keep the first one active
     if (isRightSidebarOpen) {
       if ((this.tabType === 0 || this.tabType === 1)) {
-        this.systemService.setRightSideTabClick('details')
+        this.systemService.setRightSideTabClick('details');
+        this.tabSelected = 'details';
+        this.setActive(this.tabSelected);
       } else {
-        this.systemService.setRightSideTabClick('edit')
+        this.systemService.setRightSideTabClick('edit');
+        this.tabSelected = 'edit';
+        this.setActive(this.tabSelected);
       }
     }
   }

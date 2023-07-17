@@ -79,14 +79,14 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
   private neighbourComponent!: GraphComponent;
 
   private graphComponent!: GraphComponent;
+  private builder!: GraphBuilder;
   isFilterOpen: boolean = false;
   selectedItem: any;
-  showDetails!: boolean;
   iGraph: any = {};
   shape: any;
   selectedNeighbour: any;
   neighboursOptions: any;
-  selectedNode!: INode;
+  selectedNode!: any;
   private original: any;
   private originalNeighbourHood: any;
   private shapeStyleDragDrop: any;
@@ -99,6 +99,8 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
   private people: any;
   private file: any;
   private network: any;
+  private nodeSelection: any;
+  private edgeSelection: any;
 
   constructor(private cdr: ChangeDetectorRef, private systemService: CymService) {
   }
@@ -224,17 +226,25 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
     this.edgeListener(inputMode);
 
     this.labelListener(inputMode);
+    this.deleteListener(inputMode);
 
     // on click of node get the sidebar open with the node properties
     this.leftClickListener(inputMode);
 
   }
 
+  private deleteListener(inputMode: GraphEditorInputMode) {
+    // when node or edge  is deleted
+    inputMode.addDeletedItemListener((sender, evt) => {
+      if (evt.item instanceof INode) {
+        this.systemService.setGraphItem(null);
+      }
+    });
+  }
+
   private leftClickListener(inputMode: GraphEditorInputMode | GraphViewerInputMode) {
     // node click listener which sends node or edge details to the sidebar
     inputMode.addItemLeftClickedListener((sender, evt) => {
-      this.showDetails = true;
-
       this.selectedItem = evt.item instanceof IEdge || evt.item instanceof INode ? evt.item : null;
       this.systemService.setGraphItem(this.selectedItem);
       if (evt.item instanceof INode && !this.isFullscreen) {
@@ -527,14 +537,13 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
       this.overviewComponent = new GraphOverviewComponent(container, graphComponent);
     }
     this.overviewComponent.autoDrag = true;
-    this.overviewComponent.fitContent();
+    ICommand.FIT_CONTENT.execute(null, this.overviewComponent);
   }
 
   private initialiseNeighbourhood() {
     const container = this.neighbour.nativeElement;
     this.neighbourComponent = new GraphComponent(container);
-    this.neighbourComponent.contentRect = new Rect(0, 0, 100, 100);
-    this.neighbourComponent.fitGraphBounds();
+    ICommand.FIT_CONTENT.execute(null, this.neighbourComponent);
     this.cdr.detectChanges();
   }
 
@@ -728,8 +737,8 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
 
   createGraph(data: any, graphComponent: GraphComponent): void {
     // get the graph builder to create graph from json ie; initGraph
-    const builder = new GraphBuilder();
-    const sourceNode = builder.createNodesSource({
+    this.builder = new GraphBuilder();
+    const sourceNode = this.builder.createNodesSource({
       data: data.nodes,
       id: "id",
       labels: ['label'],
@@ -743,7 +752,7 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
       layout: (nodeLayout: INode) => new Rect(nodeLayout.layout.x, nodeLayout.layout.y, nodeLayout.layout.width, nodeLayout.layout.height)
     });
 
-    const edgeNode = builder.createEdgesSource({
+    const edgeNode = this.builder.createEdgesSource({
       data: data.edges,
       id: "id",
       labels: ['label'],
@@ -764,7 +773,7 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
 
     edgeNode.edgeCreator.defaults.labels.layoutParameter = labelModel.createDefaultParameter();
 
-    graphComponent.graph = builder.buildGraph();
+    graphComponent.graph = this.builder.buildGraph();
     this.initTutorialDefaults(graphComponent.graph);
     this.layoutListener();
   }
@@ -959,6 +968,8 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
     this.originalNeighbourHood = jsonGraph;
     this.createJson();
     this.createGraph(jsonGraph, this.neighbourComponent);
+    // regain the selection back
+    this.neighbourComponent.selection.setSelected(this.selectedNode, true);
     this.neighbourComponent.contentRect = new Rect(0, 0, 100, 100);
     this.neighbourComponent.fitGraphBounds();
     this.cdr.detectChanges();
@@ -979,23 +990,24 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
     if (this.neighbourComponent.graph.nodes.size > 0) {
       this.isFullscreen = isFullscreen;
       if (isFullscreen) {
-        this.showDetails = false;
         this.graphComponent.graph = this.neighbourComponent.graph;
         this.createGraph(this.original, this.neighbourComponent);
+        this.graphComponent.selection.setSelected(this.selectedNode, true);
         const inputMode = this.graphComponent.inputMode = new GraphViewerInputMode();
         this.leftClickListener(inputMode);
         // this.neighbourComponent.zoomTo(this.neighbourComponent.contentRect);
-        ICommand.FIT_GRAPH_BOUNDS.execute(null, this.graphComponent);
-        ICommand.FIT_GRAPH_BOUNDS.execute(null, this.neighbourComponent);
+        ICommand.FIT_CONTENT.execute(null, this.graphComponent);
+        ICommand.FIT_CONTENT.execute(null, this.neighbourComponent);
 
       } else {
-        this.showDetails = false;
         this.createGraph(this.iGraph, this.graphComponent);
         this.createGraph(this.originalNeighbourHood, this.neighbourComponent);
         this.setNodeInputMode();
         // this.neighbourComponent.zoomTo(this.neighbourComponent.contentRect);
-        ICommand.FIT_GRAPH_BOUNDS.execute(null, this.graphComponent);
-        ICommand.FIT_GRAPH_BOUNDS.execute(null, this.neighbourComponent);
+        // regain the selection back
+        this.graphComponent.selection.setSelected(this.selectedNode, true);
+        ICommand.FIT_CONTENT.execute(null, this.graphComponent);
+        ICommand.FIT_CONTENT.execute(null, this.neighbourComponent);
 
       }
     }
