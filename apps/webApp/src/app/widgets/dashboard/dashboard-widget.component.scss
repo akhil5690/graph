@@ -17,34 +17,23 @@ cym-dashboard-widget {
       height: var(--graph-tool-bar-height);
     }
     display: grid;
-    grid-template-columns: 2fr 7.5fr 3fr; // purposefull
+    grid-template-columns: 2.5fr 5.5fr 2.5fr; // purposefull
     background-color: var(--graph-toolbar-bgcolor);
     width: var(--base-width);
     text-align: center;
-    color:var(--graph-toolbar-font-color)
+    color:var(--graph-toolbar-font-color);
+    font-size:var(--font-size16);
   }
 
 
-
-  .graph-tool-icons {
-    div {
-      display: grid;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-    }
-    display: grid;
-    grid-template-columns: repeat(auto-fit, var(--icon-box-size));
-    align-items: center;
-    justify-content: center;
-
-  }
   .set-icon {
     height: var(--graph-tool-icon-height);
     width: var(--graph-tool-icon-width);
   }
 
-
+  .arrow-styles{
+    background-color: green;
+  }
 
   .tab-container {
     display: grid;
@@ -64,6 +53,9 @@ cym-dashboard-widget {
     justify-content: end;
   }
 
+  .secondary-tool{
+    background-color:var(--breadcrumb-toolbar-bgcolor);
+  }
 
 }
 

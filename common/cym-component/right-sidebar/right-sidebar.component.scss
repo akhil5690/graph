@@ -1,6 +1,4 @@
 
-
-
 cym-right-sidebar {
   .right-sidebar {
     display: grid;
@@ -10,7 +8,7 @@ cym-right-sidebar {
     background: white;
     right: 0;
     overflow: hidden;
-    height: var(--right-side-bar-height);
+    height: var(--graph-height);
   }
 
   .menu-panel > div:hover {
@@ -23,6 +21,16 @@ cym-right-sidebar {
     overflow-y: auto;
     overflow-x: hidden;
     width: 20vw;
+
+    ::-webkit-scrollbar {
+      width: 0; /* Remove scrollbar space */
+      background: transparent; /* Optional: just make scrollbar invisible */
+    }
+
+    /* Optional: show position indicator in red */
+    ::-webkit-scrollbar-thumb {
+      background: #FF0000;
+    }
   }
 
   .filter {
@@ -38,10 +46,22 @@ cym-right-sidebar {
     gap: var(--grid-gap);
   }
 
-  .displayNone{
-    display:none;
+  .displayNone {
+    display: none;
   }
 
+  // .p-accordion-header{
+  //  display: flex;
+  //  flex-direction: row-reverse;
+  //  justify-content: space-between;
+  //}
 
+.emptyMessage{
+  height: var(--graph-height);
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  text-align: center;
+}
 }
 

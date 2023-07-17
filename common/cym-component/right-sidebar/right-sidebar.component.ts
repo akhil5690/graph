@@ -46,13 +46,15 @@ export class RightSidebarComponent implements OnChanges, OnInit {
       this.openPopUp = isOpen;
     });
 
-    this.cymService.selectedGraphItem.subscribe((graphItem)=>{
-     if (graphItem){
-       this.items = [graphItem?.tag];
-       this.openPopUp = true;
-       this.tab = 'details';
-       this.isRightSidebarOpen.emit(this.openPopUp);
-     }
+    this.cymService.selectedGraphItem.subscribe((graphItem) => {
+      if (graphItem) {
+        this.items = [graphItem?.tag];
+        this.openPopUp = true;
+        this.tab = 'details';
+        this.isRightSidebarOpen.emit(this.openPopUp);
+      } else {
+        this.items = null;
+      }
     });
 
     // dropdown properties

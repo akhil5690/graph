@@ -31,7 +31,7 @@
 .yfiles-scrollbar-range.yfiles-scrollbar-range-vertical
 .yfiles-scrollbar-slider,
 .yfiles-canvascomponent .yfiles-scrollbar .yfiles-scrollbar-range.yfiles-scrollbar-range-vertical {
-  width: 1rem;
+  width: 0.2rem;
 }
 
 yfiles-canvascomponent .yfiles-scrollbar.yfiles-scrollbar-horizontal,
@@ -40,7 +40,18 @@ yfiles-canvascomponent .yfiles-scrollbar.yfiles-scrollbar-horizontal,
 .yfiles-scrollbar-range.yfiles-scrollbar-range-horizontal
 .yfiles-scrollbar-slider,
 .yfiles-canvascomponent .yfiles-scrollbar .yfiles-scrollbar-range.yfiles-scrollbar-range-horizontal {
-  height: 1rem;
+  height: 0.2rem;
+}
+
+//.yfiles-scrollbar.yfiles-scrollbar-vertical.yfiles-scrollbar-inactive {
+//  display: none;
+//}
+.yfiles-scrollbar.yfiles-scrollbar-horizontal {
+  display: none;
+}
+
+.yfiles-scrollbar-range.yfiles-scrollbar-range-vertical {
+  display: none;
 }
 
 .yfiles-canvascomponent .yfiles-scrollbar .yfiles-scrollbar-range.yfiles-scrollbar-range-vertical {
@@ -73,7 +84,6 @@ yfiles-canvascomponent .yfiles-scrollbar.yfiles-scrollbar-horizontal,
   font-size: var(--otp-font-size) !important;
 
 }
-
 .p-tabview .p-tabview-panels {
   background: #ffffff;
   border: 0 none;
@@ -83,9 +93,11 @@ yfiles-canvascomponent .yfiles-scrollbar.yfiles-scrollbar-horizontal,
   border-bottom-left-radius: 6px;
 }
 
-.ui-base-border-bottom{
-  border-bottom:var(--active-border-bottom-size) solid white;
+
+.ui-base-border-bottom {
+  border-bottom: var(--active-border-bottom-size) solid white;
 }
-.ui-base-active-class{
+.ui-base-active-class {
   border-bottom-color: var(--primary-color);
 }
+
