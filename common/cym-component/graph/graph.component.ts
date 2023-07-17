@@ -58,7 +58,8 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
   selectedItem!: IEdge | INode | null;
   filter = false;
   hoverBorder: any;
-  hoverEdge: any;
+  vertexColor: any;
+  borderColor: any;
   @Input() data: any;
   @Input() tools: any;
   @Input() layout: any = 'Organic';
@@ -152,13 +153,18 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
       data: data.nodes,
       id: "id",
       style: (data: any) => this.getNodeShape({
-        fill: data.vertex_color ? data.vertex_color : "#FF9900",
+        fill: this.vertexColor ? this.vertexColor : "#FF9900",
         shape: 'ellipse',
-        stroke: data.Border_color
+        stroke: this.borderColor
       })
-      // labels: ["label"]
+    })
+    data.nodes.forEach((vertex_color: any) => {
+      if (vertex_color) {
+        this.vertexColor = vertex_color.vertex_color;
+        this.borderColor = vertex_color.border_color;
+      }
     });
-
+    
     //create edges
     const edgesSource = this.getEdges(builder, {
       data: data.edges,
@@ -258,7 +264,36 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
     this.graphHighlight(inputMode);
   }
 
-  graphHighlight(inputMode: GraphEditorInputMode){
+  itemHighlight(selectedItem: any) {
+    const styleHighlight = this.graphComponent.highlightIndicatorManager;
+    const decorator = this.graphComponent.graph.decorator;
+    const highlightShape = new ShapeNodeStyle({
+      shape: ShapeNodeShape.ELLIPSE,
+      stroke: `4px grey`,
+      fill: null
+    });
+
+    const nodeStyleHighlight = new NodeStyleDecorationInstaller({
+      nodeStyle: highlightShape,
+      // that should be slightly larger than the real node
+      margins: 0,
+      // but have a fixed size in the view coordinates
+      zoomPolicy: StyleDecorationZoomPolicy.WORLD_COORDINATES
+    });
+    decorator.nodeDecorator.highlightDecorator.setImplementation(nodeStyleHighlight);
+    if (styleHighlight) {
+      styleHighlight?.clearHighlights();
+      // then see where we are hovering over, now
+      const newItem = selectedItem.item;
+      if (newItem !== null) {
+        // we highlight the item itself
+        styleHighlight?.addHighlight(newItem);
+      }
+    }
+
+  }
+
+  graphHighlight(inputMode: GraphEditorInputMode) {
     inputMode.itemHoverInputMode.addHoveredItemChangedListener((sender, args) => {
       const hoverItem = args.item;
       // e.g. add a highlight to newItem here
@@ -356,7 +391,21 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
       this.systemService.setGraphItem(this.selectedItem);
       this.checkNeighbour(evt);
       this.checkFindings(evt);
+      // this.itemHighlight(evt)
+
+      inputMode.selectableItems = GraphItemTypes.NONE
+      inputMode.focusableItems = GraphItemTypes.NONE
+
+      const selectionNodeStyle = new ShapeNodeStyle({
+        shape: ShapeNodeShape.ELLIPSE,
+        stroke: `4px ${this.hoverBorder}`,
+        fill: null
+      })
+      if (evt.item instanceof INode) {
+        this.graphComponent.graph.setStyle(evt.item, selectionNodeStyle)
+      }
     })
+
   }
 
   checkNeighbour(evt: ItemClickedEventArgs<IModelItem>) {
