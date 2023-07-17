@@ -1,0 +1,22 @@
+.card{
+  display: grid;
+  width: var(--workspace-card-width);
+  height: var(--workspace-card-height);
+  background: white;
+  align-items: center;
+  justify-items: center;
+}
+
+.workspace-container{
+  display: grid;
+  grid-template-columns: repeat(auto-fill,var(--workspace-card-width));
+  gap: var(--unit);
+}
+.short-name{
+  height: var(--short-name);
+  width: var(--short-name);
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  background: yellowgreen;
+}

@@ -8,6 +8,7 @@ import {workSpaceService} from "../../../../../../common/cym-services/workspace/
   styleUrls: ['./workspace-widget.component.scss']
 })
 export class WorkspaceWidgetComponent implements OnInit {
+  workspaceRes: any;
 
 
   constructor(private router: Router, private workSpaceService: workSpaceService) {
@@ -85,7 +86,9 @@ export class WorkspaceWidgetComponent implements OnInit {
 
   getWorkSpace() {
     this.workSpaceService.getAllWorkspace({}).then((res) => {
-      console.log('===>', res);
+      this.workspaceRes = res;
+    }).catch((e)=>{
+      console.log(e)
     })
   }
 }
