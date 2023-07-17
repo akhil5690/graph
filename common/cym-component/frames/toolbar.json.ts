@@ -24,14 +24,14 @@ export const toolbar = [{
     "height": "24",
     "width": "22",
   },
-  {
-    "url": "../../../../assets/image/Component_sk.svg",
-    "position": "top",
-    "type": "image",
-    "sector": "3",
-    "height": "22",
-    "width": "20",
-  },
+  // {
+  //   "url": "../../../../assets/image/Component_sk.svg",
+  //   "position": "top",
+  //   "type": "image",
+  //   "sector": "3",
+  //   "height": "22",
+  //   "width": "20",
+  // },
   // {
   //   "url": "../../../../assets/image/Icon awesome-caret-up.svg",
   //   "position": "top",

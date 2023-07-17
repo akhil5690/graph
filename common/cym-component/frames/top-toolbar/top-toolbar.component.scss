@@ -31,7 +31,7 @@ cym-top-toolbar {
   .lines{
     display:grid;
     grid-template-columns: auto auto  ;
-    gap: var(--grid-gap);
+    gap: calc(var(--grid-gap)/2);
     align-items:center
   }
 
@@ -40,6 +40,11 @@ cym-top-toolbar {
     grid-template-columns: repeat(3, auto);
     gap: calc(var(--grid-gap)/2);
 
+  }
+  .usermod {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 14px;
   }
   .three > div{
     padding:calc(var(--padding)/5);
