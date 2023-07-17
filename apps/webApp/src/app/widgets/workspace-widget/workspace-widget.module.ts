@@ -27,6 +27,7 @@ import {
   CymSecondaryToolbarModule
 } from "../../../../../../common/cym-containers/cym-secondary-toolbar/cym-secondary-toolbar.module";
 import {CymInputModule} from "../../../../../../common/cym-component/form/cym-input/cym-input.module";
+import {CymCardModule} from "../../../../../../common/cym-containers/cym-card/cym-card.module";
 
 
 @NgModule({
@@ -48,7 +49,7 @@ import {CymInputModule} from "../../../../../../common/cym-component/form/cym-in
     TopToolbarModule,
     CymSecondaryToolbarModule,
     CymInputModule,
-    CymWorkspaceCardModule,CymWorkspaceCardDivisionModule
+    CymWorkspaceCardModule, CymWorkspaceCardDivisionModule, CymCardModule
   ],
   providers:[workSpaceService, HttpHandler],
   exports: [WorkspaceWidgetComponent]
