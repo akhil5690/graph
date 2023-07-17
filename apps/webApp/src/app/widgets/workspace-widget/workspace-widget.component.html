@@ -1,17 +1,17 @@
 <cym-widget-frame [frame_type]="'header-main-footer-frame'">
   <cym-top-toolbar header></cym-top-toolbar>
   <cym-div main [cymClass]="'workstation'">
-    <div *ngIf="workspaceRes;else noData" >
-      <div class="subtitle">My Workspace</div>
-      <div class="workspace-container">
-        <div *ngFor="let card of workspaceRes" class="card" (click)="goToDashboard()">
-          <div class="short-name">SN</div>
-          <div>{{card.name}}</div>
-          <div>Lorem ipsum dolor sit amet
-          </div>
-        </div>
-      </div>
-    </div>
+    <cym-div *ngIf="workspaceRes;else noData" >
+      <cym-div [cymClass]="'subtitle'">My Workspace</cym-div>
+      <cym-div [cymClass]="'workspace-container'">
+        <cym-div *ngFor="let card of workspaceRes" [cymClass]="'card'" (click)="goToDashboard()">
+          <cym-div [cymClass]="'short-name'">SN</cym-div>
+          <cym-div>{{card.name}}</cym-div>
+          <cym-div>Lorem ipsum dolor sit amet
+          </cym-div>
+        </cym-div>
+      </cym-div>
+    </cym-div>
 
     <ng-template #noData>
       <cym-div [cymClass]="'section1'">

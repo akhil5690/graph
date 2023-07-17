@@ -1,11 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {Router} from "@angular/router";
 import {workSpaceService} from "../../../../../../common/cym-services/workspace/workspace.service";
 
 @Component({
   selector: 'cym-workspace-widget',
   templateUrl: './workspace-widget.component.html',
-  styleUrls: ['./workspace-widget.component.scss']
+  styleUrls: ['./workspace-widget.component.scss'],
+  encapsulation:ViewEncapsulation.None
 })
 export class WorkspaceWidgetComponent implements OnInit {
   workspaceRes: any;
