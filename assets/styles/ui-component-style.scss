@@ -84,7 +84,6 @@ yfiles-canvascomponent .yfiles-scrollbar.yfiles-scrollbar-horizontal,
   font-size: var(--otp-font-size) !important;
 
 }
-
 .p-tabview .p-tabview-panels {
   background: #ffffff;
   border: 0 none;
@@ -94,10 +93,11 @@ yfiles-canvascomponent .yfiles-scrollbar.yfiles-scrollbar-horizontal,
   border-bottom-left-radius: 6px;
 }
 
+
 .ui-base-border-bottom {
   border-bottom: var(--active-border-bottom-size) solid white;
 }
-
 .ui-base-active-class {
   border-bottom-color: var(--primary-color);
 }
+

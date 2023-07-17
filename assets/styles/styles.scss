@@ -193,13 +193,27 @@ label {
     align-items: center;
 
   }
-
 .three-tab-container>div:hover{
   @extend .ui-base-active-class !optional;
 }
- .active-class{
-   @extend .ui-base-active-class !optional;
 
+.graph-tool-icons {
+  div {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    .active-class{
+      @extend .ui-base-active-class !optional;
+    }
+  }
+  display: grid;
+  grid-template-columns: repeat(auto-fit, var(--icon-box-size));
+  align-items: center;
+  justify-content: center;
+}
+.graph-tool-icons>div:hover{
+  background-color: var(--graph-toolbar-icon-hover);
 }
 
 
