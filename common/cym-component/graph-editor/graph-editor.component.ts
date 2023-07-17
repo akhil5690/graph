@@ -969,7 +969,7 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
     this.createJson();
     this.createGraph(jsonGraph, this.neighbourComponent);
     // regain the selection back
-    this.neighbourComponent.selection.setSelected(this.selectedNode, true);
+    // this.neighbourComponent.selection.setSelected(this.selectedNode, true);
     this.neighbourComponent.contentRect = new Rect(0, 0, 100, 100);
     this.neighbourComponent.fitGraphBounds();
     this.cdr.detectChanges();
