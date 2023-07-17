@@ -232,9 +232,11 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
   }
 
   private deleteListener(inputMode:GraphEditorInputMode){
-    // when node is deleted
+    // when node or edge  is deleted
     inputMode.addDeletedItemListener((sender, evt) => {
-      this.systemService.setGraphItem(null);
+      if (evt.item instanceof INode){
+        this.systemService.setGraphItem(null);
+      }
     });
   }
   private leftClickListener(inputMode: GraphEditorInputMode | GraphViewerInputMode) {
