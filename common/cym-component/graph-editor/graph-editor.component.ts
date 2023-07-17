@@ -82,12 +82,11 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
   private builder!: GraphBuilder;
   isFilterOpen: boolean = false;
   selectedItem: any;
-  showDetails!: boolean;
   iGraph: any = {};
   shape: any;
   selectedNeighbour: any;
   neighboursOptions: any;
-  selectedNode!: INode;
+  selectedNode!: any;
   private original: any;
   private originalNeighbourHood: any;
   private shapeStyleDragDrop: any;
@@ -225,17 +224,22 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
     this.edgeListener(inputMode);
 
     this.labelListener(inputMode);
+    this.deleteListener(inputMode);
 
     // on click of node get the sidebar open with the node properties
     this.leftClickListener(inputMode);
 
   }
 
+  private deleteListener(inputMode:GraphEditorInputMode){
+    // when node is deleted
+    inputMode.addDeletedItemListener((sender, evt) => {
+      this.systemService.setGraphItem(null);
+    });
+  }
   private leftClickListener(inputMode: GraphEditorInputMode | GraphViewerInputMode) {
     // node click listener which sends node or edge details to the sidebar
     inputMode.addItemLeftClickedListener((sender, evt) => {
-      this.showDetails = true;
-
       this.selectedItem = evt.item instanceof IEdge || evt.item instanceof INode ? evt.item : null;
       this.systemService.setGraphItem(this.selectedItem);
       if (evt.item instanceof INode && !this.isFullscreen) {
@@ -979,7 +983,6 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
     if (this.neighbourComponent.graph.nodes.size > 0) {
       this.isFullscreen = isFullscreen;
       if (isFullscreen) {
-        this.showDetails = false;
         this.graphComponent.graph = this.neighbourComponent.graph;
         this.createGraph(this.original, this.neighbourComponent);
         const inputMode = this.graphComponent.inputMode = new GraphViewerInputMode();
@@ -989,7 +992,6 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
         ICommand.FIT_CONTENT.execute(null, this.neighbourComponent);
 
       } else {
-        this.showDetails = false;
         this.createGraph(this.iGraph, this.graphComponent);
         this.createGraph(this.originalNeighbourHood, this.neighbourComponent);
         this.setNodeInputMode();
