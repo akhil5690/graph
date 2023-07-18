@@ -29,7 +29,7 @@
 .graph-container {
   display: flex;
   height: var(--graph-height);
-  overflow:hidden;
+  overflow: hidden;
 }
 
 .graph-sidebar {
@@ -67,7 +67,6 @@ span#pr_id_2_label, span#pr_id_3_label, span#pr_id_4_label {
 }
 
 
-
 .panel-header {
   //font-weight: var(--font-weight-bold);
   font-size: var(--font-size);
@@ -81,7 +80,7 @@ span#pr_id_2_label, span#pr_id_3_label, span#pr_id_4_label {
   align-items: center;
   justify-items: start;
   width: var(--overview-neighbour-width);
-  height:var(--panel-header-height);
+  height: var(--panel-header-height);
 }
 
 .graph-main {
@@ -104,8 +103,7 @@ span#pr_id_2_label, span#pr_id_3_label, span#pr_id_4_label {
 
 .subtitle.neighbour_description {
   position: absolute;
-  top: 2.85rem;
-  display: grid;
-  width: 80vw;
-  justify-content: center;
+  top: 0;
+  font-size: small;
+  padding: 0.5rem 0 0 2rem;
 }
