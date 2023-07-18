@@ -157,14 +157,14 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
         shape: 'ellipse',
         stroke: this.borderColor
       })
-    })
+    });
     data.nodes.forEach((vertex_color: any) => {
       if (vertex_color) {
         this.vertexColor = vertex_color.vertex_color;
         this.borderColor = vertex_color.border_color;
       }
     });
-    
+
     //create edges
     const edgesSource = this.getEdges(builder, {
       data: data.edges,
@@ -392,18 +392,18 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
       this.checkNeighbour(evt);
       this.checkFindings(evt);
       // this.itemHighlight(evt)
-
-      inputMode.selectableItems = GraphItemTypes.NONE
-      inputMode.focusableItems = GraphItemTypes.NONE
-
-      const selectionNodeStyle = new ShapeNodeStyle({
-        shape: ShapeNodeShape.ELLIPSE,
-        stroke: `4px ${this.hoverBorder}`,
-        fill: null
-      })
-      if (evt.item instanceof INode) {
-        this.graphComponent.graph.setStyle(evt.item, selectionNodeStyle)
-      }
+      //
+      // inputMode.selectableItems = GraphItemTypes.NONE
+      // inputMode.focusableItems = GraphItemTypes.NONE
+      //
+      // const selectionNodeStyle = new ShapeNodeStyle({
+      //   shape: ShapeNodeShape.ELLIPSE,
+      //   stroke: `4px ${this.hoverBorder}`,
+      //   fill: null
+      // })
+      // if (evt.item instanceof INode) {
+      //   this.graphComponent.graph.setStyle(evt.item, selectionNodeStyle)
+      // }
     })
 
   }
