@@ -15,9 +15,9 @@
 
     <ng-template #noData>
       <cym-div [cymClass]="'section1'">
-        <cym-workspace-card *ngFor="let tool of workspace1" [cymClass]="'section11'">
+        <cym-workspace-card [cymClass]="'section11'">
           <cym-div card-content>
-            <cym-workspace-card-division *ngFor="let sub of tool.cardDivision" [workspaceCardDetails]="sub">
+            <cym-workspace-card-division  [workspaceCardDetails]="sub">
             </cym-workspace-card-division>
             <div class="create-workspace">
               <cym-button [label]="'Create Wokspace'" [class]="'solid-button'" (click)="goToDashboard()"></cym-button>
@@ -29,7 +29,7 @@
     </ng-template>
 
     <cym-div [cymClass]="'section2'">
-      <cym-workspace-card *ngFor="let tool of workspace" [cymClass]="'section2-card'">
+      <cym-workspace-card *ngFor="let tool of workspaceNoData" [cymClass]="'section2-card'">
         <cym-div header [cymClass]="'section2-head'">{{tool.name}}</cym-div>
         <cym-div card-content [cymClass]="'section222'">
           <cym-workspace-card-division *ngFor="let sub of tool.cardDivision" [workspaceCardDetails]="sub"

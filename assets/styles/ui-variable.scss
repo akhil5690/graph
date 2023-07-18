@@ -11,8 +11,6 @@
   --font-weight-bolder: 1000;
   --large-screen-font-size: 14px;
   --medium-screen-font-size: 10px;
-  //--font-family: 'san-fransisco', Roboto Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  //--font-family-bold: 'san-fransisco-bold', Roboto Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --font-family: 'JamGrotesque-Regular', Roboto Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --font-family-bold: 'JamGrotesque-Bold', Roboto Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 
@@ -50,7 +48,7 @@
   //overview and neighbour -
   --overview-neighbour-width: 14rem;
   --overview-neighbour-height: 10rem;
-  --overview-start: 0;
+  --overview-start: 0.7rem;
   --neighbour-start: 15rem;
 
   //graph-tool-bar-height-
@@ -138,9 +136,6 @@
   --logged-in-user-font12 : 0.857rem ;
   --logged-in-user-div1 : 1.785rem;
   --logged-in-user-div2 : 0.5rem;
-
-
-
 
   --sidebar-width: calc(var(--unit)*15);
   --pink2: #f1a7b4;

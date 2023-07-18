@@ -509,6 +509,7 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
         layout: owner.tag.layout
       };
     }
+    this.systemService.setGraphItem(this.selectedItem);
   };
   isFullscreen: boolean = false;
 
