@@ -119,7 +119,7 @@ export function initDemoStyles(
   graph.decorator.portDecorator.edgePathCropperDecorator.setImplementation(
     new DefaultEdgePathCropper({cropAtPort: false, extraCropLength})
   )
-  // graph.edgeDefaults.labels.style = createDemoEdgeLabelStyle(theme.edgeLabel)
+  graph.edgeDefaults.labels.style = createDemoEdgeLabelStyle(theme.edgeLabel)
 }
 
 /**
@@ -209,12 +209,12 @@ export function createDemoEdgeLabelStyle(
   colorSetName: ColorSetName = 'demo-orange'
 ): DefaultLabelStyle {
   const labelStyle = new DefaultLabelStyle()
-  labelStyle.shape = LabelShape.ROUND_RECTANGLE
-  labelStyle.backgroundFill = Fill.from(colorSets[colorSetName].edgeLabelFill)
-  labelStyle.textFill = Fill.from(colorSets[colorSetName].text)
-  labelStyle.verticalTextAlignment = VerticalTextAlignment.CENTER
-  labelStyle.horizontalTextAlignment = HorizontalTextAlignment.CENTER
-  labelStyle.insets = new Insets(4, 2, 4, 1)
+  // labelStyle.shape = LabelShape.ROUND_RECTANGLE
+  labelStyle.backgroundFill = "#EBEDEF"
+  // labelStyle.textFill = Fill.from(colorSets[colorSetName].text)
+  // labelStyle.verticalTextAlignment = VerticalTextAlignment.CENTER
+  // labelStyle.horizontalTextAlignment = HorizontalTextAlignment.CENTER
+  // labelStyle.insets = new Insets(4, 2, 4, 1)
   return labelStyle
 }
 
