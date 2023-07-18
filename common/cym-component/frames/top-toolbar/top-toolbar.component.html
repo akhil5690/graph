@@ -1,6 +1,6 @@
 <div class="container">
   <div class="brand-logo" *ngFor="let item of sector1">
-    <img [src]="item.url" alt="logo" [height]="item.height" [width]="item.width" class="icon-height">
+    <img [src]="item.url" alt="logo" [height]="item.height" [width]="item.width" >
     <!--      <img src="assets/image/Line_top_toolbar.svg" alt="">-->
   </div>
   <div class="menu">
@@ -14,7 +14,7 @@
     </div>
     <div class="usermod">
       <div>
-        <cym-logged-in-user ></cym-logged-in-user>
+        <cym-logged-in-user></cym-logged-in-user>
       </div>
       <div class="lines">
         <img src="assets/image/thin-line.svg" alt="" class="line-height">

@@ -1,16 +1,16 @@
 .user{
-  height: 30px;
-  width: 30px;
-  background-color: #2FB2C3;
-  border-radius: 50%;
-  display: inline-block;
+  height:var(--logged-in-user-height);
+  width: var(--logged-in-user-width);
+  background-color: var(--primary-color);
+  border-radius: var(--circle-border-radius);
+  display: grid;
   text-align: center;
+  align-self:center
 }
 .username{
-  font-size: 14px;
-  font-weight: 100;
+  font-size: var(--logged-in-user-font12);
   color: white;
-  padding-top: 6px;
+  align-self:center;
 
 
 

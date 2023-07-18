@@ -1,6 +1,6 @@
 {
   "comment": "906e0b3a-13a6-4158-9f66-8076889855ef",
-  "date": "06/26/2023",
+  "date": "07/10/2023",
   "distribution": false,
   "domains": [
     "*"
@@ -13,7 +13,7 @@
   "package": "complete",
   "product": "yFiles for HTML",
   "type": "eval",
-  "version": "2.5",
+  "version": "2.6",
   "watermark": "yFiles HTML Evaluation License (expires in ${license-days-remaining} days)",
-  "key": "3a0da9ed722e2023a5bcb1692a234d5823370274"
+  "key": "5ab4175af42107922d27a1db4a91dd93ce1be4c8"
 }

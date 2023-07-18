@@ -162,7 +162,6 @@ label {
   border-color: #2fb2c3;
   color: #6c757d;
 }
-
   .rightTab{
     padding: calc(var(--unit) / 2);
     display: grid;
@@ -171,14 +170,18 @@ label {
     cursor: pointer;
     @extend .ui-base-border-bottom !optional;
   }
-  .rightTab:hover{
-    @extend .ui-base-active-class !optional;
-    border-bottom-color: var(--primary-color);
-  }
+  .rightTab.active-class{
+      @extend .ui-base-active-class !optional;
+    }
+
+  //.rightTab:hover{
+  //  @extend .ui-base-active-class !optional;
+  //}
 
   .three-tab-container {
     .active-class{
       @extend .ui-base-active-class !optional;
+      transition-delay: 1s;
     }
     div {
       display: grid;
@@ -186,6 +189,7 @@ label {
       align-items: center;
       cursor: pointer;
       @extend .ui-base-border-bottom !optional;
+
     }
     display: grid;
     grid-template-columns: repeat(3 , var(--three-row-container-column-width));
@@ -193,9 +197,9 @@ label {
     align-items: center;
 
   }
-.three-tab-container>div:hover{
-  @extend .ui-base-active-class !optional;
-}
+//.three-tab-container>div:hover{
+//  @extend .ui-base-active-class !optional;
+//}
 
 .graph-tool-icons {
   div {
@@ -203,9 +207,6 @@ label {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    .active-class{
-      @extend .ui-base-active-class !optional;
-    }
   }
   display: grid;
   grid-template-columns: repeat(auto-fit, var(--icon-box-size));
@@ -215,13 +216,12 @@ label {
 .graph-tool-icons>div:hover{
   background-color: var(--graph-toolbar-icon-hover);
 }
-
-
 .max-dropdown-width {
   width: 8rem;
   min-width: 8rem;
   max-width: 8rem;
 }
+
 
 
 
