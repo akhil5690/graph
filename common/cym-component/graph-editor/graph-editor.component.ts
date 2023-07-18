@@ -998,7 +998,10 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
       if (isFullscreen) {
         this.graphComponent.graph = this.neighbourComponent.graph;
         this.createGraph(this.original, this.neighbourComponent);
-        this.graphComponent.selection.setSelected(this.selectedNode, true);
+        const node = this.graphComponent.graph.nodes.find(node=>node.tag.id === this.selectedNode.tag.id);
+        if (node) {
+          this.graphComponent.selection.setSelected(node, true);
+        }
         const inputMode = this.graphComponent.inputMode = new GraphViewerInputMode();
         this.leftClickListener(inputMode);
         // this.neighbourComponent.zoomTo(this.neighbourComponent.contentRect);
@@ -1011,7 +1014,11 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
         this.setNodeInputMode();
         // this.neighbourComponent.zoomTo(this.neighbourComponent.contentRect);
         // regain the selection back
-        this.graphComponent.selection.setSelected(this.selectedNode, true);
+
+        const node = this.graphComponent.graph.nodes.find(node=>node.tag.id === this.selectedNode.tag.id);
+        if (node) {
+          this.graphComponent.selection.setSelected(node, true);
+        }
         ICommand.FIT_CONTENT.execute(null, this.graphComponent);
         ICommand.FIT_CONTENT.execute(null, this.neighbourComponent);
 

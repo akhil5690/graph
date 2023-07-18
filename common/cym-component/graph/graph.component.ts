@@ -657,6 +657,10 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
       if (isFullscreen) {
         this.graphComponent.graph = this.neighbourComponent.graph;
         this.createGraph(this.data, this.neighbourComponent);
+        const node = this.graphComponent.graph.nodes.find(node=>node.tag.id === this.selectedNode.tag.id);
+        if (node) {
+          this.graphComponent.selection.setSelected(node, true);
+        }
         this.setInputMode(this.graphComponent);
         this.neighbourComponent.zoomTo(this.neighbourComponent.contentRect);
         ICommand.FIT_GRAPH_BOUNDS.execute(null, this.graphComponent);
@@ -665,6 +669,10 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
         this.showDetails = false;
         this.createGraph(this.data, this.graphComponent);
         this.createGraph(this.originalNeighbourhood, this.neighbourComponent);
+        const node = this.graphComponent.graph.nodes.find(node=>node.tag.id === this.selectedNode.tag.id);
+        if (node) {
+          this.graphComponent.selection.setSelected(node, true);
+        }
         this.setInputMode(this.graphComponent);
         this.neighbourComponent.zoomTo(this.neighbourComponent.contentRect);
         this.graphComponent.zoomTo(this.graphComponent.contentRect);
