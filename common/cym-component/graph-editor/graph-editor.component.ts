@@ -87,6 +87,8 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
   selectedNeighbour: any;
   neighboursOptions: any;
   selectedNode!: any;
+  sourceNode: any;
+  edgeNode: any;
   private original: any;
   private originalNeighbourHood: any;
   private shapeStyleDragDrop: any;
@@ -190,8 +192,6 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
     this.initialiseNeighbourhood();
 
     this.getNeighbourOption();
-
-
   }
 
   setEditorMode(): GraphEditorInputMode {
@@ -251,7 +251,10 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
         this.selectedNode = evt.item;
         this.getNeighbourGraph(evt.item)
       }
+      // inputMode.selectableItems = GraphItemTypes.NONE
+      // inputMode.focusableItems = GraphItemTypes.NONE
     })
+
   }
 
   edgeListener(inputMode: GraphEditorInputMode) {
@@ -370,7 +373,7 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
             for (const edge of this.graphComponent.graph.edgesAt(newItem)) {
 
               const labelStyle = new DefaultLabelStyle({
-                backgroundFill: 'white',
+                backgroundFill: '#EBEDEF',
                 textSize: 10,
                 verticalTextAlignment: 'center',
                 horizontalTextAlignment: 'center'
@@ -388,7 +391,7 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
           } else if (newItem instanceof IEdge) {
             // if it's an edge - we highlight the adjacent nodes
             const labelStyle = new DefaultLabelStyle({
-              backgroundFill: 'white',
+              backgroundFill: '#EBEDEF',
               textSize: 10,
               verticalTextAlignment: 'center',
               horizontalTextAlignment: 'center'
@@ -739,7 +742,7 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
   createGraph(data: any, graphComponent: GraphComponent): void {
     // get the graph builder to create graph from json ie; initGraph
     this.builder = new GraphBuilder();
-    const sourceNode = this.builder.createNodesSource({
+    this.sourceNode = this.builder.createNodesSource({
       data: data.nodes,
       id: "id",
       labels: ['label'],
@@ -753,7 +756,7 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
       layout: (nodeLayout: INode) => new Rect(nodeLayout.layout.x, nodeLayout.layout.y, nodeLayout.layout.width, nodeLayout.layout.height)
     });
 
-    const edgeNode = this.builder.createEdgesSource({
+    this.edgeNode = this.builder.createEdgesSource({
       data: data.edges,
       id: "id",
       labels: ['label'],
@@ -765,14 +768,14 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
       })
     });
 
-    edgeNode.edgeCreator.defaults.labels.style = new DefaultLabelStyle({
-      backgroundFill: 'white',
+    this.edgeNode.edgeCreator.defaults.labels.style = new DefaultLabelStyle({
+      backgroundFill: '#EBEDEF',
       textSize: 10
     });
     // aligning the edge label
     const labelModel = new EdgePathLabelModel({distance: 50});
 
-    edgeNode.edgeCreator.defaults.labels.layoutParameter = labelModel.createDefaultParameter();
+    this.edgeNode.edgeCreator.defaults.labels.layoutParameter = labelModel.createDefaultParameter();
 
     graphComponent.graph = this.builder.buildGraph();
     this.initTutorialDefaults(graphComponent.graph);
