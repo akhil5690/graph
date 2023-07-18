@@ -43,14 +43,17 @@ cym-secondary-toolbar {
     width:var(--secondary-tool-icon-width);
   }
 
-
   .p-breadcrumb ul li:last-child .p-menuitem-text {
     color: var(--primary-color);
   }
-
   .pi-chevron-right:before{
-    color:var(--breadcrumb-font-color);
+    color:var(--breadcrumb-arrow-color);
+
   }
+
+
+
+
 
 
 }

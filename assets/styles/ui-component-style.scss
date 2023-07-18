@@ -92,12 +92,15 @@ yfiles-canvascomponent .yfiles-scrollbar.yfiles-scrollbar-horizontal,
   border-bottom-right-radius: 6px;
   border-bottom-left-radius: 6px;
 }
-
-
 .ui-base-border-bottom {
   border-bottom: var(--active-border-bottom-size) solid white;
 }
 .ui-base-active-class {
   border-bottom-color: var(--primary-color);
 }
+
+//svg.p-icon{
+//  height:10px;
+//}
+
 
