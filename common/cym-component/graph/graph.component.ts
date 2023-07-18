@@ -674,6 +674,7 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
           this.graphComponent.selection.setSelected(node, true);
         }
         this.setInputMode(this.graphComponent);
+        this.systemService.setGraphItem(node);
         this.neighbourComponent.zoomTo(this.neighbourComponent.contentRect);
         this.graphComponent.zoomTo(this.graphComponent.contentRect);
 

@@ -1019,6 +1019,7 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
         if (node) {
           this.graphComponent.selection.setSelected(node, true);
         }
+        this.systemService.setGraphItem(node);
         ICommand.FIT_CONTENT.execute(null, this.graphComponent);
         ICommand.FIT_CONTENT.execute(null, this.neighbourComponent);
 
