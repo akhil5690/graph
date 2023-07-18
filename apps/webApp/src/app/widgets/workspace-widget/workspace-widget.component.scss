@@ -4,17 +4,17 @@ cym-workspace-widget{
     width: var(--workspace-card-width);
     height: var(--workspace-card-height);
     background: white;
-    align-items: end;
     justify-items: center;
     align-content: center;
-    gap: 0.5rem;
+    gap: calc(var(--grid-gap)/2);
   }
 
   .workspace-container{
     display: grid;
     grid-template-columns: repeat(auto-fill,var(--workspace-card-width));
-    gap: var(--unit);
+    gap: calc(var(--grid-gap)/2);
     cursor: pointer;
+    padding: var(--padding) 0 var(--padding) 0;
   }
   .short-name{
     height: var(--short-name);
@@ -23,6 +23,10 @@ cym-workspace-widget{
     align-items: center;
     justify-items: center;
     background: yellowgreen;
+  }
+
+  .workspace-title{
+    font-weight: var(--font-weight-bolder);
   }
 
 }

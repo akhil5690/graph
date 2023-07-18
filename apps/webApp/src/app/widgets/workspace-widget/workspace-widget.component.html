@@ -2,7 +2,7 @@
   <cym-top-toolbar header></cym-top-toolbar>
   <cym-div main [cymClass]="'workstation'">
     <cym-div *ngIf="workspaceRes;else noData" >
-      <cym-div [cymClass]="'subtitle'">My Workspace</cym-div>
+      <cym-div [cymClass]="'workspace-title'">My Workspace</cym-div>
       <cym-div [cymClass]="'workspace-container'">
         <cym-div *ngFor="let card of workspaceRes" [cymClass]="'card'" (click)="goToDashboard()">
           <cym-div [cymClass]="'short-name'">SN</cym-div>
