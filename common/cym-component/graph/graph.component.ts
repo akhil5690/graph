@@ -20,12 +20,12 @@ import {
   GraphComponent,
   GraphEditorInputMode,
   GraphItemTypes,
-  GraphOverviewComponent, GraphViewerInputMode, HierarchicLayout, IArrow, ICommand,
+  GraphOverviewComponent, GraphSelectionIndicatorManager, GraphViewerInputMode, HierarchicLayout, IArrow, ICommand,
   IconLabelStyle,
   IEdge,
   IEdgeStyle,
   ILabelModelParameter,
-  ILabelStyle, IModelItem,
+  ILabelStyle, IModelItem, IndicatorEdgeStyleDecorator,
   INode,
   INodeStyle,
   InteriorLabelModel, ItemClickedEventArgs,
@@ -35,7 +35,7 @@ import {
   NodesSource, NodeStyleDecorationInstaller,
   OrganicLayout, OrthogonalLayout,
   PolylineEdgeStyle, RadialLayout,
-  Rect, ShapeNodeShape,
+  Rect, RectangleNodeStyle, ShapeNodeShape,
   ShapeNodeStyle,
   Size, StyleDecorationZoomPolicy, TraversalDirection
 } from "yfiles";
@@ -392,18 +392,37 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
       this.checkNeighbour(evt);
       this.checkFindings(evt);
       // this.itemHighlight(evt)
-      //
+
       // inputMode.selectableItems = GraphItemTypes.NONE
-      // inputMode.focusableItems = GraphItemTypes.NONE
-      //
-      // const selectionNodeStyle = new ShapeNodeStyle({
-      //   shape: ShapeNodeShape.ELLIPSE,
-      //   stroke: `4px ${this.hoverBorder}`,
-      //   fill: null
-      // })
+      inputMode.focusableItems = GraphItemTypes.NONE
       // if (evt.item instanceof INode) {
       //   this.graphComponent.graph.setStyle(evt.item, selectionNodeStyle)
       // }
+
+
+      const selectionNodeStyle = new ShapeNodeStyle({
+        shape: ShapeNodeShape.ELLIPSE,
+        stroke: `4px ${this.hoverBorder}`,
+        fill: null
+      })
+      const selectionEdgeStyle = new PolylineEdgeStyle({
+        stroke: `4px ${this.hoverBorder}`,
+        targetArrow: this.arrow({
+          type: ArrowType.TRIANGLE,
+          fill: this.hoverBorder
+        })
+      })
+      const labelStyle = new DefaultLabelStyle({
+        backgroundFill: '#EBEDEF',
+        textSize: 10,
+        verticalTextAlignment: 'center',
+        horizontalTextAlignment: 'center'
+      });
+      this.graphComponent.selectionIndicatorManager = new GraphSelectionIndicatorManager({
+        nodeStyle: selectionNodeStyle,
+        edgeStyle: selectionEdgeStyle,
+        labelStyle: labelStyle
+      })
     })
 
   }
