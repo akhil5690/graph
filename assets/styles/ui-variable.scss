@@ -129,7 +129,6 @@
   --workspace-card-height: 10rem;
   --short-name: 5rem;
 
-
   //logged-in-user  icon related styles
   --logged-in-user-height : 1.714rem;
   --logged-in-user-width : 1.714rem;
@@ -137,12 +136,18 @@
   --logged-in-user-div1 : 1.785rem;
   --logged-in-user-div2 : 0.5rem;
 
+  //chevron right arrow styles
+  --chevron-height: 0.714rem;
+  --chevron-width : 0.714rem;
+
+
+
+
   --sidebar-width: calc(var(--unit)*15);
   --pink2: #f1a7b4;
   --pink3: #f7d8e3;
   --primary-light-color: rgb(246 59 159 / 12%);
   --third-background-color: rgb(232, 232, 232);
-
 
   --grey-color: #e6e6e6;
   --icon-grey: #585858;
