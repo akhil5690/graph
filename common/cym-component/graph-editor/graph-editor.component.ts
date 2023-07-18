@@ -310,7 +310,7 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
 
       // add the new node to the graph
       this.graphComponent.graph.nodes.append(node);
-      this.systemService.setGraphItem(null);
+      this.systemService.setRightSideTabClick('edit');
 
     });
     this.hoverEvent(inputMode);
