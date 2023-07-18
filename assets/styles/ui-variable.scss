@@ -11,8 +11,6 @@
   --font-weight-bolder: 1000;
   --large-screen-font-size: 14px;
   --medium-screen-font-size: 10px;
-  //--font-family: 'san-fransisco', Roboto Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  //--font-family-bold: 'san-fransisco-bold', Roboto Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --font-family: 'JamGrotesque-Regular', Roboto Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --font-family-bold: 'JamGrotesque-Bold', Roboto Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 
@@ -122,9 +120,6 @@
 
   //card related styles
 
-
-
-
   --sidebar-width: calc(var(--unit)*15);
   --pink2: #f1a7b4;
   --pink3: #f7d8e3;
@@ -160,9 +155,9 @@
 
   --three-row-container-column-width: 7.42rem;
 
-  // card
+  // Workspace card
   --workspace-card-width: 14rem;
-  --workspace-card-height: 10rem;
+  --workspace-card-height: 14rem;
   --short-name: 5rem;
 
 }

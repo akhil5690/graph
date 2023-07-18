@@ -11,15 +11,7 @@ import {workSpaceService} from "../../../../../../common/cym-services/workspace/
 export class WorkspaceWidgetComponent implements OnInit {
   workspaceRes: any;
 
-
-  constructor(private router: Router, private workSpaceService: workSpaceService) {
-  }
-
-  ngOnInit() {
-    this.getWorkSpace();
-  }
-
-  workspace: any = [{
+  workspaceNoData: any = [{
     name: "Observables",
     cardDivision: [{
       image: "assets/image/find_workspace.svg",
@@ -40,46 +32,60 @@ export class WorkspaceWidgetComponent implements OnInit {
         subHeader2: "No files shared with you yet"
       }],
     },
-  ]
-
-  workspace1: any = [{
-    name: null,
-    cardDivision: [{
-      image: "assets/image/Layer-6.svg",
-      subHeader1: "No Workspace created or shared yet",
-      subHeader2: "Create your first workspace here!"
-    }],
-  }]
-  myWorkspace: any = [{
-    name: "My Workspace",
-    cardDivision: [{
-      image: null,
-      subHeader1: "Operations Management",
-      subHeader2: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no"
-    }, {
-      image: null,
-      subHeader1: "Human Resources",
-      subHeader2: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no"
+  ];
+  workspaceData: any = [{
+    name: "Observables",
+    list: [{
+      desc: "Graph Node 'qa-cymonix-instance' health check is now critical",
+      observedOnDate: "15/06/2023",
+      observedOnTime:'14:20 IST'
+    },{
+      desc: "Graph Node 'qa-cymonix-instance' health check is now critical",
+      observedOnDate: "15/06/2023",
+      observedOnTime:'14:20 IST'
+    },{
+      desc: "Graph Node 'qa-cymonix-instance' health check is now critical",
+      observedOnDate: "15/06/2023",
+      observedOnTime:'14:20 IST'
+    },{
+      desc: "Graph Node 'qa-cymonix-instance' health check is now critical",
+      observedOnDate: "15/06/2023",
+      observedOnTime:'14:20 IST'
+    },{
+      desc: "Graph Node 'qa-cymonix-instance' health check is now critical",
+      observedOnDate: "15/06/2023",
+      observedOnTime:'14:20 IST'
+    },]
+  },
+    {
+      name: "Tasks",
+      list: [{
+        taskName: "assets/image/clipboard_workspace.svg",
+        desc:'',
+        status: "You don't have any new tasks",
+      },]
     },
-      {
-        image: null,
-        subHeader1: "Supply Chain Management",
-        subHeader2: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no"
-      }]
-  }]
+    {
+      name: "Shared with Me",
+      cardDivision: [{
+        image: "assets/image/folder_workspace.svg",
+        subHeader2: "No files shared with you yet"
+      }],
+    },
+  ];
+  sub = {
+    image: "assets/image/Layer-6.svg",
+    subHeader1: "No Workspace created or shared yet",
+    subHeader2: "Create your first workspace here!"
+  };
 
-  sharedWorkspace: any = [{
-    name: "My Workspace",
-    cardDivision: [{
-      image: null,
-      subHeader1: "Sales Department",
-      subHeader2: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no"
-    }, {
-      image: null,
-      subHeader1: "Cloud Computing",
-      subHeader2: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no"
-    }]
-  }]
+  constructor(private router: Router, private workSpaceService: workSpaceService) {
+  }
+
+  ngOnInit() {
+    this.getWorkSpace();
+
+  }
 
   goToDashboard() {
     this.router.navigate(['/launchpad']).then();

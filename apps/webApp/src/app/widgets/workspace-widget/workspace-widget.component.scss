@@ -4,8 +4,10 @@ cym-workspace-widget{
     width: var(--workspace-card-width);
     height: var(--workspace-card-height);
     background: white;
-    align-items: center;
+    align-items: end;
     justify-items: center;
+    align-content: center;
+    gap: 0.5rem;
   }
 
   .workspace-container{

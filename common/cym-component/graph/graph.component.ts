@@ -99,7 +99,7 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
   }
 
   ngOnChanges() {
-    if (this.data) {
+    if (this.data?.nodes) {
       // start creating graph
       this.run();
     }
