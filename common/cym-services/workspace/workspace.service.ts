@@ -8,22 +8,17 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 })
 export class workSpaceService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpHandler) {
   }
 
   getAllWorkspace(params: any): Promise<any> {
     return new Promise((resolve, reject) => {
       let httpOptions = {
-        headers: new HttpHeaders({
-          'org-id': '6',
-          'user-id': '7'
-        })
-      }
-      this.http.get(config.workspace, httpOptions).subscribe((res) => {
-        resolve(res);
-      }, error => {
-        resolve(error);
-      })
+        headers: new HttpHeaders(params)
+      };
+      this.http.getData(config.workspace, httpOptions).then((data) => {
+        resolve(data)
+      }).catch((e) => reject(e))
     })
   }
 }

@@ -10,7 +10,7 @@ export class HttpHandler {
 
   getData(apiUrl: string, params?: HttpParams | any) {
     return new Promise((resolve, reject) => {
-      this.http.get(apiUrl, {params: params}).subscribe({
+      this.http.get(apiUrl, params).subscribe({
         next: (data) => {
           resolve(data)
         }, error: (err) => {
