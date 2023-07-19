@@ -88,28 +88,39 @@ export class WorkspaceWidgetComponent implements OnInit {
       'org-id': '6',
       'user-id': '7'
     });
-    this.getModel({
+    this.getModel(null, {
       'org-id': '6',
       'user-id': '7'
     });
-    this.getTask({
+    this.getTask(null, {
       'org-id': '6',
       'user-id': '7'
     });
-    this.getObservables({
+    this.getObservables(null,{
       'org-id': '6',
       'user-id': '7'
     });
 
     // get list of models of particular workspace
-    this.getModel({
+    this.getModel(null, {
       'org-id': '6',
       'user-id': '7',
     }, {'workspace': '4'});
-    this.getModel({
+
+    // by id
+    this.getModel(2, {
       'org-id': '6',
       'user-id': '7',
     });
+    this.getTask(2, {
+      'org-id': '6',
+      'user-id': '7',
+    });
+
+    this.getObservables(2, {
+      'org-id': '6',
+      'user-id': '7',
+    })
 
   }
 
@@ -125,24 +136,24 @@ export class WorkspaceWidgetComponent implements OnInit {
     })
   }
 
-  private getModel(header: any, params?: any) {
-    this.workSpaceService.getModel(header,params).then((model) => {
+  private getModel(id: any, header: any, params?: any) {
+    this.workSpaceService.getModel(id, header, params).then((model) => {
       console.log('model', model)
     }).catch((e) => {
       console.log(e);
     })
   }
 
-  private getTask(header: any) {
-    this.workSpaceService.getTask(header).then((task) => {
+  private getTask(id: any, header: any) {
+    this.workSpaceService.getTask(id,header).then((task) => {
       console.log('task', task)
     }).catch((e) => {
       console.log(e);
     })
   }
 
-  private getObservables(header: any) {
-    this.workSpaceService.getObservables(header).then((observable) => {
+  private getObservables(id:any,header: any) {
+    this.workSpaceService.getObservables(id,header).then((observable) => {
       console.log('observable', observable)
     }).catch((e) => {
       console.log(e);
