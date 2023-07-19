@@ -56,21 +56,21 @@ export class WorkspaceWidgetComponent implements OnInit {
       observedOnDate: "Observed on: 15/06/2023,",
       observedOnTime: '14:20 IST'
     }]
-  },{
+  }, {
     name: "Tasks",
     list: [{
       label: "Port 22 is open",
-      des:"Block port 22 for graph node 'qa-cymonix-id-balancer'",
+      des: "Block port 22 for graph node 'qa-cymonix-id-balancer'",
       name: "Assigned to : You",
       dueTime: 'Due today'
     }, {
       label: "SSL Renewal",
-      des:"SSL is not installed on loadbalancers in graph node 'ca-Cymonix-id-balancer'",
+      des: "SSL is not installed on loadbalancers in graph node 'ca-Cymonix-id-balancer'",
       name: "Assigned to : Abhay",
       dueTime: 'Due tomorrow'
     }, {
       label: "Review Findings",
-      des:"Review all findings from IAM analysers and AWS Inspector effected nodes...",
+      des: "Review all findings from IAM analysers and AWS Inspector effected nodes...",
       name: "Assigned to : Pradeep",
       dueTime: 'By: 05.08.2023'
     }]
@@ -88,11 +88,26 @@ export class WorkspaceWidgetComponent implements OnInit {
   };
 
 
-
   constructor(private router: Router, private workSpaceService: workSpaceService) {
   }
 
   ngOnInit() {
+    this.apis();
+
+  }
+
+  apis() {
+    this.getReq();
+    this.postReq();
+    // this.deleteReq();
+    this.deletebyId();
+  }
+
+  goToDashboard() {
+    this.router.navigate(['/launchpad']).then();
+  }
+
+  private getReq() {
     // get all data
     this.getWorkSpace({
       'org-id': '6',
@@ -131,12 +146,14 @@ export class WorkspaceWidgetComponent implements OnInit {
       'org-id': '6',
       'user-id': '7',
     });
+  }
 
+  private postReq() {
     //   post
     this.postTask({
       'org-id': '6',
       'user-id': '7',
-    },  {
+    }, {
       "id": 2,
       "status": null,
       "created_date": "2023-07-19T10:15:01.370981Z",
@@ -207,14 +224,38 @@ export class WorkspaceWidgetComponent implements OnInit {
 
   }
 
-  goToDashboard() {
-    this.router.navigate(['/launchpad']).then();
+  private deleteReq() {
+    this.deleteModel(null, {
+      'org-id': '6',
+      'user-id': '7',
+    });
+    this.deleteTask(null, {
+      'org-id': '6',
+      'user-id': '7',
+    });
+    this.deleteObservables(null, {
+      'org-id': '6',
+      'user-id': '7',
+    });
   }
-
+  private deletebyId() {
+    this.deleteModel(23, {
+      'org-id': '6',
+      'user-id': '7',
+    });
+    this.deleteTask(13, {
+      'org-id': '6',
+      'user-id': '7',
+    });
+    this.deleteObservables(10, {
+      'org-id': '6',
+      'user-id': '7',
+    });
+  }
   getWorkSpace(header: any) {
     this.workSpaceService.getWorkspace(header).then((res) => {
       this.workspaceRes = res;
-      console.log(this.workspaceRes,"workspaceRes")
+      console.log(this.workspaceRes, "workspaceRes")
     }).catch((e) => {
       console.log(e);
     })
@@ -267,5 +308,25 @@ export class WorkspaceWidgetComponent implements OnInit {
       console.log(e)
     });
   }
+
+  private deleteModel(id: any, headers: any) {
+    this.workSpaceService.deleteModels(id,headers).then((model)=>{
+      console.log('deleted');
+    }).catch((e)=>{console.log(e)})
+  }
+
+  private deleteTask(id: any, headers: any) {
+    this.workSpaceService.deleteTask(id,headers).then((task)=>{
+      console.log('deleted');
+    }).catch((e)=>{console.log(e)})
+  }
+
+  private deleteObservables(id: any, headers: any) {
+    this.workSpaceService.deleteObservables(id,headers).then((observables)=>{
+      console.log('deleted');
+    }).catch((e)=>{console.log(e)})
+  }
+
+
 }
 

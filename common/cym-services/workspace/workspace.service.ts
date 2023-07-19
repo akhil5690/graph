@@ -61,37 +61,88 @@ export class workSpaceService {
 
 //   Post request
 
-  postTask(headers:any,body:any): Promise<any> {
-    return new Promise<any>((resolve, reject)=>{
+  postTask(headers: any, body: any): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
       let httpOptions = {
         headers: new HttpHeaders(headers),
       };
       const apiUrl = config.task;
-      this.http.postData(apiUrl,httpOptions,body).then((data)=>{
+      this.http.postData(apiUrl, httpOptions, body).then((data) => {
         resolve(data);
-      }).catch(e=>{ reject(e)})
+      }).catch(e => {
+        reject(e)
+      })
     })
   }
-  postModel(headers:any,body:any): Promise<any> {
-    return new Promise<any>((resolve, reject)=>{
+
+  postModel(headers: any, body: any): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
       let httpOptions = {
         headers: new HttpHeaders(headers),
       };
       const apiUrl = config.model;
-      this.http.postData(apiUrl,httpOptions,body).then((data)=>{
+      this.http.postData(apiUrl, httpOptions, body).then((data) => {
         resolve(data);
-      }).catch(e=>{ reject(e)})
+      }).catch(e => {
+        reject(e)
+      })
     })
   }
-  postObservables(headers:any,body:any): Promise<any> {
-    return new Promise<any>((resolve, reject)=>{
+
+  postObservables(headers: any, body: any): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
       let httpOptions = {
         headers: new HttpHeaders(headers),
       };
       const apiUrl = config.observables;
-      this.http.postData(apiUrl,httpOptions,body).then((data)=>{
+      this.http.postData(apiUrl, httpOptions, body).then((data) => {
         resolve(data);
-      }).catch(e=>{ reject(e)})
+      }).catch(e => {
+        reject(e)
+      })
+    })
+  }
+
+//   delete data
+  deleteModels(id: any, headers: any) {
+    return new Promise<any>((resolve, reject) => {
+      let httpOptions = {
+        headers: new HttpHeaders(headers),
+      };
+      const apiUrl = id ? config.model + `${id}/` : config.model;
+      this.http.deleteData(apiUrl, httpOptions).then((data) => {
+        resolve(data);
+      }).catch(e => {
+        reject(e)
+      })
+    })
+  }
+
+  deleteTask(id: any, headers: any) {
+    return new Promise<any>((resolve, reject) => {
+      let httpOptions = {
+        headers: new HttpHeaders(headers),
+      };
+      const apiUrl = id ? config.task + `${id}/` : config.task;
+      this.http.deleteData(apiUrl, httpOptions).then((data) => {
+        resolve(data);
+      }).catch(e => {
+        reject(e)
+      })
+    })
+  }
+
+  deleteObservables(id: any, headers: any) {
+    return new Promise<any>((resolve, reject) => {
+      let httpOptions = {
+        headers: new HttpHeaders(headers),
+      };
+      const apiUrl = id ? config.observables + `${id}/` : config.observables;
+      this.http.deleteData(apiUrl, httpOptions).then((data) => {
+        resolve(data);
+      }).catch(e => {
+        reject(e)
+      })
     })
   }
 }

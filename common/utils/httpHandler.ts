@@ -29,4 +29,14 @@ export class HttpHandler {
       })
     })
   }
+
+  deleteData(apiUrl:string,params:any){
+    return new Promise((resolve, reject)=>{
+      this.http.delete(apiUrl,params).subscribe({
+        next:(data)=>{
+          resolve(data)
+        },error:(error)=>{ reject(error)}
+      })
+    })
+  }
 }
