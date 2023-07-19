@@ -1,16 +1,22 @@
 <div [class]="cymClass">
-  <div>
-    <div>
-      {{taskData.label}}
-    </div>
-    <div>
-      {{taskData.dueTime}}
-    </div>
-    <div>
-      {{taskData.des}}
-    </div>
-    <div>{{taskData.name}}</div>
+  <div class="task">
+    <div class="task-section1">
+      <div class="task-data-label">
+        {{taskData.label}}
+      </div>
+      <div class="task-data">
+        {{taskData.des}}
+      </div>
+    </div >
+   <div class="task-section2">
+     <div class="task-duedate">
+       {{taskData.dueTime}}
+     </div>
+     <div class="task-name">{{taskData.name}}</div>
+   </div>
   </div>
+
 </div>
 <cym-divider></cym-divider>
+
 
