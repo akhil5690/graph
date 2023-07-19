@@ -83,7 +83,33 @@ export class WorkspaceWidgetComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getWorkSpace();
+    // get all data
+    this.getWorkSpace({
+      'org-id': '6',
+      'user-id': '7'
+    });
+    this.getModel({
+      'org-id': '6',
+      'user-id': '7'
+    });
+    this.getTask({
+      'org-id': '6',
+      'user-id': '7'
+    });
+    this.getObservables({
+      'org-id': '6',
+      'user-id': '7'
+    });
+
+    // get list of models of particular workspace
+    this.getModel({
+      'org-id': '6',
+      'user-id': '7',
+    }, {'workspace': '4'});
+    this.getModel({
+      'org-id': '6',
+      'user-id': '7',
+    });
 
   }
 
@@ -91,12 +117,33 @@ export class WorkspaceWidgetComponent implements OnInit {
     this.router.navigate(['/launchpad']).then();
   }
 
-  getWorkSpace() {
-    this.workSpaceService.getAllWorkspace({
-      'org-id': '6',
-      'user-id': '7'
-    }).then((res) => {
+  getWorkSpace(header: any) {
+    this.workSpaceService.getWorkspace(header).then((res) => {
       this.workspaceRes = res;
+    }).catch((e) => {
+      console.log(e);
+    })
+  }
+
+  private getModel(header: any, params?: any) {
+    this.workSpaceService.getModel(header,params).then((model) => {
+      console.log('model', model)
+    }).catch((e) => {
+      console.log(e);
+    })
+  }
+
+  private getTask(header: any) {
+    this.workSpaceService.getTask(header).then((task) => {
+      console.log('task', task)
+    }).catch((e) => {
+      console.log(e);
+    })
+  }
+
+  private getObservables(header: any) {
+    this.workSpaceService.getObservables(header).then((observable) => {
+      console.log('observable', observable)
     }).catch((e) => {
       console.log(e);
     })

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpHandler} from "../../utils/httpHandler";
 import config from '../../config.json'
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class workSpaceService {
   constructor(private http: HttpHandler) {
   }
 
-  getAllWorkspace(header: any): Promise<any> {
+  getWorkspace(header: any): Promise<any> {
     return new Promise((resolve, reject) => {
       let httpOptions = {
         headers: new HttpHeaders(header)
@@ -22,21 +22,37 @@ export class workSpaceService {
     })
   }
 
-  getTask(): Promise<any> {
+  getTask(header: any): Promise<any> {
     return new Promise<any>((resolve, reject) => {
-
+      let httpOptions = {
+        headers: new HttpHeaders(header)
+      };
+      this.http.getData(config.task, httpOptions).then((data) => {
+        resolve(data)
+      }).catch((e) => reject(e))
     });
   }
 
-  getObservables(): Promise<any> {
+  getObservables(header: any): Promise<any> {
     return new Promise((resolve, reject) => {
-
+      let httpOptions = {
+        headers: new HttpHeaders(header)
+      };
+      this.http.getData(config.observables, httpOptions).then((data) => {
+        resolve(data)
+      }).catch((e) => reject(e))
     });
   }
 
-  getAllModels(): Promise<any> {
+  getModel(header: any, params: any): Promise<any> {
     return new Promise((resolve, reject) => {
-
+      let httpOptions = {
+        headers: new HttpHeaders(header),
+        params: new HttpParams(params)
+      };
+      this.http.getData(config.model, httpOptions).then((data) => {
+        resolve(data)
+      }).catch((e) => reject(e))
     });
   }
 }
