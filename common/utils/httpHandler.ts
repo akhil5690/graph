@@ -39,4 +39,14 @@ export class HttpHandler {
       })
     })
   }
+
+  putData(apiUrl:string,params:any,body:any){
+    return new Promise((resolve, reject)=>{
+      this.http.put(apiUrl,body,params).subscribe({
+        next:(data)=>{
+          resolve(data)
+        },error:(error)=>{ reject(error)}
+      })
+    })
+  }
 }

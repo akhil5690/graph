@@ -101,6 +101,7 @@ export class WorkspaceWidgetComponent implements OnInit {
     this.postReq();
     // this.deleteReq();
     this.deletebyId();
+    this.putReq();
   }
 
   goToDashboard() {
@@ -373,6 +374,14 @@ export class WorkspaceWidgetComponent implements OnInit {
     }).catch((e) => {
       console.log(e)
     })
+  }
+
+  private putReq() {
+    this.putWorkspace(null,{});
+  }
+
+  private putWorkspace(id:any,headers: {}) {
+
   }
 }
 
