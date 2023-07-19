@@ -6,7 +6,7 @@ cym-top-toolbar {
     align-items: center;
     padding: var(--padding);
     height: var(--base-height);
-    color: var(--primary-text-color);
+    color: var(--secondary-text-color);
     //gap: calc(var(--grid-gap)/2);
     width: var(--base-width);
     background-color: var(--theme-color-one);
@@ -55,6 +55,13 @@ cym-top-toolbar {
   }
   .line-height{
     height:1.8rem; // divider for tool bar
+  }
+
+  .top-sector1{
+    display:grid;
+    grid-template-columns: auto auto auto;
+    align-items: center;
+
   }
 
 
