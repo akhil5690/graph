@@ -58,4 +58,40 @@ export class workSpaceService {
       }).catch((e) => reject(e))
     });
   }
+
+//   Post request
+
+  postTask(headers:any,body:any): Promise<any> {
+    return new Promise<any>((resolve, reject)=>{
+      let httpOptions = {
+        headers: new HttpHeaders(headers),
+      };
+      const apiUrl = config.task;
+      this.http.postData(apiUrl,httpOptions,body).then((data)=>{
+        resolve(data);
+      }).catch(e=>{ reject(e)})
+    })
+  }
+  postModel(headers:any,body:any): Promise<any> {
+    return new Promise<any>((resolve, reject)=>{
+      let httpOptions = {
+        headers: new HttpHeaders(headers),
+      };
+      const apiUrl = config.model;
+      this.http.postData(apiUrl,httpOptions,body).then((data)=>{
+        resolve(data);
+      }).catch(e=>{ reject(e)})
+    })
+  }
+  postObservables(headers:any,body:any): Promise<any> {
+    return new Promise<any>((resolve, reject)=>{
+      let httpOptions = {
+        headers: new HttpHeaders(headers),
+      };
+      const apiUrl = config.observables;
+      this.http.postData(apiUrl,httpOptions,body).then((data)=>{
+        resolve(data);
+      }).catch(e=>{ reject(e)})
+    })
+  }
 }

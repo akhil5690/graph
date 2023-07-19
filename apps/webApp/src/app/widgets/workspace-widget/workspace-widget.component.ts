@@ -96,7 +96,7 @@ export class WorkspaceWidgetComponent implements OnInit {
       'org-id': '6',
       'user-id': '7'
     });
-    this.getObservables(null,{
+    this.getObservables(null, {
       'org-id': '6',
       'user-id': '7'
     });
@@ -120,7 +120,80 @@ export class WorkspaceWidgetComponent implements OnInit {
     this.getObservables(2, {
       'org-id': '6',
       'user-id': '7',
-    })
+    });
+
+    //   post
+    this.postTask({
+      'org-id': '6',
+      'user-id': '7',
+    },  {
+      "id": 2,
+      "status": null,
+      "created_date": "2023-07-19T10:15:01.370981Z",
+      "created_by": null,
+      "last_updated_date": "2023-07-19T10:15:01.370988Z",
+      "last_updated_by": null,
+      "additional_info": null,
+      "title": "Port 22",
+      "description": "Block port for graph node",
+      "start_date": "2023-07-18",
+      "end_date": "2023-07-19",
+      "assigned_to": "you",
+      "org_id": 6
+    },);
+    this.postObservable({
+      'org-id': '6',
+      'user-id': '7',
+    }, {
+      "status": "",
+      "created_date": "2023-07-19T09:53:02.504633Z",
+      "created_by": "",
+      "last_updated_date": "2023-07-19T09:53:02.504640Z",
+      "last_updated_by": "",
+      "additional_info": "",
+      "type": "",
+      "property": "",
+      "value": "",
+      "last_observed": "2023-07-19T09:53:02.504647Z",
+      "org_id": 6
+    },);
+    this.postModel({
+      'org-id': '6',
+      'user-id': '7',
+    }, {
+      "status": "True",
+      "created_date": "2023-07-19T08:24:52.748288Z",
+      "created_by": "",
+      "last_updated_date": "2023-07-19T08:24:52.748294Z",
+      "last_updated_by": "",
+      "additional_info": "",
+      "name": "m",
+      "description": "m",
+      "schema": {
+        "edges": [],
+        "nodes": [
+          {
+            "id": "ac1044b4-6a5b-4d0a-bcbd-60818355c81e",
+            "label": "AWS",
+            "properties": [
+              {
+                "key": "Region",
+                "type": "string",
+                "default": "Virginia"
+              },
+              {
+                "key": "keyspace",
+                "type": "boolean",
+                "default": "true"
+              }
+            ]
+          }
+        ]
+      },
+      "explorer": {},
+      "org-id": 6,
+      "workspace": 3
+    });
 
   }
 
@@ -145,19 +218,43 @@ export class WorkspaceWidgetComponent implements OnInit {
   }
 
   private getTask(id: any, header: any) {
-    this.workSpaceService.getTask(id,header).then((task) => {
+    this.workSpaceService.getTask(id, header).then((task) => {
       console.log('task', task)
     }).catch((e) => {
       console.log(e);
     })
   }
 
-  private getObservables(id:any,header: any) {
-    this.workSpaceService.getObservables(id,header).then((observable) => {
+  private getObservables(id: any, header: any) {
+    this.workSpaceService.getObservables(id, header).then((observable) => {
       console.log('observable', observable)
     }).catch((e) => {
       console.log(e);
     })
+  }
+
+  private postTask(header: any, body: any) {
+    this.workSpaceService.postTask(header, body).then((task) => {
+      console.log('post Task', task);
+    }).catch((e) => {
+      console.log(e)
+    });
+  }
+
+  private postObservable(header: any, body: any) {
+    this.workSpaceService.postObservables(header, body).then((observables) => {
+      console.log('post observables', observables);
+    }).catch((e) => {
+      console.log(e)
+    });
+  }
+
+  private postModel(header: any, body: any) {
+    this.workSpaceService.postModel(header, body).then((model) => {
+      console.log('post model', model);
+    }).catch((e) => {
+      console.log(e)
+    });
   }
 }
 
