@@ -172,6 +172,7 @@ label {
   }
   .rightTab.active-class{
       @extend .ui-base-active-class !optional;
+    transition-delay: 0.2s;
     }
 
   //.rightTab:hover{
@@ -181,7 +182,7 @@ label {
   .three-tab-container {
     .active-class{
       @extend .ui-base-active-class !optional;
-      transition-delay: 1s;
+      transition-delay: 0.2s;
     }
     div {
       display: grid;

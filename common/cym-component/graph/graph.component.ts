@@ -391,40 +391,38 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
       this.systemService.setGraphItem(this.selectedItem);
       this.checkNeighbour(evt);
       this.checkFindings(evt);
-      // this.itemHighlight(evt)
-
-      // inputMode.selectableItems = GraphItemTypes.NONE
-      inputMode.focusableItems = GraphItemTypes.NONE
-      // if (evt.item instanceof INode) {
-      //   this.graphComponent.graph.setStyle(evt.item, selectionNodeStyle)
-      // }
-
-
-      const selectionNodeStyle = new ShapeNodeStyle({
-        shape: ShapeNodeShape.ELLIPSE,
-        stroke: `4px ${this.hoverBorder}`,
-        fill: null
-      })
-      const selectionEdgeStyle = new PolylineEdgeStyle({
-        stroke: `4px ${this.hoverBorder}`,
-        targetArrow: this.arrow({
-          type: ArrowType.TRIANGLE,
-          fill: this.hoverBorder
-        })
-      })
-      const labelStyle = new DefaultLabelStyle({
-        backgroundFill: '#EBEDEF',
-        textSize: 10,
-        verticalTextAlignment: 'center',
-        horizontalTextAlignment: 'center'
-      });
-      this.graphComponent.selectionIndicatorManager = new GraphSelectionIndicatorManager({
-        nodeStyle: selectionNodeStyle,
-        edgeStyle: selectionEdgeStyle,
-        labelStyle: labelStyle
-      })
+      this.selectionStyle(inputMode);
     })
 
+  }
+
+  selectionStyle(inputMode: GraphEditorInputMode | GraphViewerInputMode) {
+
+    // inputMode.selectableItems = GraphItemTypes.NONE
+    inputMode.focusableItems = GraphItemTypes.NONE;
+    const selectionNodeStyle = new ShapeNodeStyle({
+      shape: ShapeNodeShape.ELLIPSE,
+      stroke: `4px ${this.hoverBorder}`,
+      fill: null
+    });
+    const selectionEdgeStyle = new PolylineEdgeStyle({
+      stroke: `4px ${this.hoverBorder}`,
+      targetArrow: this.arrow({
+        type: ArrowType.TRIANGLE,
+        fill: this.hoverBorder
+      })
+    });
+    const labelStyle = new DefaultLabelStyle({
+      backgroundFill: '#EBEDEF',
+      textSize: 10,
+      verticalTextAlignment: 'center',
+      horizontalTextAlignment: 'center'
+    });
+    this.graphComponent.selectionIndicatorManager = new GraphSelectionIndicatorManager({
+      nodeStyle: selectionNodeStyle,
+      edgeStyle: selectionEdgeStyle,
+      labelStyle: labelStyle
+    })
   }
 
   checkNeighbour(evt: ItemClickedEventArgs<IModelItem>) {
@@ -657,6 +655,10 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
       if (isFullscreen) {
         this.graphComponent.graph = this.neighbourComponent.graph;
         this.createGraph(this.data, this.neighbourComponent);
+        const node = this.graphComponent.graph.nodes.find(node => node.tag.id === this.selectedNode.tag.id);
+        if (node) {
+          this.graphComponent.selection.setSelected(node, true);
+        }
         this.setInputMode(this.graphComponent);
         this.neighbourComponent.zoomTo(this.neighbourComponent.contentRect);
         ICommand.FIT_GRAPH_BOUNDS.execute(null, this.graphComponent);
@@ -665,7 +667,12 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
         this.showDetails = false;
         this.createGraph(this.data, this.graphComponent);
         this.createGraph(this.originalNeighbourhood, this.neighbourComponent);
+        const node = this.graphComponent.graph.nodes.find(node => node.tag.id === this.selectedNode.tag.id);
+        if (node) {
+          this.graphComponent.selection.setSelected(node, true);
+        }
         this.setInputMode(this.graphComponent);
+        this.systemService.setGraphItem(node);
         this.neighbourComponent.zoomTo(this.neighbourComponent.contentRect);
         this.graphComponent.zoomTo(this.graphComponent.contentRect);
 

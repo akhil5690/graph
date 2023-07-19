@@ -1,7 +1,10 @@
 <div class="container">
-  <div class="brand-logo" *ngFor="let item of sector1">
-    <img [src]="item.url" alt="logo" [height]="item.height" [width]="item.width" >
-    <!--      <img src="assets/image/Line_top_toolbar.svg" alt="">-->
+  <div class="brand-logo" *ngFor="let item of sector1" >
+    <div class="top-sector1">
+      <div><img [src]="item.url" alt="logo" [height]="item.height" [width]="item.width" ></div>
+      <div><img src="assets/image/thin-line.svg" alt="" class="line-height"> </div>
+      <div>Operations Management</div>
+    </div>
   </div>
   <div class="menu">
     <div *ngFor="let item of sector2">{{item.name}}</div>

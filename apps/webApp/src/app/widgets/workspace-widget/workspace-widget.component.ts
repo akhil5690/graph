@@ -6,7 +6,7 @@ import {workSpaceService} from "../../../../../../common/cym-services/workspace/
   selector: 'cym-workspace-widget',
   templateUrl: './workspace-widget.component.html',
   styleUrls: ['./workspace-widget.component.scss'],
-  encapsulation:ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None
 })
 export class WorkspaceWidgetComponent implements OnInit {
   workspaceRes: any;
@@ -38,30 +38,30 @@ export class WorkspaceWidgetComponent implements OnInit {
     list: [{
       desc: "Graph Node 'qa-cymonix-instance' health check is now critical",
       observedOnDate: "15/06/2023",
-      observedOnTime:'14:20 IST'
-    },{
+      observedOnTime: '14:20 IST'
+    }, {
       desc: "Graph Node 'qa-cymonix-instance' health check is now critical",
       observedOnDate: "15/06/2023",
-      observedOnTime:'14:20 IST'
-    },{
+      observedOnTime: '14:20 IST'
+    }, {
       desc: "Graph Node 'qa-cymonix-instance' health check is now critical",
       observedOnDate: "15/06/2023",
-      observedOnTime:'14:20 IST'
-    },{
+      observedOnTime: '14:20 IST'
+    }, {
       desc: "Graph Node 'qa-cymonix-instance' health check is now critical",
       observedOnDate: "15/06/2023",
-      observedOnTime:'14:20 IST'
-    },{
+      observedOnTime: '14:20 IST'
+    }, {
       desc: "Graph Node 'qa-cymonix-instance' health check is now critical",
       observedOnDate: "15/06/2023",
-      observedOnTime:'14:20 IST'
+      observedOnTime: '14:20 IST'
     },]
   },
     {
       name: "Tasks",
       list: [{
         taskName: "assets/image/clipboard_workspace.svg",
-        desc:'',
+        desc: '',
         status: "You don't have any new tasks",
       },]
     },
@@ -92,10 +92,13 @@ export class WorkspaceWidgetComponent implements OnInit {
   }
 
   getWorkSpace() {
-    this.workSpaceService.getAllWorkspace({}).then((res) => {
+    this.workSpaceService.getAllWorkspace({
+      'org-id': '6',
+      'user-id': '7'
+    }).then((res) => {
       this.workspaceRes = res;
-    }).catch((e)=>{
-      console.log(e)
+    }).catch((e) => {
+      console.log(e);
     })
   }
 }
