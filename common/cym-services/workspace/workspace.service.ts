@@ -11,14 +11,32 @@ export class workSpaceService {
   constructor(private http: HttpHandler) {
   }
 
-  getAllWorkspace(params: any): Promise<any> {
+  getAllWorkspace(header: any): Promise<any> {
     return new Promise((resolve, reject) => {
       let httpOptions = {
-        headers: new HttpHeaders(params)
+        headers: new HttpHeaders(header)
       };
       this.http.getData(config.workspace, httpOptions).then((data) => {
         resolve(data)
       }).catch((e) => reject(e))
     })
+  }
+
+  getTask(): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+
+    });
+  }
+
+  getObservables(): Promise<any> {
+    return new Promise((resolve, reject) => {
+
+    });
+  }
+
+  getAllModels(): Promise<any> {
+    return new Promise((resolve, reject) => {
+
+    });
   }
 }
