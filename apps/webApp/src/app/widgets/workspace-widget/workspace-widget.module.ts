@@ -28,6 +28,12 @@ import {
 } from "../../../../../../common/cym-containers/cym-secondary-toolbar/cym-secondary-toolbar.module";
 import {CymInputModule} from "../../../../../../common/cym-component/form/cym-input/cym-input.module";
 import {CymCardModule} from "../../../../../../common/cym-containers/cym-card/cym-card.module";
+import {
+    CymObservableWorkspaceModule
+} from "../../../../../../common/cym-containers/cym-observable-workspace/cym-observable-workspace.module";
+import {
+  CymTasksWorkspaceModule
+} from "../../../../../../common/cym-containers/cym-tasks-workspace/cym-tasks-workspace.module";
 
 
 @NgModule({
@@ -49,7 +55,7 @@ import {CymCardModule} from "../../../../../../common/cym-containers/cym-card/cy
     TopToolbarModule,
     CymSecondaryToolbarModule,
     CymInputModule,
-    CymWorkspaceCardModule, CymWorkspaceCardDivisionModule, CymCardModule
+    CymWorkspaceCardModule, CymWorkspaceCardDivisionModule, CymCardModule, CymObservableWorkspaceModule, CymTasksWorkspaceModule
   ],
   providers:[workSpaceService, HttpHandler],
   exports: [WorkspaceWidgetComponent]
