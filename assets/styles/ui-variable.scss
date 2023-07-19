@@ -55,15 +55,9 @@
   --graph-tool-bar-height: 2.857rem;
   --graph-toolbar-icon-hover: #f5f5f5;
 
-  //graph-page-icon -
-  --graph-tool-icon-height: 1.42rem;
-  --graph-tool-icon-width: 1.42rem;
-
-
   //graph-sidebar -
   --graph-sidebar-height: 85vh;
   --graph-sidebar-width: 80vw;
-
   --graph-height: calc(var(--main-height-seconadry) - var(--top-toolbar-height));
   --graph-width: 100vw;
 
@@ -83,6 +77,8 @@
   --icon-color: white;
   --icon-box-size: 2.85rem;
   --line-color:#B6B6B6;
+  --graph-tool-icon-height: 1.42rem;// graph icon
+  --graph-tool-icon-width: 1.42rem;
 
   //breadcrumbs related styles//
   --breadcrumb-toolbar-bgcolor: #FFFFFF;
@@ -98,8 +94,6 @@
   --graph-toolbar-font-color: #585858;
   --graph-toolbar-icon-color: #585858;
 --graph-top-toolbar-height: 3rem;
-  //icon-image-
-  --card-division-img-size: 6rem; //launchpad page
 
   //menu-right-toolbar-
   --right-toolbar-height: 30px;
@@ -119,14 +113,13 @@
   --panel-header-height:2.857rem;
   --accordian-header-height:2.857rem;
 
-
   //card related styles
   --vertical-cards-loop: calc(var(--unit) * 15);
   --card-height: calc(var(--unit) * 11);
-  // card
-  --workspace-card-width: 13rem;
-  --workspace-card-height: 11rem;
-  --short-name: 5rem;
+  --card-division-img-size: 6rem; //launchpad page
+  --workspace-card-width: 12rem; // workspace page
+  --workspace-card-height: 10rem;
+  --short-name: 4rem;
 
   //logged-in-user  icon related styles
   --logged-in-user-height : 1.714rem;
@@ -136,10 +129,10 @@
   --logged-in-user-div2 : 0.5rem;
   --circle-border-radius:50%; // for logged in user icon
 
-
   //chevron right arrow styles
   --chevron-height: 0.714rem;
   --chevron-width : 0.714rem;
+
 
 
 

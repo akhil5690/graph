@@ -1,13 +1,13 @@
 <cym-widget-frame [frame_type]="'header-main-footer-frame'">
   <cym-top-toolbar header></cym-top-toolbar>
   <cym-div main [cymClass]="'workstation'">
-    <cym-div *ngIf="workspaceRes;else noData" >
+    <cym-div *ngIf="workspaceRes;else noData">
       <cym-div [cymClass]="'workspace-title'">My Workspace</cym-div>
       <cym-div [cymClass]="'workspace-container'">
         <cym-div *ngFor="let card of workspaceRes" [cymClass]="'card'" (click)="goToDashboard()">
           <cym-div [cymClass]="'short-name'">SN</cym-div>
           <cym-div>{{card.name}}</cym-div>
-          <cym-div>Lorem ipsum dolor sit </cym-div>
+          <cym-div>Lorem ipsum dolor sit</cym-div>
           <cym-div></cym-div>
         </cym-div>
       </cym-div>
@@ -17,24 +17,34 @@
       <cym-div [cymClass]="'section1'">
         <cym-workspace-card [cymClass]="'section11'">
           <cym-div card-content>
-            <cym-workspace-card-division  [workspaceCardDetails]="sub">
+            <cym-workspace-card-division [workspaceCardDetails]="sub">
             </cym-workspace-card-division>
             <div class="create-workspace">
               <cym-button [label]="'Create Wokspace'" [class]="'solid-button'" (click)="goToDashboard()"></cym-button>
             </div>
           </cym-div>
         </cym-workspace-card>
-
       </cym-div>
     </ng-template>
 
+    <!--    <cym-div [cymClass]="'section2'">-->
+    <!--      <cym-workspace-card *ngFor="let tool of workspaceNoData" [cymClass]="'section2-card'">-->
+    <!--        <cym-div header [cymClass]="'section2-head'">{{tool.name}}</cym-div>-->
+    <!--        <cym-div card-content [cymClass]="'section222'">-->
+    <!--          <cym-workspace-card-division *ngFor="let sub of tool.cardDivision" [workspaceCardDetails]="sub"-->
+    <!--                                       [cymClass]="'section2-division'">-->
+    <!--          </cym-workspace-card-division>-->
+    <!--        </cym-div>-->
+    <!--      </cym-workspace-card>-->
+    <!--    </cym-div>-->
+
     <cym-div [cymClass]="'section2'">
-      <cym-workspace-card *ngFor="let tool of workspaceNoData" [cymClass]="'section2-card'">
+      <cym-workspace-card *ngFor="let tool of workspaceData" [cymClass]="'section2-card'">
         <cym-div header [cymClass]="'section2-head'">{{tool.name}}</cym-div>
         <cym-div card-content [cymClass]="'section222'">
-          <cym-workspace-card-division *ngFor="let sub of tool.cardDivision" [workspaceCardDetails]="sub"
-                                       [cymClass]="'section2-division'">
-          </cym-workspace-card-division>
+          <cym-observable-workspace *ngFor="let sub of tool.list" [observableData]="sub"></cym-observable-workspace>
+          <cym-tasks-workspace *ngFor="let sub of tool.list" [taskData]="sub"></cym-tasks-workspace>
+          <cym-workspace-card-division *ngFor="let sub of tool.cardDivision" [workspaceCardDetails]="sub"></cym-workspace-card-division>
         </cym-div>
       </cym-workspace-card>
     </cym-div>
