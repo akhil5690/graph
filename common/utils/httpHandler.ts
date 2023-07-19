@@ -18,6 +18,15 @@ export class HttpHandler {
         }
       })
     })
+  }
 
+  postData(apiURL: string, params: any, body: any) {
+    return new Promise((resolve, reject)=>{
+      this.http.post(apiURL,body,params).subscribe({
+        next:(data)=>{
+          resolve(data)
+        },error:(error)=>{ reject(error)}
+      })
+    })
   }
 }
