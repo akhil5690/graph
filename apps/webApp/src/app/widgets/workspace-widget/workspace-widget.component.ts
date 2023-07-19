@@ -36,26 +36,31 @@ export class WorkspaceWidgetComponent implements OnInit {
   workspaceData: any = [{
     name: "Observables",
     list: [{
-      desc: "Graph Node 'qa-cymonix-instance' health check is now critical",
+      desc: "Graph Node qa-cymonix-instance health check is now critical",
       observedOnDate: "Observed on: 15/06/2023,",
       observedOnTime: '14:20 IST'
     }, {
-      desc: "Graph Node 'qa-cymonix-instance' health check is now critical",
-      observedOnDate: "Observed on: 15/06/2023,",
-      observedOnTime: '14:20 IST'
+      desc: "BOT load-data-from-crm-cymonix has failed",
+      observedOnDate: "Observed on: 17/07/2023,",
+      observedOnTime: '09:00 IST'
     }, {
-      desc: "Graph Node 'qa-cymonix-instance' health check is now critical",
-      observedOnDate: "Observed on: 15/06/2023,",
-      observedOnTime: '14:20 IST'
+      desc: "BOT load-data-from-crm-cymonix has triggered",
+      observedOnDate: "Observed on: 17/07/2023,",
+      observedOnTime: '13:10 IST'
     }, {
-      desc: "Graph Node 'qa-cymonix-instance' health check is now critical",
-      observedOnDate: "Observed on: 15/06/2023,",
-      observedOnTime: '14:20 IST'
+      desc: "BOT load-data-from-armis has successful",
+      observedOnDate: "Observed on: 16/07/2023,",
+      observedOnTime: '03:45 IST'
     }, {
-      desc: "Graph Node 'qa-cymonix-instance' health check is now critical",
-      observedOnDate: "Observed on: 15/06/2023,",
-      observedOnTime: '14:20 IST'
-    }]
+      desc: "BOT load-data-from-armis has triggered",
+      observedOnDate: "Observed on: 10/07/2023,",
+      observedOnTime: '21:05 IST'
+    },
+      {
+        desc: "Graph Node ec2-instance findings reported critical",
+        observedOnDate: "Observed on: 11/07/2023,",
+        observedOnTime: '16:50 IST'
+      }]
   },{
     name: "Tasks",
     list: [{
