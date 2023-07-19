@@ -28,7 +28,7 @@ export class workSpaceService {
         headers: new HttpHeaders(header)
       };
       let apiUrl = id ? config.model + `${id}/` : config.task;
-      this.http.getData(config.task, httpOptions).then((data) => {
+      this.http.getData(apiUrl, httpOptions).then((data) => {
         resolve(data)
       }).catch((e) => reject(e))
     });
