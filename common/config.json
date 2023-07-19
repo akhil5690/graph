@@ -1,5 +1,8 @@
 {
   "schema": "https://3264khiyek.execute-api.us-east-1.amazonaws.com/Stage/GetSchemaAPI",
   "graph": "https://l6lf5jf3xe.execute-api.us-east-1.amazonaws.com/Stage/NeptuneDataQuery",
-  "workspace": "https://wao7wqhdai.execute-api.us-east-1.amazonaws.com/qa/api/workspace/"
+  "workspace": "https://wao7wqhdai.execute-api.us-east-1.amazonaws.com/qa/api/workspace/",
+  "model": "https://wao7wqhdai.execute-api.us-east-1.amazonaws.com/qa/api/model/",
+  "task": "https://wao7wqhdai.execute-api.us-east-1.amazonaws.com/qa/api/task/",
+  "observables": "https://wao7wqhdai.execute-api.us-east-1.amazonaws.com/qa/api/observables/"
 }
