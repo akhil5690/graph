@@ -150,6 +150,23 @@ export class WorkspaceWidgetComponent implements OnInit {
 
   private postReq() {
     //   post
+    this.postWorkspace({
+      'org-id': '6',
+      'user-id': '7',
+    }, {
+      "status": "True",
+      "created_date": "2023-07-19T11:16:51.295364Z",
+      "created_by": "",
+      "last_updated_date": "2023-07-19T11:16:51.295427Z",
+      "last_updated_by": "",
+      "additional_info": "",
+      "name": "Vandana",
+      "description": "m",
+      "color": "orange",
+      "workspace_key": null,
+      "org_id": 6,
+      "user": 7
+    });
     this.postTask({
       'org-id': '6',
       'user-id': '7',
@@ -237,8 +254,17 @@ export class WorkspaceWidgetComponent implements OnInit {
       'org-id': '6',
       'user-id': '7',
     });
+    this.deleteWorkspace(null,{
+      'org-id': '6',
+      'user-id': '7',
+    });
   }
+
   private deletebyId() {
+    this.deleteWorkspace(10,{
+      'org-id': '6',
+      'user-id': '7',
+    });
     this.deleteModel(23, {
       'org-id': '6',
       'user-id': '7',
@@ -252,6 +278,7 @@ export class WorkspaceWidgetComponent implements OnInit {
       'user-id': '7',
     });
   }
+
   getWorkSpace(header: any) {
     this.workSpaceService.getWorkspace(header).then((res) => {
       this.workspaceRes = res;
@@ -285,6 +312,13 @@ export class WorkspaceWidgetComponent implements OnInit {
     })
   }
 
+  private postWorkspace(header: any, body: any) {
+    this.workSpaceService.postWorkspace(header, body).then((task) => {
+      console.log('post Task', task);
+    }).catch((e) => {
+      console.log(e)
+    });
+  }
   private postTask(header: any, body: any) {
     this.workSpaceService.postTask(header, body).then((task) => {
       console.log('post Task', task);
@@ -310,23 +344,35 @@ export class WorkspaceWidgetComponent implements OnInit {
   }
 
   private deleteModel(id: any, headers: any) {
-    this.workSpaceService.deleteModels(id,headers).then((model)=>{
+    this.workSpaceService.deleteModels(id, headers).then((model) => {
       console.log('deleted');
-    }).catch((e)=>{console.log(e)})
+    }).catch((e) => {
+      console.log(e)
+    })
   }
 
   private deleteTask(id: any, headers: any) {
-    this.workSpaceService.deleteTask(id,headers).then((task)=>{
+    this.workSpaceService.deleteTask(id, headers).then((task) => {
       console.log('deleted');
-    }).catch((e)=>{console.log(e)})
+    }).catch((e) => {
+      console.log(e)
+    })
   }
 
   private deleteObservables(id: any, headers: any) {
-    this.workSpaceService.deleteObservables(id,headers).then((observables)=>{
+    this.workSpaceService.deleteObservables(id, headers).then((observables) => {
       console.log('deleted');
-    }).catch((e)=>{console.log(e)})
+    }).catch((e) => {
+      console.log(e)
+    })
   }
 
-
+  private deleteWorkspace(id: any, headers: any) {
+    this.workSpaceService.deleteWorkspace(id, headers).then((observables) => {
+      console.log('deleted');
+    }).catch((e) => {
+      console.log(e)
+    })
+  }
 }
 
