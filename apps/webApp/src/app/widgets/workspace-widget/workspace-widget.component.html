@@ -3,6 +3,7 @@
   <cym-div main [cymClass]="'workstation'">
     <cym-div *ngIf="workspaceRes;else noData">
       <cym-div [cymClass]="'workspace-title'">My Workspace</cym-div>
+      <cym-button [image]="'../../../../assets/image/help-web-button.svg'" [label]="'New workspace'"></cym-button>
       <cym-div [cymClass]="'workspace-container'">
         <cym-div *ngFor="let card of workspaceRes" [cymClass]="'card'" (click)="goToDashboard()">
           <cym-div [cymClass]="'short-name'">SN</cym-div>
