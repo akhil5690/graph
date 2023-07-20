@@ -89,6 +89,11 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
     this.systemService.toolClick.subscribe(tool => {
       this.clickEvent(tool)
     })
+    this.systemService.isRightSidebarOpenSub.subscribe((isOpen) => {
+      if (isOpen) {
+        this.fitContent();
+      }
+    })
   }
 
   ngAfterViewInit() {

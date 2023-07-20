@@ -84,10 +84,28 @@ cym-workspace-widget{
     font-weight: var(--font-weight-bold);
   }
 
-  .section2-division{
+  .section2-division {
     justify-content: center;
     align-items: center;
+  }
 
+  .workspace-header-line{
+    display:grid;
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+  }
+
+  .my-workspace-add-button{
+    background-color: #2896a4;
+    display:grid;
+    grid-template-columns: 2fr 8fr;
+    grid-template-rows: 30px;
+
+
+  }
+
+  .divide{
+    background-color: black;
   }
 
 }
