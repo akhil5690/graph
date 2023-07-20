@@ -2,8 +2,14 @@
   <cym-top-toolbar header></cym-top-toolbar>
   <cym-div main [cymClass]="'workstation'">
     <cym-div *ngIf="workspaceRes;else noData">
-      <cym-div [cymClass]="'workspace-title'">My Workspace</cym-div>
-      <cym-button [image]="'../../../../assets/image/help-web-button.svg'" [label]="'New workspace'"></cym-button>
+
+          <cym-div [cymClass]="'workspace-page'">
+            <cym-div [cymClass]="'workspace-title'">My Workspace</cym-div>
+            <cym-div [cymClass]="'add'">
+              <cym-button [image]="'../../../../assets/image/add.svg'" [label]="'New workspace'" [class]="'solid-button'"></cym-button>
+            </cym-div>
+          </cym-div>
+
       <cym-div [cymClass]="'workspace-container'">
         <cym-div *ngFor="let card of workspaceRes" [cymClass]="'card'" (click)="goToDashboard()">
           <cym-div [cymClass]="'short-name'">{{card.workspace_key}}</cym-div>
@@ -11,8 +17,8 @@
           <cym-div [cymClass]="'text-center'">{{card.description}}</cym-div>
         </cym-div>
       </cym-div>
-      <div>
-        <cym-divider class="divide"></cym-divider>
+      <div class="divider-workspace">
+        <cym-divider></cym-divider>
       </div>
     </cym-div>
 

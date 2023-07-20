@@ -32,9 +32,24 @@ cym-workspace-widget {
     background: yellowgreen;
   }
 
+  .workspace-page{
+    display:grid;
+    grid-template-columns: 8fr 2fr;
+    align-items: center;
+  }
+
   .workspace-title {
     font-weight: var(--font-weight-bolder);
   }
+
+  .add{
+    text-align:right;
+    color:var(--secondary-text-color);
+    align-items: center;
+  }
+
+
+
 
   .workstation {
     display: grid;
