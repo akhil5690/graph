@@ -39,7 +39,7 @@
   .task{
     display: grid;
     grid-template-columns: 7fr 3fr;
-    grid-template-rows: var(--unit);
+    grid-template-rows: calc(var(--unit)*2);
     text-align: left;
     row-gap: 0.3rem;
     padding: var(--padding);
