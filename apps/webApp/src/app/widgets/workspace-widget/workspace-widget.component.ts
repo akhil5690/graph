@@ -52,11 +52,11 @@ export class WorkspaceWidgetComponent implements OnInit {
   }
 
   apis() {
-    this.getReq();
-    this.postReq();
     // this.deleteReq();
-    this.deletebyId();
-    this.putReq();
+    this.getReq();
+    // this.postReq();
+    // this.deletebyId();
+    // this.putReq();
   }
 
   goToDashboard() {
@@ -271,8 +271,8 @@ export class WorkspaceWidgetComponent implements OnInit {
   }
 
   private postWorkspace(header: any, body: any) {
-    this.workSpaceService.postWorkspace(header, body).then((task) => {
-      console.log('post Task', task);
+    this.workSpaceService.postWorkspace(header, body).then((workspace) => {
+      console.log('post Workspace', workspace);
     }).catch((e) => {
       console.log(e)
     });
