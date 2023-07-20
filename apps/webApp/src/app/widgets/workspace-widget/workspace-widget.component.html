@@ -40,23 +40,23 @@
 
     <cym-div [cymClass]="'section2'">
       <cym-workspace-card [cymClass]="'section2-card'">
-        <div header>Observables</div>
-        <div card-content>
+        <cym-div header [cymClass]="'section2-head'">Observables</cym-div>
+        <cym-div card-content>
           <cym-observable-workspace *ngFor="let observable of observables"
                                     [observableData]="observable"></cym-observable-workspace>
-        </div>
+        </cym-div>
       </cym-workspace-card>
       <cym-workspace-card [cymClass]="'section2-card'">
-        <div header>Tasks</div>
-        <div card-content>
+        <cym-div header [cymClass]="'section2-head'">Tasks</cym-div>
+        <cym-div card-content>
           <cym-tasks-workspace *ngFor="let task of tasks" [taskData]="task"></cym-tasks-workspace>
-        </div>
+        </cym-div>
       </cym-workspace-card>
       <cym-workspace-card [cymClass]="'section2-card'">
-        <div header>Shared with Me</div>
-        <div card-content>
+        <cym-div header [cymClass]="'section2-head'">Shared with Me</cym-div>
+        <cym-div card-content>
           Shared with Me
-        </div>
+        </cym-div>
       </cym-workspace-card>
     </cym-div>
   </cym-div>
