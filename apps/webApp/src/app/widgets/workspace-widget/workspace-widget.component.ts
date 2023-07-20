@@ -45,7 +45,7 @@ export class WorkspaceWidgetComponent implements OnInit {
     // this.deleteReq();
     this.getReq();
     // this.postReq();
-    // this.deletebyId();
+    this.deletebyId();
     // this.putReq();
   }
 
@@ -106,10 +106,10 @@ export class WorkspaceWidgetComponent implements OnInit {
       "last_updated_date": "2023-07-19T11:16:51.295427Z",
       "last_updated_by": "",
       "additional_info": "",
-      "name": "Vandana",
-      "description": "m",
+      "name": "Operations Management",
+      "description": 'Administration of business operations ',
       "color": "orange",
-      "workspace_key": null,
+      "workspace_key": 'OM',
       "org_id": 6,
       "user": 7
     });
@@ -207,7 +207,7 @@ export class WorkspaceWidgetComponent implements OnInit {
   }
 
   private deletebyId() {
-    this.deleteWorkspace(10, {
+    this.deleteWorkspace(246, {
       'org-id': '6',
       'user-id': '7',
     });

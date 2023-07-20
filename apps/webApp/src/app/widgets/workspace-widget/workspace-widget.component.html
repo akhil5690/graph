@@ -6,10 +6,9 @@
       <cym-button [image]="'../../../../assets/image/help-web-button.svg'" [label]="'New workspace'"></cym-button>
       <cym-div [cymClass]="'workspace-container'">
         <cym-div *ngFor="let card of workspaceRes" [cymClass]="'card'" (click)="goToDashboard()">
-          <cym-div [cymClass]="'short-name'">SN</cym-div>
-          <cym-div>{{card.name}}</cym-div>
-          <cym-div>Lorem ipsum dolor sit</cym-div>
-          <cym-div></cym-div>
+          <cym-div [cymClass]="'short-name'">{{card.workspace_key}}</cym-div>
+          <cym-div [cymClass]="'text-center'">{{card.name}}</cym-div>
+          <cym-div [cymClass]="'text-center'">{{card.description}}</cym-div>
         </cym-div>
       </cym-div>
       <div>
