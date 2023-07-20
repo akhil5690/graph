@@ -335,11 +335,28 @@ export class WorkspaceWidgetComponent implements OnInit {
   }
 
   private putReq() {
-    this.putWorkspace(null, {});
+    this.putWorkspace(48, {
+      'org-id': '6',
+      'user-id': '7',
+    }, {
+      "status": "False",
+      "created_date": "2023-07-19T11:16:51.295364Z",
+      "created_by": "",
+      "last_updated_date": "2023-07-19T11:16:51.295427Z",
+      "last_updated_by": "",
+      "additional_info": "",
+      "name": "Vandana",
+      "description": "m",
+      "color": "orange",
+      "workspace_key":null, "org_id": 6,
+      "user": 7
+    });
   }
 
-  private putWorkspace(id: any, headers: {}) {
-
+  private putWorkspace(id: any, headers: {}, body: any) {
+    this.workSpaceService.putWorkspace(id,headers,body).then().catch((e) => {
+      console.log(e)
+    })
   }
 }
 
