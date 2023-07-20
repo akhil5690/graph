@@ -10,6 +10,8 @@ import {workSpaceService} from "../../../../../../common/cym-services/workspace/
 })
 export class WorkspaceWidgetComponent implements OnInit {
   workspaceRes: any;
+  tasks: any;
+  observables: any;
 
   workspaceNoData: any = [{
     name: "Observables",
@@ -33,59 +35,7 @@ export class WorkspaceWidgetComponent implements OnInit {
       }],
     },
   ];
-  workspaceData: any = [{
-    name: "Observables",
-    list: [{
-      desc: "Graph Node qa-cymonix-instance health check is now critical",
-      observedOnDate: "Observed on: 15/06/2023,",
-      observedOnTime: '14:20 IST'
-    }, {
-      desc: "BOT load-data-from-crm-cymonix has failed",
-      observedOnDate: "Observed on: 17/07/2023,",
-      observedOnTime: '09:00 IST'
-    }, {
-      desc: "BOT load-data-from-crm-cymonix has triggered",
-      observedOnDate: "Observed on: 17/07/2023,",
-      observedOnTime: '13:10 IST'
-    }, {
-      desc: "BOT load-data-from-armis has successful",
-      observedOnDate: "Observed on: 16/07/2023,",
-      observedOnTime: '03:45 IST'
-    }, {
-      desc: "BOT load-data-from-armis has triggered",
-      observedOnDate: "Observed on: 10/07/2023,",
-      observedOnTime: '21:05 IST'
-    },
-      {
-        desc: "Graph Node ec2-instance findings reported critical",
-        observedOnDate: "Observed on: 11/07/2023,",
-        observedOnTime: '16:50 IST'
-      }]
-  },{
-    name: "Tasks",
-    list: [{
-      label: "Port 22 is open",
-      des: "Block port 22 for graph node 'qa-cymonix-id-balancer'",
-      name: "Assigned to : You",
-      dueTime: 'Due today'
-    }, {
-      label: "SSL Renewal",
-      des: "SSL is not installed on loadbalancers in graph node 'ca-Cymonix-id-balancer'",
-      name: "Assigned to : Abhay",
-      dueTime: 'Due tomorrow'
-    }, {
-      label: "Review Findings",
-      des: "Review all findings from IAM analysers and AWS Inspector effected nodes...",
-      name: "Assigned to : Pradeep",
-      dueTime: 'By: 05.08.2023'
-    }]
-  }, {
-    name: "Shared with Me",
-    cardDivision: [{
-      image: "assets/image/folder_workspace.svg",
-      subHeader2: "No files shared with you yet"
-    }],
-  }];
+  workspaceHeader: any = ["Observable", "Tasks", "Shared with me"];
   sub = {
     image: "assets/image/Layer-6.svg",
     subHeader1: "No Workspace created or shared yet",
@@ -202,8 +152,8 @@ export class WorkspaceWidgetComponent implements OnInit {
       "last_updated_by": "",
       "additional_info": "",
       "type": "",
-      "property": "",
-      "value": "",
+      "property": "load-data-from-crm-cymonix",
+      "value": "has failed",
       "last_observed": "2023-07-19T09:53:02.504647Z",
       "org_id": 6
     },);
@@ -260,14 +210,14 @@ export class WorkspaceWidgetComponent implements OnInit {
       'org-id': '6',
       'user-id': '7',
     });
-    this.deleteWorkspace(null,{
+    this.deleteWorkspace(null, {
       'org-id': '6',
       'user-id': '7',
     });
   }
 
   private deletebyId() {
-    this.deleteWorkspace(10,{
+    this.deleteWorkspace(10, {
       'org-id': '6',
       'user-id': '7',
     });
@@ -304,7 +254,8 @@ export class WorkspaceWidgetComponent implements OnInit {
 
   private getTask(id: any, header: any) {
     this.workSpaceService.getTask(id, header).then((task) => {
-      console.log('task', task)
+      this.tasks = task;
+      console.log('task', this.tasks)
     }).catch((e) => {
       console.log(e);
     })
@@ -312,7 +263,8 @@ export class WorkspaceWidgetComponent implements OnInit {
 
   private getObservables(id: any, header: any) {
     this.workSpaceService.getObservables(id, header).then((observable) => {
-      console.log('observable', observable)
+      this.observables = observable;
+      console.log('observable', this.observables)
     }).catch((e) => {
       console.log(e);
     })
@@ -325,6 +277,7 @@ export class WorkspaceWidgetComponent implements OnInit {
       console.log(e)
     });
   }
+
   private postTask(header: any, body: any) {
     this.workSpaceService.postTask(header, body).then((task) => {
       console.log('post Task', task);
@@ -382,10 +335,10 @@ export class WorkspaceWidgetComponent implements OnInit {
   }
 
   private putReq() {
-    this.putWorkspace(null,{});
+    this.putWorkspace(null, {});
   }
 
-  private putWorkspace(id:any,headers: {}) {
+  private putWorkspace(id: any, headers: {}) {
 
   }
 }
