@@ -13,7 +13,7 @@ cym-workspace-widget{
   .workspace-container{
     display: grid;
     grid-template-columns: repeat(auto-fill,var(--workspace-card-width));
-    gap: calc(var(--grid-gap)/2);
+    gap: var(--grid-gap);
     cursor: pointer;
     padding: var(--padding) 0 var(--padding) 0;
   }
@@ -28,6 +28,64 @@ cym-workspace-widget{
 
   .workspace-title{
     font-weight: var(--font-weight-bolder);
+  }
+  .workstation{
+    display: grid;
+    grid-template-columns: 6fr 4fr;
+    gap:var(--grid-gap);
+    padding: var(--padding);
+    height:var(--base-height);
+
+  }
+
+  .section1{
+    display:grid;
+    justify-content: center;
+    height: var(--base-height);
+    align-items: center;
+    text-align: center;
+  }
+
+  .create-workspace {
+    display: grid;
+    padding: var(--padding) calc(var(--padding)*2) var(--padding) calc(var(--padding)*2) ;
+
+  }
+
+  .section2{
+    display: grid;
+    grid-template-columns: 1fr;
+    //grid-template-rows: 3fr 4fr 3fr ;
+    text-align: center;
+    justify-content: center;
+    grid-gap: var(--unit);
+    height:var(--base-height);
+    width: var(--base-height);
+
+  }
+
+  .section2-card{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    justify-content: center;
+    height:var(--base-height);
+    width: var(--base-height);
+    background-color:var(--primary-background-color)
+
+  }
+
+  .section2-head{
+    text-align:left;
+    padding-left:var(--padding);
+    padding-top:var(--padding);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .section2-division{
+    justify-content: center;
+    align-items: center;
+
   }
 
 }

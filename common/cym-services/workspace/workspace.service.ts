@@ -171,18 +171,4 @@ export class workSpaceService {
       })
     })
   }
-
-  putWorkspace(id: any, headers: any,body:any){
-    return new Promise<any>((resolve, reject) => {
-      let httpOptions = {
-        headers: new HttpHeaders(headers),
-      };
-      const apiUrl = id ? config.workspace + `${id}/` : config.workspace;
-      this.http.putData(apiUrl, httpOptions,body).then((data) => {
-        resolve(data);
-      }).catch(e => {
-        reject(e)
-      })
-    })
-  }
 }
