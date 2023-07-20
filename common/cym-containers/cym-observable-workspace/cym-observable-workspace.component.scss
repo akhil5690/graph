@@ -1,0 +1,15 @@
+
+
+  .observable{
+    display:grid;
+    grid-template-columns: 5fr 5fr ;
+    padding:calc(var(--padding)/2);
+    align-items: center;
+
+}
+
+  .observable-content{
+    text-align: left;
+    padding:calc(var(--padding)/2)
+  }
+

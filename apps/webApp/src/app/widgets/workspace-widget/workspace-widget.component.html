@@ -13,7 +13,6 @@
       </cym-div>
     </cym-div>
 
-
     <ng-template #noData>
       <cym-div [cymClass]="'section1'">
         <cym-workspace-card [cymClass]="'section11'">
@@ -42,12 +41,14 @@
     <cym-div [cymClass]="'section2'">
       <cym-workspace-card *ngFor="let tool of workspaceData" [cymClass]="'section2-card'">
         <cym-div header [cymClass]="'section2-head'">{{tool.name}}</cym-div>
-        <cym-div card-content [cymClass]="'section222'">
-          <cym-observable-workspace *ngFor="let sub of tool.list" [observableData]="sub">
-          </cym-observable-workspace>
-          <cym-tasks-workspace *ngFor="let sub of tool.list" [taskData]="sub"></cym-tasks-workspace>
-          <cym-workspace-card-division *ngFor="let sub of tool.cardDivision"
-                                       [workspaceCardDetails]="sub"></cym-workspace-card-division>
+        <cym-div card-content>
+         <div>
+           <cym-observable-workspace *ngFor="let sub of tool.list" [observableData]="sub"></cym-observable-workspace>
+         </div>
+          <div>
+            <cym-tasks-workspace *ngFor="let sub of tool.list" [taskData]="sub"></cym-tasks-workspace>
+          </div>
+          <cym-workspace-card-division *ngFor="let sub of tool.cardDivision" [workspaceCardDetails]="sub"></cym-workspace-card-division>
         </cym-div>
       </cym-workspace-card>
     </cym-div>

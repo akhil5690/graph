@@ -1,7 +1,7 @@
 cym-workspace-widget{
   .workstation{
     display: grid;
-    grid-template-columns: 3fr 2fr;
+    grid-template-columns: 6fr 4fr;
     gap:var(--grid-gap);
     padding: var(--padding);
     height:var(--base-height);
@@ -50,8 +50,6 @@ cym-workspace-widget{
     padding-left:var(--padding);
     padding-top: var(--padding);
     font-weight: var(--font-weight-bold);
-
-
   }
 
   .section2-division{
