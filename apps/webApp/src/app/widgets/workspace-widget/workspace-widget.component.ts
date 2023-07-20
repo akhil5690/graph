@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {Router} from "@angular/router";
 import {workSpaceService} from "../../../../../../common/cym-services/workspace/workspace.service";
+import {CymService} from "../../../../../../common/cym-services/systemService/cymSystemService";
 
 @Component({
   selector: 'cym-workspace-widget',
@@ -11,6 +12,7 @@ import {workSpaceService} from "../../../../../../common/cym-services/workspace/
 export class WorkspaceWidgetComponent implements OnInit {
   workspaceRes: any;
   tasks: any;
+  shareData: any;
   observables: any;
 
   workspaceNoData: any = [{
@@ -43,7 +45,7 @@ export class WorkspaceWidgetComponent implements OnInit {
   };
 
 
-  constructor(private router: Router, private workSpaceService: workSpaceService) {
+  constructor(private router: Router, private workSpaceService: workSpaceService, private cym: CymService) {
   }
 
   ngOnInit() {
@@ -236,11 +238,14 @@ export class WorkspaceWidgetComponent implements OnInit {
   }
 
   getWorkSpace(header: any) {
+    this.cym.setLoader(true);
     this.workSpaceService.getWorkspace(header).then((res) => {
       this.workspaceRes = res;
       console.log(this.workspaceRes, "workspaceRes")
     }).catch((e) => {
       console.log(e);
+    }).finally(() => {
+      this.cym.setLoader(false);
     })
   }
 
@@ -348,13 +353,13 @@ export class WorkspaceWidgetComponent implements OnInit {
       "name": "Vandana",
       "description": "m",
       "color": "orange",
-      "workspace_key":null, "org_id": 6,
+      "workspace_key": null, "org_id": 6,
       "user": 7
     });
   }
 
   private putWorkspace(id: any, headers: {}, body: any) {
-    this.workSpaceService.putWorkspace(id,headers,body).then().catch((e) => {
+    this.workSpaceService.putWorkspace(id, headers, body).then().catch((e) => {
       console.log(e)
     })
   }

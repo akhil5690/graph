@@ -2,14 +2,19 @@
 
   .observable{
     display:grid;
-    grid-template-columns: 5fr 5fr ;
+    grid-template-columns: 7fr 3fr ;
     padding:calc(var(--padding)/2);
     align-items: center;
+    font-size:var(--font-size12)
 
 }
 
   .observable-content{
     text-align: left;
     padding:calc(var(--padding)/2)
+  }
+
+  .observable-ondate{
+    font-size: var(--font-size10);
   }
 

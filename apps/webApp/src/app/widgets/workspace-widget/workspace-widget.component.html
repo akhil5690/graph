@@ -27,7 +27,6 @@
         </cym-workspace-card>
       </cym-div>
     </ng-template>
-
     <!--    <cym-div [cymClass]="'section2'">-->
     <!--      <cym-workspace-card *ngFor="let tool of workspaceNoData" [cymClass]="'section2-card'">-->
     <!--        <cym-div header [cymClass]="'section2-head'">{{tool.name}}</cym-div>-->
@@ -38,27 +37,35 @@
     <!--        </cym-div>-->
     <!--      </cym-workspace-card>-->
     <!--    </cym-div>-->
-
     <cym-div [cymClass]="'section2'">
-      <cym-workspace-card [cymClass]="'section2-card'">
+      <cym-workspace-card [cymClass]="'section2-card'" *ngIf="observables;else noObservable">
         <cym-div header [cymClass]="'section2-head'">Observables</cym-div>
         <cym-div card-content>
           <cym-observable-workspace *ngFor="let observable of observables"
                                     [observableData]="observable"></cym-observable-workspace>
         </cym-div>
       </cym-workspace-card>
-      <cym-workspace-card [cymClass]="'section2-card'">
+      <ng-template #noObservable>
+<!--        place Image for no observables-->
+      </ng-template>
+      <cym-workspace-card [cymClass]="'section2-card'" *ngIf="tasks;else noTask">
         <cym-div header [cymClass]="'section2-head'">Tasks</cym-div>
         <cym-div card-content>
           <cym-tasks-workspace *ngFor="let task of tasks" [taskData]="task"></cym-tasks-workspace>
         </cym-div>
       </cym-workspace-card>
-      <cym-workspace-card [cymClass]="'section2-card'">
+      <ng-template #noTask>
+        <!--        place Image for no Task-->
+      </ng-template>
+      <cym-workspace-card [cymClass]="'section2-card'" *ngIf="shareData;else noshareData">
         <cym-div header [cymClass]="'section2-head'">Shared with Me</cym-div>
         <cym-div card-content>
           Shared with Me
         </cym-div>
       </cym-workspace-card>
+      <ng-template #noshareData>
+        <!--        place Image for no shared with Me-->
+      </ng-template>
     </cym-div>
   </cym-div>
   <cym-div footer>Copyright - Cymonix - 2023</cym-div>
