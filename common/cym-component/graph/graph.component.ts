@@ -25,8 +25,7 @@ import {
   IEdge,
   IEdgeStyle,
   ILabelModelParameter,
-  ILabelStyle, IModelItem, IndicatorEdgeStyleDecorator,
-  INode,
+  ILabelStyle, IModelItem, INode,
   INodeStyle,
   InteriorLabelModel, ItemClickedEventArgs,
   LabelCreator, LabelStyleDecorationInstaller,
@@ -35,7 +34,7 @@ import {
   NodesSource, NodeStyleDecorationInstaller,
   OrganicLayout, OrthogonalLayout,
   PolylineEdgeStyle, RadialLayout,
-  Rect, RectangleNodeStyle, ShapeNodeShape,
+  Rect, ShapeNodeShape,
   ShapeNodeStyle,
   Size, StyleDecorationZoomPolicy, TraversalDirection
 } from "yfiles";
