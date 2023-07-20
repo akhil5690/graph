@@ -112,6 +112,11 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
     this.systemService.toolClick.subscribe(tool => {
       this.clickEvent(tool)
     })
+    this.systemService.isRightSidebarOpenSub.subscribe((isOpen)=>{
+      if(isOpen){
+        ICommand.FIT_CONTENT.execute(null, this.graphComponent);
+      }
+    })
   }
 
   ngAfterViewInit() {

@@ -67,7 +67,7 @@ cym-workspace-widget{
   .section2-card{
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto;
+    grid-template-rows: 2rem auto;
     justify-content: center;
     height:var(--base-height);
     width: var(--base-height);

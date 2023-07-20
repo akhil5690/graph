@@ -39,30 +39,35 @@
   .task{
     display: grid;
     grid-template-columns: 7fr 3fr;
-    grid-template-rows: 2rem ;
+    grid-template-rows: 2rem;
     text-align: left;
-    padding:1rem;
+    row-gap: 0.3rem;
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
 
+  .date-badge {
+    display: grid;
+    align-items: center;
+    background: #FFBF00;
+    width: fit-content;
+    text-align: center;
+    border-radius: 0.3rem;
+    padding: 0.5rem;
+    color: white;
+  }
 
+  .date-container {
+    display: grid;
+    justify-content: center;
+  }
+
+  .assigned-to{
+    display: grid;
+    justify-content: center;
   }
 
   .task-title{
-    display:grid;
-    align-items :end;
+    display: grid;
+    align-items: end;
   }
-
-  .task-date{
-    display:grid;
-    align-items: center;
-    text-align: center;
-    background-color: yellow;
-  }
-
-  .task-assigned{
-    text-align: center;
-
-  }
-
-
-
-
