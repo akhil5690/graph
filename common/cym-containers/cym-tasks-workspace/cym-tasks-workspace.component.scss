@@ -40,11 +40,26 @@
     display: grid;
     grid-template-columns: 7fr 3fr;
     grid-template-rows: 2rem ;
-
     text-align: left;
-    //justify-content: space-around;
     padding:1rem;
 
+
+  }
+
+  .task-title{
+    display:grid;
+    align-items :end;
+  }
+
+  .task-date{
+    display:grid;
+    align-items: center;
+    text-align: center;
+    background-color: yellow;
+  }
+
+  .task-assigned{
+    text-align: center;
 
   }
 

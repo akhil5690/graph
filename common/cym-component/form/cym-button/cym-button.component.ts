@@ -8,6 +8,7 @@ import {Component, Input} from '@angular/core';
 export class CymButtonComponent {
   @Input() label!: string;
   @Input() class!: string;
+  @Input() addicon : any;
 
   constructor() {
   }

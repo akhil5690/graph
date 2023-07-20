@@ -223,6 +223,10 @@ label {
   max-width: 8rem;
 }
 
+.p-divider.p-divider-horizontal:before {     // Divider for workspace
+  border-top: var(--divider-border-size) #dee2e6;
+}
+
 
 
 
