@@ -34,6 +34,10 @@ import {
 import {
   CymTasksWorkspaceModule
 } from "../../../../../../common/cym-containers/cym-tasks-workspace/cym-tasks-workspace.module";
+import {
+  CymCardDivisionModule
+} from "../../../../../../common/cym-containers/cym-card-division/cym-card-division.module";
+import {CymDividerModule} from "../../../../../../common/cym-containers/cym-divider/cym-divider.module";
 
 
 @NgModule({
@@ -55,7 +59,7 @@ import {
     TopToolbarModule,
     CymSecondaryToolbarModule,
     CymInputModule,
-    CymWorkspaceCardModule, CymWorkspaceCardDivisionModule, CymCardModule, CymObservableWorkspaceModule, CymTasksWorkspaceModule
+    CymWorkspaceCardModule, CymWorkspaceCardDivisionModule, CymCardModule, CymObservableWorkspaceModule, CymTasksWorkspaceModule, CymCardDivisionModule, CymDividerModule
   ],
   providers:[workSpaceService, HttpHandler],
   exports: [WorkspaceWidgetComponent]

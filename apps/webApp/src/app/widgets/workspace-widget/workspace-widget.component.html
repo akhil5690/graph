@@ -26,7 +26,6 @@
         </cym-workspace-card>
       </cym-div>
     </ng-template>
-
     <!--    <cym-div [cymClass]="'section2'">-->
     <!--      <cym-workspace-card *ngFor="let tool of workspaceNoData" [cymClass]="'section2-card'">-->
     <!--        <cym-div header [cymClass]="'section2-head'">{{tool.name}}</cym-div>-->
@@ -37,21 +36,24 @@
     <!--        </cym-div>-->
     <!--      </cym-workspace-card>-->
     <!--    </cym-div>-->
-
     <cym-div [cymClass]="'section2'">
-      <cym-workspace-card *ngFor="let tool of workspaceData , let i = index"  [cymClass]="'section2-card'" >
-        <cym-div header [cymClass]="'section2-head'">{{tool.name}}</cym-div>
+      <cym-workspace-card [cymClass]="'section2-card'">
+        <cym-div header [cymClass]="'section2-head'">Observables</cym-div>
         <cym-div card-content>
-          <div *ngIf="i===0">
-            <cym-observable-workspace *ngFor="let sub of tool.list" [observableData]="sub"></cym-observable-workspace>
-          </div>
-          <div *ngIf="i===1">
-            <cym-tasks-workspace *ngFor="let sub of tool.list" [taskData]="sub"></cym-tasks-workspace>
-          </div>
-          <div *ngIf="i===2">
-            <cym-workspace-card-division *ngFor="let sub of tool.cardDivision" [workspaceCardDetails]="sub"></cym-workspace-card-division>
-          </div>
-
+          <cym-observable-workspace *ngFor="let observable of observables"
+                                    [observableData]="observable"></cym-observable-workspace>
+        </cym-div>
+      </cym-workspace-card>
+      <cym-workspace-card [cymClass]="'section2-card'">
+        <cym-div header [cymClass]="'section2-head'">Tasks</cym-div>
+        <cym-div card-content>
+          <cym-tasks-workspace *ngFor="let task of tasks" [taskData]="task"></cym-tasks-workspace>
+        </cym-div>
+      </cym-workspace-card>
+      <cym-workspace-card [cymClass]="'section2-card'">
+        <cym-div header [cymClass]="'section2-head'">Shared with Me</cym-div>
+        <cym-div card-content>
+          Shared with Me
         </cym-div>
       </cym-workspace-card>
     </cym-div>

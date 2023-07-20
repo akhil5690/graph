@@ -10,6 +10,8 @@ import {workSpaceService} from "../../../../../../common/cym-services/workspace/
 })
 export class WorkspaceWidgetComponent implements OnInit {
   workspaceRes: any;
+  tasks: any;
+  observables: any;
 
   workspaceNoData: any = [{
     name: "Observables",
@@ -33,54 +35,7 @@ export class WorkspaceWidgetComponent implements OnInit {
       }],
     },
   ];
-  workspaceData: any = [{
-    name: "Observables",
-    list: [{
-      desc: "Graph Node 'qa-cymonix-instance' health check is now critical",
-      observedOnDate: "Observed on: 15/06/2023,",
-      observedOnTime: '14:20 IST'
-    }, {
-      desc: "Graph Node 'qa-cymonix-instance' health check is now critical",
-      observedOnDate: "Observed on: 15/06/2023,",
-      observedOnTime: '14:20 IST'
-    }, {
-      desc: "Graph Node 'qa-cymonix-instance' health check is now critical",
-      observedOnDate: "Observed on: 15/06/2023,",
-      observedOnTime: '14:20 IST'
-    }, {
-      desc: "Graph Node 'qa-cymonix-instance' health check is now critical",
-      observedOnDate: "Observed on: 15/06/2023,",
-      observedOnTime: '14:20 IST'
-    }, {
-      desc: "Graph Node 'qa-cymonix-instance' health check is now critical",
-      observedOnDate: "Observed on: 15/06/2023,",
-      observedOnTime: '14:20 IST'
-    }]
-  }, {
-    name: "Tasks",
-    list: [{
-      label: "Port 22 is open",
-      des: "Block port 22 for graph node 'qa-cymonix-id-balancer'",
-      name: "Assigned to : You",
-      dueTime: 'Due today'
-    }, {
-      label: "SSL Renewal",
-      des: "SSL is not installed on loadbalancers in graph node 'ca-Cymonix-id-balancer'",
-      name: "Assigned to : Abhay",
-      dueTime: 'Due tomorrow'
-    }, {
-      label: "Review Findings",
-      des: "Review all findings from IAM analysers and AWS Inspector effected nodes...",
-      name: "Assigned to : Pradeep",
-      dueTime: 'By: 05.08.2023'
-    }]
-  }, {
-    name: "Shared with Me",
-    cardDivision: [{
-      image: "assets/image/folder_workspace.svg",
-      subHeader2: "No files shared with you yet"
-    }],
-  }];
+  workspaceHeader: any = ["Observable", "Tasks", "Shared with me"];
   sub = {
     image: "assets/image/Layer-6.svg",
     subHeader1: "No Workspace created or shared yet",
@@ -97,11 +52,11 @@ export class WorkspaceWidgetComponent implements OnInit {
   }
 
   apis() {
-    this.getReq();
-    this.postReq();
     // this.deleteReq();
-    this.deletebyId();
-    this.putReq();
+    this.getReq();
+    // this.postReq();
+    // this.deletebyId();
+    // this.putReq();
   }
 
   goToDashboard() {
@@ -197,8 +152,8 @@ export class WorkspaceWidgetComponent implements OnInit {
       "last_updated_by": "",
       "additional_info": "",
       "type": "",
-      "property": "",
-      "value": "",
+      "property": "load-data-from-crm-cymonix",
+      "value": "has failed",
       "last_observed": "2023-07-19T09:53:02.504647Z",
       "org_id": 6
     },);
@@ -255,14 +210,14 @@ export class WorkspaceWidgetComponent implements OnInit {
       'org-id': '6',
       'user-id': '7',
     });
-    this.deleteWorkspace(null,{
+    this.deleteWorkspace(null, {
       'org-id': '6',
       'user-id': '7',
     });
   }
 
   private deletebyId() {
-    this.deleteWorkspace(10,{
+    this.deleteWorkspace(10, {
       'org-id': '6',
       'user-id': '7',
     });
@@ -299,7 +254,8 @@ export class WorkspaceWidgetComponent implements OnInit {
 
   private getTask(id: any, header: any) {
     this.workSpaceService.getTask(id, header).then((task) => {
-      console.log('task', task)
+      this.tasks = task;
+      console.log('task', this.tasks)
     }).catch((e) => {
       console.log(e);
     })
@@ -307,19 +263,21 @@ export class WorkspaceWidgetComponent implements OnInit {
 
   private getObservables(id: any, header: any) {
     this.workSpaceService.getObservables(id, header).then((observable) => {
-      console.log('observable', observable)
+      this.observables = observable;
+      console.log('observable', this.observables)
     }).catch((e) => {
       console.log(e);
     })
   }
 
   private postWorkspace(header: any, body: any) {
-    this.workSpaceService.postWorkspace(header, body).then((task) => {
-      console.log('post Task', task);
+    this.workSpaceService.postWorkspace(header, body).then((workspace) => {
+      console.log('post Workspace', workspace);
     }).catch((e) => {
       console.log(e)
     });
   }
+
   private postTask(header: any, body: any) {
     this.workSpaceService.postTask(header, body).then((task) => {
       console.log('post Task', task);
@@ -377,11 +335,28 @@ export class WorkspaceWidgetComponent implements OnInit {
   }
 
   private putReq() {
-    this.putWorkspace(null,{});
+    this.putWorkspace(48, {
+      'org-id': '6',
+      'user-id': '7',
+    }, {
+      "status": "False",
+      "created_date": "2023-07-19T11:16:51.295364Z",
+      "created_by": "",
+      "last_updated_date": "2023-07-19T11:16:51.295427Z",
+      "last_updated_by": "",
+      "additional_info": "",
+      "name": "Vandana",
+      "description": "m",
+      "color": "orange",
+      "workspace_key":null, "org_id": 6,
+      "user": 7
+    });
   }
 
-  private putWorkspace(id:any,headers: {}) {
-
+  private putWorkspace(id: any, headers: {}, body: any) {
+    this.workSpaceService.putWorkspace(id,headers,body).then().catch((e) => {
+      console.log(e)
+    })
   }
 }
 
