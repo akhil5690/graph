@@ -1,34 +1,42 @@
 
 
-.task{
-  display: grid;
-  grid-template-columns: 6fr  4fr;
-  grid-template-rows: 1fr;
-  padding:calc(var(--padding)/2);
-  align-items: center;
 
-}
+  .task{
+    display: grid;
+    grid-template-columns: 7fr  3fr;
+    padding:calc(var(--padding)/2);
+    align-items: center;
+    font-size: var(--font-size12);
 
-.task-section1{
-  display: grid;
-  grid-template-rows: 4fr 6fr;
-  text-align: left;
-  align-items: center;
-  padding:calc(var(--padding)/2);
-  gap:calc(var(--grid-gap)/2);
+  }
+  .task-section1{
+    display: grid;
+    grid-template-rows: 4fr 6fr;
+    text-align: left;
+    align-items: center;
+    padding:calc(var(--padding)/2);
+    gap:calc(var(--grid-gap)/2);
+  }
+  .task-section2{
+    display: grid;
+    text-align: center;
+    align-items: center;
+    padding:calc(var(--padding)/2);
+    gap:calc(var(--grid-gap)/2);
+  }
+  .task-duedate{
+    background-color: yellow;
+    text-align: center;
+    padding:calc(var(--padding)/2);
 
-}
-.task-section2{
-  display: grid;
-  text-align: center;
-  align-items: center;
-  padding:calc(var(--padding)/2);
-}
+  }
 
-.task-duedate{
-  background-color: yellow;
-  text-align: center;
-  padding:calc(var(--padding)/2);
-}
+  .task-data-label{
+    font-weight: var(--font-weight-bold);
+
+  }
+
+
+
 
 

@@ -39,16 +39,19 @@
     <!--    </cym-div>-->
 
     <cym-div [cymClass]="'section2'">
-      <cym-workspace-card *ngFor="let tool of workspaceData" [cymClass]="'section2-card'">
+      <cym-workspace-card *ngFor="let tool of workspaceData , let i = index"  [cymClass]="'section2-card'" >
         <cym-div header [cymClass]="'section2-head'">{{tool.name}}</cym-div>
         <cym-div card-content>
-         <div>
-           <cym-observable-workspace *ngFor="let sub of tool.list" [observableData]="sub"></cym-observable-workspace>
-         </div>
-          <div>
+          <div *ngIf="i===0">
+            <cym-observable-workspace *ngFor="let sub of tool.list" [observableData]="sub"></cym-observable-workspace>
+          </div>
+          <div *ngIf="i===1">
             <cym-tasks-workspace *ngFor="let sub of tool.list" [taskData]="sub"></cym-tasks-workspace>
           </div>
-          <cym-workspace-card-division *ngFor="let sub of tool.cardDivision" [workspaceCardDetails]="sub"></cym-workspace-card-division>
+          <div *ngIf="i===2">
+            <cym-workspace-card-division *ngFor="let sub of tool.cardDivision" [workspaceCardDetails]="sub"></cym-workspace-card-division>
+          </div>
+
         </cym-div>
       </cym-workspace-card>
     </cym-div>
