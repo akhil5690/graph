@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {GraphService} from "../../../../../../common/cym-services/graph/graph.service";
 import {Router} from "@angular/router";
 import {CymService} from "../../../../../../common/cym-services/systemService/cymSystemService";
@@ -30,6 +30,7 @@ export class DashboardWidgetComponent implements OnInit {
   breadcrumbItems: any;
   tabSelected: any;
   isRightSidebarOpen: any;
+
 
   constructor(private systemService: CymService, private cdr: ChangeDetectorRef, private graphService: GraphService, private router: Router, private cym: CymService, private messageService: MessageService) {
   }

@@ -69,7 +69,7 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
 
   @Output() refreshGraph = new EventEmitter();
   @Output() findingsClicked = new EventEmitter();
-
+  @Input() onClickRightSidebar: any;
 
   // graph toolbar tools
   overviewComponent!: GraphOverviewComponent;
@@ -89,11 +89,6 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
     this.systemService.toolClick.subscribe(tool => {
       this.clickEvent(tool)
     })
-    this.systemService.isRightSidebarOpenSub.subscribe((isOpen) => {
-      if (isOpen) {
-        this.fitContent();
-      }
-    })
   }
 
   ngAfterViewInit() {
@@ -107,6 +102,9 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
     if (this.data?.nodes) {
       // start creating graph
       this.run();
+    }
+    if(this.onClickRightSidebar){
+      this.fitContent();
     }
     // this.clickEvent(this.tools);
   }
