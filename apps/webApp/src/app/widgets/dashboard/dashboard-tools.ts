@@ -1,28 +1,41 @@
 export const ExplorerTools = [{
   toolName: 'toggle',
-  icon: 'assets/image/overview.svg'
+  icon: 'assets/image/overview.svg',
+  border: false
 },
   {
+    toolName: 'fitContent',
+    icon: 'assets/image/fit.svg',
+    border: true
+  },
+  {
     toolName: 'zoomIn',
-    icon: 'assets/image/zoomIn.svg'
+    icon: 'assets/image/zoomIn.svg',
+    border: false
   }, {
     toolName: 'zoomOut',
-    icon: 'assets/image/zoomOut.svg'
+    icon: 'assets/image/zoomOut.svg',
+    border: true
   }, {
-    toolName: 'fitContent',
-    icon: 'assets/image/fit.svg'
-  },{
     toolName: 'circularLayout',
-    icon: 'assets/image/circularLayout.svg'
-  },{
+    icon: 'assets/image/circularLayout.svg',
+    border: false
+  }, {
     toolName: 'organicLayout',
-    icon: 'assets/image/organicLayout.svg'
-  },{
+    icon: 'assets/image/organicLayout.svg',
+    border: false
+  }, {
     toolName: 'orthogonalLayout',
-    icon: 'assets/image/orthogonalLayout.svg'
-  },{
+    icon: 'assets/image/orthogonalLayout.svg',
+    border: false
+  }, {
     toolName: 'hierarchialLayout',
-    icon: 'assets/image/hierarchialLayout.svg'
+    icon: 'assets/image/hierarchialLayout.svg',
+    border: false
+  }, {
+    toolName: 'radialLayout',
+    icon: 'assets/image/radialLayout.svg',
+    border: true
   },
 ];
 
@@ -80,33 +93,33 @@ export const RightTabForEditor = [
   {
     toolName: 'palletes',
     icon: 'assets/image/palletes.svg',
-    tab:'edit'
+    tab: 'edit'
   },
   {
     toolName: 'styles',
     icon: 'assets/image/brush.svg',
-    tab:'filter'
+    tab: 'filter'
   },
   {
     toolName: 'details',
     icon: 'assets/image/detail.svg',
-    tab:'details'
+    tab: 'details'
   }
 ];
 export const RightTabForExplorer = [
   {
     toolName: 'details',
     icon: 'assets/image/detail.svg',
-    tab:'details'
+    tab: 'details'
   },
   {
     toolName: 'styles',
     icon: 'assets/image/filter.svg',
-    tab:'filter'
+    tab: 'filter'
   },
   {
     toolName: 'analysis',
     icon: 'assets/image/analysis.svg',
-    tab:'analysis'
+    tab: 'analysis'
   }
 ];

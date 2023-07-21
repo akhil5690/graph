@@ -592,7 +592,10 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
           this.layoutChanger(this.graphComponent, 'Orthogonal');
           break;
         case 'hierarchialLayout':
-          this.layoutChanger(this.graphComponent, 'Hierarchical')
+          this.layoutChanger(this.graphComponent, 'Hierarchical');
+          break;
+        case 'radialLayout':
+          this.layoutChanger(this.graphComponent, 'Radial');
       }
     }
   }
