@@ -33,7 +33,7 @@ export class WorkspaceWidgetComponent implements OnInit {
     subHeader2: "No files shared with you yet"
   };
 
-  constructor(private router: Router, private workSpaceService: workSpaceService, private cym: CymService) {
+  constructor(private router: Router, private workSpaceService: workSpaceService) {
   }
 
   ngOnInit() {
@@ -222,14 +222,11 @@ export class WorkspaceWidgetComponent implements OnInit {
   }
 
   getWorkSpace(header: any) {
-    this.cym.setLoader(true);
     this.workSpaceService.getWorkspace(header).then((res) => {
       this.workspaceRes = res;
       console.log(this.workspaceRes, "workspaceRes")
     }).catch((e) => {
       console.log(e);
-    }).finally(() => {
-      this.cym.setLoader(false);
     })
   }
 
