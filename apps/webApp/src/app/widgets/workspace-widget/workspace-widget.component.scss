@@ -90,7 +90,8 @@ cym-workspace-widget {
     grid-template-columns: 1fr;
     grid-template-rows: 2rem auto;
     justify-content: center;
-    max-height: 50vh;
+    max-height: 20%;
+    min-height: 100%;
     width: var(--base-height);
     overflow: auto;
     background-color: var(--primary-background-color);
