@@ -20,6 +20,9 @@ export const ExplorerTools = [{
   },{
     toolName: 'orthogonalLayout',
     icon: 'assets/image/orthogonalLayout.svg'
+  },{
+    toolName: 'hierarchialLayout',
+    icon: 'assets/image/hierarchialLayout.svg'
   },
 ];
 
