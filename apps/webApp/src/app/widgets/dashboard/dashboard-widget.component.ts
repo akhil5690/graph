@@ -46,7 +46,7 @@ export class DashboardWidgetComponent implements OnInit {
     this.getSchemaData();
     this.breadcrumbItems = [{label: 'Workspace', routerLink: '/workspace'},
       {label: 'Launchpad', routerLink: '/launchpad'},
-      {label: 'Dashboard', routerLink: '/launchpad/dashboard'}];
+      {label: 'Cymonix IQ Infrastructure', routerLink: '/launchpad/dashboard'}];
   }
 
   getGraphData() {
