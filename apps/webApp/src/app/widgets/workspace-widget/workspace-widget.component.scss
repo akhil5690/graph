@@ -47,9 +47,6 @@ cym-workspace-widget {
     align-items: center;
   }
 
-
-
-
   .workstation {
     display: grid;
     grid-template-columns: 6fr 4fr;
@@ -125,9 +122,9 @@ cym-workspace-widget {
 
 
   }
-
-  .divide {
-    background-color: black;
+  .divider-workspace {
+    .p-divider.p-component.p-divider-horizontal.p-divider-solid.p-divider-left {
+      border-top: 2px solid;
+    }
   }
-
 }
