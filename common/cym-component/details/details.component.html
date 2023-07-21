@@ -1,11 +1,16 @@
 <div *ngIf="type !== 'editor'">
   <div class="details-container" *ngFor="let item of data">
     <div *ngFor="let header of headers">
-      <div class="subtitle label">{{header}}</div>
-      <div>{{item[header]}}
-        <div *ngIf="isSeverity(header)"
-             [ngStyle]="getStyleForSeverity(item,header)" class="indicator"></div>
+      <div class="row_padding">
+        <div class="subtitle label">{{header}}</div>
+        <div>{{item[header]}}
+          <div *ngIf="isSeverity(header)"
+               [ngStyle]="getStyleForSeverity(item,header)" class="indicator"></div>
+        </div>
       </div>
+
+      <cym-divider></cym-divider>
+
     </div>
   </div>
 </div>
@@ -78,7 +83,8 @@
           <div class="subtitle label">
             <div>Type *</div>
           </div>
-          <p-dropdown [options]="typeOptions" [(ngModel)]="nodeForm['properties'][i]['type']" [placeholder]="'select type'" optionLabel="option" optionValue="value"></p-dropdown>
+          <p-dropdown [options]="typeOptions" [(ngModel)]="nodeForm['properties'][i]['type']"
+                      [placeholder]="'select type'" optionLabel="option" optionValue="value"></p-dropdown>
         </div>
         <div>
           <div class="subtitle label">
