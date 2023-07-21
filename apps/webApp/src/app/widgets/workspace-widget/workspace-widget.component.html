@@ -3,18 +3,19 @@
   <cym-div main [cymClass]="'workstation'">
     <cym-div *ngIf="workspaceRes;else noData">
 
-          <cym-div [cymClass]="'workspace-page'">
-            <cym-div [cymClass]="'workspace-title'">My Workspace</cym-div>
-            <cym-div [cymClass]="'add'">
-              <cym-button [image]="'../../../../assets/image/add.svg '" [label]="'New workspace'" [class]="'solid-button align-button'  " ></cym-button>
-            </cym-div>
-          </cym-div>
+      <cym-div [cymClass]="'workspace-page'">
+        <cym-div [cymClass]="'workspace-title'">My Workspace</cym-div>
+        <cym-div [cymClass]="'add'">
+          <cym-button [image]="'../../../../assets/image/add.svg '" [label]="'New workspace'"
+                      [class]="'solid-button align-button'  "></cym-button>
+        </cym-div>
+      </cym-div>
 
       <cym-div [cymClass]="'workspace-container'">
         <cym-div *ngFor="let card of workspaceRes" [cymClass]="'card'" (click)="goToDashboard()">
-          <cym-div [cymClass]="'short-name'">{{card.workspace_key}}</cym-div>
-          <cym-div [cymClass]="'text-center'">{{card.name}}</cym-div>
-          <cym-div [cymClass]="'text-center'">{{card.description}}</cym-div>
+          <cym-div [cymClass]="'short-name'" [ngStyle]="{background: card.color}">{{card.workspace_key}}</cym-div>
+          <cym-div [cymClass]="'text-center makeBold'">{{card.name}}</cym-div>
+          <cym-div [cymClass]="'text-center shortenText'">{{card.description}}</cym-div>
         </cym-div>
       </cym-div>
       <div class="divider-workspace">

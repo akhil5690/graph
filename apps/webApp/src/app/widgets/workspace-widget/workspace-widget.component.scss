@@ -1,14 +1,14 @@
 cym-workspace-widget {
   .card {
     display: grid;
-    grid-template-rows: 5rem 1.75rem 1.75rem;
+    grid-template-rows: 5rem 1.75rem auto;
     width: var(--workspace-card-width);
     height: var(--workspace-card-height);
     background: white;
     justify-items: center;
     gap: calc(var(--grid-gap) / 2);
     padding: var(--unit);
-    cursor:pointer;
+    cursor: pointer;
     align-items: center;
   }
 
@@ -29,21 +29,23 @@ cym-workspace-widget {
     display: grid;
     align-items: center;
     justify-items: center;
-    background: yellowgreen;
+    font-size: 1.9rem;
+    color: white;
   }
 
-  .workspace-page{
-    display:grid;
+  .workspace-page {
+    display: grid;
     grid-template-columns: 8.1fr 1.9fr;
     align-items: center;
   }
 
   .workspace-title {
-    font-weight: var(--font-weight-bolder);
+    font-weight: 800;
+    font-size: 1.1rem;
   }
 
-  .add{
-    color:var(--secondary-text-color);
+  .add {
+    color: var(--secondary-text-color);
 
   }
 
@@ -85,21 +87,22 @@ cym-workspace-widget {
   .section2-card {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 2rem auto;
+    grid-template-rows: 1fr 9fr;
     justify-content: center;
     max-height: 20%;
     min-height: 100%;
     width: var(--base-height);
     overflow: auto;
     background-color: var(--primary-background-color);
-    padding: calc(var(--padding)/2);
+    padding: calc(var(--padding) / 2);
 
   }
 
   .section2-head {
     text-align: left;
-    padding-left: calc(var(--padding)/2);
-    font-weight: var(--font-weight-bold);
+    padding-left: calc(var(--padding) / 2);
+    font-weight: 800;
+    font-size: 1.1rem;
   }
 
   .section2-division {
@@ -113,10 +116,10 @@ cym-workspace-widget {
     justify-content: space-between;
   }
 
-  .align-button{
+  .align-button {
     display: grid;
     grid-template-columns: 2fr 8fr;
-    align-items:center;
+    align-items: center;
 
   }
 
