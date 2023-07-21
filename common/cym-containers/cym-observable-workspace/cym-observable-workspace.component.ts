@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import moment from 'moment';
 
 @Component({
   selector: 'cym-observable-workspace',
@@ -8,4 +9,8 @@ import {Component, Input} from '@angular/core';
 export class CymObservableWorkspaceComponent {
   @Input() cymClass: any;
   @Input() observableData: any;
+
+  getFormattedDate(value: any) {
+    return moment(value).format('MMMM Do YYYY, h:mm:ss a');
+  }
 }

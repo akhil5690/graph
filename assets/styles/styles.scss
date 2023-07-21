@@ -246,3 +246,26 @@ label {
 .p-dropdown.p-component {
   outline: none !important;
 }
+
+.makeBold {
+  font-weight: 600;
+}
+
+.shortenText{
+  line-height: 20px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -ms-box-orient: vertical;
+  box-orient: vertical;
+  -webkit-line-clamp: 4;
+  -moz-line-clamp: 4;
+  -ms-line-clamp: 4;
+  line-clamp: 4;
+  overflow: hidden;
+  text-align: center;
+}
+
+.capitalize{
+  text-transform: capitalize;
+}
