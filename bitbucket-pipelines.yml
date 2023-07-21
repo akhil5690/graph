@@ -1,55 +1,53 @@
-image: python:3.8.10
+ image: python:3.8.10
 
-pipelines:
-  branches:
-    qa:
-      - step:
-          deployment: qa
-          script:
-            - apt-get update
-            - apt-get install -y zip
-            - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-            - unzip awscliv2.zip
-            - ./aws/install
-            - pip install aws-sam-cli
-            - python3 -m pip install --upgrade pip
-            - apt-get install -y jq  # Install jq for JSON processing
-            - CONFIG_DIR="common"  #/utils
-            - CONFIG_JSON_PATH="$CONFIG_DIR/config.json"
-            - |
-              if [ ! -d "$CONFIG_DIR" ]; then
-                mkdir -p "$CONFIG_DIR"
-              fi
-            - |
-              if [ ! -s "$CONFIG_JSON_PATH" ]; then
-                touch "$CONFIG_JSON_PATH"
-                echo '{
-                  "schema": "",
-                  "explorer": "",
-                  "graph": ""
-                }' > "$CONFIG_JSON_PATH"
-              fi
-              ls -al "$CONFIG_DIR"  # Debug statement to check the directory contents
-              cat "$CONFIG_JSON_PATH"  # Debug statement to check the file contents
-            - |
-              SCHEMA=$(aws ssm get-parameter --name "/${Env}/api/getschema/url" --with-decryption --query "Parameter.Value" --output text --region $AWS_DEFAULT_REGION)
-              EXPLORER=$(aws ssm get-parameter --name "/${Env}/api/explorer/url" --with-decryption --query "Parameter.Value" --output text --region $AWS_DEFAULT_REGION)
-              GRAPH=$(aws ssm get-parameter --name "/${Env}/api/explorer/url" --with-decryption --query "Parameter.Value" --output text --region $AWS_DEFAULT_REGION) 
-              echo "Retrieved values: schema=$SCHEMA, explorer=$EXPLORER, graph=$GRAPH"
-              jq --arg schema "$SCHEMA" \
-                 --arg explorer "$EXPLORER" \
-                 --arg graph "$GRAPH" \
-                 '.schema = $schema | .explorer = $explorer | .graph = $graph' \
-                 "$CONFIG_JSON_PATH" > "$CONFIG_JSON_PATH.tmp" && mv "$CONFIG_JSON_PATH.tmp" "$CONFIG_JSON_PATH"
-            - cat "$CONFIG_JSON_PATH"  # Check the content of the config.json file
-            - aws configure --profile deployment set aws_access_key_id ${AWS_ACCESS_KEY_ID}
-            - aws configure --profile deployment set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY}
-            - zip -r angular.zip .
-            - aws ssm get-parameter --name "/${Env}/bucket/fusioncentre/source" --with-decryption --query "Parameter.Value" --output text --region $AWS_DEFAULT_REGION > s3bucket.txt
-            - export S3_BUCKET=$(cat s3bucket.txt)
-            - aws s3 --region $AWS_DEFAULT_REGION cp angular.zip s3://$S3_BUCKET #bvvv
-            - aws ssm delete-parameter --region $AWS_DEFAULT_REGION --name /$Env/cymonix/fusioncentre/version
-            #- aws ssm delete-parameter --region $AWS_DEFAULT_REGION --name /$Env/Cymonix/ssr/version
-            - echo $BITBUCKET_BUILD_NUMBER
-            - aws ssm put-parameter --region $AWS_DEFAULT_REGION --name /$Env/cymonix/fusioncentre/version --value 1.0.$BITBUCKET_BUILD_NUMBER --type String --overwrite
-            #- aws ssm put-parameter --region $AWS_DEFAULT_REGION --name /$Env/cymonix/ssr/version --value 1.0.$BITBUCKET_BUILD_NUMBER --type String --overwrite
+ pipelines:
+   branches:
+     qa-test:
+       - step:
+           deployment: qa
+           script:
+             - apt-get update
+             - apt-get install -y zip
+             - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+             - unzip awscliv2.zip
+             - ./aws/install
+             - pip install aws-sam-cli
+             - python3 -m pip install --upgrade pip
+             - apt-get install -y jq
+             - CONFIG_DIR="common"
+             - CONFIG_JSON_PATH="$CONFIG_DIR/config.json"
+             - |
+               if [ ! -d "$CONFIG_DIR" ]; then
+                 mkdir -p "$CONFIG_DIR"
+               fi
+             - |
+               if [ ! -s "$CONFIG_JSON_PATH" ]; then
+                 touch "$CONFIG_JSON_PATH"
+                 echo '{
+                   "schema": "",
+                   "explorer": "",
+                   "graph": ""
+                 }' > "$CONFIG_JSON_PATH"
+               fi
+               ls -al "$CONFIG_DIR"  # Debug statement to check the directory contents
+               cat "$CONFIG_JSON_PATH"  # Debug statement to check the file contents
+             - |
+               SCHEMA=$(aws ssm get-parameter --name "/${Env}/api/getschema/url" --with-decryption --query "Parameter.Value" --output text --region $AWS_DEFAULT_REGION)
+               EXPLORER=$(aws ssm get-parameter --name "/${Env}/api/explorer/url" --with-decryption --query "Parameter.Value" --output text --region $AWS_DEFAULT_REGION)
+               GRAPH=$(aws ssm get-parameter --name "/${Env}/api/explorer/url" --with-decryption --query "Parameter.Value" --output text --region $AWS_DEFAULT_REGION)
+               echo "Retrieved values: schema=$SCHEMA, explorer=$EXPLORER, graph=$GRAPH"
+               jq --arg schema "$SCHEMA" \
+                  --arg explorer "$EXPLORER" \
+                  --arg graph "$GRAPH" \
+                  '.schema = $schema | .explorer = $explorer | .graph = $graph' \
+                  "$CONFIG_JSON_PATH" > "$CONFIG_JSON_PATH.tmp" && mv "$CONFIG_JSON_PATH.tmp" "$CONFIG_JSON_PATH"
+             - cat "$CONFIG_JSON_PATH"
+             - aws configure --profile deployment set aws_access_key_id ${AWS_ACCESS_KEY_ID}
+             - aws configure --profile deployment set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY}
+             - zip -r angular.zip .
+             - aws ssm get-parameter --name "/${Env}/bucket/fusioncentre/source" --with-decryption --query "Parameter.Value" --output text --region $AWS_DEFAULT_REGION > s3bucket.txt
+             - export S3_BUCKET=$(cat s3bucket.txt)
+             - aws s3 --region $AWS_DEFAULT_REGION cp angular.zip s3://$S3_BUCKET
+             - aws ssm delete-parameter --region $AWS_DEFAULT_REGION --name /$Env/cymonix/fusioncentre/version
+             - echo $BITBUCKET_BUILD_NUMBER
+             - aws ssm put-parameter --region $AWS_DEFAULT_REGION --name /$Env/cymonix/fusioncentre/version --value 1.0.$BITBUCKET_BUILD_NUMBER --type String --overwrite

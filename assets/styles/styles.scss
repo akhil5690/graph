@@ -218,10 +218,14 @@ label {
   background-color: var(--graph-toolbar-icon-hover);
 }
 .max-dropdown-width {
-  width: 8rem;
-  min-width: 8rem;
-  max-width: 8rem;
+  width: var(--max-dropdown-width);
+  min-width: var(--max-dropdown-width);
+  max-width: var(--max-dropdown-width);
 }
+
+
+
+
 
 
 

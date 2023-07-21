@@ -2,22 +2,31 @@
   <cym-top-toolbar header></cym-top-toolbar>
   <cym-div main [cymClass]="'workstation'">
     <cym-div *ngIf="workspaceRes;else noData">
-      <cym-div [cymClass]="'workspace-title'">My Workspace</cym-div>
+
+          <cym-div [cymClass]="'workspace-page'">
+            <cym-div [cymClass]="'workspace-title'">My Workspace</cym-div>
+            <cym-div [cymClass]="'add'">
+              <cym-button [image]="'../../../../assets/image/add.svg '" [label]="'New workspace'" [class]="'solid-button align-button'  " ></cym-button>
+            </cym-div>
+          </cym-div>
+
       <cym-div [cymClass]="'workspace-container'">
         <cym-div *ngFor="let card of workspaceRes" [cymClass]="'card'" (click)="goToDashboard()">
-          <cym-div [cymClass]="'short-name'">SN</cym-div>
-          <cym-div>{{card.name}}</cym-div>
-          <cym-div>Lorem ipsum dolor sit</cym-div>
-          <cym-div></cym-div>
+          <cym-div [cymClass]="'short-name'">{{card.workspace_key}}</cym-div>
+          <cym-div [cymClass]="'text-center'">{{card.name}}</cym-div>
+          <cym-div [cymClass]="'text-center'">{{card.description}}</cym-div>
         </cym-div>
       </cym-div>
+      <div class="divider-workspace">
+        <cym-divider></cym-divider>
+      </div>
     </cym-div>
 
     <ng-template #noData>
       <cym-div [cymClass]="'section1'">
         <cym-workspace-card [cymClass]="'section11'">
           <cym-div card-content>
-            <cym-workspace-card-division [workspaceCardDetails]="sub">
+            <cym-workspace-card-division [workspaceCardDetails]="noWorkspace">
             </cym-workspace-card-division>
             <div class="create-workspace">
               <cym-button [label]="'Create Wokspace'" [class]="'solid-button'" (click)="goToDashboard()"></cym-button>
@@ -26,16 +35,6 @@
         </cym-workspace-card>
       </cym-div>
     </ng-template>
-    <!--    <cym-div [cymClass]="'section2'">-->
-    <!--      <cym-workspace-card *ngFor="let tool of workspaceNoData" [cymClass]="'section2-card'">-->
-    <!--        <cym-div header [cymClass]="'section2-head'">{{tool.name}}</cym-div>-->
-    <!--        <cym-div card-content [cymClass]="'section222'">-->
-    <!--          <cym-workspace-card-division *ngFor="let sub of tool.cardDivision" [workspaceCardDetails]="sub"-->
-    <!--                                       [cymClass]="'section2-division'">-->
-    <!--          </cym-workspace-card-division>-->
-    <!--        </cym-div>-->
-    <!--      </cym-workspace-card>-->
-    <!--    </cym-div>-->
     <cym-div [cymClass]="'section2'">
       <cym-workspace-card [cymClass]="'section2-card'" *ngIf="observables;else noObservable">
         <cym-div header [cymClass]="'section2-head'">Observables</cym-div>
@@ -45,7 +44,14 @@
         </cym-div>
       </cym-workspace-card>
       <ng-template #noObservable>
-<!--        place Image for no observables-->
+        <!--        place Image for no observables-->
+        <cym-workspace-card [cymClass]="'section2-card'">
+          <cym-div header [cymClass]="'section2-head'">Observables</cym-div>
+          <cym-div card-content>
+            <cym-workspace-card-division [workspaceCardDetails]="noObservables">
+            </cym-workspace-card-division>
+          </cym-div>
+        </cym-workspace-card>
       </ng-template>
       <cym-workspace-card [cymClass]="'section2-card'" *ngIf="tasks;else noTask">
         <cym-div header [cymClass]="'section2-head'">Tasks</cym-div>
@@ -54,7 +60,13 @@
         </cym-div>
       </cym-workspace-card>
       <ng-template #noTask>
-        <!--        place Image for no Task-->
+        <cym-workspace-card [cymClass]="'section2-card'">
+          <cym-div header [cymClass]="'section2-head'">Tasks</cym-div>
+          <cym-div card-content>
+            <cym-workspace-card-division [workspaceCardDetails]="noTasks">
+            </cym-workspace-card-division>
+          </cym-div>
+        </cym-workspace-card>
       </ng-template>
       <cym-workspace-card [cymClass]="'section2-card'" *ngIf="shareData;else noshareData">
         <cym-div header [cymClass]="'section2-head'">Shared with Me</cym-div>
@@ -63,7 +75,13 @@
         </cym-div>
       </cym-workspace-card>
       <ng-template #noshareData>
-        <!--        place Image for no shared with Me-->
+        <cym-workspace-card [cymClass]="'section2-card'">
+          <cym-div header [cymClass]="'section2-head'">Shared with Me</cym-div>
+          <cym-div card-content>
+            <cym-workspace-card-division [workspaceCardDetails]="noShare">
+            </cym-workspace-card-division>
+          </cym-div>
+        </cym-workspace-card>
       </ng-template>
     </cym-div>
   </cym-div>

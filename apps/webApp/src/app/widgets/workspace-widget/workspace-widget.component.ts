@@ -14,36 +14,24 @@ export class WorkspaceWidgetComponent implements OnInit {
   tasks: any;
   shareData: any;
   observables: any;
-
-  workspaceNoData: any = [{
-    name: "Observables",
-    cardDivision: [{
-      image: "assets/image/find_workspace.svg",
-      subHeader2: "No new Observables"
-    },]
-  },
-    {
-      name: "Tasks",
-      cardDivision: [{
-        image: "assets/image/clipboard_workspace.svg",
-        subHeader2: "You don't have any new tasks"
-      },]
-    },
-    {
-      name: "Shared with Me",
-      cardDivision: [{
-        image: "assets/image/folder_workspace.svg",
-        subHeader2: "No files shared with you yet"
-      }],
-    },
-  ];
-  workspaceHeader: any = ["Observable", "Tasks", "Shared with me"];
-  sub = {
+  noWorkspace = {
     image: "assets/image/Layer-6.svg",
     subHeader1: "No Workspace created or shared yet",
     subHeader2: "Create your first workspace here!"
   };
+  noObservables ={
+    image: "assets/image/find_workspace.svg",
+    subHeader2: "No new Observables"
+  };
 
+  noTasks={
+    image: "assets/image/clipboard_workspace.svg",
+    subHeader2: "You don't have any new tasks"
+  };
+  noShare = {
+    image: "assets/image/folder_workspace.svg",
+    subHeader2: "No files shared with you yet"
+  };
 
   constructor(private router: Router, private workSpaceService: workSpaceService) {
   }
@@ -118,10 +106,10 @@ export class WorkspaceWidgetComponent implements OnInit {
       "last_updated_date": "2023-07-19T11:16:51.295427Z",
       "last_updated_by": "",
       "additional_info": "",
-      "name": "Vandana",
-      "description": "m",
+      "name": "Operations Management",
+      "description": 'Administration of business operations ',
       "color": "orange",
-      "workspace_key": null,
+      "workspace_key": 'OM',
       "org_id": 6,
       "user": 7
     });
@@ -219,7 +207,7 @@ export class WorkspaceWidgetComponent implements OnInit {
   }
 
   private deletebyId() {
-    this.deleteWorkspace(10, {
+    this.deleteWorkspace(246, {
       'org-id': '6',
       'user-id': '7',
     });

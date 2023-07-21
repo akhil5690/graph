@@ -1,8 +1,6 @@
-
-
   .observable{
     display:grid;
-    grid-template-columns: 7fr 3fr ;
+    grid-template-columns: 7fr auto ;
     padding:calc(var(--padding)/2);
     align-items: center;
     font-size:var(--font-size12)
@@ -11,9 +9,9 @@
 
   .observable-content{
     text-align: left;
-    padding:calc(var(--padding)/2)
+    display: grid;
+    padding: 0.5rem 0;
   }
-
   .observable-ondate{
     font-size: var(--font-size10);
   }

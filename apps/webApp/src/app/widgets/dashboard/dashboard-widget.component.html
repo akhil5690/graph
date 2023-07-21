@@ -5,7 +5,7 @@
   <div main>
     <cym-div [cymClass]="'dash-tool-container'">
       <div class="three-tab-container">
-        <div (click)="tabType=0; getSchemaData()" [ngClass]="tabType === 0?'active-class':''"> Schema</div>
+        <div (click)="tabType=0; getSchemaData()" [ngClass]="tabType === 0?'active-class':''"> Model</div>
         <div (click)=" tabType=1; getGraphData()" [ngClass]="tabType === 1?'active-class':''"> Explorer</div>
         <div (click)="tabType = 2;editor()" [ngClass]="tabType === 2?'active-class':''"> Editor</div>
       </div>
@@ -39,10 +39,10 @@
       </div>
     </cym-div>
     <div>
-      <cym-graph *ngIf="tabType===0" [layout]="layout" [data]="schema"></cym-graph>
+      <cym-graph *ngIf="tabType===0" [layout]="layout" [data]="schema" [onClickRightSidebar]="isRightSidebarOpen"></cym-graph>
       <cym-graph *ngIf="tabType===1" [layout]="layout" [data]="explorer" (findingsClicked)="loadFindings($event)"
                  (refreshGraph)="refreshGraph($event)"></cym-graph>
-      <cym-graph-editor *ngIf="tabType===2"></cym-graph-editor>
+      <cym-graph-editor *ngIf="tabType===2" [onClickRightSidebar]="isRightSidebarOpen"></cym-graph-editor>
     </div>
     <p-dialog [modal]="true" *ngIf="openFindingsPopup" [(visible)]="openFindingsPopup"
               (onHide)="openFindingsPopup =false" class="popup">

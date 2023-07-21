@@ -1,23 +1,29 @@
-cym-workspace-widget{
-  .card{
+cym-workspace-widget {
+  .card {
     display: grid;
-    grid-template-rows:  7fr 1fr 1fr ;
+    grid-template-rows: 5rem 1.75rem 1.75rem;
     width: var(--workspace-card-width);
     height: var(--workspace-card-height);
     background: white;
     justify-items: center;
+    gap: calc(var(--grid-gap) / 2);
+    padding: var(--unit);
+    cursor:pointer;
     align-items: center;
-    gap: calc(var(--grid-gap)/2);
-    padding:calc(var(--padding)/2)
   }
-  .workspace-container{
+
+  .text-center {
+    text-align: center;
+  }
+
+  .workspace-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill,var(--workspace-card-width));
+    grid-template-columns: repeat(auto-fill, var(--workspace-card-width));
     gap: var(--grid-gap);
-    cursor: pointer;
     padding: var(--padding) 0 var(--padding) 0;
   }
-  .short-name{
+
+  .short-name {
     height: var(--short-name);
     width: var(--short-name);
     display: grid;
@@ -26,20 +32,32 @@ cym-workspace-widget{
     background: yellowgreen;
   }
 
-  .workspace-title{
+  .workspace-page{
+    display:grid;
+    grid-template-columns: 8.1fr 1.9fr;
+    align-items: center;
+  }
+
+  .workspace-title {
     font-weight: var(--font-weight-bolder);
   }
-  .workstation{
-    display: grid;
-    grid-template-columns: 6fr 4fr;
-    gap:var(--grid-gap);
-    padding: var(--padding);
-    height:var(--base-height);
+
+  .add{
+    color:var(--secondary-text-color);
 
   }
 
-  .section1{
-    display:grid;
+  .workstation {
+    display: grid;
+    grid-template-columns: 6fr 4fr;
+    gap: var(--grid-gap);
+    padding: var(--padding);
+    height: var(--base-height);
+
+  }
+
+  .section1 {
+    display: grid;
     justify-content: center;
     height: var(--base-height);
     align-items: center;
@@ -48,44 +66,63 @@ cym-workspace-widget{
 
   .create-workspace {
     display: grid;
-    padding: var(--padding) calc(var(--padding)*2) var(--padding) calc(var(--padding)*2) ;
+    padding: var(--padding) calc(var(--padding) * 2) var(--padding) calc(var(--padding) * 2);
 
   }
 
-  .section2{
+  .section2 {
     display: grid;
     grid-template-columns: 1fr;
     //grid-template-rows: 3fr 4fr 3fr ;
     text-align: center;
     justify-content: center;
     grid-gap: var(--unit);
-    height:var(--base-height);
+    height: var(--base-height);
     width: var(--base-height);
 
   }
 
-  .section2-card{
+  .section2-card {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto;
+    grid-template-rows: 2rem auto;
     justify-content: center;
-    height:var(--base-height);
+    max-height: 20%;
+    min-height: 100%;
     width: var(--base-height);
-    background-color:var(--primary-background-color)
+    overflow: auto;
+    background-color: var(--primary-background-color);
+    padding: calc(var(--padding)/2);
 
   }
 
-  .section2-head{
-    text-align:left;
-    padding-left:var(--padding);
-    padding-top:var(--padding);
+  .section2-head {
+    text-align: left;
+    padding-left: calc(var(--padding)/2);
     font-weight: var(--font-weight-bold);
   }
 
-  .section2-division{
+  .section2-division {
     justify-content: center;
     align-items: center;
+  }
+
+  .workspace-header-line {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+  }
+
+  .align-button{
+    display: grid;
+    grid-template-columns: 2fr 8fr;
+    align-items:center;
 
   }
 
+  .divider-workspace {
+    .p-divider.p-component.p-divider-horizontal.p-divider-solid.p-divider-left {
+      border-top: var(--divider-border-size);
+    }
+  }
 }

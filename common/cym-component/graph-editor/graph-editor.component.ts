@@ -103,6 +103,7 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
   private network: any;
   private nodeSelection: any;
   private edgeSelection: any;
+  @Input() onClickRightSidebar:any
 
   constructor(private cdr: ChangeDetectorRef, private systemService: CymService) {
   }
@@ -119,6 +120,9 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
   }
 
   ngOnChanges() {
+    if(this.onClickRightSidebar){
+      ICommand.FIT_CONTENT.execute(null, this.graphComponent);
+    }
   }
 
   createDragDropNodeStyle() {

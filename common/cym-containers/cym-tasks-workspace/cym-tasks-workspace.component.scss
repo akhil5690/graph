@@ -1,53 +1,35 @@
+.task {
+  display: grid;
+  grid-template-columns: 7fr 3fr;
+  grid-template-rows: calc(var(--unit) * 2);
+  text-align: left;
+  row-gap: 0.3rem;
+  padding: calc(var(--unit) / 2);
+  font-size: var(--font-size12);
+}
 
+.date-badge {
+  display: grid;
+  align-items: center;
+  background: #FFBF00;
+  width: fit-content;
+  text-align: center;
+  border-radius: 0.3rem;
+  padding: calc(var(--padding) / 2);
+  color: white;
+}
 
+.date-container {
+  display: grid;
+  justify-content: center;
+}
 
-  //.task{
-  //  display: grid;
-  //  grid-template-columns: 7fr  3fr;
-  //  padding:calc(var(--padding)/2);
-  //  align-items: center;
-  //  font-size: var(--font-size12);
-  //
-  //}
-  //.task-section1{
-  //  display: grid;
-  //  grid-template-rows: 4fr 6fr;
-  //  align-items: center;
-  //  padding:calc(var(--padding)/2);
-  //  gap:calc(var(--grid-gap)/2);
-  //}
-  //.task-section2{
-  //  display: grid;
-  //  text-align: center;
-  //  align-items: center;
-  //  //padding:calc(var(--padding)/2);
-  //  gap:calc(var(--grid-gap)/5);
-  //}
-  //.task-duedate{
-  //  background-color: yellow;
-  //  text-align: center;
-  //  padding:calc(var(--padding)/2);
-  //
-  //}
-  //
-  //.task-data-label{
-  //  font-weight: var(--font-weight-bold);
-  //
-  //}
+.assigned-to {
+  display: grid;
+  justify-content: center;
+}
 
-
-  .task{
-    display: grid;
-    grid-template-columns: 7fr 3fr;
-    grid-template-rows: 2rem ;
-
-    text-align: left;
-    //justify-content: space-around;
-    padding:1rem;
-
-
-  }
-
-
-
-
+.task-title {
+  display: grid;
+  align-items: end;
+}
