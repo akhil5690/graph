@@ -589,7 +589,13 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
           this.fitContent();
           break;
         case 'circularLayout':
-          this.circularLayout(this.graphComponent)
+          this.layoutChanger(this.graphComponent,'Circular');
+          break;
+        case 'organicLayout':
+          this.layoutChanger(this.graphComponent,'Organic');
+          break;
+        case 'orthogonalLayout':
+          this.layoutChanger(this.graphComponent,'Orthogonal')
       }
     }
   }
@@ -685,16 +691,9 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
     }
   }
 
-  private circularLayout(graphComponent: GraphComponent) {
+  private layoutChanger(graphComponent: GraphComponent,layoutType:string) {
     if (graphComponent){
-      const layoutExecutor = this.getLayoutExecutor({
-        graphComponent: graphComponent,
-        layout: new CircularLayout(),
-        duration: '0.5s',
-      });
-
-      // start executing the layout
-      layoutExecutor.start().then();
+      this.buildLayout(graphComponent,layoutType);
       this.fitContent();
     }
   }
