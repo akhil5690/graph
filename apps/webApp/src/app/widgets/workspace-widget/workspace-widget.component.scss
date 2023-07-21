@@ -1,7 +1,7 @@
 cym-workspace-widget {
   .card {
     display: grid;
-    grid-template-rows: 4rem 2rem  2rem;
+    grid-template-rows: 5rem 1.75rem 1.75rem;
     width: var(--workspace-card-width);
     height: var(--workspace-card-height);
     background: white;
@@ -9,6 +9,7 @@ cym-workspace-widget {
     gap: calc(var(--grid-gap) / 2);
     padding: var(--unit);
     cursor:pointer;
+    align-items: center;
   }
 
   .text-center {
@@ -33,7 +34,7 @@ cym-workspace-widget {
 
   .workspace-page{
     display:grid;
-    grid-template-columns: 8fr 2fr;
+    grid-template-columns: 8.1fr 1.9fr;
     align-items: center;
   }
 
@@ -91,14 +92,13 @@ cym-workspace-widget {
     width: var(--base-height);
     overflow: auto;
     background-color: var(--primary-background-color);
-    padding: 0.5rem;
+    padding: calc(var(--padding)/2);
 
   }
 
   .section2-head {
     text-align: left;
     padding-left: calc(var(--padding)/2);
-    padding-top: var(--padding);
     font-weight: var(--font-weight-bold);
   }
 
@@ -111,15 +111,6 @@ cym-workspace-widget {
     display: grid;
     grid-template-columns: auto auto;
     justify-content: space-between;
-  }
-
-  .my-workspace-add-button {
-    background-color: #2896a4;
-    display: grid;
-    grid-template-columns: 2fr 8fr;
-    grid-template-rows: 30px;
-
-
   }
 
   .align-button{

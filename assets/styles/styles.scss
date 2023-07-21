@@ -125,7 +125,6 @@ label {
 }
 
 
-
 .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
   background: var(--primary-color);
   color: var(--primary-color-text);
@@ -162,42 +161,47 @@ label {
   border-color: #2fb2c3;
   color: #6c757d;
 }
-  .rightTab{
-    padding: calc(var(--unit) / 2);
+
+.rightTab {
+  padding: calc(var(--unit) / 2);
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  @extend .ui-base-border-bottom !optional;
+}
+
+.rightTab.active-class {
+  @extend .ui-base-active-class !optional;
+  transition-delay: 0.2s;
+}
+
+//.rightTab:hover{
+//  @extend .ui-base-active-class !optional;
+//}
+
+.three-tab-container {
+  .active-class {
+    @extend .ui-base-active-class !optional;
+    transition-delay: 0.2s;
+  }
+
+  div {
     display: grid;
-    justify-content: center;
+    height: var(--graph-tool-bar-height);
     align-items: center;
     cursor: pointer;
     @extend .ui-base-border-bottom !optional;
-  }
-  .rightTab.active-class{
-      @extend .ui-base-active-class !optional;
-    transition-delay: 0.2s;
-    }
-
-  //.rightTab:hover{
-  //  @extend .ui-base-active-class !optional;
-  //}
-
-  .three-tab-container {
-    .active-class{
-      @extend .ui-base-active-class !optional;
-      transition-delay: 0.2s;
-    }
-    div {
-      display: grid;
-      height: var(--graph-tool-bar-height);
-      align-items: center;
-      cursor: pointer;
-      @extend .ui-base-border-bottom !optional;
-
-    }
-    display: grid;
-    grid-template-columns: repeat(3 , var(--three-row-container-column-width));
-    color:var(--breadcrumb-font-color);
-    align-items: center;
 
   }
+
+  display: grid;
+  grid-template-columns: repeat(3, var(--three-row-container-column-width));
+  color: var(--breadcrumb-font-color);
+  align-items: center;
+
+}
+
 //.three-tab-container>div:hover{
 //  @extend .ui-base-active-class !optional;
 //}
@@ -209,24 +213,36 @@ label {
     justify-content: center;
     cursor: pointer;
   }
+
   display: grid;
   grid-template-columns: repeat(auto-fit, var(--icon-box-size));
   align-items: center;
   justify-content: center;
 }
-.graph-tool-icons>div:hover{
+
+.graph-tool-icons > div:hover {
   background-color: var(--graph-toolbar-icon-hover);
 }
+
 .max-dropdown-width {
-  width: 8rem;
-  min-width: 8rem;
-  max-width: 8rem;
+  width: var(--max-dropdown-width);
+  min-width: var(--max-dropdown-width);
+  max-width: var(--max-dropdown-width);
 }
 
 
+.p-dropdown.p-component {
+  background-color: var(--theme-color-one);
+  border: var(--theme-color-one);
+  padding: 0 !important;
+}
 
+.p-dropdown .p-dropdown-label {
+  background: transparent;
+  border: none;
+  color: var(--secondary-text-color);
+}
 
-
-
-
-
+.p-dropdown.p-component {
+  outline: none !important;
+}

@@ -25,8 +25,7 @@ import {
   IEdge,
   IEdgeStyle,
   ILabelModelParameter,
-  ILabelStyle, IModelItem, IndicatorEdgeStyleDecorator,
-  INode,
+  ILabelStyle, IModelItem, INode,
   INodeStyle,
   InteriorLabelModel, ItemClickedEventArgs,
   LabelCreator, LabelStyleDecorationInstaller,
@@ -35,7 +34,7 @@ import {
   NodesSource, NodeStyleDecorationInstaller,
   OrganicLayout, OrthogonalLayout,
   PolylineEdgeStyle, RadialLayout,
-  Rect, RectangleNodeStyle, ShapeNodeShape,
+  Rect, ShapeNodeShape,
   ShapeNodeStyle,
   Size, StyleDecorationZoomPolicy, TraversalDirection
 } from "yfiles";
@@ -103,7 +102,7 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
       // start creating graph
       this.run();
     }
-    if(this.onClickRightSidebar){
+    if (this.onClickRightSidebar) {
       this.fitContent();
     }
     // this.clickEvent(this.tools);
@@ -588,6 +587,15 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
           break;
         case 'fitContent':
           this.fitContent();
+          break;
+        case 'circularLayout':
+          this.layoutChanger(this.graphComponent,'Circular');
+          break;
+        case 'organicLayout':
+          this.layoutChanger(this.graphComponent,'Organic');
+          break;
+        case 'orthogonalLayout':
+          this.layoutChanger(this.graphComponent,'Orthogonal')
       }
     }
   }
@@ -683,6 +691,12 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
     }
   }
 
+  private layoutChanger(graphComponent: GraphComponent,layoutType:string) {
+    if (graphComponent){
+      this.buildLayout(graphComponent,layoutType);
+      this.fitContent();
+    }
+  }
 }
 
 
