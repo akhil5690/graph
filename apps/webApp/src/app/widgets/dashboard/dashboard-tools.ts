@@ -14,6 +14,15 @@ export const ExplorerTools = [{
   },{
     toolName: 'circularLayout',
     icon: 'assets/image/circularLayout.svg'
+  },{
+    toolName: 'organicLayout',
+    icon: 'assets/image/organicLayout.svg'
+  },{
+    toolName: 'orthogonalLayout',
+    icon: 'assets/image/orthogonalLayout.svg'
+  },{
+    toolName: 'hierarchialLayout',
+    icon: 'assets/image/hierarchialLayout.svg'
   },
 ];
 

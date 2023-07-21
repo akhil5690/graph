@@ -57,7 +57,18 @@ import {
 import licenseValue from "../../../license.json";
 import {addClass, createIconNode, createShapeNodeStyle, initDemoStyles, removeClass} from "./demo-styles";
 import {v4 as uuidv4} from 'uuid';
-import {Automotive, Business, FileImg, Finance, Network, People, Shapes, Social, Vehicle} from "./graphDragDrop";
+import {
+  Automotive,
+  Business,
+  FileImg,
+  Finance,
+  Network,
+  People,
+  Shapes,
+  Social,
+  SupplyChain,
+  Vehicle
+} from "./graphDragDrop";
 import {CymService} from "../../cym-services/systemService/cymSystemService";
 
 @Component({
@@ -92,6 +103,7 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
   private original: any;
   private originalNeighbourHood: any;
   private shapeStyleDragDrop: any;
+  private supplyChain: any;
   private businessImg: any;
   dragDropElements: any;
   private vehicle: any;
@@ -103,7 +115,7 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
   private network: any;
   private nodeSelection: any;
   private edgeSelection: any;
-  @Input() onClickRightSidebar:any
+  @Input() onClickRightSidebar: any
 
   constructor(private cdr: ChangeDetectorRef, private systemService: CymService) {
   }
@@ -120,13 +132,14 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    if(this.onClickRightSidebar){
+    if (this.onClickRightSidebar) {
       ICommand.FIT_CONTENT.execute(null, this.graphComponent);
     }
   }
 
   createDragDropNodeStyle() {
     this.shapeStyleDragDrop = Shapes;
+    this.supplyChain = SupplyChain;
     this.businessImg = Business;
     this.vehicle = Vehicle;
     this.finance = Finance;
@@ -141,34 +154,38 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
       style: this.getNodeStyleForDragDrop('shape', this.shapeStyleDragDrop),
     }, {
       id: 1,
+      headers: 'Supply Chain',
+      style: this.getNodeStyleForDragDrop('image', this.supplyChain),
+    }, {
+      id: 2,
       headers: 'Business',
       style: this.getNodeStyleForDragDrop('image', this.businessImg),
     }, {
-      id: 2,
+      id: 3,
       headers: 'Vehicle',
       style: this.getNodeStyleForDragDrop('image', this.vehicle),
     }, {
-      id: 3,
+      id: 4,
       headers: 'Finance',
       style: this.getNodeStyleForDragDrop('image', this.finance),
     }, {
-      id: 4,
+      id: 5,
       headers: 'Automotive',
       style: this.getNodeStyleForDragDrop('image', this.automotive),
     }, {
-      id: 5,
+      id: 6,
       headers: 'Social',
       style: this.getNodeStyleForDragDrop('image', this.social),
     }, {
-      id: 6,
+      id: 7,
       headers: 'People',
       style: this.getNodeStyleForDragDrop('image', this.people),
     }, {
-      id: 7,
+      id: 8,
       headers: 'Files',
       style: this.getNodeStyleForDragDrop('image', this.file),
     }, {
-      id: 8,
+      id: 9,
       headers: 'Network',
       style: this.getNodeStyleForDragDrop('image', this.network),
     }];
@@ -1002,7 +1019,7 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
       if (isFullscreen) {
         this.graphComponent.graph = this.neighbourComponent.graph;
         this.createGraph(this.original, this.neighbourComponent);
-        const node = this.graphComponent.graph.nodes.find(node=>node.tag.id === this.selectedNode.tag.id);
+        const node = this.graphComponent.graph.nodes.find(node => node.tag.id === this.selectedNode.tag.id);
         if (node) {
           this.graphComponent.selection.setSelected(node, true);
         }
@@ -1019,7 +1036,7 @@ export class GraphEditorComponent implements AfterViewInit, OnInit, OnChanges {
         // this.neighbourComponent.zoomTo(this.neighbourComponent.contentRect);
         // regain the selection back
 
-        const node = this.graphComponent.graph.nodes.find(node=>node.tag.id === this.selectedNode.tag.id);
+        const node = this.graphComponent.graph.nodes.find(node => node.tag.id === this.selectedNode.tag.id);
         if (node) {
           this.graphComponent.selection.setSelected(node, true);
         }

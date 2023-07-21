@@ -155,16 +155,10 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
       data: data.nodes,
       id: "id",
       style: (data: any) => this.getNodeShape({
-        fill: this.vertexColor ? this.vertexColor : "#FF9900",
+        fill: data.vertex_color ? data.vertex_color : "#E0E0E0",
         shape: 'ellipse',
-        stroke: this.borderColor
+        stroke: data.border_color ? data.border_color : null
       })
-    });
-    data.nodes.forEach((vertex_color: any) => {
-      if (vertex_color) {
-        this.vertexColor = vertex_color.vertex_color;
-        this.borderColor = vertex_color.border_color;
-      }
     });
 
     //create edges
@@ -542,7 +536,7 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
     switch (layout) {
       case 'Organic':
         return new OrganicLayout({minimumNodeDistance: 90, nodeEdgeOverlapAvoided: true});
-      case 'Hierarchy':
+      case 'Hierarchical':
         return new HierarchicLayout();
       case 'Circular':
         return new CircularLayout();
@@ -589,7 +583,16 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
           this.fitContent();
           break;
         case 'circularLayout':
-          this.circularLayout(this.graphComponent)
+          this.layoutChanger(this.graphComponent, 'Circular');
+          break;
+        case 'organicLayout':
+          this.layoutChanger(this.graphComponent, 'Organic');
+          break;
+        case 'orthogonalLayout':
+          this.layoutChanger(this.graphComponent, 'Orthogonal');
+          break;
+        case 'hierarchialLayout':
+          this.layoutChanger(this.graphComponent, 'Hierarchical')
       }
     }
   }
@@ -685,16 +688,9 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
     }
   }
 
-  private circularLayout(graphComponent: GraphComponent) {
-    if (graphComponent){
-      const layoutExecutor = this.getLayoutExecutor({
-        graphComponent: graphComponent,
-        layout: new CircularLayout(),
-        duration: '0.5s',
-      });
-
-      // start executing the layout
-      layoutExecutor.start().then();
+  private layoutChanger(graphComponent: GraphComponent, layoutType: string) {
+    if (graphComponent) {
+      this.buildLayout(graphComponent, layoutType);
       this.fitContent();
     }
   }
