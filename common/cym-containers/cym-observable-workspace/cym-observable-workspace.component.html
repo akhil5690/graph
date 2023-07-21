@@ -1,12 +1,15 @@
 <div [class]="cymClass">
   <div class="observable">
     <div class="observable-content">
-    <div>
-      BOT
-      <span>{{observableData.property}} {{observableData.value}}</span>
+      <div>
+      <span>
+        {{observableData.type}}
+      </span>
+        <span class="makeBold">{{observableData.property}} &nbsp;</span>
+        <span>{{observableData.value}}</span>
+      </div>
     </div>
-    </div>
-    <div class="observable-ondate">{{observableData.last_observed}}</div>
+    <div class="observable-ondate">Observed On: {{getFormattedDate(observableData.last_observed)}}</div>
   </div>
   <cym-divider></cym-divider>
 </div>

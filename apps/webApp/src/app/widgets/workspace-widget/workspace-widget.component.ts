@@ -2,6 +2,7 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {Router} from "@angular/router";
 import {workSpaceService} from "../../../../../../common/cym-services/workspace/workspace.service";
 import {CymService} from "../../../../../../common/cym-services/systemService/cymSystemService";
+import {apiOrg} from "../../../../../../constants/app-constants";
 
 @Component({
   selector: 'cym-workspace-widget',
@@ -51,51 +52,24 @@ export class WorkspaceWidgetComponent implements OnInit {
 
   private getReq() {
     // get all data
-    this.getWorkSpace({
-      'org-id': '6',
-      'user-id': '7'
-    });
-    this.getModel(null, {
-      'org-id': '6',
-      'user-id': '7'
-    });
-    this.getTask(null, {
-      'org-id': '6',
-      'user-id': '7'
-    });
-    this.getObservables(null, {
-      'org-id': '6',
-      'user-id': '7'
-    });
+    this.getWorkSpace(apiOrg);
+    this.getModel(null, apiOrg);
+    this.getTask(null, apiOrg);
+    this.getObservables(null, apiOrg);
 
     // get list of models of particular workspace
-    this.getModel(null, {
-      'org-id': '6',
-      'user-id': '7',
-    }, {'workspace': '4'});
+    this.getModel(null, apiOrg, {'workspace': '4'});
 
     // by id
-    this.getModel(2, {
-      'org-id': '6',
-      'user-id': '7',
-    });
-    this.getTask(2, {
-      'org-id': '6',
-      'user-id': '7',
-    });
+    this.getModel(2, apiOrg);
+    this.getTask(2, apiOrg);
 
-    this.getObservables(2, {
-      'org-id': '6',
-      'user-id': '7',
-    });
+    this.getObservables(2, apiOrg);
   }
 
   private postReq() {
     //   post
-    this.postWorkspace({
-      'org-id': '6',
-      'user-id': '7',
-    }, {
+    this.postWorkspace(apiOrg, {
       "status": "True",
       "created_date": "2023-07-19T11:16:51.295364Z",
       "created_by": "",
@@ -109,10 +83,7 @@ export class WorkspaceWidgetComponent implements OnInit {
       "org_id": 6,
       "user": 7
     });
-    this.postTask({
-      'org-id': '6',
-      'user-id': '7',
-    }, {
+    this.postTask(apiOrg, {
       "id": 2,
       "status": null,
       "created_date": "2023-07-19T10:15:01.370981Z",
@@ -127,10 +98,7 @@ export class WorkspaceWidgetComponent implements OnInit {
       "assigned_to": "you",
       "org_id": 6
     },);
-    this.postObservable({
-      'org-id': '6',
-      'user-id': '7',
-    }, {
+    this.postObservable(apiOrg, {
       "status": "",
       "created_date": "2023-07-19T09:53:02.504633Z",
       "created_by": "",
@@ -143,10 +111,7 @@ export class WorkspaceWidgetComponent implements OnInit {
       "last_observed": "2023-07-19T09:53:02.504647Z",
       "org_id": 6
     },);
-    this.postModel({
-      'org-id': '6',
-      'user-id': '7',
-    }, {
+    this.postModel(apiOrg, {
       "status": "True",
       "created_date": "2023-07-19T08:24:52.748288Z",
       "created_by": "",
@@ -184,41 +149,17 @@ export class WorkspaceWidgetComponent implements OnInit {
   }
 
   private deleteReq() {
-    this.deleteModel(null, {
-      'org-id': '6',
-      'user-id': '7',
-    });
-    this.deleteTask(null, {
-      'org-id': '6',
-      'user-id': '7',
-    });
-    this.deleteObservables(null, {
-      'org-id': '6',
-      'user-id': '7',
-    });
-    this.deleteWorkspace(null, {
-      'org-id': '6',
-      'user-id': '7',
-    });
+    this.deleteModel(null, apiOrg);
+    this.deleteTask(null, apiOrg);
+    this.deleteObservables(null, apiOrg);
+    this.deleteWorkspace(null, apiOrg);
   }
 
   private deletebyId() {
-    this.deleteWorkspace(246, {
-      'org-id': '6',
-      'user-id': '7',
-    });
-    this.deleteModel(23, {
-      'org-id': '6',
-      'user-id': '7',
-    });
-    this.deleteTask(13, {
-      'org-id': '6',
-      'user-id': '7',
-    });
-    this.deleteObservables(10, {
-      'org-id': '6',
-      'user-id': '7',
-    });
+    this.deleteWorkspace(246, apiOrg);
+    this.deleteModel(23, apiOrg);
+    this.deleteTask(13, apiOrg);
+    this.deleteObservables(10, apiOrg);
   }
 
   getWorkSpace(header: any) {
