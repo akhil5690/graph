@@ -39,8 +39,8 @@
       </div>
     </cym-div>
     <div>
-      <cym-graph *ngIf="tabType===0" [layout]="layout" [data]="schema" [onClickRightSidebar]="isRightSidebarOpen"></cym-graph>
-      <cym-graph *ngIf="tabType===1" [layout]="layout" [data]="explorer" (findingsClicked)="loadFindings($event)"
+      <cym-graph *ngIf="tabType===0" [data]="schema" [onClickRightSidebar]="isRightSidebarOpen"></cym-graph>
+      <cym-graph *ngIf="tabType===1" [data]="explorer" (findingsClicked)="loadFindings($event)"
                  (refreshGraph)="refreshGraph($event)"></cym-graph>
       <cym-graph-editor *ngIf="tabType===2" [onClickRightSidebar]="isRightSidebarOpen"></cym-graph-editor>
     </div>
