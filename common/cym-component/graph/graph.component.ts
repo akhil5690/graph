@@ -179,6 +179,12 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
   private styleNode(nodesSource: NodesSource<any>) {
     // set node size
     nodesSource.nodeCreator.defaults.size = this.getSize(30, 30)
+    nodesSource.nodeCreator.defaults.labels.style = this.getLabelStyle({
+      backgroundFill: '#EBEDEF',
+      textSize: 10
+    });
+
+
   }
 
 
@@ -217,7 +223,7 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
     });
 
     // style edge label
-    edgesSource.edgeCreator.defaults.labels.style = this.getEdgeLabel({
+    edgesSource.edgeCreator.defaults.labels.style = this.getLabelStyle({
       backgroundFill: '#EBEDEF',
       textSize: 10
     });
@@ -518,7 +524,7 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
     return new Arrow(options);
   }
 
-  private getEdgeLabel(options: any): ILabelStyle {
+  private getLabelStyle(options: any): ILabelStyle {
     return new DefaultLabelStyle(options);
   }
 
