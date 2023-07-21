@@ -43,11 +43,7 @@ export class WorkspaceWidgetComponent implements OnInit {
   }
 
   apis() {
-    // this.deleteReq();
     this.getReq();
-    // this.postReq();
-    // this.deletebyId();
-    // this.putReq();
   }
 
   goToDashboard() {

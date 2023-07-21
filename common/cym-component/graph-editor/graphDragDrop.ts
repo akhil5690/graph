@@ -6,6 +6,22 @@ export const Shapes = [ShapeNodeShape.ROUND_RECTANGLE, ShapeNodeShape.ELLIPSE, S
   ShapeNodeShape.SHEARED_RECTANGLE2, ShapeNodeShape.TRAPEZ, ShapeNodeShape.TRAPEZ2, ShapeNodeShape.OCTAGON,
   ShapeNodeShape.STAR5, ShapeNodeShape.STAR6, ShapeNodeShape.STAR8, ShapeNodeShape.STAR5_UP, ShapeNodeShape.PILL];
 
+export const SupplyChain=[
+  'assets/image/dragdropImage/supplyChain/customer_needs.svg',
+  'assets/image/dragdropImage/supplyChain/customer_satifaction.svg',
+  'assets/image/dragdropImage/supplyChain/distribution.svg',
+  'assets/image/dragdropImage/supplyChain/final_product.svg',
+  'assets/image/dragdropImage/supplyChain/inspection.svg',
+  'assets/image/dragdropImage/supplyChain/logistics.svg',
+  'assets/image/dragdropImage/supplyChain/packaging.svg',
+  'assets/image/dragdropImage/supplyChain/product_design.svg',
+  'assets/image/dragdropImage/supplyChain/production_process.svg',
+  'assets/image/dragdropImage/supplyChain/quality-control.svg',
+  'assets/image/dragdropImage/supplyChain/raw-materials.svg',
+  'assets/image/dragdropImage/supplyChain/testing.svg',
+  'assets/image/dragdropImage/supplyChain/value_proposition.svg',
+  'assets/image/dragdropImage/supplyChain/workforce.svg',
+]
 export const Business = [
   'assets/image/dragdropImage/business/Asset 1.svg',
   'assets/image/dragdropImage/business/Asset 2.svg',
