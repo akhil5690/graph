@@ -21,28 +21,30 @@ import {
 } from "../../../../../../common/cym-containers/cym-secondary-toolbar/cym-secondary-toolbar.module";
 import {CymInputModule} from "../../../../../../common/cym-component/form/cym-input/cym-input.module";
 import {workSpaceService} from "../../../../../../common/cym-services/workspace/workspace.service";
+import {TooltipModule} from "primeng/tooltip";
 
 
 @NgModule({
   declarations: [DashboardWidgetComponent],
-    imports: [
-        CommonModule,
-        InputTextModule,
-        ButtonModule,
-        SignInModule,
-        GraphModule,
-        RightSidebarModule,
-        HttpClientModule,
-        WidgetFrameModule,
-        TabViewModule,
-        GraphEditorModule,
-        DialogModule,
-        ToastModule,
-        CymDivModule,
-        TopToolbarModule,
-        CymSecondaryToolbarModule,
-        CymInputModule,
-    ],
+  imports: [
+    CommonModule,
+    InputTextModule,
+    ButtonModule,
+    SignInModule,
+    GraphModule,
+    RightSidebarModule,
+    HttpClientModule,
+    WidgetFrameModule,
+    TabViewModule,
+    GraphEditorModule,
+    DialogModule,
+    ToastModule,
+    CymDivModule,
+    TopToolbarModule,
+    CymSecondaryToolbarModule,
+    CymInputModule,
+    TooltipModule,
+  ],
   providers:[GraphService,HttpHandler],
   exports: [DashboardWidgetComponent]
 })
