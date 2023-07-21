@@ -49,10 +49,10 @@
   --margin24: 1.6rem;
 
   //overview and neighbour -
-  --overview-neighbour-width: 14rem;
-  --overview-neighbour-height: 10rem;
+  --overview-neighbour-width: 15rem;
+  --overview-neighbour-height: 11rem;
   --overview-start: 0.7rem;
-  --neighbour-start: 15rem;
+  --neighbour-start: 16rem;
 
   //graph-tool-bar-height-
   --graph-tool-bar-height: 2.857rem;
@@ -149,6 +149,7 @@
   --grey-color: #e6e6e6;
   --icon-grey: #585858;
   --dark-grey-color: #727272;
+
   --base-height: 100%;
   --base-width: 100%;
 
@@ -158,20 +159,16 @@
   --column-graph-frame: 80vw 20vw;
   --column-menu-frame: 97vw 3vw;
 
-
-
   --main-height: calc(100vh - (var(--top-toolbar-height) + var(--bottom-toolbar-height)));
   --main-height-seconadry: calc(100vh - (var(--top-toolbar-height) + var(--bottom-toolbar-height) + var(--secondary-toolbar-height)));
   --main-no-footer: calc(100vh - (var(--top-toolbar-height)));
   --component-header-color: rgb(214 27 119 / 51%);
-
 
   --active-border-bottom-size: 0.285rem;
   --divider-border-size: 0.285rem var(--divider-color) solid;
   --divider-color :#dee2e6;
 
   --signin-container-width: 27.2rem;
-
   --three-row-container-column-width: 7.42rem;
   --max-dropdown-width:8rem;
 
