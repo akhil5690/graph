@@ -9,8 +9,9 @@
 
   .observable-content{
     text-align: left;
+    display: grid;
+    padding: 0.5rem 0;
   }
-
   .observable-ondate{
     font-size: var(--font-size10);
   }

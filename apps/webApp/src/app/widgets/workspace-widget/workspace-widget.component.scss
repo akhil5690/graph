@@ -1,12 +1,11 @@
 cym-workspace-widget {
   .card {
     display: grid;
-    grid-template-rows: 4rem 2rem  1rem;
+    grid-template-rows: 4rem 2rem  2rem;
     width: var(--workspace-card-width);
     height: var(--workspace-card-height);
     background: white;
     justify-items: center;
-    align-items: center;
     gap: calc(var(--grid-gap) / 2);
     padding: var(--unit)
   }
