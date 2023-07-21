@@ -1,46 +1,29 @@
 <div class="graph-main">
-  <div class="graph-toolbar">
-    <div *ngFor="let tool of toolBarItems">
-      <div (click)="clickEvent(tool)" class="tools">
-        <img [src]="tool.icon" [alt]="tool.toolName" height="20" width="20">
-      </div>
-    </div>
-  </div>
   <div class="graph-container">
     <div id="graphComponent" #graphComponent [ngClass]="this.isFilterOpen?'graph-sidebar':'graph'">
     </div>
-    <cym-right-sidebar [showDetails]="showDetails" [details]="selectedItem" [data]="data" (filterGraph)="refreshData($event)"
+    <cym-right-sidebar [data]="data" (filterGraph)="refreshData($event)"
                        (isRightSidebarOpen)="setFrame($event)">
     </cym-right-sidebar>
   </div>
 
-
- <div class="overview-neigbhour">
-   <div>
-     <cym-overview>
-       <div id="overview" overview #overViewComponent></div>
-     </cym-overview>
-   </div>
-   <div>
-     <div class="neighbour">
-       <div class="container">
-         <div class="panel-header">
-           <p-dropdown [options]="neighboursOptions" [(ngModel)]="selectedNeighbour"
-                       (ngModelChange)="getNeighbourGraph(selectedNode)" optionLabel="name"
-                       optionValue="value"></p-dropdown>
-           <img src="assets/image/fullscreen.svg" *ngIf="!isFullscreen" alt="" (click)="switch(true)" class="tools">
-           <img src="assets/image/undo.svg" height="20" width="20" alt="" *ngIf="isFullscreen" (click)="switch(false)"
-                class="tools">
-         </div>
-         <div>
-           <div id="neighbour" #neighbour></div>
-         </div>
-       </div>
-     </div>
-     <div class="subtitle neighbour_description" *ngIf="isFullscreen">NeighbourHood for {{selectedNode.tag.label}}</div>
-   </div>
-
- </div>
-
-
+  <cym-overview>
+    <div id="overview" overview #overViewComponent></div>
+  </cym-overview>
+  <div class="neighbour">
+    <div class="container">
+      <div class="panel-header">
+        <p-dropdown [options]="neighboursOptions" [(ngModel)]="selectedNeighbour"
+                    (ngModelChange)="getNeighbourGraph(selectedNode)" optionLabel="name" class="max-dropdown-width"
+                    optionValue="value"></p-dropdown>
+        <img src="assets/image/fullscreen-white.svg" *ngIf="!isFullscreen" alt="" (click)="switch(true)" class="tools">
+        <img src="assets/image/undo.svg" height="20" width="20" alt="" *ngIf="isFullscreen" (click)="switch(false)"
+             class="tools">
+      </div>
+      <div>
+        <div id="neighbour" #neighbour></div>
+      </div>
+    </div>
+  </div>
+  <div class="subtitle neighbour_description" *ngIf="isFullscreen">NeighbourHood for {{selectedNode.tag.label}}</div>
 </div>

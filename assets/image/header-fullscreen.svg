@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
+  <g id="Layer_2" data-name="Layer 2" transform="translate(-0.994 -0.994)">
+    <path id="Path_3535" data-name="Path 3535" d="M2,23a1,1,0,0,1-1-1V16.44a1,1,0,1,1,2,0V21H7.557a1,1,0,0,1,0,2Z" transform="translate(0 -0.004)" fill="#ebedef"/>
+    <path id="Path_3536" data-name="Path 3536" d="M2,23a1,1,0,0,1-.71-1.71L8,14.63a1,1,0,0,1,1.409,1.41l-6.7,6.668A1,1,0,0,1,2,23Z" transform="translate(0 -0.004)" fill="#ebedef"/>
+    <path id="Path_3537" data-name="Path 3537" d="M22,8.558a1,1,0,0,1-1-1V3H16.439a1,1,0,0,1,0-2H22a1,1,0,0,1,1,1V7.558A1,1,0,0,1,22,8.558Z" transform="translate(-0.008 0)" fill="#ebedef"/>
+    <path id="Path_3538" data-name="Path 3538" d="M15.329,9.668a1,1,0,0,1-.7-1.71L21.286,1.29a1,1,0,1,1,1.419,1.42L16,9.368A1,1,0,0,1,15.329,9.668Z" transform="translate(-0.007)" fill="#ebedef"/>
+    <path id="Path_3539" data-name="Path 3539" d="M2,8.558a1,1,0,0,1-1-1V2A1,1,0,0,1,2,1H7.557a1,1,0,0,1,0,2H3V7.558A1,1,0,0,1,2,8.558Z" transform="translate(0 0)" fill="#ebedef"/>
+    <path id="Path_3540" data-name="Path 3540" d="M8.666,9.668a1,1,0,0,1-.67-.3L1.29,2.71A1,1,0,1,1,2.709,1.29L9.366,8a.966.966,0,0,1-.7,1.67Z" transform="translate(0)" fill="#ebedef"/>
+    <path id="Path_3541" data-name="Path 3541" d="M16.439,23a1,1,0,0,1,0-2H21V16.44a1,1,0,1,1,2,0V22a1,1,0,0,1-1,1Z" transform="translate(-0.008 -0.004)" fill="#ebedef"/>
+    <path id="Path_3542" data-name="Path 3542" d="M22,23a1,1,0,0,1-.71-.29L14.63,16a1,1,0,1,1,1.409-1.41l6.666,6.658A1.041,1.041,0,0,1,22,23Z" transform="translate(-0.007 -0.004)" fill="#ebedef"/>
+  </g>
+</svg>

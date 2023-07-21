@@ -1,78 +1,61 @@
 
-
-
 cym-dashboard-widget {
-  .schema-toolbar {
-    height: 3rem;
-    width: 100%;
-
-  }
   .popup {
     .p-dialog {
       display: flex;
       flex-direction: column;
       pointer-events: auto;
-      max-height: 100%;
+      max-height: var(--base-height);
       width: 100vw;
       transform: scale(1);
       position: relative;
     }
   }
+
   .dash-tool-container {
+    div{
+      height: var(--graph-tool-bar-height);
+    }
     display: grid;
-    grid-template-columns: 1.5fr 7fr 1.5fr;
-    background-color: var(--theme-color-one);
-    width: 100%;
-    height: 2.85rem;
+    grid-template-columns: 2.5fr 5.5fr 2.5fr; // purposefull
+    background-color: var(--graph-toolbar-bgcolor);
+    width: var(--base-width);
     text-align: center;
-
+    color:var(--graph-toolbar-font-color);
+    font-size:var(--font-size16);
   }
 
-  .three-tab-container {
-    div {
-      display: grid;
-      height:var(--graph-tool-bar-height);
-      align-items: center;
-      cursor:pointer;
-    }
+
+  .set-icon {
+    height: var(--graph-tool-icon-height);
+    width: var(--graph-tool-icon-width);
+  }
+
+  .arrow-styles{
+    background-color: green;
+  }
+
+  .tab-container {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 1rem;
-    color: var(--secondary-text-color);
+    grid-template-columns:0.54fr 1fr 1fr 1fr;
     align-items: center;
-    justify-content: center;
-
-  }
-
-  .graph-tool-icons {
-    div {
-      display: grid;
-      height: var(--tiny-icon-height);
-	    width: var(--tiny-icon-width);
-      align-items: center;
-      justify-content: center;
-      cursor:pointer;
-    }
-    display: grid;
-    grid-template-columns: repeat(auto-fit , 40px);
-    grid-gap: 0;
-    align-items: center;
-    justify-content:center;
-  }
-
-  .twentytwo{
-    height:20px;
-    width:20px;
-  }
-
-  .graph-tool-icons > div:hover, .three-tab-container > div:hover {
-    background-color: var(--primary-color);
-    color: white;
-
   }
 
 
+  .p-accordion .p-accordion-header:not(.p-disabled) .p-accordion-header-link:focus {
+    outline: 0 none;
+    outline-offset: 0;
+    box-shadow: none;  //Accordian box on focus
+  }
+  .close-right-sidebar {
+    @extend .tab-container;
+    grid-template-columns: 3rem;
+    justify-content: end;
+  }
 
+  .secondary-tool{
+    background-color:var(--breadcrumb-toolbar-bgcolor);
+  }
 
 }
 

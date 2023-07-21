@@ -1,29 +1,64 @@
-<div class="container">
-  <div *ngFor="let item of sector1" [class]="'breadstar'">
-    <div>
-      <cym-breadcrumb [items]="breadcrumbItems"></cym-breadcrumb>
+<div [class]="CymSecondaryToolbar">
+
+  <div class="container" >
+    <div *ngFor="let item of sector1" [class]="'breadstar'">
+      <div>
+        <cym-breadcrumb [items]="breadcrumbItems"></cym-breadcrumb>
+      </div>
+      <!--    <div>-->
+      <!--      <img [src]="item.url" alt="" [height]="item.height" [width]="item.width">-->
+      <!--    </div>-->
     </div>
-<!--    <div>-->
-<!--      <img [src]="item.url" alt="" [height]="item.height" [width]="item.width">-->
-<!--    </div>-->
-  </div>
-<!--  <div class="menu">-->
-<!--    <div *ngFor="let item of sector2">{{item.name}}</div>-->
-<!--  </div>-->
-<!--  <div>-->
-<!--    <div *ngFor="let item of sector3">-->
-<!--      <img [src]="item.url" alt="" [height]="item.height" [width]="item.width">-->
-<!--    </div>-->
-<!--  </div>-->
-  <div class="other-options" *ngFor="let item of sector4">
-  <div class="horizontal" >
-    <div [class]="'icons'">
-      <img [src]="item.url"
-           [height]="item.height" [width]="item.width" alt="">
-    </div>
-    <div>
-      {{item.text}}
+    <!--  <div class="menu">-->
+    <!--    <div *ngFor="let item of sector2">{{item.name}}</div>-->
+    <!--  </div>-->
+    <!--  <div>-->
+    <!--    <div *ngFor="let item of sector3">-->
+    <!--      <img [src]="item.url" alt="" [height]="item.height" [width]="item.width">-->
+    <!--    </div>-->
+    <!--  </div>-->
+    <div class="other-options" *ngFor="let item of sector4">
+      <div class="horizontal" >
+        <div [class]="'icons'">
+          <img [src]="item.url"
+               [height]="item.height" [width]="item.width" alt="" class="secondary-tool-icon">
+        </div>
+        <div>
+          {{item.text}}
+        </div>
+      </div>
     </div>
   </div>
-  </div>
+
 </div>
+
+
+<!--<div class="container">-->
+<!--  <div *ngFor="let item of sector1" [class]="'breadstar'">-->
+<!--    <div>-->
+<!--      <cym-breadcrumb [items]="breadcrumbItems"></cym-breadcrumb>-->
+<!--    </div>-->
+<!--&lt;!&ndash;    <div>&ndash;&gt;-->
+<!--&lt;!&ndash;      <img [src]="item.url" alt="" [height]="item.height" [width]="item.width">&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--  </div>-->
+<!--&lt;!&ndash;  <div class="menu">&ndash;&gt;-->
+<!--&lt;!&ndash;    <div *ngFor="let item of sector2">{{item.name}}</div>&ndash;&gt;-->
+<!--&lt;!&ndash;  </div>&ndash;&gt;-->
+<!--&lt;!&ndash;  <div>&ndash;&gt;-->
+<!--&lt;!&ndash;    <div *ngFor="let item of sector3">&ndash;&gt;-->
+<!--&lt;!&ndash;      <img [src]="item.url" alt="" [height]="item.height" [width]="item.width">&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;  </div>&ndash;&gt;-->
+<!--  <div class="other-options" *ngFor="let item of sector4">-->
+<!--  <div class="horizontal" >-->
+<!--    <div [class]="'icons'">-->
+<!--      <img [src]="item.url"-->
+<!--           [height]="item.height" [width]="item.width" alt="" class="secondary-tool-icon">-->
+<!--    </div>-->
+<!--    <div>-->
+<!--      {{item.text}}-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  </div>-->
+<!--</div>-->

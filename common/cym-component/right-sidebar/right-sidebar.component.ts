@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewEncapsulation} from '@angular/core';
-import {data} from "../graph/data";
 import {GraphService} from "../../cym-services/graph/graph.service";
+import {CymService} from "../../cym-services/systemService/cymSystemService";
 
 @Component({
   selector: 'cym-right-sidebar',
@@ -12,11 +12,9 @@ export class RightSidebarComponent implements OnChanges, OnInit {
   items: any;
   nodeData: any;
   openPopUp = false;
-  @Output() edgeNodeProperty = new EventEmitter()
+  @Output() edgeNodeProperty = new EventEmitter();
 
-  @Input() details: any;
   @Input() data: any;
-  @Input() showDetails: any;
   @Input() type: any;
   // data = data;
   @Input() filterOptions: any;
@@ -24,26 +22,41 @@ export class RightSidebarComponent implements OnChanges, OnInit {
   @Output() filterGraph = new EventEmitter();
   @Output() selectedLayout = new EventEmitter();
   @Output() filterByFinding = new EventEmitter();
-  tab = 'details';
+  tab = '';
   properties: any;
   values: any;
   selectedProp: any;
   selectedVal: any;
   suggestedList: any;
   layout: any;
-  selectedLayoutOpt: any;
-  isFindings: any;
   value: any;
 
-  constructor(private graphservice: GraphService) {
+  constructor(private graphservice: GraphService, private cymService: CymService) {
   }
 
   ngOnChanges(): void {
-    // get the node or the edge that is clicked
-    this.selectedGraphItem()
   }
 
   ngOnInit() {
+    this.cymService.rightSideTabClick.subscribe((tab) => {
+      this.tab = tab;
+    });
+    this.cymService.isRightSidebarOpenSub.subscribe((isOpen) => {
+      this.isRightSidebarOpen.emit(isOpen);
+      this.openPopUp = isOpen;
+    });
+
+    this.cymService.selectedGraphItem.subscribe((graphItem) => {
+      if (graphItem) {
+        this.items = [graphItem?.tag];
+        this.openPopUp = true;
+        this.tab = 'details';
+        this.isRightSidebarOpen.emit(this.openPopUp);
+      } else {
+        this.items = null;
+      }
+    });
+
     // dropdown properties
     this.properties = [
       {name: 'Account Id', code: '~id'},
@@ -52,47 +65,8 @@ export class RightSidebarComponent implements OnChanges, OnInit {
       {name: 'Tag', code: 'tags'},
     ];
 
-    // this.layout = [
-    //   {name: 'Organic', code: 'Organic'},
-    //   {name: 'Hierarchy', code: 'Hierarchy'},
-    //   {name: 'Orthogonal', code: 'Orthogonal'},
-    //   {name: 'Circular', code: 'Circular'},
-    //   {name: 'Radial', code: 'Radial'},
-    // ];
-
-    this.layout = [{}]
   }
 
-  open(isOpen: boolean) {
-    this.openPopUp = isOpen && this.showDetails;
-    this.isRightSidebarOpen.emit(this.openPopUp);
-  }
-
-  tabs(tab: string) {
-    this.openPopUp = true;
-    this.tab = tab;
-    this.isRightSidebarOpen.emit(this.openPopUp);
-    if (tab === 'details' && !this.showDetails) {
-      this.openPopUp = false;
-      this.isRightSidebarOpen.emit(this.openPopUp);
-    }
-  }
-
-  private selectedGraphItem() {
-    // get the node or the edge that is clicked
-    if (this.details && this.showDetails) {
-      this.items = [this.details.tag];
-      // this.nodeData = this.items.flatMap((item: any) =>
-      //   Object.entries(item).map(([label, value]) => ({label, value}))
-      // );
-      this.openPopUp = true;
-      this.tab = 'details'
-    }
-    else{
-      this.openPopUp = false
-    }
-    this.isRightSidebarOpen.emit(this.openPopUp);
-  }
 
   getValue(selectedProp: any) {
     // on selecting property from autocomplete get the dropdown for value field
@@ -123,14 +97,9 @@ export class RightSidebarComponent implements OnChanges, OnInit {
       filter: false,
       property: this.selectedProp.code,
       value: this.value
-    }
+    };
     // send params to dashboard and get new graph on filter
     this.filterGraph.emit(params)
-  }
-
-  layoutChange(selectedLayout: any) {
-    // send the layout which is selected from dropdown
-    this.selectedLayout.emit(selectedLayout.name)
   }
 
   property($event: any) {

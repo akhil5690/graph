@@ -1,0 +1,133 @@
+cym-workspace-widget {
+  .card {
+    display: grid;
+    grid-template-rows: 4rem 2rem  2rem;
+    width: var(--workspace-card-width);
+    height: var(--workspace-card-height);
+    background: white;
+    justify-items: center;
+    gap: calc(var(--grid-gap) / 2);
+    padding: var(--unit)
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .workspace-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, var(--workspace-card-width));
+    gap: var(--grid-gap);
+    cursor: pointer;
+    padding: var(--padding) 0 var(--padding) 0;
+  }
+
+  .short-name {
+    height: var(--short-name);
+    width: var(--short-name);
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    background: yellowgreen;
+  }
+
+  .workspace-page{
+    display:grid;
+    grid-template-columns: 8fr 2fr;
+    align-items: center;
+  }
+
+  .workspace-title {
+    font-weight: var(--font-weight-bolder);
+  }
+
+  .add{
+    text-align:right;
+    color:var(--secondary-text-color);
+    align-items: center;
+  }
+
+
+
+
+  .workstation {
+    display: grid;
+    grid-template-columns: 6fr 4fr;
+    gap: var(--grid-gap);
+    padding: var(--padding);
+    height: var(--base-height);
+
+  }
+
+  .section1 {
+    display: grid;
+    justify-content: center;
+    height: var(--base-height);
+    align-items: center;
+    text-align: center;
+  }
+
+  .create-workspace {
+    display: grid;
+    padding: var(--padding) calc(var(--padding) * 2) var(--padding) calc(var(--padding) * 2);
+
+  }
+
+  .section2 {
+    display: grid;
+    grid-template-columns: 1fr;
+    //grid-template-rows: 3fr 4fr 3fr ;
+    text-align: center;
+    justify-content: center;
+    grid-gap: var(--unit);
+    height: var(--base-height);
+    width: var(--base-height);
+
+  }
+
+  .section2-card {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 2rem auto;
+    justify-content: center;
+    max-height: 20%;
+    min-height: 100%;
+    width: var(--base-height);
+    overflow: auto;
+    background-color: var(--primary-background-color);
+    padding: 0.5rem;
+
+  }
+
+  .section2-head {
+    text-align: left;
+    padding-left: 0.5rem;
+    padding-top: var(--padding);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .section2-division {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .workspace-header-line {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+  }
+
+  .my-workspace-add-button {
+    background-color: #2896a4;
+    display: grid;
+    grid-template-columns: 2fr 8fr;
+    grid-template-rows: 30px;
+
+
+  }
+
+  .divide {
+    background-color: black;
+  }
+
+}

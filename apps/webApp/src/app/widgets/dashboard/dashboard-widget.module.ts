@@ -5,7 +5,7 @@ import {InputTextModule} from "primeng/inputtext";
 import {ButtonModule} from "primeng/button";
 import {SignInModule} from "../sign-in/sign-in.module";
 import {GraphModule} from "../../../../../../common/cym-component/graph/graph.module";
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {GraphService} from "../../../../../../common/cym-services/graph/graph.service";
 import {WidgetFrameModule} from "../../../../../../common/cym-component/frames/widget-frame/widget-frame.module";
 import {RightSidebarModule} from "../../../../../../common/cym-component/right-sidebar/right-sidebar.module";
@@ -16,26 +16,33 @@ import {DialogModule} from "primeng/dialog";
 import {ToastModule} from "primeng/toast";
 import {CymDivModule} from "../../../../../../common/cym-containers/cym-div/cym-div.module";
 import {TopToolbarModule} from "../../../../../../common/cym-component/frames/top-toolbar/top-toolbar.module";
+import {
+  CymSecondaryToolbarModule
+} from "../../../../../../common/cym-containers/cym-secondary-toolbar/cym-secondary-toolbar.module";
+import {CymInputModule} from "../../../../../../common/cym-component/form/cym-input/cym-input.module";
+import {workSpaceService} from "../../../../../../common/cym-services/workspace/workspace.service";
 
 
 @NgModule({
   declarations: [DashboardWidgetComponent],
-  imports: [
-    CommonModule,
-    InputTextModule,
-    ButtonModule,
-    SignInModule,
-    GraphModule,
-    RightSidebarModule,
-    HttpClientModule,
-    WidgetFrameModule,
-    TabViewModule,
-    GraphEditorModule,
-    DialogModule,
-    ToastModule,
-    CymDivModule,
-    TopToolbarModule,
-  ],
+    imports: [
+        CommonModule,
+        InputTextModule,
+        ButtonModule,
+        SignInModule,
+        GraphModule,
+        RightSidebarModule,
+        HttpClientModule,
+        WidgetFrameModule,
+        TabViewModule,
+        GraphEditorModule,
+        DialogModule,
+        ToastModule,
+        CymDivModule,
+        TopToolbarModule,
+        CymSecondaryToolbarModule,
+        CymInputModule,
+    ],
   providers:[GraphService,HttpHandler],
   exports: [DashboardWidgetComponent]
 })

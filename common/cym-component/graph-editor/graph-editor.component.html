@@ -1,31 +1,17 @@
 <div class="graph-main">
-  <div class="graph-toolbar">
-    <div *ngFor="let tool of toolBarItems">
-      <div (click)="clickEvent(tool)" class="tools">
-        <img [src]="tool.icon" [alt]="tool.toolName" [height]="tool.height" [width]="tool.width">
-      </div>
-    </div>
-  </div>
   <div class="graph-container">
     <div id="graphComponent" #graphContainer [ngClass]="this.isFilterOpen?'graph-sidebar':'graph'">
     </div>
-    <cym-right-sidebar [type]="'editor'" [showDetails]="showDetails" [details]="selectedItem"
-                       (edgeNodeProperty)="changeEdgeNode($event)" (isRightSidebarOpen)="setFrame($event)">
-      <p-accordion [multiple]="true" panel>
-        <p-accordionTab header="Shapes">
-          <div  class="drag-and-drop-panel" #shapes></div>
-
-        </p-accordionTab>
-
-        <p-accordionTab header="Business">
-          <div class="drag-and-drop-panel" #images>
-          </div>
-        </p-accordionTab>
-
-
-
-      </p-accordion>
+    <cym-right-sidebar [type]="'editor'" (edgeNodeProperty)="changeEdgeNode($event)" (isRightSidebarOpen)="setFrame($event)">
+      <div panel>
+        <p-accordion [activeIndex]="0">
+          <p-accordionTab *ngFor="let item of dragDropElements;let i=index" [header]="item.headers">
+            <div class="drag-and-drop-panel" [id]="'item'+i"></div>
+          </p-accordionTab>
+        </p-accordion>
+      </div>
     </cym-right-sidebar>
+
   </div>
 
   <cym-overview>
@@ -36,10 +22,10 @@
   <div class="neighbour">
     <div class="container">
       <div class="panel-header">
-        <p-dropdown [options]="neighboursOptions" [(ngModel)]="selectedNeighbour"
+        <p-dropdown [options]="neighboursOptions" [(ngModel)]="selectedNeighbour" class="max-dropdown-width"
                     (ngModelChange)="getNeighbourGraph(selectedNode)" optionLabel="name"
                     optionValue="value"></p-dropdown>
-        <img src="assets/image/fullscreen.svg" *ngIf="!isFullscreen" alt="" (click)="switch(true)" class="tools">
+        <img src="assets/image/fullscreen-white.svg" *ngIf="!isFullscreen" alt="" (click)="switch(true)" class="tools">
         <img src="assets/image/undo.svg" height="20" width="20" alt="" *ngIf="isFullscreen" (click)="switch(false)"
              class="tools">
       </div>

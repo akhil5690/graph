@@ -1,32 +1,20 @@
 <div class="right-sidebar">
-  <!--  tabs-->
-  <div class="menu-panel">
-    <div *ngIf="!openPopUp" (click)="open(true)">
-      <i class="pi pi-arrow-left"></i>
-    </div>
-    <div *ngIf="openPopUp" (click)="open(false)">
-      <i class="pi pi-arrow-right"></i>
-    </div>
-    <div (click)="tabs('details')" class="tab">
-      <img src="assets/image/information.svg" alt="" height="15" width="15">
-    </div>
-    <div (click)="tabs('filter')" class="tab">
-      <img src="assets/image/filter.svg" alt="" height="15" width="15">
-    </div>
-    <div (click)="tabs('edit')" class="tab">
-      <img src="assets/image/edit.svg" alt="" height="15" width="15">
-    </div>
-  </div>
-
   <!-- sidebar panel -->
-  <div class="details-panel" *ngIf="openPopUp">
+  <div class="details-panel" [ngClass]="openPopUp?'':'displayNone'">
     <!--   opens on click of nodes or edges for the details-->
-    <div *ngIf="items && tab === 'details'">
-      <!--      <app-details [data]="items"></app-details>-->
-      <cym-details [type]="type" [data]="items" [info]="items" (property)="property($event)"></cym-details>
+    <div *ngIf="tab === 'details'">
+      <div *ngIf="items;else emptyMessage">
+        <cym-details [type]="type" [data]="items" [info]="items" (property)="property($event)"></cym-details>
+      </div>
+      <ng-template #emptyMessage>
+        <div class="emptyMessage">
+          Please select a node or an edge to load the data properties
+        </div>
+      </ng-template>
     </div>
+
     <!--   opens on click of filter  from tab -->
-    <div *ngIf="tab === 'filter'">
+    <div *ngIf="tab === 'filter'" class="filter">
       <p>Property</p>
       <p-autoComplete [(ngModel)]="selectedProp" [suggestions]="suggestedList" (ngModelChange)="getValue(selectedProp)"
                       (completeMethod)="search($event,this.properties)" field="name" [dropdown]="true">
@@ -50,13 +38,13 @@
       <!--          </div>-->
       <!--        </ng-template>-->
       <!--      </p-autoComplete>-->
-<!--      <p>Layout</p>-->
-<!--      <p-dropdown [options]="layout" [(ngModel)]="selectedLayoutOpt" optionLabel="name"-->
-<!--                  (ngModelChange)="layoutChange(selectedLayoutOpt)"></p-dropdown>-->
+      <!--      <p>Layout</p>-->
+      <!--      <p-dropdown [options]="layout" [(ngModel)]="selectedLayoutOpt" optionLabel="name"-->
+      <!--                  (ngModelChange)="layoutChange(selectedLayoutOpt)"></p-dropdown>-->
 
     </div>
 
-    <div *ngIf="tab === 'edit'">
+    <div [ngClass]="tab === 'edit'?'':'displayNone'">
       <ng-content select="[panel]"></ng-content>
     </div>
   </div>

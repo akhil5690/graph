@@ -8,9 +8,9 @@ export class HttpHandler {
   constructor(private http: HttpClient) {
   }
 
-  getData(apiUrl: string, params?: HttpParams) {
+  getData(apiUrl: string, params?: HttpParams | any) {
     return new Promise((resolve, reject) => {
-      this.http.get(apiUrl, {params: params}).subscribe({
+      this.http.get(apiUrl, params).subscribe({
         next: (data) => {
           resolve(data)
         }, error: (err) => {
@@ -18,6 +18,35 @@ export class HttpHandler {
         }
       })
     })
+  }
 
+  postData(apiURL: string, params: any, body: any) {
+    return new Promise((resolve, reject)=>{
+      this.http.post(apiURL,body,params).subscribe({
+        next:(data)=>{
+          resolve(data)
+        },error:(error)=>{ reject(error)}
+      })
+    })
+  }
+
+  deleteData(apiUrl:string,params:any){
+    return new Promise((resolve, reject)=>{
+      this.http.delete(apiUrl,params).subscribe({
+        next:(data)=>{
+          resolve(data)
+        },error:(error)=>{ reject(error)}
+      })
+    })
+  }
+
+  putData(apiUrl:string,params:any,body:any){
+    return new Promise((resolve, reject)=>{
+      this.http.put(apiUrl,body,params).subscribe({
+        next:(data)=>{
+          resolve(data)
+        },error:(error)=>{ reject(error)}
+      })
+    })
   }
 }

@@ -13,21 +13,55 @@ import {
 } from "../../../../../../common/cym-containers/cym-workspace-card-division/cym-workspace-card-division.module";
 import {SignInModule} from "../sign-in/sign-in.module";
 import {TopToolbarModule} from "../../../../../../common/cym-component/frames/top-toolbar/top-toolbar.module";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {workSpaceService} from "../../../../../../common/cym-services/workspace/workspace.service";
+import {InputTextModule} from "primeng/inputtext";
+import {ButtonModule} from "primeng/button";
+import {GraphModule} from "../../../../../../common/cym-component/graph/graph.module";
+import {RightSidebarModule} from "../../../../../../common/cym-component/right-sidebar/right-sidebar.module";
+import {TabViewModule} from "primeng/tabview";
+import {GraphEditorModule} from "../../../../../../common/cym-component/graph-editor/graph-editor.module";
+import {DialogModule} from "primeng/dialog";
+import {ToastModule} from "primeng/toast";
+import {
+  CymSecondaryToolbarModule
+} from "../../../../../../common/cym-containers/cym-secondary-toolbar/cym-secondary-toolbar.module";
+import {CymInputModule} from "../../../../../../common/cym-component/form/cym-input/cym-input.module";
+import {CymCardModule} from "../../../../../../common/cym-containers/cym-card/cym-card.module";
+import {
+    CymObservableWorkspaceModule
+} from "../../../../../../common/cym-containers/cym-observable-workspace/cym-observable-workspace.module";
+import {
+  CymTasksWorkspaceModule
+} from "../../../../../../common/cym-containers/cym-tasks-workspace/cym-tasks-workspace.module";
+import {
+  CymCardDivisionModule
+} from "../../../../../../common/cym-containers/cym-card-division/cym-card-division.module";
+import {CymDividerModule} from "../../../../../../common/cym-containers/cym-divider/cym-divider.module";
 
 
 @NgModule({
   declarations: [WorkspaceWidgetComponent],
   imports: [
     CommonModule,
-    WidgetFrameModule,
-
-    CymDivModule,
-    CymWorkspaceCardModule,
-    CymWorkspaceCardDivisionModule,
+    InputTextModule,
+    ButtonModule,
     SignInModule,
+    GraphModule,
+    RightSidebarModule,
+    HttpClientModule,
+    WidgetFrameModule,
+    TabViewModule,
+    GraphEditorModule,
+    DialogModule,
+    ToastModule,
+    CymDivModule,
     TopToolbarModule,
+    CymSecondaryToolbarModule,
+    CymInputModule,
+    CymWorkspaceCardModule, CymWorkspaceCardDivisionModule, CymCardModule, CymObservableWorkspaceModule, CymTasksWorkspaceModule, CymCardDivisionModule, CymDividerModule
   ],
-  providers:[GraphService,HttpHandler],
+  providers:[workSpaceService, HttpHandler],
   exports: [WorkspaceWidgetComponent]
 })
 export class WorkspaceWidgetModule { }

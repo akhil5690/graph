@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation} from '@angular/core';
+import {Component, Input, ViewEncapsulation} from '@angular/core';
 import {toolbar} from "../../cym-component/frames/toolbar.json";
 import {secondaryToolbar} from "./secondary-toolbar.json";
 import {Router} from "@angular/router";
@@ -10,6 +10,10 @@ import {Router} from "@angular/router";
   encapsulation: ViewEncapsulation.None,
 })
 export class CymSecondaryToolbarComponent {
+
+  @Input() CymSecondaryToolbar!:string;
+  @Input() breadcrumbItems: any;
+
   constructor(private router: Router) {
   }
 
@@ -18,15 +22,9 @@ export class CymSecondaryToolbarComponent {
   sector2: any;
   sector3: any;
   sector4: any;
-  breadcrumbItems: any;
+
 
   ngOnInit() {
-    this.breadcrumbItems = [{label: 'Workspace', routerLink: '/workspace'},
-      {label: 'Launchpad',routerLink: '/launchpad'}
-    ];
-
-    // ,routerLink: this.router.navigate(['launchpad'])
-    // ,routerLink: this.router.navigate(['workspace'])
     this.sector1 = this.secondaryItems.filter((toolbar: any) => {
       return toolbar.sector === "1" && toolbar.position === "top";
     });

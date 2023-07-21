@@ -51,6 +51,9 @@ import {
 } from "../../../../../../common/cym-containers/cym-input-textarea/cym-input-textarea.module";
 import {CymProgressBarModule} from "../../../../../../common/cym-containers/cym-progress-bar/cym-progress-bar.module";
 import {CymBreadcrumbModule} from "../../../../../../common/cym-containers/cym-breadcrumb/cym-breadcrumb.module";
+import {
+    LoggedInUserComponentModule
+} from "../../../../../../common/cym-component/details/logged-in-user/logged-in-user.module";
 @NgModule({
   declarations: [
     ContainerWidgetComponent,
@@ -96,6 +99,7 @@ import {CymBreadcrumbModule} from "../../../../../../common/cym-containers/cym-b
         CymInputTextareaModule,
         CymProgressBarModule,
         CymBreadcrumbModule,
+        LoggedInUserComponentModule,
     ],
   providers:[GraphService,HttpHandler],
   exports: [ContainerWidgetComponent]

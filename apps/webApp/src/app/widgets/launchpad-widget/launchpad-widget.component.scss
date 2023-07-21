@@ -6,25 +6,19 @@ cym-launchpad-widget {
     justify-items: center;
     align-items: center;
   }
-
   .container {
     display: grid;
     grid-template-columns: var(--sidebar-width) 3fr  auto auto;
     width: var(--base-width);
     align-content: center;
     align-items: center;
-    padding: var(--padding);
+    //padding: var(--padding);
     height: var(--top-toolbar-height);
-    color: var(--primary-text-color);
-    gap: var(--grid-gap);
-    //background-color: black;
+    color: var(--secondary-text-color);
+    //gap: var(--grid-gap);
   }
-
   .icon-grey{
     color: var(--icon-grey);
-  }
-  .p-breadcrumb ul li:last-child .p-menuitem-text {
-    color: var(--primary-color);
   }
 
   .graph-container {
@@ -32,6 +26,11 @@ cym-launchpad-widget {
     justify-items: center;
     align-items: center;
   }
+  .secondary-tool{
+    background-color:var(--main-background);
+  }
+
+
 
 
 }

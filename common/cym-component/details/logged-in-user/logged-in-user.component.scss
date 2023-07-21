@@ -1,0 +1,17 @@
+.user{
+  height:var(--logged-in-user-height);
+  width: var(--logged-in-user-width);
+  background-color: green;
+  border-radius: var(--circle-border-radius);
+  display: grid;
+  text-align: center;
+  align-self:center
+}
+.username{
+  font-size: var(--logged-in-user-font12);
+  color: white;
+  align-self:center;
+
+
+
+}

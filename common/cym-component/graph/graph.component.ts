@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   ChangeDetectorRef,
   Component,
   ElementRef,
@@ -13,19 +14,18 @@ import {
 import {
   Arrow,
   ArrowType,
-  CircularLayout, Color,
-  DefaultLabelStyle, EdgePathLabelModel,
-  EdgesSource, EdgeStyleDecorationInstaller, ExteriorLabelModel,
+  CircularLayout, DefaultLabelStyle, EdgePathLabelModel,
+  EdgesSource, EdgeStyleDecorationInstaller, ExteriorLabelModel, GeneralPath,
   GraphBuilder,
   GraphComponent,
   GraphEditorInputMode,
   GraphItemTypes,
-  GraphOverviewComponent, GraphViewerInputMode, HierarchicLayout, ICommand,
+  GraphOverviewComponent, GraphSelectionIndicatorManager, GraphViewerInputMode, HierarchicLayout, IArrow, ICommand,
   IconLabelStyle,
   IEdge,
   IEdgeStyle,
   ILabelModelParameter,
-  ILabelStyle, IModelItem,
+  ILabelStyle, IModelItem, IndicatorEdgeStyleDecorator,
   INode,
   INodeStyle,
   InteriorLabelModel, ItemClickedEventArgs,
@@ -34,15 +34,13 @@ import {
   License, Neighborhood,
   NodesSource, NodeStyleDecorationInstaller,
   OrganicLayout, OrthogonalLayout,
-  Point,
   PolylineEdgeStyle, RadialLayout,
-  Rect, ShapeNodeShape,
+  Rect, RectangleNodeStyle, ShapeNodeShape,
   ShapeNodeStyle,
-  Size, Stroke, StyleDecorationZoomPolicy, TraversalDirection
+  Size, StyleDecorationZoomPolicy, TraversalDirection
 } from "yfiles";
-// import {data} from './data'
 import licenseValue from 'license.json';
-import {GraphService} from "../../cym-services/graph/graph.service";
+import {CymService} from 'common/cym-services/systemService/cymSystemService';
 
 @Component({
   selector: 'cym-graph',
@@ -50,7 +48,7 @@ import {GraphService} from "../../cym-services/graph/graph.service";
   styleUrls: ['./graph.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class GraphComponents implements OnInit, OnChanges {
+export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
   // data = data;
   visible = true;
   // data: any;
@@ -60,32 +58,20 @@ export class GraphComponents implements OnInit, OnChanges {
   selectedItem!: IEdge | INode | null;
   filter = false;
   hoverBorder: any;
+  vertexColor: any;
+  borderColor: any;
   @Input() data: any;
+  @Input() tools: any;
   @Input() layout: any = 'Organic';
   @ViewChild('graphComponent', {static: true}) graphContainer!: ElementRef;
   @ViewChild('overViewComponent', {static: true}) overViewContainer!: ElementRef;
   @ViewChild('neighbour', {static: true}) neighbour!: ElementRef;
 
-  @Output() refreshGraph = new EventEmitter()
-  @Output() findingsClicked = new EventEmitter()
+  @Output() refreshGraph = new EventEmitter();
+  @Output() findingsClicked = new EventEmitter();
 
 
   // graph toolbar tools
-  toolBarItems = [{
-    toolName: 'toggle',
-    icon: 'assets/image/overview.svg'
-  },
-    {
-      toolName: 'zoomIn',
-      icon: 'assets/image/zoomIn.svg'
-    }, {
-      toolName: 'zoomOut',
-      icon: 'assets/image/zoomOut.svg'
-    }, {
-      toolName: 'fitContent',
-      icon: 'assets/image/fit.svg'
-    },
-  ]
   overviewComponent!: GraphOverviewComponent;
   isFilterOpen = false;
   neighboursOptions: any;
@@ -95,18 +81,34 @@ export class GraphComponents implements OnInit, OnChanges {
   originalNeighbourhood: any;
   showDetails!: boolean;
 
-  constructor(private cdr: ChangeDetectorRef) {
+  constructor(private cdr: ChangeDetectorRef, private systemService: CymService) {
   }
 
   ngOnInit() {
     this.getNeighbourOption();
+    this.systemService.toolClick.subscribe(tool => {
+      this.clickEvent(tool)
+    })
+    this.systemService.isRightSidebarOpenSub.subscribe((isOpen) => {
+      if (isOpen) {
+        this.fitContent();
+      }
+    })
+  }
+
+  ngAfterViewInit() {
+    // if (this.data) {
+    //   // start creating graph
+    //   this.run();
+    // }
   }
 
   ngOnChanges() {
-    if (this.data) {
+    if (this.data?.nodes) {
       // start creating graph
       this.run();
     }
+    // this.clickEvent(this.tools);
   }
 
   private run() {
@@ -114,7 +116,7 @@ export class GraphComponents implements OnInit, OnChanges {
     License.value = licenseValue;
 
     // creates a component to store graph
-    this.initializeGraphComponent()
+    this.initializeGraphComponent();
 
     // editable mode for graph like creating node, adding/updating label, resizing node etc,.
     this.setInputMode(this.graphComponent);
@@ -123,7 +125,7 @@ export class GraphComponents implements OnInit, OnChanges {
     // fit the whole graph into the canvas
     setTimeout(() => {
       this.fitContent();
-    }, 100)
+    }, 100);
 
     // create overview component to view and navigate the graph in graph component
     this.initializeOverviewComponent(this.graphComponent);
@@ -143,7 +145,7 @@ export class GraphComponents implements OnInit, OnChanges {
     this.buildGraph(graphComponent, builder);
 
     // set the layout on filter
-    this.layout = this.getLayout(this.filter, this.layout)
+    this.layout = this.getLayout(this.filter, this.layout);
 
     // start building layout, example: Organic layout
     this.buildLayout(graphComponent, this.layout);
@@ -156,11 +158,16 @@ export class GraphComponents implements OnInit, OnChanges {
       data: data.nodes,
       id: "id",
       style: (data: any) => this.getNodeShape({
-        fill: data.vertex_color ? data.vertex_color : "#FF9900",
+        fill: this.vertexColor ? this.vertexColor : "#FF9900",
         shape: 'ellipse',
-        stroke: data.Border_color
+        stroke: this.borderColor
       })
-      // labels: ["label"]
+    });
+    data.nodes.forEach((vertex_color: any) => {
+      if (vertex_color) {
+        this.vertexColor = vertex_color.vertex_color;
+        this.borderColor = vertex_color.border_color;
+      }
     });
 
     //create edges
@@ -170,7 +177,7 @@ export class GraphComponents implements OnInit, OnChanges {
       labels: ["label"],
       sourceId: "source",
       targetId: "target"
-    })
+    });
 
     // add style to node
     this.styleNode(nodesSource);
@@ -183,8 +190,8 @@ export class GraphComponents implements OnInit, OnChanges {
   private styleNode(nodesSource: NodesSource<any>) {
     // set node size
     nodesSource.nodeCreator.defaults.size = this.getSize(30, 30)
-
   }
+
 
   // add icon to the node. In yfiles it is considered as label
   private styleIconLabel(nodesSource: NodesSource<any>) {
@@ -192,7 +199,7 @@ export class GraphComponents implements OnInit, OnChanges {
     labelCreator.defaults.layoutParameter = this.labelPlacement(ExteriorLabelModel.SOUTH);
     const iconCreator = nodesSource.nodeCreator.createLabelBinding();
     // null check
-    iconCreator.textProvider = node => (node.imageUrl != null ? '' : null)
+    iconCreator.textProvider = node => (node.imageUrl != null ? '' : null);
     iconCreator.styleProvider = node =>
       (new IconLabelStyle({
         icon: node.imageUrl,
@@ -201,7 +208,7 @@ export class GraphComponents implements OnInit, OnChanges {
       }));
     const findingIcon = nodesSource.nodeCreator.createLabelBinding();
     // null check
-    findingIcon.textProvider = node => (node.findingsUrl != null ? '' : null)
+    findingIcon.textProvider = node => (node.findingsUrl != null ? '' : null);
     findingIcon.styleProvider = node =>
       (new IconLabelStyle({
         icon: node.findingsUrl,
@@ -222,9 +229,9 @@ export class GraphComponents implements OnInit, OnChanges {
 
     // style edge label
     edgesSource.edgeCreator.defaults.labels.style = this.getEdgeLabel({
-      backgroundFill: 'white',
+      backgroundFill: '#EBEDEF',
       textSize: 10
-    })
+    });
 
     // aligning the edge label
     const labelModel = new EdgePathLabelModel({distance: 50});
@@ -255,89 +262,126 @@ export class GraphComponents implements OnInit, OnChanges {
   }
 
   hoverEvent(inputMode: GraphEditorInputMode) {
-    inputMode.itemHoverInputMode.enabled = true
-    inputMode.itemHoverInputMode.hoverItems = GraphItemTypes.EDGE | GraphItemTypes.NODE
+    inputMode.itemHoverInputMode.enabled = true;
+    inputMode.itemHoverInputMode.hoverItems = GraphItemTypes.EDGE | GraphItemTypes.NODE;
 // ignore items of other types which might be in front of them
-    inputMode.itemHoverInputMode.discardInvalidItems = false
-// handle changes on the hovered items
+    inputMode.itemHoverInputMode.discardInvalidItems = false;
+    this.graphHighlight(inputMode);
+  }
+
+  itemHighlight(selectedItem: any) {
+    const styleHighlight = this.graphComponent.highlightIndicatorManager;
+    const decorator = this.graphComponent.graph.decorator;
+    const highlightShape = new ShapeNodeStyle({
+      shape: ShapeNodeShape.ELLIPSE,
+      stroke: `4px grey`,
+      fill: null
+    });
+
+    const nodeStyleHighlight = new NodeStyleDecorationInstaller({
+      nodeStyle: highlightShape,
+      // that should be slightly larger than the real node
+      margins: 0,
+      // but have a fixed size in the view coordinates
+      zoomPolicy: StyleDecorationZoomPolicy.WORLD_COORDINATES
+    });
+    decorator.nodeDecorator.highlightDecorator.setImplementation(nodeStyleHighlight);
+    if (styleHighlight) {
+      styleHighlight?.clearHighlights();
+      // then see where we are hovering over, now
+      const newItem = selectedItem.item;
+      if (newItem !== null) {
+        // we highlight the item itself
+        styleHighlight?.addHighlight(newItem);
+      }
+    }
+
+  }
+
+  graphHighlight(inputMode: GraphEditorInputMode) {
     inputMode.itemHoverInputMode.addHoveredItemChangedListener((sender, args) => {
-      const hoverItem = args.item
+      const hoverItem = args.item;
       // e.g. add a highlight to newItem here
-      const styleHighlight = this.graphComponent.highlightIndicatorManager
-      const decorator = this.graphComponent.graph.decorator
-      this.hoverBorder = hoverItem.tag.hohover_border_color
+      const styleHighlight = this.graphComponent.highlightIndicatorManager;
+      const decorator = this.graphComponent.graph.decorator;
+      this.hoverBorder = hoverItem?.tag.hover_border_color;
       const highlightShape = new ShapeNodeStyle({
         shape: ShapeNodeShape.ELLIPSE,
-        stroke: this.hoverBorder,
+        stroke: `4px ${this.hoverBorder}`,
         fill: null
-      })
+      });
 
       const nodeStyleHighlight = new NodeStyleDecorationInstaller({
         nodeStyle: highlightShape,
         // that should be slightly larger than the real node
-        margins: 5,
+        margins: 0,
         // but have a fixed size in the view coordinates
-        zoomPolicy: StyleDecorationZoomPolicy.VIEW_COORDINATES
-      })
+        zoomPolicy: StyleDecorationZoomPolicy.WORLD_COORDINATES
+      });
 
       const edgeStyle = new PolylineEdgeStyle({
-        stroke: this.hoverBorder,
-        // targetArrow: IArrow.TRIANGLE,
-        // sourceArrow:
-      })
+        stroke: `4px ${this.hoverBorder}`,
+        targetArrow: this.arrow({
+          type: ArrowType.TRIANGLE,
+          fill: this.hoverBorder
+        }),
+        // sourceArrow: this.arrow({
+        //   type: ArrowType.TRIANGLE,
+        //   fill: this.hoverBorder
+        // })
+      });
       const edgeStyleHighlight = new EdgeStyleDecorationInstaller({
         edgeStyle,
-        zoomPolicy: StyleDecorationZoomPolicy.VIEW_COORDINATES
-      })
+        zoomPolicy: StyleDecorationZoomPolicy.WORLD_COORDINATES,
+      });
 
-      decorator.nodeDecorator.highlightDecorator.setImplementation(nodeStyleHighlight)
-      decorator.edgeDecorator.highlightDecorator.setFactory(edge =>
+      decorator.nodeDecorator.highlightDecorator.setImplementation(nodeStyleHighlight);
+      decorator.edgeDecorator.highlightDecorator.setFactory(() =>
         edgeStyleHighlight
-      )
+      );
       // first remove previous highlights
       if (styleHighlight) {
-        styleHighlight?.clearHighlights()
+        styleHighlight?.clearHighlights();
         // then see where we are hovering over, now
-        const newItem = hoverItem
+        const newItem = hoverItem;
         if (newItem !== null) {
           // we highlight the item itself
-          styleHighlight?.addHighlight(newItem)
+          styleHighlight?.addHighlight(newItem);
           if (newItem instanceof INode) {
             // and if it's a node, we highlight all adjacent edges, too
             for (const edge of this.graphComponent.graph.edgesAt(newItem)) {
 
               const labelStyle = new DefaultLabelStyle({
-                backgroundFill: 'white',
+                backgroundFill: '#EBEDEF',
                 textSize: 10,
-                verticalTextAlignment:'center',
-                horizontalTextAlignment:'center'
+                verticalTextAlignment: 'center',
+                horizontalTextAlignment: 'center'
               });
               const labelStyleHighlight = new LabelStyleDecorationInstaller({
                 labelStyle,
-                zoomPolicy:StyleDecorationZoomPolicy.WORLD_COORDINATES
-              })
-              decorator.labelDecorator.highlightDecorator.setImplementation(labelStyleHighlight)
-              styleHighlight?.addHighlight(edge)
-              if(edge.tag.label){
+                zoomPolicy: StyleDecorationZoomPolicy.WORLD_COORDINATES
+              });
+              decorator.labelDecorator.highlightDecorator.setImplementation(labelStyleHighlight);
+              styleHighlight?.addHighlight(edge);
+              if (edge.tag.label) {
                 styleHighlight.addHighlight(edge?.labels?.get(0))
               }
             }
           } else if (newItem instanceof IEdge) {
             // if it's an edge - we highlight the adjacent nodes
             const labelStyle = new DefaultLabelStyle({
-              backgroundFill: 'white',
+              backgroundFill: '#EBEDEF',
               textSize: 10,
-              verticalTextAlignment:'center',
-              horizontalTextAlignment:'center'
+              verticalTextAlignment: 'center',
+              horizontalTextAlignment: 'center'
             });
             const labelStyleHighlight = new LabelStyleDecorationInstaller({
               labelStyle,
-              zoomPolicy:StyleDecorationZoomPolicy.WORLD_COORDINATES
-            })
-            decorator.labelDecorator.highlightDecorator.setImplementation(labelStyleHighlight)
-
-            styleHighlight?.addHighlight(newItem)
-            if(newItem.tag.label){
+              zoomPolicy: StyleDecorationZoomPolicy.WORLD_COORDINATES
+            });
+            decorator.labelDecorator.highlightDecorator.setImplementation(labelStyleHighlight);
+            styleHighlight?.addHighlight(newItem);
+            if (newItem.tag.label) {
               styleHighlight.addHighlight(newItem?.labels?.get(0))
             }
           }
@@ -349,9 +393,40 @@ export class GraphComponents implements OnInit, OnChanges {
   private leftClickListener(inputMode: GraphViewerInputMode | GraphEditorInputMode) {
     inputMode.addItemLeftClickedListener((sender, evt) => {
       this.selectedItem = evt.item instanceof IEdge || evt.item instanceof INode ? evt.item : null;
-      this.showDetails = true;
+      this.systemService.setGraphItem(this.selectedItem);
       this.checkNeighbour(evt);
       this.checkFindings(evt);
+      this.selectionStyle(inputMode);
+    })
+
+  }
+
+  selectionStyle(inputMode: GraphEditorInputMode | GraphViewerInputMode) {
+
+    // inputMode.selectableItems = GraphItemTypes.NONE
+    inputMode.focusableItems = GraphItemTypes.NONE;
+    const selectionNodeStyle = new ShapeNodeStyle({
+      shape: ShapeNodeShape.ELLIPSE,
+      stroke: `4px ${this.hoverBorder}`,
+      fill: null
+    });
+    const selectionEdgeStyle = new PolylineEdgeStyle({
+      stroke: `4px ${this.hoverBorder}`,
+      targetArrow: this.arrow({
+        type: ArrowType.TRIANGLE,
+        fill: this.hoverBorder
+      })
+    });
+    const labelStyle = new DefaultLabelStyle({
+      backgroundFill: '#EBEDEF',
+      textSize: 10,
+      verticalTextAlignment: 'center',
+      horizontalTextAlignment: 'center'
+    });
+    this.graphComponent.selectionIndicatorManager = new GraphSelectionIndicatorManager({
+      nodeStyle: selectionNodeStyle,
+      edgeStyle: selectionEdgeStyle,
+      labelStyle: labelStyle
     })
   }
 
@@ -377,7 +452,7 @@ export class GraphComponents implements OnInit, OnChanges {
       graphComponent: graphComponent,
       layout: layout ? layout : new OrganicLayout({minimumNodeDistance: 90, nodeEdgeOverlapAvoided: true}),
       duration: '0.5s',
-    })
+    });
 
     // start executing the layout
     layoutExecutor.start().then();
@@ -486,9 +561,6 @@ export class GraphComponents implements OnInit, OnChanges {
     return new LayoutExecutor(options);
   }
 
-  private getNode(graphComponent: GraphComponent, label: string) {
-    return graphComponent.graph.nodes.find(n => n.tag.label === label);
-  }
 
   // toolbar functionality
   zooIn() {
@@ -505,7 +577,7 @@ export class GraphComponents implements OnInit, OnChanges {
 
   // toolbar event handling
   clickEvent(tool: { icon: string; toolName: string }) {
-    if (this.graphComponent) {
+    if (this.graphComponent && tool) {
       switch (tool.toolName) {
         case 'toggle':
           this.toggle();
@@ -529,7 +601,7 @@ export class GraphComponents implements OnInit, OnChanges {
 
 
   refreshData(params: any) {
-    console.log(params)
+    console.log(params);
     this.refreshGraph.emit(params);
   }
 
@@ -554,9 +626,9 @@ export class GraphComponents implements OnInit, OnChanges {
       });
       algorithm.maximumDistance = algorithm.traversalDirection === TraversalDirection.BOTH ? 1 : 2;
       const result = algorithm.run(this.graphComponent.graph);
-      jsonGraph.nodes.push(node?.tag)
+      jsonGraph.nodes.push(node?.tag);
       for (const neighbor of result.neighbors) {
-        jsonGraph.nodes.push(neighbor?.tag)
+        jsonGraph.nodes.push(neighbor?.tag);
         if (algorithm.traversalDirection === TraversalDirection.SUCCESSOR) {
           this.graphComponent.graph.inEdgesAt(neighbor).forEach((edge) => {
             jsonGraph.edges.push(edge?.tag)
@@ -575,7 +647,7 @@ export class GraphComponents implements OnInit, OnChanges {
       }
 
       this.originalNeighbourhood = jsonGraph;
-      this.createGraph(jsonGraph, this.neighbourComponent)
+      this.createGraph(jsonGraph, this.neighbourComponent);
       this.neighbourComponent.zoomTo(this.neighbourComponent.contentRect);
       this.cdr.detectChanges();
     }
@@ -588,6 +660,10 @@ export class GraphComponents implements OnInit, OnChanges {
       if (isFullscreen) {
         this.graphComponent.graph = this.neighbourComponent.graph;
         this.createGraph(this.data, this.neighbourComponent);
+        const node = this.graphComponent.graph.nodes.find(node => node.tag.id === this.selectedNode.tag.id);
+        if (node) {
+          this.graphComponent.selection.setSelected(node, true);
+        }
         this.setInputMode(this.graphComponent);
         this.neighbourComponent.zoomTo(this.neighbourComponent.contentRect);
         ICommand.FIT_GRAPH_BOUNDS.execute(null, this.graphComponent);
@@ -596,7 +672,12 @@ export class GraphComponents implements OnInit, OnChanges {
         this.showDetails = false;
         this.createGraph(this.data, this.graphComponent);
         this.createGraph(this.originalNeighbourhood, this.neighbourComponent);
+        const node = this.graphComponent.graph.nodes.find(node => node.tag.id === this.selectedNode.tag.id);
+        if (node) {
+          this.graphComponent.selection.setSelected(node, true);
+        }
         this.setInputMode(this.graphComponent);
+        this.systemService.setGraphItem(node);
         this.neighbourComponent.zoomTo(this.neighbourComponent.contentRect);
         this.graphComponent.zoomTo(this.graphComponent.contentRect);
 

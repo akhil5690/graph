@@ -1,31 +1,40 @@
+
 cym-right-sidebar {
   .right-sidebar {
     display: grid;
     position: relative;
     grid-template-rows: auto;
-    grid-template-columns: 3vw auto;
+    grid-template-columns: auto;
     background: white;
     right: 0;
     overflow: hidden;
-    height: 85vh;
+    height: var(--graph-height);
   }
 
-  .menu-panel {
-    display: flex;
-    padding: 1.5rem;
-    flex-direction: column;
-    gap: var(--unit);
-    background-color: var(--theme-color-one);
-    align-items: center;
-    //border: 2px solid var(--third-background-color);
-    border-top: none;
+  .menu-panel > div:hover {
+    background-color: var(--primary-color);
+
   }
 
   .details-panel {
-    padding: 1rem;
+    padding: 0;
     overflow-y: auto;
     overflow-x: hidden;
-    width: 20vw
+    width: 20vw;
+
+    ::-webkit-scrollbar {
+      width: 0; /* Remove scrollbar space */
+      background: transparent; /* Optional: just make scrollbar invisible */
+    }
+
+    /* Optional: show position indicator in red */
+    ::-webkit-scrollbar-thumb {
+      background: #FF0000;
+    }
+  }
+
+  .filter {
+    padding-left: var(--unit)
   }
 
   .tab {
@@ -34,6 +43,25 @@ cym-right-sidebar {
 
   .grid {
     display: grid;
-    gap: 1rem;
+    gap: var(--grid-gap);
   }
+
+  .displayNone {
+    display: none;
+  }
+
+  // .p-accordion-header{
+  //  display: flex;
+  //  flex-direction: row-reverse;
+  //  justify-content: space-between;
+  //}
+
+.emptyMessage{
+  height: var(--graph-height);
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  text-align: center;
 }
+}
+

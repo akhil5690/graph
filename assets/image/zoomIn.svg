@@ -1,1 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg"  fill="white " height="48" viewBox="0 96 960 960" width="48"><path d="M796 935 533 672q-30 26-69.959 40.5T378 727q-108.162 0-183.081-75Q120 577 120 471t75-181q75-75 181.5-75t181 75Q632 365 632 471.15 632 514 618 554q-14 40-42 75l264 262-44 44ZM377 667q81.25 0 138.125-57.5T572 471q0-81-56.875-138.5T377 275q-82.083 0-139.542 57.5Q180 390 180 471t57.458 138.5Q294.917 667 377 667Zm-31-85v-82h-82v-60h82v-81h60v81h81v60h-81v82h-60Z"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="22.422" height="22.422" viewBox="0 0 22.422 22.422">
+  <g id="Icon_feather-zoom-in" data-name="Icon feather-zoom-in" transform="translate(1 1)">
+    <path id="Path_3340" data-name="Path 3340" d="M22.285,13.392A8.892,8.892,0,1,1,13.392,4.5,8.892,8.892,0,0,1,22.285,13.392Z" transform="translate(-4.5 -4.5)" fill="none" stroke="#585858" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path id="Path_3341" data-name="Path 3341" d="M29.81,29.81l-4.835-4.835" transform="translate(-9.803 -9.803)" fill="none" stroke="#585858" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path id="Path_3342" data-name="Path 3342" d="M16.5,12v6.669" transform="translate(-7.608 -6.442)" fill="none" stroke="#585858" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path id="Path_3343" data-name="Path 3343" d="M12,16.5h6.669" transform="translate(-6.442 -7.608)" fill="none" stroke="#585858" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+  </g>
+</svg>

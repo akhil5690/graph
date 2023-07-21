@@ -6,12 +6,10 @@ cym-top-toolbar {
     align-items: center;
     padding: var(--padding);
     height: var(--base-height);
-    color: var(--primary-text-color);
-    gap: var(--grid-gap);
+    color: var(--secondary-text-color);
+    //gap: calc(var(--grid-gap)/2);
     width: var(--base-width);
     background-color: var(--theme-color-one);
-
-
   }
 
   .menu {
@@ -28,21 +26,41 @@ cym-top-toolbar {
     align-items:center;
 
   }
-
   .lines{
     display:grid;
     grid-template-columns: auto auto  ;
-    grid-gap:var(--grid-gap);
+    gap: calc(var(--grid-gap)/2);
     align-items:center
   }
 
   .three{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, auto);
+    gap: calc(var(--grid-gap) / 4);
+
+
+  }
+  .usermod {
+    display: grid;
+    grid-template-columns: var(--logged-in-user-div1)  var(--logged-in-user-div2);
     gap: calc(var(--grid-gap)/2);
   }
   .three > div{
     padding:calc(var(--padding)/5);
+  }
+  .icon-height{
+    height:var(--icon-height-toolbar);
+    width:var(--icon-width-toolbar);
+
+  }
+  .line-height{
+    height:1.8rem; // divider for tool bar
+  }
+
+  .top-sector1{
+    display:grid;
+    grid-template-columns: auto auto auto;
+    align-items: center;
 
   }
 

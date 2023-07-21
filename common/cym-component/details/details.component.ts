@@ -7,21 +7,21 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewEncapsula
   encapsulation: ViewEncapsulation.None
 })
 export class DetailsComponent implements OnChanges, OnInit {
-  @Input() data !: any
+  @Input() data !: any;
   // data:any
-  headers!: string[]
+  headers!: string[];
 
   @Input() type: string | undefined;// editor or graph
   @Input() info: any;
-  @Output() property = new EventEmitter()
+  @Output() property = new EventEmitter();
   edgeForm: { [key: string]: any } = {};
   nodeForm: { [key: string]: any } = {};
   typeOptions: any;
+  emptyMessage: string ='';
 
   ngOnChanges(): void {
     if (this.data[0]) {
       this.headers = Object.keys(this.data[0]);
-      console.log(this.data, this.headers)
       this.getForm();
     }
   }
