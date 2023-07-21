@@ -34,7 +34,7 @@ cym-workspace-widget {
 
   .workspace-page{
     display:grid;
-    grid-template-columns: 8.1fr 1.9fr;
+    grid-template-columns: 8fr 2fr;
     align-items: center;
   }
 
@@ -115,8 +115,10 @@ cym-workspace-widget {
 
   .align-button{
     display: grid;
-    grid-template-columns: 2fr 8fr;
+    grid-template-columns: auto auto;
     align-items:center;
+    gap:var(--grid-gap);
+    justify-content: center;
 
   }
 
