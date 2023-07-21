@@ -5,7 +5,7 @@
   <div main>
     <cym-div [cymClass]="'dash-tool-container'">
       <div class="three-tab-container">
-        <div (click)="tabType=0; getSchemaData()" [ngClass]="tabType === 0?'active-class':''"> Schema</div>
+        <div (click)="tabType=0; getSchemaData()" [ngClass]="tabType === 0?'active-class':''"> Model</div>
         <div (click)=" tabType=1; getGraphData()" [ngClass]="tabType === 1?'active-class':''"> Explorer</div>
         <div (click)="tabType = 2;editor()" [ngClass]="tabType === 2?'active-class':''"> Editor</div>
       </div>
