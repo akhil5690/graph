@@ -11,7 +11,7 @@
       </div>
 
       <div class="graph-tool-icons">
-        <div *ngFor="let tools of toolBarItems">
+        <div *ngFor="let tools of toolBarItems" pTooltip="{{tools.toolTip}}">
           <div (click)="selectedTool(tools)">
             <img [src]="tools.icon" [alt]="tools.toolName" [height]="tools.height"
                  [width]="tools.width" class="set-icon">

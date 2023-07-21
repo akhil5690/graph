@@ -73,9 +73,8 @@
   grid-template-columns:8.5fr 1.5fr;
   align-items: center;
   justify-items: start;
-  //width: var(--overview-neighbour-width);
   width:100%
-  //height: var(--panel-header-height);
+
 }
 
 .graph-main {
@@ -86,19 +85,24 @@
   position: relative;
   top: 0;
   bottom: 0;
-  height: var(--graph-top-toolbar-height);
   width: var(--base-width);
   background-color: var(--theme-color-one);
   display: inline-flex;
   align-items: center;
-  padding: var(--unit);
-  gap: var(--unit);
+  padding: calc(var(--padding));
+  gap: calc(var(--grid-gap));
   color: var(--primary-color-text);
 }
 
-.subtitle.neighbour_description {
+.neighbour_description {
   position: absolute;
   top: 0;
   font-size: large;
-  padding: 0.5rem 0 0 2rem;
+  padding: 1.5rem 0 0 2rem;
+}
+
+svg.p-dropdown-trigger-icon.p-icon {
+  color: white;
+  height: 1rem;
+  width: 1rem;
 }

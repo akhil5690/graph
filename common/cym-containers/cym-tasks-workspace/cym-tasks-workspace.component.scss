@@ -1,7 +1,6 @@
 .task {
   display: grid;
   grid-template-columns: 7fr 3fr;
-  grid-template-rows: calc(var(--unit) * 2);
   text-align: left;
   row-gap: 0.3rem;
   padding: calc(var(--unit) / 2);
@@ -15,21 +14,26 @@
   width: fit-content;
   text-align: center;
   border-radius: 0.3rem;
-  padding: calc(var(--padding) / 2);
+  padding: 0.1rem 0.3rem;
   color: white;
 }
 
 .date-container {
   display: grid;
-  justify-content: center;
+  height: 1.3rem;
+  justify-content: end;
+  align-self: end;
+
 }
 
 .assigned-to {
   display: grid;
-  justify-content: center;
+  justify-content: end;
 }
 
 .task-title {
   display: grid;
   align-items: end;
+  font-size:1rem;
+  font-weight: 600;
 }

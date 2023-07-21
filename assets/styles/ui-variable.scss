@@ -51,8 +51,8 @@
   //overview and neighbour -
   --overview-neighbour-width: 15rem;
   --overview-neighbour-height: 11rem;
-  --overview-start: 0.7rem;
-  --neighbour-start: 16rem;
+  --overview-start: 2.7rem;
+  --neighbour-start: 19rem;
 
   //graph-tool-bar-height-
   --graph-tool-bar-height: 2.857rem;
@@ -120,8 +120,8 @@
   --vertical-cards-loop: calc(var(--unit) * 15);
   --card-height: calc(var(--unit) * 11);
   --card-division-img-size: 6rem; //launchpad page
-  --workspace-card-width: 14rem; // workspace page
-  --workspace-card-height: 12rem;
+  --workspace-card-width: 15rem; // workspace page
+  --workspace-card-height: 16rem;
   --short-name: 4rem;
 
   //logged-in-user  icon related styles
