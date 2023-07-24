@@ -7,7 +7,7 @@ import {
   Input,
   OnChanges,
   OnInit,
-  Output,
+  Output, SimpleChanges,
   ViewChild,
   ViewEncapsulation
 } from '@angular/core';
@@ -40,6 +40,7 @@ import {
 } from "yfiles";
 import licenseValue from 'license.json';
 import {CymService} from 'common/cym-services/systemService/cymSystemService';
+import {data} from "./data";
 
 @Component({
   selector: 'cym-graph',
@@ -61,7 +62,6 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
   borderColor: any;
   @Input() data: any;
   @Input() tools: any;
-  @Input() layout: any = 'Organic';
   @ViewChild('graphComponent', {static: true}) graphContainer!: ElementRef;
   @ViewChild('overViewComponent', {static: true}) overViewContainer!: ElementRef;
   @ViewChild('neighbour', {static: true}) neighbour!: ElementRef;
@@ -97,8 +97,9 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
     // }
   }
 
-  ngOnChanges() {
-    if (this.data?.nodes) {
+  ngOnChanges(changes:SimpleChanges) {
+    console.log(changes);
+    if (changes.hasOwnProperty('data') && this.data?.nodes) {
       // start creating graph
       this.run();
     }
@@ -141,11 +142,8 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
     // run graph
     this.buildGraph(graphComponent, builder);
 
-    // set the layout on filter
-    this.layout = this.getLayout(this.filter, this.layout);
-
     // start building layout, example: Organic layout
-    this.buildLayout(graphComponent, this.layout);
+    this.buildLayout(graphComponent, 'Organic');
 
   }
 
@@ -181,6 +179,12 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
   private styleNode(nodesSource: NodesSource<any>) {
     // set node size
     nodesSource.nodeCreator.defaults.size = this.getSize(30, 30)
+    nodesSource.nodeCreator.defaults.labels.style = this.getLabelStyle({
+      backgroundFill: '#EBEDEF',
+      textSize: 10
+    });
+
+
   }
 
 
@@ -219,7 +223,7 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
     });
 
     // style edge label
-    edgesSource.edgeCreator.defaults.labels.style = this.getEdgeLabel({
+    edgesSource.edgeCreator.defaults.labels.style = this.getLabelStyle({
       backgroundFill: '#EBEDEF',
       textSize: 10
     });
@@ -520,7 +524,7 @@ export class GraphComponents implements OnInit, OnChanges, AfterViewInit {
     return new Arrow(options);
   }
 
-  private getEdgeLabel(options: any): ILabelStyle {
+  private getLabelStyle(options: any): ILabelStyle {
     return new DefaultLabelStyle(options);
   }
 

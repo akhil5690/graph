@@ -11,7 +11,7 @@
       </div>
 
       <div class="graph-tool-icons">
-        <div *ngFor="let tools of toolBarItems" pTooltip="{{tools.toolTip}}">
+        <div *ngFor="let tools of toolBarItems" pTooltip="{{tools.toolTip}}" tooltipPosition="bottom">
           <div (click)="selectedTool(tools)">
             <img [src]="tools.icon" [alt]="tools.toolName" [height]="tools.height"
                  [width]="tools.width" class="set-icon">
@@ -39,8 +39,8 @@
       </div>
     </cym-div>
     <div>
-      <cym-graph *ngIf="tabType===0" [layout]="layout" [data]="schema" [onClickRightSidebar]="isRightSidebarOpen"></cym-graph>
-      <cym-graph *ngIf="tabType===1" [layout]="layout" [data]="explorer" (findingsClicked)="loadFindings($event)"
+      <cym-graph *ngIf="tabType===0" [data]="schema" [onClickRightSidebar]="isRightSidebarOpen"></cym-graph>
+      <cym-graph *ngIf="tabType===1" [data]="explorer" (findingsClicked)="loadFindings($event)"
                  (refreshGraph)="refreshGraph($event)"></cym-graph>
       <cym-graph-editor *ngIf="tabType===2" [onClickRightSidebar]="isRightSidebarOpen"></cym-graph-editor>
     </div>
